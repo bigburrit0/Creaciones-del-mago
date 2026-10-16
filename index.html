@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Impresión y diseño 3D en Montevideo | Creaciones del Mago</title>
+<meta name="description" content="Impresión 3D en Montevideo: figuras, maquetas de estadios y barcos de One Piece. Diseño 3D a medida desde una foto o dibujo. Pedí tu precio por WhatsApp.">
+<meta name="theme-color" content="#1F1A3D">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
+<meta property="og:site_name" content="Creaciones del Mago">
+<meta property="og:title" content="Creaciones del Mago · Impresión y diseño 3D en Montevideo">
+<meta property="og:description" content="Figuras, maquetas y piezas a medida, impresas en 3D en Montevideo. Escribinos por WhatsApp.">
+<meta property="og:image" content="assets/px/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/px/favicon.png">
+<link rel="apple-touch-icon" href="assets/px/apple-touch-icon.png">
+<link rel="preload" href="fonts/MagoPixel-Bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/Inter-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Creaciones del Mago",
+  "description": "Impresión y diseño 3D en Montevideo: figuras, maquetas y piezas a medida en PLA y PETG.",
+  "url": "https://creacionesdelmago.com/",
+  "logo": "https://creacionesdelmago.com/assets/px/apple-touch-icon.png",
+  "image": "https://creacionesdelmago.com/assets/px/og.png",
+  "telephone": "+598 92 104 419",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "+598 92 104 419",
+    "availableLanguage": "es",
+    "areaServed": "UY"
+  },
+  "areaServed": [
+    { "@type": "Place", "name": "La Unión, Montevideo" },
+    { "@type": "Place", "name": "La Blanqueada, Montevideo" },
+    { "@type": "Place", "name": "Buceo, Montevideo" },
+    { "@type": "Country", "name": "Uruguay" }
+  ],
+  "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG"]
+}
+</script>
+<style>
+/* Cartucho: a retro game cartridge. Title screen, a quiet beat, the boss level
+   (the ship prints itself), the worlds, the workshop, a continue screen. */
+@font-face { font-family: "Mago Pixel"; src: url("fonts/MagoPixel-Regular.woff") format("woff"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Mago Pixel"; src: url("fonts/MagoPixel-Bold.woff") format("woff"); font-weight: 700; font-display: swap; }
+/* Text face: Inter (SIL OFL), Latin subset. Pixels are for titles; reading is for Inter. */
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Regular.woff") format("woff"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-SemiBold.woff") format("woff"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Bold.woff") format("woff"); font-weight: 700; font-display: swap; }
+
+:root {
+  /* every text pair below measures 7:1 or more (WCAG AAA) */
+  --sc-canvas: #1F1A3D;  --sc-surface: #2A2350;
+  --sc-ink: #F3E9D2;     --sc-ink-soft: #D6D0F7;
+  --sc-accent: #F2A93B;  --sc-accent-ink: #2A1638;
+  --sc-font-display: "Mago Pixel", ui-monospace, monospace;
+  --sc-font-text: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --sc-font-mono: "Mago Pixel", ui-monospace, monospace;
+
+  --tinta: #2A1638;      /* outlines and hard shadows */
+  --profunda: #141127;   /* the interlude */
+  --azul: #0E2350;       /* the boss level: matches the blue backdrop */
+  --mundo: #2A2350;      /* the worlds: the night, one step lighter */
+  --papel: #F3E9D2;      /* the workshop */
+  --papel-tinta: #1F1A3D;
+  --papel-suave: #3F3566;
+  --oro-texto: #6E3D00;  /* accent as text on paper */
+
+  --px: 3px;             /* one art pixel. JS sets an integer value. */
+  --b: 4px;              /* pixel border */
+  --nav-h: 64px;
+
+  /* pixel titles in whole multiples of the 10-unit em, so every pixel is crisp */
+  --t-body: 19px; --t-small: 16px; --t-sub: 30px; --t-h2: 40px; --t-hero: 50px; --t-quiet: 40px;
+  --sc-r-sm: 0; --sc-r-md: 0; --sc-r-lg: 0; --sc-r-pill: 0;
+}
+@media (min-width: 1500px) { :root { --t-h2: 50px; --t-hero: 60px; --t-body: 20px; } }
+@media (max-width: 760px)  { :root { --t-h2: 30px; --t-hero: 30px; --t-quiet: 30px; --t-body: 18px; --nav-h: 60px; } }
+
+html { background: var(--sc-canvas); }
+body {
+  font-family: var(--sc-font-text);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+/* the pixel face is never smoothed */
+h1, h2, h3, .px-type { font-family: var(--sc-font-display); font-weight: 700; -webkit-font-smoothing: none; font-smooth: never; letter-spacing: 0; }
+strong, b { font-weight: 700; }
+img.pix, .pix { image-rendering: pixelated; image-rendering: crisp-edges; }
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+a { text-underline-offset: 6px; text-decoration-thickness: 2px; }
+:focus-visible { outline: var(--b) solid var(--sc-accent); outline-offset: 4px; border-radius: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------------------------------------------------------------- pixel UI */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: 52px; padding: 10px 22px;
+  font: 700 18px/1.3 var(--sc-font-text);
+  color: var(--sc-accent-ink); background: var(--sc-accent);
+  border: var(--b) solid var(--tinta);
+  box-shadow: var(--b) var(--b) 0 var(--tinta);
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: transform 120ms var(--sc-ease-out), box-shadow 120ms var(--sc-ease-out);
+}
+.btn svg { width: 24px; height: 24px; flex: none; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: calc(var(--b) + 2px) calc(var(--b) + 2px) 0 var(--tinta); }
+}
+.btn:active { transform: translate(var(--b), var(--b)); box-shadow: 0 0 0 var(--tinta); }
+.btn--ghost { background: transparent; color: var(--sc-ink); border-color: var(--sc-ink); box-shadow: none; }
+.btn--ghost:active { transform: translateY(2px); }
+.label { font: 600 var(--t-small)/1.4 var(--sc-font-text); letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-accent); }
+.note { font-size: var(--t-small); color: var(--sc-ink-soft); }
+
+/* ------------------------------------------------------------------- HUD */
+.hud {
+  position: fixed; inset: 0 0 auto 0; z-index: var(--sc-z-chrome);
+  height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; gap: 24px;
+  background: var(--sc-canvas);
+  border-bottom: var(--b) solid var(--tinta);
+}
+.hud__mark { display: flex; align-items: center; gap: 12px; color: var(--sc-ink); text-decoration: none; font: 700 20px/1 var(--sc-font-display); -webkit-font-smoothing: none; }
+.hud__mark img { width: 42px; height: auto; }
+.hud__links { display: flex; gap: 28px; margin-left: auto; }
+.hud__links a { color: var(--sc-ink-soft); text-decoration: none; font-size: 16px; font-weight: 600; }
+.hud__links a:hover { color: var(--sc-ink); text-decoration: underline; }
+.hud .btn { min-height: 44px; padding: 4px 14px; }
+.hud__bar { position: absolute; left: 0; right: 0; bottom: calc(-1 * var(--b) - 4px); height: 4px; pointer-events: none; }
+.hud__bar i { display: block; height: 100%; width: 0; background: var(--sc-accent); }
+@media (max-width: 900px) { .hud__links { display: none; } .hud .btn { margin-left: auto; } }
+@media (max-width: 520px) {
+  .hud__name { display: none; }
+  .hud .btn span { display: none; }
+  .hud .btn { padding: 4px 10px; }
+}
+
+/* ------------------------------------------------------- act 1: title screen */
+.title { background: var(--sc-canvas); }
+.title .sc-stage { background: var(--sc-canvas); }
+.layer { position: absolute; pointer-events: none; will-change: transform; }
+img.layer, .layer img { height: auto; max-width: none; }
+.stars { inset: 0; width: 100%; height: 100%; }
+.moon { width: calc(30 * var(--px)); right: 12%; top: calc(var(--nav-h) + 9vh); transform: translate3d(0, calc(var(--sc-p, 0) * -40px), 0); }
+.cloud-a { width: calc(64 * var(--px)); right: 30%; top: 30%; transform: translate3d(calc(var(--sc-p, 0) * -30px), calc(var(--sc-p, 0) * -80px), 0); }
+.cloud-b { width: calc(44 * var(--px)); right: 6%; top: 46%; transform: translate3d(calc(var(--sc-p, 0) * 30px), calc(var(--sc-p, 0) * -100px), 0); }
+.temple {
+  width: calc(264 * var(--px)); height: calc(98 * var(--px));
+  right: 3vw; bottom: 0;
+  transform: translate3d(0, calc(var(--sc-p, 0) * 70px), 0);
+}
+.temple img.pyramid { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.glyph {
+  width: calc(85 * var(--px));
+  /* the crest sits 12 art pixels below the top of the pyramid sprite */
+  right: calc(3vw + (264 - 85) / 2 * var(--px));
+  bottom: calc(96 * var(--px));
+  transform: translate3d(0, calc(var(--sc-p, 0) * -120px), 0) scale(calc(1 + var(--sc-p, 0) * 0.06));
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 0 transparent);
+}
+.glyph img { width: 100%; max-width: none; }
+.sparks { inset: 0; width: 100%; height: 100%; }
+.leaves-l { width: calc(150 * var(--px)); left: -2vw; bottom: 0; transform: translate3d(calc(var(--sc-p, 0) * -90px), calc(var(--sc-p, 0) * 30px), 0); }
+.leaves-r { width: calc(150 * var(--px)); right: -2vw; bottom: 0; transform: translate3d(calc(var(--sc-p, 0) * 90px), calc(var(--sc-p, 0) * 30px), 0); }
+.title__copy {
+  position: absolute; z-index: var(--sc-z-copy);
+  left: max(16px, var(--sc-gutter)); top: 50%; translate: 0 -46%;
+  width: min(40rem, 46vw);
+  display: grid; gap: 20px;
+}
+.title__copy h1 { font-size: var(--t-hero); line-height: 1.2; color: var(--sc-ink); text-wrap: balance; }
+.title__copy h1 em { font-style: normal; color: var(--sc-accent); }
+.title__copy p:not(.label) { color: var(--sc-ink); max-width: 36ch; font-size: calc(var(--t-body) + 1px); }
+.title__actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+@media (max-width: 900px) {
+  .title__copy { top: calc(var(--nav-h) + 28px); translate: none; width: auto; right: 16px; }
+  .temple { right: 50%; translate: 50% 0; }
+  .glyph { right: 50%; translate: 50% 0; }
+  .title .moon { display: none; }
+  .cloud-a { right: -8%; top: auto; bottom: calc(150 * var(--px)); }
+  .temple { bottom: calc(-40 * var(--px)); }
+  .title__actions .btn--ghost { display: none; }
+  .cloud-b { display: none; }
+  .leaves-l { left: calc(-70 * var(--px)); }
+  .leaves-r { right: calc(-70 * var(--px)); }
+  .glyph { bottom: calc(56 * var(--px)); }
+}
+@media (max-width: 900px) and (max-height: 760px) { .title__copy p { display: none; } }
+
+/* ------------------------------------------------------ act 2: interlude */
+.interlude { background: var(--profunda); padding-block: clamp(80px, 16vh, 160px); }
+.interlude .sc-wrap { display: grid; gap: 20px; }
+.interlude p { font: 700 var(--t-quiet)/1.3 var(--sc-font-display); -webkit-font-smoothing: none; color: var(--sc-ink); max-width: 24ch; }
+.interlude p + p { color: var(--sc-accent); margin-left: clamp(0px, 12vw, 220px); }
+.cursor { display: inline-block; width: 0.6em; height: 0.12em; background: currentColor; vertical-align: baseline; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+/* ---------------------------------------------------------- act 3: peak */
+.boss .sc-stage { background: var(--azul); }
+.boss__frame {
+  position: absolute; right: 8vw; top: calc(var(--nav-h) + (100svh - var(--nav-h)) / 2); translate: 0 -50%;
+  height: min(78svh, calc(100svh - var(--nav-h) - 72px)); aspect-ratio: 3 / 4; max-width: 100%;
+  border: var(--b) solid var(--tinta);
+  box-shadow: calc(var(--b) * 2) calc(var(--b) * 2) 0 var(--tinta);
+  background: #0a1838;
+}
+.boss__frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.boss__hud {
+  position: absolute; left: 0; right: 0; bottom: calc(-1 * (40px + var(--b)));
+  display: flex; justify-content: space-between; gap: 16px;
+  font: 700 20px/30px var(--sc-font-display); -webkit-font-smoothing: none; color: var(--sc-ink);
+}
+.boss__hud b { color: var(--sc-accent); font-variant-numeric: tabular-nums; }
+.boss__hud span { white-space: nowrap; }
+.boss__copy { position: absolute; left: max(16px, var(--sc-gutter)); top: 50%; translate: 0 -50%; width: min(34rem, 40vw); height: 16rem; }
+.dialog {
+  position: absolute; inset: 0 0 auto 0;
+  padding: 20px 24px 24px;
+  background: var(--papel); color: var(--papel-tinta);
+  border: var(--b) solid var(--tinta);
+  box-shadow: calc(var(--b) * 2) calc(var(--b) * 2) 0 var(--tinta);
+}
+.dialog h2, .dialog p.big { font: 700 var(--t-sub)/1.3 var(--sc-font-display); -webkit-font-smoothing: none; text-wrap: balance; }
+.dialog p + p, .dialog h2 + p { margin-top: 12px; color: var(--papel-suave); }
+@media (max-width: 900px) {
+  .boss__frame { right: 50%; translate: 50% 0; top: calc(var(--nav-h) + 16px); height: auto; width: min(82vw, calc((100svh - var(--nav-h) - 260px) * 0.75)); }
+  .boss__hud .hide-s { display: none; }
+  .dialog h2, .dialog p.big { font-size: 20px; line-height: 1.4; }
+  .boss__copy { left: 16px; right: 16px; width: auto; top: auto; bottom: 20px; translate: none; height: 11rem; }
+  .dialog { inset: auto 0 0 0; padding: 14px 16px 16px; }
+  .dialog p + p, .dialog h2 + p { display: none; }
+}
+
+/* ------------------------------------------------------- act 4: worlds */
+.worlds .sc-stage { background: var(--mundo); }
+.worlds [data-sc-pan] { align-items: center; gap: 48px; height: 100%; padding: calc(var(--nav-h) + 24px) var(--sc-gutter) 24px; width: max-content; }
+.rail-lead, .rail-end { width: min(28rem, 80vw); flex: none; display: grid; gap: 20px; align-content: center; }
+.rail-lead h2, .rail-end h2 { font-size: var(--t-h2); line-height: 1.2; color: var(--sc-ink); text-wrap: balance; }
+.rail-lead p, .rail-end p { color: var(--sc-ink-soft); }
+.world { flex: none; display: grid; gap: 14px; align-content: center; }
+.world h3 { font-size: var(--t-sub); line-height: 1.3; color: var(--sc-accent); }
+.world__grid { display: grid; grid-template-columns: auto auto; gap: 12px; }
+.world__grid .px-photo--big { grid-row: span 2; height: clamp(280px, calc(100svh - var(--nav-h) - 300px), 600px); aspect-ratio: 4 / 5; }
+.world__grid .px-photo:not(.px-photo--big) { height: calc((clamp(280px, calc(100svh - var(--nav-h) - 300px), 600px) - 12px) / 2); aspect-ratio: 1; }
+.world p { color: var(--sc-ink-soft); max-width: 34ch; }
+.world a { color: var(--sc-ink); font-weight: 700; justify-self: start; }
+.world a:hover { color: var(--sc-accent); }
+@media (max-width: 760px) {
+  .worlds [data-sc-pan] { gap: 24px; align-items: center; }
+  .world { width: 84vw; }
+  .world__grid { grid-template-columns: 1fr 1fr; }
+  .world__grid .px-photo--big { grid-column: span 2; grid-row: auto; width: 100%; height: auto; aspect-ratio: 1; max-height: 44svh; }
+  .world__grid .px-photo:not(.px-photo--big) { width: 100%; height: auto; aspect-ratio: 1; max-height: 21svh; }
+}
+
+/* the signature: a photo that prints itself, from pixels to the real thing */
+.px-photo { position: relative; overflow: hidden; background: #191433; border: var(--b) solid var(--tinta); }
+.px-photo img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.px-photo .px { clip-path: inset(0 0 var(--done, 0%) 0); }
+.px-photo .line {
+  position: absolute; left: 0; right: 0; height: var(--b);
+  bottom: var(--done, 0%); background: var(--sc-accent);
+}
+.px-photo .line::after {   /* the toolhead */
+  content: ""; position: absolute; bottom: 100%; left: var(--head, 50%);
+  width: 16px; height: 12px; translate: -50% 0;
+  background: var(--sc-ink-soft); box-shadow: 0 0 0 var(--b) var(--tinta);
+}
+.px-photo.is-done .line, .px-photo.is-done .px { display: none; }
+
+/* ------------------------------------------------------ act 5: workshop */
+.workshop { background: var(--papel); color: var(--papel-tinta); --sc-ink: var(--papel-tinta); --sc-ink-soft: var(--papel-suave); }
+.workshop :focus-visible { outline-color: var(--papel-tinta); }
+.workshop .label { color: var(--oro-texto); margin-bottom: 12px; }
+.workshop__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.workshop h2 { font-size: var(--t-h2); line-height: 1.2; text-wrap: balance; }
+.workshop .lead { margin-top: 20px; max-width: 46ch; color: var(--papel-suave); }
+.quest { list-style: none; padding: 0; margin-top: 40px; display: grid; gap: 4px; counter-reset: q; }
+.quest li { counter-increment: q; display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 14px 0; border-top: var(--b) solid var(--papel-tinta); }
+.quest li::before { content: counter(q); font: 700 30px/1 var(--sc-font-display); -webkit-font-smoothing: none; color: var(--oro-texto); padding-top: 2px; }
+.specs { margin-top: 32px; display: grid; gap: 8px; }
+.specs p { color: var(--papel-tinta); }
+.specs b { color: var(--oro-texto); }
+.workshop .btn { margin-top: 32px; }
+.sketch { position: relative; aspect-ratio: 870 / 910; border: var(--b) solid var(--papel-tinta); box-shadow: calc(var(--b) * 2) calc(var(--b) * 2) 0 var(--papel-tinta); background: var(--papel); }
+.sketch img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.sketch figcaption { position: absolute; left: 0; right: 0; top: calc(100% + 24px); color: var(--papel-suave); }
+.faq { margin-top: clamp(96px, 14vh, 160px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+.faq dl { margin: 0; }
+.taller { margin-top: 40px; max-width: 380px; }
+.taller img { display: block; width: 100%; height: auto; border: var(--b) solid var(--papel-tinta); box-shadow: calc(var(--b) * 2) calc(var(--b) * 2) 0 var(--papel-tinta); }
+.taller figcaption { margin-top: 16px; font-size: var(--t-small); color: var(--papel-suave); }
+@media (max-width: 900px) { .taller { max-width: 300px; margin-bottom: 8px; } }
+.faq details { border-top: var(--b) solid var(--papel-tinta); padding: 14px 0; }
+.faq details:last-child { border-bottom: var(--b) solid var(--papel-tinta); }
+.faq summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; gap: 16px; min-height: 44px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "+"; font: 700 30px/1 var(--sc-font-display); -webkit-font-smoothing: none; color: var(--oro-texto); width: 20px; flex: none; }
+.faq details[open] summary::before { content: "-"; }
+.faq details p { margin-top: 10px; padding-left: 32px; color: var(--papel-suave); max-width: 52ch; }
+@media (max-width: 900px) {
+  .workshop__grid, .faq { grid-template-columns: minmax(0, 1fr); }
+  .sketch { max-width: 420px; margin-bottom: 96px; }
+}
+
+/* ---------------------------------------------------- act 6: continue */
+.continue .sc-stage { background: var(--sc-canvas); }
+.continue__copy { position: absolute; z-index: var(--sc-z-copy); left: max(16px, var(--sc-gutter)); top: 50%; translate: 0 -50%; width: min(40rem, 50vw); display: grid; gap: 24px; }
+.continue__lead { color: var(--sc-ink); max-width: 40ch; }
+.continue h2 { font-size: var(--t-h2); line-height: 1.2; color: var(--sc-ink); text-wrap: balance; }
+.menu { list-style: none; padding: 0; display: grid; gap: 12px; }
+.menu li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.menu .arrow { color: var(--sc-accent); font: 700 30px/1 var(--sc-font-display); -webkit-font-smoothing: none; animation: blink 1.2s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .menu .arrow { animation: none; } }
+.phone { font: 700 30px/1 var(--sc-font-display); -webkit-font-smoothing: none; color: var(--sc-ink); }
+.copy-btn { font: 600 16px/1.4 var(--sc-font-text); min-height: 44px; color: var(--sc-ink); background: none; border: 2px solid var(--sc-ink-soft); padding: 8px 14px; cursor: pointer; }
+.copy-btn:hover { color: var(--sc-ink); border-color: var(--sc-ink); }
+.continue small { font-size: var(--t-small); color: var(--sc-ink-soft); max-width: 46ch; }
+.temple--home { right: 4vw; transform: none; }
+.glyph--home { right: calc(4vw + (264 - 85) / 2 * var(--px)); transform: none; }
+.foot { position: absolute; left: max(16px, var(--sc-gutter)); right: max(16px, var(--sc-gutter)); bottom: 16px; z-index: var(--sc-z-copy); display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px 24px; color: var(--sc-ink-soft); font-size: 15px; }
+@media (max-width: 900px) {
+  .continue__copy { top: calc(var(--nav-h) + 24px); translate: none; width: auto; right: 16px; gap: 16px; }
+  .temple--home { right: 50%; translate: 50% 0; bottom: calc(-40 * var(--px)); }
+  .glyph--home { right: 50%; translate: 50% 0; bottom: calc(56 * var(--px)); }
+  .foot { background: var(--sc-canvas); padding: 6px 10px; left: 0; right: 0; bottom: 0; }
+  .continue .moon, .continue .leaves-r { display: none; }
+  .foot { font-size: 14px; flex-direction: column; bottom: 0; }
+  .foot span:last-child { display: none; }
+}
+@media (max-width: 900px) and (max-height: 760px) { .temple--home, .glyph--home { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="hud">
+  <a class="hud__mark" href="#inicio"><img class="pix" src="assets/px/glifo-linea.png" width="52" height="56" alt=""><span class="hud__name">Creaciones del Mago</span></a>
+  <nav class="hud__links" aria-label="Secciones">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#a-medida">A medida</a>
+    <a href="#preguntas">Preguntas</a>
+  </nav>
+  <a class="btn" data-wa href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20de%20Creaciones%20del%20Mago%20y%20quiero%20hacer%20una%20consulta." aria-label="Escribinos por WhatsApp">
+    <svg viewBox="0 0 12 12" class="pix" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M2 1h8v1h1v6h-1v1H5v1H4v1H3V9H2V8H1V2h1zM3 4h1v1H3zm3 0h1v1H6zm3 0h1v1H9z"/></svg>
+    <span>Escribinos por WhatsApp</span>
+  </a>
+  <div class="hud__bar" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="inicio">
+
+  <!-- 1 · CURIOSIDAD: title screen. Five planes at different rates. -->
+  <section class="title" data-sc-act="pin" data-sc-span="1.5">
+    <div data-sc-stage>
+      <canvas class="layer stars" data-stars aria-hidden="true"></canvas>
+      <img class="layer moon pix" src="assets/px/luna.png" width="30" height="30" alt="">
+      <img class="layer cloud-a pix" src="assets/px/nube-a.png" width="64" height="14" alt="">
+      <img class="layer cloud-b pix" src="assets/px/nube-b.png" width="44" height="11" alt="">
+      <div class="layer temple"><img class="pyramid pix" src="assets/px/piramide.png" width="264" height="98" alt=""></div>
+      <div class="layer glyph"><img class="pix" src="assets/px/glifo-oro.png" width="85" height="92" alt="El logo de Creaciones del Mago, dibujado a mano y pasado a pixel art"></div>
+      <canvas class="layer sparks" data-sparks aria-hidden="true"></canvas>
+      <img class="layer leaves-l pix" src="assets/px/hojas-izq.png" width="150" height="96" alt="">
+      <img class="layer leaves-r pix" src="assets/px/hojas-der.png" width="150" height="96" alt="">
+
+      <div class="title__copy" data-sc-cue="0 0.72 0 0.3">
+        <p class="label">Impresión y diseño 3D en Montevideo</p>
+        <h1>Figuras, maquetas y piezas a medida, <em>impresas en 3D en Montevideo.</em></h1>
+        <p>Elegí algo del catálogo o mandanos una foto, un dibujo o una medida, y lo convertimos en una pieza real.</p>
+        <div class="title__actions">
+          <a class="btn" data-wa href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20de%20Creaciones%20del%20Mago%20y%20quiero%20hacer%20una%20consulta.">Pedí tu precio por WhatsApp</a>
+          <a class="btn btn--ghost" href="#catalogo">Ver el catálogo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · SILENCIO: authored quiet before the peak. -->
+  <section class="interlude" data-sc-act="flow">
+    <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="420">
+      <p>Primero es una idea.</p>
+      <p>Después, capas.<span class="cursor" aria-hidden="true"></span></p>
+    </div>
+  </section>
+
+  <!-- 3 · ASOMBRO: the peak. The ship prints itself while the camera pulls back. -->
+  <section class="boss" data-sc-act="pin" data-sc-span="4">
+    <div data-sc-stage>
+      <div class="boss__frame">
+        <canvas data-sc-sequence="assets/merry/{iii}.webp:48:0" role="img" aria-label="El Going Merry de One Piece impreso en 3D, que pasa de pixel art a la foto real"></canvas>
+        <div class="boss__hud" aria-hidden="true"><span>Going Merry</span><span><span class="hide-s">Capa </span><b data-layer>0</b>/60</span></div>
+      </div>
+      <div class="boss__copy">
+        <div class="dialog" data-sc-cue="0.02 0.34 0.06 0.08">
+          <h2>Así se imprime en 3D.</h2>
+          <p>Primero hay un archivo: un modelo del catálogo o un diseño hecho para vos. Lo cortamos en capas finitas.</p>
+        </div>
+        <div class="dialog" data-sc-cue="0.34 0.68 0.08 0.08">
+          <p class="big">La impresora lo levanta capa por capa, de abajo hacia arriba.</p>
+          <p>Cada línea dorada es una capa de plástico derretido que se enfría y queda firme.</p>
+        </div>
+        <div class="dialog" data-sc-cue="0.68 1 0.08 0.04">
+          <p class="big">Y al final lo tenés en la mano.</p>
+          <p>Going Merry de One Piece: cerca de 200 piezas, impresas en varios colores y armadas a mano.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · ANTOJO: the worlds, travelling sideways. Every photo prints as it enters. -->
+  <section id="catalogo" class="worlds" data-sc-act="pan" data-sc-span="3.3">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.02">
+        <div class="rail-lead">
+          <h2>Catálogo: piezas que ya imprimimos</h2>
+          <p>Todas las fotos son nuestras, de piezas reales. ¿Te gusta alguna en otro color o tamaño? Pedila por WhatsApp.</p>
+        </div>
+
+        <article class="world">
+          <h3>Barcos de One Piece</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/thousand-sunny-one-piece-impreso-3d.webp" width="800" height="1000" alt="Barco Thousand Sunny de One Piece impreso en 3D en varios colores" loading="lazy"><img class="px pix" src="assets/p/sunny-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/going-merry-one-piece-impreso-3d.webp" width="720" height="720" alt="Going Merry de One Piece impreso en 3D sobre su base" loading="lazy"><img class="px pix" src="assets/p/merry-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/submarino-tiburon-one-piece-impreso-3d.webp" width="720" height="720" alt="Submarino tiburón de One Piece impreso en 3D en azul" loading="lazy"><img class="px pix" src="assets/p/tiburon-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>El Thousand Sunny, el Going Merry y el submarino tiburón, impresos por partes y armados. Para la repisa, o para regalarle a alguien que no para de hablar de Luffy.</p>
+          <a data-wa-item="los barcos de One Piece" href="https://wa.me/59892104419">Preguntar por los barcos</a>
+        </article>
+
+        <article class="world">
+          <h3>Figuras y frutas del diablo</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/fruta-del-diablo-con-soporte-impresa-3d.webp" width="800" height="1000" alt="Fruta del diablo de One Piece impresa en 3D, violeta, con soporte de raíces" loading="lazy"><img class="px pix" src="assets/p/fruta-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/figuras-articuladas-impresas-3d.webp" width="720" height="720" alt="Figuras articuladas impresas en 3D, una verde y una violeta" loading="lazy"><img class="px pix" src="assets/p/articulados-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/hello-kitty-robot-impresa-3d.webp" width="720" height="720" alt="Figura de Hello Kitty con armadura de robot impresa en 3D" loading="lazy"><img class="px pix" src="assets/p/kitty-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>Frutas del diablo como la Gomu Gomu, la Mera Mera o la Ito Ito, con su soporte; figuras articuladas que se mueven de verdad y una Hello Kitty con armadura de robot.</p>
+          <a data-wa-item="las figuras" href="https://wa.me/59892104419">Preguntar por las figuras</a>
+        </article>
+
+        <article class="world">
+          <h3>Maquetas de estadios</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/maqueta-estadio-penarol-impresa-3d.webp" width="800" height="1000" alt="Maqueta del estadio de Peñarol impresa en 3D en amarillo, negro y verde" loading="lazy"><img class="px pix" src="assets/p/penarol-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/maqueta-estadio-nacional-impresa-3d.webp" width="720" height="720" alt="Maqueta del estadio de Nacional impresa en 3D" loading="lazy"><img class="px pix" src="assets/p/nacional-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/estadio-penarol-frente-impreso-3d.webp" width="720" height="720" alt="Estadio de Peñarol impreso en 3D visto de frente" loading="lazy"><img class="px pix" src="assets/p/estadio2-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>El Campeón del Siglo y el Gran Parque Central en miniatura, con tribunas y nombre. Para el escritorio de alguien que vive el clásico todo el año.</p>
+          <a data-wa-item="las maquetas de estadios" href="https://wa.me/59892104419">Preguntar por los estadios</a>
+        </article>
+
+        <article class="world">
+          <h3>Miniaturas para regalar</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/platillo-volador-miniatura-impresa-3d.webp" width="800" height="1000" alt="Platillo volador rosa con un extraterrestre verde, impreso en 3D" loading="lazy"><img class="px pix" src="assets/p/ovni-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/hamster-en-huevo-impreso-3d.webp" width="720" height="720" alt="Hámster dentro de un huevo gris, impreso en 3D" loading="lazy"><img class="px pix" src="assets/p/hamster-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/vaso-de-cafe-miniatura-impreso-3d.webp" width="720" height="720" alt="Vaso de café en miniatura impreso en 3D" loading="lazy"><img class="px pix" src="assets/p/cafe-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>Un platillo volador con su marciano, un hámster adentro de un huevo, un vasito de café. Chiquitos, ideales para regalar o para darle onda a la biblioteca.</p>
+          <a data-wa-item="las miniaturas" href="https://wa.me/59892104419">Preguntar por las miniaturas</a>
+        </article>
+
+        <article class="world">
+          <h3>Aviones radiocontrolados</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/ala-volante-rc-impresa-3d.webp" width="800" height="1000" alt="Ala volante RC impresa en 3D, naranja con fuselaje negro" loading="lazy"><img class="px pix" src="assets/p/ala-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/piezas-avion-rc-impresas-3d.webp" width="720" height="720" alt="Piezas de un avión RC impreso en 3D, antes de armar" loading="lazy"><img class="px pix" src="assets/p/piezas-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/avion-rc-impreso-3d.webp" width="720" height="720" alt="Avión blanco radiocontrolado impreso en 3D sobre el pasto" loading="lazy"><img class="px pix" src="assets/p/cub-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>Alas volantes y aviones RC impresos pieza por pieza, para armar en casa.</p>
+          <a data-wa-item="los aviones RC" href="https://wa.me/59892104419">Preguntar por los aviones</a>
+        </article>
+
+        <article class="world">
+          <h3>Fingerboard y pájaros</h3>
+          <div class="world__grid">
+            <figure class="px-photo px-photo--big"><img src="assets/p/baranda-fingerboard-impresa-3d.webp" width="800" height="1000" alt="Baranda de fingerboard impresa en 3D, en gris" loading="lazy"><img class="px pix" src="assets/p/baranda-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/rampa-fingerboard-impresa-3d.webp" width="720" height="720" alt="Rampa de fingerboard impresa en 3D con una tabla encima" loading="lazy"><img class="px pix" src="assets/p/rampa-px.png" alt=""><i class="line"></i></figure>
+            <figure class="px-photo"><img src="assets/p/comedero-para-pajaros-impreso-3d.webp" width="720" height="720" alt="Comedero para pájaros con techo rojo, impreso en 3D" loading="lazy"><img class="px pix" src="assets/p/comedero-px.png" alt=""><i class="line"></i></figure>
+          </div>
+          <p>Rampas, barandas y obstáculos de fingerboard para armar la pista arriba de la mesa, y comederos para que los pájaros vengan al balcón.</p>
+          <a data-wa-item="las rampas de fingerboard y los comederos" href="https://wa.me/59892104419">Preguntar por rampas y comederos</a>
+        </article>
+
+        <div class="rail-end">
+          <h2>¿No está acá?</h2>
+          <p>También hacemos clickers y juguetes antiestrés, animales flexibles, llaveros, torres de dados y contadores para Magic, y máscaras de cosplay. Contanos qué buscás y te pasamos el precio antes de empezar.</p>
+          <p><a class="btn btn--ghost" href="#a-medida">Pedir una pieza a medida</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · POSIBILIDAD: the workshop, on paper. The logo's own drawing turns into pixels. -->
+  <section id="a-medida" class="workshop sc-section" data-sc-act="flow">
+    <div class="sc-wrap">
+      <div class="workshop__grid">
+        <div data-sc-in>
+          <p class="label">Diseño 3D a medida</p>
+          <h2>Si no existe, lo diseñamos.</h2>
+          <p class="lead">Mandanos una foto, un dibujo, el link de un modelo o las medidas. Puede ser un regalo personalizado que no está en ninguna tienda, un repuesto que ya no se consigue o esa idea que tenés hace tiempo. Lo diseñamos en 3D desde cero y lo imprimimos.</p>
+          <ol class="quest">
+            <li>Nos escribís por WhatsApp con la idea, una foto, un link o la medida.</li>
+            <li>Te pasamos el precio y la fecha de entrega antes de empezar.</li>
+            <li>Si hace falta, diseñamos la pieza. Después, la imprimimos.</li>
+            <li>Te la enviamos: sin costo en La Unión, La Blanqueada y parte de Buceo, y a todo Uruguay.</li>
+          </ol>
+          <div class="specs">
+            <p><b>Tamaño:</b> hasta 25 cm por lado en una sola pieza; lo más grande se imprime en partes.</p>
+            <p><b>Materiales:</b> PLA para interior y decoración; PETG para exterior o más resistencia.</p>
+            <p><b>Colores:</b> hasta 4 en una misma impresión.</p>
+          </div>
+          <a class="btn" data-wa-item="una pieza a medida" data-wa-text="Hola, quiero diseñar una pieza a medida. Te cuento la idea:" href="https://wa.me/59892104419">Contanos tu idea</a>
+        </div>
+        <figure class="sketch">
+          <img src="assets/px/dibujo.webp" width="700" height="732" alt="Dibujo a mano del logo de Creaciones del Mago, en tinta sobre papel" loading="lazy">
+          <img class="pix" src="assets/px/dibujo-px.png" width="87" height="91" alt="El mismo logo convertido en pixel art" data-sc-reveal="up" data-sc-reveal-at="0.3 0.62" loading="lazy">
+          <figcaption>Nuestro logo empezó como un dibujo a mano, en papel. Con tu idea hacemos lo mismo: del boceto al archivo, y del archivo a la pieza.</figcaption>
+        </figure>
+      </div>
+
+      <div id="preguntas" class="faq">
+        <div class="faq__side">
+          <h2>Preguntas frecuentes</h2>
+          <figure class="taller">
+            <img src="assets/p/taller-impresora-3d-ams-montevideo.webp" width="720" height="900" alt="El taller de Creaciones del Mago en Montevideo: el cargador de cuatro bobinas de la impresora 3D junto a un cuaderno de dibujo" loading="lazy">
+            <figcaption>Nuestro taller: la impresora carga cuatro bobinas a la vez, al lado del cuaderno de dibujo.</figcaption>
+          </figure>
+        </div>
+        <div>
+          <details><summary>¿Cuánto sale una impresión 3D?</summary><p>Depende del tamaño, el material y las horas de impresión. Contanos qué querés y te pasamos el precio antes de empezar.</p></details>
+          <details><summary>¿Cuánto demora?</summary><p>Depende de cuántas horas lleve la pieza y de los pedidos que haya antes. Te damos la fecha cuando confirmás.</p></details>
+          <details><summary>¿Imprimen en varios colores?</summary><p>Sí. La impresora carga hasta 4 bobinas a la vez, así que una misma pieza puede salir con hasta 4 colores.</p></details>
+          <details><summary>¿En qué materiales imprimen?</summary><p>En PLA, ideal para figuras y decoración de interior, y en PETG, más resistente y mejor para piezas que van afuera.</p></details>
+          <details><summary>¿Qué tan grande puede ser una pieza?</summary><p>Hasta 25 cm por lado en una sola impresión. Lo más grande lo imprimimos en partes que después se arman.</p></details>
+          <details><summary>¿Me pueden diseñar algo que no existe?</summary><p>Sí. Con una foto, un dibujo o las medidas lo diseñamos en 3D desde cero.</p></details>
+          <details><summary>¿Puedo mandar mi propio archivo?</summary><p>Sí: STL, 3MF u OBJ, o directamente el link del modelo, por ejemplo de MakerWorld o Printables.</p></details>
+          <details><summary>¿Hacen envíos?</summary><p>Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo, y a todo Uruguay.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · DECISIÓN: continue screen. The glyph is back on its temple. -->
+  <section id="contacto" class="continue" data-sc-act="pin" data-sc-span="1.25">
+    <div data-sc-stage>
+      <canvas class="layer stars" data-stars aria-hidden="true"></canvas>
+      <img class="layer moon pix" src="assets/px/luna.png" width="30" height="30" alt="" style="transform:none">
+      <div class="layer temple temple--home"><img class="pyramid pix" src="assets/px/piramide.png" width="264" height="98" alt=""></div>
+      <div class="layer glyph glyph--home"><img class="pix" src="assets/px/glifo-oro.png" width="85" height="92" alt=""></div>
+      <img class="layer leaves-r pix" src="assets/px/hojas-der.png" width="150" height="96" alt="" style="transform:none">
+
+      <div class="continue__copy" data-sc-cue="0 1 0 0">
+        <h2>¿Tenés una idea dando vueltas?</h2>
+        <p class="continue__lead">Mandala por WhatsApp, aunque sea a medias. Te respondemos y te pasamos el precio antes de empezar.</p>
+        <ul class="menu">
+          <li><span class="arrow" aria-hidden="true">&gt;</span><a class="btn" data-wa href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20de%20Creaciones%20del%20Mago%20y%20quiero%20hacer%20una%20consulta.">Escribinos por WhatsApp</a></li>
+          <li><span class="phone">092 104 419</span><button class="copy-btn" type="button" data-copy="092104419">Copiar número</button></li>
+        </ul>
+        <small>Estamos en Montevideo. Envío sin costo en La Unión, La Blanqueada y parte de Buceo; envíos a todo el país.</small>
+      </div>
+      <footer class="foot"><span>© 2026 Creaciones del Mago</span><span>Impresión y diseño 3D en Montevideo, Uruguay</span></footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+
+  // One art pixel, in whole screen pixels, so every sprite shares a grid.
+  function setPx() {
+    var w = innerWidth, h = innerHeight;
+    var px = w <= 900 ? Math.max(2, Math.floor(w / 190)) : Math.max(2, Math.floor(Math.min(w / 380, h / 225)));
+    root.style.setProperty('--px', px + 'px');
+    return px;
+  }
+  var PX = setPx();
+
+  // WhatsApp links per world carry the world's name in the message.
+  var WA = 'https://wa.me/59892104419?text=';
+  document.querySelectorAll('[data-wa-item]').forEach(function (a) {
+    var t = a.getAttribute('data-wa-text') || ('Hola, vi ' + a.getAttribute('data-wa-item') + ' en la web y quiero consultar.');
+    a.href = WA + encodeURIComponent(t);
+  });
+
+  var api = ScrollCraft.mount(document.body);
+
+  // ---------------------------------------------------------- stars, sparks
+  function starfield(cv) {
+    var ctx = cv.getContext('2d'), stars = [], w, h;
+    function size() {
+      w = cv.width = Math.ceil(cv.clientWidth / PX); h = cv.height = Math.ceil(cv.clientHeight / PX);
+      stars = [];
+      var n = Math.round(w * h / 260), seed = 11;
+      function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+      // no stars behind the words: keep the sky clear around the copy block
+      var copy = cv.parentNode.querySelector('.title__copy, .continue__copy'), box = null;
+      if (copy) {
+        var cr = copy.getBoundingClientRect(), sr = cv.getBoundingClientRect(), pad = 28;
+        box = { x0: (cr.left - sr.left - pad) / PX, x1: (cr.right - sr.left + pad) / PX, y0: (cr.top - sr.top - pad) / PX, y1: (cr.bottom - sr.top + pad) / PX };
+      }
+      for (var i = 0; i < n; i++) {
+        var st = { x: Math.floor(rnd() * w), y: Math.floor(rnd() * h * 0.78), b: rnd(), s: rnd() < 0.08 };
+        if (box && st.x > box.x0 && st.x < box.x1 && st.y > box.y0 && st.y < box.y1) continue;
+        stars.push(st);
+      }
+    }
+    function draw(t) {
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach(function (s) {
+        var on = reduce ? 1 : (Math.sin(t / 700 + s.b * 40) > -0.6 ? 1 : 0.35);
+        ctx.fillStyle = s.b > 0.85 ? 'rgba(242,169,59,' + on + ')' : 'rgba(201,194,242,' + (0.55 * on) + ')';
+        ctx.fillRect(s.x, s.y, 1, 1);
+        if (s.s) { ctx.fillRect(s.x - 1, s.y, 3, 1); ctx.fillRect(s.x, s.y - 1, 1, 3); }
+      });
+    }
+    size(); addEventListener('resize', size);
+    if (document.fonts) document.fonts.ready.then(size);
+    return draw;
+  }
+  function sparks(cv, anchor) {
+    var ctx = cv.getContext('2d'), w, h, ps = [];
+    function size() { w = cv.width = Math.ceil(cv.clientWidth / PX); h = cv.height = Math.ceil(cv.clientHeight / PX); }
+    size(); addEventListener('resize', size);
+    return function (t) {
+      ctx.clearRect(0, 0, w, h);
+      var r = anchor.getBoundingClientRect(), sr = cv.getBoundingClientRect();
+      var cx = (r.left - sr.left + r.width / 2) / PX, cy = (r.top - sr.top + r.height * 0.55) / PX, half = r.width / PX / 2;
+      if (!reduce && ps.length < 26 && Math.random() < 0.3) ps.push({ x: cx + (Math.random() * 2 - 1) * half * 1.15, y: cy + Math.random() * half, v: 0.12 + Math.random() * 0.25, l: 1 });
+      ps = ps.filter(function (p) { return p.l > 0; });
+      ps.forEach(function (p) {
+        p.y -= p.v; p.l -= 0.006 + p.v * 0.01;
+        ctx.fillStyle = p.l > 0.5 ? '#FFD98A' : '#F2A93B';
+        ctx.fillRect(Math.round(p.x), Math.round(p.y), 1, 1);
+      });
+    };
+  }
+  var drawers = [];
+  document.querySelectorAll('[data-stars]').forEach(function (cv) { var d = starfield(cv); drawers.push({ el: cv, fn: d }); });
+  var sp = document.querySelector('[data-sparks]');
+  if (sp) drawers.push({ el: sp, fn: sparks(sp, document.querySelector('.title .glyph')) });
+
+  // -------------------------------------------- the signature: print-line photos
+  var photos = Array.prototype.map.call(document.querySelectorAll('.px-photo'), function (f, i) {
+    var px = f.querySelector('.px');
+    return { el: f, rows: 40, head: (i * 37) % 100, done: -1 };
+  });
+  photos.forEach(function (p) {
+    var img = p.el.querySelector('.px');
+    function rows() { if (img.naturalHeight) p.rows = img.naturalHeight; }
+    if (img.complete) rows(); else img.addEventListener('load', rows);
+  });
+  if (reduce) photos.forEach(function (p) { p.el.classList.add('is-done'); });
+
+  function printPhotos() {
+    var vw = innerWidth;
+    photos.forEach(function (p, i) {
+      if (p.el.classList.contains('is-done')) return;
+      var r = p.el.getBoundingClientRect();
+      if (r.right < -50 || r.left > vw + 50) return;
+      // starts as the photo enters on the right, finishes by the time its
+      // left edge reaches 35% of the viewport
+      var k = (vw * 1.02 - r.left) / (vw * 0.67);
+      k = Math.max(0, Math.min(1, k));
+      var done = Math.floor(k * p.rows) / p.rows;
+      if (done === p.done) return;
+      p.done = done;
+      p.el.style.setProperty('--done', (done * 100).toFixed(2) + '%');
+      p.head = (p.head + 23) % 100;
+      p.el.style.setProperty('--head', (8 + p.head * 0.84).toFixed(1) + '%');
+      if (done >= 1) p.el.classList.add('is-done');
+    });
+  }
+
+  // ------------------------------------------------------------- layer count
+  var boss = api.acts.filter(function (a) { return a.el.classList.contains('boss'); })[0];
+  var layerEl = document.querySelector('[data-layer]');
+  function layers() {
+    if (!boss || !layerEl) return;
+    var k = Math.min(1, boss.p / 0.86);
+    layerEl.textContent = Math.floor(k * 60);
+  }
+
+  // ------------------------------------------------------------ HUD print bar
+  var bar = document.querySelector('.hud__bar i');
+  function hudBar() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    var k = max > 0 ? scrollY / max : 0;
+    bar.style.width = (Math.round(k * 50) * 2) + '%';
+  }
+
+  function visible(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
+  function frame(t) {
+    drawers.forEach(function (d) { if (visible(d.el)) d.fn(t); });
+    printPhotos(); layers(); hudBar();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  if (reduce) drawers.forEach(function (d) { d.fn(0); });
+
+  addEventListener('resize', function () { var n = setPx(); if (n !== PX) { PX = n; api.layout(); } });
+
+  // Keyboard: a link inside the sideways rail scrolls the page to where its world is in view.
+  var worlds = api.acts.filter(function (a) { return a.device === 'pan' || a.el.classList.contains('worlds'); })[0];
+  document.querySelector('.rail').addEventListener('focusin', function (e) {
+    if (!worlds || reduce) return;
+    var item = e.target.closest('.world, .rail-end, .rail-lead'); if (!item) return;
+    var rail = worlds.rail, over = rail.scrollWidth - innerWidth;
+    if (over <= 0) return;
+    var target = item.offsetLeft - (innerWidth - item.offsetWidth) / 2;
+    var p = Math.max(0, Math.min(1, target / (over * (1 + (worlds.railExtra || 0)))));
+    scrollTo({ top: worlds.top + p * (worlds.height - innerHeight), behavior: 'instant' });
+  });
+
+  // Copy the phone number.
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-copy');
+      var done = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar número'; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(v).then(done, function () { selectPhone(b); });
+      else selectPhone(b);
+    });
+  });
+  function selectPhone(b) {
+    var s = b.parentNode.querySelector('.phone'), r = document.createRange();
+    r.selectNodeContents(s); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  }
+})();
+</script>
+</body>
+</html>

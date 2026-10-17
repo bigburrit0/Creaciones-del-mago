@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Creaciones del Mago · Impresión 3D en Montevideo</title>
+<meta name="description" content="Clickers, autos para armar, ajedrez, exhibidores para Hot Wheels y piezas a medida, impresos en 3D en Montevideo. Elegí lo que te guste y pedilo por WhatsApp.">
+<meta name="theme-color" content="#1F1A3D">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
+<meta property="og:site_name" content="Creaciones del Mago">
+<meta property="og:title" content="Creaciones del Mago · Impresión 3D en Montevideo">
+<meta property="og:description" content="Imprimo en 3D casi cualquier cosa. Elegí del catálogo o mandame tu idea por WhatsApp.">
+<meta property="og:image" content="assets/px/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/px/favicon.png">
+<link rel="apple-touch-icon" href="assets/px/apple-touch-icon.png">
+<link rel="preload" href="fonts/MagoPixel-Bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/Inter-Regular.woff" as="font" type="font/woff" crossorigin>
+<style>/*ENGINE_CSS*/</style>
+<style>/*PAGE_CSS*/</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Creaciones del Mago",
+  "description": "Impresión y diseño 3D en Montevideo: clickers, autos a escala, ajedrez, exhibidores para autitos y piezas a medida en PLA y PETG.",
+  "url": "https://creacionesdelmago.com/",
+  "logo": "https://creacionesdelmago.com/assets/px/apple-touch-icon.png",
+  "image": "https://creacionesdelmago.com/assets/px/og.png",
+  "telephone": "+598 92 104 419",
+  "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+598 92 104 419", "availableLanguage": "es", "areaServed": "UY" },
+  "areaServed": [
+    { "@type": "Place", "name": "La Unión, Montevideo" },
+    { "@type": "Place", "name": "La Blanqueada, Montevideo" },
+    { "@type": "Place", "name": "Buceo, Montevideo" },
+    { "@type": "Country", "name": "Uruguay" }
+  ],
+  "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG"]
+}
+</script>
+</head>
+<body>
+
+<header class="hud">
+  <a class="hud__mark" href="#inicio"><img class="pix" src="assets/px/glifo-linea.png" width="52" height="56" alt=""><span class="hud__name">Creaciones del Mago</span></a>
+  <nav class="hud__links" aria-label="Secciones">
+    <a href="#catalogo">Catálogo</a>
+    <a href="#a-medida">A medida</a>
+    <a href="#preguntas">Cómo pedir</a>
+  </nav>
+  <a class="bag" href="#pedido" aria-label="Tu pedido, vacío">{{BAG_ICON}}<span>Pedido</span><b>0</b></a>
+  <a class="btn" href="{{WA_GENERAL}}" aria-label="Escribime por WhatsApp">{{WA_ICON}}<span>Escribime</span></a>
+  <div class="hud__bar" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="inicio">
+
+  <!-- 1 · CURIOSIDAD: title screen, kept from v3. The toolhead prints the glyph. -->
+  <section class="title" data-sc-act="pin" data-sc-span="1.15">
+    <div data-sc-stage>
+      <canvas class="layer stars" data-stars aria-hidden="true"></canvas>
+      <img class="layer moon pix" src="assets/px/luna.png" width="30" height="30" alt="">
+      <img class="layer cloud-a pix" src="assets/px/nube-a.png" width="64" height="14" alt="">
+      <img class="layer cloud-b pix" src="assets/px/nube-b.png" width="44" height="11" alt="">
+      <div class="layer temple"><img class="pyramid pix" src="assets/px/piramide.png" width="264" height="98" alt=""></div>
+      <div class="layer glyph">
+        <img class="pix glyph__ghost" src="assets/px/glifo-oro.png" width="85" height="92" alt="">
+        <img class="pix glyph__ink" src="assets/px/glifo-oro.png" width="85" height="92" alt="El logo de Creaciones del Mago, un glifo dibujado a mano y pasado a pixel art">
+        <span class="head" aria-hidden="true"><img class="pix" src="assets/px/cabezal.png" width="18" height="22" alt=""></span>
+      </div>
+      <canvas class="layer sparks" data-sparks aria-hidden="true"></canvas>
+      <img class="layer leaves-l pix" src="assets/px/hojas-izq.png" width="150" height="96" alt="">
+      <img class="layer leaves-r pix" src="assets/px/hojas-der.png" width="150" height="96" alt="">
+
+      <div class="title__copy">
+        <p class="label">Impresión 3D en Montevideo</p>
+        <h1>Imprimo <em>en 3D</em> casi cualquier cosa.</h1>
+        <p>Clickers, autos para armar, ajedrez, cosas de One Piece y Minecraft. Elegí del catálogo o mandame una foto de lo que querés.</p>
+        <div class="title__actions">
+          <a class="btn" href="#catalogo">Ver el catálogo</a>
+          <a class="btn btn--ghost" href="{{WA_GENERAL}}">Escribime por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · ANTOJO + AGENCIA: the shop. Category index, one label schema, "Lo quiero". -->
+  <section id="catalogo" class="shop edge" data-sc-act="flow">
+    <div class="sc-wrap">
+      <div class="shop__head" data-sc-in>
+        <h2>¿Qué te imprimo?</h2>
+        <p>Tocá «Lo quiero» en lo que te guste y el mensaje de WhatsApp se arma solo. Me lo mandás y te paso precio y fecha, sin compromiso.</p>
+        <p class="shop__hint">Si tocás una foto, la ves grande.</p>
+      </div>
+      <!--SHOP-->
+    </div>
+  </section>
+
+  <!-- 3 · CONFIANZA: made to order, on paper. Real photos off the printer. -->
+  <section id="a-medida" class="custom edge" data-sc-act="flow">
+    <div class="sc-wrap custom__grid">
+      <div data-sc-in>
+        <p class="label">A medida</p>
+        <h2>¿No está en el catálogo? Lo diseño.</h2>
+        <p class="lead">Mandame una foto, un dibujo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, también te aviso.</p>
+        <div class="specs">
+          <p><b>Impresora:</b> una Bambu Lab A1, con cargador de cuatro bobinas.</p>
+          <p><b>Tamaño:</b> hasta 25 cm por lado en una sola pieza. Si es más grande, lo hago en partes.</p>
+          <p><b>Material:</b> PLA para adentro. PETG para afuera o para algo que tenga que aguantar.</p>
+          <p><b>Colores:</b> hasta cuatro en la misma pieza.</p>
+        </div>
+        <a class="btn" href="{{WA_CUSTOM}}">{{WA_ICON}}<span>Contame tu idea por WhatsApp</span></a>
+      </div>
+      <div class="jobs">
+        <figure class="job"><div class="frame" data-sc-reveal="up" data-sc-reveal-at="0.06 0.28"><img src="assets/p/job-sunny.webp" width="720" height="900" alt="El barco Thousand Sunny de One Piece arriba de la impresora 3D" loading="lazy"></div><figcaption><b>Recién terminado</b> El Thousand Sunny, todavía arriba de la impresora.</figcaption></figure>
+        <figure class="job"><div class="frame" data-sc-reveal="up" data-sc-reveal-at="0.1 0.32"><img src="assets/p/job-piezas.webp" width="720" height="900" alt="Piezas naranjas de un avión radiocontrolado impreso en 3D, sobre una mesa" loading="lazy"></div><figcaption><b>Antes de armar</b> Las piezas de un ala volante a radiocontrol.</figcaption></figure>
+        <figure class="job"><div class="frame" data-sc-reveal="up" data-sc-reveal-at="0.2 0.42"><img src="assets/p/job-fruta.webp" width="720" height="900" alt="Fruta del diablo violeta con soporte de raíces, sobre la cama de la impresora" loading="lazy"></div><figcaption><b>En la cama de la impresora</b> Una fruta del diablo con su soporte.</figcaption></figure>
+        <figure class="job"><div class="frame" data-sc-reveal="up" data-sc-reveal-at="0.24 0.46"><img src="assets/p/job-penarol.webp" width="720" height="900" alt="Maqueta del estadio de Peñarol impresa en 3D en amarillo, negro y gris" loading="lazy"></div><figcaption><b>Para la repisa</b> El Campeón del Siglo, en tres colores.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · CALMA: how it works, four pixel steps and short answers. -->
+  <section id="preguntas" class="how edge" data-sc-act="flow">
+    <div class="sc-wrap">
+      <h2 data-sc-in>Cómo pedir</h2>
+      <ol class="steps" data-sc-in data-sc-stagger="110">
+        <li><span class="steps__icon">{{I_CHAT}}</span><b>Elegí del catálogo o contame tu idea.</b><span>Por WhatsApp. Si tenés una foto, mejor.</span></li>
+        <li><span class="steps__icon">{{I_COIN}}</span><b>Te paso precio y fecha.</b><span>Antes de empezar. Si no te cierra, no pasa nada.</span></li>
+        <li><span class="steps__icon">{{I_PRINTER}}</span><b>Lo imprimo.</b><span>Hay piezas que llevan más de un día de impresora.</span></li>
+        <li><span class="steps__icon">{{I_BOX}}</span><b>Te lo llevo o te lo mando.</b><span>Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando.</span></li>
+      </ol>
+      <div class="faq" data-sc-in>
+        <details><summary>¿Cuánto sale?</summary><p>Depende del tamaño, del material y de las horas de impresora. Te paso el precio antes de empezar.</p></details>
+        <details><summary>¿Cuánto demora?</summary><p>Depende de las horas que lleve y de cuántos pedidos tenga antes. La fecha te la paso junto con el precio.</p></details>
+        <details><summary>¿Puedo elegir el color?</summary><p>Sí. Preguntame qué colores tengo en ese momento.</p></details>
+        <details><summary>¿Las fotos son tuyas?</summary><p>Las que dicen «Foto mía», sí. Las otras son de quien diseñó cada modelo. Si ya lo imprimí, te mando foto.</p></details>
+        <details><summary>¿Puedo mandar mi propio archivo?</summary><p>Sí: STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables.</p></details>
+        <details><summary>¿Hacés envíos?</summary><p>Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando: el costo del envío te lo paso con el precio.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · DECISIÓN: the counter. Your order, already written. -->
+  <section id="pedido" class="counter" data-sc-act="pin" data-sc-span="1.25">
+    <div data-sc-stage>
+      <canvas class="layer stars" data-stars aria-hidden="true"></canvas>
+      <img class="layer moon pix" src="assets/px/luna.png" width="30" height="30" alt="" style="transform:none">
+      <div class="layer temple temple--home"><img class="pyramid pix" src="assets/px/piramide.png" width="264" height="98" alt=""></div>
+      <div class="layer glyph glyph--home"><img class="pix" src="assets/px/glifo-oro.png" width="85" height="92" alt=""></div>
+
+      <div class="counter__copy" data-sc-cue="0 1 0 0">
+        <h2>Te contesto yo, por WhatsApp.</h2>
+        <div class="dialog">
+          <p class="dialog__who">{{WA_ICON}}<span>Tu mensaje</span></p>
+          <p class="dialog__msg" data-msg aria-live="off">{{MSG_EMPTY}}</p>
+          <div class="dialog__inv" aria-label="Lo que elegiste"></div>
+          <p class="dialog__hint" data-say data-full="Tocá una foto para sacarla. En WhatsApp podés cambiar lo que quieras antes de mandar." data-empty="Todavía no elegiste nada. Mandalo igual y contame qué buscás.">Todavía no elegiste nada. Mandalo igual y contame qué buscás.</p>
+          <div class="dialog__actions">
+            <a class="btn" data-wa-order href="{{WA_GENERAL}}">{{WA_ICON}}<span data-send>Escribime por WhatsApp</span></a>
+          </div>
+        </div>
+        <div class="counter__alt">
+          <span class="phone">092 104 419</span><button class="copy-btn" type="button" data-copy="092104419">Copiar número</button>
+        </div>
+        <small>Si es algo a medida, mandá una foto y las medidas aproximadas. Estoy en Montevideo.</small>
+      </div>
+      <footer class="foot"><span>© 2026 Creaciones del Mago</span><span>Impresión y diseño 3D en Montevideo</span></footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- the inventory: appears with the first "Lo quiero" -->
+<div class="inv" aria-label="Tu pedido">
+  <div class="inv__slots" aria-hidden="true"></div>
+  <p class="inv__say"></p>
+  <a class="btn" data-wa-order href="{{WA_GENERAL}}" aria-label="Mandar pedido por WhatsApp">{{WA_ICON}}<span>Mandar pedido</span></a>
+</div>
+<!-- the peek: an RPG item window -->
+<dialog class="peek" aria-labelledby="peek-name">
+  <div class="peek__win">
+    <p class="peek__bar"><span data-peek-where></span><button class="peek__x" type="button" data-peek-close aria-label="Cerrar">×</button></p>
+    <div class="peek__shot"><img data-peek-img src="" alt="" width="600" height="600"><span class="tag" data-peek-tag hidden>Foto mía</span></div>
+    <div class="peek__body">
+      <h3 id="peek-name" data-peek-name></h3>
+      <p data-peek-line></p>
+      <button class="pick" type="button" aria-pressed="false" data-peek-pick><span>Lo quiero</span></button>
+      <p class="peek__note">¿En otro color o de otro tamaño? Preguntame.</p>
+      <div class="peek__nav">
+        <button type="button" data-peek-go="-1">{{I_LEFT}}<span>Anterior</span></button>
+        <button type="button" data-peek-go="1"><span>Siguiente</span>{{I_RIGHT}}</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+<p class="sr-only" aria-live="polite" data-live></p>
+<span data-msg-empty="{{MSG_EMPTY}}" hidden></span>
+
+<script>/*ENGINE_JS*/</script>
+<script>/*PAGE_JS*/</script>
+</body>
+</html>

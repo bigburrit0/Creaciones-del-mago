@@ -347,7 +347,7 @@
     img.src = full.getAttribute('src'); img.alt = full.getAttribute('alt');
     peek.querySelector('[data-peek-name]').textContent = it.getAttribute('data-name');
     peek.querySelector('[data-peek-line]').innerHTML = it.querySelector('p').innerHTML;
-    peek.querySelector('[data-peek-tag]').hidden = !it.hasAttribute('data-mine');
+
     syncPeek();
     if (!peek.open) {
       if (typeof peek.showModal === 'function') peek.showModal(); else peek.setAttribute('open', '');

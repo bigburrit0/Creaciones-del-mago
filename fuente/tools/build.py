@@ -21,7 +21,7 @@ e = html.escape
 def item_html(shelf, it):
     iid, name, fact = it[0], it[1], it[2]
     mine = shelf.get("mine") == "all" or iid in shelf.get("mine", ())
-    tag = '<span class="tag">Foto mía</span>' if mine else ''
+    tag = ''
     msg = it[3] if len(it) > 3 else (shelf.get("pre", "") + name)
     return (f'<article class="item" data-id="{iid}" data-name="{e(name)}" data-line="{e(msg)}"{" data-mine" if mine else ""}>'
             f'<button class="shot" type="button" aria-label="Ver {e(name)} más grande">'

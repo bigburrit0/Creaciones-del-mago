@@ -253,7 +253,7 @@ def guide_page(meta, others):
       <p class="hero__lead">{inline(meta["bajada"])}</p>
       <p class="meta">Actualizada el <time datetime="{meta['actualizada']}">{fecha(meta['actualizada'])}</time> · La escribe la persona que imprime en Creaciones del Mago, Montevideo</p>
     </div>
-    <figure class="hero__img{' is-photo' if not is_gemini else ''}"><img src="{img}" alt="{e(meta.get('imagen_alt', meta['titulo']))}" width="600" height="600" fetchpriority="high"></figure>
+    <figure class="hero__img{' is-photo' if not is_gemini else ''}"><img src="{img}" alt="{e(meta.get('imagen_alt', meta['titulo']))}" width="{2100 if is_gemini else 600}" height="{800 if is_gemini else 600}" fetchpriority="high"></figure>
   </div>
   <div class="wrap paper-wrap">
     <article class="paper">

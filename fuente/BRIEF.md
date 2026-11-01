@@ -98,7 +98,7 @@ búsqueda, ver nota al final), cruzada con las 5 propuestas de copy.
   y se generan igual en el HTML visible y en el JSON-LD (`FAQPage`), así no se desfasan.
 - Datos estructurados: `LocalBusiness` + `WebSite` + `FAQPage`, con `sameAs` a Instagram.
 - Instagram: link en el hero, la ficha, el cierre y el pie. Constantes `IG_URL` e `IG_HANDLE`
-  al principio de `tools/build.py`: **confirmar el usuario exacto**.
+  al principio de `tools/build.py`.
 - Raíz: `robots.txt`, `sitemap.xml`, `llms.txt`. og:image y og:url con URL absoluta.
 - Psicología usada sin inventar nada: ancla de precio con mecanismo (peso y tiempo), reversión
   del riesgo ("sin compromiso", "si no se puede, te aviso antes"), poco esfuerzo para el primer

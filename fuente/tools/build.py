@@ -57,7 +57,7 @@ def read(p): return open(os.path.join(ROOT, p), encoding='utf-8').read()
 
 # ---- site facts, one place. The page, the FAQ and the structured data all read from here.
 SITE = "https://creacionesdelmago.com/"
-IG_URL = "https://www.instagram.com/creacionesdelmago/"   # CONFIRMAR el usuario exacto de Instagram
+IG_URL = "https://www.instagram.com/creacionesdelmago/"   # confirmado por el dueño (1/11/2026)
 IG_HANDLE = "@creacionesdelmago"
 PHONE = "092 104 419"
 PHONE_INTL = "+598 92 104 419"

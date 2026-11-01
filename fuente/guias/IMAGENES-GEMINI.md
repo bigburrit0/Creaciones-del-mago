@@ -108,6 +108,30 @@ Medieval-style carved chess pieces inspired by 12th-century Norse ivory chessmen
 A child's bedroom table seen from slightly above. A chessboard where one army is cartoon dogs and the other is cartoon cats, in bright orange and blue. A few pieces have been captured and sit to the side. Colorful, friendly, warm afternoon light through the window. No people visible, no text.
 ```
 
+## Aeromodelismo (guías 11 a 14)
+
+Mismo estilo común. Aviones genéricos, sin marcas ni matrículas.
+
+### 11. Avión RC impreso en 3D · `avion-rc-hero.webp`
+```
+A small radio-controlled airplane with a high wing, white and orange, flying low over a wide green field at golden hour, Uruguayan countryside with eucalyptus trees on the horizon. In the foreground, a small table with a 3D printer and a few orange printed airplane parts. Warm sunset sky with gold #F2A93B, pixel clouds.
+```
+
+### 12. Repuestos RC · `repuestos-rc-hero.webp`
+```
+A workbench seen from above at night: a radio-controlled airplane partially disassembled, a cracked orange plastic motor mount next to an identical new gold printed one, a small screwdriver, a ruler and a smartphone. Warm lamp light, cozy workshop.
+```
+
+### 13. PLA o PETG para RC · `pla-petg-rc-hero.webp`
+```
+Two filament spools on a workbench, one matte gold and one glossy translucent teal, between them printed airplane parts: a wing section, a motor mount, a landing gear cover. Behind, a small RC airplane hanging on the wall. Night workshop, warm lamp light.
+```
+
+### 14. Avión con chicos · `avion-chicos-hero.webp`
+```
+A white and orange hand-launched glider flying over a summer field in Uruguay, bright blue sky with a few pixel clouds. Far away and small, two silhouettes (an adult and a child, no faces visible) watching it fly. Warm, joyful summer afternoon.
+```
+
 ## Cuando las tengas
 
 1. Guardalas en `assets/guias/` con estos nombres.

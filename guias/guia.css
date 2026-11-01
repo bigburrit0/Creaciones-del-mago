@@ -132,6 +132,7 @@ details p { margin-top: 8px; }
 
 /* ---------------------------------------------------------------- product cards (same planks as the shop) */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 22px 16px; margin-top: 1.2em; }
+@media (max-width: 520px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; } .card h4 { font-size: 17px; } .card p { font-size: 15px; } }
 .card { display: flex; flex-direction: column; }
 .card img { aspect-ratio: 1; object-fit: cover; border: var(--b) solid var(--tinta); background: var(--surface); }
 .card .plank { display: block; height: 10px; margin: 0 -6px; background: #8A5A2B; border: 3px solid var(--tinta); border-top: 0; }

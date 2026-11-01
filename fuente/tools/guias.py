@@ -303,7 +303,7 @@ def index_page(guides):
       {crumb_html}
       <p class="label">Guías</p>
       <h1>Guías para regalar y pedir en 3D</h1>
-      <p class="hero__lead">Lo que me preguntan por WhatsApp, contestado con calma: qué regalar, qué material conviene y qué mandarme para pedir.</p>
+      <p class="hero__lead">Lo que me preguntan por WhatsApp, contestado con calma: qué regalar, cómo elegir un ajedrez, qué material conviene y qué mandarme para pedir.</p>
     </div>
   </div>
   <div class="wrap">
@@ -313,13 +313,13 @@ def index_page(guides):
     url = SITE + "guias/"
     ld = [business(),
           {"@type": ["CollectionPage", "Blog"], "@id": url + "#blog", "name": "Guías de Creaciones del Mago", "url": url, "inLanguage": "es-UY",
-           "description": "Guías de impresión 3D en Montevideo: regalos de Navidad, amigo invisible, exhibidores para autitos 1:64, PLA o PETG y cómo pedir una pieza.",
+           "description": "Guías de impresión 3D en Montevideo: regalos de Navidad, amigo invisible, exhibidores para autitos 1:64, ajedrez personalizado, medidas e historia del ajedrez, PLA o PETG y cómo pedir una pieza.",
            "publisher": {"@id": SITE + "#negocio"},
            "mainEntity": {"@type": "ItemList", "itemListElement": [
                {"@type": "ListItem", "position": k + 1, "url": f"{url}{g['slug']}/", "name": g["titulo"]} for k, g in enumerate(guides)]}},
           crumb_ld]
     return shell(title="Guías de impresión 3D en Montevideo: regalos y pedidos | Creaciones del Mago",
-                 description="Qué regalar impreso en 3D esta Navidad, PLA o PETG, exhibidores para autitos 1:64 y qué mandar para pedir una pieza. Desde Montevideo.",
+                 description="Qué regalar impreso en 3D esta Navidad, ajedrez personalizado, PLA o PETG, exhibidores para autitos 1:64 y qué mandar para pedir una pieza. Desde Montevideo.",
                  canonical=url, og_image=SITE + "assets/px/og.png", body=body, jsonld=ld)
 
 # ---------------------------------------------------------------- sitemap + llms.txt
@@ -336,7 +336,7 @@ def write_llms(guides):
     p = os.path.join(REPO, "llms.txt")
     txt = open(p, encoding="utf-8").read()
     txt = re.sub(r"\n## Guías\n.*?(?=\n## )", "", txt, flags=re.S)
-    block = ("\n## Guías\n\n- [Todas las guías](" + SITE + "guias/): regalos impresos en 3D, materiales y cómo pedir, desde Montevideo.\n"
+    block = ("\n## Guías\n\n- [Todas las guías](" + SITE + "guias/): regalos impresos en 3D, ajedrez personalizado, materiales y cómo pedir, desde Montevideo.\n"
              + "".join(f"- [{g['titulo']}]({SITE}guias/{g['slug']}/): {g['respuesta'].replace('**', '')}\n" for g in guides))
     txt = txt.replace("\n## Catálogo", block + "\n## Catálogo", 1)
     open(p, "w", encoding="utf-8").write(txt)

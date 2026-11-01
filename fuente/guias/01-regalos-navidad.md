@@ -38,6 +38,8 @@ Para el que juega en el club y para el que juega en el celular. El de viaje se p
 
 [[productos: plegable, medieval, perros-gatos, domino]]
 
+Si querés elegir los colores de cada bando o el tamaño, te explico cómo en la guía de [ajedrez personalizado](/guias/ajedrez-personalizado-uruguay/).
+
 ## Para el gamer de la casa
 
 Cosas de los juegos que conoce de memoria, para la repisa o para usar. La alcancía se vacía sacando la tapa, y la caja guarda un mazo de cartas.

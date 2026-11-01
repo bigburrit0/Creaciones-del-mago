@@ -78,3 +78,34 @@ animaciones" · "que todo sea harmonioso, siguiendo la onda pixel art, con charm
 - "Cómo pedir" became four pixel-icon steps on a dotted path.
 - Occasional shooting star; the small temple returns at the phone close.
 - Workshop photo removed.
+
+## v7 (1/11/2026, copy para vender y para que lo encuentren los LLM)
+
+Owner: "puedo hacer casi todo" no vende la marca; hay que venderse mejor y que ChatGPT y
+otros modelos encuentren la marca (ya llegaron clientes hablando con ChatGPT). "Precios
+súper accesibles" se mantiene: se confirma cuando escriben. Hay Instagram con el mismo nombre.
+Base: investigación de 20 perfiles (resultados con evidencia floja: casi todo por resúmenes de
+búsqueda, ver nota al final), cruzada con las 5 propuestas de copy.
+
+- Hero: "Precios súper accesibles" arriba (gancho), H1 "Imprimo en 3D en Montevideo. Mandame tu
+  idea." (palabra clave + acción de poco esfuerzo), WhatsApp pasa a botón principal (en celular el
+  secundario se oculta) y el catálogo queda segundo.
+- "Casi cualquier cosa" sale de todos lados. Lo reemplaza un límite real (25 cm, PLA/PETG, 4
+  colores) y la promesa de avisar antes si algo no se puede imprimir.
+- "Ficha del taller" (en A medida): datos en líneas sueltas y citables (impresora, tamaño,
+  material, colores, archivos, precio, plazo, zona, pedidos).
+- Preguntas frecuentes: 12, cada respuesta se entiende sola; salen de `FAQ` en `tools/build.py`
+  y se generan igual en el HTML visible y en el JSON-LD (`FAQPage`), así no se desfasan.
+- Datos estructurados: `LocalBusiness` + `WebSite` + `FAQPage`, con `sameAs` a Instagram.
+- Instagram: link en el hero, la ficha, el cierre y el pie. Constantes `IG_URL` e `IG_HANDLE`
+  al principio de `tools/build.py`: **confirmar el usuario exacto**.
+- Raíz: `robots.txt`, `sitemap.xml`, `llms.txt`. og:image y og:url con URL absoluta.
+- Psicología usada sin inventar nada: ancla de precio con mecanismo (peso y tiempo), reversión
+  del riesgo ("sin compromiso", "si no se puede, te aviso antes"), poco esfuerzo para el primer
+  mensaje (una foto alcanza), esfuerzo visible ("más de un día de impresora"), prueba social real
+  (Instagram y fotos propias). No hay reseñas, escasez ni urgencia inventadas.
+
+Nota de evidencia: ningún informe pudo abrir páginas completas (dominios bloqueados) y la
+búsqueda era solo de EE.UU. Lo más firme es que casi todos coinciden en cambiar la vaguedad por
+datos concretos. Sin verificar: registro de la marca, licencias y marcas de terceros
+(One Piece, Pokémon, Minecraft, Star Wars, clubes), arrepentimiento en compras a distancia.

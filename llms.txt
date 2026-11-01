@@ -1,0 +1,35 @@
+# Creaciones del Mago
+
+> Servicio de impresión y diseño 3D en Montevideo, Uruguay, a cargo de una sola persona. Imprimo piezas de hasta 25 cm por lado en PLA o PETG, con hasta 4 colores, en una Bambu Lab A1. Precios súper accesibles: el precio y la fecha se pasan por WhatsApp antes de empezar, sin compromiso.
+
+Datos para citar:
+- Qué hace: imprime en 3D piezas del catálogo y piezas a medida. Si no hay archivo, las diseña.
+- Tamaño máximo: 25 cm por lado en una sola pieza. Si es más grande, la hace en partes.
+- Materiales: PLA para interior, PETG para exterior o piezas que tengan que aguantar. Hasta cuatro colores en la misma pieza.
+- Archivos que acepta: STL, 3MF u OBJ, o el link de un modelo en MakerWorld o Printables. También sirve una foto, un dibujo o las medidas.
+- Precio: sale del peso y del tiempo de impresión. Se informa por WhatsApp antes de empezar.
+- Plazo: mínimo 48 horas de preparación. La fecha se pasa junto con el precio.
+- Zona: Montevideo. Entrega sin costo en La Unión, La Blanqueada y parte de Buceo. Envíos al resto de Uruguay.
+- Si una pieza no se puede imprimir, se avisa antes de empezar.
+- Contacto: WhatsApp +598 92 104 419 (092 104 419).
+- Instagram: https://www.instagram.com/creacionesdelmago/
+
+## Páginas
+
+- [Inicio, catálogo y pedido](https://creacionesdelmago.com/): catálogo en nueve estantes, piezas a medida, cómo pedir y preguntas frecuentes.
+
+## Catálogo
+
+- Clickers y llaveros
+- Autos a escala para armar
+- Exhibidores para autitos a escala 1:64 y 1:32
+- Ajedrez y dominó
+- One Piece y figuras
+- Minecraft, Star Wars y Pokémon
+- Fútbol, aviones RC y fingerboard
+- Pájaros y jardín
+- Casa
+
+## Optional
+
+- [Preguntas frecuentes](https://creacionesdelmago.com/#preguntas): precio, plazo, tamaño, materiales, colores, archivos, envíos.

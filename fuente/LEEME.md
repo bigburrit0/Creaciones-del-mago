@@ -7,3 +7,5 @@ Acá está lo que arma `index.html`. No hace falta para que la web funcione: Git
 - `tools/build.py`: junta todo en un solo `index.html` (`python3 tools/build.py`, desde una carpeta que tenga también `assets/`, `fonts/`, `scrollcraft.css` y `scrollcraft.js`).
 - `tools/photos.py` e `imgs.py`: recortan las fotos a cuadrado (600 px) y hacen la versión pixelada de 32 px.
 - `COPY-RULES.md`: las reglas de texto. `BRIEF.md`: las decisiones de diseño.
+
+Extras en la raíz del sitio (se editan a mano, no los genera el build): `robots.txt`, `sitemap.xml`, `llms.txt`. Si cambian los datos (tamaño, materiales, zona, teléfono), actualizarlos junto con `FAQ` en `tools/build.py`. El usuario de Instagram está en `IG_URL` e `IG_HANDLE` (arriba de `tools/build.py`).

@@ -55,9 +55,87 @@ def shop_html():
 
 def read(p): return open(os.path.join(ROOT, p), encoding='utf-8').read()
 
+# ---- site facts, one place. The page, the FAQ and the structured data all read from here.
+SITE = "https://creacionesdelmago.com/"
+IG_URL = "https://www.instagram.com/creacionesdelmago/"   # CONFIRMAR el usuario exacto de Instagram
+IG_HANDLE = "@creacionesdelmago"
+PHONE = "092 104 419"
+PHONE_INTL = "+598 92 104 419"
+
+# Each answer stands on its own: a search assistant may quote it without the question around it.
+FAQ = [
+    ("¿Dónde puedo imprimir una pieza en 3D en Montevideo?",
+     "Conmigo. Soy Creaciones del Mago: diseño e imprimo piezas en 3D en Montevideo. Escribime por WhatsApp con una foto, un archivo o las medidas y te paso precio y fecha."),
+    ("¿Cuánto sale?",
+     "Precios súper accesibles. Cada precio sale del peso y del tiempo de impresión de tu pieza, y te lo paso por WhatsApp antes de empezar. Si no te cierra, no pasa nada."),
+    ("¿Cuánto demora?",
+     "Todos los pedidos tienen un mínimo de 48 horas de preparación. La fecha exacta te la paso junto con el precio."),
+    ("¿Qué tamaño máximo puedo imprimir?",
+     "Hasta 25 cm por lado en una sola pieza. Si es más grande, la hago en partes."),
+    ("¿En qué materiales imprimís?",
+     "En PLA para piezas de interior y en PETG para exterior o para algo que tenga que aguantar. Hasta cuatro colores en la misma pieza."),
+    ("¿Puedo elegir el color?",
+     "Sí. Tengo una gran variedad de colores y efectos especiales. Preguntame qué hay disponible."),
+    ("¿Puedo mandar mi propio archivo?",
+     "Sí: STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables. Si no tenés archivo, lo diseño."),
+    ("¿Hacés piezas a medida?",
+     "Sí. Mandame una foto, un dibujo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, te aviso antes de empezar."),
+    ("¿Qué pasa si mi pieza no se puede imprimir?",
+     "Te lo digo antes de empezar y, si hay otra forma de resolverlo, te la propongo. Prefiero avisarte a imprimir algo que no te sirve."),
+    ("¿Hacés envíos?",
+     "Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando: el costo del envío te lo paso con el precio."),
+    ("¿Cómo hago un pedido?",
+     f"Por WhatsApp al {PHONE}. Tocá «Lo quiero» en lo que te guste y el mensaje se arma solo, o contame tu idea con una foto."),
+    ("¿Tenés Instagram?",
+     f"Sí, {IG_HANDLE}. Ahí podés ver más de mi trabajo."),
+]
+
+def faq_html():
+    return ''.join(f'<details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in FAQ)
+
+def jsonld():
+    cats = [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": s.get("name", s["tab"]), "description": s["intro"]}} for s in SHELVES]
+    cats.append({"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Impresión y diseño 3D a medida",
+                 "description": "Diseño e imprimo piezas a partir de una foto, un dibujo, un archivo STL, 3MF u OBJ o el link de un modelo, con las medidas."}})
+    biz = {
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": SITE + "#negocio",
+        "name": "Creaciones del Mago",
+        "alternateName": "Creaciones del Mago, impresión 3D en Montevideo",
+        "url": SITE,
+        "description": ("Servicio de impresión y diseño 3D en Montevideo, Uruguay. Imprimo piezas de hasta 25 cm por lado en PLA o PETG, con hasta 4 colores: "
+                        "autos a escala, ajedrez, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso."),
+        "slogan": "Imprimo en 3D en Montevideo. Mandame tu idea.",
+        "logo": SITE + "assets/px/apple-touch-icon.png",
+        "image": SITE + "assets/px/og.png",
+        "telephone": PHONE_INTL,
+        "sameAs": [IG_URL],
+        "address": {"@type": "PostalAddress", "addressLocality": "Montevideo", "addressCountry": "UY"},
+        "areaServed": [
+            {"@type": "Place", "name": "La Unión, Montevideo"},
+            {"@type": "Place", "name": "La Blanqueada, Montevideo"},
+            {"@type": "Place", "name": "Buceo, Montevideo"},
+            {"@type": "City", "name": "Montevideo"},
+            {"@type": "Country", "name": "Uruguay"},
+        ],
+        "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "telephone": PHONE_INTL,
+                         "availableLanguage": "es", "areaServed": "UY", "url": "https://wa.me/59892104419"},
+        "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG", "autos a escala para armar", "ajedrez impreso en 3D", "exhibidores para autitos 1:64"],
+        "makesOffer": cats,
+    }
+    site = {"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Creaciones del Mago", "inLanguage": "es-UY", "publisher": {"@id": SITE + "#negocio"}}
+    faq = {"@type": "FAQPage", "@id": SITE + "#preguntas", "inLanguage": "es-UY", "isPartOf": {"@id": SITE + "#web"},
+           "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]}
+    data = {"@context": "https://schema.org", "@graph": [biz, site, faq]}
+    return '<script type="application/ld+json">\n' + json.dumps(data, ensure_ascii=False, indent=2) + '\n</script>'
+
 TEMPLATE = read('src/index.tpl.html')
 out = (TEMPLATE
        .replace('<!--SHOP-->', shop_html())
+       .replace('<!--FAQ-->', faq_html())
+       .replace('<!--JSONLD-->', jsonld())
+       .replace('{{IG_URL}}', e(IG_URL)).replace('{{IG_HANDLE}}', e(IG_HANDLE))
+       .replace('{{PHONE}}', e(PHONE))
        .replace('/*ENGINE_CSS*/', read('scrollcraft.css'))
        .replace('/*PAGE_CSS*/', read('src/page.css'))
        .replace('/*ENGINE_JS*/', read('scrollcraft.js'))

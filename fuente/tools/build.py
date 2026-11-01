@@ -120,7 +120,7 @@ def jsonld():
         ],
         "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "telephone": PHONE_INTL,
                          "availableLanguage": "es", "areaServed": "UY", "url": "https://wa.me/59892104419"},
-        "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG", "autos a escala para armar", "ajedrez impreso en 3D", "exhibidores para autitos 1:64"],
+        "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG", "autos a escala para armar", "ajedrez impreso en 3D", "ajedrez personalizado", "ajedrez temático", "exhibidores para autitos 1:64"],
         "makesOffer": cats,
     }
     site = {"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Creaciones del Mago", "inLanguage": "es-UY", "publisher": {"@id": SITE + "#negocio"}}

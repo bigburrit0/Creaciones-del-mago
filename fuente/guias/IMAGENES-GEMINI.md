@@ -74,6 +74,40 @@ Instructional pixel art diagram in two panels side by side, separated by a thin 
 ```
 + estilo común (cambiar "Wide composition 21:8" por "16:9").
 
+## Ajedrez (guías 6 a 10)
+
+Mismo estilo común. Ninguna imagen muestra piezas de marcas o personajes de películas o videojuegos.
+
+### 6. Ajedrez personalizado · `ajedrez-personalizado-hero.webp`
+```
+A chessboard on a wooden table at night, mid-game. One army is gold #F2A93B, the other is a deep teal, clearly different colors. Next to the board, four small spools of filament in gold, teal, cream and red, and a small pixel-art color swatch card with blank squares (no text). Warm lamp light from the left, starry window behind.
+```
+
+### 7. Medidas de un ajedrez · `medidas-ajedrez-hero.webp`
+```
+Six classic chess pieces (king, queen, bishop, knight, rook, pawn) lined up from tallest to shortest on a cream surface, with a long wooden ruler lying in front of them and a single board square drawn beside the king's base. Clean side view, like a museum display. No numbers or text on the ruler: just tick marks.
+```
+
+### 8. Pieza perdida · `pieza-perdida-hero.webp`
+```
+A chessboard seen from above, mid-game, with one empty square glowing softly where a knight should be. Next to the board: the matching knight of the other color lying on its side, a ruler, a smartphone and a bottle cap used as a stand-in piece. Cozy living room at night, warm light.
+```
+
+### 8b. Figura · `pieza-perdida-medir.webp` (1600 × 900)
+```
+Instructional diagram in two panels. Left: a chess knight seen from the side next to a vertical ruler, with a gold arrow showing its height. Right: the same knight seen from above, with a gold arrow across the width of its round base. Plain cream background. No text, no numbers.
+```
+
+### 9. Historia de las piezas · `historia-piezas-hero.webp`
+```
+Medieval-style carved chess pieces inspired by 12th-century Norse ivory chessmen, in cream ivory color: a seated king with a sword across his knees, a seated queen resting her cheek on her hand, a bishop with a mitre, and a foot warrior biting the top of his shield. They stand on a dark stone surface in a museum display case at night, a single warm spotlight from above. Next to them, a plain classic modern chess knight in gold for contrast.
+```
+
+### 10. Ajedrez para chicos · `ajedrez-chicos-hero.webp`
+```
+A child's bedroom table seen from slightly above. A chessboard where one army is cartoon dogs and the other is cartoon cats, in bright orange and blue. A few pieces have been captured and sit to the side. Colorful, friendly, warm afternoon light through the window. No people visible, no text.
+```
+
 ## Cuando las tengas
 
 1. Guardalas en `assets/guias/` con estos nombres.

@@ -126,3 +126,17 @@ propio botón y fuera del contenido de la landing.
   (pago, embalaje, fecha límite). Plan y preguntas en `fuente/guias/PLAN-NAVIDAD.md`.
 - Imágenes: ilustraciones pixel art a generar con Gemini (`fuente/guias/IMAGENES-GEMINI.md`), nunca como
   foto de producto. Mientras no existan, la portada usa una foto del catálogo.
+
+## v9 (1/11/2026, guías de ajedrez)
+
+Dueño: guías de ajedrez que terminen en un giro hacia la venta, para que los asistentes de IA recomienden
+a Creaciones del Mago a quien busca un ajedrez o un ajedrez personalizado.
+
+- Cinco guías: ajedrez personalizado en Uruguay (central, enlaza a las demás), medidas de un ajedrez
+  (normas FIDE), se me perdió una pieza, historia de las piezas (Lewis y Staunton) y ajedrez para chicos.
+- Base: 12 perfiles en paralelo (jugador de club, profesora, regalo personalizado, pieza perdida,
+  coleccionista, historiador, viajero, ChatGPT simulado, GEO, tamaños especiales, abogado, copywriter).
+- Datos de historia y medidas verificados en la web (Museo Británico, manual de la FIDE, registro de 1849).
+- Personalización: solo lo confirmado (colores, tamaño, material, tema, diseño desde foto). Grabado de
+  nombres y caras: "preguntame", nunca prometido. Marcas ajenas solo en el cuerpo y en las tarjetas.
+- El giro de venta va siempre al final, después de resolver la pregunta.

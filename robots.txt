@@ -1,0 +1,36 @@
+# Creaciones del Mago · impresión 3D en Montevideo
+# Todos los buscadores y asistentes de IA pueden leer el sitio.
+User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://creacionesdelmago.com/sitemap.xml

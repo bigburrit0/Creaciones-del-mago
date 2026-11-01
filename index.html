@@ -3,16 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Creaciones del Mago · Impresión 3D en Montevideo</title>
-<meta name="description" content="Clickers, autos para armar, ajedrez, exhibidores para Hot Wheels y piezas a medida, impresos en 3D en Montevideo. Elegí lo que te guste y pedilo por WhatsApp.">
+<title>Impresión 3D en Montevideo, a medida y catálogo | Creaciones del Mago</title>
+<meta name="description" content="Imprimo en 3D en Montevideo: autos para armar, ajedrez, exhibidores y piezas a medida. Hasta 25 cm por lado, en PLA o PETG. Precio y fecha por WhatsApp.">
+<link rel="canonical" href="https://creacionesdelmago.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#1F1A3D">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_UY">
 <meta property="og:site_name" content="Creaciones del Mago">
-<meta property="og:title" content="Creaciones del Mago · Impresión 3D en Montevideo">
-<meta property="og:description" content="Imprimo en 3D casi cualquier cosa. Elegí del catálogo o mandame tu idea por WhatsApp.">
-<meta property="og:image" content="assets/px/og.png">
+<meta property="og:url" content="https://creacionesdelmago.com/">
+<meta property="og:title" content="Impresión 3D en Montevideo | Creaciones del Mago">
+<meta property="og:description" content="Imprimo en 3D en Montevideo. Mandame tu idea o elegí del catálogo y te paso precio y fecha por WhatsApp, sin compromiso.">
+<meta property="og:image" content="https://creacionesdelmago.com/assets/px/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Creaciones del Mago: impresión y diseño 3D en Montevideo, con el glifo dorado sobre una pirámide en pixel art">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Impresión 3D en Montevideo | Creaciones del Mago">
+<meta name="twitter:description" content="Imprimo en 3D en Montevideo. Mandame tu idea o elegí del catálogo y te paso precio y fecha por WhatsApp, sin compromiso.">
+<meta name="twitter:image" content="https://creacionesdelmago.com/assets/px/og.png">
 <link rel="icon" type="image/png" href="assets/px/favicon.png">
 <link rel="apple-touch-icon" href="assets/px/apple-touch-icon.png">
 <link rel="preload" href="fonts/MagoPixel-Bold.woff" as="font" type="font/woff" crossorigin>
@@ -602,6 +611,10 @@ img.layer, .layer img { height: auto; max-width: none; }
 .title__copy h1 em { font-style: normal; color: var(--sc-accent); }
 .title__copy p:not(.label) { color: var(--sc-ink); max-width: 34ch; font-size: calc(var(--t-body) + 1px); }
 .title__actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+.title__copy p.title__proof { font-size: var(--t-small); color: var(--sc-ink-soft); max-width: 44ch; }
+.title__proof a, .foot a, .specs a { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.title__proof a { color: var(--sc-accent); }
+.title__proof a:hover, .foot a:hover { color: var(--sc-ink); }
 @media (max-width: 900px) {
   .title__copy { top: calc(var(--nav-h) + 28px); translate: none; width: auto; right: 16px; }
   .temple { right: 50%; translate: 50% 0; }
@@ -782,6 +795,10 @@ img.layer, .layer img { height: auto; max-width: none; }
 .specs { margin-top: 32px; display: grid; gap: 6px; }
 .specs p { color: var(--papel-tinta); font-size: var(--t-small); }
 .specs b { color: var(--oro-texto); }
+.specs__title { margin-top: 32px; }
+.specs__title + .specs { margin-top: 10px; }
+.specs a { color: var(--papel-tinta); }
+.specs a:hover { color: var(--oro-texto); }
 .jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .job { display: grid; gap: 10px; align-content: start; }
 .job:nth-child(even) { margin-top: 56px; }
@@ -889,6 +906,9 @@ img.layer, .layer img { height: auto; max-width: none; }
 .copy-btn { font: 600 16px/1.4 var(--sc-font-text); min-height: 44px; color: var(--sc-ink); background: none; border: 2px solid var(--sc-ink-soft); padding: 8px 14px; cursor: pointer; }
 .copy-btn:hover { border-color: var(--sc-ink); }
 .counter__alt { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.counter small a { color: var(--sc-accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.counter small a:hover { color: var(--sc-ink); }
+@media (max-width: 900px) { .foot a { display: none; } }
 .counter small { font-size: var(--t-small); color: var(--sc-ink-soft); max-width: 46ch; }
 .temple--home { right: 4vw; transform: none; }
 .glyph--home { right: calc(4vw + (264 - 85) / 2 * var(--px)); transform: none; }
@@ -992,21 +1012,268 @@ img.layer, .layer img { height: auto; max-width: none; }
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Creaciones del Mago",
-  "description": "Impresión y diseño 3D en Montevideo: clickers, autos a escala, ajedrez, exhibidores para autitos y piezas a medida en PLA y PETG.",
-  "url": "https://creacionesdelmago.com/",
-  "logo": "https://creacionesdelmago.com/assets/px/apple-touch-icon.png",
-  "image": "https://creacionesdelmago.com/assets/px/og.png",
-  "telephone": "+598 92 104 419",
-  "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+598 92 104 419", "availableLanguage": "es", "areaServed": "UY" },
-  "areaServed": [
-    { "@type": "Place", "name": "La Unión, Montevideo" },
-    { "@type": "Place", "name": "La Blanqueada, Montevideo" },
-    { "@type": "Place", "name": "Buceo, Montevideo" },
-    { "@type": "Country", "name": "Uruguay" }
-  ],
-  "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG"]
+  "@graph": [
+    {
+      "@type": [
+        "LocalBusiness",
+        "ProfessionalService"
+      ],
+      "@id": "https://creacionesdelmago.com/#negocio",
+      "name": "Creaciones del Mago",
+      "alternateName": "Creaciones del Mago, impresión 3D en Montevideo",
+      "url": "https://creacionesdelmago.com/",
+      "description": "Servicio de impresión y diseño 3D en Montevideo, Uruguay. Imprimo piezas de hasta 25 cm por lado en PLA o PETG, con hasta 4 colores: autos a escala, ajedrez, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso.",
+      "slogan": "Imprimo en 3D en Montevideo. Mandame tu idea.",
+      "logo": "https://creacionesdelmago.com/assets/px/apple-touch-icon.png",
+      "image": "https://creacionesdelmago.com/assets/px/og.png",
+      "telephone": "+598 92 104 419",
+      "sameAs": [
+        "https://www.instagram.com/creacionesdelmago/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montevideo",
+        "addressCountry": "UY"
+      },
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "La Unión, Montevideo"
+        },
+        {
+          "@type": "Place",
+          "name": "La Blanqueada, Montevideo"
+        },
+        {
+          "@type": "Place",
+          "name": "Buceo, Montevideo"
+        },
+        {
+          "@type": "City",
+          "name": "Montevideo"
+        },
+        {
+          "@type": "Country",
+          "name": "Uruguay"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+598 92 104 419",
+        "availableLanguage": "es",
+        "areaServed": "UY",
+        "url": "https://wa.me/59892104419"
+      },
+      "knowsAbout": [
+        "impresión 3D",
+        "diseño 3D a medida",
+        "PLA",
+        "PETG",
+        "autos a escala para armar",
+        "ajedrez impreso en 3D",
+        "exhibidores para autitos 1:64"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Clickers y llaveros",
+            "description": "Se aprietan y hacen clic. Para tener en la mano mientras esperás o estudiás. También hago flexis, torres de dados y contadores para Magic: preguntame."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Autos a escala",
+            "description": "Para armar o para la repisa. Varios doblan cuando girás el volante. Fotos de los diseñadores."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Exhibidores para autitos",
+            "description": "Para sacar los Hot Wheels y los Matchbox de la caja y tenerlos a la vista. Todos son para escala 1:64, menos el estante 1:32. Fotos de los diseñadores."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ajedrez y dominó",
+            "description": "Casi todos son solo las piezas, sin tablero. El tablero también lo imprimo, aparte. Fotos de los diseñadores."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "One Piece y figuras",
+            "description": "Todo esto salió de mi impresora, y las fotos las saqué yo."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Minecraft, Star Wars y Pokémon",
+            "description": "Acá también están el ajedrez de Minecraft y el de Star Wars."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fútbol, aviones RC y fingerboard",
+            "description": "Los estadios los imprimí yo, y las fotos son mías."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pájaros y jardín",
+            "description": "Para el balcón, el fondo o la huerta. Si va al sol, conviene PETG: preguntame. Fotos de los diseñadores."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Casa",
+            "description": "Cosas raras y útiles para la casa. Fotos de los diseñadores."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Impresión y diseño 3D a medida",
+            "description": "Diseño e imprimo piezas a partir de una foto, un dibujo, un archivo STL, 3MF u OBJ o el link de un modelo, con las medidas."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://creacionesdelmago.com/#web",
+      "url": "https://creacionesdelmago.com/",
+      "name": "Creaciones del Mago",
+      "inLanguage": "es-UY",
+      "publisher": {
+        "@id": "https://creacionesdelmago.com/#negocio"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://creacionesdelmago.com/#preguntas",
+      "inLanguage": "es-UY",
+      "isPartOf": {
+        "@id": "https://creacionesdelmago.com/#web"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Dónde puedo imprimir una pieza en 3D en Montevideo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Conmigo. Soy Creaciones del Mago: diseño e imprimo piezas en 3D en Montevideo. Escribime por WhatsApp con una foto, un archivo o las medidas y te paso precio y fecha."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto sale?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Precios súper accesibles. Cada precio sale del peso y del tiempo de impresión de tu pieza, y te lo paso por WhatsApp antes de empezar. Si no te cierra, no pasa nada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto demora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todos los pedidos tienen un mínimo de 48 horas de preparación. La fecha exacta te la paso junto con el precio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tamaño máximo puedo imprimir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hasta 25 cm por lado en una sola pieza. Si es más grande, la hago en partes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué materiales imprimís?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En PLA para piezas de interior y en PETG para exterior o para algo que tenga que aguantar. Hasta cuatro colores en la misma pieza."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo elegir el color?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Tengo una gran variedad de colores y efectos especiales. Preguntame qué hay disponible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo mandar mi propio archivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables. Si no tenés archivo, lo diseño."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hacés piezas a medida?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Mandame una foto, un dibujo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, te aviso antes de empezar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si mi pieza no se puede imprimir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Te lo digo antes de empezar y, si hay otra forma de resolverlo, te la propongo. Prefiero avisarte a imprimir algo que no te sirve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hacés envíos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando: el costo del envío te lo paso con el precio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo hago un pedido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por WhatsApp al 092 104 419. Tocá «Lo quiero» en lo que te guste y el mensaje se arma solo, o contame tu idea con una foto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tenés Instagram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, @creacionesdelmago. Ahí podés ver más de mi trabajo."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
@@ -1044,13 +1311,14 @@ img.layer, .layer img { height: auto; max-width: none; }
       <img class="layer leaves-r pix" src="assets/px/hojas-der.png" width="150" height="96" alt="">
 
       <div class="title__copy">
-        <p class="label">Impresión 3D en Montevideo</p>
-        <h1>Imprimo <em>en 3D</em> casi cualquier cosa.</h1>
-        <p>Clickers, autos para armar, ajedrez, cosas de One Piece y Minecraft. Elegí del catálogo o mandame una foto de lo que querés.</p>
+        <p class="label">Precios súper accesibles</p>
+        <h1>Imprimo <em>en 3D</em> en Montevideo. Mandame tu idea.</h1>
+        <p>Una foto, un archivo o las medidas alcanzan. Te paso precio y fecha antes de empezar, sin compromiso. Si no se puede imprimir, te aviso antes.</p>
         <div class="title__actions">
-          <a class="btn" href="#catalogo">Ver el catálogo</a>
-          <a class="btn btn--ghost" href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20y%20te%20quiero%20consultar%20algo.">Escribime por WhatsApp</a>
+          <a class="btn" href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20y%20te%20quiero%20consultar%20algo."><svg viewBox="0 0 12 12" class="pix" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M2 1h8v1h1v6h-1v1H5v1H4v1H3V9H2V8H1V2h1zM3 4h1v1H3zm3 0h1v1H6zm3 0h1v1H9z"/></svg><span>Escribime por WhatsApp</span></a>
+          <a class="btn btn--ghost" href="#catalogo">Ver el catálogo</a>
         </div>
+        <p class="title__proof">Hasta 25 cm por lado, en PLA o PETG. Mirá mi trabajo en Instagram: <a href="https://www.instagram.com/creacionesdelmago/" rel="me noopener" target="_blank">@creacionesdelmago</a></p>
       </div>
     </div>
   </section>
@@ -1073,12 +1341,18 @@ img.layer, .layer img { height: auto; max-width: none; }
       <div data-sc-in>
         <p class="label">A medida</p>
         <h2>¿No está en el catálogo? Lo diseño.</h2>
-        <p class="lead">Mandame una foto, un dibujo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, también te aviso.</p>
+        <p class="lead">Mandame una foto, un dibujo, un archivo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, te aviso antes de empezar.</p>
+        <p class="label specs__title">Ficha del taller</p>
         <div class="specs">
           <p><b>Impresora:</b> una Bambu Lab A1, con cargador de cuatro bobinas.</p>
           <p><b>Tamaño:</b> hasta 25 cm por lado en una sola pieza. Si es más grande, lo hago en partes.</p>
           <p><b>Material:</b> PLA para adentro. PETG para afuera o para algo que tenga que aguantar.</p>
           <p><b>Colores:</b> hasta cuatro en la misma pieza.</p>
+          <p><b>Archivos:</b> STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables. Si no tenés archivo, lo diseño.</p>
+          <p><b>Precio:</b> súper accesible. Sale del peso y del tiempo de impresión, y te lo paso antes de empezar.</p>
+          <p><b>Plazo:</b> mínimo 48 horas de preparación. La fecha te la paso con el precio.</p>
+          <p><b>Zona:</b> Montevideo. Entrega sin costo en La Unión, La Blanqueada y parte de Buceo. Envío al resto del país.</p>
+          <p><b>Pedidos:</b> WhatsApp 092 104 419 o Instagram <a href="https://www.instagram.com/creacionesdelmago/" rel="me noopener" target="_blank">@creacionesdelmago</a>.</p>
         </div>
         <a class="btn" href="https://wa.me/59892104419?text=Hola%2C%20quiero%20una%20pieza%20a%20medida.%20Es%20esto%3A"><svg viewBox="0 0 12 12" class="pix" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M2 1h8v1h1v6h-1v1H5v1H4v1H3V9H2V8H1V2h1zM3 4h1v1H3zm3 0h1v1H6zm3 0h1v1H9z"/></svg><span>Contame tu idea por WhatsApp</span></a>
       </div>
@@ -1097,16 +1371,12 @@ img.layer, .layer img { height: auto; max-width: none; }
       <h2 data-sc-in>Cómo pedir</h2>
       <ol class="steps" data-sc-in data-sc-stagger="110">
         <li><span class="steps__icon"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M1 1h10v1h-10zM1 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM5 4h1v1h-1zM7 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM10 5h1v1h-1zM1 6h10v1h-10zM2 7h2v1h-2zM2 8h1v1h-1z"/></svg></span><b>Elegí del catálogo o contame tu idea.</b><span>Por WhatsApp. Si tenés una foto, mejor.</span></li>
-        <li><span class="steps__icon"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M3 1h1v1h-1zM8 1h1v1h-1zM1 2h10v1h-10zM1 3h10v1h-10zM1 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h2v1h-2zM6 5h2v1h-2zM10 5h1v1h-1zM1 6h1v1h-1zM3 6h2v1h-2zM6 6h2v1h-2zM10 6h1v1h-1zM1 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM3 8h2v1h-2zM10 8h1v1h-1zM1 9h1v1h-1zM3 9h2v1h-2zM10 9h1v1h-1zM1 10h10v1h-10z"/></svg></span><b>Te paso precio y fecha.</b><span>Antes de empezar. Si no te cierra, no pasa nada.</span></li>
+        <li><span class="steps__icon"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M3 1h1v1h-1zM8 1h1v1h-1zM1 2h10v1h-10zM1 3h10v1h-10zM1 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h2v1h-2zM6 5h2v1h-2zM10 5h1v1h-1zM1 6h1v1h-1zM3 6h2v1h-2zM6 6h2v1h-2zM10 6h1v1h-1zM1 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM3 8h2v1h-2zM10 8h1v1h-1zM1 9h1v1h-1zM3 9h2v1h-2zM10 9h1v1h-1zM1 10h10v1h-10z"/></svg></span><b>Te paso precio y fecha.</b><span>Antes de empezar, sin compromiso. Si no te cierra, no pasa nada.</span></li>
         <li><span class="steps__icon"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M1 1h10v1h-10zM1 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM4 3h4v1h-4zM10 3h1v1h-1zM1 4h1v1h-1zM4 4h4v1h-4zM10 4h1v1h-1zM1 5h1v1h-1zM5 5h2v1h-2zM10 5h1v1h-1zM1 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM3 7h6v1h-6zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM1 9h10v1h-10zM1 10h2v1h-2zM9 10h2v1h-2z"/></svg></span><b>Lo imprimo.</b><span>Hay piezas que llevan más de un día de impresora.</span></li>
         <li><span class="steps__icon"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M2 1h8v1h-8zM1 2h1v1h-1zM5 2h2v1h-2zM10 2h1v1h-1zM0 3h12v1h-12zM0 4h1v1h-1zM5 4h2v1h-2zM11 4h1v1h-1zM0 5h1v1h-1zM5 5h2v1h-2zM11 5h1v1h-1zM0 6h1v1h-1zM11 6h1v1h-1zM0 7h1v1h-1zM11 7h1v1h-1zM0 8h1v1h-1zM11 8h1v1h-1zM0 9h12v1h-12z"/></svg></span><b>Te lo llevo o te lo mando.</b><span>Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando.</span></li>
       </ol>
       <div class="faq" data-sc-in>
-        <details><summary>¿Cuánto sale?</summary><p>Tenemos precios súper accesibles. Cada precio se calcula según el peso y el tiempo de impresión de tu proyecto, y te lo pasamos antes de empezar.</p></details>
-        <details><summary>¿Cuánto demora?</summary><p>Todos los pedidos tienen un mínimo de 48 horas de preparación. La fecha exacta te la pasamos junto con el precio.</p></details>
-        <details><summary>¿Puedo elegir el color?</summary><p>Sí. Tenemos una gran variedad de colores y efectos especiales, únicos. Preguntanos qué hay disponible.</p></details>
-        <details><summary>¿Puedo mandar mi propio archivo?</summary><p>Sí: STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables.</p></details>
-        <details><summary>¿Hacés envíos?</summary><p>Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando: el costo del envío te lo paso con el precio.</p></details>
+        <details><summary>¿Dónde puedo imprimir una pieza en 3D en Montevideo?</summary><p>Conmigo. Soy Creaciones del Mago: diseño e imprimo piezas en 3D en Montevideo. Escribime por WhatsApp con una foto, un archivo o las medidas y te paso precio y fecha.</p></details><details><summary>¿Cuánto sale?</summary><p>Precios súper accesibles. Cada precio sale del peso y del tiempo de impresión de tu pieza, y te lo paso por WhatsApp antes de empezar. Si no te cierra, no pasa nada.</p></details><details><summary>¿Cuánto demora?</summary><p>Todos los pedidos tienen un mínimo de 48 horas de preparación. La fecha exacta te la paso junto con el precio.</p></details><details><summary>¿Qué tamaño máximo puedo imprimir?</summary><p>Hasta 25 cm por lado en una sola pieza. Si es más grande, la hago en partes.</p></details><details><summary>¿En qué materiales imprimís?</summary><p>En PLA para piezas de interior y en PETG para exterior o para algo que tenga que aguantar. Hasta cuatro colores en la misma pieza.</p></details><details><summary>¿Puedo elegir el color?</summary><p>Sí. Tengo una gran variedad de colores y efectos especiales. Preguntame qué hay disponible.</p></details><details><summary>¿Puedo mandar mi propio archivo?</summary><p>Sí: STL, 3MF u OBJ, o el link del modelo en MakerWorld o Printables. Si no tenés archivo, lo diseño.</p></details><details><summary>¿Hacés piezas a medida?</summary><p>Sí. Mandame una foto, un dibujo o el link de un modelo, con las medidas. Si se puede imprimir, te digo cuánto sale y para cuándo. Si no se puede, te aviso antes de empezar.</p></details><details><summary>¿Qué pasa si mi pieza no se puede imprimir?</summary><p>Te lo digo antes de empezar y, si hay otra forma de resolverlo, te la propongo. Prefiero avisarte a imprimir algo que no te sirve.</p></details><details><summary>¿Hacés envíos?</summary><p>Sí. Sin costo en La Unión, La Blanqueada y parte de Buceo. Al resto del país también mando: el costo del envío te lo paso con el precio.</p></details><details><summary>¿Cómo hago un pedido?</summary><p>Por WhatsApp al 092 104 419. Tocá «Lo quiero» en lo que te guste y el mensaje se arma solo, o contame tu idea con una foto.</p></details><details><summary>¿Tenés Instagram?</summary><p>Sí, @creacionesdelmago. Ahí podés ver más de mi trabajo.</p></details>
       </div>
     </div>
   </section>
@@ -1133,9 +1403,9 @@ img.layer, .layer img { height: auto; max-width: none; }
         <div class="counter__alt">
           <span class="phone">092 104 419</span><button class="copy-btn" type="button" data-copy="092104419">Copiar número</button>
         </div>
-        <small>Si es algo a medida, mandá una foto y las medidas aproximadas. Estoy en Montevideo.</small>
+        <small>Si es algo a medida, mandá una foto y las medidas. Instagram: <a href="https://www.instagram.com/creacionesdelmago/" rel="me noopener" target="_blank">@creacionesdelmago</a></small>
       </div>
-      <footer class="foot"><span>© 2026 Creaciones del Mago</span><span>Impresión y diseño 3D en Montevideo</span></footer>
+      <footer class="foot"><span>© 2026 Creaciones del Mago</span><span>Impresión y diseño 3D en Montevideo</span><a href="https://www.instagram.com/creacionesdelmago/" rel="me noopener" target="_blank">Instagram @creacionesdelmago</a></footer>
     </div>
   </section>
 

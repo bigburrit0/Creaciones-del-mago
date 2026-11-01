@@ -40,6 +40,13 @@ o discutida.
 13. **Categorías con nombres que la gente usa**, menos de 10, todas a la vista;
     si algo entra en dos, va en las dos (Baymard). [E]
 
+## Decisiones del dueño (1/11/2026)
+14. **"Precios súper accesibles" sí.** Lo decide el dueño y se confirma cuando escriben. Va siempre
+    pegado a cómo se calcula (peso y tiempo de impresión) y a "antes de empezar, sin compromiso".
+15. **Nada de "casi todo".** Se dice el límite real y se promete avisar antes si no se puede imprimir.
+16. **Cada respuesta de las preguntas frecuentes se entiende sola** (la puede citar un asistente de IA
+    sin la pregunta): nombra qué se hace, dónde y con qué límite.
+
 ## Prohibido
 Sumergite · descubrí · elevá · experiencia única · calidad premium · diseños
 únicos · "no es solo X, es Y" · tríadas de adjetivos · transformamos tus ideas ·

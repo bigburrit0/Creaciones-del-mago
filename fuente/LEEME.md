@@ -8,4 +8,6 @@ Acá está lo que arma `index.html`. No hace falta para que la web funcione: Git
 - `tools/photos.py` e `imgs.py`: recortan las fotos a cuadrado (600 px) y hacen la versión pixelada de 32 px.
 - `COPY-RULES.md`: las reglas de texto. `BRIEF.md`: las decisiones de diseño.
 
-Extras en la raíz del sitio (se editan a mano, no los genera el build): `robots.txt`, `sitemap.xml`, `llms.txt`. Si cambian los datos (tamaño, materiales, zona, teléfono), actualizarlos junto con `FAQ` en `tools/build.py`. El usuario de Instagram está en `IG_URL` e `IG_HANDLE` (arriba de `tools/build.py`).
+Guías (blog): `guias/` en la raíz se genera con `python3 -I fuente/tools/guias.py` desde los textos de `fuente/guias/`. Ver `fuente/guias/LEEME.md`. Ese script también regenera `sitemap.xml` y la sección «Guías» de `llms.txt`.
+
+Extras en la raíz del sitio (`robots.txt` se edita a mano; `sitemap.xml` y la sección «Guías» de `llms.txt` los regenera `guias.py`): `robots.txt`, `sitemap.xml`, `llms.txt`. Si cambian los datos (tamaño, materiales, zona, teléfono), actualizarlos junto con `FAQ` en `tools/build.py`. El usuario de Instagram está en `IG_URL` e `IG_HANDLE` (arriba de `tools/build.py`).

@@ -109,3 +109,20 @@ Nota de evidencia: ningún informe pudo abrir páginas completas (dominios bloqu
 búsqueda era solo de EE.UU. Lo más firme es que casi todos coinciden en cambiar la vaguedad por
 datos concretos. Sin verificar: registro de la marca, licencias y marcas de terceros
 (One Piece, Pokémon, Minecraft, Star Wars, clubes), arrepentimiento en compras a distancia.
+
+## v8 (1/11/2026, guías para Google, los asistentes de IA y Navidad)
+
+Dueño: un "blog" que ayude a aparecer en buscadores y en los LLM, con enfoque de Navidad y regalos, con su
+propio botón y fuera del contenido de la landing.
+
+- `/guias/`: cinco guías (regalos de Navidad, amigo invisible, exhibidores 1:64, PLA o PETG, qué mandar para
+  pedir). Fuente en `fuente/guias/`, generador `tools/guias.py`, estilos `src/guia.css`.
+- Única entrada desde la landing: botón «Guías» con un libro pixel en la barra de arriba, entre el menú y el pedido.
+- Cada guía: "respuesta corta" citable, tabla, tarjetas del catálogo con «Lo quiero» por WhatsApp, preguntas
+  frecuentes autocontenidas, fecha visible. Datos: `BlogPosting`, `BreadcrumbList`, `FAQPage`.
+- Base: 20 perfiles en paralelo (compradores, SEO local, GEO, ChatGPT/Perplexity/AI Overviews simulados,
+  evaluador de calidad, abogado del consumidor, tráfico). Coincidencias: sin jerga en la guía de regalos,
+  marcas solo en el cuerpo y con aclaración, no prometer fechas de Navidad, faltan datos del dueño
+  (pago, embalaje, fecha límite). Plan y preguntas en `fuente/guias/PLAN-NAVIDAD.md`.
+- Imágenes: ilustraciones pixel art a generar con Gemini (`fuente/guias/IMAGENES-GEMINI.md`), nunca como
+  foto de producto. Mientras no existan, la portada usa una foto del catálogo.

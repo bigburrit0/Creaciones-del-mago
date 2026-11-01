@@ -549,13 +549,20 @@ a { text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .bag:hover { border-color: var(--sc-ink); }
 .bag.is-bump { animation: bump 260ms var(--sc-ease-out); }
 @keyframes bump { 40% { transform: translateY(-4px); } }
-@media (max-width: 900px) { .hud__links { display: none; } .bag { margin-left: auto; } }
+.guias-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 12px;
+  color: var(--sc-ink); border: 2px solid var(--sc-accent); text-decoration: none; font: 600 16px/1 var(--sc-font-text);
+}
+.guias-btn svg { width: 22px; height: 22px; color: var(--sc-accent); }
+.guias-btn:hover { background: var(--estante); }
+@media (max-width: 900px) { .hud__links { display: none; } .guias-btn { margin-left: auto; } }
 @media (max-width: 480px) {
   main .btn { white-space: normal; text-align: left; }
 }
 @media (max-width: 520px) {
   .hud__name { display: none; }
   .hud .btn span, .bag span { display: none; }
+  .guias-btn { padding: 4px 8px; font-size: 15px; }
   .hud .btn { padding: 4px 10px; }
   .hud { gap: 12px; }
 }
@@ -1286,6 +1293,7 @@ img.layer, .layer img { height: auto; max-width: none; }
     <a href="#a-medida">A medida</a>
     <a href="#preguntas">Cómo pedir</a>
   </nav>
+  <a class="guias-btn" href="guias/" aria-label="Guías para regalar y pedir"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M1 1h4v1h-4zM6 1h4v1h-4zM1 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM1 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM9 3h1v1h-1zM1 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM1 5h1v1h-1zM4 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM1 6h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM9 6h1v1h-1zM1 7h4v1h-4zM6 7h4v1h-4zM4 8h3v1h-3z"/></svg><span>Guías</span></a>
   <a class="bag" href="#pedido" aria-label="Tu pedido, vacío"><svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M4 1h4v1h1v2h2v7H1V4h2V2h1zm1 1v2h2V2zM2 5v5h8V5z"/></svg><span>Pedido</span><b>0</b></a>
   <a class="btn" href="https://wa.me/59892104419?text=Hola%2C%20vi%20la%20web%20y%20te%20quiero%20consultar%20algo." aria-label="Escribime por WhatsApp"><svg viewBox="0 0 12 12" class="pix" aria-hidden="true" shape-rendering="crispEdges"><path fill="currentColor" d="M2 1h8v1h1v6h-1v1H5v1H4v1H3V9H2V8H1V2h1zM3 4h1v1H3zm3 0h1v1H6zm3 0h1v1H9z"/></svg><span>Escribime</span></a>
   <div class="hud__bar" aria-hidden="true"><i></i></div>

@@ -147,6 +147,7 @@ out = (TEMPLATE
        .replace('{{BAG_ICON}}', BAG_ICON)
        .replace('{{I_CHAT}}', icon_svg('chat')).replace('{{I_COIN}}', icon_svg('coin'))
        .replace('{{I_PRINTER}}', icon_svg('printer')).replace('{{I_BOX}}', icon_svg('box'))
+       .replace('{{I_BOOK}}', icon_svg('libro'))
        .replace('{{I_LEFT}}', icon_svg('left')).replace('{{I_RIGHT}}', icon_svg('right'))
        .replace('{{N_ITEMS}}', str(sum(len(s["items"]) for s in SHELVES))))
 assert '{{' not in out, out[out.index('{{'):out.index('{{') + 40]

@@ -88,13 +88,20 @@ a { text-underline-offset: 6px; text-decoration-thickness: 2px; }
 .bag:hover { border-color: var(--sc-ink); }
 .bag.is-bump { animation: bump 260ms var(--sc-ease-out); }
 @keyframes bump { 40% { transform: translateY(-4px); } }
-@media (max-width: 900px) { .hud__links { display: none; } .bag { margin-left: auto; } }
+.guias-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 12px;
+  color: var(--sc-ink); border: 2px solid var(--sc-accent); text-decoration: none; font: 600 16px/1 var(--sc-font-text);
+}
+.guias-btn svg { width: 22px; height: 22px; color: var(--sc-accent); }
+.guias-btn:hover { background: var(--estante); }
+@media (max-width: 900px) { .hud__links { display: none; } .guias-btn { margin-left: auto; } }
 @media (max-width: 480px) {
   main .btn { white-space: normal; text-align: left; }
 }
 @media (max-width: 520px) {
   .hud__name { display: none; }
   .hud .btn span, .bag span { display: none; }
+  .guias-btn { padding: 4px 8px; font-size: 15px; }
   .hud .btn { padding: 4px 10px; }
   .hud { gap: 12px; }
 }

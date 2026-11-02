@@ -73,3 +73,17 @@ def keep_component(m, seed_xy, r=0):
     seed = np.zeros(sub.shape, bool); seed[ys[k]-y0, xs[k]-x0] = True
     c = flood(sub, seed)
     out = np.zeros_like(m); out[y0:y1, x0:x1] = c & m[y0:y1, x0:x1]; return out
+def fill_holes(m):
+    """fill pixels enclosed by the mask (not reachable from the image border)"""
+    ys, xs = np.where(m)
+    if not len(xs): return m
+    y0, y1, x0, x1 = ys.min(), ys.max()+1, xs.min(), xs.max()+1
+    sub = np.pad(m[y0:y1, x0:x1], 1)
+    seed = np.zeros(sub.shape, bool); seed[0, :] = seed[-1, :] = seed[:, 0] = seed[:, -1] = True
+    outside = flood(~sub, seed)
+    out = m.copy(); out[y0:y1, x0:x1] |= ~outside[1:-1, 1:-1]; return out
+def main_body(m, seed_xy, r=4):
+    """drop thin attachments (sticks, ropes, outline slivers) thinner than ~2r px, keep the part around seed_xy"""
+    core = keep_component(erode(m, r), seed_xy)
+    return dilate(core, r + 1) & m
+def lilac_px(a): return ((a[..., 2] > a[..., 0] + 8) & (lum(a) > 105)) | ((a[..., 2] > a[..., 0] + 2) & (lum(a) > 175))

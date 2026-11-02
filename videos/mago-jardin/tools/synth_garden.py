@@ -44,14 +44,24 @@ for k, at in enumerate([0.8, 1.2, 1.6]):
 # harvest chime (feeder appears)
 for j, s in enumerate([0, 4, 7, 12, 16]):
     x = sq(note(12+s), 0.5, 0.25)*np.exp(-t(0.5)*5) * 0.3 + tri(note(24+s), 0.5)*np.exp(-t(0.5)*4)*0.25
-    put(fx, crush(x, 6), 2.6 + j*0.06)
+    put(fx, crush(x, 6), 2.48 + j*0.06)
 # 8-bit wing flaps
 def flaps(start, end, rate):
     tt = start
     while tt < end:
         n = rng.uniform(-1, 1, int(0.05*SR)); x = lp(n, 0.35)*np.exp(-t(0.05)*45)
         put(fx, crush(x, 4)*0.45, tt); tt += rate
-flaps(3.0, 4.0, 0.13); flaps(3.6, 4.8, 0.11); flaps(5.0, 5.7, 0.12); flaps(5.6, 6.4, 0.2)
+flaps(3.0, 4.0, 0.18); flaps(4.0, 5.2, 0.28); flaps(3.6, 4.8, 0.18); flaps(5.0, 5.6, 0.18); flaps(5.6, 6.4, 0.2)
+# leaf burst as the canopy pops
+n = rng.uniform(-1, 1, int(0.22*SR)); put(fx, crush(n - lp(n, 0.3), 4)*np.exp(-t(0.22)*14)*0.35, 2.4)
+# soft footsteps: wizard hops back, then walks to the chair
+def step(at, f=180, g=0.3):
+    put(fx, crush(sq(np.linspace(f, f*0.6, int(0.035*SR)), 0.035, 0.5)*np.exp(-t(0.035)*90))*g, at)
+for k in range(3): step(0.46 + 0.14*k + 0.047, 200)
+for k in range(5): step(5.52 + 0.11*k + 0.055, 170 + 15*(k % 2), 0.22)
+for k in range(5): step(6.07 + 0.13*k + 0.065, 170 + 15*(k % 2), 0.22)
+# landing taps on the feeder
+for at in (5.32, 5.66): put(fx, sq(1300, 0.025, 0.5)*np.exp(-t(0.025)*150)*0.25, at)
 # chiptune kiskadee call  ("bien-te-veo": short, short, long falling)
 def kiskadee(at, base=1500):
     for d, f0, f1, gap in [(0.09, base*1.3, base*1.45, 0.0), (0.08, base*1.1, base*1.2, 0.13), (0.28, base*1.5, base*0.95, 0.26)]:
@@ -59,10 +69,10 @@ def kiskadee(at, base=1500):
         put(fx, crush(x)*0.32, at + gap)
 kiskadee(4.15); kiskadee(8.55, 1400)
 # chair unfold: creak + clack, poof
-put(fx, crush(sq(np.linspace(220, 140, int(0.18*SR)), 0.18, 0.125)*env(int(0.18*SR), 0.01, 0.05))*0.25, 6.78)
-for at in (6.92, 6.99):
+put(fx, crush(sq(np.linspace(220, 140, int(0.18*SR)), 0.18, 0.125)*env(int(0.18*SR), 0.01, 0.05))*0.25, 6.7)
+for at in (6.86, 6.93):
     put(fx, (rng.uniform(-1, 1, int(0.04*SR))*np.exp(-t(0.04)*90)*0.6 + sq(700, 0.04, 0.5)*np.exp(-t(0.04)*80)*0.4), at)
-n = rng.uniform(-1, 1, int(0.25*SR)); put(fx, crush(lp(n, 0.15))*np.exp(-t(0.25)*12)*0.4, 6.82)
+n = rng.uniform(-1, 1, int(0.25*SR)); put(fx, crush(lp(n, 0.15))*np.exp(-t(0.25)*12)*0.4, 6.74)
 # dissolve shimmer
 for k in range(8): put(fx, sq(1046*2**(k/8), 0.06, 0.25)*np.exp(-t(0.06)*40)*0.1, 7.4 + k*0.075)
 # pecking ticks

@@ -24,6 +24,8 @@ cen = (xx >= 400) & (xx < 830) & (yy >= 790) & (yy < 1228)
 plots = cen & (yy >= 992)
 med = np.median(np.stack([i6, i7, i8]), 0)          # kneeling wizard (6), sparkles (7), hornero (8) each appear once
 P[plots] = med[plots]
+gold = cen & (P[..., 0] > 190) & (P[..., 1] > 150) & (P[..., 2] < 140)
+P = inpaint(P, dilate(gold, 3) & cen, 80)
 # plot pitch is ~175 px. Top row under the canopy/feeder/hat: copy from two cells to the right;
 # trunk and planted-soil patch (present in 7 and 8): copy from one cell to the right.
 z1 = plots & (yy < 1068) & (xx >= 440) & (xx < 700)
@@ -61,15 +63,19 @@ def dsprite(img, thr, bx, base=P, grow=1, med=5):
 kneel = dsprite(i6, 40, kneel_box)
 stand = dsprite(i7, 40, (90, 970, 520, 1570)) & ~boxmask(i7.shape, 415, 0, W, 1100) & ~boxmask(i7.shape, 480, 1100, W, 1200)
 point = dsprite(i8, 40, (90, 970, 520, 1570)) & ~boxmask(i8.shape, 400, 0, W, 1080)
+point &= ~(boxmask(i8.shape, 340, 960, 420, 1080) & (i8[..., 0] > i8[..., 2] + 10))
+point = keep_component(point, (280, 1300), r=2)
 tree = dsprite(i7, 35, (400, 780, 745, 1240))
 red8 = (i8[..., 0] > 150) & (i8[..., 1] < 100)
-struct8 = dsprite(i8, 35, (330, 600, 720, 1240)) & ~(boxmask(i8.shape, 0, 990, 520, 2000)) & ~dilate(red8, 3)
+struct8 = dsprite(i8, 35, (330, 600, 720, 1240)) & ~(boxmask(i8.shape, 0, 990, 380, 2000)) & ~dilate(red8, 3)
 horn8 = keep_component(dsprite(i8, 40, (780, 950, 1040, 1230)), (900, 1080), r=2)
 # kiskadee (flying, image 3): non-lilac part of the left side of the feeder area
 lilac = (i8[..., 2] > 170) & (i8[..., 2] > i8[..., 0] + 5) & (i8[..., 0] > 140)
 kis = struct8 & boxmask(P.shape, 330, 780, 560, 1060) & ~lilac
 kis = erode(dilate(kis, 2), 2)
-kis = keep_component(mf(kis, ImageFilter.MedianFilter(5)), (440, 900), r=2)
+kis = keep_component(mf(kis, ImageFilter.MedianFilter(5)) & ~lilac_px(i8), (440, 900), r=2)
+kis = fill_holes(kis) & ~lilac_px(i8) & ~boxmask(i8.shape, 505, 895, W, H) & ~boxmask(i8.shape, 498, 0, W, 862) & ~boxmask(i8.shape, 522, 0, W, H) & ~boxmask(i8.shape, 440, 0, 510, 796)
+kis = keep_component(kis, (440, 900))
 # feeder = struct8 above the trunk minus the bird, the hole mirrored from the right half
 feeder_m = struct8 & ~kis & (np.arange(H)[:, None] < 1082)
 feeder_img = i8.copy()
@@ -88,14 +94,16 @@ rope_m = keep_component(rope_m, (520, 690), r=4)
 box_m = feeder_m & (np.arange(H)[:, None] >= 780) & (np.arange(W)[None, :] >= 470)
 canopy = tree & (np.arange(H)[:, None] < 1060)
 trunk = tree & (np.arange(H)[:, None] >= 1060)
-trunk8 = struct8 & (np.arange(H)[:, None] >= 1060) & ~kis
+trunk8 = struct8 & (np.arange(H)[:, None] >= 1060) & ~kis & (np.arange(W)[None, :] >= 480)
 
 # ---------- final layout (5.jpg): wand cut-outs
 k5 = i5.copy()
 sp1 = wand(i5, (338, 1228, 482, 1334), navy=False)
 sp2 = wand(i5, (503, 1228, 640, 1334), navy=False)
-kis5 = wand(i5, (330, 850, 515, 1020), navy=False)
-hor5 = wand(i5, (596, 862, 770, 1000), navy=False)
+kis5 = main_body(wand(i5, (330, 850, 515, 1020), navy=False) & ~lilac_px(i5), (430, 940))
+hor5 = wand(i5, (596, 862, 770, 1000), navy=False) & ~lilac_px(i5)
+hor5 &= ~(boxmask(i5.shape, 726, 0, 744, 955) | boxmask(i5.shape, 726, 994, 744, H) | boxmask(i5.shape, 744, 0, W, 958))   # feeder rod and trunk behind the bird
+hor5 = main_body(hor5, (675, 930), r=5)
 wiz5 = wand(i5, (700, 878, 1112, 1548), dark=80)
 wiz5 &= ~boxmask(i5.shape, 0, 0, 800, 1195)
 lawn = (i5[..., 1] > i5[..., 0] + 12) & (i5[..., 1] > i5[..., 2] - 5)
@@ -112,17 +120,32 @@ green = (i5[..., 1] > i5[..., 0] + 15) & (i5[..., 1] > i5[..., 2] + 5)
 leaves = green & boxmask(i5.shape, 290, 120, 1000, 545)
 
 # ---------- small drawn sprout (palette taken from the tree)
+SPROUT = [            # 1 char = 1 art pixel (6 px); o outline, L light leaf, G leaf, D dark leaf, S stem, s soil, m dark soil
+    "...oo.......oo...",
+    "..oLLo.....oLLo..",
+    ".oLLGGo...oGGLLo.",
+    ".oLGGGDo.oDGGGLo.",
+    "..oGGDDooDDGGo...",
+    "...ooDDoSoDDoo...",
+    ".....oooSooo.....",
+    ".......oSo.......",
+    ".......oSo.......",
+    "......ooSoo......",
+    "...mmmmsssmmmm...",
+    "..msssssssssssm..",
+    "...mmmmmmmmmmm...",
+]
 def sprout_layer():
+    pal = {'o': (38, 44, 40), 'L': (150, 196, 96), 'G': (92, 150, 74), 'D': (60, 112, 56), 'S': (78, 128, 62),
+           's': (104, 66, 42), 'm': (78, 48, 32)}
     a = np.zeros((H, W, 4), np.float32)
-    ol = np.array([38, 44, 40, 255.]); g1 = np.array([92, 150, 74, 255.]); g2 = np.array([60, 112, 56, 255.])
-    soil = np.array([84, 52, 34, 255.])
-    px = 7; bx, by = 562, 1196   # base of the trunk
-    def r(x, y, w, h, c): a[by + y*px: by + (y+h)*px, bx + x*px: bx + (x+w)*px] = c
-    r(-3, -1, 7, 2, soil)
-    r(-1, -6, 2, 6, ol); r(0, -6, 1, 5, g2)
-    r(-5, -9, 4, 3, ol); r(-4, -8, 3, 2, g1)
-    r(1, -10, 4, 3, ol); r(2, -9, 3, 2, g1)
-    r(-1, -8, 2, 2, ol); r(0, -8, 1, 1, g2)
+    px = 6; bx, by = 565, 1206   # bottom centre of the art = planted plot
+    rows = len(SPROUT); cols = len(SPROUT[0])
+    for r, line in enumerate(SPROUT):
+        for c, ch in enumerate(line):
+            if ch in pal:
+                y = by - (rows - r)*px; x = bx + (c - cols//2)*px
+                a[y:y+px, x:x+px, :3] = pal[ch]; a[y:y+px, x:x+px, 3] = 255
     return a
 
 # ---------- output scaling
@@ -175,7 +198,32 @@ a, bxx = transplant(i5, sp2, 0.85, (705, 1300), (bb(sp2)[0]+60, bb(sp2)[3])); sa
 wb = bb(wiz5)
 a, bxx = transplant(i5, wiz5, 1.0, (1108, 1002), (wb[2], wb[3])); save_rgba(a, 'l_wiz'); meta['l_wiz'] = conv(bxx)
 meta['trunk_base'] = conv((565, 1198, 565, 1198))[:2]
+# closed-wing frames for a 2-frame flap: the perched bird moved onto the flying bird's body
+def centroid(m): ys, xs = np.where(m); return xs.mean(), ys.mean()
+def shift_layer(arr, dx, dy):
+    out = np.zeros_like(arr); dx, dy = int(round(dx)), int(round(dy))
+    ys, xs = np.where(arr[..., 3] > 0); ok = (ys+dy >= 0) & (ys+dy < H) & (xs+dx >= 0) & (xs+dx < W)
+    out[ys[ok]+dy, xs[ok]+dx] = arr[ys[ok], xs[ok]]; return out
+yel = lambda a: (a[..., 0] > 170) & (a[..., 1] > 150) & (a[..., 2] < 110)
+LK_t, _ = transplant(i5, kis5, s_b, to8((bb(kis5)[2], bb(kis5)[3])), (bb(kis5)[2], bb(kis5)[3]))
+LH_t, _ = transplant(i5, hor5, s_b, to8((bb(hor5)[0], bb(hor5)[3])), (bb(hor5)[0], bb(hor5)[3]))
+cf = centroid(yel(i8) & kis); cl = centroid(yel(LK_t) & (LK_t[..., 3] > 0))
+save_rgba(shift_layer(LK_t, cf[0]-cl[0], cf[1]-cl[1]), 'kis_closed')
+cf = centroid(horn8); cl = centroid(LH_t[..., 3] > 0)
+HC = shift_layer(LH_t, cf[0]-cl[0], cf[1]-cl[1] - 10)
+# tint the rufous perched hornero towards the orange of the flying keyframe so the flap does not flicker colour
+bright = lambda a, m: m & (lum(a) > 90)
+gain = i8[bright(i8, horn8)].mean(0) / np.maximum(HC[..., :3][bright(HC[..., :3], HC[..., 3] > 0)].mean(0), 1)
+HC[..., :3] = np.where((HC[..., 3:] > 0) & (lum(HC[..., :3])[..., None] > 70), np.clip(HC[..., :3]*gain, 0, 255), HC[..., :3])
+save_rgba(HC, 'hor_closed')
+LHo = LH_t.copy(); LHo[..., :3] = np.where((LHo[..., 3:] > 0) & (lum(LHo[..., :3])[..., None] > 70), np.clip(LHo[..., :3]*gain, 0, 255), LHo[..., :3])
+save_rgba(LHo, 'l_hor_orange')
 meta['f_sp1'] = conv(bb(sp1)); meta['f_sp2'] = conv(bb(sp2))
+# landing offsets: how far the closed-wing flying frame must move to sit exactly on the perched sprite (output px)
+def a_centroid(name):
+    a = np.asarray(Image.open(f'{OUT}/{name}.png'))[..., 3] > 0; ys, xs = np.where(a); return xs.mean(), ys.mean()
+for bird, fly, perch in [('kis', 'kis_closed', 'l_kis'), ('hor', 'hor_closed', 'l_hor')]:
+    f, p_ = a_centroid(fly), a_centroid(perch); meta[bird + '_land'] = [round(p_[0]-f[0]), round(p_[1]-f[1])]
 json.dump(meta, open(f'{OUT}/meta.json', 'w'), indent=1)
 print(json.dumps(meta))
 if DBG:

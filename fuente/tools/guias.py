@@ -251,7 +251,7 @@ def guide_page(meta, others):
       <p class="label">{e(meta.get("etiqueta", "Guía"))}</p>
       <h1>{inline(meta["titulo"])}</h1>
       <p class="hero__lead">{inline(meta["bajada"])}</p>
-      <p class="meta">Actualizada el <time datetime="{meta['actualizada']}">{fecha(meta['actualizada'])}</time> · La escribe la persona que imprime en Creaciones del Mago, Montevideo</p>
+      <p class="meta">Actualizada el <time datetime="{meta['actualizada']}">{fecha(meta['actualizada'])}</time> · Por El Mago</p>
     </div>
     <figure class="hero__img{' is-photo' if not is_gemini else ''}"><img src="{img}" alt="{e(meta.get('imagen_alt', meta['titulo']))}" width="{2100 if is_gemini else 600}" height="{800 if is_gemini else 600}" fetchpriority="high"></figure>
   </div>
@@ -277,7 +277,7 @@ def guide_page(meta, others):
            "abstract": meta["respuesta"].replace("**", ""),
            "datePublished": meta["publicada"], "dateModified": meta["actualizada"], "inLanguage": "es-UY",
            "image": SITE.rstrip("/") + img, "url": url, "mainEntityOfPage": url,
-           "author": {"@id": SITE + "#negocio"}, "publisher": {"@id": SITE + "#negocio"},
+           "author": {"@type": "Person", "name": "El Mago", "worksFor": {"@id": SITE + "#negocio"}}, "publisher": {"@id": SITE + "#negocio"},
            "isPartOf": {"@type": "Blog", "@id": SITE + "guias/#blog", "name": "Guías de Creaciones del Mago", "url": SITE + "guias/"},
            "about": [x.strip() for x in meta.get("temas", "").split(",") if x.strip()]},
           crumb_ld]

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      :root { --ground: #f3e3c6; --spark: #fff3b0; --spark-edge: #f2b640; --dust: #c9a06a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); }
+      img { image-rendering: pixelated; display: block; }
+      #stage, .layer, .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      .hid { opacity: 0; }
+      .px { position: absolute; width: 8px; height: 8px; opacity: 0; }
+      .star { width: 6px; height: 6px; background: var(--spark);
+        box-shadow: 6px 0 var(--spark), -6px 0 var(--spark), 0 6px var(--spark), 0 -6px var(--spark),
+                    12px 0 var(--spark-edge), -12px 0 var(--spark-edge), 0 12px var(--spark-edge), 0 -12px var(--spark-edge); }
+      .dust { width: 12px; height: 12px; background: var(--dust); box-shadow: 0 0 0 3px #f1dcb4; }
+      .seed { width: 12px; height: 12px; background: #ffd34a; box-shadow: 0 0 0 4px rgba(255, 220, 90, 0.45), 0 0 18px 6px rgba(255, 210, 80, 0.5); }
+      #rope-clip { clip-path: inset(0% 0% 0% 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="10" data-track-index="0" data-track-kind="graphics" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
+        <!-- ===== patio (keyframes 1-3) ===== -->
+        <div id="grp-patio" class="layer">
+          <img id="plate" class="full" src="assets/plate.jpg" alt="" />
+          <img id="plate-nochair" class="full hid" src="assets/plate_nochair.jpg" alt="" />
+          <img id="sprout" class="full hid" src="assets/sprout.png" alt="" />
+          <img id="sapling" class="full hid" src="assets/sapling.png" alt="" />
+          <img id="trunk" class="full hid" src="assets/trunk.png" alt="" />
+          <img id="trunk8" class="full hid" src="assets/trunk8.png" alt="" />
+          <img id="canopy" class="full hid" src="assets/canopy.png" alt="" />
+          <div id="rope-clip" class="layer"><img id="rope" class="full" src="assets/rope.png" alt="" /></div>
+          <img id="feeder" class="full hid" src="assets/feeder.png" alt="" />
+          <img id="l-sp1" class="full hid" src="assets/l_sp1.png" alt="" />
+          <img id="l-sp2" class="full hid" src="assets/l_sp2.png" alt="" />
+          <img id="l-kis" class="full hid" src="assets/l_kis.png" alt="" />
+          <img id="l-hor" class="full hid" src="assets/l_hor.png" alt="" />
+          <img id="l-wiz" class="full hid" src="assets/l_wiz.png" alt="" />
+          <img id="kneel" class="full" src="assets/kneel.png" alt="" />
+          <img id="stand" class="full hid" src="assets/stand.png" alt="" />
+          <img id="point" class="full hid" src="assets/point.png" alt="" />
+          <img id="kis-fly" class="full hid" src="assets/kis_fly.png" alt="" />
+          <img id="hor-fly" class="full hid" src="assets/hor_fly.png" alt="" />
+          <div id="seed" class="px seed" style="left:436px;top:1022px"></div>
+        </div>
+
+        <!-- ===== final garden (keyframe 4) ===== -->
+        <div id="grp-final" class="layer hid">
+          <img id="k4-base" class="full" src="assets/k4_base.jpg" alt="" />
+          <img id="f-leaves" class="full" src="assets/f_leaves.png" alt="" />
+          <img id="f-sp1" class="full" src="assets/f_sp1.png" alt="" />
+          <img id="f-sp2" class="full" src="assets/f_sp2.png" alt="" />
+          <img id="f-mate" class="full" src="assets/f_mate.png" alt="" />
+        </div>
+        <!-- block dissolve frames -->
+        <img id="dis1" class="full hid" src="assets/dis1.png" alt="" />
+        <img id="dis2" class="full hid" src="assets/dis2.png" alt="" />
+        <img id="dis3" class="full hid" src="assets/dis3.png" alt="" />
+        <img id="dis4" class="full hid" src="assets/dis4.png" alt="" />
+        <img id="dis5" class="full hid" src="assets/dis5.png" alt="" />
+        <img id="dis6" class="full hid" src="assets/dis6.png" alt="" />
+        <img id="dis7" class="full hid" src="assets/dis7.png" alt="" />
+        <img id="k4" class="full hid" src="assets/k4.jpg" alt="" />
+
+        <!-- sparkles and dust (positions are set per burst in the script) -->
+        <div id="fx" class="layer">
+          <div id="st1" class="px star"></div><div id="st2" class="px star"></div><div id="st3" class="px star"></div>
+          <div id="st4" class="px star"></div><div id="st5" class="px star"></div><div id="st6" class="px star"></div>
+          <div id="du1" class="px dust"></div><div id="du2" class="px dust"></div><div id="du3" class="px dust"></div>
+          <div id="du4" class="px dust"></div><div id="du5" class="px dust"></div><div id="du6" class="px dust"></div>
+          <div id="du7" class="px dust"></div><div id="du8" class="px dust"></div>
+        </div>
+      </div>
+
+      <audio id="aud-music" class="clip" src="assets/g_music.wav" data-start="0" data-duration="10" data-track-index="1" data-volume="0.55"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/g_sfx.wav" data-start="0" data-duration="10" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-birds" class="clip" src="assets/g_birds.wav" data-start="0" data-duration="10" data-track-index="3" data-volume="0.35"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, t) => tl.set(sel, { opacity: 1 }, t);
+      const hide = (sel, t) => tl.set(sel, { opacity: 0 }, t);
+      // a sprite hopping from offset (fx,fy) to (tx,ty) in n stepped hops
+      function hops(sel, t0, dur, from, to, n, h) {
+        const kf = [];
+        for (let i = 1; i <= n; i++) {
+          const f = i / n, x = from[0] + (to[0] - from[0]) * f, y = from[1] + (to[1] - from[1]) * f;
+          kf.push({ x: from[0] + (to[0] - from[0]) * (i - 0.5) / n, y: from[1] + (to[1] - from[1]) * (i - 0.5) / n - h, duration: dur / n / 2, ease: "steps(1)" });
+          kf.push({ x, y, duration: dur / n / 2, ease: "steps(1)" });
+        }
+        tl.fromTo(sel, { x: from[0], y: from[1] }, { keyframes: kf, immediateRender: false }, t0);
+      }
+      // a sprite flying along a stepped path with flapping wings
+      function fly(sel, t0, dur, from, to, steps, flap, origin) {
+        tl.fromTo(sel, { x: from[0], y: from[1] }, { x: to[0], y: to[1], duration: dur, ease: "steps(" + steps + ")", immediateRender: false }, t0);
+        for (let k = 0, t = t0; t < t0 + dur; t += flap, k++) tl.set(sel, { scaleY: k % 2 ? 1 : 0.72, transformOrigin: origin }, t);
+        tl.set(sel, { scaleY: 1 }, t0 + dur);
+      }
+      // a burst of 6 sparkles around (cx,cy)
+      const ring = [[-60, -40], [55, -55], [70, 20], [-70, 25], [0, -80], [10, 60]];
+      function sparkle(t, cx, cy, s) {
+        ring.forEach(([dx, dy], i) => {
+          const id = "#st" + (i + 1);
+          tl.set(id, { left: cx + dx * s, top: cy + dy * s, opacity: 1, scale: 1 }, t + i * 0.02);
+          tl.set(id, { scale: 0.5 }, t + 0.12 + i * 0.02);
+          tl.set(id, { opacity: 0 }, t + 0.22 + i * 0.02);
+        });
+      }
+      function dust(t, cx, cy, n, spread) {
+        for (let i = 1; i <= n; i++) {
+          const a = (i / n) * Math.PI * 2, dx = Math.cos(a) * spread, dy = Math.sin(a) * spread * 0.5;
+          tl.set("#du" + i, { left: cx, top: cy, x: 0, y: 0, opacity: 1 }, t);
+          tl.to("#du" + i, { x: dx, y: dy - 10, duration: 0.24, ease: "steps(3)" }, t);
+          tl.set("#du" + i, { opacity: 0 }, t + 0.26);
+        }
+      }
+
+      // ---------- 0-2 s : seed, step back, three growth stages
+      tl.fromTo("#kneel", { y: 0 }, { keyframes: [{ y: 6, duration: 0.06 }, { y: 0, duration: 0.06 }], ease: "steps(1)", immediateRender: false }, 0.1);
+      dust(0.12, 640, 1150, 4, 40);
+      show("#seed", 0.3);
+      tl.fromTo("#seed", { x: 0, y: 0 }, { keyframes: [{ x: 30, y: 20 }, { x: 60, y: 60 }, { x: 90, y: 104 }, { x: 105, y: 124 }], duration: 0.3, ease: "steps(1)", immediateRender: false }, 0.3);
+      hide("#seed", 0.62);
+      sparkle(0.6, 547, 1150, 0.6);
+      hide("#kneel", 0.3);
+      show("#stand", 0.3);
+      hops("#stand", 0.3, 0.45, [279, -336], [0, 0], 3, 40);
+      // stage 1: sprout
+      show("#sprout", 0.8);
+      tl.fromTo("#sprout", { scaleY: 0.4, transformOrigin: "547px 1155px" }, { scaleY: 1, duration: 0.12, ease: "steps(2)", immediateRender: false }, 0.8);
+      sparkle(0.8, 547, 1100, 0.7);
+      // stage 2: sapling
+      hide("#sprout", 1.2); show("#sapling", 1.2);
+      tl.fromTo("#sapling", { scaleY: 0.6, transformOrigin: "547px 1155px" }, { scaleY: 1, duration: 0.12, ease: "steps(2)", immediateRender: false }, 1.2);
+      sparkle(1.2, 547, 1040, 1.0);
+      // stage 3: young tree (keyframe 2)
+      hide("#sapling", 1.6); show(["#trunk", "#canopy"], 1.6);
+      tl.fromTo(["#trunk", "#canopy"], { scaleY: 0.75, transformOrigin: "547px 1160px" }, { scaleY: 1, duration: 0.12, ease: "steps(2)", immediateRender: false }, 1.6);
+      sparkle(1.6, 552, 900, 1.5);
+
+      // ---------- 2-5 s : the feeder grows from the branch, birds fly in
+      tl.fromTo("#rope-clip", { clipPath: "inset(0% 0% 0% 100%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "steps(4)" }, 2.3);
+      tl.fromTo("#canopy", { scale: 1, transformOrigin: "552px 880px" }, { scale: 0, duration: 0.36, ease: "steps(4)", immediateRender: false }, 2.35);
+      hide("#trunk", 2.6); show("#trunk8", 2.6);
+      show("#feeder", 2.6);
+      tl.fromTo("#feeder", { scale: 0.1, transformOrigin: "574px 748px" }, { scale: 1, duration: 0.36, ease: "steps(4)", immediateRender: false }, 2.6);
+      sparkle(2.62, 574, 880, 1.6);
+      sparkle(2.9, 574, 860, 2.0);
+      // kiskadee from the top-left, rufous hornero from the right
+      show("#kis-fly", 3.0);
+      fly("#kis-fly", 3.0, 1.0, [-520, -560], [0, 0], 10, 0.13, "430px 850px");
+      hide("#stand", 3.3); show("#point", 3.3);
+      show("#hor-fly", 3.6);
+      fly("#hor-fly", 3.6, 1.2, [420, -260], [0, 0], 12, 0.11, "873px 1036px");
+      tl.set("#kis-fly", { scaleY: 1 }, 4.0);
+      for (let t = 4.0; t < 5.2; t += 0.2) tl.set("#kis-fly", { scaleY: (Math.round((t - 4) / 0.2) % 2) ? 0.85 : 1, transformOrigin: "430px 850px" }, t);
+
+      // ---------- 5-8 s : landing, sparrows, the wizard unfolds the chair and sits
+      hide("#kis-fly", 5.25); show("#l-kis", 5.25);
+      fly("#hor-fly", 5.0, 0.7, [0, 0], [-198, -84], 7, 0.12, "873px 1036px");
+      hide("#hor-fly", 5.7); show("#l-hor", 5.7);
+      show(["#l-sp1", "#l-sp2"], 5.6);
+      hops("#l-sp1", 5.6, 0.8, [-440, 40], [0, 0], 4, 34);
+      hops("#l-sp2", 5.7, 0.8, [440, 40], [0, 0], 4, 34);
+      // wizard walks to the folded chair
+      hide("#point", 5.85); show("#stand", 5.85);
+      hops("#stand", 5.9, 0.9, [0, 0], [590, -500], 6, 22);
+      // poof: chair unfolds, wizard sits with his mate
+      dust(6.8, 930, 760, 8, 110);
+      sparkle(6.84, 930, 700, 2.2);
+      hide("#plate", 6.9); show("#plate-nochair", 6.9);
+      hide("#stand", 6.9); show("#l-wiz", 6.9);
+      tl.fromTo("#l-wiz", { scaleY: 0.85, transformOrigin: "880px 963px" }, { scaleY: 1, duration: 0.12, ease: "steps(2)", immediateRender: false }, 6.9);
+      // sparrows peck
+      for (let t = 6.5; t < 7.4; t += 0.3) {
+        tl.set("#l-sp1", { rotation: 16, transformOrigin: "430px 1250px" }, t);
+        tl.set("#l-sp1", { rotation: 0 }, t + 0.12);
+        tl.set("#l-sp2", { rotation: -16, transformOrigin: "690px 1250px" }, t + 0.15);
+        tl.set("#l-sp2", { rotation: 0 }, t + 0.27);
+      }
+
+      // ---------- 7.4-8 s : 16-bit block dissolve into keyframe 4
+      for (let i = 1; i <= 7; i++) {
+        show("#dis" + i, 7.4 + (i - 1) * 0.075);
+        if (i > 1) hide("#dis" + (i - 1), 7.4 + (i - 1) * 0.075);
+      }
+      show("#grp-final", 7.925); hide("#dis7", 7.925); hide("#grp-patio", 7.925);
+
+      // ---------- 8-9.2 s : pecking loop, mate sip, leaves sway
+      for (let t = 8.0; t < 9.2; t += 0.3) {
+        tl.set("#f-sp1", { rotation: 16, transformOrigin: "395px 1282px" }, t);
+        tl.set("#f-sp1", { rotation: 0 }, t + 0.12);
+        tl.set("#f-sp2", { rotation: -16, transformOrigin: "560px 1282px" }, t + 0.15);
+        tl.set("#f-sp2", { rotation: 0 }, t + 0.27);
+      }
+      tl.fromTo("#f-mate", { y: 0 }, { keyframes: [{ y: -8 }, { y: -16 }, { y: -16 }, { y: -16 }, { y: -8 }, { y: 0 }], duration: 0.6, ease: "steps(1)", immediateRender: false }, 8.3);
+      [[8.0, 4], [8.25, 0], [8.5, -4], [8.75, 0], [9.0, 4], [9.2, 0]].forEach(([t, x]) => tl.set("#f-leaves", { x }, t));
+
+      // ---------- 9.2-10 s : calm, exact keyframe 4
+      show("#k4", 9.2);
+      tl.set("#stage", { x: 0 }, 9.99);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

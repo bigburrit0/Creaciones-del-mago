@@ -116,3 +116,54 @@ def score(lib, reel, sh, img):
         - (15 if any(i.startswith("altura") for i in issues) else 0) - (10 if any(i.startswith("ancla") for i in issues) else 0)
     sc = int(max(0, min(100, sc)))
     return {"score": sc, "pass": (not hard) and sc >= 70, "issues": issues, "fixes": list(dict.fromkeys(fixes)), "metrics": m}
+
+
+# ------------------------------------------------------------------ normalisation of real image-model output
+def pixel_pitch(img):
+    """size of one art pixel in image pixels, from the autocorrelation of colour edges (both axes)"""
+    a = np.asarray(img.convert("L")).astype(np.float32); best = []
+    for g in (np.abs(np.diff(a, axis=1)).sum(0), np.abs(np.diff(a, axis=0)).sum(1)):
+        g = g - g.mean(); ac = np.correlate(g, g, "full")[len(g) - 1:]; ac /= max(ac[0], 1e-6)
+        best.append(int(np.arange(3, 40)[np.argmax(ac[3:40])]))
+    return int(round(float(np.median(best))))
+
+
+def strip_grid_lines(a):
+    """paint magenta any full-length dark line (cell separators the model sometimes draws)"""
+    a = a.copy(); dark = a.astype(int).sum(2) < 200
+    for axis in (0, 1):
+        frac = dark.mean(axis=1 - axis)
+        for i in np.where(frac > 0.6)[0]:
+            if axis == 0: a[i, :] = (255, 0, 255)
+            else: a[:, i] = (255, 0, 255)
+    return a
+
+
+def normalize_sheet(lib, sh, img):
+    """Rebuild any-size model output as the canonical sheet (grid x cell_art x scale), keeping its art pixels.
+    Returns (normalized PIL image, info dict). Plates are only resized to 9:16 at x scale."""
+    S = lib["grid"]["scale"]
+    if sh["fmt"] == "plate":
+        W, H = lib["grid"]["art_canvas"]; return img.convert("RGB").resize((W * S, H * S), Image.BOX), {"plate": True}
+    f = lib["sheet_formats"][sh["fmt"]]; gx, gy = f["grid"]; ca = f["cell_art"]
+    img = img.convert("RGB"); p = pixel_pitch(img)
+    A = int(round(img.width / p)); Ah = int(round(img.height / p))
+    img = img.resize((A * p, Ah * p), Image.NEAREST)
+    a = strip_grid_lines(np.asarray(img))
+    art = to_art(Image.fromarray(a), p, A, Ah)                 # RGBA art at the model's own resolution
+    cw, ch = A // gx, Ah // gy; out = np.zeros((gy * ca, gx * ca, 4), np.uint8)
+    for gyi in range(gy):
+        for gxi in range(gx):
+            c = art[gyi * ch:(gyi + 1) * ch, gxi * cw:(gxi + 1) * cw]
+            al = c[..., 3] > 0
+            if al.sum() < 6: continue
+            ys, xs = np.where(al); c = c[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+            h, w = c.shape[:2]
+            if h > ca - 4 or w > ca - 4:                         # too big for our cell: integer shrink is not possible, crop safely
+                c = c[max(0, h - (ca - 4)):, max(0, (w - (ca - 4)) // 2):][: ca - 4, : ca - 4]; h, w = c.shape[:2]
+            ax, ay = f["anchor_art"]
+            y0 = max(0, min(ca - h, ay + 1 - h)); x0 = max(0, min(ca - w, ax - w // 2))
+            out[gyi * ca + y0:gyi * ca + y0 + h, gxi * ca + x0:gxi * ca + x0 + w] = c
+    rgb = np.where(out[..., 3:] > 0, out[..., :3], np.array([255, 0, 255], np.uint8))
+    norm = Image.fromarray(rgb.astype(np.uint8)).resize((gx * ca * S, gy * ca * S), Image.NEAREST)
+    return norm, {"pitch": p, "model_cell_art": [cw, ch]}

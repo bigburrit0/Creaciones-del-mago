@@ -218,7 +218,8 @@ def main():
                     used += 1; log(event="error", sheet=sh["name"], gate=sh["gate"], model=model, error=redact(e)); print("  error:", redact(e)); break
                 if img is None:
                     log(event="no_image", sheet=sh["name"], model=model, response_text=text); print("  sin imagen:", text[:120]); continue
-                p = os.path.join(folder, f"v{n}.png"); img.convert("RGB").save(p)
+                p = os.path.join(folder, f"v{n}.png"); img.convert("RGB").save(os.path.join(folder, f"v{n}_raw.png"))
+                QC.normalize_sheet(lib, sh, img)[0].save(p)
                 q = QC.score(lib, reel, sh, Image.open(p)); results.append(dict(n=n, path=p, qc=q))
                 log(event="generate", sheet=sh["name"], gate=sh["gate"], model=model, variant=n, round=rnd,
                     prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(), prompt=prompt,
@@ -268,7 +269,9 @@ def manual(a, lib, reel, todo, reqs, sheets, cands, log):
         folder = os.path.join(cands, stem); os.makedirs(folder, exist_ok=True); results = []
         for f in mine:
             n = max(existing_variants(folder) + [0]) + 1; p = os.path.join(folder, f"v{n}.png")
-            Image.open(os.path.join(a.imp, f)).convert("RGB").save(p)
+            raw = Image.open(os.path.join(a.imp, f)).convert("RGB"); raw.save(os.path.join(folder, f"v{n}_raw.png"))
+            norm, info = QC.normalize_sheet(lib, sh, raw); norm.save(p)
+            print(f"  normalizada: píxel de {info.get('pitch', '-')} px, celda del modelo {info.get('model_cell_art', '-')}")
             q = QC.score(lib, reel, sh, Image.open(p)); results.append(dict(n=n, path=p, qc=q))
             log(event="import", sheet=sh["name"], gate=sh["gate"], variant=n, source="gemini-app", file=f, qc=q)
             print(f"  {sh['name']} v{n} ({f}): score {q['score']} {'OK' if q['pass'] else 'NO'} {'; '.join(q['issues'])}")

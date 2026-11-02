@@ -1,0 +1,316 @@
+<title>Reels de ajedrez</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: barra fija con los 10 cartuchos (conceptos); debajo, el concepto activo como una ruta de 3 pasos: imágenes, video, edición. Tema único de noche, como la web. */
+@font-face{font-family:"MagoPixel";src:url(FONT_REG) format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"MagoPixel";src:url(FONT_BOLD) format("woff");font-weight:700;font-display:swap}
+:root{
+  --night:#1F1A3D; --night-2:#2A2350; --night-3:#191433; --line:#3F3566; --violet:#4E4399; --violet-2:#7B6ED0;
+  --lilac:#D6D0F7; --cream:#F3E9D2; --cream-2:#C9BC9C; --gold:#F2A93B; --gold-ink:#2A1638; --done:#7FD3A0;
+  --f-pixel:"MagoPixel","Courier New",monospace;
+  --f-body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.125rem;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--night);color:var(--cream);font-family:var(--f-body);font-size:var(--s0);line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--night-3)}
+.pix{image-rendering:pixelated}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--night-3);border:1px solid var(--line);padding:0 .3em;border-radius:3px;color:var(--lilac)}
+strong{color:var(--cream)}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--night-3);border-bottom:2px solid var(--line)}
+.bar__in{max-width:1180px;margin:0 auto;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:16px;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;flex:none}
+.brand img{width:30px;height:auto}
+.brand b{font-family:var(--f-pixel);font-size:var(--s-1);letter-spacing:.04em;color:var(--gold);line-height:1.2}
+.brand b span{display:block;color:var(--lilac);font-weight:400}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;padding-block:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:flex;gap:9px;align-items:center;background:var(--night-2);color:var(--cream);border:2px solid var(--line);border-radius:4px;padding:6px 12px 6px 8px;cursor:pointer;font:inherit;text-align:left;box-shadow:0 3px 0 var(--night)}
+.tab:hover{border-color:var(--violet-2)}
+.tab[aria-selected="true"]{border-color:var(--gold);background:var(--violet);box-shadow:0 3px 0 var(--gold-ink)}
+.tab__ico{width:32px;height:32px;flex:none;display:grid;place-items:center;background:var(--night-3);border:1px solid var(--line);font-family:var(--f-pixel);font-size:10px;color:var(--gold);line-height:1}
+.tab__ico img{width:32px;height:32px}
+.tab__t{display:flex;flex-direction:column;line-height:1.2}
+.tab__k{font-family:var(--f-pixel);font-size:var(--s-1);white-space:nowrap}
+.tab__p{font-size:.75rem;color:var(--lilac);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tab__p.ok{color:var(--done)}
+.keys{flex:none;font-size:.75rem;color:var(--cream-2)}
+@media (max-width:760px){.keys,.brand b{display:none}}
+
+/* Contenido */
+main{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 32px;align-items:start}
+.eyebrow{font-family:var(--f-pixel);font-size:var(--s-1);color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+h1{font-family:var(--f-pixel);font-weight:700;font-size:var(--s3);line-height:1.15;margin:.2em 0 .35em;text-wrap:balance}
+.hero p{margin:0 0 .6em;max-width:68ch;color:var(--lilac)}
+.hero p strong{color:var(--cream)}
+.specs{display:grid;grid-template-columns:auto auto;gap:6px 14px;background:var(--night-2);border:2px solid var(--line);padding:12px 16px;font-size:var(--s-1);align-self:start}
+.specs dt{color:var(--cream-2)}
+.specs dd{margin:0;font-family:var(--f-pixel);color:var(--cream);font-variant-numeric:tabular-nums}
+.file{font-size:.75rem;color:var(--cream-2);word-break:break-all}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+
+.step{display:flex;flex-direction:column;gap:16px}
+.step__h{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;border-bottom:2px dashed var(--line);padding-bottom:10px}
+.step__n{font-family:var(--f-pixel);font-size:var(--s-1);background:var(--gold);color:var(--gold-ink);padding:3px 8px;font-weight:700}
+h2{font-family:var(--f-pixel);font-size:var(--s2);margin:0;line-height:1.2}
+.step__h p{margin:0;color:var(--lilac);font-size:var(--s-1);flex-basis:100%}
+.note{background:var(--night-3);border-left:4px solid var(--violet-2);padding:10px 14px;margin:0;color:var(--lilac);max-width:90ch}
+.note.warn{border-left-color:var(--gold)}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--night-2);border:2px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.card.is-done{border-color:var(--done)}
+.card__h{display:flex;gap:10px;align-items:center;padding:10px 12px;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.num{font-family:var(--f-pixel);font-weight:700;width:30px;height:30px;display:grid;place-items:center;background:var(--violet);color:var(--cream);flex:none}
+.card.is-done .num{background:var(--done);color:var(--gold-ink)}
+.card__t{flex:1;min-width:0;line-height:1.25}
+.card__t b{display:block;font-weight:700}
+.card__t span{font-size:.75rem;color:var(--cream-2);font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.card__file{font-size:.75rem;color:var(--cream-2);font-family:var(--f-mono)}
+.prompt{margin:0;padding:12px 14px;font-family:var(--f-mono);font-size:.8125rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;color:var(--cream);max-height:12.5em;overflow:hidden;position:relative;flex:1}
+.prompt::after{content:"";position:absolute;inset:auto 0 0;height:3em;background:linear-gradient(transparent,var(--night-2))}
+.card.open .prompt{max-height:none}
+.card.open .prompt::after{display:none}
+.card__f{display:flex;gap:8px;padding:10px 12px;border-top:2px solid var(--line);flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:var(--s-1);cursor:pointer;border:2px solid var(--line);background:var(--night-3);color:var(--cream);padding:7px 12px;border-radius:3px;box-shadow:0 3px 0 var(--night);display:inline-flex;gap:6px;align-items:center}
+.btn:hover{border-color:var(--violet-2)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--night)}
+.btn.copy{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);font-family:var(--f-pixel)}
+.btn.copy.copied{background:var(--done);border-color:var(--done)}
+.btn.ghost{background:transparent;box-shadow:none}
+.check{display:inline-flex;gap:7px;align-items:center;font-size:var(--s-1);color:var(--lilac);cursor:pointer;margin-left:auto;user-select:none}
+.check input{width:18px;height:18px;accent-color:var(--done);margin:0}
+
+.video{background:var(--night-2);border:2px solid var(--gold);min-width:0}
+.video.is-done{border-color:var(--done)}
+.video .prompt{max-height:none}
+.video .prompt::after{display:none}
+.attach{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 14px;border-bottom:2px solid var(--line);font-size:var(--s-1);color:var(--lilac)}
+.chip{font-family:var(--f-pixel);font-size:.75rem;padding:4px 8px;border:2px solid var(--line);background:var(--night-3);color:var(--cream)}
+.chip.on{border-color:var(--done);color:var(--done)}
+.chip.gold{border-color:var(--gold);color:var(--gold)}
+.arrow{color:var(--cream-2)}
+ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:90ch;color:var(--lilac)}
+ul.plain li::marker{color:var(--gold)}
+.fbcode{margin:8px 0 0;display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.fbcode pre{flex:1;min-width:0;margin:0;padding:8px 10px;background:var(--night-3);border:1px solid var(--line);font-family:var(--f-mono);font-size:.78rem;white-space:pre-wrap;word-break:break-word;color:var(--cream)}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.panel{background:var(--night-2);border:2px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+h3{font-family:var(--f-pixel);font-size:var(--s1);margin:0;color:var(--gold)}
+.quote{margin:0;font-size:var(--s1);line-height:1.45;color:var(--cream)}
+.quote.small{font-size:var(--s0);color:var(--lilac)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.meta{font-size:.75rem;color:var(--cream-2)}
+.tablewrap{overflow-x:auto;border:2px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:var(--s-1)}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-pixel);font-weight:400;color:var(--gold);background:var(--night-3);font-size:.75rem;letter-spacing:.04em}
+td:first-child{font-family:var(--f-mono);white-space:nowrap;color:var(--cream);font-variant-numeric:tabular-nums}
+td{color:var(--lilac)}
+tr:last-child td{border-bottom:0}
+.alts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.alts{grid-template-columns:1fr}}
+.alt{background:var(--night-3);border:2px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.alt b{font-family:var(--f-pixel);font-size:var(--s-1);color:var(--gold)}
+.alt p{margin:0;font-size:var(--s-1);color:var(--lilac)}
+.alt p code{white-space:normal}
+.foot{font-size:.75rem;color:var(--cream-2);border-top:2px dashed var(--line);padding-top:14px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--done);color:var(--gold-ink);font-family:var(--f-pixel);padding:8px 14px;border:2px solid var(--gold-ink);z-index:30}
+@media (prefers-reduced-motion:no-preference){.card,.video{transition:border-color .2s}.btn{transition:background .15s}}
+</style>
+
+<header class="bar">
+  <div class="bar__in">
+    <div class="brand"><img class="pix" src="GLIFO" alt="Glifo de Creaciones del Mago"><b>Reels de ajedrez<span>10 s · 9:16</span></b></div>
+    <nav class="tabs" role="tablist" aria-label="Conceptos" id="tabs"></nav>
+    <div class="keys">Teclas 1 a 0</div>
+  </div>
+</header>
+<main id="main" aria-live="polite"></main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const DATA = /*DATA*/;
+const KEY = "estudio-reels-ajedrez-v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const st = s => (state[s] ||= { img: [false,false,false,false], video: false });
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+
+const copyTexts = [];
+function copyBtn(text, label = "Copiar") {
+  const i = copyTexts.push(text) - 1;
+  return `<button class="btn copy" type="button" data-copy="${i}">${label}</button>`;
+}
+
+function progress(s) {
+  const p = st(s); const n = p.img.filter(Boolean).length;
+  return p.video ? "Video listo" : `${n}/4 imágenes`;
+}
+
+function renderTabs(active) {
+  document.getElementById("tabs").innerHTML = DATA.map((c, i) => {
+    const ok = st(c.slug).video;
+    const ico = c.thumb ? `<img class="pix" src="${c.thumb}" alt="">` : "♞";
+    return `<button class="tab" role="tab" id="tab-${c.slug}" aria-selected="${c.slug === active}" data-go="${c.slug}">
+      <span class="tab__ico">${ico}</span>
+      <span class="tab__t"><span class="tab__k">${i + 1}. ${esc(c.name)}</span><span class="tab__p ${ok ? "ok" : ""}">${progress(c.slug)}</span></span>
+    </button>`;
+  }).join("");
+  document.querySelector('.tab[aria-selected="true"]')?.scrollIntoView({ inline: "center", block: "nearest" });
+}
+
+function render(slug) {
+  const c = DATA.find(x => x.slug === slug) || DATA[0];
+  const p = st(c.slug);
+  copyTexts.length = 0;
+  renderTabs(c.slug);
+  const idx = DATA.indexOf(c);
+
+  const imgs = c.images.map((im, k) => `
+    <article class="card ${p.img[k] ? "is-done" : ""}" id="img-${k}">
+      <div class="card__h">
+        <span class="num">${im.n}</span>
+        <div class="card__t"><b>${im.title}</b><span>${esc(im.t)} · guardala como imagen-${im.n}.png</span></div>
+      </div>
+      <pre class="prompt">${esc(im.prompt)}</pre>
+      <div class="card__f">
+        ${copyBtn(im.prompt, "Copiar prompt")}
+        <button class="btn ghost" type="button" data-toggle="${k}">Ver entero</button>
+        <label class="check"><input type="checkbox" id="chk-${c.slug}-${k}" data-img="${k}" ${p.img[k] ? "checked" : ""}> Ya la generé</label>
+      </div>
+    </article>`).join("");
+
+  const chips = [1,2,3,4].map(n => `<span class="chip ${p.img[n-1] ? "on" : ""}">imagen-${n}</span>`).join('<span class="arrow">→</span>');
+
+  const fb = c.fallbacks.map(f => `<li>${f}</li>`).join("");
+  const fbcode = c.fbcode.map(t => `<div class="fbcode"><pre>${esc(t)}</pre>${copyBtn(t, "Copiar línea")}</div>`).join("");
+
+  const rows = c.rows.map(r => `<tr>${r.map(x => `<td>${x}</td>`).join("")}</tr>`).join("");
+  const alts = c.cierres.map(a => `
+    <div class="alt"><b>${esc(a.name)}</b>
+      <p>En pantalla: <code>${esc(a.text)}</code></p>
+      <p>Voz: «${esc(a.vo)}»</p>
+      <div class="row">${copyBtn(a.text, "Copiar texto")}${copyBtn(a.vo, "Copiar voz")}</div>
+    </div>`).join("");
+
+  document.getElementById("main").innerHTML = `
+    <section class="hero" aria-labelledby="h1">
+      <div>
+        <div class="eyebrow">Reel ${idx + 1} de ${DATA.length} · ${esc(c.genre)}</div>
+        <h1 id="h1">«${esc(c.name)}»</h1>
+        <p>${c.summary}</p>
+        ${c.extra.map(x => `<p>${x}</p>`).join("")}
+      </div>
+      <dl class="specs">
+        <dt>Formato</dt><dd>9:16 · 1080×1920</dd>
+        <dt>Duración</dt><dd>10 s</dd>
+        <dt>Imágenes</dt><dd>4 + video</dd>
+        <dt>Progreso</dt><dd>${progress(c.slug)}</dd>
+      </dl>
+    </section>
+
+    <section class="step" aria-labelledby="s1">
+      <div class="step__h"><span class="step__n">PASO 1</span><h2 id="s1">Generá las imágenes, una por una</h2>
+        <p>Copiá cada prompt entero en Gemini, en orden. Cada uno ya trae el estilo y la paleta.</p></div>
+      ${c.tip ? `<p class="note">${c.tip}</p>` : ""}
+      <div class="grid">${imgs}</div>
+      <p class="note warn"><strong>Antes de pasar al video, revisá:</strong> ${c.review}</p>
+    </section>
+
+    <section class="step" aria-labelledby="s2">
+      <div class="step__h"><span class="step__n">PASO 2</span><h2 id="s2">Generá el video con las 4 imágenes</h2>
+        <p>${c.setup}</p></div>
+      <article class="video ${p.video ? "is-done" : ""}">
+        <div class="attach"><span>Adjuntá en este orden:</span> ${chips} <span class="arrow">+</span> <span class="chip gold">prompt de 10 s</span></div>
+        <pre class="prompt">${esc(c.video)}</pre>
+        <div class="card__f">
+          ${copyBtn(c.video, "Copiar prompt del video")}
+          <label class="check"><input type="checkbox" id="chk-${c.slug}-video" data-video="1" ${p.video ? "checked" : ""}> El video quedó bien</label>
+        </div>
+      </article>
+      <div class="panel">
+        <h3>Si tu herramienta no acepta 4 imágenes</h3>
+        <ul class="plain">${fb}</ul>
+        ${fbcode}
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s3">
+      <div class="step__h"><span class="step__n">PASO 3</span><h2 id="s3">Edición: voz, textos y post</h2>
+        <p>Todo el texto va en CapCut o Canva, nunca dentro de la imagen.</p></div>
+      <div class="two">
+        <div class="panel"><h3>Voz en off</h3>
+          <p class="quote">«${esc(c.voz)}»</p>
+          <div class="row">${copyBtn(c.voz, "Copiar voz")}<span class="meta">${c.voz.split(/\s+/).length} palabras. Grabala vos con el celular.</span></div>
+        </div>
+        <div class="panel"><h3>Texto del post</h3>
+          <p class="quote small">${esc(c.post)}</p>
+          <div class="row">${copyBtn(c.post, "Copiar texto del post")}</div>
+        </div>
+      </div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Tiempo</th><th>Qué pasa</th><th>Texto en pantalla</th><th>Voz en off</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      <h3>Otros cierres para probar</h3>
+      <div class="alts">${alts}</div>
+      <div class="panel"><h3>Notas de edición</h3><ul class="plain">${c.edicion.map(e => `<li>${e}</li>`).join("")}</ul></div>
+    </section>
+
+    <p class="foot">Fuente: <code>${esc(c.file)}</code> en el repo. Las marcas de «Ya la generé» se guardan solo en este navegador.</p>`;
+}
+
+function current() { const h = location.hash.slice(1); return DATA.some(c => c.slug === h) ? h : DATA[0].slug; }
+function go(slug) { if (location.hash.slice(1) !== slug) location.hash = slug; else render(slug); }
+
+let toastT;
+function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 1400); }
+
+document.addEventListener("click", async e => {
+  const tab = e.target.closest("[data-go]");
+  if (tab) { go(tab.dataset.go); window.scrollTo({ top: 0 }); return; }
+  const tg = e.target.closest("[data-toggle]");
+  if (tg) { const card = tg.closest(".card"); card.classList.toggle("open"); tg.textContent = card.classList.contains("open") ? "Ver menos" : "Ver entero"; return; }
+  const b = e.target.closest("[data-copy]");
+  if (b) {
+    const text = copyTexts[+b.dataset.copy];
+    const label = b.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      b.classList.add("copied"); b.textContent = "Copiado"; toast("Copiado");
+      setTimeout(() => { b.classList.remove("copied"); b.textContent = label; }, 1400);
+    } catch (err) {
+      const pre = b.closest(".card, .video, .fbcode, .panel, .alt")?.querySelector("pre, .quote");
+      if (pre) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      toast("Seleccioné el texto: copialo con Ctrl+C");
+    }
+  }
+});
+document.addEventListener("change", e => {
+  const slug = current(); const p = st(slug);
+  if (e.target.dataset.img !== undefined) p.img[+e.target.dataset.img] = e.target.checked;
+  else if (e.target.dataset.video) p.video = e.target.checked;
+  else return;
+  save(); const y = scrollY; render(slug); scrollTo(0, y);
+});
+document.addEventListener("keydown", e => {
+  if (e.target.closest("input, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const n = e.key === "0" ? 10 : +e.key; if (n >= 1 && n <= DATA.length) { go(DATA[n - 1].slug); window.scrollTo({ top: 0 }); }
+});
+addEventListener("hashchange", () => render(current()));
+render(current());
+</script>

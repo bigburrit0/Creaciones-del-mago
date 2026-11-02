@@ -1,135 +1,121 @@
-# Reel 3 · «Carrera por la rambla» (piso en perspectiva, tipo Mode 7)
+# Reel 3 · «Carrera por la rambla» (carreras de 16 bits)
 
-| | |
-|---|---|
-| **Formato** | 9:16 vertical, 1080 × 1920, 10 s, una sola toma |
-| **Género retro** | Carreras de 16 bits con piso en perspectiva (el efecto «Mode 7»): cámara atrás del auto, la ruta corre hacia el horizonte |
-| **Productos** | Fiat 500 de 1965 (catálogo: «Escala 1:20. Adentro tiene asientos y volante.») y Escarabajo 1300 («Tiene partes que se sacan.»). Fotos de los diseñadores: `assets/p/fiat.webp`, `assets/p/escarabajo.webp` |
-| **Público** | Nostálgicos de 35 a 65, e hijos y nietos que buscan regalo para el viejo o el abuelo. Navidad |
-| **Mensaje único** | El auto que tenía tu viejo, a escala, en partes para armar |
-| **Tono** | Épico y nostálgico |
-| **Aparece el Mago** | Sí, al costado de la meta con la bandera a cuadros |
+**Resumen:** carrera de videojuego de los 90 por la rambla al atardecer, un Fiat 500 amarillo contra un Escarabajo
+rojo. El Fiat gana, el Mago baja la bandera a cuadros, y en la meta el auto se desarma en el aire en todas sus piezas
+y se vuelve a armar: es un auto para armar. Regalo para el viejo o el abuelo. 9:16, 10 s.
 
-## 1. La idea
+---
 
-Una carrera de videojuego de los 90 por la rambla de Montevideo al atardecer: un Fiat 500 amarillo contra un
-Escarabajo rojo, los dos autos que medio Uruguay tuvo en la familia. El Fiat gana, el Mago baja la bandera a cuadros,
-y en la meta el auto se desarma en el aire en todas sus piezas y se vuelve a armar. Ahí se entiende que es un auto
-para armar.
+## PASO 1 · Generar las imágenes (una por una, en este orden)
 
-- **Por qué engancha:** el piso que corre hacia el horizonte se reconoce enseguida, y la rambla le da un lugar
-  conocido. El ruido de motor de 16 bits arranca en el primer cuadro.
-- **Por qué vende:** el regalo para el padre o el abuelo es difícil, y un auto que conoce, para armar, resuelve. Que
-  se desarme en el aire muestra que «se arma por partes» sin decirlo.
-- **Lo local:** la rambla con el mar a un lado y la ciudad del otro, y de lejos la silueta de una torre de los años
-  20 (sin que sea la protagonista).
-- **Loop:** termina con los autos quietos en la meta y el mismo cielo del principio. Al repetirse, parece la largada
-  de la vuelta siguiente.
+Copiá cada prompt entero en Gemini y generá una imagen por vez. Guardalas como `imagen-1.png` a `imagen-4.png`.
 
-## 2. Guion (0 a 10 s)
+> **Para que salgan parecidas entre sí:** desde la imagen 2 en adelante, adjuntá la imagen 1 junto con el prompt.
+> Si querés que los autos salgan con la forma real, adjuntá también `assets/p/fiat.webp` y
+> `assets/p/escarabajo.webp`.
 
-| Tiempo | Imagen (pixel art 16 bits, cámara atrás de los autos) | Texto en pantalla (en edición) | Audio |
-|---|---|---|---|
-| **0:00 – 0:02** | Vista desde atrás de dos autitos en la largada, sobre la rambla al atardecer: el Fiat 500 amarillo de techo negro a la izquierda, el Escarabajo rojo a la derecha. Arriba, tres luces se encienden de rojo a dorado. Arrancan. | `¿TE ACORDÁS DEL AUTO DE TU VIEJO?` | **SFX:** dos pitidos y uno más agudo, motores chiptune acelerando. **Voz:** «¿Te acordás del auto de tu viejo?» |
-| **0:02 – 0:05** | La ruta corre hacia el horizonte con las franjas pasando rápido. La rambla dobla a la izquierda con el mar al lado. El Escarabajo va adelante, el Fiat se le pone al lado en la curva. | Arriba, como marcador de juego: `1P FIAT 500 · 1965` a la izquierda y `2P ESCARABAJO 1300` a la derecha | **SFX:** motor de diente de sierra subiendo de tono, chirrido de curva. Música chiptune de 150 BPM. **Voz:** «Lo imprimo a escala, en partes,» |
-| **0:05 – 0:07** | El Fiat pasa adelante. Cruza la meta, una franja a cuadros en el piso. Al costado, el Mago baja una bandera a cuadros. | (sigue el marcador) | **SFX:** «¡fiu!» de adelantamiento y fanfarria corta. **Voz:** «y lo armás vos.» |
-| **0:07 – 0:10** | El Fiat frena en el centro. Se desarma en el aire: la carrocería, las cuatro ruedas, los asientos, el volante y los paragolpes flotan separados, y en un segundo se vuelven a encastrar con destellos dorados. El Escarabajo llega atrás. | `Autos a escala para armar · impresos en 3D` y abajo: `WhatsApp 092 104 419` | **SFX:** clics de encastre en cascada y un acorde final. **Voz:** «Escribime y te paso el precio.» |
-
-**Voz en off completa** (21 palabras):
-> «¿Te acordás del auto de tu viejo? Lo imprimo a escala, en partes, y lo armás vos. Escribime y te paso el precio.»
-
-## 3. Texto del post y variantes de cierre
-
-**Texto del post (principal):**
-> ¿Te acordás del auto de tu viejo? El Fiat 500 de 1965 (escala 1:20, con asientos y volante adentro) y el
-> Escarabajo 1300 (tiene partes que se sacan) los imprimo en 3D en Montevideo, en partes para armar. En el catálogo
-> también están la Kombi, el Willys Jeep y otros. Te paso precio y fecha por WhatsApp antes de empezar, sin
-> compromiso. 092 104 419 · creacionesdelmago.com
-
-| Variante | Texto en pantalla (0:07 – 0:10) | Voz | Para qué |
-|---|---|---|---|
-| **A · Nostalgia** (principal) | `Autos a escala para armar · WhatsApp 092 104 419` | «Escribime y te paso el precio.» | Conversión por WhatsApp |
-| **B · Navidad** | `Regalo para el viejo · Si es para Navidad, decímelo` | «Si es para Navidad, decímelo y te digo si llego.» | Diciembre, sin prometer fecha |
-| **C · Armar juntos** | `Para armar con tu viejo una tarde` | «Una tarde armándolo con tu viejo. Escribime.» | Regalo con plan, para hijos y nietos |
-| **D · Comentarios** | `¿Qué auto tenía tu viejo?` | «¿Qué auto tenía tu viejo? Comentalo.» | Alcance orgánico. Las respuestas sirven para elegir el próximo auto del catálogo |
-
-## 4. Imágenes fijas
-
-Generá primero la **hoja del Mago** (está en `LEEME.md`) y subila en el keyframe B. Subí también
-`assets/p/fiat.webp` y `assets/p/escarabajo.webp` como referencia de forma: Fiat 500 amarillo con techo negro y faros
-redondos, Escarabajo rojo con guardabarros redondeados. **Sin escudos ni nombres en los autos.**
-
-Pegá el **bloque de estilo** del `LEEME.md` al final de cada prompt.
-
-### Keyframe A · primer cuadro (0:00, la largada)
+### Imagen 1 · 0:00 · La largada
 
 ```
-16-bit racing game view from behind and slightly above two small cars on a starting line, vertical 9:16. On the left, a tiny round 1960s Italian city car in yellow with a black folded roof and round headlights; on the right, a round 1960s beetle-shaped car in red. Both seen from behind, the same size, side by side, no badges, no plates, no logos. The road is the seaside promenade of Montevideo drawn as a flat retro racing track in strong perspective, with dashed lane stripes and a low stone sea wall, curving gently to the left toward the horizon. On the left the wide sea sparkles; on the right, a low city skyline in dark indigo with the distant silhouette of one tall ornate 1920s tower with a pointed top. Golden sunset sky with indigo at the top. Above the road, a simple gantry with three round start lights, the first one glowing. The road surface fills the bottom fifth of the frame and stays plain. No people.
+Vertical 9:16 image (1080x1920). 16-bit racing video game view from behind and slightly above two small cars on a starting line. On the left, a tiny round 1960s Italian city car in yellow with a black folded roof and round headlights; on the right, a round 1960s beetle-shaped car in red. Both seen from behind, the same size, side by side, with no badges, no plates and no logos. The road is the seaside promenade of Montevideo, Uruguay, drawn as a flat retro racing track in strong perspective, with dashed lane stripes and a low stone sea wall, curving gently to the left toward the horizon. On the left the wide sea sparkles; on the right, a low city skyline in dark indigo with the distant silhouette of one tall ornate 1920s tower with a pointed top. Golden sunset sky with indigo at the top. Above the road, a simple gantry with three round start lights; the first one glows red. No people.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look with flat sprites, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain road surface at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
 ```
-+ bloque de estilo.
 
-### Keyframe B · último cuadro (0:10, la meta)
-
-```
-Same 16-bit racing game view from behind and slightly above, same seaside promenade at sunset, same sea on the left and skyline on the right. The yellow 1960s Italian city car with the black roof is stopped in the center of the road, right after a black-and-cream checkered finish line painted across the asphalt, with a few small gold sparkles around it. The red beetle-shaped car arrives a little behind on the right. On the left roadside, the Wizard from the attached reference sheet stands on the sea wall waving a black-and-cream checkered flag, small but clearly visible. No badges, no plates, no logos on the cars. The road surface fills the bottom fifth of the frame and stays plain.
-```
-+ bloque de estilo + `Use the attached Wizard reference sheet and keep the Wizard exactly the same (robe, hat, beard, proportions).`
-
-**Revisá antes de seguir:** que el piso se vea plano y retro (no una ruta realista en 3D), que los autos no tengan
-logos y que el Mago sea el de la hoja.
-
-## 5. Prompt del video (Gemini, 10 s)
-
-**Configuración:** video, 9:16, 10 segundos. Imagen inicial: **keyframe A**. Si te deja sumar imagen final o
-referencias, agregá el **keyframe B**, la hoja del Mago y la foto del Fiat.
+### Imagen 2 · 0:03 · La curva
 
 ```
+Vertical 9:16 image (1080x1920). Same 16-bit racing video game view from behind and slightly above, same seaside promenade of Montevideo at sunset, drawn as a flat retro racing track in strong perspective. The road now curves to the left along the low stone sea wall, with the sparkling sea on the left and the low indigo city skyline on the right, the distant tall ornate 1920s tower silhouette a bit to the side. The two small cars race side by side in the curve: the round red 1960s beetle-shaped car slightly ahead on the right, the tiny round yellow 1960s Italian city car with a black folded roof pulling alongside on the left, both seen from behind, with small pixel dust clouds behind the tires and short speed lines on the road. No badges, no plates, no logos. No people.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look with flat sprites, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain road surface at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
+```
+
+### Imagen 3 · 0:06 · La meta y el Mago
+
+```
+Vertical 9:16 image (1080x1920). Same 16-bit racing video game view from behind and slightly above, same seaside promenade of Montevideo at sunset, sea on the left, low indigo city skyline on the right. The tiny round yellow 1960s Italian city car with a black folded roof is crossing a black-and-cream checkered finish line painted across the asphalt, in the center of the road, a few small gold sparkles around it. The round red 1960s beetle-shaped car is a little behind on the right. On the left roadside, standing on the stone sea wall, a small friendly pixel wizard waves a black-and-cream checkered flag: deep indigo robe #2A2350 with violet-blue #4E4399 folds, a tall pointed hat with a wide brim and a gold #F2A93B band, a short cream beard, round dark eyes, rosy cheeks, a small gold belt buckle, brown boots. No badges, no plates, no logos on the cars.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look with flat sprites, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain road surface at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
+```
+
+### Imagen 4 · 0:08 · El auto desarmado en el aire
+
+```
+Vertical 9:16 image (1080x1920). Same 16-bit racing video game view, same seaside promenade of Montevideo at sunset just after the black-and-cream checkered finish line, sea on the left, low indigo city skyline on the right. In the center of the road, the tiny round yellow 1960s Italian city car with a black roof is shown as a floating exploded view of a model kit: its pieces hover in mid-air a little apart from each other, in their correct positions: the yellow body shell, the black roof, four wheels, two small seats, a tiny steering wheel, the front and rear bumpers and two round headlights, with small gold sparkles between them. The round red 1960s beetle-shaped car is stopped a little behind on the right. On the left roadside, the small pixel wizard in a deep indigo robe and tall pointed hat with a gold band holds the checkered flag down and looks at the floating pieces. No badges, no plates, no logos.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look with flat sprites, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain road surface at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
+```
+
+**Antes de pasar al video, revisá:** que el piso se vea plano y retro (no una ruta realista), que los autos no
+tengan escudos ni nombres, que el Fiat sea amarillo con techo negro y el Escarabajo rojo, y que el Mago sea igual en
+las imágenes 3 y 4.
+
+---
+
+## PASO 2 · Generar el video completo con las imágenes
+
+En Gemini, video **9:16 de 10 segundos**. Adjuntá las cuatro imágenes **en orden** (imagen 1, 2, 3 y 4) y pegá este
+prompt:
+
+```
+Create one 10-second vertical 9:16 video using the four attached images as keyframes, in this order: Image 1 is the first frame (0 s), Image 2 appears at about 3 s, Image 3 at about 6 s, and Image 4 at about 8 s. Keep exactly the look, cars, wizard, colors and pixel art style of the images and animate smoothly from one to the next.
+
 Single continuous shot, no cuts. Chase camera locked at a fixed distance behind the cars: the camera itself does not pan, tilt or zoom; only the road surface scrolls toward the viewer, like a 1990s 16-bit racing game with a flat perspective floor. Authentic 16-bit pixel art: hard square pixels, limited palette, low frame-rate sprite animation, flat 2D sprites for the cars, no 3D rendering, no motion blur, no depth of field.
 
-Subject: a small yellow 1960s Italian city car with a black roof and a small red 1960s beetle-shaped car, seen from behind, racing on the seaside promenade of Montevideo at sunset, sea on the left, city skyline on the right.
-
-Action, in order:
-0 to 2 seconds: the three start lights above the road turn from red to gold to green; both cars launch forward and the dashed lane stripes start rushing toward the viewer.
-2 to 5 seconds: the road scrolls fast and curves to the left along the sea wall; the background skyline slides slowly sideways as the road turns; the red car leads, the yellow car pulls alongside in the curve, tiny pixel dust behind the tires.
-5 to 7 seconds: the yellow car overtakes and crosses a black-and-cream checkered line on the asphalt; on the left roadside, the small Wizard in an indigo robe and pointed hat with a gold band waves a checkered flag.
-7 to 10 seconds: the road stops scrolling and the yellow car stops in the center; it pops apart in mid-air into its separate model kit pieces: body shell, four wheels, two seats, steering wheel and bumpers floating a little apart; one second later all the pieces snap back together with small gold sparkles. The red car rolls in behind. The last second holds still.
+Action:
+0 to 2 seconds (Image 1): the three start lights turn from red to gold to green; both cars launch forward and the dashed lane stripes start rushing toward the viewer.
+2 to 5 seconds (Image 1 to Image 2): the road scrolls fast and curves to the left along the sea wall; the skyline slides slowly sideways as the road turns; the red car leads and the yellow car pulls alongside in the curve, tiny pixel dust behind the tires.
+5 to 7 seconds (Image 2 to Image 3): the yellow car overtakes and crosses the checkered finish line; on the left roadside the small wizard waves the checkered flag.
+7 to 8.5 seconds (Image 3 to Image 4): the road stops scrolling, the yellow car stops in the center and pops apart in mid-air into its separate model kit pieces, floating a little apart.
+8.5 to 10 seconds: all the pieces snap back together into the complete yellow car with small gold sparkles; the red car rolls in behind; the last second holds still with the complete yellow car in the center.
 
 Audio: two short beeps and one higher beep for the start lights; two chiptune car engines with rising sawtooth pitch; a tire squeal in the curve; upbeat 16-bit racing music around 150 BPM; a whoosh when the yellow car overtakes; a short fanfare at the finish line; a quick cascade of plastic snap-fit clicks when the car reassembles; a final bright chord. No dialogue, no voice, no music with lyrics.
 
 No text, no letters, no numbers, no subtitles, no captions, no logos, no badges anywhere in the video.
 ```
 
-**Si la ruta se vuelve realista o mareadora:** probá de nuevo con esta línea en vez de la de cámara:
-`The camera is completely still. The cars stay in the same place on screen; only the striped road texture moves toward the viewer and the sea wall slides by.`
+**Si tu herramienta no acepta 4 imágenes:**
+- Si acepta **primer y último cuadro**: usá la imagen 1 al inicio y la imagen 3 al final, y en el prompt borrá los
+  tramos de 7 a 10 s (el desarme queda afuera; el cierre va sobre el auto en la meta).
+- Si acepta **una sola imagen**: usá la imagen 1, con el mismo prompt.
+- Si el video sale de **8 s**: en la edición, congelá el último cuadro 2 s más.
+- Si la ruta sale realista o mareadora: cambiá la línea de la cámara por
+  `The camera is completely still. The cars stay in the same place on screen; only the striped road texture moves toward the viewer and the sea wall slides by.`
 
-## 6. Plan B (si la herramienta da 8 s)
+---
 
-Primer cuadro: keyframe A. Último cuadro: keyframe B. Mismo prompt con estos tiempos:
+## Después: guion, voz, texto y edición
 
-```
-0 to 1.5 seconds: start lights turn green, both cars launch. 1.5 to 4 seconds: the road scrolls and curves left along the sea, the yellow car pulls alongside the red one. 4 to 5.5 seconds: the yellow car overtakes and crosses the checkered line, the Wizard waves the flag. 5.5 to 8 seconds: the yellow car stops, pops apart into its kit pieces in mid-air and snaps back together with gold sparkles.
-```
+### Guion (para la edición)
 
-En la edición, congelá el último cuadro 2 s (de 0:08 a 0:10) para el cierre.
+| Tiempo | Qué pasa | Texto en pantalla (se pone en la edición) | Voz en off |
+|---|---|---|---|
+| 0:00 – 0:02 | Luces de largada, arrancan | `¿TE ACORDÁS DEL AUTO DE TU VIEJO?` | «¿Te acordás del auto de tu viejo?» |
+| 0:02 – 0:05 | La curva por la rambla | Arriba, como en un juego: `1P FIAT 500 · 1965` y `2P ESCARABAJO 1300` | «Lo imprimo a escala, en partes,» |
+| 0:05 – 0:07 | El Fiat gana, el Mago baja la bandera | (sigue el marcador) | «y lo armás vos.» |
+| 0:07 – 0:10 | El auto se desarma y se vuelve a armar | `Autos a escala para armar · impresos en 3D` / `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
 
-## 7. Edición
+**Voz en off completa** (grabala vos con el celular):
+> «¿Te acordás del auto de tu viejo? Lo imprimo a escala, en partes, y lo armás vos. Escribime y te paso el precio.»
 
-- **Marcador de juego (0:02 – 0:07):** arriba, debajo de los 250 px de la zona segura. `1P FIAT 500 · 1965` en
-  amarillo a la izquierda y `2P ESCARABAJO 1300` en rojo `#E2504C` a la derecha, en fuente pixel chica con contorno
-  índigo. Es lo que en un juego de carreras sería el nombre del piloto.
-- **Gancho (0:00 – 0:02):** `¿TE ACORDÁS DEL AUTO DE TU VIEJO?` en dos renglones, centrado en la franja del medio,
-  crema `#F3E9D2` con contorno índigo.
-- **Cierre (0:07 – 0:10):** caja índigo al 85 % con borde dorado, justo arriba de la zona de botones de Instagram.
-  Arriba de la caja, el glifo `assets/px/glifo-oro.png`.
-- **Música:** si el audio del video sale flojo, poné una pista chiptune libre de derechos de unos 150 BPM y dejá los
-  efectos del video arriba.
-- **Desarme del auto:** es lo más difícil para la IA. Si sale mal (piezas que se derriten o un auto distinto), cortá
-  el video en 0:07, dejá el auto quieto 1 s y en la edición hacé el efecto con dos capas: el keyframe B y un «sacudón»
-  de escala de 100 a 108 % con destellos dorados. Se pierde el desarme, pero el mensaje sigue en el texto.
+### Texto del post
 
-## 8. Antes de publicar
+> ¿Te acordás del auto de tu viejo? El Fiat 500 de 1965 (escala 1:20, con asientos y volante adentro) y el
+> Escarabajo 1300 (tiene partes que se sacan) los imprimo en 3D en Montevideo, en partes para armar. En el catálogo
+> también están la Kombi, el Willys Jeep y otros. Te paso precio y fecha por WhatsApp antes de empezar, sin
+> compromiso. 092 104 419 · creacionesdelmago.com
 
-- [ ] Los autos no tienen escudos, nombres ni patentes generados por la IA.
-- [ ] El Fiat es amarillo con techo negro y el Escarabajo rojo, como en el catálogo.
-- [ ] La torre del fondo es solo una silueta chica.
-- [ ] El texto del post no promete fecha para Navidad ni precio.
+**Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
+- **Navidad:** `Regalo para el viejo · Si es para Navidad, decímelo` · «Si es para Navidad, decímelo y te digo si llego.»
+- **Armar juntos:** `Para armar con tu viejo una tarde` · «Una tarde armándolo con tu viejo. Escribime.»
+- **Comentarios:** `¿Qué auto tenía tu viejo?` · «¿Qué auto tenía tu viejo? Comentalo.»
+
+### Edición (CapCut o Canva)
+
+- Marcador `1P` / `2P` arriba, debajo de los 250 px de la zona segura: Fiat en amarillo a la izquierda, Escarabajo
+  en rojo `#E2504C` a la derecha, letra pixel chica con contorno índigo.
+- Gancho en crema `#F3E9D2` con contorno índigo `#1F1A3D`, centrado en la franja del medio.
+- Cierre: caja índigo con borde dorado arriba de la zona de botones de Instagram, y el glifo real
+  `assets/px/glifo-oro.png` arriba de la caja.
+- Si el desarme sale mal (piezas que se derriten o un auto distinto), cortá en 0:07 y cerrá sobre el auto en la meta.
+- Dejá libres los 250 px de arriba y los 420 px de abajo (ahí van los botones de la app).

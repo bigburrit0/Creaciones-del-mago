@@ -14,36 +14,33 @@ vuelve wireframe, estadios con franjas, pantalla de victoria).
 
 Los cuatro se pueden pautar desde ya. El 1 y el 3 están pensados para Navidad y el 4 sirve como regalo.
 
-## Cómo se produce cada uno (resumen)
+## Cómo se usa cada archivo
 
-1. **Personaje.** Si el guion lleva al Mago (guiones 3 y 4), generá primero la hoja de personaje (abajo) y
-   subila como referencia en cada imagen y en el video.
-2. **Imágenes fijas.** Cada guion trae 2 keyframes: **A** (primer cuadro del video) y **B** (último cuadro).
-   Se generan con el generador de imágenes de Gemini. Subí la foto del producto del catálogo como referencia
-   de forma (la ruta está en cada guion, en `assets/p/`).
-3. **Video.** En Gemini: video de 10 s, 9:16, con el keyframe A como imagen inicial y el prompt de video
-   del guion. Si tu herramienta acepta imagen final o imágenes de referencia, sumá el keyframe B y la hoja del
-   Mago.
-4. **Edición** (CapCut, Canva o Premiere): textos en pantalla, voz en off, el glifo real del logo
-   (`assets/px/glifo-oro.png`) en el cierre y la música si hace falta.
+Cada guion tiene el mismo orden:
 
-### Si tu herramienta da 8 s y no 10
+1. **Paso 1 · Imágenes.** Cuatro prompts, uno por escena (imagen 1 a 4). Cada uno está completo (estilo,
+   paleta y Mago incluidos): se copia entero en Gemini y se genera una imagen por vez. Desde la imagen 2,
+   conviene adjuntar la imagen 1 para que el fondo no cambie.
+2. **Paso 2 · Video.** Se adjuntan las cuatro imágenes en orden y se pega el prompt del video de 10 s. Abajo
+   del prompt dice qué hacer si la herramienta acepta solo primer y último cuadro, una sola imagen, o da 8 s.
+3. **Después.** Guion con los tiempos, voz en off, texto del post, otros cierres y cómo editarlo.
 
-Según lo que encontró la investigación, Veo 3.1 genera clips de 4, 6 u 8 s, y Gemini Omni Flash permite de 3 a
-10 s. Si tu cuenta te da 8 s, cada guion trae un «plan B»: generás 8 s con los keyframes A y B (primer y
-último cuadro) y en la edición congelás el último cuadro 2 s más para el cierre. En pixel art un cuadro
-quieto no se nota raro.
+Según lo que encontró la investigación, Veo 3.1 genera clips de 4, 6 u 8 s y Gemini Omni Flash de 3 a 10 s.
+Si te da 8 s, se congela el último cuadro 2 s en la edición. En pixel art un cuadro quieto no se nota raro.
 
-## Bloque de estilo (va al final de todos los prompts de imagen)
+## Bloque de estilo (ya está incluido en cada prompt)
+
+Queda acá como referencia, por si generás alguna imagen extra.
 
 ```
 Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered Bayer dithering), limited palette of about 24 colors. Brand palette: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399 for mid-tones, warm cream #F3E9D2 for light surfaces, gold #F2A93B as the main accent, with small touches of pine green #2F6B4F and warm red #E2504C only where the scene needs them. Flat 2D game look, not a 3D render, not photorealistic. Vertical 9:16 (1080x1920). Keep the top 13% and the bottom 22% of the frame calm and uncluttered (plain sky, wall, floor or sea) for on-screen text and app buttons. No text, no letters, no numbers, no logos, no brand marks, no watermarks.
 ```
 
-## Hoja de personaje del Mago (keyframe 0, una sola vez)
+## Hoja de personaje del Mago (opcional)
 
-El sitio no tiene un sprite del Mago, solo el glifo y la pirámide. Esta hoja fija cómo se ve, para que sea el
-mismo en todos los videos. Si ya tenés un Mago aprobado de la campaña anterior, usá ese.
+El sitio no tiene un sprite del Mago, solo el glifo y la pirámide. Los prompts de los guiones 3 y 4 ya lo
+describen igual en cada imagen. Si aun así cambia de una imagen a otra, generá esta hoja y adjuntala. Si ya tenés
+un Mago aprobado de la campaña anterior, usá ese.
 
 ```
 Character reference sheet for a 16-bit pixel art video game hero called the Wizard. One small friendly wizard sprite, about 48 pixels tall, shown three times side by side on a plain cream #F3E9D2 background: facing front, walking to the right in side view, and waving. Deep indigo robe #2A2350 with violet-blue #4E4399 folds, a tall pointed hat with a wide brim and a gold #F2A93B band, a short cream beard, round dark eyes, rosy cheeks, a small gold buckle on the belt, simple brown boots. Friendly and a bit mischievous. Same proportions in the three poses. Hard pixel edges, 1-pixel dark outline, no anti-aliasing, limited palette. No text, no letters, no logos.

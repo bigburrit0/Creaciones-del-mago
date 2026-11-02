@@ -1,135 +1,118 @@
 # Reel 1 · «Huevito» (mascota virtual de bolsillo)
 
-| | |
-|---|---|
-| **Formato** | 9:16 vertical, 1080 × 1920, 10 s, una sola toma |
-| **Género retro** | Mascota virtual de bolsillo: pantalla LCD de 4 tonos, huevo que se mueve, íconos de corazón |
-| **Producto** | Clicker «Hámster en el huevo» (catálogo: «Se asoma por la cáscara.»). Foto propia: `assets/p/hamster.webp` |
-| **Público** | Grupos de amigo invisible (oficina, familia, amigos), 18 a 40 años. Sirve para Navidad |
-| **Mensaje único** | Un regalo chico para el amigo invisible: una mascota que no come, no se muere y hace clic |
-| **Tono** | Ternura con humor seco |
+**Resumen:** en la pantallita de una mascota virtual nace un hámster, se escapa de la pantalla y cae en la mesa
+convertido en el clicker «Hámster en el huevo». Texto: «No come. No se muere. Hace clic.»
+Para el amigo invisible y Navidad. 9:16, 10 s.
 
-## 1. La idea
+---
 
-Todos tuvimos o vimos una mascota virtual de bolsillo: la pantallita verdosa, el huevo que se mueve, el miedo a
-que se muera. Acá el huevo se abre, el hámster se escapa de la pantalla y cae arriba de la mesa convertido en el
-clicker de verdad. El chiste está en el texto: «No come. No se muere. Hace clic.»
+## PASO 1 · Generar las imágenes (una por una, en este orden)
 
-- **Por qué engancha:** en el primer segundo hay algo que se mueve en una pantalla chica y un pitido. El que
-  tuvo uno lo reconoce al instante, y el que no, igual entiende que algo va a nacer.
-- **Por qué vende:** el clicker es un regalo barato, chico y que se entiende sin explicar, justo lo que se busca
-  para el amigo invisible.
-- **Loop:** en el último cuadro, la pantallita del fondo muestra un huevo nuevo. Al repetirse, el video arranca con
-  ese huevo.
+Copiá cada prompt entero en Gemini y generá una imagen por vez. Guardalas como `imagen-1.png` a `imagen-4.png`.
 
-## 2. Guion (0 a 10 s)
+> **Para que salgan parecidas entre sí:** desde la imagen 2 en adelante, adjuntá la imagen 1 junto con el prompt.
+> En las imágenes 3 y 4, si querés que el clicker salga con la forma real, adjuntá también la foto del catálogo
+> `assets/p/hamster.webp`.
 
-| Tiempo | Imagen (pixel art 16 bits, cámara fija) | Texto en pantalla (en edición) | Audio |
-|---|---|---|---|
-| **0:00 – 0:02** | Primer plano de un juguetito de bolsillo crema con pantalla LCD verdosa, apoyado en una mesa de verano junto a un regalo envuelto con cinta dorada. En la pantalla, un huevo pixelado se sacude. Un pulgar pixel aprieta el botón del medio. | `NACIÓ TU MASCOTA` | **SFX:** dos pitidos de 4 bits y un «crac» chiquito. **Voz:** «Esta no come,» |
-| **0:02 – 0:04** | En la pantalla, el huevo se parte y asoma la cara de un hámster. Aparecen tres corazones que titilan. | (sigue) | **SFX:** arpegio alegre de tres notas. **Voz:** «no se muere» |
-| **0:04 – 0:07** | El hámster sale de la pantalla: al cruzar el borde pasa de 4 tonos a todo color y cae en la mesa, sentado en la mitad de su cáscara gris. Es el clicker impreso. | `NO COME. NO SE MUERE. HACE CLIC.` | **SFX:** «pop» al salir y un golpecito suave al caer. **Voz:** «y hace clic.» |
-| **0:07 – 0:10** | El pulgar aprieta la cabeza del hámster: clic, destello dorado, el hámster parpadea. Atrás, la pantallita ya muestra un huevo nuevo. | `Hámster en el huevo · clicker impreso en 3D` y abajo: `Para el amigo invisible · WhatsApp 092 104 419` | **SFX:** clic de plástico bien nítido y un acorde corto. **Voz:** «Un clicker para el amigo invisible. Escribime y te paso el precio.» |
-
-**Voz en off completa** (20 palabras, grabala vos con el celular, sin apuro):
-> «Esta no come, no se muere y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.»
-
-## 3. Texto del post y variantes de cierre
-
-**Texto del post (principal):**
-> Una mascota que no come, no se muere y hace clic. Es el hámster en el huevo: un clicker impreso en 3D, acá en
-> Montevideo. Para el amigo invisible podés pedir uno o varios para todo el grupo y te paso el precio total por
-> WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
-
-| Variante | Texto en pantalla (0:07 – 0:10) | Voz | Para qué |
-|---|---|---|---|
-| **A · Amigo invisible** (principal) | `Para el amigo invisible · WhatsApp 092 104 419` | «Un clicker para el amigo invisible. Escribime y te paso el precio.» | Conversión por WhatsApp |
-| **B · Navidad** | `Regalo chico para Navidad · WhatsApp 092 104 419` | «Para Navidad, decime cuántos querés y te digo si llego.» | Diciembre, sin prometer fecha |
-| **C · Grupo** | `¿Son 10? Te paso el precio de todos` | «¿Son diez en el amigo invisible? Te paso el precio de todos juntos.» | Pedidos grandes de oficina |
-| **D · Comentarios** | `¿Cuál le regalás? Hámster, vasito de café o banana` | «¿Cuál le regalarías? Comentalo.» | Alcance orgánico. Los tres existen en el catálogo |
-
-## 4. Imágenes fijas
-
-Generalas en Gemini en este orden. En las dos, subí como referencia la foto `assets/p/hamster.webp` (es foto tuya)
-para que el clicker salga con la forma real: hámster beige con una mancha marrón en la oreja y el ojo, nariz rosada,
-sentado en media cáscara gris con fondo azul.
-
-Pegá el **bloque de estilo** del `LEEME.md` al final de cada prompt.
-
-### Keyframe A · primer cuadro (0:00)
-
-Primer plano del juguetito de bolsillo con el huevo en la pantalla, en una mesa de verano a la noche. Nada de nieve:
-es diciembre en Montevideo.
+### Imagen 1 · 0:00 · El huevo en la pantalla
 
 ```
-Close-up, straight-on, static shot of a small rounded pebble-shaped pocket keychain toy in cream plastic, standing upright on a wooden table, centered in the frame. It has a small square greenish four-tone LCD screen and three round gold buttons below it, and a short keychain ring on top. On the LCD screen, a simple four-tone pixel egg sits in the middle with tiny motion lines on both sides, as if wobbling. A pixel thumb rests just above the middle button. Next to the toy, a small wrapped gift box in cream paper with a gold ribbon and a sprig of pine green. Behind, an open window on a warm summer evening in Montevideo: indigo sky turning gold at the bottom, a few stars, dark palm fronds, a thin string of tiny warm lights along the window frame. The wooden table fills the bottom fifth of the frame and stays plain. Cozy, quiet, a little playful. Generic toy, no brand shapes or marks.
+Vertical 9:16 image (1080x1920). Close-up, straight-on, static view of a small rounded pebble-shaped pocket keychain toy in cream plastic, standing upright on a wooden table in the center of the frame. It has a small square greenish four-tone LCD screen, three round gold buttons below the screen and a short keychain ring on top. On the LCD screen, a simple four-tone pixel egg sits in the middle with tiny motion lines on both sides, as if it is wobbling. A pixel thumb rests just above the middle button. Next to the toy, a small wrapped gift box in cream paper with a gold ribbon and a sprig of pine green. Behind, an open window on a warm summer evening in Montevideo, Uruguay (December, no snow): indigo sky turning gold at the bottom, a few stars, dark palm fronds, a thin string of tiny warm lights along the window frame. Cozy, quiet, a little playful. Generic toy, no brand shapes.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain wooden table at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
 ```
-+ bloque de estilo.
 
-### Keyframe B · último cuadro (0:10)
-
-Mismo lugar y mismo encuadre. El juguetito pasa atrás, a la izquierda, y adelante está el clicker. Pedilo como
-edición del keyframe A para que no cambie el fondo.
+### Imagen 2 · 0:02 · Nace el hámster en la pantalla
 
 ```
-Edit the attached image and keep everything else the same: same table, same window, same lights, same camera. Move the pocket keychain toy slightly back and to the left; its LCD screen now shows a new four-tone pixel egg. In the center foreground, add a small 3D-printed toy shaped like the attached reference photo: a chubby beige hamster with a brown patch over one ear and eye, round black eyes and a pink nose, sitting inside the bottom half of a cracked gray eggshell with a blue base. A tiny gold sparkle above the hamster's head. The pixel thumb rests near the hamster. Keep the bottom fifth of the frame plain wooden table for text.
+Vertical 9:16 image (1080x1920). Exactly the same scene as before: close-up, straight-on, static view of a small rounded pebble-shaped pocket keychain toy in cream plastic standing upright on a wooden table in the center, with a small square greenish four-tone LCD screen, three round gold buttons and a keychain ring on top; next to it a small wrapped gift box in cream paper with a gold ribbon and a sprig of pine green; behind, an open window on a warm summer evening in Montevideo with indigo-to-gold sky, stars, palm fronds and a string of tiny warm lights. Now, on the LCD screen, the four-tone pixel egg is cracked open and a tiny cute hamster face peeks out of the shell, with three small pixel hearts above it. The pixel thumb is pressing the middle gold button. Generic toy, no brand shapes.
+
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain wooden table at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
 ```
-+ bloque de estilo.
 
-**Revisá antes de seguir:** que el hámster tenga la mancha marrón y la cáscara gris, que la pantalla no tenga letras ni
-números y que el juguetito no se parezca a uno de marca (si sale con forma de huevo exacta, pedí «rounded pebble
-shape» de nuevo).
-
-## 5. Prompt del video (Gemini, 10 s)
-
-**Configuración:** video, 9:16, 10 segundos. Imagen inicial: **keyframe A**. Si te deja sumar imágenes de referencia
-o imagen final, agregá el **keyframe B** y la foto del hámster.
+### Imagen 3 · 0:05 · El hámster salta fuera de la pantalla
 
 ```
-Single continuous shot, no cuts. Locked-off static camera, straight-on close-up, no zoom, no camera movement, no depth of field, no motion blur. Authentic 16-bit pixel art animated like a 1990s console game: hard square pixels, limited palette, sprite animation at a low frame rate, the image stays flat and 2D for the whole clip.
+Vertical 9:16 image (1080x1920). Same scene: a small rounded pebble-shaped pocket keychain toy in cream plastic with a greenish four-tone LCD screen and three gold buttons, standing on a wooden table, now a little to the left; a small wrapped gift box with a gold ribbon; behind, an open window on a warm summer evening in Montevideo with indigo-to-gold sky, palm fronds and tiny warm lights. A chubby hamster is jumping out of the LCD screen in mid-air, in a little arc toward the center of the table: the part of the hamster still inside the screen is drawn in four greenish LCD tones, and the part that is already out is in full color (beige fur, a brown patch over one ear and eye, round black eyes, pink nose). On the table, in the center, waits the bottom half of a cracked gray eggshell with a blue base inside, where the hamster is about to land. A few small pixel sparkles around the jump.
 
-Subject: a cream pebble-shaped pocket keychain toy with a small greenish four-tone LCD screen, on a wooden table next to a wrapped gift with a gold ribbon, summer evening window behind.
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain wooden table at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
+```
 
-Action, in order:
-0 to 2 seconds: on the LCD screen the pixel egg wobbles left and right; the pixel thumb presses the middle gold button twice.
-2 to 4 seconds: on the screen the egg cracks open and a tiny hamster face peeks out; three small pixel hearts blink above it.
-4 to 7 seconds: the hamster jumps out of the screen; as it crosses the edge of the screen it turns from four greenish tones into full color, and it lands on the table sitting inside the bottom half of a gray cracked eggshell: a small 3D-printed beige hamster with a brown patch over one ear, pink nose, blue base inside the shell.
-7 to 10 seconds: the thumb presses the hamster's head once, the hamster blinks, a small gold sparkle pops; behind it, the toy's screen now shows a new egg wobbling. The last second holds still.
+### Imagen 4 · 0:10 · El clicker en la mesa (último cuadro)
 
-Context: cozy summer night in December, warm string lights blinking softly, palm fronds barely moving.
+```
+Vertical 9:16 image (1080x1920). Same scene: wooden table, a small wrapped gift box with a gold ribbon, an open window on a warm summer evening in Montevideo with indigo-to-gold sky, palm fronds and tiny warm lights. The small cream pebble-shaped pocket keychain toy now stands slightly back and to the left; its greenish LCD screen shows a new four-tone pixel egg. In the center foreground sits a small 3D-printed toy: a chubby beige hamster with a brown patch over one ear and eye, round black eyes and a pink nose, sitting inside the bottom half of a cracked gray eggshell with a blue base. A pixel thumb is pressing gently on top of the hamster's head, and a tiny gold sparkle pops above it. If a reference photo is attached, match the hamster toy to it.
 
-Audio: two short 4-bit beeps, a tiny eggshell crack, a cheerful three-note chiptune arpeggio when the hamster appears, a soft pop when it jumps out, a light tap when it lands, then one crisp, satisfying plastic click and a short bright chord. Quiet crickets in the background. No dialogue, no voice, no music with lyrics.
+Style: authentic 16-bit home-console pixel art from the early 1990s. Hard square pixels on a visible grid, 1-pixel dark outlines, no anti-aliasing, no blur, no soft gradients (only ordered dithering), limited palette of about 24 colors: deep night indigo #1F1A3D and #2A2350, violet-blue #4E4399, warm cream #F3E9D2, gold #F2A93B as the main accent, small touches of pine green #2F6B4F and warm red #E2504C. Flat 2D game look, not a 3D render, not photorealistic. Keep the top 13% and the bottom 22% of the image calm and plain (sky at the top, plain wooden table at the bottom) for text. No text, no letters, no numbers, no logos, no watermarks.
+```
+
+**Antes de pasar al video, revisá:** que el hámster tenga la mancha marrón y la cáscara gris, que ninguna imagen
+tenga letras o números, y que el fondo sea el mismo en las cuatro. Si una sale distinta, regenerala adjuntando la
+imagen 1.
+
+---
+
+## PASO 2 · Generar el video completo con las imágenes
+
+En Gemini, video **9:16 de 10 segundos**. Adjuntá las cuatro imágenes **en orden** (imagen 1, 2, 3 y 4) y pegá este
+prompt:
+
+```
+Create one 10-second vertical 9:16 video using the four attached images as keyframes, in this order: Image 1 is the first frame (0 s), Image 2 appears at about 2 s, Image 3 at about 5 s, and Image 4 is the final frame (10 s). Keep exactly the look, objects, colors and pixel art style of the images and animate smoothly from one to the next.
+
+Single continuous shot, no cuts. Locked-off static camera, straight-on close-up, no zoom, no pan, no depth of field, no motion blur. Authentic 16-bit pixel art animated like a 1990s console game: hard square pixels, limited palette, low frame-rate sprite animation, flat 2D for the whole clip.
+
+Action:
+0 to 2 seconds (Image 1 to Image 2): on the little greenish LCD screen the pixel egg wobbles left and right; the pixel thumb presses the middle gold button twice; the egg cracks and a tiny hamster face peeks out, three pixel hearts blink above it.
+2 to 5 seconds (Image 2 to Image 3): the hamster climbs out of the shell and jumps out of the screen; as it crosses the edge of the screen it changes from four greenish tones into full color.
+5 to 7 seconds (Image 3 to Image 4): the hamster lands on the table inside the bottom half of the gray cracked eggshell and becomes the small 3D-printed hamster toy.
+7 to 10 seconds (Image 4): the thumb presses the hamster's head once, the hamster blinks, a small gold sparkle pops; behind it, the toy's screen shows a new egg wobbling. The last second holds still.
+
+Background: summer evening, the string of tiny warm lights blinks softly, palm fronds barely move.
+
+Audio: two short 4-bit beeps, a tiny eggshell crack, a cheerful three-note chiptune arpeggio when the hamster appears, a soft pop when it jumps out of the screen, a light tap when it lands, then one crisp satisfying plastic click and a short bright chord. Quiet crickets in the background. No dialogue, no voice, no music with lyrics.
 
 No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in the video.
 ```
 
-## 6. Plan B (si la herramienta da 8 s)
+**Si tu herramienta no acepta 4 imágenes:**
+- Si acepta **primer y último cuadro**: usá la imagen 1 y la imagen 4, con el mismo prompt.
+- Si acepta **una sola imagen**: usá la imagen 1, con el mismo prompt.
+- Si el video sale de **8 s**: en la edición, congelá el último cuadro 2 s más.
 
-Usá «primer y último cuadro» con el keyframe A al inicio y el B al final, y el mismo prompt cambiando la línea de
-tiempos por esta:
+---
 
-```
-0 to 1.5 seconds: the egg wobbles and the thumb presses the button. 1.5 to 3.5 seconds: the egg cracks, the hamster peeks out, hearts blink. 3.5 to 6 seconds: the hamster jumps out of the screen, turns full color and lands in its gray eggshell on the table. 6 to 8 seconds: the thumb presses the hamster's head once, click, gold sparkle; the screen behind shows a new egg.
-```
+## Después: guion, voz, texto y edición
 
-En la edición, congelá el último cuadro 2 s (de 0:08 a 0:10) y poné el cierre sobre ese cuadro.
+### Guion (para la edición)
 
-## 7. Edición
+| Tiempo | Qué pasa | Texto en pantalla (se pone en la edición) | Voz en off |
+|---|---|---|---|
+| 0:00 – 0:02 | El huevo se sacude, el pulgar aprieta, nace el hámster | `NACIÓ TU MASCOTA` | «Esta no come,» |
+| 0:02 – 0:05 | El hámster sale de la pantalla | (sigue) | «no se muere» |
+| 0:05 – 0:07 | Cae en su cáscara: es el clicker | `NO COME. NO SE MUERE. HACE CLIC.` | «y hace clic.» |
+| 0:07 – 0:10 | Clic en la cabeza, destello. Atrás, un huevo nuevo | `Hámster en el huevo · clicker impreso en 3D` / `Para el amigo invisible · WhatsApp 092 104 419` | «Un clicker para el amigo invisible. Escribime y te paso el precio.» |
 
-- **Textos:** fuente pixel, color crema `#F3E9D2` con contorno de 2 px en índigo `#1F1A3D`. Que entren letra por
-  letra como en una caja de diálogo (efecto máquina de escribir, 2 o 3 cuadros por letra).
-- **0:00 – 0:02:** `NACIÓ TU MASCOTA`, arriba del juguetito, en la franja del medio.
-- **0:04 – 0:07:** `NO COME. NO SE MUERE. HACE CLIC.` en tres renglones que aparecen de a uno, al ritmo de la voz.
-- **0:07 – 0:10:** caja oscura (índigo `#1F1A3D` al 85 %) con borde dorado de 2 px, justo arriba de la zona de
-  botones de Instagram, con el texto del cierre. Arriba de la caja, el glifo `assets/px/glifo-oro.png` chico.
-- **Voz:** grabada en un lugar sin eco. Bajá la música y los efectos del video unos 6 dB mientras hablás.
-- **Loop:** el último cuadro y el primero tienen el mismo fondo. Si se nota un salto, poné un fundido de 3 cuadros
-  al final.
+**Voz en off completa** (grabala vos con el celular):
+> «Esta no come, no se muere y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.»
 
-## 8. Antes de publicar
+### Texto del post
 
-- [ ] El clicker se parece a la foto real (mancha marrón, cáscara gris).
-- [ ] No hay letras, números ni logos generados por la IA en ningún cuadro.
-- [ ] Los píxeles se ven duros durante todo el clip (sin partes borrosas ni «3D»).
-- [ ] El texto se lee con el sonido apagado y no queda tapado por los botones de la app.
-- [ ] El texto del post no promete fecha para Navidad ni precio.
+> Una mascota que no come, no se muere y hace clic. Es el hámster en el huevo: un clicker impreso en 3D, acá en
+> Montevideo. Para el amigo invisible podés pedir uno o varios para todo el grupo y te paso el precio total por
+> WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+
+**Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
+- **Navidad:** `Regalo chico para Navidad` · «Para Navidad, decime cuántos querés y te digo si llego.»
+- **Grupo grande:** `¿Son 10? Te paso el precio de todos` · «¿Son diez? Te paso el precio de todos juntos.»
+- **Comentarios:** `¿Cuál le regalás? Hámster, vasito de café o banana` · «¿Cuál le regalarías? Comentalo.»
+
+### Edición (CapCut o Canva)
+
+- Textos en fuente pixel (MagoPixel de la web convertida a TTF, o Press Start 2P), crema `#F3E9D2` con contorno
+  índigo `#1F1A3D`, entrando letra por letra.
+- Cierre: caja índigo con borde dorado arriba de la zona de botones de Instagram, y el glifo real
+  `assets/px/glifo-oro.png` arriba de la caja.
+- Bajá el audio del video unos 6 dB mientras habla la voz.
+- Dejá libres los 250 px de arriba y los 420 px de abajo (ahí van los botones de la app).
+- No pongas fecha para Navidad ni precio.

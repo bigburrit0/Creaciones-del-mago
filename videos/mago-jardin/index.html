@@ -22,7 +22,7 @@
       #rope-clip { clip-path: inset(0% 0% 0% 100%); }
       /* paint order inside the patio: ground < plant < feeder < perched birds < sparrows < wizard < flying birds */
       #plate { z-index: 1; } #plate-nochair { z-index: 2; }
-      #sprout, #sapling, #trunk, #trunk8 { z-index: 10; } #canopy { z-index: 11; } #rope-clip { z-index: 12; }
+      #trunk-up { z-index: 9; } #sprout, #sapling, #trunk, #trunk8 { z-index: 10; } #rope2 { z-index: 12; } #canopy { z-index: 11; } #rope-clip { z-index: 12; }
       #l-wiz { z-index: 16; } #feeder { z-index: 20; } #l-kis, #l-hor-o, #l-hor { z-index: 22; }
       #l-sp1, #l-sp2 { z-index: 25; } #kneel, #stand, #point { z-index: 30; }
       #kis, #hor { z-index: 40; } #seed { z-index: 41; } #leaves-fx { z-index: 42; }
@@ -61,10 +61,11 @@
           <img id="plate-nochair" class="full hid" src="assets/plate_nochair.jpg" alt="" />
           <img id="sprout" class="full hid" src="assets/sprout.png" alt="" />
           <img id="sapling" class="full hid" src="assets/sapling.png" alt="" />
+          <img id="trunk-up" class="full hid" src="assets/trunk_up.png" alt="" />
           <img id="trunk" class="full hid" src="assets/trunk.png" alt="" />
           <img id="trunk8" class="full hid" src="assets/trunk8.png" alt="" />
           <img id="canopy" class="full hid" src="assets/canopy.png" alt="" />
-          <div id="rope-clip" class="layer"><img id="rope" class="full" src="assets/rope.png" alt="" /></div>
+          <img id="rope2" class="full hid" src="assets/rope2.png" alt="" />
           <img id="feeder" class="full hid" src="assets/feeder.png" alt="" />
           <img id="l-wiz" class="full hid" src="assets/l_wiz.png" alt="" />
           <img id="l-kis" class="full hid" src="assets/l_kis.png" alt="" />
@@ -130,7 +131,7 @@
               <span class="cl c1 type">Comedero casita</span>
               <span class="cl c2 type">comen varios pájaros a la vez</span>
               <span class="cl c3 type">en PETG si va al sol</span>
-              <span class="cl c4 type">WhatsApp 092 104 419</span>
+              <span class="cl c4 type">Escribime por mensaje</span>
             </div>
             <div id="card-next"></div>
           </div>
@@ -236,14 +237,19 @@
       idle("#stand", 1.0, 2.1, 0.4, { scaleY: 1.015 }, FEET);           // breathing while he watches
 
       // ---------- 2-5 s : the feeder grows from the branch, birds fly in
-      tl.fromTo("#rope-clip", { clipPath: "inset(0% 0% 0% 100%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.3, ease: "steps(4)" }, 2.05);
-      // the canopy swells and bursts into leaves exactly as the feeder grows out of it
-      tl.fromTo("#canopy", { scale: 1, transformOrigin: "552px 880px" }, { keyframes: [{ scale: 1.1, duration: 0.07, ease: S1 }, { scale: 0.5, duration: 0.05, ease: S1 }, { scale: 0, duration: 0.05, ease: S1 }], immediateRender: false }, 2.36);
-      burst("lf", 8, 2.43, 552, 880, 150, 0.32);
+      // the tree shoots up in four stage jumps (canopy rises, trunk stretches) to make room for the feeder
+      show("#trunk-up", 2.05);
+      [-75, -150, -225, -300].forEach((dy, i) => {
+        const t = 2.05 + i * 0.08;
+        tl.set("#canopy", { y: dy }, t);
+        tl.set("#trunk-up", { clipPath: `inset(${857 + dy}px 0px 0px 0px)` }, t);
+      });
+      sparkle(2.12, 552, 760, 1.2);
+      burst("lf", 8, 2.4, 552, 600, 130, 0.32);
       hide("#trunk", 2.45); show("#trunk8", 2.45);
-      show("#feeder", 2.45);
-      tl.fromTo("#feeder", { scale: 0.15, transformOrigin: "574px 748px" }, { keyframes: [{ scale: 0.55, duration: 0.08, ease: S1 }, { scale: 1.12, duration: 0.08, ease: S1 }, { scale: 0.96, duration: 0.08, ease: S1 }, { scale: 1, duration: 0.08, ease: S1 }], immediateRender: false }, 2.45);
-      sparkle(2.5, 574, 880, 1.6); sparkle(2.8, 574, 860, 2.0);
+      show(["#feeder", "#rope2"], 2.45);
+      tl.fromTo("#feeder", { scale: 0.15, transformOrigin: "556px 750px" }, { keyframes: [{ scale: 0.55, duration: 0.08, ease: S1 }, { scale: 1.12, duration: 0.08, ease: S1 }, { scale: 0.96, duration: 0.08, ease: S1 }, { scale: 1, duration: 0.08, ease: S1 }], immediateRender: false }, 2.45);
+      sparkle(2.5, 556, 880, 1.6); sparkle(2.8, 556, 860, 2.0);
       // the feeder sways on its rope and settles
       tl.fromTo("#feeder", { rotation: 0 }, { keyframes: [{ rotation: 4 }, { rotation: -3 }, { rotation: 2 }, { rotation: -1 }, { rotation: 0 }].map(k => Object.assign(k, { duration: 0.12, ease: S1 })), immediateRender: false }, 2.8);
       // the wizard points at the sky as the birds come
@@ -343,7 +349,7 @@
       // 8.0 s: dialogue box opens (stepped), glyph drops in, text types out
       tl.set("#card", { opacity: 1, scaleY: 0.1, transformOrigin: "50% 100%" }, 8.0);
       tl.set("#card", { scaleY: 0.55 }, 8.04); tl.set("#card", { scaleY: 1.04 }, 8.08); tl.set("#card", { scaleY: 1 }, 8.12);
-      tl.fromTo("#glyph", { opacity: 1, y: -60 }, { keyframes: [{ y: -20 }, { y: 6 }, { y: 0 }].map(k => Object.assign(k, { duration: 0.05, ease: S1 })), immediateRender: false }, 8.1);
+      tl.fromTo("#glyph", { opacity: 1, y: -60 }, { opacity: 1, keyframes: [{ y: -20 }, { y: 6 }, { y: 0 }].map(k => Object.assign(k, { duration: 0.05, ease: S1 })), immediateRender: false }, 8.1);
       sparkle(8.28, 134, 1190, 1.0);
       const chars = Array.from(document.querySelectorAll("#card .ch"));
       const t0 = 8.16, rate = 0.012;                                      // whole box in ~1 s

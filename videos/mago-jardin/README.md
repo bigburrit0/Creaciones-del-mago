@@ -19,6 +19,7 @@ Para regenerar (requiere numpy y Pillow):
 ```bash
 npx hyperframes@0.9.3 init garden --resolution portrait --non-interactive
 python3 tools/build_garden.py keyframes garden/assets
+python3 tools/fix_feeder.py garden/assets          # clean feeder, taller trunk, rope (no floating branch)
 python3 tools/dissolve.py garden/assets 8
 python3 tools/synth_garden.py garden/assets
 cp index.html garden/

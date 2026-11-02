@@ -13,7 +13,7 @@ Grabá con el celular, en un lugar sin eco (un placard con ropa sirve), a un pal
 | 0,3 s | «No da tomates:» | `PLANTÁS ESTO.`, crece el arbolito |
 | 2,45 s | «da benteveos.» | `COSECHÁS ESTO.`, sale el comedero (decilo justo ahí) |
 | 4,0 s | «Es un comedero impreso en 3D, en PETG para el sol.» | llegan los pájaros, el Mago va a la silla |
-| 8,1 s | «Escribime y te paso el precio.» | se abre el cuadro del WhatsApp |
+| 8,1 s | «Escribime y te paso el precio.» | se abre el cuadro final («Escribime por mensaje») |
 
 Dos formas de grabarla:
 - **Una toma** con la frase entera (`voz.m4a`). El script la pone a los 0,3 s. Hacé una pausa corta después de «tomates» y otra antes de «Escribime».
@@ -37,6 +37,8 @@ Si preferís CapCut: subí `mago-jardin-texto.mp4`, poné la voz encima y bajá 
 > Si va al sol, conviene PETG, que aguanta mejor la intemperie: preguntame. En el catálogo hay más comederos,
 > pajareras y un bebedero para abejas. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
 > 092 104 419 · creacionesdelmago.com
+
+En el video no va el número de WhatsApp: el cuadro final dice «Escribime por mensaje».
 
 Otros cierres (cambian el cuadro final en `index.html`, `#card-text`, y la última frase de la voz):
 - Navidad: «Si es para Navidad, decímelo y te digo si llego.»

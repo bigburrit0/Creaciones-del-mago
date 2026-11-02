@@ -26,6 +26,30 @@
       #l-wiz { z-index: 16; } #feeder { z-index: 20; } #l-kis, #l-hor-o, #l-hor { z-index: 22; }
       #l-sp1, #l-sp2 { z-index: 25; } #kneel, #stand, #point { z-index: 30; }
       #kis, #hor { z-index: 40; } #seed { z-index: 41; } #leaves-fx { z-index: 42; }
+      /* ===== on-screen text (game HUD): free zones = top 250 px and bottom 420 px (app buttons) ===== */
+      @font-face { font-family: "Mago Pixel"; src: url("assets/MagoPixel-Bold.woff") format("woff"); font-weight: 700; }
+      @font-face { font-family: "Mago Pixel"; src: url("assets/MagoPixel-Regular.woff") format("woff"); font-weight: 400; }
+      :root { --cream: #F3E9D2; --ink: #1F1A3D; --indigo: #2A2350; --gold: #F2A93B; }
+      #hud { z-index: 100; pointer-events: none; }
+      .ol { text-shadow: 6px 0 var(--ink), -6px 0 var(--ink), 0 6px var(--ink), 0 -6px var(--ink),
+                         6px 6px var(--ink), -6px 6px var(--ink), 6px -6px var(--ink), -6px -6px var(--ink),
+                         0 14px var(--ink), 6px 14px var(--ink), -6px 14px var(--ink); }
+      .headline { position: absolute; left: 0; width: 1080px; top: 262px; text-align: center; font-family: "Mago Pixel";
+        font-weight: 700; font-size: 92px; line-height: 1; letter-spacing: 12px; color: var(--cream); opacity: 0; }
+      #card { position: absolute; left: 48px; width: 940px; top: 1282px; height: 218px; background: var(--ink); opacity: 0;
+        box-shadow: 0 0 0 6px var(--gold), 0 0 0 12px var(--ink), 12px 18px 0 6px rgba(31, 26, 61, 0.45); }
+      #card-icon { position: absolute; left: 30px; top: 45px; width: 128px; height: 128px; box-shadow: 0 0 0 6px var(--indigo); }
+      #card-text { position: absolute; left: 192px; top: 14px; right: 24px; font-family: "Mago Pixel"; color: var(--cream); }
+      .cl { display: block; white-space: nowrap; }
+      .c1 { font-weight: 700; font-size: 46px; line-height: 54px; color: var(--gold); }
+      .c2 { font-weight: 400; font-size: 34px; line-height: 44px; }
+      .c4 { font-weight: 700; font-size: 42px; line-height: 52px; color: var(--gold); }
+      .c3 { font-weight: 400; font-size: 34px; line-height: 44px; }
+      .ch { opacity: 0; }
+      #card-next { position: absolute; right: 22px; bottom: 14px; width: 0; height: 0; opacity: 0;
+        border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 14px solid var(--gold); }
+      #glyph { position: absolute; left: 66px; top: 1120px; width: 136px; height: 147px; opacity: 0;
+        filter: drop-shadow(6px 6px 0 var(--ink)); }
     </style>
   </head>
   <body>
@@ -93,6 +117,23 @@
           <div id="du1" class="px dust"></div><div id="du2" class="px dust"></div><div id="du3" class="px dust"></div>
           <div id="du4" class="px dust"></div><div id="du5" class="px dust"></div><div id="du6" class="px dust"></div>
           <div id="du7" class="px dust"></div><div id="du8" class="px dust"></div>
+        </div>
+
+        <!-- on-screen text -->
+        <div id="hud" class="layer">
+          <div id="t-plant" class="headline ol">PLANTÁS ESTO.</div>
+          <div id="t-harvest" class="headline ol">COSECHÁS ESTO.</div>
+          <img id="glyph" src="assets/glifo-oro.png" alt="" />
+          <div id="card">
+            <img id="card-icon" src="assets/casita-px.png" alt="" />
+            <div id="card-text">
+              <span class="cl c1 type">Comedero casita</span>
+              <span class="cl c2 type">comen varios pájaros a la vez</span>
+              <span class="cl c3 type">en PETG si va al sol</span>
+              <span class="cl c4 type">WhatsApp 092 104 419</span>
+            </div>
+            <div id="card-next"></div>
+          </div>
         </div>
       </div>
 
@@ -276,6 +317,39 @@
       }
       tl.fromTo("#f-mate", { y: 0 }, { keyframes: [{ y: -8 }, { y: -16 }, { y: -16 }, { y: -16 }, { y: -8 }, { y: 0 }], duration: 0.6, ease: S1, immediateRender: false }, 8.3);
       [[8.0, 4], [8.25, 0], [8.5, -4], [8.75, 0], [9.0, 3], [9.15, 0]].forEach(([t, x]) => tl.set("#f-leaves", { x }, t));
+
+      // ---------- on-screen text
+      // split the card lines into letters for an RPG-dialogue reveal
+      document.querySelectorAll("#card .type").forEach(el => {
+        const walkNodes = n => Array.from(n.childNodes).forEach(c => {
+          if (c.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            for (const ch of c.textContent) { const sp = document.createElement("span"); sp.className = "ch"; sp.textContent = ch; frag.appendChild(sp); }
+            c.replaceWith(frag);
+          } else walkNodes(c);
+        });
+        walkNodes(el);
+      });
+      // a stepped pop for text: 0 -> 1.15 -> 0.95 -> 1
+      function textPop(sel, t) {
+        tl.set(sel, { opacity: 1, scale: 0.6, transformOrigin: "50% 50%" }, t);
+        tl.set(sel, { scale: 1.15 }, t + 0.05); tl.set(sel, { scale: 0.95 }, t + 0.1); tl.set(sel, { scale: 1 }, t + 0.15);
+      }
+      // 0.15 s: PLANTÁS ESTO.  2.45 s (the feeder pops out of the tree): COSECHÁS ESTO. replaces it at once
+      textPop("#t-plant", 0.15);
+      hide("#t-plant", 2.45); show("#t-harvest", 2.45);
+      tl.set("#t-harvest", { x: -10 }, 2.45); tl.set("#t-harvest", { x: 8 }, 2.5); tl.set("#t-harvest", { x: -4 }, 2.55); tl.set("#t-harvest", { x: 0 }, 2.6);
+      tl.set("#t-harvest", { opacity: 0.5 }, 5.8); hide("#t-harvest", 5.88);
+      // 8.0 s: dialogue box opens (stepped), glyph drops in, text types out
+      tl.set("#card", { opacity: 1, scaleY: 0.1, transformOrigin: "50% 100%" }, 8.0);
+      tl.set("#card", { scaleY: 0.55 }, 8.04); tl.set("#card", { scaleY: 1.04 }, 8.08); tl.set("#card", { scaleY: 1 }, 8.12);
+      tl.fromTo("#glyph", { opacity: 1, y: -60 }, { keyframes: [{ y: -20 }, { y: 6 }, { y: 0 }].map(k => Object.assign(k, { duration: 0.05, ease: S1 })), immediateRender: false }, 8.1);
+      sparkle(8.28, 134, 1190, 1.0);
+      const chars = Array.from(document.querySelectorAll("#card .ch"));
+      const t0 = 8.16, rate = 0.012;                                      // whole box in ~1 s
+      chars.forEach((c, i) => tl.set(c, { opacity: 1 }, t0 + i * rate));
+      const tEnd = t0 + chars.length * rate;
+      for (let t = tEnd + 0.1, k = 0; t < 9.95; t += 0.25, k++) tl.set("#card-next", { opacity: k % 2 ? 0 : 1, y: k % 2 ? 0 : 4 }, t);
 
       // ---------- 9.2-10 s : calm, exact keyframe 4
       show("#k4", 9.2);

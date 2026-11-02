@@ -3,6 +3,7 @@
 Uso, desde la raíz del repo: python3 -I fuente/campanas/reels-10s/armar_estudio.py
 """
 import base64, html, json, re, sys
+sys.dont_write_bytecode = True
 from pathlib import Path
 
 here = Path(__file__).resolve().parent

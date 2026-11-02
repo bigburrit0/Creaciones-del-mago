@@ -11,6 +11,7 @@ Requiere: ffmpeg, Python 3 con numpy, Pillow y fontTools. El video base va en ba
 (no se versiona). Todo lo que se genera queda en salida/.
 """
 import argparse, json, os, subprocess, sys, wave
+sys.dont_write_bytecode = True
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 

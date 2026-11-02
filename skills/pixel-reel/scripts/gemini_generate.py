@@ -18,7 +18,7 @@ What it does, in approval order (gates):
 The API key is read by the SDK from GEMINI_API_KEY in the environment. It is never printed, logged or written:
 every message that could echo it goes through redact().
 """
-import argparse, datetime, hashlib, io, json, os, shutil, sys, time
+import argparse, datetime, hashlib, io, json, os, re, shutil, sys, time
 from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import prmanifest as M
@@ -264,7 +264,7 @@ def manual(a, lib, reel, todo, reqs, sheets, cands, log):
         return
     files = sorted(f for f in os.listdir(a.imp) if f.lower().endswith((".png", ".jpg", ".jpeg", ".webp")))
     for sh in todo:
-        stem = sh["name"][:-4]; mine = [f for f in files if f.startswith(stem + "_") or f == sh["name"]]
+        stem = sh["name"][:-4]; mine = [f for f in files if re.fullmatch(re.escape(stem) + r"(_v\d+)?\.(png|jpe?g|webp)", f, re.I)]
         if not mine: continue
         folder = os.path.join(cands, stem); os.makedirs(folder, exist_ok=True); results = []
         for f in mine:

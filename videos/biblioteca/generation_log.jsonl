@@ -15,3 +15,33 @@
 {"ts": "2026-11-02T19:25:33+00:00", "event": "pack", "sheet": "papa_noel_model.png", "gate": 2}
 {"ts": "2026-11-02T19:25:33+00:00", "event": "pack", "sheet": "plate_taller_master.png", "gate": 3}
 {"ts": "2026-11-02T19:27:00+00:00", "event": "approve", "sheet": "mago_model.png", "variant": 1, "by": "person"}
+{"ts": "2026-11-02T19:42:32+00:00", "event": "import", "sheet": "papa_noel_model.png", "gate": 2, "variant": 1, "source": "gemini-app", "file": "papa_noel_model_v1.png", "qc": {"score": 100, "pass": true, "issues": [], "fixes": [], "metrics": {"bg_border": 1.0, "fringe": 0.0007, "blockiness": 0.0, "palette_dist": 18.3, "height": 107, "height_target": 92, "anchor_off": [0.2, 0.0]}}}
+{"ts": "2026-11-02T19:42:51+00:00", "event": "import", "sheet": "papa_noel_model.png", "gate": 2, "variant": 2, "source": "gemini-app", "file": "papa_noel_model_v2.png", "qc": {"score": 85, "pass": false, "issues": ["altura 113 px de arte, se pidió 92"], "fixes": ["The subject has exactly the same height in every cell: 368 image pixels from the top of the head (or hat) to the soles of the feet."], "metrics": {"bg_border": 1.0, "fringe": 0.0013, "blockiness": 0.0, "palette_dist": 14.7, "height": 113, "height_target": 92, "anchor_off": [0.2, 0.0]}}}
+{"ts": "2026-11-02T19:42:55+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 1, "source": "gemini-app", "file": "plate_taller_master_v1.png", "qc": {"score": 50, "pass": false, "issues": ["hay magenta en el fondo", "colores lejos de la paleta (51.6)"], "fixes": ["This is a full scene: no magenta anywhere, fill the whole canvas.", "Use only the colours of the attached palette image; no new colours."], "metrics": {"aspect": 0.562, "magenta": 0.172, "palette_dist": 51.6}}}
+{"ts": "2026-11-02T19:42:56+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 2, "source": "gemini-app", "file": "plate_taller_master_v2.png", "qc": {"score": 100, "pass": true, "issues": [], "fixes": [], "metrics": {"aspect": 0.562, "magenta": 0.0001, "palette_dist": 22.6}}}
+{"ts": "2026-11-02T19:42:56+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 3, "source": "gemini-app", "file": "plate_taller_master_v3.png", "qc": {"score": 100, "pass": true, "issues": [], "fixes": [], "metrics": {"aspect": 0.562, "magenta": 0.0, "palette_dist": 28.5}}}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_walk_E_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_turn_S_to_N_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_idle_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_idle_N_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_sip_mate_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_surprised_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_joy_jump_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_thinking_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_idea_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_press_button_N_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_item_get_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_toss_E_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_wave_S_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "mago_offer_mate_E_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "fx_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "fx_2.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "fx_3.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "items_1.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "items_2.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "items_3.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "items_5.png", "gate": 5}
+{"ts": "2026-11-02T19:43:01+00:00", "event": "pack", "sheet": "items_6.png", "gate": 5}
+{"ts": "2026-11-02T19:43:13+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 1, "source": "gemini-app", "file": "plate_taller_master_v1.png", "qc": {"score": 50, "pass": false, "issues": ["hay magenta en el fondo", "colores lejos de la paleta (51.6)"], "fixes": ["This is a full scene: no magenta anywhere, fill the whole canvas.", "Use only the colours of the attached palette image; no new colours."], "metrics": {"aspect": 0.562, "magenta": 0.172, "palette_dist": 51.6}}}
+{"ts": "2026-11-02T19:43:14+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 2, "source": "gemini-app", "file": "plate_taller_master_v2.png", "qc": {"score": 100, "pass": true, "issues": [], "fixes": [], "metrics": {"aspect": 0.562, "magenta": 0.0001, "palette_dist": 22.6}}}
+{"ts": "2026-11-02T19:43:15+00:00", "event": "import", "sheet": "plate_taller_master.png", "gate": 3, "variant": 3, "source": "gemini-app", "file": "plate_taller_master_v3.png", "qc": {"score": 100, "pass": true, "issues": [], "fixes": [], "metrics": {"aspect": 0.562, "magenta": 0.0, "palette_dist": 28.5}}}

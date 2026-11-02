@@ -60,8 +60,14 @@ Para usarlo después, en cada prompt: `Use the attached Wizard reference sheet a
 - **Son ilustraciones.** La pieza real se ve en el catálogo. En el texto del post se puede decir «mirá las fotos
   en la web».
 - **Audio en el video, voz aparte.** En el prompt de video se piden efectos y música chiptune, sin diálogo
-  (la investigación no encontró confirmación de que el español rioplatense salga bien). La voz en off la grabás
-  vos con el celular, en primera persona: suena a persona, que es lo que piden las reglas de texto.
+  (la investigación no encontró confirmación de que el español rioplatense salga bien). La voz en off va con la
+  **voz de la marca** (Gemini TTS, voz argentina `es-419-techagent-10`, aprobada por el dueño el 2/11/2026),
+  en primera persona. Cómo generarla: `../voz/VOZ.md`.
+- **Nunca el número de teléfono en un reel.** Ni en el texto en pantalla, ni en la voz, ni en el texto del post
+  (decisión del dueño, 2/11/2026). El cierre pide escribir por mensaje («Escribime por mensaje», «Escribime y te
+  paso el precio»). Antes de exportar o publicar, correr `python3 fuente/campanas/reels-10s/revisar_reglas.py`
+  desde la raíz del repo: falla si encuentra un teléfono en los guiones o en los proyectos de edición, y
+  `armar.py` no exporta si el `timeline.json` tiene uno.
 - **Texto según `fuente/COPY-RULES.md`.** Yo y voseo, un dato en vez de un adjetivo, nada inventado: ni
   reseñas, ni «quedan pocos», ni plazos que no sean «mínimo 48 horas de preparación». Para Navidad no se promete
   fecha: «si es para Navidad, decímelo y te digo si llego».

@@ -90,17 +90,17 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:02 | Se parte la manija, la imagen tiembla | `¡CRAC!` chiquito, al lado de la manija | «¿Se te rompió la manija del termo?» |
 | 0:02 – 0:05 | Todo gris, el termo solo | `CONTINUE?` grande y la cuenta `9`, `8`, `7` (uno por segundo) | «No lo tires.» |
 | 0:05 – 0:07 | Cae la manija dorada, vuelve el color | `+1 MANIJA` en dorado | «Mandame fotos y medidas» |
-| 0:07 – 0:10 | Vapor del mate, gaviotas | `¿Se rompió una pieza del termo?` / `Mandame fotos y medidas · WhatsApp 092 104 419` | «y, si se puede imprimir, te la hago.» |
+| 0:07 – 0:10 | Vapor del mate, gaviotas | `¿Se rompió una pieza del termo?` / `Mandame fotos y medidas por mensaje` | «y, si se puede imprimir, te la hago.» |
 
-**Voz en off completa** (grabala vos con el celular):
+**Voz en off completa** (con la voz de la marca, ver `../voz/VOZ.md`):
 > «¿Se te rompió la manija del termo? No lo tires. Mandame fotos y medidas y, si se puede imprimir, te la hago.»
 
 ### Texto del post
 
 > ¿Se te rompió la manija del termo? Las piezas que no tocan el agua caliente (la manija, el anillo de agarre, la
 > base) las imprimo en 3D a partir de fotos y medidas, en PETG para que aguanten. Las que tocan el agua, como el
-> tapón o la rosca del pico, no: te lo digo antes y no perdés nada. Te paso precio y fecha por WhatsApp antes de
-> empezar, sin compromiso. 092 104 419 · Montevideo
+> tapón o la rosca del pico, no: te lo digo antes y no perdés nada. Te paso precio y fecha por mensaje antes de
+> empezar, sin compromiso. Montevideo
 
 **Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
 - **Cualquier repuesto:** `¿Una manija, una perilla, un clip? Mandame una foto` · «Mandame una foto y te digo si se puede.»

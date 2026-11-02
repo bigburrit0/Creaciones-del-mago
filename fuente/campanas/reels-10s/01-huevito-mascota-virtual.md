@@ -94,16 +94,16 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:02 | El huevo se sacude, el pulgar aprieta, nace el hámster | `NACIÓ TU MASCOTA` | «Esta no come,» |
 | 0:02 – 0:05 | El hámster sale de la pantalla | (sigue) | «no se muere» |
 | 0:05 – 0:07 | Cae en su cáscara: es el clicker | `NO COME. NO SE MUERE. HACE CLIC.` | «y hace clic.» |
-| 0:07 – 0:10 | Clic en la cabeza, destello. Atrás, un huevo nuevo | `Hámster en el huevo · clicker impreso en 3D` / `Para el amigo invisible · WhatsApp 092 104 419` | «Un clicker para el amigo invisible. Escribime y te paso el precio.» |
+| 0:07 – 0:10 | Clic en la cabeza, destello. Atrás, un huevo nuevo | `Hámster en el huevo · clicker impreso en 3D` / `Para el amigo invisible · Escribime por mensaje` | «Un clicker para el amigo invisible. Escribime y te paso el precio.» |
 
-**Voz en off completa** (grabala vos con el celular):
+**Voz en off completa** (con la voz de la marca, ver `../voz/VOZ.md`):
 > «Esta no come, no se muere y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.»
 
 ### Texto del post
 
 > Una mascota que no come, no se muere y hace clic. Es el hámster en el huevo: un clicker impreso en 3D, acá en
 > Montevideo. Para el amigo invisible podés pedir uno o varios para todo el grupo y te paso el precio total por
-> WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+> mensaje antes de empezar, sin compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
 - **Navidad:** `Regalo chico para Navidad` · «Para Navidad, decime cuántos querés y te digo si llego.»
@@ -119,3 +119,5 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 - Bajá el audio del video unos 6 dB mientras habla la voz.
 - Dejá libres los 250 px de arriba y los 420 px de abajo (ahí van los botones de la app).
 - No pongas fecha para Navidad ni precio.
+- **Nunca el número de teléfono** (ni en pantalla, ni en la voz, ni en el texto del post). El cierre pide
+  escribir por mensaje. Antes de exportar: `python3 revisar_reglas.py`.

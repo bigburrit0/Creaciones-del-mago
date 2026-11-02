@@ -87,17 +87,17 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:03 | El Mago planta, crece el arbolito en tres saltos | `PLANTÁS ESTO.` | «No da tomates:» |
 | 0:03 – 0:06 | Cuelga el comedero, llegan el benteveo y el hornero | `COSECHÁS ESTO.` (reemplaza al anterior de golpe) | «da benteveos.» |
 | 0:06 – 0:08 | Llegan los chingolos, el Mago se sienta con el mate | (sin texto) | «Es un comedero impreso en 3D, en PETG para el sol.» |
-| 0:08 – 0:10 | Todos comen, el Mago toma mate | `Comedero casita · comen varios pájaros a la vez` / `En PETG si va al sol · WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:08 – 0:10 | Todos comen, el Mago toma mate | `Comedero casita · comen varios pájaros a la vez` / `En PETG si va al sol · Escribime por mensaje` | «Escribime y te paso el precio.» |
 
-**Voz en off completa** (grabala vos con el celular, con calma):
+**Voz en off completa** (con la voz de la marca, ver `../voz/VOZ.md`; con calma):
 > «No da tomates: da benteveos. Es un comedero impreso en 3D, en PETG para el sol. Escribime y te paso el precio.»
 
 ### Texto del post
 
 > No da tomates: da benteveos. El comedero casita lo imprimo en 3D en Montevideo, y comen varios pájaros a la vez.
 > Si va al sol, conviene PETG, que aguanta mejor la intemperie: preguntame. En el catálogo hay más comederos,
-> pajareras y un bebedero para abejas. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> pajareras y un bebedero para abejas. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:08 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para la que tiene fondo · Si es para Navidad, decímelo` · «Si es para Navidad, decímelo y te digo si llego.»

@@ -393,6 +393,11 @@ def main():
     ap.add_argument("--snapshots", help="lista de segundos separados por coma: solo exporta PNG de esos cuadros")
     a = ap.parse_args()
     tl = json.load(open(os.path.join(AQUI, "timeline.json")))
+    sys.path.insert(0, os.path.dirname(AQUI))
+    from revisar_reglas import revisar_timeline          # regla: nunca el teléfono en un reel
+    errores = revisar_timeline(tl)
+    if errores:
+        sys.exit("No se exporta: hay un número de teléfono en el reel.\n  " + "\n  ".join(errores))
     if not os.path.exists(ruta(tl["base"]["archivo"])):
         sys.exit("Falta el video base en " + ruta(tl["base"]["archivo"]) + " (bajalo de Drive, ver EDICION.md).")
     if a.snapshots:

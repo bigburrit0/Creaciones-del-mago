@@ -93,17 +93,17 @@ No text, no letters, no numbers, no subtitles, no captions, no logos, no badges 
 | 0:00 – 0:02 | Luces de largada, arrancan | `¿TE ACORDÁS DEL AUTO DE TU VIEJO?` | «¿Te acordás del auto de tu viejo?» |
 | 0:02 – 0:05 | La curva por la rambla | Arriba, como en un juego: `1P FIAT 500 · 1965` y `2P ESCARABAJO 1300` | «Lo imprimo a escala, en partes,» |
 | 0:05 – 0:07 | El Fiat gana, el Mago baja la bandera | (sigue el marcador) | «y lo armás vos.» |
-| 0:07 – 0:10 | El auto se desarma y se vuelve a armar | `Autos a escala para armar · impresos en 3D` / `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:07 – 0:10 | El auto se desarma y se vuelve a armar | `Autos a escala para armar · impresos en 3D` / `Escribime y te paso el precio` | «Escribime y te paso el precio.» |
 
-**Voz en off completa** (grabala vos con el celular):
+**Voz en off completa** (con la voz de la marca, ver `../voz/VOZ.md`):
 > «¿Te acordás del auto de tu viejo? Lo imprimo a escala, en partes, y lo armás vos. Escribime y te paso el precio.»
 
 ### Texto del post
 
 > ¿Te acordás del auto de tu viejo? El Fiat 500 de 1965 (escala 1:20, con asientos y volante adentro) y el
 > Escarabajo 1300 (tiene partes que se sacan) los imprimo en 3D en Montevideo, en partes para armar. En el catálogo
-> también están la Kombi, el Willys Jeep y otros. Te paso precio y fecha por WhatsApp antes de empezar, sin
-> compromiso. 092 104 419 · creacionesdelmago.com
+> también están la Kombi, el Willys Jeep y otros. Te paso precio y fecha por mensaje antes de empezar, sin
+> compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
 - **Navidad:** `Regalo para el viejo · Si es para Navidad, decímelo` · «Si es para Navidad, decímelo y te digo si llego.»

@@ -6,6 +6,10 @@ import base64, html, json, re, sys
 from pathlib import Path
 
 here = Path(__file__).resolve().parent
+sys.path.insert(0, str(here))
+from revisar_reglas import revisar_todo  # regla: nunca el teléfono en un reel
+if revisar_todo():
+    sys.exit("No se arma el estudio: hay un número de teléfono en un reel. Correr revisar_reglas.py para ver dónde.")
 repo = here.parents[2]
 out = here / "estudio-reels.html"
 d = repo / "fuente/campanas/reels-10s"

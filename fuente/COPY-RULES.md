@@ -47,6 +47,11 @@ o discutida.
 16. **Cada respuesta de las preguntas frecuentes se entiende sola** (la puede citar un asistente de IA
     sin la pregunta): nombra qué se hace, dónde y con qué límite.
 
+## Decisiones del dueño (2/11/2026)
+17. **Nunca el número de teléfono en un reel** (pantalla, voz ni texto del post). El llamado a la acción
+    pide escribir por mensaje. Lo controla `fuente/campanas/reels-10s/revisar_reglas.py`.
+18. **La voz en off de los reels es la voz de la marca** (`fuente/campanas/voz/VOZ.md`), en primera persona.
+
 ## Prohibido
 Sumergite · descubrí · elevá · experiencia única · calidad premium · diseños
 únicos · "no es solo X, es Y" · tríadas de adjetivos · transformamos tus ideas ·

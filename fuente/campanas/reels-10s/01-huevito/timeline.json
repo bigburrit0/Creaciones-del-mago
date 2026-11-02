@@ -27,13 +27,13 @@
       {"texto": "clicker impreso en 3D", "k": 6, "color": "crema", "desde": 8.88},
       {"separador": true, "desde": 9.30},
       {"texto": "Para el amigo invisible", "k": 6, "color": "crema", "desde": 9.35},
-      {"texto": "WhatsApp 092 104 419", "k": 7, "color": "oro", "desde": 9.85}
+      {"texto": "Escribime por mensaje", "k": 6, "color": "oro", "desde": 9.85}
     ]
   },
   "tipeo_cps": {"titulos": 24, "cierre": 48},
   "voz": {
     "texto": "Esta no come, no se muere y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.",
-    "toma": "voz/toma-gemini-techagent-10.wav",
+    "toma": "../../voz/referencia-huevito.wav",
     "frases": [
       {"texto": "Esta no come,", "en": 0.30},
       {"texto": "no se muere", "en": 3.20},

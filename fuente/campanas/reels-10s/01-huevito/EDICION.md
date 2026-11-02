@@ -30,12 +30,12 @@ El video generado no sigue exacto el guion: el hámster nace en 2,0 s, sale en 4
 | 4,0 – 5,8 | El hámster sale de la pantalla, salta (4,75 – 5,5) y cae en la cáscara gris (5,8) | (limpio: el salto pasa por el cielo) | | salto y caída del video |
 | 5,8 – 7,3 | Ya es el clicker en su cáscara. El dedo entra en 6,9 | `NO COME.` 5,8 · `NO SE MUERE.` 6,25 · `HACE CLIC.` 6,9 → 7,3 | 6,3 «y hace clic.» | |
 | 7,3 – 8,5 | Clic en la cabeza (7,3), cierra los ojos, destello dorado | (sigue hasta 8,25) | 7,6 «Un clicker para el amigo invisible.» | clic y acorde del video |
-| 8,25 – 9,7 | El dedo se va. La pantalla vuelve a mostrar un huevo nuevo (8,75) | Caja de cierre: glifo + `Hámster en el huevo` / `clicker impreso en 3D` / `Para el amigo invisible` / `WhatsApp 092 104 419` | 9,3 «Escribime y te paso el precio.» | pop y destello del cierre |
+| 8,25 – 9,7 | El dedo se va. La pantalla vuelve a mostrar un huevo nuevo (8,75) | Caja de cierre: glifo + `Hámster en el huevo` / `clicker impreso en 3D` / `Para el amigo invisible` / `Escribime por mensaje` | 9,3 «Escribime y te paso el precio.» | pop y destello del cierre |
 | 9,7 – 11,5 | Cuadro quieto con el huevo nuevo: empalma con el primer cuadro (loop) | (caja completa) | | grillos y acorde final |
 
 - El video de Gemini se corta en 9,67 s, porque en 9,75 vuelve a aparecer el hámster en la pantalla y rompía
   el loop. Desde ahí queda quieto el cuadro del huevo, como dice el LEEME (en pixel art no se nota).
-- Se alarga de 10 a 11,5 s para que la voz entre sin apuro y el WhatsApp quede legible ~1,2 s completo.
+- Se alarga de 10 a 11,5 s para que la voz entre sin apuro y el cierre quede legible ~1,2 s completo.
 - Zona segura: todos los textos van entre y = 262 y y = 800 (cielo de la ventana). Arriba quedan libres los
   250 px y abajo los 420 px. La caja va arriba y no abajo porque en este video la parte de abajo es el clicker y
   la mesa: una caja ahí tapaba el producto.
@@ -49,7 +49,9 @@ El video generado no sigue exacto el guion: el hámster nace en 2,0 s, sale en 4
   48 letras/s en la caja.
 - Cierre: caja índigo con borde dorado `#F2A93B` en escalón (ventana de RPG), se abre en 4 cuadros; el glifo
   real `assets/px/glifo-oro.png` a ×2 con contorno índigo, aparece con un pop por pasos (×1, ×3, ×2).
-- WhatsApp en dorado; el resto en crema.
+- El llamado a la acción («Escribime por mensaje») en dorado; el resto en crema.
+- **Nunca el número de teléfono** en el reel (pantalla, voz ni post). `armar.py` no exporta si el
+  `timeline.json` tiene uno; para revisar todo: `python3 ../revisar_reglas.py`.
 
 ## Audio
 
@@ -66,8 +68,8 @@ paso el precio.»
 
 **La que va en `huevito-con-voz.mp4`:** Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`), voz
 `es-419-techagent-10` de la biblioteca extendida (argentina, «conversational, slightly dry humor»). Es
-rioplatense y con voseo natural. Prompt exacto en `voz/prompt-gemini-tts.txt`; toma en
-`voz/toma-gemini-techagent-10.wav` (7,7 s, 24 kHz). `armar.py` la corta sola en las 5 frases por los silencios
+rioplatense y con voseo natural. Prompt y script en `../../voz/` (`VOZ.md`); toma en
+`../../voz/referencia-huevito.wav` (7,7 s, 24 kHz). `armar.py` la corta sola en las 5 frases por los silencios
 y pone cada una en su tiempo.
 
 Por qué esa: al 2/11/2026, las comparativas ponen a ElevenLabs (v3 / multilingual) y Gemini TTS arriba en
@@ -75,13 +77,15 @@ naturalidad, casi empatados, y a OpenAI un escalón abajo en expresividad. No ha
 Gemini tiene 53 voces argentinas, que es lo más cerca del acento de Montevideo, y la clave ya estaba en la
 sesión. Se generaron 5 voces (techagent-10, podcaster-12, tutor-11, training-6, assistant-5).
 
+La voz quedó como **voz de la marca** para los próximos reels: `../../voz/VOZ.md`.
+
 **Si querés otra voz** (ElevenLabs, otra de Gemini o la tuya):
 
 1. Generá una sola toma con la frase completa, con pausas marcadas entre las 5 frases.
    - ElevenLabs: modelo Eleven v3 (o Multilingual v2), una voz en español de Argentina de la Voice Library,
      Stability ~45 %, Similarity ~75 %, Style ~20 %, speaker boost activado, velocidad 1,0. Texto:
      `Esta no come, ... no se muere ... y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.`
-   - Gemini: mismo prompt que `voz/prompt-gemini-tts.txt`, cambiando la voz.
+   - Gemini: `python3 ../../voz/generar_voz.py "texto" salida.wav --voz OTRA_VOZ`.
 2. `python3 armar.py --voz mi-toma.wav --nombre huevito-voz2`. Corta la toma en 5 frases y las pone en
    0,3 · 3,2 · 6,3 · 7,6 · 9,3 s. Si no encuentra las 4 pausas, la pega entera desde 0,3 s.
    `--una-toma 0.3` la pega entera sin cortar.
@@ -92,4 +96,4 @@ sesión. Se generaron 5 voces (techagent-10, podcaster-12, tutor-11, training-6,
 
 > Una mascota que no come, no se muere y hace clic. Es el hámster en el huevo: un clicker impreso en 3D, acá en
 > Montevideo. Para el amigo invisible podés pedir uno o varios para todo el grupo y te paso el precio total por
-> WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+> mensaje antes de empezar, sin compromiso. creacionesdelmago.com

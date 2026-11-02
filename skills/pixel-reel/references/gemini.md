@@ -44,6 +44,10 @@ Cuando hay un límite de uso, conviene pedir primero los P0 y empezar por los mo
 - **Verificar sin gastar**: `python3 scripts/gemini_check.py` muestra el largo de la clave, si la API responde y qué modelos de imagen hay.
 - **Repo**: ignorar `.env`, `*.key`, `*.pem` y archivos de credenciales, y también `biblioteca/candidates/` (las variantes no aprobadas).
 
+### Sin API: modo paquetes (plan de consumidor, app de Gemini)
+
+`--pack DIR` no llama a la API. Por cada hoja lista (con sus dependencias aprobadas) arma `DIR/NN_<hoja>/` con `PROMPT.txt`, los adjuntos numerados y `LEEME.txt` con los pasos. La persona pega el prompt en la app de Gemini, adjunta los archivos, pide 2 o 3 versiones y descarga cada una como `<hoja>_v1.png`, `<hoja>_v2.png`... Después `--import CARPETA` toma esas imágenes como variantes y sigue igual que la generación automática: control de calidad, hoja de contacto, aprobación sola en el gate 5 y espera de elección en los gates 2 a 4. La app de Gemini no guarda en una carpeta de Drive por su cuenta: las imágenes se descargan y se pasan a mano.
+
 ### Modelo
 
 Si no se indica con `--model` o con `PIXEL_REEL_IMAGE_MODEL`, el script le pide a la API la lista de modelos (una llamada gratuita) y elige el primero disponible en este orden: `gemini-3-pro-image-preview` (acepta hasta 14 imágenes de referencia), `gemini-3.1-flash-image-preview` y `gemini-2.5-flash-image`. `--list-models` muestra los disponibles para la clave. Las hojas se piden en `1:1` a `1K`, que da 1024×1024, el formato de las hojas; los fondos se piden en `9:16`.

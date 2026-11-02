@@ -18,3 +18,4 @@ client_secret*.json
 service-account*.json
 # pixel-reel: image-model candidates (approved sheets are copied to videos/biblioteca/sheets/)
 videos/biblioteca/candidates/
+videos/biblioteca/packs/

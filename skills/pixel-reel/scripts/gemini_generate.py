@@ -161,6 +161,8 @@ def main():
     ap.add_argument("--image-size", default="1K"); ap.add_argument("--model"); ap.add_argument("--retries", type=int, default=5)
     ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--regen", action="store_true")
     ap.add_argument("--list-models", action="store_true"); ap.add_argument("--approve", action="append", default=[])
+    ap.add_argument("--pack", metavar="DIR", help="no API: write prompt + attachments per sheet for pasting into the Gemini app")
+    ap.add_argument("--import", dest="imp", metavar="DIR", help="no API: take images named <sheet>*.png from DIR as variants, score and approve")
     a = ap.parse_args()
     lib, reel = M.load(a.library, a.reel)
     sheets = a.sheets or os.path.join(lib["_dir"], "sheets"); cands = a.candidates or os.path.join(lib["_dir"], "candidates")
@@ -182,6 +184,8 @@ def main():
     if a.only: only = set(x.strip() for x in a.only.split(",")); todo = [s for s in todo if s["name"] in only]
     todo.sort(key=lambda s: s["gate"])
 
+    if a.pack or a.imp:
+        manual(a, lib, reel, todo, reqs, sheets, cands, log); return
     cl = model = None
     if not a.dry_run or a.list_models:
         cl = client(); model = pick_model(cl, a.model or os.environ.get("PIXEL_REEL_IMAGE_MODEL"))
@@ -236,6 +240,45 @@ def main():
             summary.append((sh["name"], f"esperando elección: {cpath}" if results else "sin variantes"))
     print(f"\nimágenes pedidas en esta corrida: {used} (tope {a.max_images})" + (" [simulación]" if a.dry_run else ""))
     for name, st in summary: print(f"- {name}: {st}")
+
+
+def manual(a, lib, reel, todo, reqs, sheets, cands, log):
+    """Gemini-app workflow (consumer plan, no API): --pack writes one folder per sheet; --import scores what comes back."""
+    if a.pack:
+        os.makedirs(a.pack, exist_ok=True); k = 0
+        for sh in todo:
+            req = reqs[sh["name"]]; refs, missing = resolve(req["attach"], lib, sheets)
+            if missing: print(f"- {sh['name']}: bloqueada hasta aprobar " + ", ".join(os.path.basename(m) for m in missing)); continue
+            k += 1; d = os.path.join(a.pack, f"{k:02d}_{sh['name'][:-4]}"); os.makedirs(d, exist_ok=True)
+            for i, r in enumerate(refs, 1): shutil.copy(r, os.path.join(d, f"adjunto_{i}_{os.path.basename(r)}"))
+            open(os.path.join(d, "PROMPT.txt"), "w").write(req["body"] + "\n")
+            open(os.path.join(d, "LEEME.txt"), "w").write(
+                f"Hoja: {sh['name']} (gate {sh['gate']}, formato {req['aspect']})\n\n"
+                "1. En la app de Gemini, nuevo chat, modelo con generación de imágenes.\n"
+                "2. Adjuntá los archivos adjunto_*.\n3. Pegá el texto de PROMPT.txt y enviá.\n"
+                f"4. Pedí {a.variants} versiones (podés repetir el pedido) y descargá cada imagen como "
+                f"{sh['name'][:-4]}_v1.png, {sh['name'][:-4]}_v2.png...\n5. Pasáselas a Claude.\n")
+            print(f"- paquete {d}"); log(event="pack", sheet=sh["name"], gate=sh["gate"])
+            if k >= a.max_images: break
+        return
+    files = sorted(f for f in os.listdir(a.imp) if f.lower().endswith((".png", ".jpg", ".jpeg", ".webp")))
+    for sh in todo:
+        stem = sh["name"][:-4]; mine = [f for f in files if f.startswith(stem + "_") or f == sh["name"]]
+        if not mine: continue
+        folder = os.path.join(cands, stem); os.makedirs(folder, exist_ok=True); results = []
+        for f in mine:
+            n = max(existing_variants(folder) + [0]) + 1; p = os.path.join(folder, f"v{n}.png")
+            Image.open(os.path.join(a.imp, f)).convert("RGB").save(p)
+            q = QC.score(lib, reel, sh, Image.open(p)); results.append(dict(n=n, path=p, qc=q))
+            log(event="import", sheet=sh["name"], gate=sh["gate"], variant=n, source="gemini-app", file=f, qc=q)
+            print(f"  {sh['name']} v{n} ({f}): score {q['score']} {'OK' if q['pass'] else 'NO'} {'; '.join(q['issues'])}")
+        cpath = contact(folder, [dict(n=n, path=os.path.join(folder, f'v{n}.png'), qc=QC.score(lib, reel, sh, Image.open(os.path.join(folder, f'v{n}.png')))) for n in existing_variants(folder)], sh["name"])
+        passing = sorted([r for r in results if r["qc"]["pass"]], key=lambda r: -r["qc"]["score"])
+        if sh["gate"] in AUTO_GATES and passing:
+            shutil.copy(passing[0]["path"], os.path.join(sheets, sh["name"])); log(event="approve", sheet=sh["name"], variant=passing[0]["n"], by="auto")
+            print(f"- {sh['name']}: aprobada automáticamente v{passing[0]['n']}; revisar {cpath}")
+        else:
+            print(f"- {sh['name']}: esperando elección: {cpath}")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ import prmanifest as M
 import gen_prompts as GP
 import qc as QC
 
-PREFERRED = ["gemini-3-pro-image-preview", "gemini-3.1-flash-image-preview", "gemini-2.5-flash-image", "gemini-2.5-flash-image-preview"]
+PREFERRED = ["gemini-3-pro-image", "gemini-3-pro-image-preview", "gemini-3.1-flash-image-preview", "gemini-2.5-flash-image", "gemini-2.5-flash-image-preview"]
 AUTO_GATES = {5}
 _KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or ""
 
@@ -79,9 +79,9 @@ def load_ref(p):
 
 # ------------------------------------------------------------------ Gemini
 def client():
-    if not _KEY:
-        sys.exit("GEMINI_API_KEY no está en el entorno. Cargala en la configuración del entorno y abrí una sesión nueva.")
     from google import genai
+    if not _KEY:  # network secret: the egress proxy injects x-goog-api-key, the SDK only needs a placeholder
+        os.environ["GEMINI_API_KEY"] = "proxy-injected"
     return genai.Client()
 
 
@@ -122,6 +122,9 @@ def generate(cl, model, req, refs, extra, size, retries, log):
             return img, redact(" ".join(text))[:400], contents[0]
         except errors.APIError as e:
             code = getattr(e, "code", None)
+            if code == 429 and "limit: 0" in str(e):
+                raise RuntimeError("cuota 0 para este modelo: la clave no tiene generación de imágenes habilitada (plan gratuito); "
+                                   "activar facturación en el proyecto de Google AI Studio")
             if code in (429, 500, 502, 503, 504) and attempt < retries:
                 log(event="retry", model=model, sheet=req["sheet"], code=code, wait_s=wait)
                 print(f"  límite o error {code}: espero {wait} s"); time.sleep(wait); wait *= 2; continue

@@ -38,6 +38,8 @@ Cuando hay un límite de uso, conviene pedir primero los P0 y empezar por los mo
 
 - **Clave**: guardarla como variable de entorno `GEMINI_API_KEY` en la configuración del entorno, nunca en el chat ni en un archivo del repo. El SDK la lee sola y el script no la imprime ni la escribe: todo mensaje pasa por un filtro que la reemplaza por `***`.
 - **Red**: tiene que permitir `generativelanguage.googleapis.com`.
+- **Clave como secreto de red** (alternativa a la variable): en la configuración del entorno, un secreto para `generativelanguage.googleapis.com` con el encabezado `x-goog-api-key`, sin prefijo. El proxy agrega la clave y los scripts usan un valor de relleno, así que la clave no queda nunca a la vista de la sesión.
+- **Facturación**: en el plan gratuito, los modelos de imagen tienen cuota 0 (`limit: 0`). Hay que activar la facturación en el proyecto de Google AI Studio. Con cuota 0 el script corta sin reintentar.
 - **SDK**: `pip install google-genai`.
 - **Verificar sin gastar**: `python3 scripts/gemini_check.py` muestra el largo de la clave, si la API responde y qué modelos de imagen hay.
 - **Repo**: ignorar `.env`, `*.key`, `*.pem` y archivos de credenciales, y también `biblioteca/candidates/` (las variantes no aprobadas).

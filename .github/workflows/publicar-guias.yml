@@ -1,0 +1,50 @@
+# Publica las guías programadas: cada día arma /guias/ con las que tienen fecha `publicada`
+# igual o anterior a hoy (hora de Montevideo), y si algo cambió lo sube a main y pide a
+# GitHub Pages que vuelva a publicar el sitio.
+name: Publicar guías programadas
+
+on:
+  schedule:
+    - cron: "17 9 * * *"     # todos los días a las 06:17 de Montevideo (09:17 UTC)
+  workflow_dispatch: {}      # botón "Run workflow" para publicar a mano
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: publicar-guias
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Armar las guías de hoy
+        run: python3 -I fuente/tools/guias.py
+      - name: Subir si hay una guía nueva
+        id: subir
+        run: |
+          rm -rf fuente/tools/__pycache__
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "Nada nuevo para publicar hoy."
+            echo "cambios=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "Creaciones del Mago (publicación automática)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Guías: publicación programada del $(TZ=America/Montevideo date +%F)"
+          git push origin HEAD:main
+          echo "cambios=si" >> "$GITHUB_OUTPUT"
+      - name: Pedir a GitHub Pages que publique
+        if: steps.subir.outputs.cambios == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages se actualiza solo con el push."

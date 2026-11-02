@@ -58,12 +58,24 @@ def parse(path):
     meta["body"] = m.group(2)
     return meta
 
+PUBLISHED = None   # slugs live today; set in main()
+
+def hoy():
+    """Today in Montevideo (YYYY-MM-DD). GUIAS_HOY overrides it, to preview a future date."""
+    if os.environ.get("GUIAS_HOY"): return os.environ["GUIAS_HOY"]
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    return datetime.now(ZoneInfo("America/Montevideo")).date().isoformat()
+
 def inline(t):
     t = e(t, quote=False)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     def link(m):
         href = m.group(2)
         ext = href.startswith("http") and not href.startswith(SITE)
+        mg = re.match(r"^/guias/([^/#]+)/", href)
+        if mg and PUBLISHED is not None and mg.group(1) not in PUBLISHED:
+            return m.group(1)   # scheduled guide: plain text until it goes live
         return f'<a href="{e(href)}"' + (' rel="noopener" target="_blank"' if ext else '') + f'>{m.group(1)}</a>'
     return re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, t)
 
@@ -344,7 +356,14 @@ def write_llms(guides):
 def main():
     files = sorted(f for f in os.listdir(SRC_DIR) if f.endswith(".md") and f[0].isdigit())
     guides = [parse(os.path.join(SRC_DIR, f)) for f in files]
-    guides = [g for g in guides if g.get("estado", "publicada") == "publicada"]
+    today = hoy()
+    pending = [g for g in guides if g.get("estado", "publicada") == "publicada" and g["publicada"] > today]
+    guides = [g for g in guides if g.get("estado", "publicada") == "publicada" and g["publicada"] <= today]
+    guides.sort(key=lambda g: g["publicada"])   # oldest first, as before
+    global PUBLISHED
+    PUBLISHED = {g["slug"] for g in guides}
+    if pending:
+        print("programadas:", ", ".join(f"{g['publicada']} {g['slug']}" for g in sorted(pending, key=lambda g: g["publicada"])))
     if os.path.isdir(OUT_DIR):
         for d in os.listdir(OUT_DIR):
             full = os.path.join(OUT_DIR, d)

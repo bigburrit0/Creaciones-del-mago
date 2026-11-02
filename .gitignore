@@ -5,3 +5,16 @@ videos/*/placeholder-sheets/
 videos/*/hf/assets/
 videos/*/hf/.hyperframes/
 videos/*/hf/node_modules/
+# credentials: never commit (GEMINI_API_KEY lives only in the environment settings)
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+*credentials*.json
+*secret*
+client_secret*.json
+service-account*.json
+# pixel-reel: image-model candidates (approved sheets are copied to videos/biblioteca/sheets/)
+videos/biblioteca/candidates/

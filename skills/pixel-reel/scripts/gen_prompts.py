@@ -54,8 +54,19 @@ def cells(lst, n=4):
 
 
 def block(sh, title, attach, body):
-    att = "\n".join(f"- `{a}`" for a in attach) or "- (ninguno)"
-    return f"### {title}\n\nArchivo: `{sh['name']}`\n\nAdjuntar:\n{att}\n\n```\n{body}\n```\n"
+    """one request: what to send (body + attachments) for one sheet; formatted to Markdown by fmt()"""
+    return {"sheet": sh["name"], "title": title, "attach": attach, "body": body,
+            "aspect": "9:16" if sh["fmt"] == "plate" else "1:1"}
+
+
+def fmt(req):
+    att = "\n".join(f"- `{a}`" for a in req["attach"]) or "- (ninguno)"
+    return f"### {req['title']}\n\nArchivo: `{req['sheet']}`\n\nAdjuntar:\n{att}\n\n```\n{req['body']}\n```\n"
+
+
+def requests(lib, reel, sheets):
+    """public API for other scripts: [(sheet, request)] in plan order"""
+    return build(lib, reel, sheets)
 
 
 def build(lib, reel, sheets):
@@ -145,9 +156,9 @@ def main():
           "Pedir en este orden. Cada imagen aprobada se guarda con el nombre indicado en la carpeta de hojas y se adjunta en los prompts siguientes.",
           "", "## Gate 1 · Paleta", "", "`palette.png` ya está generada. No hace falta pedirla.", ""]
     gate = None
-    for sh, txt in build(lib, reel, sheets):
+    for sh, req in build(lib, reel, sheets):
         if sh["gate"] != gate: gate = sh["gate"]; md += [f"## {GATES[gate]}", ""]
-        md.append(txt)
+        md.append(fmt(req))
     open(os.path.join(a.out, "PROMPTS.md"), "w").write("\n".join(md))
     if not reel: write_catalog(lib, os.path.join(a.out, "CATALOGO.md"))
     print(f"{len(sheets)} prompts -> {os.path.join(a.out, 'PROMPTS.md')}")

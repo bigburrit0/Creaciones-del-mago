@@ -9,7 +9,7 @@ Workflow para hacer reels de pixel art **a partir de piezas** (fondo vacío + ho
 
 La regla de oro: **se diseña todo antes de generar** (guion, beats, posiciones, cada animación cuadro por cuadro, cada objeto con sus estados, efectos, audio) en un manifiesto. Las imágenes se piden en un formato fijo pensado para cortarse solo, y el video se arma con un runtime de animación por pasos.
 
-Requiere: Python 3 con numpy y Pillow; Node con `npx hyperframes` (y su skill `/hyperframes` para el contrato de render); un modelo de imagen que acepte imágenes de referencia (Gemini funciona bien).
+Requiere: Python 3 con numpy y Pillow; Node con `npx hyperframes` (y su skill `/hyperframes` para el contrato de render); un modelo de imagen que acepte imágenes de referencia. Para generar las hojas automáticamente con Gemini: `pip install google-genai`, la clave en la variable de entorno `GEMINI_API_KEY` y salida de red a `generativelanguage.googleapis.com`.
 
 ## Estructura de un proyecto
 
@@ -40,6 +40,14 @@ Trabajar en este orden. Cada etapa tiene una salida concreta y, cuando correspon
 
 **2. Prompts.** `python3 scripts/gen_prompts.py biblioteca/sprites.json <reel> --reel <reel>/reel.json [--only-missing biblioteca/sheets]`. Escribe `PROMPTS.md` en orden de aprobación (paleta → model sheets → imagen maestra → fondo vacío → animaciones, objetos, efectos e ítems) y `palette.png`. Claude no llama al modelo de imagen: la persona pega cada prompt con sus adjuntos y guarda lo aprobado en `biblioteca/sheets/` con el nombre indicado. Cómo pedir y qué hacer cuando el modelo falla: `references/gemini.md`.
 
+**2b. Generación automática con Gemini (opcional).** Si `GEMINI_API_KEY` está en el entorno, `scripts/gemini_generate.py` reemplaza el copiar y pegar. Usa el mismo plan y los mismos prompts y adjuntos de `PROMPTS.md`, pide solo lo que falta en `biblioteca/sheets/` y respeta el orden de los gates. Por cada hoja:
+- pide varias variantes y las guarda en `biblioteca/candidates/<hoja>/`;
+- las puntúa con el control de calidad (`scripts/qc.py`): celdas vacías o de más, sprite que toca el borde, altura, ancla, paleta, magenta plano, nitidez del píxel;
+- arma `contact.png`;
+- deja todo registrado en `biblioteca/generation_log.jsonl`, sin la clave.
+
+Los **gates 2 a 4 nunca se aprueban solos**: mostrarle `contact.png` a la persona y aprobar con `--approve hoja.png=N`. En el gate 5 se aprueba sola la mejor variante que pase el control; si ninguna pasa, se vuelve a pedir una vez con las correcciones de `references/gemini.md`. Siempre conviene correr primero `--dry-run` y fijar un tope de gasto con `--max-images`. Para verificar la clave sin gastar: `scripts/gemini_check.py`, que muestra solo el largo de la clave y los modelos de imagen disponibles. Detalles en `references/gemini.md`.
+
 **3. Animatic, sin esperar a las imágenes.** `python3 scripts/placeholders.py biblioteca/sprites.json <reel>/placeholder-sheets --reel <reel>/reel.json` genera hojas provisorias con los mismos nombres y formato, así que todo lo que sigue funciona igual. Con eso se arma, anima y renderiza el reel completo: se fijan el timing, la puesta y el audio mientras se generan las imágenes reales.
 
 **4. Ensamblado.** `python3 scripts/assemble.py biblioteca/sprites.json biblioteca/sheets:<reel>/placeholder-sheets <reel>/reel.json <reel>/hf`. Hace tres cosas:
@@ -69,6 +77,9 @@ Cuando llegan hojas reales nuevas, se vuelve a correr la etapa 4 y se renderiza.
 |---|---|
 | `scripts/prmanifest.py` | Lee el manifiesto y arma el plan de hojas con nombres estables (lo usan todos) |
 | `scripts/gen_prompts.py` | Prompts en orden de aprobación, catálogo legible y `palette.png` |
+| `scripts/gemini_generate.py` | Genera las hojas que faltan con Gemini: variantes, control de calidad, hoja de contacto, aprobación y log |
+| `scripts/gemini_check.py` | Verifica la clave (solo su largo) y la conexión, y lista los modelos de imagen, sin gastar |
+| `scripts/qc.py` | Control de calidad de una hoja (lo usa el generador; sirve también para hojas hechas a mano) |
 | `scripts/placeholders.py` | Hojas provisorias en el formato exacto (`--noisy` imita los defectos del modelo, para probar) |
 | `scripts/slice_sheets.py` | Hoja → tiras por animación + `atlas.json`/`atlas.js` + revisión + reporte |
 | `scripts/chiptune.py` | Cues → `sfx.wav`, `music.wav`, `ambience.wav` (`--list` muestra los 30 efectos) |

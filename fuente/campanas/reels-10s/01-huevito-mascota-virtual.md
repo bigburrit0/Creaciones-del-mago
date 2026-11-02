@@ -84,6 +84,9 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 
 ## Después: guion, voz, texto y edición
 
+> **Ya está editado.** El proyecto de edición, con los tiempos reales del video de Gemini, la voz de IA y el
+> comando para armarlo, está en `01-huevito/EDICION.md`.
+
 ### Guion (para la edición)
 
 | Tiempo | Qué pasa | Texto en pantalla (se pone en la edición) | Voz en off |

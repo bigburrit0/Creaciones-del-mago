@@ -1,0 +1,47 @@
+{
+  "_nota": "Fuente de verdad de la edición del Reel 1 «Huevito». Tiempos en segundos del video final (24 fps). Los tiempos salen de mirar el video de Gemini cuadro a cuadro (ver EDICION.md).",
+  "fps": 24,
+  "duracion": 11.5,
+  "base": {
+    "archivo": "base/huevito-gemini.mp4",
+    "corte": 9.667,
+    "_corte": "En 9,75 s el video vuelve a mostrar el hámster en la pantalla. Se corta antes, con el huevo nuevo en la pantalla (empalma con el primer cuadro), y ese cuadro queda quieto hasta el final."
+  },
+  "colores": {"crema": "#F3E9D2", "indigo": "#1F1A3D", "indigo2": "#2A2350", "oro": "#F2A93B"},
+  "textos": [
+    {"id": "nacio", "desde": 1.30, "hasta": 4.00, "lineas": [
+      {"texto": "NACIÓ TU MASCOTA", "k": 8, "y": 330}
+    ]},
+    {"id": "nocome", "desde": 5.80, "hasta": 8.25, "lineas": [
+      {"texto": "NO COME.", "k": 9, "y": 296, "desde": 5.80},
+      {"texto": "NO SE MUERE.", "k": 9, "y": 404, "desde": 6.25},
+      {"texto": "HACE CLIC.", "k": 9, "y": 512, "desde": 6.88}
+    ]}
+  ],
+  "cierre": {
+    "desde": 8.25,
+    "glifo": {"archivo": "../../../../assets/px/glifo-oro.png", "escala": 2, "y": 262},
+    "caja": {"y": 400, "padding_x": 32, "borde": 6},
+    "lineas": [
+      {"texto": "Hámster en el huevo", "k": 7, "color": "crema", "desde": 8.45},
+      {"texto": "clicker impreso en 3D", "k": 6, "color": "crema", "desde": 8.88},
+      {"separador": true, "desde": 9.30},
+      {"texto": "Para el amigo invisible", "k": 6, "color": "crema", "desde": 9.35},
+      {"texto": "WhatsApp 092 104 419", "k": 7, "color": "oro", "desde": 9.85}
+    ]
+  },
+  "tipeo_cps": {"titulos": 24, "cierre": 48},
+  "voz": {
+    "texto": "Esta no come, no se muere y hace clic. Un clicker para el amigo invisible. Escribime y te paso el precio.",
+    "toma": "voz/toma-gemini-techagent-10.wav",
+    "frases": [
+      {"texto": "Esta no come,", "en": 0.30},
+      {"texto": "no se muere", "en": 3.20},
+      {"texto": "y hace clic.", "en": 6.30},
+      {"texto": "Un clicker para el amigo invisible.", "en": 7.60},
+      {"texto": "Escribime y te paso el precio.", "en": 9.30}
+    ],
+    "bajar_fondo_db": -6
+  },
+  "mezcla": {"video": 1.0, "musica": 0.16, "efectos": 0.30, "ambiente": 0.10, "voz": 1.0}
+}

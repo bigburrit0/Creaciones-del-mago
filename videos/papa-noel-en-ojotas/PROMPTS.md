@@ -1,15 +1,15 @@
-# Prompts para Gemini
+# Prompts para el modelo de imagen
 
-Generado por `videos/biblioteca/tools/gen_prompts.py`. No editar a mano: cambiar el JSON y regenerar.
-Orden = orden de aprobación (ver `videos/biblioteca/ESTILO.md`, sección 8). Cada imagen aprobada se guarda con el nombre indicado y se adjunta en los prompts siguientes.
+Generado por `pixel-reel/scripts/gen_prompts.py`. No editar a mano: cambiar el manifiesto y regenerar.
+Pedir en este orden. Cada imagen aprobada se guarda con el nombre indicado en la carpeta de hojas y se adjunta en los prompts siguientes.
 
 ## Gate 1 · Paleta
 
-`palette.png` ya está generada (32 colores). No hace falta pedirla.
+`palette.png` ya está generada. No hace falta pedirla.
 
-## Gate 2 · Model sheets de los personajes
+## Gate 2 · Model sheets
 
-### El Mago: model sheet (gate 2)
+### El Mago · model sheet
 
 Archivo: `mago_model.png`
 
@@ -31,7 +31,7 @@ Cell 3: back view (N), standing
 Cell 4: front view (S) holding a mate gourd with a metal straw at chest height with his right hand
 ```
 
-### Papá Noel de verano: model sheet (gate 2)
+### Papá Noel de verano · model sheet
 
 Archivo: `papa_noel_model.png`
 
@@ -54,9 +54,9 @@ Cell 3: back view (N), standing
 Cell 4: front view (S) sitting on an invisible stool, hands on the knees
 ```
 
-## Gate 3 y 4 · Escenario
+## Gate 3 · Imagen maestra del escenario
 
-### Taller · imagen maestra (gate 3)
+### El taller del Mago · imagen maestra
 
 Archivo: `plate_taller_master.png`
 
@@ -70,10 +70,12 @@ STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three
 FORMAT: 9:16 vertical PNG, the whole scene is 270x480 art pixels (each art pixel a 4x4 block).
 
 SCENE: the cosy one-room workshop of a wizard who makes 3D printed things, seen from a top-down three-quarter view like a 1990s farming RPG interior. Back wall: warm honey-coloured wooden planks; in the centre a square window with a summer blue sky, a bright sun and the green leafy branch of a plane tree; on the left half of the back wall two wooden shelves with small colourful 3D printed objects and four spools of filament (red, blue, gold, green). Against the back wall on the left: a sturdy wooden workbench (no printer on it, the printer is a separate sprite). Right side wall: a wooden door (closed) with a small brass knob, the door is a separate sprite so leave a door-shaped dark frame. Floor: warm wooden boards running left-right, a round woven rug in the centre, a small empty patch near the door for a stool. Bottom edge: a strip of terracotta and cream checkered tiles. Bright summer daylight coming from the window (upper-left light). Nothing on the floor, no characters, no animals, no furniture other than the shelves and the workbench. Christmas decorations (they will be separate sprites, so just suggest them lightly): a garland with lights above the window, a tiny Christmas tree in the back-right corner, a wreath on the door.
-For scale only: El Mago (attached model sheet) stands at the workbench, 96 art pixels tall.
+For scale only: El Mago (attached model sheet) stands in the scene, 96 art pixels tall.
 ```
 
-### Taller · fondo vacío (gate 4)
+## Gate 4 · Fondo vacío
+
+### El taller del Mago · fondo vacío
 
 Archivo: `plate_taller.png`
 
@@ -81,10 +83,10 @@ Adjuntar:
 - `plate_taller_master.png`
 
 ```
-Same image, same camera, same pixel grid, same palette and light. Remove the wizard and any seasonal decoration. Keep only the empty room exactly as it is. Fill the hidden areas naturally. 9:16 PNG.
+Same image, same camera, same pixel grid, same palette and light. Remove every character and any seasonal decoration. Keep only the empty set exactly as it is. Fill the hidden areas naturally. 9:16 PNG.
 ```
 
-## Gate 5 · Animaciones de los personajes
+## Gate 5 · Animaciones, objetos, efectos e ítems
 
 ### El Mago · walk_E · 6 cuadros · loop · P0 (hoja 1/2)
 
@@ -204,7 +206,7 @@ Archivo: `mago_sip_mate_S_1.png`
 Adjuntar:
 - `palette.png`
 - `mago_model.png`
-- `mate.png (si ya existe)`
+- `mate: el sprite del objeto si ya existe`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
@@ -228,7 +230,7 @@ Adjuntar:
 - `palette.png`
 - `mago_model.png`
 - `mago_sip_mate_S_1.png`
-- `mate.png (si ya existe)`
+- `mate: el sprite del objeto si ya existe`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
@@ -259,7 +261,7 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 384 image pixels.
 
 SUBJECT: El Mago exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: surprised_S (something unexpected happens), facing the camera in a front three-quarter view, frames 1-4 of 4, played once.
+ACTION: surprised_S (something unexpected happens), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
 Cell 1: neutral
 Cell 2: anticipation: body squashed down, eyes closing
 Cell 3: jolt: body stretched up, eyes wide, mouth open, both hands up at shoulder height, hat lifting off the head
@@ -348,7 +350,7 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 384 image pixels.
 
 SUBJECT: El Mago exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: idea_S (eureka moment (add fx_idea above the head)), facing the camera in a front three-quarter view, frames 1-4 of 4, played once.
+ACTION: idea_S (eureka moment (add fx_idea above the head)), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
 Cell 1: thinking pose, hand on beard
 Cell 2: eyes snap wide open, back straightens
 Cell 3: right index finger raised high, big smile
@@ -392,7 +394,7 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 384 image pixels.
 
 SUBJECT: El Mago exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: item_get_S (RPG 'item get' reveal; the item sprite is placed above the hands), facing the camera in a front three-quarter view, frames 1-4 of 4, played once.
+ACTION: item_get_S (RPG 'item get' reveal; the item sprite is placed above the hands), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
 Cell 1: facing the camera, both hands at the chest
 Cell 2: lifting both hands, body stretching
 Cell 3: both hands holding an object high above the head, triumphant smile (the object is drawn separately)
@@ -450,7 +452,7 @@ Archivo: `mago_offer_mate_E_1.png`
 Adjuntar:
 - `palette.png`
 - `mago_model.png`
-- `mate.png (si ya existe)`
+- `mate: el sprite del objeto si ya existe`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
@@ -459,7 +461,7 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 384 image pixels.
 
 SUBJECT: El Mago exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: offer_mate_E (offering mate to a guest), seen from the side, facing RIGHT, frames 1-3 of 3, played once.
+ACTION: offer_mate_E (offering mate to a guest), seen from the side, facing RIGHT, frames 1-3 of 3, played once, the last frame is held.
 Cell 1: side view, holding the mate gourd at the chest with the right hand
 Cell 2: extending the arm forward
 Cell 3: arm fully extended offering the gourd to the right, friendly smile
@@ -562,7 +564,7 @@ Archivo: `papa_noel_sip_mate_S_1.png`
 Adjuntar:
 - `palette.png`
 - `papa_noel_model.png`
-- `mate.png (si ya existe)`
+- `mate: el sprite del objeto si ya existe`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
@@ -593,7 +595,7 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 368 image pixels.
 
 SUBJECT: Papá Noel de verano exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: refreshed_S (relief after the mate), facing the camera in a front three-quarter view, frames 1-4 of 4, played once.
+ACTION: refreshed_S (relief after the mate), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
 Cell 1: sitting, long sigh of relief, shoulders dropping
 Cell 2: big smile, eyes closed
 Cell 3: sitting upright, happy, sunglasses back on, giving the mate back with an extended right arm
@@ -637,11 +639,33 @@ SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole ima
 Standing height: 368 image pixels.
 
 SUBJECT: Papá Noel de verano exactly as in the attached model sheet (same face, colours, proportions and size).
-ACTION: sad_S (no gifts to deliver), facing the camera in a front three-quarter view, frames 1-4 of 4, played once.
+ACTION: sad_S (no gifts to deliver), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
 Cell 1: sitting, empty sack on his lap
 Cell 2: shoulders dropping
 Cell 3: head down, hat drooping, mouth turned down
 Cell 4: same, one tear (hold)
+```
+
+### Papá Noel de verano · startled_S · 4 cuadros · hold · P0
+
+Archivo: `papa_noel_startled_S_1.png`
+
+Adjuntar:
+- `palette.png`
+- `papa_noel_model.png`
+
+```
+STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
+
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells; frames read left-to-right then top-to-bottom. Same subject, same size and same proportions in every cell; only the pose or state changes. The subject's base (feet) sits on the same baseline in every cell, 16 image pixels above the bottom of the cell, horizontally centred.
+Standing height: 368 image pixels.
+
+SUBJECT: Papá Noel de verano exactly as in the attached model sheet (same face, colours, proportions and size).
+ACTION: startled_S (jumps scared on the stool when he sees the lit TNT), facing the camera in a front three-quarter view, frames 1-4 of 4, played once, the last frame is held.
+Cell 1: sitting, watching happily
+Cell 2: jolt: body stretched up off the stool, eyes huge, beard bristling, hands up
+Cell 3: sitting again, leaning back, hands covering the mouth, eyes wide
+Cell 4: same pose, shaking (hold)
 ```
 
 ### Papá Noel de verano · joy_jump_S · 6 cuadros · once · P0 (hoja 1/2)
@@ -778,9 +802,7 @@ Cell 3: hand raised
 Cell 4: hand tilted in
 ```
 
-## Gate 5 · Objetos y efectos
-
-### Objeto · printer · 4 estados · P0
+### Objeto · printer · 4 estados
 
 Archivo: `printer.png`
 
@@ -793,7 +815,7 @@ STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three
 
 SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells; frames read left-to-right then top-to-bottom. Same subject, same size and same proportions in every cell; only the pose or state changes. The subject's base (feet) sits on the same baseline in every cell, 16 image pixels above the bottom of the cell, horizontally centred.
 
-SUBJECT: printer for the wizard's workshop (the shop's printer; frames 2-3 loop while printing). about 52x44 art px, base anchored at the bottom centre of the cell
+SUBJECT: printer for El taller del Mago (the shop's printer; frames 2-3 loop while printing). about 52x44 art px, base anchored at the bottom centre of the cell
 STATES:
 Cell 1: idle: compact desktop 3D printer, open frame with one upright gantry on the left side and a moving bed, light grey and charcoal, small screen on the front, a gold filament spool on top, no logo
 Cell 2: printing: the nozzle carriage at the left, the bed pushed back, a tiny orange glow at the nozzle
@@ -801,7 +823,7 @@ Cell 3: printing: the nozzle carriage at the right, the bed pulled forward, tiny
 Cell 4: done: nozzle parked, a small green light on the screen, a soft gold sparkle above the empty bed
 ```
 
-### Objeto · door_R · 3 estados · P0
+### Objeto · door_R · 3 estados
 
 Archivo: `door_R.png`
 
@@ -814,7 +836,7 @@ STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three
 
 SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells; frames read left-to-right then top-to-bottom. Same subject, same size and same proportions in every cell; only the pose or state changes. The subject's base (feet) sits on the same baseline in every cell, 16 image pixels above the bottom of the cell, horizontally centred.
 
-SUBJECT: door R for the wizard's workshop (people come in and out). about 34x80 art px
+SUBJECT: door R for El taller del Mago (people come in and out). about 34x80 art px
 STATES:
 Cell 1: closed wooden door on a right-hand side wall seen in three-quarter view, brass knob
 Cell 2: door ajar, a thin slice of bright sunlight
@@ -822,7 +844,7 @@ Cell 3: door wide open, swung inward, a rectangle of bright summer sunlight on t
 Cell 4: leave empty (plain magenta)
 ```
 
-### Objeto · sack · 4 estados · P0
+### Objeto · sack · 4 estados
 
 Archivo: `sack.png`
 
@@ -835,7 +857,7 @@ STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three
 
 SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells; frames read left-to-right then top-to-bottom. Same subject, same size and same proportions in every cell; only the pose or state changes. The subject's base (feet) sits on the same baseline in every cell, 16 image pixels above the bottom of the cell, horizontally centred.
 
-SUBJECT: sack for the wizard's workshop (Santa's sack filling up). about 44x48 art px when full
+SUBJECT: sack for El taller del Mago (Santa's sack filling up). about 44x48 art px when full
 STATES:
 Cell 1: empty red cloth sack lying flat and wrinkled on the floor
 Cell 2: the same sack one third full, a few round lumps
@@ -843,7 +865,7 @@ Cell 3: the same sack two thirds full, standing up
 Cell 4: the same sack completely full and round, tied with a gold cord, small sparkles
 ```
 
-### Objeto · garland · 2 estados · P0
+### Objeto · garland · 2 estados
 
 Archivo: `garland.png`
 
@@ -856,7 +878,7 @@ STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three
 
 SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells; frames read left-to-right then top-to-bottom. Same subject, same size and same proportions in every cell; only the pose or state changes. The subject's base (feet) sits on the same baseline in every cell, 16 image pixels above the bottom of the cell, horizontally centred.
 
-SUBJECT: garland for the wizard's workshop (above the window, blink at 2 fps). 
+SUBJECT: garland for El taller del Mago (above the window, blink at 2 fps). 
 STATES:
 Cell 1: a short garland of green leaves with red bows and warm string lights, lights off, drawn horizontally to hang above a window
 Cell 2: same garland, lights on
@@ -864,9 +886,9 @@ Cell 3: leave empty (plain magenta)
 Cell 4: leave empty (plain magenta)
 ```
 
-### Objeto · stool, fan, mate, xmas_tree
+### Objetos · stool, fan, mate, xmas_tree
 
-Archivo: `objects_1.png`
+Archivo: `objects_taller_1.png`
 
 Adjuntar:
 - `palette.png`
@@ -875,7 +897,7 @@ Adjuntar:
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell and stays the same size across its row; each subject fits inside 128x128 image pixels.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its row and fits inside 128x128 image pixels.
 
 ROWS:
 Row 1 (stool, seat for guests (separate so a sitting character can overlap it)): frame 1: simple round wooden stool with three legs
@@ -884,9 +906,9 @@ Row 3 (mate, the wizard's mate when it is not in his hand): frame 1: a mate gour
 Row 4 (xmas_tree, corner decoration, blink at 2 fps): frame 1: tiny potted Christmas tree in a terracotta pot, red and gold baubles, lights off | frame 2: same tree, lights on (warm yellow dots)
 ```
 
-### Objeto · wreath
+### Objetos · wreath
 
-Archivo: `objects_2.png`
+Archivo: `objects_taller_2.png`
 
 Adjuntar:
 - `palette.png`
@@ -895,7 +917,7 @@ Adjuntar:
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell and stays the same size across its row; each subject fits inside 128x128 image pixels.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its row and fits inside 128x128 image pixels.
 
 ROWS:
 Row 1 (wreath, on the door): frame 1: small Christmas wreath with a red bow, to hang on a door
@@ -904,18 +926,17 @@ Row 3: leave empty
 Row 4: leave empty
 ```
 
-### FX · fx_sparkle, fx_puff, fx_confetti, fx_hearts
+### Efectos · fx_sparkle, fx_puff, fx_confetti, fx_hearts
 
 Archivo: `fx_1.png`
 
 Adjuntar:
 - `palette.png`
-- `plate_taller_master.png`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell and stays the same size across its row; each subject fits inside 128x128 image pixels.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its row and fits inside 128x128 image pixels.
 
 ROWS:
 Row 1 (fx_sparkle, anything appearing or shining): frame 1: tiny 4-point star, pale yellow #FFF3B0 | frame 2: bigger 4-point star with gold edge #F2B640 | frame 3: biggest star with 4 small dots around | frame 4: fading: small dots only
@@ -924,27 +945,43 @@ Row 3 (fx_confetti, celebration): frame 1: burst of small red, gold and green sq
 Row 4 (fx_hearts, love, gift received): frame 1: one small red pixel heart | frame 2: heart rising, a second smaller heart | frame 3: two hearts higher | frame 4: hearts fading
 ```
 
-### FX · fx_sweat, fx_idea, fx_moth
+### Efectos · fx_sweat, fx_idea, fx_steam, fx_swirl
 
 Archivo: `fx_2.png`
 
 Adjuntar:
 - `palette.png`
-- `plate_taller_master.png`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell and stays the same size across its row; each subject fits inside 128x128 image pixels.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its row and fits inside 128x128 image pixels.
 
 ROWS:
 Row 1 (fx_sweat, heat, nerves): frame 1: one light blue sweat drop | frame 2: two drops flying outward | frame 3: three drops | frame 4: drops fading
 Row 2 (fx_idea, eureka (no text)): frame 1: small yellow glow | frame 2: a glowing yellow light bulb with short rays | frame 3: bulb with long rays | frame 4: bulb with short rays
-Row 3 (fx_moth, empty sack / empty wallet gag): frame 1: small grey moth, wings up | frame 2: small grey moth, wings down
-Row 4: leave empty
+Row 3 (fx_steam, anger, heat): frame 1: small grey puff | frame 2: two puffs rising | frame 3: puffs bigger | frame 4: puffs fading
+Row 4 (fx_swirl, confusion (instead of a question mark)): frame 1: small dark spiral | frame 2: spiral rotated | frame 3: spiral rotated again | frame 4: spiral rotated again
 ```
 
-## Gate 5 · Ítems del catálogo
+### Efectos · fx_moth, fx_magic_ring, fx_notes, fx_dust_motes
+
+Archivo: `fx_3.png`
+
+Adjuntar:
+- `palette.png`
+
+```
+STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
+
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 4x4 grid of equal 256x256 cells. Each ROW is one animation of up to 4 frames, read left to right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its row and fits inside 128x128 image pixels.
+
+ROWS:
+Row 1 (fx_moth, empty sack / empty wallet gag): frame 1: small grey moth, wings up | frame 2: small grey moth, wings down
+Row 2 (fx_magic_ring, spells): frame 1: thin gold ring of sparkles, small | frame 2: ring bigger | frame 3: ring biggest, sparkles separating | frame 4: only sparkles
+Row 3 (fx_notes, happy, music): frame 1: one small musical note | frame 2: two notes rising | frame 3: notes higher | frame 4: notes fading
+Row 4 (fx_dust_motes, ambient sunbeam): frame 1: three tiny pale dots | frame 2: dots shifted
+```
 
 ### Ítems · cafe, banana, suculenta, hamster
 
@@ -960,16 +997,16 @@ Adjuntar:
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels (40x40 art pixels), centred, resting on an invisible baseline 128 image pixels above the bottom of the cell. All four objects drawn at the same pixel scale.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels, centred and resting on an invisible baseline 176 image pixels above the bottom of its cell. All objects drawn at the same pixel scale.
 
-SUBJECT: 3D printed products from a small shop, as RPG inventory items.
+SUBJECT: products of a small shop, as RPG inventory items.
 Cell 1: takeaway coffee cup fidget clicker: white cup, black lid, brown sleeve (draw it from the attached photo of 'cafe', simplified to pixel art)
 Cell 2: half-peeled yellow banana fidget clicker (draw it from the attached photo of 'banana', simplified to pixel art)
 Cell 3: tiny green succulent in a small pot, fidget clicker (draw it from the attached photo of 'suculenta', simplified to pixel art)
 Cell 4: little hamster peeking out of a cracked egg shell, fidget clicker (draw it from the attached photo of 'hamster', simplified to pixel art)
 ```
 
-### Ítems · calavera, garaje, plegable, hoja
+### Ítems · calavera, garaje, panal, plegable
 
 Archivo: `items_2.png`
 
@@ -977,17 +1014,86 @@ Adjuntar:
 - `palette.png`
 - `assets/p/calavera.webp`
 - `assets/p/garaje.webp`
+- `assets/p/panal.webp`
 - `assets/p/plegable.webp`
+
+```
+STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
+
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels, centred and resting on an invisible baseline 176 image pixels above the bottom of its cell. All objects drawn at the same pixel scale.
+
+SUBJECT: products of a small shop, as RPG inventory items.
+Cell 1: small white skull keychain with a metal ring (draw it from the attached photo of 'calavera', simplified to pixel art)
+Cell 2: black wall display grid holding six tiny colourful toy cars (2 columns x 3 rows) (draw it from the attached photo of 'garaje', simplified to pixel art)
+Cell 3: black hexagon honeycomb wall display cells with two tiny toy cars (draw it from the attached photo of 'panal', simplified to pixel art)
+Cell 4: wooden-coloured octagonal tube that is a travel chess set, slightly open with chess pieces inside (draw it from the attached photo of 'plegable', simplified to pixel art)
+```
+
+### Ítems · medieval, perros-gatos, domino, hoja
+
+Archivo: `items_3.png`
+
+Adjuntar:
+- `palette.png`
+- `assets/p/medieval.webp`
+- `assets/p/perros-gatos.webp`
+- `assets/p/domino.webp`
 - `assets/p/hoja.webp`
 
 ```
 STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
 
-SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels (40x40 art pixels), centred, resting on an invisible baseline 128 image pixels above the bottom of the cell. All four objects drawn at the same pixel scale.
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels, centred and resting on an invisible baseline 176 image pixels above the bottom of its cell. All objects drawn at the same pixel scale.
 
-SUBJECT: 3D printed products from a small shop, as RPG inventory items.
-Cell 1: small white skull keychain with a metal ring (draw it from the attached photo of 'calavera', simplified to pixel art)
-Cell 2: black wall display grid holding six tiny colourful toy cars (2 columns x 3 rows) (draw it from the attached photo of 'garaje', simplified to pixel art)
-Cell 3: wooden-coloured octagonal tube that is a travel chess set, slightly open with chess pieces inside (draw it from the attached photo of 'plegable', simplified to pixel art)
+SUBJECT: products of a small shop, as RPG inventory items.
+Cell 1: medieval chess knight and castle tower pieces, grey stone colour (draw it from the attached photo of 'medieval', simplified to pixel art)
+Cell 2: two chess pieces: a cat king and a dog king (draw it from the attached photo of 'perros-gatos', simplified to pixel art)
+Cell 3: a small white box with domino tiles stacked beside it (draw it from the attached photo of 'domino', simplified to pixel art)
 Cell 4: white leaf-shaped hanging bird feeder, a curved leaf with veins (draw it from the attached photo of 'hoja', simplified to pixel art)
+```
+
+### Ítems · creeper, tnt, pokebox, dragon
+
+Archivo: `items_5.png`
+
+Adjuntar:
+- `palette.png`
+- `assets/p/creeper.webp`
+- `assets/p/tnt.webp`
+- `assets/p/pokebox.webp`
+- `assets/p/dragon.webp`
+
+```
+STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
+
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels, centred and resting on an invisible baseline 176 image pixels above the bottom of its cell. All objects drawn at the same pixel scale.
+
+SUBJECT: products of a small shop, as RPG inventory items.
+Cell 1: green Creeper-style money box: a green pixel cube head with a dark face, coin slot on top (draw it from the attached photo of 'creeper', simplified to pixel art)
+Cell 2: TNT block: red block with a white band (no letters, just a plain white band) and a fuse on top (draw it from the attached photo of 'tnt', simplified to pixel art)
+Cell 3: card box shaped like a grey retro handheld console with a little screen and buttons (no logo) (draw it from the attached photo of 'pokebox', simplified to pixel art)
+Cell 4: articulated black dragon with purple eyes and big wings, End-dragon style (draw it from the attached photo of 'dragon', simplified to pixel art)
+```
+
+### Ítems · f40, penarol, nacional, repisa
+
+Archivo: `items_6.png`
+
+Adjuntar:
+- `palette.png`
+- `assets/p/f40.webp`
+- `assets/p/penarol.webp`
+- `assets/p/nacional.webp`
+- `assets/p/repisa.webp`
+
+```
+STYLE (must follow exactly): authentic 16-bit SNES-era pixel art, top-down three-quarter view like a 1990s farming RPG. Hard square pixels, every art pixel is a 4x4 block of image pixels. No anti-aliasing, no blur, no gradients, no semi-transparency. Dithering only in backgrounds, never on characters or props. Every sprite has a 1-art-pixel dark outline #150A34. Light comes from the upper-left, shadows fall to the lower-right, 3 tones per material. Use only colours from the attached palette. No text, no letters, no numbers, no logos, no watermark.
+
+SHEET: 1024x1024 PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, no floor, no grid lines, no borders. A 2x2 grid of equal 512x512 cells, one object per cell, each object at most 160x160 image pixels, centred and resting on an invisible baseline 176 image pixels above the bottom of its cell. All objects drawn at the same pixel scale.
+
+SUBJECT: products of a small shop, as RPG inventory items.
+Cell 1: red 1980s Italian sports car model kit, low wedge shape, pop-up headlights (draw it from the attached photo of 'f40', simplified to pixel art)
+Cell 2: football stadium model with yellow and black stands (draw it from the attached photo of 'penarol', simplified to pixel art)
+Cell 3: football stadium model with white, blue and red stands (draw it from the attached photo of 'nacional', simplified to pixel art)
+Cell 4: melted-looking wall shelf that seems to drip (draw it from the attached photo of 'repisa', simplified to pixel art)
 ```

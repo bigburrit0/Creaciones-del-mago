@@ -12,7 +12,7 @@ Tres subagentes trabajaron en paralelo: historia, gancho comercial y biblioteca 
 
 - **Historia**: de 5 conceptos, el recomendado fue *Papá Noel en ojotas*, por el chiste local del verano y porque usa solo dos personajes. Lo llevé al **taller con la impresora**: así el regalo sale de la impresora 3D, que es lo que se vende, y el taller queda como escenario fijo para próximos reels.
 - **Marketing**: el ángulo más fuerte es el **amigo invisible**. Tiene fecha fija, empuja a pedir temprano (por el mínimo de 48 h) y un solo comprador resuelve todo el grupo con clickers. Por eso el primer regalo que sale de la impresora es el combo de clickers.
-- **Fuera del reel**: la alcancía Creeper, el bloque de TNT, la caja tipo Game Boy y el dragón del End. Se reconocen muy bien, pero son de marcas de terceros (Minecraft, Pokémon, Nintendo) y esto es un aviso. Se pueden sumar si lo decidís vos.
+- **Los productos de juegos**: la alcancía Creeper, la caja tipo Game Boy, el dragón y el bloque de TNT son los de mejor silueta según el análisis de marketing. Entran todos, y el TNT es el remate del pico. En los prompts se piden sin logos ni texto: la silueta y los colores alcanzan para reconocerlos.
 
 ## Escenario y posiciones
 
@@ -47,7 +47,10 @@ Taller visto desde arriba a tres cuartos, en la grilla de 270×480 px de arte (�
 | 6,4–6,9 | ¡Idea! | | Lamparita sobre el Mago | Ding de idea |
 | 6,9–7,6 | Vuelve a la mesa y se da vuelta | | | Pasos |
 | 7,6–8,4 | Aprieta el botón | | La impresora imprime (2 cuadros en bucle) | Zumbido de impresora chiptune |
-| **8,4–11,6** pico | 4 veces: la impresora destella, el Mago levanta el regalo "item get" (0,4 s) y lo tira hacia la bolsa (0,25 s) | Mira cómo se llena la bolsa | 1) los 4 clickers juntos (café, banana, suculenta, hámster); 2) garaje de autitos; 3) ajedrez de viaje en tubo; 4) comedero hoja. Cada uno vuela en 4 pasos y la bolsa crece: vacía, 1/3, 2/3, llena | "Item get" ascendente (cada uno un tono más agudo), whoosh, plop en la bolsa |
+| **8,4–9,2** pico | Se da vuelta; levanta los 4 clickers juntos ("item get") y los tira a la bolsa | Mira | Destello en la impresora; los clickers (café, banana, suculenta, hámster) vuelan en 4 pasos; la bolsa pasa a 1/3 | Ding, "item get", whoosh, plop |
+| 9,2–10,0 | "Item get" con la alcancía Creeper, la tira | Sonríe | Destello; Creeper a la bolsa | "Item get" un tono más agudo |
+| 10,0–10,8 | Brazos en alto, maravillado | Sonríe | **Ráfaga**: la impresora escupe 8 productos seguidos directo a la bolsa (caja Game Boy, dragón, Ferrari F40, garaje de autitos, ajedrez de viaje, comedero hoja, estadio de Peñarol, estadio de Nacional); la bolsa pasa a 2/3 | 8 pops ascendentes |
+| 10,8–11,6 | "Item get" con el **bloque de TNT**, la mecha chispea; lo tira | Salta del susto | El TNT cae en la bolsa, que se llena y suelta polvo y confeti | Mecha, "¡uy!", boom ahogado |
 | 11,6–12,8 | Salto de alegría | Salto de alegría | Confeti y corazones | Acorde de victoria |
 | 12,8–13,3 | Reposo | Se carga la bolsa al hombro | | Esfuerzo chiptune |
 | 13,3–14,0 | Saluda | Sale por la puerta saludando; la puerta se cierra | | Ojotas, puerta |
@@ -68,14 +71,14 @@ Con las hojas aprobadas, Claude compone estos 6 cuadros con el fondo y los sprit
 
 ## Lo que hay que pedirle a Gemini
 
-`PROMPTS.md` tiene los **45 prompts** de este reel, en orden de aprobación:
+`PROMPTS.md` tiene los **50 prompts** de este reel, en orden de aprobación:
 
 - **2 model sheets**: El Mago y Papá Noel de verano.
 - **2 imágenes del escenario**: la maestra del taller y el fondo vacío.
-- **28 hojas de animación**: 14 animaciones del Mago (17 hojas) y 11 de Papá Noel (14 hojas). Las de 6 cuadros van en 2 hojas.
+- **32 hojas de animación**: 14 animaciones del Mago (17 hojas) y 12 de Papá Noel (15 hojas). Las de 6 cuadros van en 2 hojas.
 - **6 hojas de objetos y adornos**: impresora, puerta, bolsa, guirnalda, una hoja con banquito, ventilador, mate y arbolito, y otra con la corona.
-- **2 hojas de efectos**: destello, polvo, confeti, corazones, sudor, idea y polilla.
-- **2 hojas de ítems**: clickers, calavera, garaje, ajedrez de viaje y comedero hoja, adjuntando las fotos reales de `assets/p/`.
+- **3 hojas de efectos** con los 12 efectos de la biblioteca (el reel usa 7).
+- **5 hojas de ítems** (de a 4) con los 14 productos del reel y algunos más de la biblioteca, adjuntando las fotos reales de `assets/p/`.
 
 Todo lo que se apruebe queda en la biblioteca: el próximo reel del Mago ya tiene el taller, la impresora, los efectos y 14 animaciones hechas.
 
@@ -84,3 +87,18 @@ Todo lo que se apruebe queda en la biblioteca: el próximo reel del Mago ya tien
 > Papá Noel llegó al taller derretido y con la bolsa vacía. Por suerte la impresora no se toma vacaciones.
 > ¿Amigo invisible antes del 24? Pedí con tiempo: cada pedido lleva mínimo 48 horas.
 > Escribime al 092 104 419 y te paso precio y fecha, sin compromiso. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+## Estado
+
+- **Animatic listo**: `animatic.mp4` es el reel completo con figuras provisorias, con el timing y el audio definitivos. Se arma con la skill `pixel-reel` (ver `skills/pixel-reel/SKILL.md`).
+- **Falta**: las hojas reales de Gemini. Cada una que se aprueba va a `videos/biblioteca/sheets/` con su nombre. Después se vuelve a ensamblar y renderizar, sin tocar la línea de tiempo:
+
+```bash
+python3 skills/pixel-reel/scripts/assemble.py videos/biblioteca/sprites.json videos/biblioteca/sheets:videos/papa-noel-en-ojotas/placeholder-sheets videos/papa-noel-en-ojotas/reel.json videos/papa-noel-en-ojotas/hf
+```
+
+```bash
+cd videos/papa-noel-en-ojotas/hf && npx hyperframes render -o ../papa-noel-en-ojotas.mp4
+```
+
+Para regenerar las provisorias (no se versionan): `python3 skills/pixel-reel/scripts/placeholders.py videos/biblioteca/sprites.json videos/papa-noel-en-ojotas/placeholder-sheets --reel videos/papa-noel-en-ojotas/reel.json`.

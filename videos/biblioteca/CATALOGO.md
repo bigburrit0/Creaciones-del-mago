@@ -1,6 +1,6 @@
 # Catálogo de sprites
 
-Generado desde `sprites.json` por `tools/gen_prompts.py`. Prioridad: P0 = lo usa el reel de Navidad, P1 = siguiente tanda, P2 = cuando haga falta.
+Generado desde el manifiesto por `pixel-reel/scripts/gen_prompts.py`.
 
 ## El Mago (48 animaciones)
 
@@ -87,7 +87,7 @@ Generado desde `sprites.json` por `tools/gen_prompts.py`. Prioridad: P0 = lo usa
 | `sit_mate_S` | S | 4 | bucle | 4 | P1 | calm ending |
 | `sit_doze_S` | S | 4 | bucle | 3 | P2 | night shift while a print runs |
 
-## Taller: objetos con estados
+## El taller del Mago: objetos
 
 | id | estados | modo | prio | para qué |
 |---|---|---|---|---|
@@ -119,6 +119,6 @@ Generado desde `sprites.json` por `tools/gen_prompts.py`. Prioridad: P0 = lo usa
 | `fx_notes` | 4 | bucle | P2 | happy, music |
 | `fx_dust_motes` | 2 | bucle | P2 | ambient sunbeam |
 
-## Ítems del catálogo
+## Ítems
 
-`cafe`, `banana`, `suculenta`, `hamster`, `calavera`, `garaje`, `panal`, `plegable`, `medieval`, `perros-gatos`, `domino`, `hoja`, `driftwood`, `maceta`, `bowl`, `cassette`
+`cafe`, `banana`, `suculenta`, `hamster`, `calavera`, `garaje`, `panal`, `plegable`, `medieval`, `perros-gatos`, `domino`, `hoja`, `driftwood`, `maceta`, `bowl`, `cassette`, `creeper`, `tnt`, `pokebox`, `dragon`, `f40`, `penarol`, `nacional`, `repisa`, `mesa-luz`

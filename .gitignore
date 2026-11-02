@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+# pixel-reel: generated files (rebuild with skills/pixel-reel/scripts)
+videos/*/placeholder-sheets/
+videos/*/hf/assets/
+videos/*/hf/.hyperframes/
+videos/*/hf/node_modules/

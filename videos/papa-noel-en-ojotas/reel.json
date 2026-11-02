@@ -146,6 +146,24 @@
      ]
     },
     {
+     "id": "startled_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "jumps scared on the stool when he sees the lit TNT",
+     "poses": [
+      "sitting, watching happily",
+      "jolt: body stretched up off the stool, eyes huge, beard bristling, hands up",
+      "sitting again, leaning back, hands covering the mouth, eyes wide",
+      "same pose, shaking (hold)"
+     ]
+    },
+    {
      "id": "joy_jump_S",
      "group": "reel",
      "dir": "S",
@@ -221,7 +239,18 @@
       "hand tilted in"
      ]
     }
-   ]
+   ],
+   "placeholder": {
+    "body": "#FBF4E4",
+    "hat": "#C0392B",
+    "hat_band": null,
+    "pompom": "#FBF4E4",
+    "beard": "#FBF4E4",
+    "skin": "#F0C090",
+    "boots": "#2E2160",
+    "belt": "#C0392B",
+    "hat_tip": "side"
+   }
   }
  },
  "uses": {
@@ -253,23 +282,29 @@
    "wreath"
   ],
   "fx": [
-   "fx_sparkle",
-   "fx_puff",
    "fx_confetti",
-   "fx_sweat",
+   "fx_hearts",
    "fx_idea",
    "fx_moth",
-   "fx_hearts"
+   "fx_puff",
+   "fx_sparkle",
+   "fx_sweat"
   ],
   "items": [
    "cafe",
    "banana",
    "suculenta",
    "hamster",
+   "creeper",
+   "pokebox",
+   "dragon",
+   "f40",
    "garaje",
    "plegable",
    "hoja",
-   "calavera"
+   "penarol",
+   "nacional",
+   "tnt"
   ]
  },
  "positions_art": {
@@ -406,13 +441,43 @@
   {
    "t": [
     8.4,
+    9.2
+   ],
+   "printer": "done blink + fx_sparkle",
+   "mago": "turn N->S, item_get_S with the 4 clickers above his head (amigo invisible), toss_E",
+   "items": "cafe, banana, suculenta, hamster together, arc into the sack",
+   "sack": "empty -> 1/3"
+  },
+  {
+   "t": [
+    9.2,
+    10.0
+   ],
+   "printer": "done blink + fx_sparkle",
+   "mago": "item_get_S with the Creeper money box, toss_E",
+   "items": "creeper arcs into the sack"
+  },
+  {
+   "t": [
+    10.0,
+    10.8
+   ],
+   "printer": "rapid fire: 8 items shoot out in quick arcs straight into the sack (0.1 s apart)",
+   "mago": "item_get_S pose held, amazed",
+   "papa_noel": "refreshed_S frame 2 (big smile)",
+   "items": "pokebox, dragon, f40, garaje, plegable, hoja, penarol, nacional",
+   "sack": "1/3 -> 2/3"
+  },
+  {
+   "t": [
+    10.8,
     11.6
    ],
-   "printer": "done blink before each gift",
-   "mago": "turn N->S, then 4 x (item_get_S 0.4 s + toss_E 0.25 s)",
-   "items": "1) the 4 clickers together (cafe, banana, suculenta, hamster) 2) garaje 3) plegable 4) hoja; each flies in a 4-step arc into the sack",
-   "sack": "empty -> 1/3 -> 2/3 -> full",
-   "fx": "fx_sparkle at the printer for each gift"
+   "printer": "done + fx_sparkle",
+   "mago": "item_get_S with the TNT block, fuse sparkling (fx_sparkle loop at the fuse), toss_E",
+   "papa_noel": "startled_S",
+   "items": "tnt arcs into the sack",
+   "sack": "2/3 -> full, fx_puff + fx_confetti burst out of the sack (muffled boom)"
   },
   {
    "t": [

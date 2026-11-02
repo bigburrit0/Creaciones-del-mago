@@ -1,6 +1,47 @@
 {
- "version": 1,
- "style": "see ESTILO.md",
+ "project": {
+  "name": "Creaciones del Mago",
+  "scale_reference": "mago",
+  "style": {
+   "palette": [
+    "#150A34",
+    "#2E2160",
+    "#4B3A8E",
+    "#6A58B8",
+    "#C98A2B",
+    "#F2C14E",
+    "#C8AE88",
+    "#F0D8B2",
+    "#D9826A",
+    "#E1AE73",
+    "#F0C090",
+    "#5A3424",
+    "#8A5638",
+    "#6E3B22",
+    "#A0603A",
+    "#D8D4C8",
+    "#FFF3B0",
+    "#F2B640",
+    "#1E3A2A",
+    "#2F5A32",
+    "#5C9A4A",
+    "#9BC46A",
+    "#7A1E22",
+    "#C0392B",
+    "#E86A4A",
+    "#2B4C7E",
+    "#4F86C6",
+    "#9CC9E8",
+    "#5B4636",
+    "#B08A5A",
+    "#E9D8B4",
+    "#FBF4E4"
+   ],
+   "outline": "#150A34",
+   "view": "top-down three-quarter view like a 1990s farming RPG",
+   "light": "upper-left, shadows fall to the lower-right"
+  }
+ },
  "grid": {
   "art_canvas": [
    270,
@@ -1428,6 +1469,42 @@
    {
     "id": "cassette",
     "description": "giant retro cassette tape"
+   },
+   {
+    "id": "creeper",
+    "description": "green Creeper-style money box: a green pixel cube head with a dark face, coin slot on top"
+   },
+   {
+    "id": "tnt",
+    "description": "TNT block: red block with a white band (no letters, just a plain white band) and a fuse on top"
+   },
+   {
+    "id": "pokebox",
+    "description": "card box shaped like a grey retro handheld console with a little screen and buttons (no logo)"
+   },
+   {
+    "id": "dragon",
+    "description": "articulated black dragon with purple eyes and big wings, End-dragon style"
+   },
+   {
+    "id": "f40",
+    "description": "red 1980s Italian sports car model kit, low wedge shape, pop-up headlights"
+   },
+   {
+    "id": "penarol",
+    "description": "football stadium model with yellow and black stands"
+   },
+   {
+    "id": "nacional",
+    "description": "football stadium model with white, blue and red stands"
+   },
+   {
+    "id": "repisa",
+    "description": "melted-looking wall shelf that seems to drip"
+   },
+   {
+    "id": "mesa-luz",
+    "description": "bedside organizer that holds an open book, with small drawers"
    }
   ]
  }

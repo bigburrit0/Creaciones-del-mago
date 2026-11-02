@@ -1,0 +1,457 @@
+{
+ "id": "papa-noel-en-ojotas",
+ "duration": 15,
+ "set": "taller",
+ "decorations": "Christmas decorations (they will be separate sprites, so just suggest them lightly): a garland with lights above the window, a tiny Christmas tree in the back-right corner, a wreath on the door.",
+ "characters": {
+  "papa_noel": {
+   "model": {
+    "name": "Papá Noel de verano",
+    "height_px": 92,
+    "description": "a jolly, round Santa Claus dressed for a very hot Uruguayan summer: big white beard, rosy sunburned cheeks, a red Santa hat with a white pompom, small round sunglasses, a white sleeveless undershirt, his red Santa jacket tied around the waist by the sleeves, red shorts with white fur trim, black flip-flops (ojotas) and bare legs. Same chibi proportions as the attached wizard (head about one third of the height), slightly taller and wider than him. Colours: reds #7A1E22 #C0392B #E86A4A, whites #FBF4E4 #E9D8B4, skin #F0C090 #E1AE73 #D9826A, outline #150A34.",
+    "cells": [
+     "front three-quarter view facing the camera (S), standing, hands on the belly",
+     "side view facing LEFT (W), standing",
+     "back view (N), standing",
+     "front view (S) sitting on an invisible stool, hands on the knees"
+    ]
+   },
+   "animations": [
+    {
+     "id": "walk_hot_W",
+     "group": "reel",
+     "dir": "W",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "stumbles in from the door, exhausted by the heat",
+     "poses": [
+      "side view facing LEFT, dragging the right flip-flop forward, tongue out, sweating, shoulders slumped",
+      "body low, knees bent, arms hanging",
+      "passing pose, body up, sunglasses sliding down the nose",
+      "dragging the left flip-flop forward",
+      "body low, arms hanging",
+      "passing pose, body up"
+     ]
+    },
+    {
+     "id": "sit_plop_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "drops onto the stool",
+     "poses": [
+      "standing in front of a stool, knees giving way",
+      "falling backwards, arms up",
+      "landing sitting on the stool (stool drawn separately), body squashed, belly bouncing",
+      "sitting slumped, legs stretched out"
+     ]
+    },
+    {
+     "id": "fan_hot_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "sitting and fanning himself, sweat (add fx_sweat)",
+     "poses": [
+      "sitting, holding his Santa hat in the right hand fanning his face, eyes closed, mouth open panting",
+      "hat moved to the left of the face",
+      "hat in front of the face",
+      "hat moved to the right"
+     ]
+    },
+    {
+     "id": "sip_mate_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": "mate",
+     "use": "takes the mate the wizard offers",
+     "poses": [
+      "sitting, holding a mate gourd with both hands at the chest, surprised",
+      "lifting the gourd to the beard",
+      "sipping, eyes closed, cheeks puffed",
+      "lowering the gourd, eyes wide open, refreshed"
+     ]
+    },
+    {
+     "id": "refreshed_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "relief after the mate",
+     "poses": [
+      "sitting, long sigh of relief, shoulders dropping",
+      "big smile, eyes closed",
+      "sitting upright, happy, sunglasses back on, giving the mate back with an extended right arm",
+      "same pose (hold)"
+     ]
+    },
+    {
+     "id": "sack_shake_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "nothing left in the sack (sack is part of this sprite; add fx_moth)",
+     "poses": [
+      "standing, holding an empty red sack upside down with both hands above his head",
+      "shaking it, sack to the left",
+      "shaking it, sack to the right",
+      "looking into the empty sack, puzzled"
+     ]
+    },
+    {
+     "id": "sad_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "no gifts to deliver",
+     "poses": [
+      "sitting, empty sack on his lap",
+      "shoulders dropping",
+      "head down, hat drooping, mouth turned down",
+      "same, one tear (hold)"
+     ]
+    },
+    {
+     "id": "joy_jump_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 6,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "celebration when the sack is full",
+     "poses": [
+      "crouching, fists at the chest, huge smile",
+      "taking off, fists up",
+      "apex, arms up, beard and hat flying",
+      "falling",
+      "landing squash",
+      "recover, arms up wide, laughing"
+     ]
+    },
+    {
+     "id": "sack_shoulder_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "lifts the full sack",
+     "poses": [
+      "standing next to a full round red sack on the floor (sack drawn in this sprite)",
+      "bending, grabbing the sack",
+      "swinging the sack up",
+      "full sack on the right shoulder, proud grin"
+     ]
+    },
+    {
+     "id": "walk_sack_E",
+     "group": "reel",
+     "dir": "E",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "leaves through the door with the sack",
+     "poses": [
+      "side view facing RIGHT, full red sack on the shoulder, right flip-flop forward, happy",
+      "body low",
+      "passing, body up",
+      "left flip-flop forward",
+      "body low",
+      "passing, body up"
+     ]
+    },
+    {
+     "id": "wave_S",
+     "group": "reel",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "goodbye from the door",
+     "poses": [
+      "standing, full sack on the left shoulder, right hand raised waving, big smile",
+      "hand tilted out",
+      "hand raised",
+      "hand tilted in"
+     ]
+    }
+   ]
+  }
+ },
+ "uses": {
+  "mago": [
+   "walk_E",
+   "turn_S_to_N",
+   "idle_S",
+   "idle_N",
+   "press_button_N",
+   "surprised_S",
+   "offer_mate_E",
+   "thinking_S",
+   "idea_S",
+   "item_get_S",
+   "toss_E",
+   "joy_jump_S",
+   "wave_S",
+   "sip_mate_S"
+  ],
+  "objects": [
+   "printer",
+   "door_R",
+   "stool",
+   "fan",
+   "sack",
+   "mate",
+   "xmas_tree",
+   "garland",
+   "wreath"
+  ],
+  "fx": [
+   "fx_sparkle",
+   "fx_puff",
+   "fx_confetti",
+   "fx_sweat",
+   "fx_idea",
+   "fx_moth",
+   "fx_hearts"
+  ],
+  "items": [
+   "cafe",
+   "banana",
+   "suculenta",
+   "hamster",
+   "garaje",
+   "plegable",
+   "hoja",
+   "calavera"
+  ]
+ },
+ "positions_art": {
+  "door": [
+   238,
+   262
+  ],
+  "stool": [
+   210,
+   340
+  ],
+  "sack": [
+   176,
+   352
+  ],
+  "mago_bench": [
+   80,
+   240
+  ],
+  "mago_offer": [
+   160,
+   336
+  ],
+  "mago_toss": [
+   104,
+   300
+  ],
+  "printer_out": [
+   80,
+   160
+  ],
+  "tree": [
+   228,
+   214
+  ]
+ },
+ "beats": [
+  {
+   "t": [
+    0.0,
+    0.25
+   ],
+   "door_R": "closed -> wide open (bang)",
+   "mago": "press_button_N at the bench",
+   "fx": "fx_puff at the door"
+  },
+  {
+   "t": [
+    0.25,
+    1.35
+   ],
+   "papa_noel": "walk_hot_W from the door to the stool, fx_sweat",
+   "mago": "turn N->S (0.5), surprised_S (0.8)"
+  },
+  {
+   "t": [
+    1.35,
+    1.75
+   ],
+   "papa_noel": "sit_plop_S on the stool",
+   "fx": "fx_puff under the stool"
+  },
+  {
+   "t": [
+    1.75,
+    3.2
+   ],
+   "papa_noel": "fan_hot_S loop + fx_sweat",
+   "mago": "walk_E from the bench to mago_offer"
+  },
+  {
+   "t": [
+    3.2,
+    3.7
+   ],
+   "mago": "offer_mate_E",
+   "papa_noel": "fan_hot_S"
+  },
+  {
+   "t": [
+    3.7,
+    4.4
+   ],
+   "papa_noel": "sip_mate_S",
+   "mago": "idle_S (no mate)"
+  },
+  {
+   "t": [
+    4.4,
+    5.0
+   ],
+   "papa_noel": "refreshed_S (gives the mate back)",
+   "mago": "sip_mate_S starts",
+   "fx": "fx_sparkle on Papá Noel"
+  },
+  {
+   "t": [
+    5.0,
+    5.8
+   ],
+   "papa_noel": "sack_shake_S, fx_moth flies out",
+   "mago": "sip_mate_S"
+  },
+  {
+   "t": [
+    5.8,
+    6.4
+   ],
+   "papa_noel": "sad_S",
+   "mago": "thinking_S"
+  },
+  {
+   "t": [
+    6.4,
+    6.9
+   ],
+   "mago": "idea_S + fx_idea above the head"
+  },
+  {
+   "t": [
+    6.9,
+    7.6
+   ],
+   "mago": "walk_E mirrored (W) to the bench, turn S->N at 7.5"
+  },
+  {
+   "t": [
+    7.6,
+    8.4
+   ],
+   "mago": "press_button_N",
+   "printer": "printing loop (frames 2-3)"
+  },
+  {
+   "t": [
+    8.4,
+    11.6
+   ],
+   "printer": "done blink before each gift",
+   "mago": "turn N->S, then 4 x (item_get_S 0.4 s + toss_E 0.25 s)",
+   "items": "1) the 4 clickers together (cafe, banana, suculenta, hamster) 2) garaje 3) plegable 4) hoja; each flies in a 4-step arc into the sack",
+   "sack": "empty -> 1/3 -> 2/3 -> full",
+   "fx": "fx_sparkle at the printer for each gift"
+  },
+  {
+   "t": [
+    11.6,
+    12.8
+   ],
+   "papa_noel": "joy_jump_S",
+   "mago": "joy_jump_S",
+   "fx": "fx_confetti + fx_hearts"
+  },
+  {
+   "t": [
+    12.8,
+    13.3
+   ],
+   "papa_noel": "sack_shoulder_S (the sack sprite on the floor hides)"
+  },
+  {
+   "t": [
+    13.3,
+    14.0
+   ],
+   "papa_noel": "walk_sack_E to the door, wave_S at the door, exits",
+   "door_R": "open -> closed at 14.0",
+   "mago": "wave_S"
+  },
+  {
+   "t": [
+    14.0,
+    15.0
+   ],
+   "mago": "sip_mate_S, then idle_S; last 0.4 s still",
+   "xmas_tree": "lights blink",
+   "fan": "spinning"
+  }
+ ],
+ "ambient": [
+  "fan loop 12 fps all the time",
+  "garland and tree lights blink at 2 fps",
+  "fx_dust_motes optional in the window light"
+ ]
+}

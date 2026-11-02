@@ -1,5 +1,7 @@
 # Videos pixel art con Claude + Gemini + HyperFrames: qué se retrabajó y cómo evitarlo
 
+> **Puesto en práctica:** la biblioteca reutilizable está en [`biblioteca/`](biblioteca/README.md) (estilo, 48 animaciones del Mago, taller, efectos, ítems y generador de prompts). El primer reel planificado con este método es [`papa-noel-en-ojotas/`](papa-noel-en-ojotas/GUION.md).
+
 Informe de los dos videos hechos hasta ahora (`mate-power-up/` y `mago-jardin/`) y propuesta de workflow para los próximos.
 
 ## 1. El problema en una frase

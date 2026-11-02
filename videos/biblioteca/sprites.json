@@ -1,0 +1,1434 @@
+{
+ "version": 1,
+ "style": "see ESTILO.md",
+ "grid": {
+  "art_canvas": [
+   270,
+   480
+  ],
+  "scale": 4,
+  "video": [
+   1080,
+   1920
+  ],
+  "fps_video": 30
+ },
+ "sheet_formats": {
+  "char": {
+   "image": [
+    1024,
+    1024
+   ],
+   "grid": [
+    2,
+    2
+   ],
+   "cell_px": 512,
+   "cell_art": 128,
+   "anchor_art": [
+    64,
+    124
+   ],
+   "frames_per_sheet": 4
+  },
+  "small": {
+   "image": [
+    1024,
+    1024
+   ],
+   "grid": [
+    4,
+    4
+   ],
+   "cell_px": 256,
+   "cell_art": 64,
+   "anchor_art": [
+    32,
+    60
+   ],
+   "frames_per_sheet": 16
+  },
+  "plate": {
+   "aspect": "9:16",
+   "art": [
+    270,
+    480
+   ]
+  },
+  "item": {
+   "image": [
+    1024,
+    1024
+   ],
+   "grid": [
+    2,
+    2
+   ],
+   "cell_px": 512,
+   "cell_art": 128,
+   "item_max_art": 40,
+   "anchor_art": [
+    64,
+    84
+   ],
+   "frames_per_sheet": 4
+  }
+ },
+ "characters": {
+  "mago": {
+   "model": {
+    "name": "El Mago",
+    "height_px": 96,
+    "description": "an old, kind, friendly wizard with a long white beard covering his chest, rosy cheeks, small black eyes and a round nose; a tall floppy purple wizard hat whose tip curls backwards, with a gold band; a long violet-blue robe with wide sleeves; a brown belt with a square gold buckle; brown boots. He is short and round, cute chibi proportions (head about one third of his height). Colours: robe and hat #6A58B8 #4B3A8E #2E2160, gold #F2C14E #C98A2B, beard #F0D8B2 #C8AE88, skin #F0C090 #E1AE73 #D9826A, boots and belt #8A5638 #5A3424, outline #150A34.",
+    "cells": [
+     "front three-quarter view facing the camera (S), standing, hands resting on the belly",
+     "side view facing right (E), standing",
+     "back view (N), standing",
+     "front view (S) holding a mate gourd with a metal straw at chest height with his right hand"
+    ]
+   },
+   "format": "char",
+   "animations": [
+    {
+     "id": "walk_E",
+     "group": "locomotion",
+     "dir": "E",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": true,
+     "priority": "P0",
+     "holds": null,
+     "use": "cross the room left to right (W = mirrored)",
+     "poses": [
+      "right foot forward touching ground, left arm forward",
+      "body lowest, knees bent, hat tip dips",
+      "passing pose, legs together, body highest",
+      "left foot forward touching ground, right arm forward",
+      "body lowest, knees bent, hat tip dips",
+      "passing pose, legs together, body highest"
+     ]
+    },
+    {
+     "id": "walk_S",
+     "group": "locomotion",
+     "dir": "S",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "walk towards the camera",
+     "poses": [
+      "right boot forward, left hand swinging",
+      "body down, robe hem flares",
+      "passing, body up",
+      "left boot forward, right hand swinging",
+      "body down, robe hem flares",
+      "passing, body up"
+     ]
+    },
+    {
+     "id": "walk_N",
+     "group": "locomotion",
+     "dir": "N",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "walk away from the camera",
+     "poses": [
+      "seen from behind, right boot forward",
+      "body down",
+      "passing, body up",
+      "left boot forward",
+      "body down",
+      "passing, body up"
+     ]
+    },
+    {
+     "id": "run_E",
+     "group": "locomotion",
+     "dir": "E",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 12,
+     "mirror_to_W": true,
+     "priority": "P2",
+     "holds": null,
+     "use": "hurry, chase something",
+     "poses": [
+      "long stride, right leg forward, left hand holding the hat on his head",
+      "both feet off the ground, robe streaming back",
+      "landing on right foot, body low",
+      "long stride, left leg forward, hand on hat",
+      "both feet off the ground",
+      "landing on left foot"
+     ]
+    },
+    {
+     "id": "turn_S_to_N",
+     "group": "locomotion",
+     "dir": "S>N",
+     "frames": 3,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "turn to the workbench; play reversed for N to S",
+     "poses": [
+      "facing the camera (S), neutral",
+      "three-quarter back view, head turning",
+      "seen fully from behind (N)"
+     ]
+    },
+    {
+     "id": "idle_S",
+     "group": "idle",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "default standing loop",
+     "poses": [
+      "neutral standing, hands resting on belly",
+      "chest slightly up, beard lifts one pixel",
+      "neutral standing",
+      "chest slightly down, hat brim one pixel lower"
+     ]
+    },
+    {
+     "id": "idle_N",
+     "group": "idle",
+     "dir": "N",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "default loop while working at the bench",
+     "poses": [
+      "seen from behind, standing at the bench",
+      "shoulders up one pixel",
+      "neutral",
+      "shoulders down one pixel"
+     ]
+    },
+    {
+     "id": "blink_S",
+     "group": "idle",
+     "dir": "S",
+     "frames": 3,
+     "mode": "once",
+     "fps": 12,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "life in long holds (play 1-2-3-2-1)",
+     "poses": [
+      "eyes open",
+      "eyes half closed",
+      "eyes closed"
+     ]
+    },
+    {
+     "id": "look_around_S",
+     "group": "idle",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "waiting, curiosity",
+     "poses": [
+      "looking at the camera",
+      "head and eyes turned to his left",
+      "looking at the camera",
+      "head and eyes turned to his right"
+     ]
+    },
+    {
+     "id": "sip_mate_S",
+     "group": "idle",
+     "dir": "S",
+     "frames": 6,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": "mate",
+     "use": "signature mate sip, calm endings",
+     "poses": [
+      "holding the mate gourd at chest height with the right hand",
+      "lifting the gourd, straw approaching the beard",
+      "sipping, eyes closed, cheeks puffed",
+      "sipping, eyes closed, cheeks in",
+      "lowering the gourd, content smile",
+      "gourd back at chest, relaxed sigh"
+     ]
+    },
+    {
+     "id": "sleepy_S",
+     "group": "idle",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "late night, waiting for a long print",
+     "poses": [
+      "eyes half closed, head upright",
+      "head drooping forward",
+      "head low, hat brim covering the eyes",
+      "jerks awake, eyes wide, back upright"
+     ]
+    },
+    {
+     "id": "surprised_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "something unexpected happens",
+     "poses": [
+      "neutral",
+      "anticipation: body squashed down, eyes closing",
+      "jolt: body stretched up, eyes wide, mouth open, both hands up at shoulder height, hat lifting off the head",
+      "eyes wide, hands up, hat back on (hold this frame)"
+     ]
+    },
+    {
+     "id": "joy_jump_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 6,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "victory, happy reveal, a sale",
+     "poses": [
+      "anticipation crouch, fists at the chest, big smile",
+      "takes off, both fists up, feet together",
+      "apex, arms fully up, robe flaring, hat floating above the head",
+      "falling, arms up, hat coming down",
+      "landing squash, knees bent",
+      "recover, both fists up, eyes closed with joy"
+     ]
+    },
+    {
+     "id": "laugh_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "funny moment",
+     "poses": [
+      "leaning back, hand on belly, eyes closed, mouth open",
+      "shoulders up, beard shaking",
+      "leaning back, mouth open",
+      "shoulders down"
+     ]
+    },
+    {
+     "id": "proud_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "showing a finished piece",
+     "poses": [
+      "neutral",
+      "chest puffing out, chin rising",
+      "chin up, eyes closed, thumbs hooked in the belt",
+      "same pose, small sparkle on the gold buckle (hold)"
+     ]
+    },
+    {
+     "id": "thinking_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "considering, planning",
+     "poses": [
+      "right hand stroking the beard, eyes looking up-left",
+      "hand lower on the beard",
+      "hand stroking the beard, eyes looking up-right",
+      "hand lower on the beard"
+     ]
+    },
+    {
+     "id": "idea_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "eureka moment (add fx_idea above the head)",
+     "poses": [
+      "thinking pose, hand on beard",
+      "eyes snap wide open, back straightens",
+      "right index finger raised high, big smile",
+      "same pose, eyes sparkling (hold)"
+     ]
+    },
+    {
+     "id": "confused_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "doesn't understand an order (add fx_swirl)",
+     "poses": [
+      "head tilted left, right hand scratching under the hat brim",
+      "hat lifted one pixel, scratching",
+      "head tilted right, scratching",
+      "hat lifted one pixel"
+     ]
+    },
+    {
+     "id": "facepalm_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "a failed print, a funny mistake",
+     "poses": [
+      "neutral",
+      "right hand rising to the face",
+      "palm covering the eyes, head tilted down, shoulders slumped",
+      "same, small sigh (hold)"
+     ]
+    },
+    {
+     "id": "sad_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "something broke, sold out",
+     "poses": [
+      "neutral",
+      "shoulders dropping",
+      "head down, hat brim low, mouth turned down",
+      "same, one small tear (hold)"
+     ]
+    },
+    {
+     "id": "grumpy_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "printer jam (add fx_steam)",
+     "poses": [
+      "arms crossed, frowning, eyebrows down",
+      "cheeks puffed, frowning",
+      "arms crossed, frowning",
+      "cheeks puffed, small huff"
+     ]
+    },
+    {
+     "id": "love_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "a lovely gift, a customer photo (add fx_hearts)",
+     "poses": [
+      "hands clasped at the chest, eyes closed, blushing",
+      "leaning slightly left",
+      "hands clasped, blushing",
+      "leaning slightly right"
+     ]
+    },
+    {
+     "id": "shy_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "receiving a compliment",
+     "poses": [
+      "blushing, looking down, fingers touching",
+      "pulling the hat brim down with the right hand",
+      "blushing, looking down",
+      "peeking up from under the brim"
+     ]
+    },
+    {
+     "id": "nervous_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "deadline, Christmas rush (add fx_sweat)",
+     "poses": [
+      "forced smile, two sweat drops on the forehead, fingers fidgeting",
+      "glancing left",
+      "forced smile, sweat drops",
+      "glancing right"
+     ]
+    },
+    {
+     "id": "impatient_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "waiting for a long print",
+     "poses": [
+      "arms crossed, right foot raised",
+      "arms crossed, right foot tapping down",
+      "arms crossed, right foot raised",
+      "arms crossed, foot down, eyes rolling up"
+     ]
+    },
+    {
+     "id": "scared_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 12,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "a spooky print, Halloween",
+     "poses": [
+      "shivering, knees together, hands up near the face, eyes wide",
+      "same pose shifted one pixel left",
+      "same pose",
+      "same pose shifted one pixel right"
+     ]
+    },
+    {
+     "id": "celebrate_spin_S",
+     "group": "emotion",
+     "dir": "S",
+     "frames": 6,
+     "mode": "once",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "big celebration, end of a reel",
+     "poses": [
+      "arms up, facing the camera",
+      "spinning, side view, robe flaring",
+      "spinning, seen from behind, arms up",
+      "spinning, other side, robe flaring",
+      "facing the camera, arms up wide",
+      "final pose, one fist up, wink"
+     ]
+    },
+    {
+     "id": "press_button_N",
+     "group": "work",
+     "dir": "N",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "starting a print, working at the printer",
+     "poses": [
+      "seen from behind at the bench, right arm reaching to the printer screen",
+      "index finger pressing",
+      "arm pulling back",
+      "head tilting, watching the printer"
+     ]
+    },
+    {
+     "id": "take_print_N",
+     "group": "work",
+     "dir": "N",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "taking a finished piece out",
+     "poses": [
+      "seen from behind, both hands reaching into the printer",
+      "lifting the build plate",
+      "bending the plate, piece popping off",
+      "holding the piece up"
+     ]
+    },
+    {
+     "id": "item_get_S",
+     "group": "work",
+     "dir": "S",
+     "frames": 4,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "RPG 'item get' reveal; the item sprite is placed above the hands",
+     "poses": [
+      "facing the camera, both hands at the chest",
+      "lifting both hands, body stretching",
+      "both hands holding an object high above the head, triumphant smile (the object is drawn separately)",
+      "same pose, eyes closed with pride (hold)"
+     ]
+    },
+    {
+     "id": "toss_E",
+     "group": "work",
+     "dir": "E",
+     "frames": 4,
+     "mode": "once",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "throw a piece to someone on the right (W = mirrored if the hand is not visible)",
+     "poses": [
+      "side view, right hand low behind the body holding a small object position",
+      "swinging the arm forward underhand",
+      "arm forward and up, hand open (object released)",
+      "follow-through, smiling"
+     ]
+    },
+    {
+     "id": "inspect_S",
+     "group": "work",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "quality check (piece drawn separately)",
+     "poses": [
+      "holding a small piece close to the face with both hands, one eye squinting",
+      "turning the piece",
+      "looking at it from the other side",
+      "nodding, satisfied"
+     ]
+    },
+    {
+     "id": "carry_box_E",
+     "group": "work",
+     "dir": "E",
+     "frames": 6,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": true,
+     "priority": "P1",
+     "holds": null,
+     "use": "deliveries, carrying gifts",
+     "poses": [
+      "walking, holding a box at the chest with both arms (box drawn separately), right foot forward",
+      "body down",
+      "passing, body up",
+      "left foot forward",
+      "body down",
+      "passing, body up"
+     ]
+    },
+    {
+     "id": "wrap_gift_S",
+     "group": "work",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 6,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "Christmas packing",
+     "poses": [
+      "hands folding paper on a box in front of him",
+      "pulling a ribbon tight",
+      "tying a bow",
+      "patting the box, smiling"
+     ]
+    },
+    {
+     "id": "sand_piece_S",
+     "group": "work",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "post-processing",
+     "poses": [
+      "holding a piece in the left hand, sanding with the right",
+      "sanding stroke right",
+      "sanding stroke left",
+      "blowing the dust off"
+     ]
+    },
+    {
+     "id": "cast_S",
+     "group": "magic",
+     "dir": "S",
+     "frames": 6,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "big magic moment (add fx_magic_ring)",
+     "poses": [
+      "hands together at the chest",
+      "arms rising, hands glowing gold",
+      "arms spread wide up, hands glowing, robe lifting",
+      "arms forward, releasing the glow, smiling",
+      "arms lowering",
+      "neutral, satisfied"
+     ]
+    },
+    {
+     "id": "snap_summon_S",
+     "group": "magic",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 10,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "make something appear (add fx_puff where it appears)",
+     "poses": [
+      "right hand raised, fingers ready to snap",
+      "snap: fingers clicked, small star at the fingertips",
+      "hand still raised, looking to his right with a grin",
+      "hand lowering"
+     ]
+    },
+    {
+     "id": "levitate_S",
+     "group": "magic",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "an object floating over his hands (object drawn separately)",
+     "poses": [
+      "both palms up at chest height, eyes on something floating above",
+      "palms one pixel higher",
+      "palms up",
+      "palms one pixel lower"
+     ]
+    },
+    {
+     "id": "wave_S",
+     "group": "social",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "hello / goodbye",
+     "poses": [
+      "right hand raised to the side, open palm, smiling",
+      "hand tilted outward",
+      "hand raised, open palm",
+      "hand tilted inward"
+     ]
+    },
+    {
+     "id": "point_E",
+     "group": "social",
+     "dir": "E",
+     "frames": 3,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": true,
+     "priority": "P1",
+     "holds": null,
+     "use": "look at this (W = mirrored)",
+     "poses": [
+      "side view, neutral",
+      "arm extending forward",
+      "arm fully extended, index finger pointing right, eyebrows up"
+     ]
+    },
+    {
+     "id": "thumbs_up_S",
+     "group": "social",
+     "dir": "S",
+     "frames": 3,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "approval, 'listo'",
+     "poses": [
+      "neutral",
+      "right arm rising",
+      "thumb up at chest height, wink, big smile"
+     ]
+    },
+    {
+     "id": "talk_S",
+     "group": "social",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "explaining something to the camera (no speech bubble text)",
+     "poses": [
+      "mouth open, right hand open at chest height",
+      "mouth closed, eyebrows up",
+      "mouth open, both hands slightly apart",
+      "mouth half open, nodding"
+     ]
+    },
+    {
+     "id": "offer_mate_E",
+     "group": "social",
+     "dir": "E",
+     "frames": 3,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": "mate",
+     "use": "offering mate to a guest",
+     "poses": [
+      "side view, holding the mate gourd at the chest with the right hand",
+      "extending the arm forward",
+      "arm fully extended offering the gourd to the right, friendly smile"
+     ]
+    },
+    {
+     "id": "bow_S",
+     "group": "social",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "thank you",
+     "poses": [
+      "neutral",
+      "bowing, one hand on the chest, hat tilting",
+      "deep bow, hat held on the head with the other hand",
+      "back up, smiling"
+     ]
+    },
+    {
+     "id": "shrug_S",
+     "group": "social",
+     "dir": "S",
+     "frames": 3,
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "'qué le vas a hacer'",
+     "poses": [
+      "neutral",
+      "shoulders rising, palms turning up",
+      "shrug: palms up at the sides, eyebrows raised, crooked smile"
+     ]
+    },
+    {
+     "id": "sit_down_S",
+     "group": "sitting",
+     "dir": "S",
+     "frames": 4,
+     "mode": "once",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": null,
+     "use": "sit on a stool or chair (seat drawn separately)",
+     "poses": [
+      "standing in front of a stool",
+      "bending the knees",
+      "sitting on the stool (stool drawn separately), hands on the knees",
+      "settled, relaxed"
+     ]
+    },
+    {
+     "id": "sit_mate_S",
+     "group": "sitting",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P1",
+     "holds": "mate",
+     "use": "calm ending",
+     "poses": [
+      "sitting, mate at the chest",
+      "lifting the gourd",
+      "sipping, eyes closed",
+      "lowering, content"
+     ]
+    },
+    {
+     "id": "sit_doze_S",
+     "group": "sitting",
+     "dir": "S",
+     "frames": 4,
+     "mode": "loop",
+     "fps": 3,
+     "mirror_to_W": false,
+     "priority": "P2",
+     "holds": null,
+     "use": "night shift while a print runs",
+     "poses": [
+      "sitting, head dropping forward",
+      "hat brim over the eyes, chest down",
+      "chest up",
+      "head low"
+     ]
+    }
+   ]
+  }
+ },
+ "sets": {
+  "taller": {
+   "name": "El taller del Mago",
+   "plate": {
+    "id": "plate_taller",
+    "description": "the cosy one-room workshop of a wizard who makes 3D printed things, seen from a top-down three-quarter view like a 1990s farming RPG interior. Back wall: warm honey-coloured wooden planks; in the centre a square window with a summer blue sky, a bright sun and the green leafy branch of a plane tree; on the left half of the back wall two wooden shelves with small colourful 3D printed objects and four spools of filament (red, blue, gold, green). Against the back wall on the left: a sturdy wooden workbench (no printer on it, the printer is a separate sprite). Right side wall: a wooden door (closed) with a small brass knob, the door is a separate sprite so leave a door-shaped dark frame. Floor: warm wooden boards running left-right, a round woven rug in the centre, a small empty patch near the door for a stool. Bottom edge: a strip of terracotta and cream checkered tiles. Bright summer daylight coming from the window (upper-left light). Nothing on the floor, no characters, no animals, no furniture other than the shelves and the workbench.",
+    "anchors_art": {
+     "bench_front": [
+      80,
+      240
+     ],
+     "printer": [
+      80,
+      196
+     ],
+     "printer_out": [
+      80,
+      160
+     ],
+     "center": [
+      135,
+      330
+     ],
+     "stool": [
+      210,
+      340
+     ],
+     "door": [
+      238,
+      262
+     ],
+     "sack": [
+      178,
+      352
+     ],
+     "tree": [
+      228,
+      214
+     ],
+     "fan": [
+      34,
+      380
+     ],
+     "window": [
+      135,
+      96
+     ]
+    },
+    "anchors_note": "Approximate: measure them again on the approved plate and update this list."
+   },
+   "objects": [
+    {
+     "id": "printer",
+     "format": "char",
+     "frames": 4,
+     "mode": "states",
+     "fps": 8,
+     "priority": "P0",
+     "use": "the shop's printer; frames 2-3 loop while printing",
+     "description": "about 52x44 art px, base anchored at the bottom centre of the cell",
+     "poses": [
+      "idle: compact desktop 3D printer, open frame with one upright gantry on the left side and a moving bed, light grey and charcoal, small screen on the front, a gold filament spool on top, no logo",
+      "printing: the nozzle carriage at the left, the bed pushed back, a tiny orange glow at the nozzle",
+      "printing: the nozzle carriage at the right, the bed pulled forward, tiny orange glow",
+      "done: nozzle parked, a small green light on the screen, a soft gold sparkle above the empty bed"
+     ]
+    },
+    {
+     "id": "door_R",
+     "format": "char",
+     "frames": 3,
+     "mode": "states",
+     "fps": 8,
+     "priority": "P0",
+     "use": "people come in and out",
+     "description": "about 34x80 art px",
+     "poses": [
+      "closed wooden door on a right-hand side wall seen in three-quarter view, brass knob",
+      "door ajar, a thin slice of bright sunlight",
+      "door wide open, swung inward, a rectangle of bright summer sunlight on the floor"
+     ]
+    },
+    {
+     "id": "stool",
+     "format": "small",
+     "frames": 1,
+     "mode": "static",
+     "fps": 8,
+     "priority": "P0",
+     "use": "seat for guests (separate so a sitting character can overlap it)",
+     "description": "",
+     "poses": [
+      "simple round wooden stool with three legs"
+     ]
+    },
+    {
+     "id": "fan",
+     "format": "small",
+     "frames": 3,
+     "mode": "loop",
+     "fps": 12,
+     "priority": "P1",
+     "use": "summer heat gag, ambient loop",
+     "description": "",
+     "poses": [
+      "small blue electric floor fan, blades at angle 0 with motion lines",
+      "blades rotated 30 degrees",
+      "blades rotated 60 degrees"
+     ]
+    },
+    {
+     "id": "gift_box",
+     "format": "char",
+     "frames": 4,
+     "mode": "states",
+     "fps": 8,
+     "priority": "P1",
+     "use": "reveals and unboxings",
+     "description": "about 40x40 art px",
+     "poses": [
+      "closed square gift box wrapped in red paper with a gold ribbon and bow",
+      "lid lifting, gold light leaking out",
+      "lid off to the side, box open, gold light beam",
+      "open empty box, lid leaning on it"
+     ]
+    },
+    {
+     "id": "sack",
+     "format": "char",
+     "frames": 4,
+     "mode": "states",
+     "fps": 8,
+     "priority": "P0",
+     "use": "Santa's sack filling up",
+     "description": "about 44x48 art px when full",
+     "poses": [
+      "empty red cloth sack lying flat and wrinkled on the floor",
+      "the same sack one third full, a few round lumps",
+      "the same sack two thirds full, standing up",
+      "the same sack completely full and round, tied with a gold cord, small sparkles"
+     ]
+    },
+    {
+     "id": "mate",
+     "format": "small",
+     "frames": 1,
+     "mode": "static",
+     "fps": 8,
+     "priority": "P1",
+     "use": "the wizard's mate when it is not in his hand",
+     "description": "",
+     "poses": [
+      "a mate gourd (brown, rounded) with a silver metal straw, standalone"
+     ]
+    }
+   ],
+   "seasonal_overlays": {
+    "navidad": [
+     {
+      "id": "xmas_tree",
+      "format": "small",
+      "frames": 2,
+      "mode": "loop",
+      "fps": 2,
+      "priority": "P0",
+      "use": "corner decoration, blink at 2 fps",
+      "description": "",
+      "poses": [
+       "tiny potted Christmas tree in a terracotta pot, red and gold baubles, lights off",
+       "same tree, lights on (warm yellow dots)"
+      ]
+     },
+     {
+      "id": "garland",
+      "format": "char",
+      "frames": 2,
+      "mode": "loop",
+      "fps": 2,
+      "priority": "P0",
+      "use": "above the window, blink at 2 fps",
+      "description": "",
+      "poses": [
+       "a short garland of green leaves with red bows and warm string lights, lights off, drawn horizontally to hang above a window",
+       "same garland, lights on"
+      ]
+     },
+     {
+      "id": "wreath",
+      "format": "small",
+      "frames": 1,
+      "mode": "static",
+      "fps": 8,
+      "priority": "P1",
+      "use": "on the door",
+      "description": "",
+      "poses": [
+       "small Christmas wreath with a red bow, to hang on a door"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "fx": [
+  {
+   "id": "fx_sparkle",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 12,
+   "priority": "P0",
+   "use": "anything appearing or shining",
+   "description": "",
+   "poses": [
+    "tiny 4-point star, pale yellow #FFF3B0",
+    "bigger 4-point star with gold edge #F2B640",
+    "biggest star with 4 small dots around",
+    "fading: small dots only"
+   ]
+  },
+  {
+   "id": "fx_puff",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 12,
+   "priority": "P0",
+   "use": "poof, landing, disappearing",
+   "description": "",
+   "poses": [
+    "small round cream dust cloud",
+    "bigger cloud, three bumps",
+    "biggest cloud, breaking apart",
+    "a few small dust dots"
+   ]
+  },
+  {
+   "id": "fx_confetti",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 10,
+   "priority": "P0",
+   "use": "celebration",
+   "description": "",
+   "poses": [
+    "burst of small red, gold and green squares close together",
+    "squares spreading out",
+    "squares falling and spreading",
+    "a few squares at the bottom"
+   ]
+  },
+  {
+   "id": "fx_hearts",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 8,
+   "priority": "P1",
+   "use": "love, gift received",
+   "description": "",
+   "poses": [
+    "one small red pixel heart",
+    "heart rising, a second smaller heart",
+    "two hearts higher",
+    "hearts fading"
+   ]
+  },
+  {
+   "id": "fx_sweat",
+   "format": "small",
+   "frames": 4,
+   "mode": "loop",
+   "fps": 8,
+   "priority": "P0",
+   "use": "heat, nerves",
+   "description": "",
+   "poses": [
+    "one light blue sweat drop",
+    "two drops flying outward",
+    "three drops",
+    "drops fading"
+   ]
+  },
+  {
+   "id": "fx_idea",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 10,
+   "priority": "P0",
+   "use": "eureka (no text)",
+   "description": "",
+   "poses": [
+    "small yellow glow",
+    "a glowing yellow light bulb with short rays",
+    "bulb with long rays",
+    "bulb with short rays"
+   ]
+  },
+  {
+   "id": "fx_steam",
+   "format": "small",
+   "frames": 4,
+   "mode": "loop",
+   "fps": 8,
+   "priority": "P2",
+   "use": "anger, heat",
+   "description": "",
+   "poses": [
+    "small grey puff",
+    "two puffs rising",
+    "puffs bigger",
+    "puffs fading"
+   ]
+  },
+  {
+   "id": "fx_swirl",
+   "format": "small",
+   "frames": 4,
+   "mode": "loop",
+   "fps": 8,
+   "priority": "P1",
+   "use": "confusion (instead of a question mark)",
+   "description": "",
+   "poses": [
+    "small dark spiral",
+    "spiral rotated",
+    "spiral rotated again",
+    "spiral rotated again"
+   ]
+  },
+  {
+   "id": "fx_moth",
+   "format": "small",
+   "frames": 2,
+   "mode": "loop",
+   "fps": 10,
+   "priority": "P0",
+   "use": "empty sack / empty wallet gag",
+   "description": "",
+   "poses": [
+    "small grey moth, wings up",
+    "small grey moth, wings down"
+   ]
+  },
+  {
+   "id": "fx_magic_ring",
+   "format": "small",
+   "frames": 4,
+   "mode": "once",
+   "fps": 10,
+   "priority": "P1",
+   "use": "spells",
+   "description": "",
+   "poses": [
+    "thin gold ring of sparkles, small",
+    "ring bigger",
+    "ring biggest, sparkles separating",
+    "only sparkles"
+   ]
+  },
+  {
+   "id": "fx_notes",
+   "format": "small",
+   "frames": 4,
+   "mode": "loop",
+   "fps": 6,
+   "priority": "P2",
+   "use": "happy, music",
+   "description": "",
+   "poses": [
+    "one small musical note",
+    "two notes rising",
+    "notes higher",
+    "notes fading"
+   ]
+  },
+  {
+   "id": "fx_dust_motes",
+   "format": "small",
+   "frames": 2,
+   "mode": "loop",
+   "fps": 2,
+   "priority": "P2",
+   "use": "ambient sunbeam",
+   "description": "",
+   "poses": [
+    "three tiny pale dots",
+    "dots shifted"
+   ]
+  }
+ ],
+ "items": {
+  "format": "item",
+  "photos_dir": "assets/p/<id>.webp",
+  "list": [
+   {
+    "id": "cafe",
+    "description": "takeaway coffee cup fidget clicker: white cup, black lid, brown sleeve"
+   },
+   {
+    "id": "banana",
+    "description": "half-peeled yellow banana fidget clicker"
+   },
+   {
+    "id": "suculenta",
+    "description": "tiny green succulent in a small pot, fidget clicker"
+   },
+   {
+    "id": "hamster",
+    "description": "little hamster peeking out of a cracked egg shell, fidget clicker"
+   },
+   {
+    "id": "calavera",
+    "description": "small white skull keychain with a metal ring"
+   },
+   {
+    "id": "garaje",
+    "description": "black wall display grid holding six tiny colourful toy cars (2 columns x 3 rows)"
+   },
+   {
+    "id": "panal",
+    "description": "black hexagon honeycomb wall display cells with two tiny toy cars"
+   },
+   {
+    "id": "plegable",
+    "description": "wooden-coloured octagonal tube that is a travel chess set, slightly open with chess pieces inside"
+   },
+   {
+    "id": "medieval",
+    "description": "medieval chess knight and castle tower pieces, grey stone colour"
+   },
+   {
+    "id": "perros-gatos",
+    "description": "two chess pieces: a cat king and a dog king"
+   },
+   {
+    "id": "domino",
+    "description": "a small white box with domino tiles stacked beside it"
+   },
+   {
+    "id": "hoja",
+    "description": "white leaf-shaped hanging bird feeder, a curved leaf with veins"
+   },
+   {
+    "id": "driftwood",
+    "description": "rustic birdhouse that looks like driftwood planks, round hole"
+   },
+   {
+    "id": "maceta",
+    "description": "quilted gold planter that looks like padded fabric"
+   },
+   {
+    "id": "bowl",
+    "description": "melted-looking bowl for keys, dripping edges"
+   },
+   {
+    "id": "cassette",
+    "description": "giant retro cassette tape"
+   }
+  ]
+ }
+}

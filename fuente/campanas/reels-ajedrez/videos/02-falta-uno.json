@@ -1,0 +1,111 @@
+{
+  "_nota": "Reel 2 · Falta uno. Tiempos en segundos. Ver 02-final.md. Se arma con: python3 fuente/campanas/reels-ajedrez/armar_reel.py fuente/campanas/reels-ajedrez/videos/02-falta-uno.json",
+  "video": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-gemini-crudo.mp4",
+  "duracion": 10,
+  "fps": 30,
+  "formato": "bandas",
+  "video_y": 540,
+  "bordes_negros": {
+    "_nota": "De 0 a 2 s el crudo es la imagen vertical centrada con barras negras (columnas 0-278 y 1002-1279); fundido a la escena del sillón de 1,975 a 2,21 s",
+    "x": [279, 1001],
+    "fundido": [1.975, 2.21]
+  },
+  "fuente": "fonts/MagoPixel-Bold.woff",
+  "glifo": "assets/px/glifo-oro.png",
+  "glifo_escala": 2,
+  "lufs": -14,
+  "musica_db": 0,
+  "ducking": {
+    "umbral": 0.012,
+    "ratio": 10,
+    "ataque": 15,
+    "suelta": 350
+  },
+  "voz": {
+    "toma": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-voz-toma-gemini.wav",
+    "ganancia_db": 0,
+    "frases": [
+      {
+        "texto": "¿Se te perdió el caballo?",
+        "corte": [0.04, 1.24],
+        "en": 0.35
+      },
+      {
+        "texto": "Mandame fotos de su pareja y las medidas, y te lo imprimo.",
+        "corte": [1.92, 4.47],
+        "en": 2.75
+      },
+      {
+        "texto": "Si no se puede, te aviso antes.",
+        "corte": [4.78, 6.08],
+        "en": 7.85
+      }
+    ]
+  },
+  "textos": [
+    {
+      "texto": "FALTA UNO",
+      "estilo": "dialogo",
+      "desde": 0.05,
+      "hasta": 5.1,
+      "tam": 70,
+      "y": 300,
+      "tipeo": 0.3,
+      "colores": {
+        "FALTA UNO": "#F2A93B"
+      }
+    },
+    {
+      "texto": "BUSCANDO... 0 DE 1",
+      "estilo": "suelto",
+      "desde": 2.25,
+      "hasta": 5.05,
+      "tam": 50,
+      "x": 30,
+      "y": 440,
+      "tipeo": 0.5
+    },
+    {
+      "texto": "Lo copio\ndel otro bando",
+      "estilo": "dialogo",
+      "desde": 5.1,
+      "hasta": 7.6,
+      "tam": 70,
+      "y": 300,
+      "pad_abajo": 14,
+      "tipeo": 0.6,
+      "flecha": false
+    },
+    {
+      "texto": "Piezas de repuesto\nimpresas en 3D",
+      "estilo": "dialogo",
+      "desde": 7.6,
+      "hasta": 10.01,
+      "tam": 70,
+      "y": 300,
+      "tipeo": 0.6,
+      "flecha": false
+    },
+    {
+      "texto": "Escribime por mensaje\nTE PASO EL PRECIO",
+      "estilo": "cierre",
+      "desde": 8.3,
+      "hasta": 10.01,
+      "tams": [50, 60],
+      "y": 1488,
+      "abajo": true,
+      "glifo": true,
+      "glifo_solapa": 24,
+      "colores": {
+        "TE PASO EL PRECIO": "#F2A93B"
+      }
+    }
+  ],
+  "salidas": {
+    "final": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-final.mp4",
+    "sin_voz": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-sin-voz.mp4",
+    "voz": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-voz.wav",
+    "hoja": "fuente/campanas/reels-ajedrez/videos/02-falta-uno-hoja-contacto.png"
+  },
+  "hoja_tiempos": [0.5, 3, 6, 9.5]
+}

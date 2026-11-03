@@ -117,10 +117,14 @@ def dibujar_caja_texto(p, d, t, tiempo, glifo=None):
     anchos = [p.ancho(ln, s) for ln, s in zip(lineas, tams)]
     caja_w = int(max(anchos) + 2 * pad_x)
     caja_h = int(sum(altos) + gap * (len(lineas) - 1) + 2 * pad_y)
+    caja_h += t.get("pad_abajo", 0)  # aire extra abajo cuando el último renglón no tiene descendentes
     cx = W // 2
     y_ancla = t["y"]  # y de arriba de la caja, o de abajo si "abajo": true
     y0 = y_ancla - caja_h if t.get("abajo") else y_ancla
     x0 = cx - caja_w // 2
+    izquierda = t.get("x") is not None  # "x": borde izquierdo del bloque; los renglones se alinean a la izquierda
+    if izquierda:
+        x0 = t["x"]
     x0 -= x0 % u
     y0 -= y0 % u
 
@@ -143,7 +147,7 @@ def dibujar_caja_texto(p, d, t, tiempo, glifo=None):
     for ln, s, a, h in zip(lineas, tams, anchos, altos):
         vis = ln[:max(0, mostrar)]
         mostrar -= len(ln)
-        x = cx - a / 2
+        x = x0 + pad_x if izquierda else cx - a / 2
         x -= x % u
         color = t.get("colores", {}).get(ln, CREMA)
         if vis:
@@ -172,15 +176,33 @@ def capa(p, cfg, tiempo, glifo):
 
 # ---------------------------------------------------------------- video y audio
 
+def filtro_bordes(cfg):
+    """Pinta de índigo las barras negras laterales que trae a veces el principio del crudo (una imagen vertical
+    centrada en el 16:9). En el fundido a la escena siguiente suma el índigo en proporción inversa al fundido:
+    la barra fundida vale p * escena, así que p * escena + (1 - p) * índigo es el mismo fundido, pero desde el índigo
+    de las bandas. Opcional: el reel 1 no lo usa."""
+    b = cfg.get("bordes_negros")
+    if not b:
+        return ""
+    x0, x1 = b["x"]          # columnas de la imagen (en el crudo); afuera de [x0, x1] es barra
+    t0, t1 = b["fundido"]    # segundos en que empieza y termina el fundido a la escena siguiente
+    k = f"(1-clip((T-{t0})/{t1 - t0},0,1))*(lt(X,{x0})+gt(X,{x1}))"
+    rgb = [int(INDIGO[i:i + 2], 16) for i in (1, 3, 5)]
+    canal = lambda c, v: f"{c}='if(gte({k},1),{v},clip({c}(X,Y)+{v}*{k},0,255))'"
+    exprs = ":".join(canal(c, v) for c, v in zip("rgb", rgb))
+    return f"format=gbrp,geq={exprs}:enable='lt(t,{t1 + 0.05})',"
+
+
 def filtro_video(cfg):
     fmt = cfg.get("formato", "bandas")
     fps = cfg.get("fps", 30)
+    pre = filtro_bordes(cfg)
     if fmt == "recorte":
         v = f"crop=ih*9/16:ih,scale={W}:{H}:flags=neighbor"
     else:
         vy = cfg.get("video_y")
         v = f"scale={W}:-2:flags=neighbor,pad={W}:{H}:0:{vy if vy is not None else '(oh-ih)/2'}:color={INDIGO}"
-    return f"[0:v]{v},fps={fps},setsar=1,trim=0:{cfg['duracion']},setpts=PTS-STARTPTS[base]"
+    return f"[0:v]{pre}{v},fps={fps},setsar=1,trim=0:{cfg['duracion']},setpts=PTS-STARTPTS[base]"
 
 
 def voz_en_linea(cfg, tmp):

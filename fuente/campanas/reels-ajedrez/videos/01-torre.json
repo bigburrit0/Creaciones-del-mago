@@ -1,0 +1,115 @@
+{
+  "_nota": "Reel 1 · La torre que muerde el escudo. Tiempos en segundos. Ver 01-final.md. Se arma con: python3 fuente/campanas/reels-ajedrez/armar_reel.py fuente/campanas/reels-ajedrez/videos/01-torre.json",
+  "video": "fuente/campanas/reels-ajedrez/videos/01-torre-gemini-crudo.mp4",
+  "duracion": 10,
+  "fps": 30,
+  "formato": "bandas",
+  "video_y": 540,
+  "fuente": "fonts/MagoPixel-Bold.woff",
+  "glifo": "assets/px/glifo-oro.png",
+  "glifo_escala": 2,
+  "lufs": -14,
+  "musica_db": 0,
+  "ducking": {
+    "umbral": 0.012,
+    "ratio": 10,
+    "ataque": 15,
+    "suelta": 350
+  },
+  "voz": {
+    "toma": "fuente/campanas/reels-ajedrez/videos/01-torre-voz-toma-gemini.wav",
+    "ganancia_db": 0,
+    "frases": [
+      {
+        "texto": "Hace más de ochocientos años alguien talló una torre que muerde su escudo.",
+        "corte": [
+          0.18,
+          3.4
+        ],
+        "en": 0.55
+      },
+      {
+        "texto": "Yo imprimo el ajedrez vikingo.",
+        "corte": [
+          3.7,
+          4.94
+        ],
+        "en": 7.0
+      },
+      {
+        "texto": "Escribime y te paso el precio.",
+        "corte": [
+          5.26,
+          6.46
+        ],
+        "en": 8.45
+      }
+    ]
+  },
+  "textos": [
+    {
+      "texto": "ESTA TORRE\nMUERDE EL ESCUDO",
+      "estilo": "dialogo",
+      "desde": 0.15,
+      "hasta": 6.8,
+      "tam": 70,
+      "y": 300,
+      "tipeo": 1.0
+    },
+    {
+      "texto": "PIEZAS DE LEWIS\nSIGLO XII",
+      "estilo": "suelto",
+      "desde": 2.4,
+      "hasta": 8.3,
+      "tams": [
+        60,
+        60
+      ],
+      "y": 1236,
+      "tipeo": 0.5,
+      "colores": {
+        "SIGLO XII": "#F2A93B"
+      }
+    },
+    {
+      "texto": "Ajedrez vikingo\nimpreso en 3D",
+      "estilo": "dialogo",
+      "desde": 6.8,
+      "hasta": 10.01,
+      "tam": 70,
+      "y": 300,
+      "tipeo": 0.6,
+      "flecha": false
+    },
+    {
+      "texto": "Escribime por WhatsApp\n092 104 419",
+      "estilo": "cierre",
+      "desde": 8.3,
+      "hasta": 10.01,
+      "tams": [
+        50,
+        80
+      ],
+      "y": 1488,
+      "abajo": true,
+      "glifo": true,
+      "glifo_solapa": 40,
+      "colores": {
+        "092 104 419": "#F2A93B"
+      }
+    }
+  ],
+  "salidas": {
+    "final": "fuente/campanas/reels-ajedrez/videos/01-torre-final.mp4",
+    "sin_voz": "fuente/campanas/reels-ajedrez/videos/01-torre-sin-voz.mp4",
+    "voz": "fuente/campanas/reels-ajedrez/videos/01-torre-voz.wav",
+    "hoja": "fuente/campanas/reels-ajedrez/videos/01-torre-hoja-contacto.png"
+  },
+  "hoja_tiempos": [
+    0.5,
+    3,
+    6,
+    7.5,
+    9.5
+  ]
+}

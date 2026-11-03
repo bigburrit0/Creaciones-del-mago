@@ -93,7 +93,7 @@ No text, no letters, no numbers, no prices, no subtitles, no captions, no logos 
 | 0:00 – 0:03 | La garra baja y agarra al rey | `ÚLTIMA FICHA` | «Este no lo sacás con la garra.» |
 | 0:03 – 0:06 | Lo sube… y se resbala | `…CASI` | (silencio: que se escuche el «wah-wah») |
 | 0:06 – 0:08 | El ajedrez en el estante | `Ajedrez escultórico · rey de 8 cm` | «Ajedrez escultórico, rey de ocho centímetros, con lugar para imanes.» |
-| 0:08 – 0:10 | Destello sobre el rey | `Impreso en 3D · WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:08 – 0:10 | Destello sobre el rey | `Impreso en 3D` / `Escribime por mensaje` | «Escribime y te paso el precio.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Este no lo sacás con la garra. Ajedrez escultórico, rey de ocho centímetros, con lugar para imanes. Escribime y te
@@ -103,8 +103,8 @@ No text, no letters, no numbers, no prices, no subtitles, no captions, no logos 
 
 > Este no sale de la máquina de la garra. Es el ajedrez escultórico: piezas retorcidas como una cinta, con un rey de
 > 8 cm y lugar para imanes. Lo imprimo en 3D en Montevideo, en los dos colores que elijas. Queda bien armado en un
-> estante, aunque en tu casa nadie juegue. Las fotos del catálogo son del diseñador. Te paso precio y fecha por
-> WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+> estante, aunque en tu casa nadie juegue. Las fotos del catálogo son del diseñador. Te paso precio y fecha por mensaje
+> antes de empezar, sin compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:06 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

@@ -30,7 +30,7 @@ arriba y los 420 px de abajo.
 | 0,15 – 6,8 s | `ESTA TORRE` / `MUERDE EL ESCUDO` (entra letra por letra) | | 0,55 – 3,7 s: «Hace más de ochocientos años alguien talló una torre que muerde su escudo.» |
 | 2,4 – 8,3 s | | `PIEZAS DE LEWIS` / `SIGLO XII` (dorado) | (música y marcha del ejército, sin voz) |
 | 6,8 – 10 s | `Ajedrez vikingo` / `impreso en 3D` | | 7,0 – 8,2 s: «Yo imprimo el ajedrez vikingo.» |
-| 8,3 – 10 s | | Cierre: glifo dorado + caja `Escribime por WhatsApp` / `092 104 419` | 8,45 – 9,6 s: «Escribime y te paso el precio.» |
+| 8,3 – 10 s | | Cierre: glifo dorado + caja `Escribime por mensaje` / `TE PASO EL PRECIO` (dorado) | 8,45 – 9,6 s: «Escribime y te paso el precio.» |
 
 Voz completa (22 palabras): «Hace más de ochocientos años alguien talló una torre que muerde su escudo. Yo imprimo el
 ajedrez vikingo. Escribime y te paso el precio.»
@@ -38,8 +38,8 @@ ajedrez vikingo. Escribime y te paso el precio.»
 Cambios contra el guion base:
 - El dato de Lewis pasa a la banda de abajo y queda en pantalla de 2,4 a 8,3 s, mientras la caja de arriba sigue
   con el gancho. Así no hay bandas vacías y el gancho dura lo que dura la frase.
-- «WhatsApp 092 104 419» pasa a «Escribime por WhatsApp / 092 104 419»: el botón dice la acción (COPY-RULES, 12) y
-  repite el verbo de la voz.
+- El cierre no lleva número de teléfono (decisión del dueño, COPY-RULES 17): el cierre del guion base pasa a
+  «Escribime por mensaje / TE PASO EL PRECIO». El botón dice la acción (COPY-RULES 12) y repite la frase de la voz.
 - La voz no va pegada: la frase 1 va sobre el clic y el brillo, la 2 cuando aparece el set en la mesa y la 3 con el
   cierre. Entre 3,7 y 7 s se escucha la marcha del ejército.
 
@@ -93,11 +93,10 @@ Hace más de ochocientos años alguien talló una torre que muerde su escudo. Yo
 > Las piezas de Lewis aparecieron en 1831 en una isla de Escocia y son del siglo XII: hay torres que son guerreros
 > mordiendo el escudo. Hoy 82 están en el Museo Británico y 11 en Edimburgo. Mi ajedrez vikingo no es una copia de
 > esas piezas, es otro diseño con el mismo espíritu: reyes con espada y reinas con escudo, impreso en 3D en
-> Montevideo, en los colores que elijas. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> Montevideo, en los colores que elijas. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 ## Revisión
 
 Hoja de contacto en `videos/01-torre-hoja-contacto.png` (0,5 s, 3 s, 6 s, 7,5 s y 9,5 s, con las zonas de botones
-marcadas en rojo): ningún texto entra en esas zonas ni queda cortado. El glifo del cierre roza el borde de abajo del
-video, sin tapar el tablero.
+marcadas en rojo): ningún texto entra en esas zonas ni queda cortado. En ningún cuadro aparece el número de teléfono.

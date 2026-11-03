@@ -82,20 +82,20 @@
       "flecha": false
     },
     {
-      "texto": "Escribime por WhatsApp\n092 104 419",
+      "texto": "Escribime por mensaje\nTE PASO EL PRECIO",
       "estilo": "cierre",
       "desde": 8.3,
       "hasta": 10.01,
       "tams": [
         50,
-        80
+        60
       ],
       "y": 1488,
       "abajo": true,
       "glifo": true,
-      "glifo_solapa": 40,
+      "glifo_solapa": 24,
       "colores": {
-        "092 104 419": "#F2A93B"
+        "TE PASO EL PRECIO": "#F2A93B"
       }
     }
   ],

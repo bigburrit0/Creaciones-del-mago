@@ -95,7 +95,7 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:02 | El hueco brilla en el tablero | `FALTA UNO` | «¿Se te perdió el caballo?» |
 | 0:02 – 0:05 | La linterna debajo del sillón | `BUSCANDO… 0 DE 1` | «Mandame fotos de su pareja y las medidas,» |
 | 0:05 – 0:07 | La impresora termina el caballo | `Lo copio del otro bando` | «y te lo imprimo.» |
-| 0:07 – 0:10 | El juego completo, el perro con el viejo | `Piezas de repuesto · impresas en 3D` / `WhatsApp 092 104 419` | «Si no se puede, te aviso antes.» |
+| 0:07 – 0:10 | El juego completo, el perro con el viejo | `Piezas de repuesto · impresas en 3D` / `Escribime por mensaje` | «Si no se puede, te aviso antes.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «¿Se te perdió el caballo? Mandame fotos de su pareja y las medidas, y te lo imprimo. Si no se puede, te aviso
@@ -106,7 +106,7 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 > Para jugar hoy: si falta un peón, usá una tapita; si falta la dama, una torre dada vuelta, como en los clubes.
 > Para reponerla, mandame fotos de la pieza que falta en su pareja del otro bando (si perdiste el caballo negro, el
 > blanco tiene la misma forma), la altura y el ancho de la base. La imprimo en 3D en Montevideo y te paso el precio
-> por WhatsApp antes de empezar, sin compromiso. Si no se puede imprimir, te aviso antes. 092 104 419 ·
+> por mensaje antes de empezar, sin compromiso. Si no se puede imprimir, te aviso antes.
 > creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):

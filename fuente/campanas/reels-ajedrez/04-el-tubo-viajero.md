@@ -93,7 +93,7 @@ No text, no letters, no numbers, no place names, no subtitles, no captions, no l
 | 0:00 – 0:03 | El Mago sale del pueblo con el tubo | `¿QUÉ LLEVA EN EL TUBO?` | «Se pliega en un tubo» |
 | 0:03 – 0:06 | Pasa el faro, llega a la playa | `24 CM` (al lado del tubo) | «de veinticuatro centímetros con las piezas adentro.» |
 | 0:06 – 0:09 | El tubo se abre en un tablero | `Ajedrez de viaje · impreso en 3D` | «Para la playa, el ómnibus o la mochila.» |
-| 0:09 – 0:10 | El Mago piensa la jugada | `WhatsApp 092 104 419` | «Escribime.» |
+| 0:09 – 0:10 | El Mago piensa la jugada | `Escribime por mensaje` | «Escribime.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Se pliega en un tubo de veinticuatro centímetros con las piezas adentro. Para la playa, el ómnibus o la mochila.
@@ -103,8 +103,8 @@ No text, no letters, no numbers, no place names, no subtitles, no captions, no l
 
 > El ajedrez de viaje se pliega en un tubo de 24 cm con las piezas adentro. Lo imprimo en 3D en Montevideo, en los
 > colores que elijas, y lo mando a todo Uruguay; en La Unión, La Blanqueada y parte de Buceo te lo llevo sin costo.
-> Las piezas son chicas, pensadas para viajar. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> Las piezas son chicas, pensadas para viajar. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:06 a 0:10 y la última frase de la voz):
 - **Vacaciones:** `Para llevar de vacaciones` · «Para las vacaciones. Escribime y te paso el precio.»

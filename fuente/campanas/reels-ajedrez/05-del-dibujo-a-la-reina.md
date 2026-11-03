@@ -93,7 +93,7 @@ No text, no letters, no numbers, no menu words, no subtitles, no captions, no lo
 | 0:00 – 0:03 | El dibujo del perro en la pantalla | `ESTE DIBUJO…` | «Mandame una foto o un dibujo de tu perro» |
 | 0:03 – 0:05 | Se vuelve sprite de pieza | `…ES UNA DAMA` | «y lo vuelvo la dama de tu ajedrez.» |
 | 0:05 – 0:08 | La impresora la imprime | `Desde una foto o un dibujo` | «Lo imprimo en 3D.» |
-| 0:08 – 0:10 | La dama en el tablero, el perro duerme | `Ajedrez personalizado · WhatsApp 092 104 419` | «Si no se puede imprimir, te aviso antes.» |
+| 0:08 – 0:10 | La dama en el tablero, el perro duerme | `Ajedrez personalizado` / `Escribime por mensaje` | «Si no se puede imprimir, te aviso antes.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Mandame una foto o un dibujo de tu perro y lo vuelvo la dama de tu ajedrez. Lo imprimo en 3D. Si no se puede
@@ -104,7 +104,7 @@ No text, no letters, no numbers, no menu words, no subtitles, no captions, no lo
 > Una pieza puede salir de una foto o de un dibujo: tu perro, tu gato, lo que dibujó tu hijo. La diseño y la
 > imprimo en 3D en Montevideo, en el color que quieras. Se puede hacer una sola pieza para un ajedrez
 > que ya tenés, o el juego entero. Si algo no se puede imprimir, te aviso antes de empezar. Te paso precio y fecha
-> por WhatsApp, sin compromiso. 092 104 419 · creacionesdelmago.com
+> por mensaje, sin compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:05 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

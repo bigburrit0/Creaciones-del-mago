@@ -93,7 +93,7 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:03 | Las partes encastran | `JUEVES · 20 HS · CLUB` | «Tablero de tamaño reglamentario» |
 | 0:03 – 0:05 | El tablero se completa | `TAMAÑO REGLAMENTARIO` | «que se arma por partes.» |
 | 0:05 – 0:07 | Las piezas lisas a su lugar | `Piezas lisas, sin adornos` | «Piezas lisas, sin adornos.» |
-| 0:07 – 0:10 | Unas jugadas y el reloj | `Impreso en 3D · WhatsApp 092 104 419` | «Para el torneo de los jueves. Escribime.» |
+| 0:07 – 0:10 | Unas jugadas y el reloj | `Impreso en 3D` / `Escribime por mensaje` | «Para el torneo de los jueves. Escribime.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Tablero de tamaño reglamentario que se arma por partes. Piezas lisas, sin adornos. Para el torneo de los jueves.
@@ -104,8 +104,8 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 > El tablero rompecabezas es de tamaño reglamentario y se arma por partes. No trae piezas: las del video son las del
 > ajedrez minimalista, que va aparte. Según la FIDE, en un juego de torneo el rey mide unos 9,5 cm y la casilla
 > entre 5 y 6 cm; si querés las piezas en esa medida, decímelo. Lo imprimo en 3D en Montevideo, en los colores que
-> quieras (los de tu club, por ejemplo). Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> quieras (los de tu club, por ejemplo). Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:05 a 0:10 y la última frase de la voz):
 - **Colores del club:** `En los colores de tu club` · «En los colores de tu club. Escribime.»

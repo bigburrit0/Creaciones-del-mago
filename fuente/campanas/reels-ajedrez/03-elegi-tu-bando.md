@@ -91,7 +91,7 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 | 0:00 – 0:03 | El cuadro elige al perro y a la gata | `ELEGÍ TU BANDO` | «¿Perros o gatos?» |
 | 0:03 – 0:06 | Rey perro contra reina gata | `PERROS · GATOS` (uno de cada lado del rayo) | «En este ajedrez se elige bando.» |
 | 0:06 – 0:08 | Saltan al tablero | (sigue) | «Lo imprimo en los colores que quieras.» |
-| 0:08 – 0:10 | El ajedrez en la cocina | `Perros contra gatos · ajedrez impreso en 3D` / `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:08 – 0:10 | El ajedrez en la cocina | `Perros contra gatos · ajedrez impreso en 3D` / `Escribime por mensaje` | «Escribime y te paso el precio.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «¿Perros o gatos? En este ajedrez se elige bando. Lo imprimo en los colores que quieras. Escribime y te paso el
@@ -101,8 +101,8 @@ No text, no letters, no numbers, no subtitles, no captions, no logos anywhere in
 
 > Los perros de un lado, los gatos del otro, y vos elegís bando. Es un ajedrez impreso en 3D en Montevideo: elegís
 > los colores de cada bando y el tamaño. Para un chico que empieza, conviene un rey de 7 a 9 cm y dos colores bien
-> distintos. Son solo las piezas; el tablero lo imprimo aparte si lo querés. Te paso precio y fecha por WhatsApp
-> antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+> distintos. Son solo las piezas; el tablero lo imprimo aparte si lo querés. Te paso precio y fecha por mensaje
+> antes de empezar, sin compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:08 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

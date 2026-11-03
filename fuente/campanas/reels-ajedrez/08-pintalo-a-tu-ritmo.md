@@ -92,7 +92,7 @@ No text, no letters, no numbers, no scores, no subtitles, no captions, no logos 
 | 0:00 – 0:03 | Caen las notas, el casco se pinta | `¿PINTÁS MINIATURAS?` | «Si pintás miniaturas,» |
 | 0:03 – 0:06 | Combo: capa y caballo | `COMBO x32` (una pieza por acierto) | «este medieval tiene detalle para rato.» |
 | 0:06 – 0:08 | El caballero salta al tablero | `Te lo imprimo en un color liso` | «Te lo imprimo en un color liso y lo pintás vos.» |
-| 0:08 – 0:10 | La fila de piezas pintadas | `Ajedrez medieval detallado · WhatsApp 092 104 419` | «Escribime.» |
+| 0:08 – 0:10 | La fila de piezas pintadas | `Ajedrez medieval detallado` / `Escribime por mensaje` | «Escribime.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Si pintás miniaturas, este medieval tiene detalle para rato. Te lo imprimo en un color liso y lo pintás vos.
@@ -102,8 +102,8 @@ No text, no letters, no numbers, no scores, no subtitles, no captions, no logos 
 
 > Para los que pintan miniaturas: el ajedrez medieval detallado son 32 piezas con armaduras, capas y caballos. Te lo
 > imprimo en 3D en Montevideo en un solo color, para que lo pintes vos, o ya en dos colores si lo querés para jugar.
-> Ojo: la pintura y los pinceles no vienen. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> Ojo: la pintura y los pinceles no vienen. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:06 a 0:10 y la última frase de la voz):
 - **Para jugar:** `¿No pintás? Te lo imprimo en dos colores` · «¿No pintás? Te lo imprimo en dos colores.»

@@ -47,6 +47,10 @@ o discutida.
 16. **Cada respuesta de las preguntas frecuentes se entiende sola** (la puede citar un asistente de IA
     sin la pregunta): nombra qué se hace, dónde y con qué límite.
 
+17. **Nada de número de teléfono en reels, videos ni posts de redes.** Ni en pantalla, ni en la voz, ni en el
+    texto del post. El cierre es una acción: "Escribime por mensaje", "Te paso el precio por mensaje". El
+    número va solo en la web y en las guías (decisión del dueño, 3/11/2026).
+
 ## Prohibido
 Sumergite · descubrí · elevá · experiencia única · calidad premium · diseños
 únicos · "no es solo X, es Y" · tríadas de adjetivos · transformamos tus ideas ·

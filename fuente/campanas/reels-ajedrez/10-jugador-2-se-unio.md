@@ -95,7 +95,7 @@ No text, no letters, no numbers, no "player" labels, no subtitles, no captions, 
 | 0:00 – 0:03 | Pantalla dividida, silla vacía | Arriba `1P` · abajo `2P PRESIONÁ START` | «Más de diez horas de impresora» |
 | 0:03 – 0:06 | La línea se abre, el chico se sienta | `JUGADOR 2 SE UNIÓ` | «para que alguien se siente enfrente.» |
 | 0:06 – 0:08 | Juegan | `Ajedrez medieval · impreso en 3D` | «Ajedrez medieval, para regalar y jugar.» |
-| 0:08 – 0:10 | La partida en la mesa | `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:08 – 0:10 | La partida en la mesa | `Escribime por mensaje` | «Escribime y te paso el precio.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Más de diez horas de impresora para que alguien se siente enfrente. Ajedrez medieval, para regalar y jugar.
@@ -106,7 +106,7 @@ No text, no letters, no numbers, no "player" labels, no subtitles, no captions, 
 > Un ajedrez para regalar, pero sobre todo para sentarse a jugar. El medieval tiene caballeros con armadura y torres
 > de castillo, y lleva más de 10 horas de impresora. Lo imprimo en 3D en Montevideo, en los dos colores que elijas.
 > Son solo las piezas; el tablero lo imprimo aparte si lo querés. Si es para las fiestas, decímelo y te digo si
-> llego. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso. 092 104 419 · creacionesdelmago.com
+> llego. Te paso precio y fecha por mensaje antes de empezar, sin compromiso. creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:06 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

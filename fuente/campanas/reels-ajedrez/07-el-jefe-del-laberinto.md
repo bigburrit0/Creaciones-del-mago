@@ -92,7 +92,7 @@ No text, no letters, no numbers, no Greek inscriptions, no health bars, no subti
 | 0:00 – 0:03 | El héroe camina, ojos rojos en la puerta | `NIVEL FINAL` | «Minotauro contra Hércules.» |
 | 0:03 – 0:05 | Sale el minotauro | `JEFE: MINOTAURO` | «Este ajedrez trae su tablero:» |
 | 0:05 – 0:07 | Chocan, el piso se vuelve tablero | (sigue) | «cincuenta y dos por cincuenta centímetros.» |
-| 0:07 – 0:10 | El ajedrez griego en la mesa | `Ajedrez de la antigua Grecia · con tablero 52 × 50 cm` / `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:07 – 0:10 | El ajedrez griego en la mesa | `Ajedrez de la antigua Grecia · con tablero 52 × 50 cm` / `Escribime por mensaje` | «Escribime y te paso el precio.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Minotauro contra Hércules. Este ajedrez trae su tablero: cincuenta y dos por cincuenta centímetros. Escribime y
@@ -102,8 +102,8 @@ No text, no letters, no numbers, no Greek inscriptions, no health bars, no subti
 
 > Minotauro contra Hércules. Es el único ajedrez del catálogo que trae tablero, de 52 × 50 cm. Las fotos son del
 > diseñador del modelo; yo lo imprimo en 3D en Montevideo, en los colores que elijas. Es una pieza para tener a la
-> vista, y también se juega. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> vista, y también se juega. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:07 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

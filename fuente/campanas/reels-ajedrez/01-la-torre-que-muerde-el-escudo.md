@@ -93,7 +93,7 @@ No text, no letters, no numbers, no runes, no subtitles, no captions, no logos a
 | 0:00 – 0:03 | El cursor hace clic en la vitrina | `ESTA TORRE MUERDE EL ESCUDO` | «Hace más de 800 años» |
 | 0:03 – 0:06 | La torre salta, llega el ejército dorado | `PIEZAS DE LEWIS · SIGLO XII` | «alguien talló una torre que muerde su escudo.» |
 | 0:06 – 0:09 | El set aparece en la mesa | `Ajedrez vikingo · impreso en 3D` | «Yo imprimo el ajedrez vikingo.» |
-| 0:09 – 0:10 | Destellos, cuadro quieto | `WhatsApp 092 104 419` | «Escribime y te paso el precio.» |
+| 0:09 – 0:10 | Destellos, cuadro quieto | `Escribime por mensaje` | «Escribime y te paso el precio.» |
 
 **Voz en off completa** (grabala vos con el celular):
 > «Hace más de 800 años alguien talló una torre que muerde su escudo. Yo imprimo el ajedrez vikingo. Escribime y te
@@ -104,8 +104,8 @@ No text, no letters, no numbers, no runes, no subtitles, no captions, no logos a
 > Las piezas de Lewis aparecieron en 1831 en una isla de Escocia y son del siglo XII: hay torres que son guerreros
 > mordiendo el escudo. Hoy 82 están en el Museo Británico y 11 en Edimburgo. Mi ajedrez vikingo no es una copia de
 > esas piezas, es otro diseño con el mismo espíritu: reyes con espada y reinas con escudo, impreso en 3D en
-> Montevideo, en los colores que elijas. Te paso precio y fecha por WhatsApp antes de empezar, sin compromiso.
-> 092 104 419 · creacionesdelmago.com
+> Montevideo, en los colores que elijas. Te paso precio y fecha por mensaje antes de empezar, sin compromiso.
+> creacionesdelmago.com
 
 **Otros cierres para probar** (cambian el texto de 0:06 a 0:10 y la última frase de la voz):
 - **Navidad:** `Para Navidad · decímelo y te digo si llego` · «Si es para Navidad, decímelo y te digo si llego.»

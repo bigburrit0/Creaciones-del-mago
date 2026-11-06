@@ -1033,20 +1033,20 @@
       330
      ],
      "stool": [
-      210,
-      340
+      190,
+      372
      ],
      "door": [
-      238,
-      262
-     ],
-     "sack": [
-      178,
+      244,
       352
      ],
+     "sack": [
+      150,
+      390
+     ],
      "tree": [
-      228,
-      214
+      205,
+      192
      ],
      "fan": [
       34,
@@ -1055,9 +1055,21 @@
      "window": [
       135,
       96
+     ],
+     "wreath": [
+      243,
+      215
+     ],
+     "seat": [
+      190,
+      386
+     ],
+     "offer": [
+      134,
+      386
      ]
     },
-    "anchors_note": "Approximate: measure them again on the approved plate and update this list."
+    "anchors_note": "Medidas sobre plate_taller v1 (2026-11-06). La puerta está dibujada en el fondo en perspectiva: el sprite door_R no calza y no se usa en este set."
    },
    "objects": [
     {

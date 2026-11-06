@@ -29,7 +29,6 @@
         <!-- set and props -->
         <div id="garland" class="act"></div>
         <div id="tree" class="act"></div>
-        <div id="door" class="act"></div>
         <div id="wreath" class="act"></div>
         <div id="printer" class="act"></div>
         <div id="fan" class="act"></div>
@@ -70,28 +69,28 @@
       const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool });
 
       // ----- positions (art px, 270x480 grid) -----
-      const P = { door: [238, 262], bench: [80, 240], offer: [158, 340], seat: [214, 352], sack: [172, 356],
-                  hands: [80, 150], printerOut: [80, 172], sackIn: [172, 330] };
+      // measured on the approved empty workshop (plate_taller v1); the door is the one drawn on the right wall
+      const P = { door: [244, 352], bench: [80, 240], offer: [134, 386], seat: [190, 386], sack: [150, 390],
+                  hands: [80, 150], printerOut: [80, 172], sackIn: [150, 364] };
+      const S = (dx, dy) => [P.seat[0] + dx, P.seat[1] + dy];      // points relative to Papá Noel's seat
 
       // ----- set, ambient loops -----
       const garland = R.actor("#garland", "obj.garland", 135, 74);   garland.play(0, "obj.garland", { dur: 15 });
-      const tree = R.actor("#tree", "obj.xmas_tree", 228, 196);     tree.play(0, "obj.xmas_tree", { dur: 15 });
+      const tree = R.actor("#tree", "obj.xmas_tree", 205, 192);     tree.play(0, "obj.xmas_tree", { dur: 15 });
       const fan = R.actor("#fan", "obj.fan", 34, 372);              fan.play(0, "obj.fan", { dur: 15, fps: 12 });
-      const door = R.actor("#door", "obj.door_R", 238, 262);
-      R.actor("#wreath", "obj.wreath", 238, 196);
+      R.actor("#wreath", "obj.wreath", 243, 215);                // on the door drawn in the background
       const printer = R.actor("#printer", "obj.printer", 80, 198);
-      R.actor("#stool", "obj.stool", 214, 338);
+      R.actor("#stool", "obj.stool", P.seat[0], P.seat[1] - 14);
       const sack = R.actor("#sack", "obj.sack", ...P.sack);
 
       // ----- 0-1.75 s : the door bursts open, Papá Noel staggers in and collapses on the stool -----
-      door.play(0, "obj.door_R", { frames: [0, 1, 2], fps: 12 });
-      R.fx(0.02, "fx.fx_puff", 226, 230);
+      R.fx(0.02, "fx.fx_puff", 236, 330);
       const papa = R.actor("#papa", "papa_noel.walk_hot_W", ...P.door);
       papa.show(0.25); papa.z(0.25, 9);
       papa.walk(0.25, 1.1, P.seat[0], P.seat[1], "papa_noel.walk_hot_W");
-      R.fx(0.4, "fx.fx_sweat", 232, 196, { loop: true, dur: 1.0 });
+      R.fx(0.4, "fx.fx_sweat", 240, 252, { loop: true, dur: 1.0 });
       papa.play(1.35, "papa_noel.sit_plop_S", { fps: 10 }); papa.pop(1.55, 0.88);
-      sack.show(1.4); sack.frame(1.4, "obj.sack", 0); R.fx(1.4, "fx.fx_puff", 205, 352);
+      sack.show(1.4); sack.frame(1.4, "obj.sack", 0); R.fx(1.4, "fx.fx_puff", ...S(-9, 0));
 
       const mago = R.actor("#mago", "mago.press_button_N", ...P.bench);
       mago.play(0, "mago.press_button_N", { dur: 0.5 });
@@ -100,19 +99,19 @@
 
       // ----- 1.75-5 s : the wizard brings his mate, Papá Noel cools down -----
       papa.play(1.75, "papa_noel.fan_hot_S", { dur: 1.95 });
-      R.fx(1.75, "fx.fx_sweat", 226, 250, { loop: true, dur: 1.9 });
+      R.fx(1.75, "fx.fx_sweat", ...S(12, -102), { loop: true, dur: 1.9 });
       mago.walk(1.75, 1.45, P.offer[0], P.offer[1], "mago.walk_E");
       mago.play(3.2, "mago.offer_mate_E");
       mago.play(3.7, "mago.idle_S", { dur: 0.7 });
       papa.play(3.7, "papa_noel.sip_mate_S", { fps: 8 });
       papa.play(4.4, "papa_noel.refreshed_S", { fps: 7 });
-      R.fx(4.5, "fx.fx_sparkle", 214, 262);
+      R.fx(4.5, "fx.fx_sparkle", ...S(0, -90));
       mago.play(4.4, "mago.sip_mate_S", { fps: 9 });
 
       // ----- 5-6.9 s : empty sack, sad, idea -----
       sack.hide(5.0);
       papa.play(5.0, "papa_noel.sack_shake_S", { fps: 10 });
-      R.fx(5.15, "fx.fx_moth", 214, 232, { loop: true, dur: 0.6 });
+      R.fx(5.15, "fx.fx_moth", ...S(0, -120), { loop: true, dur: 0.6 });
       papa.play(5.8, "papa_noel.sad_S", { fps: 8 });
       mago.play(5.8, "mago.thinking_S", { dur: 0.6 });
       mago.play(6.4, "mago.idea_S");
@@ -163,16 +162,15 @@
       papa.play(11.6, "papa_noel.joy_jump_S");
       mago.play(11.6, "mago.joy_jump_S");
       R.fx(11.7, "fx.fx_confetti", 150, 230);
-      R.fx(11.9, "fx.fx_hearts", 214, 238);
+      R.fx(11.9, "fx.fx_hearts", ...S(0, -114));
       mago.play(12.35, "mago.idle_S", { dur: 0.95 });
       sack.hide(12.8);
       papa.play(12.8, "papa_noel.sack_shoulder_S");
       papa.z(13.3, 8);
       papa.walk(13.3, 0.45, P.door[0], P.door[1], "papa_noel.walk_sack_E");
       papa.play(13.75, "papa_noel.wave_S", { dur: 0.25 });
-      papa.hide(14.0);
+      papa.hide(14.0); R.fx(13.95, "fx.fx_puff", 236, 330);
       mago.play(13.3, "mago.wave_S", { dur: 0.7 });
-      door.play(14.0, "obj.door_R", { frames: [2, 1, 0], fps: 12 });
       mago.play(13.95, "mago.sip_mate_S", { fps: 9 });
 
       window.__timelines["main"] = tl;

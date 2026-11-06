@@ -1,6 +1,12 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-06
 
 ## Próximo paso exacto
+**DIRECCIÓN: 3D TOON (2026-11-06, noche):** el usuario eligió el 3D toon (no pixel) y pidió proporciones y animación correctas con un equipo de investigación Haiku. Síntesis en `videos/RESEARCH_3D_TOON.md`.
+- El Mago 3D: `videos/biblioteca/3d/mago3d.py` → `glb/mago.glb` (cuerpo de 3 cabezas, sin cuello, sombrero con punta curvada, barba hasta el cinturón, botas, manos de mitón; esqueleto CC0 acortado, 46 clips, huesos extra hat.1-3, beard.1-2, eyes, brows).
+- Reel: `videos/experimentos/mago-toon/` (`build.sh` copia libs y glb; `cues.json` → audio con chiptune.py; `npx hyperframes render --fps 60`). Velocidad de caminata medida del clip (sin patinar), resortes simulados una vez, parpadeos, contornos sin picos (normales suavizadas), cámara con lente larga.
+- El usuario rechazó el entorno nuevo SOLO porque desde el teléfono no se puede aprobar: si lo pide desde la PC, proponerlo de nuevo (Hugging Face, Poly Haven, Kenney, blender.org).
+- Siguiente: comentarios del usuario sobre `mago-toon.mp4`; acciones propias (mate, magia) con mocap de video del usuario o poses a mano; Papá Noel 3D; reel completo de Navidad en 3D.
+
 **3D fase 1 + prueba 3D completa (2026-11-06, noche):** el usuario (escribe en inglés) pidió instalar todas las herramientas gratis posibles, avanzar con la fase 1 y explicar cómo se hacen los reels 3D tipo "4 modelos de IA, un gallo" (three.js de una sola página, primitivas, grabación de pantalla; explicado en `videos/PLAN_3D.md`). Le gusta el estilo Dead Cells y también le interesa 3D completo si es de calidad.
 - Instalado (se pierde con el contenedor; comandos en `videos/PLAN_3D.md` "Reinstall"): `bpy` 5.2.3 en `/opt/bpy` (+ OpenEXR, trimesh, OpenCV...), three.js 0.170.0 en `/opt/three`, biblioteca de animaciones CC0 de Quaternius (46 clips) en `/opt/assets3d/ual`.
 - El usuario RECHAZÓ crear un entorno nuevo con Hugging Face, Poly Haven, Kenney y blender.org: no volver a proponerlo. Imagen→3D (TRELLIS/Hunyuan3D) y Mixamo quedan del lado del usuario.

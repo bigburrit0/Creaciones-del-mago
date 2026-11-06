@@ -9,6 +9,14 @@ Yes. The approach I recommend is the **"pre-rendered sprites" pipeline** (Donkey
 
 The result keeps the pixel-art look, but the motion comes from real animation. It is no longer 4 AI drawings, so it is neither choppy nor robotic. And the characters are always identical, because there is one model instead of one drawing per frame.
 
+## Decision (2026-11-06, night): 3D toon is the direction
+
+- The user chose **3D toon** over pixel art from 3D, and asked for proper proportions and animation.
+- **Research:** `RESEARCH_3D_TOON.md`, six Haiku agents.
+- **El Mago in 3D:** `biblioteca/3d/mago3d.py`. It builds him to the approved model sheet: gnome proportions, hat with the curled tip, beard to the belt, boots. He is skinned to the CC0 skeleton, reshaped to chibi proportions, and exported as `biblioteca/3d/glb/mago.glb` with all 46 animations. There are extra bones for the hat and beard springs, blinking and eyebrows.
+- **First reel:** `experimentos/mago-toon/` (10 s, 60 fps, with sound).
+- **About the network request:** the user declined the environment request only because it can't be approved from a phone. When they are at their PC and ask, propose it again: Hugging Face, Poly Haven, Kenney, blender.org.
+
 ## Status (2026-11-06, evening): phase 1 done, fully-3D test made
 
 **Installed in this cloud session** (they disappear with the container; see "Reinstall" below):

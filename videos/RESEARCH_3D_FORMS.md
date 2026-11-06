@@ -15,6 +15,35 @@ Six Haiku agents researched one category each. Several sources were blocked by t
 | 5 | **Surface and baked light** | Flat and clean; contact areas don't darken | Ambient occlusion baked into vertex colours (BVH ray-cast, ~24–32 rays, radius 0.1–0.2 m), multiplied in with a purple tint. Toon gradient tinted: shadow band purple (0.48, 0.42, 0.62), lit band warm. Hard-edged toon specular on the nose, buckle, boots and gifts. One grade: saturation ~1.08, slight contrast; vignette. Bloom only on emissive parts (skipped: cost on software WebGL) |
 | 6 | **Set dressing and camera** | Bare room, a single continuous move | Three tiers of props, one hero (the printer) with space around it, foreground elements for depth. Christmas plus summer cues (mate and thermos, a paper fan, mandarins, a faded wreath). Stage in depth: characters separated in z, faces in the upper half. About 4 shots cut on action (wide entrance, two-shot, printer and sack insert, wide hero). Hot light: warm low sun, cooler sky, dappled patches on the floor, warmth lifted into the shadows. Pans under 10°/s |
 
-## Applied
+## Applied (2026-11-07)
 
-See the end of this file once the changes are in (El Mago v2, Papá Noel, props, the 15 s reel).
+**Shared library `biblioteca/3d/toonchar.py`** (Blender, headless):
+- `drape()`: a shell projected onto the support parts with rays (a procedural shrinkwrap), with a thickness function, tapered edges, a tip lifting off and the inner face slightly under the support;
+- `lathe` and `tube` with folds, scallops and dents (`wob` and `zwob`);
+- `displace()`: seeded noise along normals;
+- `skin_fn`, `skin` and `smooth_weights` (Laplacian smoothing, at most 4 influences);
+- `bake_ao()`: ray-cast ambient occlusion into an `AO` vertex colour, exported in the GLB.
+
+**El Mago v2 (`mago3d.py`):**
+- The beard lies on the chin, chest, belly and belt and wraps around the sides. It has 6 tapered locks with the dominant one off-centre, and the free tip lifts off. The upper beard follows the head and the rest follows the chest, plus two spring bones.
+- The robe has folds that fade upward and a scalloped hem.
+- The hat has dents at the bend, a tip leaning to one side, a drooping, wavy brim and a thicker band.
+- The belt is sized from the robe; the buckle projects.
+- Cuff lips, an elbow crease, flared boots with a wide toe and soles.
+
+**Papá Noel (`santa3d.py`):**
+- Round body with a belly bulge, a jiggle bone, a draped beard, and a jacket tied at the waist with an off-centre knot and sleeves of different lengths.
+- Fur trims, bare chubby arms and legs (calves), flip-flops with straps, round sunglasses on their own bone (they slide down the nose), and a floppy hat with a pompom on 3 spring bones.
+
+**Shared web helpers (`biblioteca/3d/web/toon3d.js`):**
+- **Toon shading:** the gradient tinted (purple shadows, warm light), baked AO multiplied in with a purple tint, a rim light, and hard toon specular on the buckle, nose, boots, flip-flops, mate and gifts.
+- **Outlines** on smoothed normals.
+- **`Character`:** clip crossfades as a pure function of time, and walk speed measured from the stride.
+- **Posing:** `rotWorld` (posing in world axes), `ikArm` (two-bone IK for fanning, sipping, offering, presenting gifts, holding the sack, cheering, waving).
+- **`simulateSprings`:** hats, beards and the belly, with cone limits and no rotating into the chest.
+
+**The reel (`papa-noel-en-ojotas/hf3d`, 17 s):**
+- **Weight:** a heavy plop with squash and settle, a startled jolt, a relief sigh, an idea hop with a landing squash, Santa's tired slump (spine and head), the belly on a spring, and the sack bouncing on every gift.
+- **Contact:** blob shadows under each character and the sack, the mate in their hands, gifts held in the hands and then arcing into the sack's mouth.
+- **Set:** a door that bursts open and closes with an overshoot, sunlight spilling in, a foreground tree with blinking lights, a thermos, mandarins, shelves, a light shaft and dust, confetti, sweat drops, a moth and the idea bulb.
+- **Camera:** four shots cut on action (a wide entrance, a two-shot, the printer and sack, a wide ending), framed clear of Instagram's interface.

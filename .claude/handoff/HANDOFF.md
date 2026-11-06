@@ -1,6 +1,12 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-06
 
 ## Próximo paso exacto
+**REEL 3D TOON (2026-11-07):** el usuario pidió aprender y aplicar peso, volumen y formas que se apoyan en otras (ej.: la barba tiene que caer sobre el cuerpo, no meterse adentro) con agentes Haiku, armar una lista de categorías, aplicarlas y hacer el reel.
+- Categorías y reglas: `videos/RESEARCH_3D_FORMS.md` (contacto/drapeado, peso, volumen/deformación, formas secundarias, superficie y luz horneada, set y cámara) + qué se aplicó.
+- Biblioteca de personajes: `videos/biblioteca/3d/toonchar.py`; El Mago v2 `mago3d.py`; Papá Noel `santa3d.py` → `glb/mago.glb`, `glb/santa.glb` (46 clips cada uno). Ayudas web compartidas: `videos/biblioteca/3d/web/toon3d.js`.
+- Reel: `videos/papa-noel-en-ojotas/hf3d/` (17 s, 4 planos), audio `cues3d.json`, armado con `../build3d.sh` (copia three.js, toon3d.js, glbs y sintetiza el audio). Render: `papa-noel-en-ojotas-3d.mp4` (60 fps).
+- Siguiente: comentarios del usuario sobre el reel 3D; pulir las acciones que no tienen clip propio; caption.
+
 **DIRECCIÓN: 3D TOON (2026-11-06, noche):** el usuario eligió el 3D toon (no pixel) y pidió proporciones y animación correctas con un equipo de investigación Haiku. Síntesis en `videos/RESEARCH_3D_TOON.md`.
 - El Mago 3D: `videos/biblioteca/3d/mago3d.py` → `glb/mago.glb` (cuerpo de 3 cabezas, sin cuello, sombrero con punta curvada, barba hasta el cinturón, botas, manos de mitón; esqueleto CC0 acortado, 46 clips, huesos extra hat.1-3, beard.1-2, eyes, brows).
 - Reel: `videos/experimentos/mago-toon/` (`build.sh` copia libs y glb; `cues.json` → audio con chiptune.py; `npx hyperframes render --fps 60`). Velocidad de caminata medida del clip (sin patinar), resortes simulados una vez, parpadeos, contornos sin picos (normales suavizadas), cámara con lente larga.

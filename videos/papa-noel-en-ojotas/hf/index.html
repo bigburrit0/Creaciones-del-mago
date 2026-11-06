@@ -19,6 +19,14 @@
       /* paint order: decor < door < printer < stool < sack < Papá Noel < El Mago < items < fx */
       #garland, #tree, #wreath { z-index: 3; } #door { z-index: 4; } #printer { z-index: 5; } #fan { z-index: 5; }
       #stool { z-index: 6; } #sack { z-index: 7; } #papa { z-index: 10; } #mago { z-index: 11; } .item { z-index: 20; }
+      /* depth & light overlays (pixel-crisp, dithered, palette colours) */
+      .ov { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; image-rendering: pixelated; pointer-events: none; }
+      #ov-shadows { z-index: 1; mix-blend-mode: multiply; opacity: 0.55; }
+      #ov-light { z-index: 2; mix-blend-mode: screen; opacity: 0.5; }
+      #ov-vignette { z-index: 45; opacity: 0.6; }
+      .csh { position: absolute; left: 0; top: 0; width: 160px; height: 48px; margin-left: -80px; margin-top: -26px;
+             background: url(assets/light/shadow.png) no-repeat; image-rendering: pixelated; mix-blend-mode: multiply; opacity: 0.6; z-index: 8; }
+      .mote { position: absolute; left: 0; top: 0; width: 4px; height: 4px; background: #fff3b0; z-index: 31; opacity: 0; }
     </style>
   </head>
   <body>
@@ -26,6 +34,10 @@
       <div id="stage" class="clip" data-start="0" data-duration="15" data-track-index="0" data-track-kind="graphics"
            data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
         <img id="plate" src="assets/pr/plates/taller.png" alt="" />
+        <img id="ov-shadows" class="ov" src="assets/light/shadows.png" alt="" />
+        <img id="ov-light" class="ov" src="assets/light/light.png" alt="" />
+        <div id="mago-sh" class="csh"></div>
+        <div id="papa-sh" class="csh hid"></div>
         <!-- set and props -->
         <div id="garland" class="act"></div>
         <div id="tree" class="act"></div>
@@ -52,6 +64,9 @@
         <div id="it-penarol" class="act item hid"></div>
         <div id="it-nacional" class="act item hid"></div>
         <div id="it-tnt" class="act item hid"></div>
+        <div id="m1" class="mote"></div><div id="m2" class="mote"></div><div id="m3" class="mote"></div><div id="m4" class="mote"></div>
+        <div id="m5" class="mote"></div><div id="m6" class="mote"></div><div id="m7" class="mote"></div><div id="m8" class="mote"></div>
+        <img id="ov-vignette" class="ov" src="assets/light/vignette.png" alt="" />
         <!-- effect pool -->
         <div id="fx1" class="pr-fx"></div><div id="fx2" class="pr-fx"></div><div id="fx3" class="pr-fx"></div>
         <div id="fx4" class="pr-fx"></div><div id="fx5" class="pr-fx"></div><div id="fx6" class="pr-fx"></div>
@@ -66,7 +81,18 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       const fxPool = Array.from({ length: 12 }, (_, i) => "#fx" + (i + 1));
-      const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool });
+      const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool, videoFps: 60 });
+
+      // dust motes drifting in the window light (deterministic paths, snapped to the art grid)
+      for (let i = 1; i <= 8; i++) {
+        const x0 = 112 + ((i * 37) % 84), y0 = 168 + ((i * 53) % 130), ph = i * 1.7, kf = [];
+        for (let k = 1; k <= 60; k++) {
+          const t = k / 60 * 15;
+          kf.push({ x: (x0 + Math.sin(t * 0.6 + ph) * 6 - t * 0.6) * 4, y: (y0 + t * 1.6 + Math.sin(t * 0.9 + ph) * 3) * 4, duration: 0.25, ease: "none" });
+        }
+        tl.fromTo("#m" + i, { x: x0 * 4, y: y0 * 4 }, { keyframes: kf, modifiers: { x: (v) => Math.round(parseFloat(v) / 4) * 4 + "px", y: (v) => Math.round(parseFloat(v) / 4) * 4 + "px" } }, 0);
+        for (let k = 0; k < 15 / 0.5; k++) tl.set("#m" + i, { opacity: [0, 0.5, 0.9, 0.5][(k + i) % 4] }, k * 0.5);
+      }
 
       // ----- positions (art px, 270x480 grid) -----
       // measured on the approved empty workshop (plate_taller v1); the door is the one drawn on the right wall
@@ -85,14 +111,14 @@
 
       // ----- 0-1.75 s : the door bursts open, Papá Noel staggers in and collapses on the stool -----
       R.fx(0.02, "fx.fx_puff", 236, 330);
-      const papa = R.actor("#papa", "papa_noel.walk_hot_W", ...P.door);
+      const papa = R.actor("#papa", "papa_noel.walk_hot_W", ...P.door, { shadow: "#papa-sh" });
       papa.show(0.25); papa.z(0.25, 9);
       papa.walk(0.25, 1.1, P.seat[0], P.seat[1], "papa_noel.walk_hot_W");
       R.fx(0.4, "fx.fx_sweat", 240, 252, { loop: true, dur: 1.0 });
       papa.play(1.35, "papa_noel.sit_plop_S", { fps: 10 }); papa.pop(1.55, 0.88);
       sack.show(1.4); sack.frame(1.4, "obj.sack", 0); R.fx(1.4, "fx.fx_puff", ...S(-9, 0));
 
-      const mago = R.actor("#mago", "mago.press_button_N", ...P.bench);
+      const mago = R.actor("#mago", "mago.press_button_N", ...P.bench, { shadow: "#mago-sh" });
       mago.play(0, "mago.press_button_N", { dur: 0.5 });
       mago.play(0.5, "mago.turn_S_to_N", { reverse: true, fps: 8 });
       mago.play(0.875, "mago.surprised_S");

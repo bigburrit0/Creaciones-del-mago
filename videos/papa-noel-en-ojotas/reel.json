@@ -518,5 +518,56 @@
   "fan loop 12 fps all the time",
   "garland and tree lights blink at 2 fps",
   "fx_dust_motes optional in the window light"
- ]
+ ],
+ "lighting": {
+  "shaft": {
+   "top": [
+    108,
+    192,
+    156
+   ],
+   "bottom": [
+    78,
+    214,
+    318
+   ],
+   "density": [
+    0.16,
+    0.05
+   ],
+   "colour": "#FFF3B0"
+  },
+  "contact": [
+   [
+    80,
+    200,
+    30,
+    5
+   ],
+   [
+    190,
+    384,
+    24,
+    6
+   ],
+   [
+    205,
+    207,
+    14,
+    4
+   ],
+   [
+    34,
+    382,
+    16,
+    4
+   ]
+  ],
+  "vignette": 0.3,
+  "shadow_colour": "#2E2160",
+  "character_shadow": [
+   30,
+   7
+  ]
+ }
 }

@@ -20,6 +20,9 @@ def main():
     cues = a.cues or os.path.join(os.path.dirname(a.reel), "cues.json")
     if os.path.exists(cues): subprocess.run([sys.executable, os.path.join(HERE, "chiptune.py"), cues, os.path.join(assets, "audio")], check=True)
     shutil.copy(os.path.join(SKILL, "assets", "pixel-reel.js"), assets)
+    import json
+    if json.load(open(a.reel)).get("lighting"):
+        subprocess.run([sys.executable, os.path.join(HERE, "draw_light.py"), a.library, a.reel, os.path.join(assets, "light")], check=True)
     if not os.path.exists(os.path.join(assets, "gsap.min.js")):
         found = glob.glob(os.path.join(a.hf, "**", "node_modules", "gsap", "dist", "gsap.min.js"), recursive=True) + \
                 glob.glob(os.path.join(os.path.dirname(os.path.abspath(a.hf)), "**", "node_modules", "gsap", "dist", "gsap.min.js"), recursive=True)

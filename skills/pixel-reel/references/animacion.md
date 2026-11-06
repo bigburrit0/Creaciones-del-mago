@@ -2,6 +2,15 @@
 
 El runtime está en `assets/pixel-reel.js` y lo copia `assemble.py`. Cada sprite es una tira PNG ya escalada ×4, descrita en `atlas.js`. Un **actor** es un `<div class="act">` del HTML: el runtime le cambia la tira y la posición del fondo con `tl.set`, así que los cuadros saltan como en un juego de 16 bits. Todo depende del tiempo de la línea de tiempo, de modo que se puede saltar a cualquier punto sin que cambie el resultado.
 
+## Reglas de movimiento (v2, "smooth"; ver `videos/RESEARCH_PIXEL_REELS.md`)
+
+- Los **cuadros** del sprite cambian por pasos (8 a 12 fps), pero la **posición** se interpola en cada cuadro de video y se ajusta a la grilla de píxeles de arte. Es el modo por defecto (`smooth: true`); `smooth: false` vuelve al movimiento escalonado viejo.
+- Los fps del sprite se redondean a un divisor de los fps del video (`videoFps`, 60 por defecto): 10, 12, 15 o 20. Así cada cuadro dura lo mismo. Con 8 fps en 30, los cuadros alternan 4-3-4-3 y el movimiento tiembla.
+- Renderizar a **60 fps**: `npx hyperframes render --fps 60`.
+- `walk` va a velocidad constante con un suavizado corto al arrancar y al frenar. `arc` y `hops` siguen parábolas reales. `pop` usa un rebote elástico.
+- Sombras en el piso: `R.actor(sel, key, x, y, { shadow: "#id-sombra" })` con un `<div class="csh">`. La sombra sigue al personaje en x y se queda en el piso cuando salta.
+- Luz y profundidad: `scripts/draw_light.py` genera el haz de luz de la ventana, las sombras de contacto, la viñeta y la sombra de los personajes, a partir de `reel.json` → `lighting`. Todo va con dithering ordenado y colores de la paleta, sin difuminados.
+
 ## Inicio
 
 ```html

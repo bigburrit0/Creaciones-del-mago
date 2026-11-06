@@ -61,7 +61,7 @@ Leer `hf/assets/pr/slice_report.md` y mirar `hf/assets/pr/review/`, donde cada h
 
 **6. Audio.** Un `cues.json` por reel con efectos sincronizados a los beats, música y ambiente (`references/audio.md`). `scripts/chiptune.py` lo sintetiza en tres pistas: efectos, música y ambiente. Usar solo melodías propias o de dominio público.
 
-**7. Revisión y render.** Tomar snapshots en cada beat (`npx hyperframes snapshot --at ...`), revisarlos y renderizar (`npx hyperframes render -o <reel>/<reel>.mp4`). Si GSAP no se puede bajar de un CDN, tiene que estar en `hf/assets/gsap.min.js`; `assemble.py` lo copia si encuentra un `node_modules/gsap` cerca.
+**7. Revisión y render.** Tomar snapshots en cada beat (`npx hyperframes snapshot --at ...`), revisarlos y renderizar a 60 fps (`npx hyperframes render --fps 60 -o <reel>/<reel>.mp4`). Si GSAP no se puede bajar de un CDN, tiene que estar en `hf/assets/gsap.min.js`; `assemble.py` lo copia si encuentra un `node_modules/gsap` cerca.
 
 Cuando llegan hojas reales nuevas, se vuelve a correr la etapa 4 y se renderiza. La línea de tiempo no cambia, porque los nombres y anclas son los mismos.
 
@@ -80,6 +80,7 @@ Cuando llegan hojas reales nuevas, se vuelve a correr la etapa 4 y se renderiza.
 | `scripts/gemini_generate.py` | Genera las hojas que faltan con Gemini: variantes, control de calidad, hoja de contacto, aprobación y log |
 | `scripts/gemini_check.py` | Verifica la clave (solo su largo) y la conexión, y lista los modelos de imagen, sin gastar |
 | `scripts/draw_fx.py` | Dibuja las hojas de efectos sin modelo de imagen (destellos, polvo, confeti, corazones, sudor, idea, vapor, espiral, polilla, anillo, notas, motas) |
+| `scripts/draw_light.py` | Luz de ventana, sombras de contacto, viñeta y sombra de personajes, pixel-crisp con dithering |
 | `scripts/qc.py` | Control de calidad de una hoja (lo usa el generador; sirve también para hojas hechas a mano) |
 | `scripts/placeholders.py` | Hojas provisorias en el formato exacto (`--noisy` imita los defectos del modelo, para probar) |
 | `scripts/slice_sheets.py` | Hoja → tiras por animación + `atlas.json`/`atlas.js` + revisión + reporte |

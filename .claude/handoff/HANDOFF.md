@@ -1,6 +1,8 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-06
 
 ## Próximo paso exacto
+**2026-11-06 (noche):** el usuario dijo que el reel se ve "very very choppy" y los objetos planos; pidió investigar con 10 agentes Haiku. Síntesis y plan en `videos/RESEARCH_PIXEL_REELS.md`. Aplicado: motor de movimiento v2 (posiciones suaves ajustadas a la grilla, fps divisores, 60 fps), `draw_light.py` (luz, sombras de contacto, viñeta, sombra de personajes), polvo en la luz → `avance-3.mp4` (60 fps). Siguiente según el plan: pasada de "juice" en la secuencia de regalos y vida ambiente (Claude); props en 3/4 y caminatas de 8 cuadros (Gemini). El usuario escribió en inglés en este pedido.
+
 **Tanda 7 (2026-11-06, reemplaza a la 6):** Claude hizo fx_1..3 (`draw_fx.py`) y `mago_idle_N_1` (derivada), y arregló `mago_walk_E_1` y `papa_noel_sack_shake_S_1`; ranking en `videos/biblioteca/AUDITORIA.md`. A Gemini van solo 16 hojas: 9 animaciones del Mago, `mago_sip_mate_S_2` y `mago_joy_jump_S_2` (en el mismo chat que su parte 1), items_1/2/3/5/6, más `papa_noel_sad_S_1` opcional (la aprobada es floja). Al importar fx hechos por Claude NO usar `--import`: el QC marca como vacíos los cuadros chicos a propósito y la normalización no hace falta. Último avance: `avance-2.mp4`.
 
 **Tanda 6 enviada (2026-11-06):** las 20 hojas que faltan (11 animaciones del Mago incl. `mago_sip_mate_S_2` y `mago_joy_jump_S_2` armadas a mano para hacer en el mismo chat que su parte 1, fx_1..3, items_1/2/3/5/6). 30 aprobadas + 20 = las 50 del reel. Al llegar el zip: importar (`--import`), revisar contactos (si la parte 1 aprobada de sip_mate/joy_jump no es la que usó para la parte 2, re-pedir la 2), re-ensamblar y render final.

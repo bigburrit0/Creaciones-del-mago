@@ -197,3 +197,21 @@
 {"ts": "2026-11-06T03:03:23+00:00", "event": "import", "sheet": "papa_noel_walk_sack_E_2.png", "gate": 5, "variant": 1, "source": "gemini-app", "file": "papa_noel_walk_sack_E_2_v1.png", "qc": {"score": 98, "pass": true, "issues": [], "fixes": [], "metrics": {"bg_border": 1.0, "fringe": 0.0007, "blockiness": 0.0, "palette_dist": 21.4, "height": 108, "height_target": 92, "anchor_off": [-2.7, 0.0]}}}
 {"ts": "2026-11-06T03:03:25+00:00", "event": "import", "sheet": "papa_noel_walk_sack_E_2.png", "gate": 5, "variant": 2, "source": "gemini-app", "file": "papa_noel_walk_sack_E_2_v2.png", "qc": {"score": 98, "pass": true, "issues": [], "fixes": [], "metrics": {"bg_border": 1.0, "fringe": 0.0007, "blockiness": 0.0, "palette_dist": 21.6, "height": 108, "height_target": 92, "anchor_off": [-2.7, 0.0]}}}
 {"ts": "2026-11-06T03:03:28+00:00", "event": "approve", "sheet": "papa_noel_walk_sack_E_2.png", "variant": 1, "by": "auto"}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_idle_N_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_sip_mate_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_surprised_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_joy_jump_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_thinking_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_idea_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_item_get_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_toss_E_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_wave_S_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "mago_offer_mate_E_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "fx_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "fx_2.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "fx_3.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "items_1.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "items_2.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "items_3.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "items_5.png", "gate": 5}
+{"ts": "2026-11-06T03:10:35+00:00", "event": "pack", "sheet": "items_6.png", "gate": 5}

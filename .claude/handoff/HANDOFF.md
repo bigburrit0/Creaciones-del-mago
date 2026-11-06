@@ -1,6 +1,10 @@
-# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — 2026-11-02 19:58 UTC
+# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-06
 
 ## Próximo paso exacto
+**Estado 2026-11-06:** tanda 4 importada (originales en `videos/biblioteca/recibidas/tanda4/`). Aprobadas solas (gate 5): 11 animaciones de Papá Noel parte 1 (todas menos sad_S), printer, door_R, sack, garland, objects_taller_1, objects_taller_2. Revocada `papa_noel_sad_S_1` (camisa hawaiana, fuera de diseño). Esperando que el usuario elija `plate_taller` v1 o v2 (`--approve plate_taller.png=N`; casi idénticas, recomendada v1). Enviada **tanda 5** (zip regenerable con `--pack --only ...` y corrección agregada a mano al final del PROMPT.txt): mago_walk_E_2, mago_press_button_N_1 (corrección: sin mesa), papa_noel_walk_hot_W_2, papa_noel_sad_S_1 (corrección: ropa del model sheet), papa_noel_joy_jump_S_2, papa_noel_walk_sack_E_2. De la tanda 3 el usuario todavía no mandó el resto (11 animaciones del Mago, fx_1..3, items).
+Ojo al animar: `sit_plop_S` y `startled_S` traen el banquito dibujado en algunos cuadros: ocultar el actor `#stool` mientras se ven. El usuario puede mandar imágenes como zip con nombres exactos (así llegó la tanda 4); su PC es Windows, no se puede conectar como carpeta.
+
+Paso anterior (sigue valiendo):
 Pedirle al usuario las imágenes que haya generado de las tandas 3 y 4. Guardar cada original en `videos/biblioteca/recibidas/<hoja>_vN.webp` y luego, convertidas a PNG con nombre `<hoja>_vN.png` en una carpeta temporal, importarlas:
 `cd videos && python3 -I ../skills/pixel-reel/scripts/gemini_generate.py biblioteca/sprites.json --reel papa-noel-en-ojotas/reel.json --import <carpeta>`
 Comprobar: gate 5 se aprueba solo si pasa QC (queda en `videos/biblioteca/sheets/`); gates 2-4 dejan `candidates/<hoja>/contact.png` para que el usuario elija (`--approve hoja.png=N`). Mirar SIEMPRE la hoja de contacto: el QC no detecta errores de contenido (ver "No repetir").

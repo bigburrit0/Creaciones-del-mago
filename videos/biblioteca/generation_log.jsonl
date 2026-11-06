@@ -160,3 +160,16 @@
 {"ts": "2026-11-06T02:17:14+00:00", "event": "pack", "sheet": "papa_noel_sad_S_1.png", "gate": 5}
 {"ts": "2026-11-06T02:17:14+00:00", "event": "pack", "sheet": "papa_noel_joy_jump_S_2.png", "gate": 5}
 {"ts": "2026-11-06T02:17:14+00:00", "event": "pack", "sheet": "papa_noel_walk_sack_E_2.png", "gate": 5}
+{"ts": "2026-11-06T02:21:30+00:00", "event": "approve", "sheet": "plate_taller.png", "variant": 1, "by": "person"}
+{"ts": "2026-11-06T02:23:31+00:00", "event": "revoke", "sheet": "papa_noel_sit_plop_S_1.png", "by": "claude", "reason": "banquito dibujado dentro del sprite; el banquito es un objeto aparte del escenario. Volver a pedir sin banquito."}
+{"ts": "2026-11-06T02:23:31+00:00", "event": "revoke", "sheet": "papa_noel_startled_S_1.png", "by": "claude", "reason": "banquito dibujado dentro del sprite; el banquito es un objeto aparte del escenario. Volver a pedir sin banquito."}
+{"ts": "2026-11-06T02:23:31+00:00", "event": "pack", "sheet": "papa_noel_sit_plop_S_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:31+00:00", "event": "pack", "sheet": "papa_noel_startled_S_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "mago_walk_E_2.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "mago_press_button_N_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_walk_hot_W_2.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_sit_plop_S_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_sad_S_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_startled_S_1.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_joy_jump_S_2.png", "gate": 5}
+{"ts": "2026-11-06T02:23:59+00:00", "event": "pack", "sheet": "papa_noel_walk_sack_E_2.png", "gate": 5}

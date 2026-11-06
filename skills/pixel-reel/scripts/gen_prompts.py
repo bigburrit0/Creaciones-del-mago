@@ -27,11 +27,16 @@ def style_block(lib):
     return txt
 
 
+SUBJECT_ONLY = ("Draw ONLY the subject described: no furniture, no stool, chair or table, no floor, no props unless a cell "
+                "names them (the set and its furniture are separate images). A character keeps exactly the outfit and colours "
+                "of its attached model sheet in every cell.")
+
+
 def sheet_block(lib, fmt):
     f = lib["sheet_formats"][fmt]; s = lib["grid"]["scale"]
     w, h = f["image"]; gx, gy = f["grid"]; cw = w // gx
     base = (f"SHEET: {w}x{h} PNG. Flat pure magenta #FF00FF background filling the whole image, no shadow on the background, "
-            f"no floor, no grid lines, no borders. ")
+            f"no floor, no grid lines, no borders. {SUBJECT_ONLY} ")
     if fmt == "small":
         return base + (f"A {gx}x{gy} grid of equal {cw}x{cw} cells. Each ROW is one animation of up to {gx} frames, read left to "
                        f"right; unused cells stay plain magenta. Every subject is centred in its cell, keeps the same size along its "

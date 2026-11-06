@@ -30,6 +30,8 @@ Cuando hay un límite de uso, conviene pedir primero los P0 y empezar por los mo
 | Píxeles borrosos o "pintados" | "crisp pixel art, every art pixel is a 4x4 block, no painterly shading, no blur" |
 | Sombra sobre el magenta | "no drop shadow, no ground shadow, the background is one flat colour #FF00FF" |
 | Texto o firmas | "no text, no letters, no signature anywhere" |
+| Dibuja muebles dentro del sprite (mesa, banquito) | "Draw ONLY the subject: NO table, stool or furniture; the set is a separate image" (desde la v3 del generador va en todos los prompts de hojas). El control de calidad no lo detecta: revisar la hoja de contacto |
+| Cambia la ropa del personaje (camisa estampada, otro color) | "Keep EXACTLY the outfit of the attached model sheet: ..." describiendo la ropa. Tampoco lo detecta el control de calidad |
 | Objeto en la mano equivocada en W | Pedir la animación en W aparte y marcar `mirror_to_W: false` |
 
 ## Generación automática (`gemini_generate.py`)

@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 17, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.36) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="17" data-track-index="1" data-volume="0.45"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="17" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-amb" class="clip" src="assets/audio/ambience.wav" data-start="0" data-duration="17" data-track-index="3" data-volume="0.3"></audio>
+    </div>
+    <script type="module">
+      /* Papá Noel en ojotas, 3D toon (17 s). Story: GUION.md. Research: RESEARCH_3D_TOON.md, RESEARCH_3D_FORMS.md.
+         Characters: biblioteca/3d (mago3d.py, santa3d.py). Every frame is a pure function of t. */
+      import * as THREE from "three";
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+      import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+      import { toon, outline, shade, Character, rotWorld, ikArm, simulateSprings, cameraAt, ss, seg, clamp, lerp, pulse, rnd } from "./lib/toon3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 17, FPS = 60, WO = 0.0024;
+      const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("c"), antialias: true, preserveDrawingBuffer: true });
+      renderer.setSize(1080, 1920, false); renderer.setPixelRatio(1);
+      renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.NoToneMapping;
+      const scene = new THREE.Scene(); scene.background = new THREE.Color("#3a2a4a"); scene.fog = new THREE.FogExp2("#d9a874", 0.045);
+      const camera = new THREE.PerspectiveCamera(36, 1080 / 1920, 0.05, 40);
+      const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+
+      // ---------- helpers ----------
+      function canvasTex(w, h, draw) {
+        const cv = document.createElement("canvas"); cv.width = w; cv.height = h; draw(cv.getContext("2d"), w, h);
+        const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
+      }
+      function rbox(w, h, d, c, x, y, z, parent, o = {}) {
+        const m = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 2, Math.min(w, h, d) * (o.r ?? 0.12)), o.mat || toon(c, o.mo || {}));
+        m.position.set(x, y, z); if (o.rot) m.rotation.set(...o.rot); shade(m); (parent || scene).add(m); if (o.line !== false) outline(m, (o.w ?? WO) / (o.s ?? 1)); return m;
+      }
+      function cyl(r1, r2, h, c, x, y, z, parent, o = {}) {
+        const m = new THREE.Mesh(new THREE.CylinderGeometry(r1, r2, h, o.seg || 16), toon(c, o.mo || {})); m.position.set(x, y, z);
+        if (o.rot) m.rotation.set(...o.rot); shade(m); (parent || scene).add(m); if (o.line !== false) outline(m, (o.w ?? WO) / (o.s ?? 1)); return m;
+      }
+      function sph(r, c, x, y, z, parent, o = {}) {
+        const m = new THREE.Mesh(new THREE.SphereGeometry(r, o.seg || 16, o.seg ? o.seg / 2 : 10), o.basic ? new THREE.MeshBasicMaterial({ color: c, fog: false }) : toon(c, o.mo || {}));
+        m.position.set(x, y, z); if (o.scale) m.scale.set(...o.scale); shade(m); (parent || scene).add(m); if (o.line) outline(m, (o.w ?? WO) / (o.s ?? 1)); return m;
+      }
+
+      // ---------- the workshop (metres) ----------
+      const planks = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#A0603A"; g.fillRect(0, 0, w, h); g.fillStyle = "#8A5638";
+        for (let y = 0; y < h; y += 16) g.fillRect(0, y, w, 2); [[14, 0], [44, 16], [6, 32], [36, 48]].forEach(([x, y]) => g.fillRect(x, y, 2, 16));
+        g.fillStyle = "#B0703F"; for (let y = 4; y < h; y += 16) g.fillRect(0, y, w, 1); g.fillStyle = "#94593A"; g.fillRect(20, 22, 10, 1); g.fillRect(48, 54, 8, 1); });
+      planks.repeat.set(14, 14);
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), toon("#ffffff", { map: planks, rim: 0 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+      const wallTex = () => { const t = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#E8A846"; g.fillRect(0, 0, w, h);
+        for (let y = 0; y < h; y += 16) { g.fillStyle = "#F2C14E"; g.fillRect(0, y, w, 3); g.fillStyle = "#C98A2B"; g.fillRect(0, y + 14, w, 2); } }); return t; };
+      const DOOR = { x0: 0.52, x1: 1.18, h: 1.5, z: -1.1 };
+      function wall(x0, x1, y0, y1, z) { const t = wallTex(); t.repeat.set((x1 - x0) / 0.7, (y1 - y0) / 0.7);
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, y1 - y0), toon("#ffffff", { map: t, rim: 0 })); m.position.set((x0 + x1) / 2, (y0 + y1) / 2, z); m.receiveShadow = true; scene.add(m); return m; }
+      wall(-3, DOOR.x0, 0, 3, -1.1); wall(DOOR.x1, 3, 0, 3, -1.1); wall(DOOR.x0, DOOR.x1, DOOR.h, 3, -1.1);
+      { const t = wallTex(); t.repeat.set(9, 4.3); const l = new THREE.Mesh(new THREE.PlaneGeometry(9, 3), toon("#ffffff", { map: t, rim: 0 })); l.rotation.y = Math.PI / 2; l.position.set(-1.45, 1.5, 3.4); l.receiveShadow = true; scene.add(l);
+        const r = l.clone(); r.rotation.y = -Math.PI / 2; r.position.set(1.5, 1.5, 3.4); scene.add(r); }
+      rbox(9, 0.08, 0.03, "#6E3B22", 0, 0.04, -1.09, null, { line: false });
+      // door: frame, outside (bright summer yard), panel on a hinge with a wreath, light spilling in when open
+      const yard = canvasTex(64, 96, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#9CC9E8"); gr.addColorStop(0.55, "#E9F4F8"); gr.addColorStop(0.56, "#9BC46A"); gr.addColorStop(1, "#5C9A4A"); g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = "#FFF6D8"; g.beginPath(); g.arc(46, 16, 9, 0, 7); g.fill(); });
+      const outside = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 2.2), new THREE.MeshBasicMaterial({ map: yard, fog: false })); outside.position.set(0.85, 1.0, -1.7); scene.add(outside);
+      for (const [w, h, x, y] of [[0.07, 1.55, DOOR.x0 - 0.02, 0.775], [0.07, 1.55, DOOR.x1 + 0.02, 0.775], [0.8, 0.08, 0.85, 1.52]]) rbox(w, h, 0.07, "#6E3B22", x, y, -1.08);
+      const hinge = new THREE.Group(); hinge.position.set(DOOR.x0 + 0.005, 0, -1.08); scene.add(hinge);
+      const doorTex = canvasTex(32, 64, (g, w, h) => { g.fillStyle = "#8A5638"; g.fillRect(0, 0, w, h); g.fillStyle = "#6E3B22"; for (let x = 0; x < w; x += 8) g.fillRect(x, 0, 1, h); g.fillStyle = "#A0603A"; g.fillRect(3, 6, 1, 20); g.fillRect(19, 30, 1, 22); });
+      rbox(0.64, 1.47, 0.05, "#ffffff", 0.325, 0.74, 0, hinge, { mo: { map: doorTex } });
+      rbox(0.6, 0.06, 0.03, "#6E3B22", 0.325, 1.2, 0.035, hinge); rbox(0.6, 0.06, 0.03, "#6E3B22", 0.325, 0.3, 0.035, hinge);
+      sph(0.028, "#F2C14E", 0.58, 0.75, 0.05, hinge, { mo: { spec: 0.4 }, line: true });
+      const wreath = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.035, 8, 20), toon("#2F5A32")); wreath.position.set(0.325, 1.08, 0.06); shade(wreath); hinge.add(wreath); outline(wreath, WO);
+      rbox(0.07, 0.05, 0.03, "#C0392B", 0.325, 0.98, 0.09, hinge, { line: false });
+      const spillTex = canvasTex(32, 32, (g) => { const gr = g.createRadialGradient(16, 8, 1, 16, 14, 18); gr.addColorStop(0, "rgba(255,236,190,0.9)"); gr.addColorStop(1, "rgba(255,236,190,0)"); g.fillStyle = gr; g.fillRect(0, 0, 32, 32); });
+      const spill = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 1.3), new THREE.MeshBasicMaterial({ map: spillTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+      spill.rotation.x = -Math.PI / 2; spill.position.set(0.82, 0.004, -0.5); scene.add(spill);
+      // window, garland, light shaft and dust
+      const sky = canvasTex(128, 96, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#7FB6E0"); gr.addColorStop(1, "#BFE0F2"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+        g.fillStyle = "#FFF6D8"; g.beginPath(); g.arc(30, 26, 12, 0, 7); g.fill();
+        [["#5C9A4A", 96, 44, 26], ["#2F5A32", 110, 64, 20], ["#9BC46A", 84, 30, 14], ["#5C9A4A", 120, 30, 16]].forEach(([c, x, y, r]) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); }); });
+      sky.wrapS = sky.wrapT = THREE.ClampToEdgeWrapping;
+      const WIN = V3(-0.28, 1.32, -1.095);
+      const glass = new THREE.Mesh(new THREE.PlaneGeometry(0.72, 0.56), new THREE.MeshBasicMaterial({ map: sky, fog: false })); glass.position.copy(WIN); scene.add(glass);
+      for (const [w, h, x, y] of [[0.82, 0.06, 0, 0.31], [0.82, 0.06, 0, -0.31], [0.06, 0.68, -0.38, 0], [0.06, 0.68, 0.38, 0], [0.035, 0.56, 0, 0], [0.72, 0.035, 0, 0]]) rbox(w, h, 0.05, "#8A5638", WIN.x + x, WIN.y + y, -1.075);
+      for (let k = 0; k < 12; k++) { const b = new THREE.Mesh(new THREE.IcosahedronGeometry(0.034, 0), toon(k % 2 ? "#2F5A32" : "#5C9A4A")); b.position.set(WIN.x - 0.44 + k * 0.08, WIN.y + 0.4 - Math.sin(k / 11 * Math.PI) * 0.06, -1.07); shade(b); scene.add(b); }
+      for (let k = 0; k < 3; k++) sph(0.022, ["#C0392B", "#F2C14E", "#C0392B"][k], WIN.x - 0.3 + k * 0.3, WIN.y + 0.36 - Math.sin((k + 0.6) / 3 * Math.PI) * 0.05, -1.05, null, { mo: { spec: 0.3 } });
+      const beamTex = canvasTex(4, 64, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "rgba(255,240,200,0.9)"); gr.addColorStop(1, "rgba(255,240,200,0)"); g.fillStyle = gr; g.fillRect(0, 0, w, h); });
+      beamTex.wrapS = beamTex.wrapT = THREE.ClampToEdgeWrapping;
+      { const bg = new THREE.BufferGeometry();
+        bg.setAttribute("position", new THREE.Float32BufferAttribute([WIN.x - 0.36, WIN.y + 0.28, -1.09, WIN.x + 0.36, WIN.y + 0.28, -1.09, 0.45, 0.01, 0.3, -0.45, 0.01, 0.3], 3));
+        bg.setAttribute("uv", new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2)); bg.setIndex([0, 1, 2, 0, 2, 3]);
+        scene.add(new THREE.Mesh(bg, new THREE.MeshBasicMaterial({ map: beamTex, transparent: true, opacity: 0.07, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide, fog: false }))); }
+      const NM = 40, mpos = new Float32Array(NM * 3), motes = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: "#FFF3B0", size: 4, sizeAttenuation: false, transparent: true, opacity: 0.7, fog: false }));
+      motes.geometry.setAttribute("position", new THREE.BufferAttribute(mpos, 3)); scene.add(motes);
+      // rug, bench, shelves with prints, spools, thermos, mandarins
+      const rugTex = canvasTex(128, 128, (g) => { for (let r = 64; r > 0; r -= 8) { g.fillStyle = (r / 8) % 2 ? "#D7B98A" : "#B08A5A"; g.beginPath(); g.arc(64, 64, r, 0, 7); g.fill(); } });
+      const rug = new THREE.Mesh(new THREE.CircleGeometry(0.62, 40), toon("#ffffff", { map: rugTex, rim: 0 })); rug.rotation.x = -Math.PI / 2; rug.position.set(-0.05, 0.004, 0.0); rug.receiveShadow = true; scene.add(rug);
+      const bench = new THREE.Group(); bench.position.set(-0.62, 0, -0.84); scene.add(bench);
+      rbox(1.27, 0.055, 0.47, "#B08A5A", 0, 0.55, 0, bench); rbox(1.2, 0.03, 0.4, "#8A5638", 0, 0.16, 0, bench);
+      for (const [x, z] of [[-0.58, -0.18], [0.58, -0.18], [-0.58, 0.18], [0.58, 0.18]]) rbox(0.055, 0.53, 0.055, "#8A5638", x, 0.265, z, bench);
+      for (const y of [0.98, 1.24]) {
+        rbox(0.72, 0.03, 0.16, "#8A5638", -0.98, y, -1.02);
+        [["#C0392B", -1.22, "c"], ["#4F86C6", -1.0, "k"], ["#5C9A4A", -0.78, "c"]].forEach(([c, x, k]) => {
+          const g = k === "k" ? new THREE.ConeGeometry(0.045, 0.12, 8) : new THREE.CylinderGeometry(0.04, 0.045, 0.1, 12);
+          const m = new THREE.Mesh(g, toon(c, { spec: 0.2 })); m.position.set(x, y + 0.07, -1.0); shade(m); scene.add(m); outline(m, WO); });
+      }
+      [["#C0392B", -1.15], ["#2B4C7E", -1.0], ["#F2C14E", -0.85]].forEach(([c, x]) => cyl(0.06, 0.06, 0.07, c, x, 0.65, -0.99, null, { rot: [Math.PI / 2, 0, 0] }));
+      cyl(0.045, 0.045, 0.2, "#2B4C7E", -1.15, 0.68, -0.72); cyl(0.03, 0.035, 0.04, "#2E2160", -1.15, 0.8, -0.72);           // thermos (mate water)
+      cyl(0.075, 0.055, 0.04, "#E9D8B4", -0.95, 0.6, -0.65); [[-0.97, -0.66], [-0.93, -0.64], [-0.95, -0.68]].forEach(([x, z], i) => sph(0.026, "#E86A4A", x, 0.635 + (i === 2 ? 0.02 : 0), z, null, { line: true }));
+      // stool for Santa (height set from his sitting pose below), sack, tree (foreground), printer
+      const S = V3(0.42, 0, -0.38), K = V3(0.8, 0, -0.22);
+      const stool = new THREE.Group(); stool.position.copy(S); scene.add(stool);
+      const tree = new THREE.Group(); tree.position.set(1.12, 0, 0.65); scene.add(tree);
+      rbox(0.18, 0.15, 0.18, "#C0392B", 0, 0.075, 0, tree);
+      [[0.3, 0.38, 0.33], [0.23, 0.32, 0.56], [0.16, 0.27, 0.77]].forEach(([r, h, y]) => { const c = new THREE.Mesh(new THREE.ConeGeometry(r, h, 10), toon("#2F5A32")); c.position.y = y; shade(c); tree.add(c); outline(c, WO); });
+      sph(0.05, "#FFF3B0", 0, 0.94, 0, tree, { basic: true });
+      const bulbs = []; for (let k = 0; k < 12; k++) { const a = k * 2.3, y = 0.24 + k * 0.05, r = 0.27 - k * 0.018; bulbs.push(sph(0.02, "#E86A4A", Math.cos(a) * r, y, Math.sin(a) * r, tree, { basic: true, seg: 8 })); }
+
+      // light: warm sun through the window (hot summer), warm sky fill, soft front fill
+      const sun = new THREE.DirectionalLight("#FFE0A0", 2.3); sun.position.set(0.2, 3.2, -2.6); sun.target.position.set(0.1, 0, 0.3);
+      sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536); Object.assign(sun.shadow.camera, { left: -2.2, right: 2.2, top: 2.2, bottom: -2.2, near: 0.5, far: 9 });
+      sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; scene.add(sun, sun.target);
+      scene.add(new THREE.HemisphereLight("#FFE9CC", "#5A4650", 1.0));
+      const front = new THREE.DirectionalLight("#FFF1DC", 0.75); front.position.set(1.0, 1.8, 3.2); scene.add(front);
+
+      // ---------- characters and models ----------
+      const loader = new GLTFLoader();
+      const [gm, gs, gp] = await Promise.all(["mago", "santa", "printer"].map((n) => loader.loadAsync("assets/" + n + ".glb")));
+      const mago = new Character(gm, WO), santa = new Character(gs, WO); scene.add(mago.W, santa.W);
+      const blobTex = canvasTex(64, 64, (g) => { const gr = g.createRadialGradient(32, 32, 2, 32, 32, 32); gr.addColorStop(0, "rgba(42,22,54,0.55)"); gr.addColorStop(1, "rgba(42,22,54,0)"); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); });
+      const blob = (s) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(s, s), new THREE.MeshBasicMaterial({ map: blobTex, transparent: true, depthWrite: false })); m.rotation.x = -Math.PI / 2; scene.add(m); return m; };
+      const blobM = blob(0.62), blobS = blob(0.78), blobK = blob(0.5);
+      const printer = gp.scene; printer.scale.setScalar(0.085); printer.position.set(-0.42, 0.578, -0.84); printer.rotation.y = 0.3;
+      const prM = []; printer.traverse((m) => { if (m.isMesh) prM.push(m); });
+      prM.forEach((m) => { const e = m.material.emissive && m.material.emissive.getHex() !== 0;
+        m.material = e ? new THREE.MeshBasicMaterial({ color: m.material.emissive }) : toon(m.material.color.clone()); shade(m); if (!e) outline(m, WO / 0.085); });
+      scene.add(printer);
+      const PR = {}; for (const n of ["head", "bed", "gantry", "print", "bow", "nozzle", "tube"]) PR[n] = printer.getObjectByName(n);
+      const PRrest = {}; for (const n in PR) if (PR[n]) PRrest[n] = PR[n].position.clone();
+      if (PR.tube) PR.tube.visible = false; if (PR.print) PR.print.visible = false; if (PR.bow) PR.bow.visible = false;
+      const nozzleMat = PR.nozzle && PR.nozzle.isMesh ? PR.nozzle.material : null;
+      const PRINT_OUT = V3(-0.42, 0.72, -0.8);
+
+      // mate (gourd + silver rim + bombilla); one per owner, toggled
+      function makeMate() { const g = new THREE.Group();
+        const pts = [[0.001, 0], [0.03, 0.004], [0.043, 0.03], [0.04, 0.06], [0.03, 0.08], [0.033, 0.088], [0.001, 0.09]].map(([r, y]) => new THREE.Vector2(r, y));
+        const gourd = new THREE.Mesh(new THREE.LatheGeometry(pts, 16), toon("#8A5638", { spec: 0.15 })); shade(gourd); g.add(gourd); outline(gourd, WO);
+        const rim = new THREE.Mesh(new THREE.TorusGeometry(0.031, 0.006, 6, 16), toon("#D8D4C8", { spec: 0.5 })); rim.rotation.x = Math.PI / 2; rim.position.y = 0.086; g.add(rim);
+        const bomb = new THREE.Mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.11, 6), toon("#D8D4C8", { spec: 0.5 })); bomb.position.set(0.012, 0.12, 0); bomb.rotation.z = -0.25; g.add(bomb);
+        const herb = new THREE.Mesh(new THREE.CircleGeometry(0.028, 12), toon("#5C9A4A")); herb.rotation.x = -Math.PI / 2; herb.position.y = 0.085; g.add(herb);
+        scene.add(g); return g; }
+      const mate = makeMate(); mate.scale.setScalar(1.25);
+      // sack: one lathe, scaled per fill level, with a gold drawstring
+      const sack = new THREE.Group(); scene.add(sack);
+      { const pts = [[0.001, 0], [0.12, 0.01], [0.165, 0.08], [0.17, 0.17], [0.14, 0.26], [0.07, 0.31], [0.04, 0.33], [0.06, 0.37], [0.075, 0.4], [0.001, 0.41]].map(([r, y]) => new THREE.Vector2(r, y));
+        const g = new THREE.LatheGeometry(pts, 22); const p = g.attributes.position;
+        for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), a = Math.atan2(z, x), f = 1 + 0.06 * Math.sin(3 * a + y * 14) + 0.03 * Math.sin(7 * a); p.setXYZ(i, x * f, y, z * f); }
+        g.computeVertexNormals(); const m = new THREE.Mesh(g, toon("#C0392B", { spec: 0.08 })); shade(m); sack.add(m); outline(m, WO);
+        const rope = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.012, 6, 16), toon("#F2C14E", { spec: 0.3 })); rope.rotation.x = Math.PI / 2; rope.position.y = 0.335; sack.add(rope); }
+      // gifts (stylised 3D-printed products; no logos or text)
+      function gift(kind) {
+        const g = new THREE.Group(), C = (c) => toon(c, { spec: 0.25 }), add = (geo, c, x = 0, y = 0, z = 0, rot) => { const m = new THREE.Mesh(geo, C(c)); m.position.set(x, y, z); if (rot) m.rotation.set(...rot); shade(m); g.add(m); outline(m, WO * 0.8); return m; };
+        const B = (w, h, d) => new RoundedBoxGeometry(w, h, d, 2, Math.min(w, h, d) * 0.15);
+        switch (kind) {
+          case "cafe": add(new THREE.CylinderGeometry(0.03, 0.025, 0.05, 14), "#FBF4E4", 0, 0.025); add(new THREE.TorusGeometry(0.014, 0.005, 6, 10), "#FBF4E4", 0.032, 0.026); add(new THREE.CircleGeometry(0.026, 12), "#5A3424", 0, 0.051, 0, [-Math.PI / 2, 0, 0]); break;
+          case "banana": { const c = new THREE.CatmullRomCurve3([V3(-0.05, 0.03, 0), V3(-0.015, 0.008, 0), V3(0.02, 0.012, 0), V3(0.05, 0.04, 0)]); add(new THREE.TubeGeometry(c, 10, 0.014, 8), "#F2C14E"); break; }
+          case "suculenta": add(new THREE.CylinderGeometry(0.03, 0.022, 0.035, 12), "#D9826A", 0, 0.017); for (let k = 0; k < 6; k++) add(new THREE.ConeGeometry(0.011, 0.04, 6), "#5C9A4A", Math.cos(k) * 0.012, 0.05, Math.sin(k) * 0.012, [Math.cos(k) * 0.5, 0, Math.sin(k) * 0.5]); break;
+          case "hamster": add(new THREE.SphereGeometry(0.035, 14, 10), "#E1AE73", 0, 0.03).scale.set(1.2, 0.85, 1); add(new THREE.SphereGeometry(0.01, 8, 6), "#D9826A", -0.018, 0.06, 0.01); add(new THREE.SphereGeometry(0.01, 8, 6), "#D9826A", 0.018, 0.06, 0.01); break;
+          case "creeper": add(B(0.07, 0.11, 0.07), "#5C9A4A", 0, 0.055); add(B(0.016, 0.016, 0.004), "#1E3A2A", -0.016, 0.085, 0.036); add(B(0.016, 0.016, 0.004), "#1E3A2A", 0.016, 0.085, 0.036); add(B(0.014, 0.028, 0.004), "#1E3A2A", 0, 0.062, 0.036); break;
+          case "pokebox": add(B(0.075, 0.105, 0.025), "#D8D4C8", 0, 0.052); add(B(0.05, 0.036, 0.004), "#2F5A32", 0, 0.072, 0.013); add(new THREE.CylinderGeometry(0.008, 0.008, 0.006, 10), "#C0392B", 0.018, 0.034, 0.014, [Math.PI / 2, 0, 0]); break;
+          case "dragon": add(new THREE.SphereGeometry(0.035, 12, 8), "#2F5A32", 0, 0.035).scale.set(1.3, 0.9, 0.9); add(new THREE.SphereGeometry(0.02, 10, 8), "#5C9A4A", 0.045, 0.06); add(new THREE.ConeGeometry(0.03, 0.05, 3), "#9BC46A", -0.01, 0.07, -0.02, [0.6, 0, 0.3]); add(new THREE.ConeGeometry(0.012, 0.05, 6), "#2F5A32", -0.055, 0.03, 0, [0, 0, 1.4]); break;
+          case "f40": add(B(0.11, 0.028, 0.05), "#C0392B", 0, 0.024); add(B(0.05, 0.022, 0.04), "#C0392B", -0.01, 0.046); for (const [x, z] of [[-0.035, 0.026], [0.035, 0.026], [-0.035, -0.026], [0.035, -0.026]]) add(new THREE.CylinderGeometry(0.013, 0.013, 0.01, 10), "#2E2160", x, 0.013, z, [Math.PI / 2, 0, 0]); break;
+          case "garaje": add(B(0.09, 0.06, 0.07), "#E9D8B4", 0, 0.03); add(B(0.1, 0.012, 0.08), "#C0392B", 0, 0.066); add(B(0.05, 0.04, 0.004), "#4F86C6", 0, 0.025, 0.036); break;
+          case "plegable": add(B(0.1, 0.018, 0.1), "#5A3424", 0, 0.009); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if ((i + j) % 2) add(new THREE.PlaneGeometry(0.02, 0.02), "#FBF4E4", -0.03 + i * 0.02, 0.0185, -0.03 + j * 0.02, [-Math.PI / 2, 0, 0]); break;
+          case "hoja": add(new THREE.SphereGeometry(0.05, 14, 8), "#9BC46A", 0, 0.012).scale.set(1, 0.25, 0.6); add(B(0.08, 0.004, 0.006), "#5C9A4A", 0, 0.026); break;
+          case "penarol": add(new THREE.CylinderGeometry(0.05, 0.055, 0.035, 16, 1, true), "#F2C14E", 0, 0.018); add(new THREE.TorusGeometry(0.052, 0.006, 6, 16), "#150A34", 0, 0.033, 0, [Math.PI / 2, 0, 0]); add(new THREE.CircleGeometry(0.048, 16), "#5C9A4A", 0, 0.006, 0, [-Math.PI / 2, 0, 0]); break;
+          case "nacional": add(new THREE.CylinderGeometry(0.05, 0.055, 0.035, 16, 1, true), "#FBF4E4", 0, 0.018); add(new THREE.TorusGeometry(0.052, 0.006, 6, 16), "#2B4C7E", 0, 0.033, 0, [Math.PI / 2, 0, 0]); add(new THREE.TorusGeometry(0.054, 0.004, 6, 16), "#C0392B", 0, 0.02, 0, [Math.PI / 2, 0, 0]); add(new THREE.CircleGeometry(0.048, 16), "#5C9A4A", 0, 0.006, 0, [-Math.PI / 2, 0, 0]); break;
+          case "tnt": add(B(0.085, 0.085, 0.085), "#C0392B", 0, 0.043); add(B(0.088, 0.03, 0.088), "#E9D8B4", 0, 0.045); add(new THREE.CylinderGeometry(0.004, 0.004, 0.04, 6), "#150A34", 0, 0.1); break;
+        }
+        g.visible = false; scene.add(g); return g;
+      }
+      const CLICK = ["cafe", "banana", "suculenta", "hamster"].map(gift), CREEPER = gift("creeper"), TNT = gift("tnt");
+      const RAPID = ["pokebox", "dragon", "f40", "garaje", "plegable", "hoja", "penarol", "nacional"].map(gift);
+      [...CLICK, CREEPER, TNT, ...RAPID].forEach((g) => g.scale.setScalar(1.35));
+      // effects: sparks, confetti, sweat, moth, idea bulb, dust puffs
+      const sparkM = (c) => new THREE.MeshBasicMaterial({ color: c, fog: false });
+      const SPK = Array.from({ length: 30 }, (_, i) => { const m = new THREE.Mesh(new THREE.OctahedronGeometry(i % 5 ? 0.011 : 0.018), sparkM(i % 3 ? "#F2C14E" : "#FFF3B0")); m.visible = false; scene.add(m); return m; });
+      const CONF = Array.from({ length: 70 }, (_, i) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.025, 0.014), new THREE.MeshBasicMaterial({ color: ["#C0392B", "#F2C14E", "#4F86C6", "#5C9A4A", "#E86A4A", "#FBF4E4"][i % 6], side: THREE.DoubleSide, fog: false })); m.visible = false; scene.add(m); return m; });
+      const SWEAT = Array.from({ length: 3 }, () => { const m = sph(0.014, "#9CC9E8", 0, 0, 0, null, { mo: { spec: 0.6 }, line: true }); m.scale.set(1, 1.4, 1); m.visible = false; return m; });
+      const moth = new THREE.Group(); scene.add(moth); { sph(0.012, "#8A5638", 0, 0, 0, moth, { scale: [1, 1, 1.8] }); for (const s of [-1, 1]) { const w = new THREE.Mesh(new THREE.CircleGeometry(0.03, 8), new THREE.MeshBasicMaterial({ color: "#C8AE88", side: THREE.DoubleSide })); w.position.x = s * 0.025; w.name = "w" + s; moth.add(w); } } moth.visible = false;
+      const bulb = new THREE.Group(); scene.add(bulb); sph(0.05, "#FFF3B0", 0, 0, 0, bulb, { basic: true }); cyl(0.022, 0.018, 0.035, "#8C8A92", 0, -0.055, 0, bulb); bulb.visible = false;
+      const PUFF = Array.from({ length: 18 }, () => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), new THREE.MeshBasicMaterial({ color: "#E9D8B4", transparent: true, depthWrite: false, fog: false })); m.visible = false; scene.add(m); return m; });
+
+      // ---------- staging: positions, clip schedules, beats ----------
+      const T = { doorOpen: 0.03, sW0: 0.2, sW1: 2.3, sit: 2.3, mW0: 2.6, mW1: 3.6, offer: 3.7, give: 4.3, sip0: 4.4, relief: 5.2, back: 5.85, mSip: 5.95,
+                  shake0: 6.0, shake1: 7.0, sad1: 7.85, think: 7.0, idea: 7.65, mB0: 8.0, mB1: 9.0, press: 9.0, pop1: 9.7, toss1: 10.05, pop2: 10.4, toss2: 10.7,
+                  rapid: 10.9, popT: 11.75, tossT: 12.05, boom: 12.5, stand: 12.55, shoulder: 13.6, sE0: 14.05, sE1: 15.45, wave: 15.55, exit: 15.95, doorClose: 15.98, mPick: 15.8, mSip2: 16.15 };
+      const Q0 = V3(-0.38, 0, -0.44), Q1 = V3(0.04, 0, -0.33), DOORP = V3(0.85, 0, -1.5), DOORIN = V3(0.85, 0, -1.08);
+      // Santa's sitting pose decides where he stands and how tall the stool is
+      santa.add("Sitting_Idle_Loop", -10, -9); const sitE = santa.sched[0]; sitE.a = 0; sitE.b = 1; santa.apply(0.5);
+      const hipS = new THREE.Vector3(); santa.b("DEF-hips").getWorldPosition(hipS); santa.sched.length = 0; santa.mixer.stopAllAction();
+      const SIT = V3(S.x - hipS.x, 0, S.z - hipS.z), seatH = Math.max(0.12, hipS.y - 0.075);
+      cyl(0.19, 0.17, 0.05, "#A0603A", 0, seatH - 0.025, 0, stool, { mo: { spec: 0.1 } }); for (let k = 0; k < 3; k++) { const a = k * 2.094 + 0.5; cyl(0.024, 0.02, seatH - 0.04, "#8A5638", Math.cos(a) * 0.12, (seatH - 0.04) / 2, Math.sin(a) * 0.12, stool); }
+      const vS = santa.stanceSpeed("Walk_Loop"), vM = mago.stanceSpeed("Walk_Loop");
+      const tsS1 = clamp(DOORP.distanceTo(SIT) / (T.sW1 - T.sW0) / vS, 0.7, 1.7), tsS2 = clamp(SIT.distanceTo(DOORP) / (T.sE1 - T.sE0 + 0.5) / vS, 0.7, 1.8);
+      const tsM1 = clamp(Q0.distanceTo(Q1) / (T.mW1 - T.mW0) / vM, 0.8, 1.9), tsM2 = clamp(Q1.distanceTo(Q0) / (T.mB1 - T.mB0) / vM, 0.8, 1.9);
+      console.log("speeds", vS.toFixed(3), vM.toFixed(3), "ts", tsS1.toFixed(2), tsS2.toFixed(2), tsM1.toFixed(2), tsM2.toFixed(2), "seat", seatH.toFixed(3));
+      // Santa
+      santa.add("Walk_Loop", -0.5, T.sW1 + 0.12, { speed: tsS1 * 0.92 });
+      santa.add("Idle_Loop", T.sW1 - 0.15, T.sit + 0.25);
+      santa.add("Sitting_Enter", T.sit, T.sit + 0.95, { loop: false, speed: 1.4, fade: 0.15 });
+      santa.add("Sitting_Idle_Loop", T.sit + 0.8, T.stand + 0.25);
+      santa.add("Sitting_Exit", T.stand, T.stand + 0.95, { loop: false, speed: 1.35, fade: 0.15 });
+      santa.add("Idle_Loop", T.stand + 0.8, T.sE0 + 0.15);
+      santa.add("Walk_Loop", T.sE0, T.sE1 + 0.15, { speed: tsS2 });
+      santa.add("Idle_Loop", T.sE1, DUR + 1);
+      // El Mago
+      mago.add("Interact", -0.3, 0.65, { loop: false, off: 0.6 });
+      mago.add("Idle_Loop", 0.45, T.mW0 + 0.15);
+      mago.add("Walk_Loop", T.mW0, T.mW1 + 0.12, { speed: tsM1 });
+      mago.add("Idle_Loop", T.mW1, T.mB0 + 0.15, { off: 0.7 });
+      mago.add("Walk_Loop", T.mB0, T.mB1 + 0.12, { speed: tsM2 });
+      mago.add("Interact", T.press - 0.1, T.press + 0.75, { loop: false, off: 0.5 });
+      mago.add("Idle_Loop", T.press + 0.6, T.toss1 + 0.05, { off: 0.3 });
+      mago.add("Spell_Simple_Shoot", T.toss1 - 0.05, T.toss1 + 0.45, { loop: false, fade: 0.1 });
+      mago.add("Idle_Loop", T.toss1 + 0.35, T.toss2 + 0.05, { off: 1.1 });
+      mago.add("Spell_Simple_Shoot", T.toss2 - 0.05, T.toss2 + 0.45, { loop: false, fade: 0.1 });
+      mago.add("Idle_Loop", T.toss2 + 0.35, T.tossT + 0.05, { off: 0.2 });
+      mago.add("Spell_Simple_Shoot", T.tossT - 0.05, T.tossT + 0.45, { loop: false, fade: 0.1 });
+      mago.add("Dance_Loop", T.boom, T.shoulder + 0.4);
+      mago.add("Idle_Loop", T.shoulder + 0.2, DUR + 1, { off: 0.4 });
+
+      const unwrap = (a, ref) => { while (a - ref > Math.PI) a -= 2 * Math.PI; while (a - ref < -Math.PI) a += 2 * Math.PI; return a; };
+      const hd = (a, b) => Math.atan2(b.x - a.x, b.z - a.z);
+      const hTurn = (t, keys) => { let h = keys[0][1]; for (let i = 1; i < keys.length; i++) { const [t0, h0] = keys[i - 1], [t1, h1] = keys[i]; if (t >= t0) h = lerp(h0, unwrap(h1, h0), seg(t, t0, t1)); } return h; };
+      const faceSanta = hd(Q1, V3(S.x, 0, S.z + 0.2));
+      function frame(c) { const h = c.W.rotation.y; return { fwd: V3(Math.sin(h), 0, Math.cos(h)), right: V3(-Math.cos(h), 0, Math.sin(h)), left: V3(Math.cos(h), 0, -Math.sin(h)), up: V3(0, 1, 0) }; }
+      const wp = (bone, off) => { const p = new THREE.Vector3(); bone.getWorldPosition(p); return off ? p.add(off) : p; };
+      function arm(c, side, target, w, poleOff) {
+        if (w <= 0.001) return; const F = frame(c), sh = wp(c.b("DEF-upper_arm." + side));
+        const pole = sh.clone().add(F.up.clone().multiplyScalar(-0.35)).add(F.fwd.clone().multiplyScalar(-0.12)).add((side === "R" ? F.right : F.left).clone().multiplyScalar(0.25)).add(poleOff || V3(0, 0, 0));
+        ikArm(c.b("DEF-upper_arm." + side), c.b("DEF-forearm." + side), c.b("DEF-hand." + side), target, pole, w);
+      }
+      const headPt = (c, up, fwd, side = 0) => { const F = frame(c); return wp(c.b("DEF-head")).add(F.up.clone().multiplyScalar(up)).add(F.fwd.clone().multiplyScalar(fwd)).add(F.right.clone().multiplyScalar(side)); };
+
+      function poseAt(t) {
+        // ---- Santa
+        santa.apply(t);
+        let sp, sh;
+        if (t < T.sW1) { const f = clamp((t - T.sW0) / (T.sW1 - T.sW0), 0, 1); sp = DOORP.clone().lerp(SIT, f); sh = hTurn(t, [[0, hd(DOORP, SIT)], [T.sW1 - 0.35, hd(DOORP, SIT)], [T.sit + 0.1, 0]]); }
+        else if (t < T.sE0) { sp = SIT.clone(); sh = 0; }
+        else { const f = clamp((t - T.sE0) / (T.sE1 - T.sE0), 0, 1), end = DOORIN.clone().add(V3(0, 0, 0.18)); sp = SIT.clone().lerp(end, f);
+               sh = hTurn(t, [[T.sE0 - 0.2, 0], [T.sE0 + 0.25, hd(SIT, end)], [T.sE1 - 0.05, hd(SIT, end)], [T.wave - 0.05, 0.15], [T.exit - 0.12, 0.15], [T.exit, Math.PI]]);
+               if (t > T.exit) sp = DOORP.clone(); }
+        santa.W.position.copy(sp); santa.W.rotation.y = sh; santa.W.visible = t < T.exit + 0.02;
+        // plop squash, startled jolt, relief sigh (volume kept, capped)
+        const pl = t - (T.sit + 0.62), plop = pl > 0 && pl < 0.5 ? -Math.sin(pl / 0.5 * Math.PI * 2.2) * Math.exp(-pl * 7) * 0.1 : 0;
+        const st = t - 11.8, jolt = st > 0 && st < 0.45 ? Math.sin(st / 0.45 * Math.PI * 2) * Math.exp(-st * 6) * 0.07 : 0;
+        const sigh = -0.035 * pulse(t, T.relief, T.relief + 0.25, T.relief + 0.45, T.relief + 0.8);
+        const sq = plop + jolt + sigh; santa.W.scale.set(1 - sq / 2, 1 + sq, 1 - sq / 2); santa.W.position.y += Math.max(0, jolt) * 0.5;
+        santa.W.updateMatrixWorld(true);
+        const SF = frame(santa);
+        // exhausted posture while walking in and fanning; sad slump; head tilt back to sip
+        const tired = Math.max(pulse(t, T.sW0, T.sW0 + 0.3, T.sit + 0.3, T.sit + 0.7) * 0.16, pulse(t, T.shake1, T.shake1 + 0.2, T.sad1 - 0.1, T.sad1 + 0.25) * 0.2);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, tired);
+        rotWorld(santa.b("DEF-head"), SF.left, tired * 1.4 - 0.18 * pulse(t, T.sip0 + 0.15, T.sip0 + 0.4, T.relief - 0.1, T.relief + 0.15)
+                                                + 0.25 * pulse(t, T.shake1, T.shake1 + 0.25, T.sad1 - 0.1, T.sad1 + 0.25));
+        rotWorld(santa.b("DEF-head"), SF.up, 0.35 * pulse(t, T.press - 0.3, T.press, T.boom - 0.2, T.boom) * Math.sign(-1));   // looks toward the printer
+        // arms (IK): fan himself, take the mate and sip, hand it back, shake the sack, hold it sad, startled, cheer, sack on shoulder, wave
+        const fanW = pulse(t, T.sit + 0.75, T.sit + 0.95, T.give - 0.25, T.give - 0.05);
+        arm(santa, "R", headPt(santa, 0.13, 0.15, 0.06 + 0.06 * Math.sin(t * 2 * Math.PI * 3.2)), fanW);
+        const mateW = pulse(t, T.give - 0.2, T.give, T.back, T.back + 0.25);
+        const mouthS = headPt(santa, 0.06, 0.2, 0.02), lapS = wp(santa.b("DEF-hips")).add(SF.fwd.clone().multiplyScalar(0.22)).add(V3(0, 0.12, 0)).add(SF.right.clone().multiplyScalar(0.12));
+        const reachM = Q1.clone().lerp(SIT, 0.55).add(V3(0, 0.42, 0.1));
+        let tgt = t < T.sip0 ? reachM : t < T.relief ? mouthS.clone().lerp(lapS, 1 - seg(t, T.sip0, T.sip0 + 0.25)) : t < T.back - 0.25 ? lapS : reachM;
+        if (t >= T.sip0 && t < T.relief) tgt = lapS.clone().lerp(mouthS, seg(t, T.sip0, T.sip0 + 0.25) - seg(t, T.relief - 0.15, T.relief + 0.1));
+        arm(santa, "R", tgt, mateW);
+        const shakeW = pulse(t, T.shake0, T.shake0 + 0.2, T.sad1 - 0.1, T.sad1 + 0.15), sackUp = pulse(t, T.shake0, T.shake0 + 0.25, T.shake1 - 0.1, T.shake1 + 0.2);
+        const sackC = wp(santa.b("DEF-hips")).add(SF.fwd.clone().multiplyScalar(0.26)).add(V3(0, 0.12 + 0.45 * sackUp + 0.04 * sackUp * Math.sin(t * 2 * Math.PI * 5), 0));
+        arm(santa, "R", sackC.clone().add(SF.right.clone().multiplyScalar(0.11)), shakeW); arm(santa, "L", sackC.clone().add(SF.left.clone().multiplyScalar(0.11)), shakeW);
+        const jW = pulse(t, 11.8, 11.86, 12.05, 12.35), cheer = pulse(t, T.stand + 0.5, T.stand + 0.75, T.shoulder - 0.1, T.shoulder + 0.1), upW = Math.max(jW, cheer);
+        const wig = 0.04 * Math.sin(t * 14) * cheer;
+        arm(santa, "R", headPt(santa, 0.42, 0.06, 0.2 + wig), upW); arm(santa, "L", headPt(santa, 0.42, 0.06, -0.2 - wig), upW);
+        const shW = pulse(t, T.shoulder, T.shoulder + 0.25, T.exit - 0.1, T.exit);
+        arm(santa, "R", headPt(santa, -0.02, -0.05, 0.2), shW * 0.9);
+        arm(santa, "L", headPt(santa, 0.3, 0.05, -0.28 + 0.07 * Math.sin(t * 2 * Math.PI * 3)), pulse(t, T.wave, T.wave + 0.12, T.exit - 0.12, T.exit));
+        // face: glasses slide down the nose with relief, brows up when startled and happy
+        const gl = santa.b("glasses"), br = santa.b("brows");
+        gl.position.y -= 0.022 * pulse(t, T.relief, T.relief + 0.15, T.stand + 1.0, T.stand + 1.2);
+        br.position.y += 0.012 * Math.max(pulse(t, 11.8, 11.85, 12.3, 12.5), pulse(t, T.relief, T.relief + 0.1, T.relief + 0.6, T.relief + 0.8), pulse(t, T.boom, T.boom + 0.1, T.shoulder, T.shoulder + 0.2));
+        br.position.y -= 0.008 * pulse(t, T.shake1, T.shake1 + 0.15, T.sad1 - 0.1, T.sad1 + 0.1);
+        // ---- El Mago
+        mago.apply(t);
+        let mp, mh;
+        if (t < T.mW0) { mp = Q0.clone(); mh = hTurn(t, [[0, Math.PI], [0.55, Math.PI], [0.9, 1.25]]); }
+        else if (t < T.mB0) { const f = clamp((t - T.mW0) / (T.mW1 - T.mW0), 0, 1); mp = Q0.clone().lerp(Q1, f); mh = hTurn(t, [[T.mW0 - 0.2, 1.25], [T.mW0 + 0.1, hd(Q0, Q1)], [T.mW1 - 0.3, hd(Q0, Q1)], [T.mW1 + 0.1, faceSanta], [T.think - 0.2, faceSanta], [T.think, 0.6], [T.idea + 0.3, 0.4]]); }
+        else { const f = clamp((t - T.mB0) / (T.mB1 - T.mB0), 0, 1); mp = Q1.clone().lerp(Q0, f);
+               mh = hTurn(t, [[T.mB0 - 0.1, 0.4], [T.mB0 + 0.15, hd(Q1, Q0)], [T.mB1 - 0.3, hd(Q1, Q0)], [T.mB1 + 0.05, Math.PI], [T.pop1 - 0.15, Math.PI], [T.pop1 + 0.05, 0.85], [T.boom, 0.85], [T.boom + 0.3, 0.3], [T.exit, 0.55], [T.mPick, 0.2]]); }
+        // idea hop (with squash) and surprise jolt
+        const ih = t - T.idea, hop = ih > 0 && ih < 0.32 ? Math.sin(ih / 0.32 * Math.PI) * 0.07 : 0;
+        const lq = t - (T.idea + 0.32), land = lq > 0 && lq < 0.35 ? -Math.sin(lq / 0.35 * Math.PI * 2) * Math.exp(-lq * 8) * 0.08 : 0;
+        const sj = t - 0.6, surp = sj > 0 && sj < 0.45 ? Math.sin(sj / 0.45 * Math.PI * 2) * Math.exp(-sj * 6) * 0.06 : 0;
+        mago.W.position.copy(mp); mago.W.position.y += hop; mago.W.rotation.y = mh; const msq = land + surp; mago.W.scale.set(1 - msq / 2, 1 + msq, 1 - msq / 2);
+        mago.W.updateMatrixWorld(true);
+        const MF = frame(mago);
+        // arms: offer the mate, sip, think, item get (both hands up), toss, pick up the mate at the end
+        const offer = pulse(t, T.offer, T.offer + 0.25, T.give, T.give + 0.25);
+        arm(mago, "R", reachM.clone().add(V3(-0.05, 0, 0)), offer);
+        const mouthM = headPt(mago, 0.0, 0.17, 0.01);
+        arm(mago, "R", mouthM, Math.max(pulse(t, T.mSip, T.mSip + 0.2, T.mSip + 0.55, T.mSip + 0.75), pulse(t, T.mSip2, T.mSip2 + 0.2, DUR, DUR + 1)));
+        arm(mago, "R", headPt(mago, -0.05, 0.15, 0.03), pulse(t, T.think, T.think + 0.2, T.idea - 0.05, T.idea + 0.05));
+        rotWorld(mago.b("DEF-head"), MF.fwd, 0.15 * pulse(t, T.think, T.think + 0.25, T.idea - 0.05, T.idea + 0.1));
+        const get = Math.max(pulse(t, T.pop1, T.pop1 + 0.1, T.toss1 - 0.05, T.toss1 + 0.05), pulse(t, T.pop2, T.pop2 + 0.1, T.toss2 - 0.05, T.toss2 + 0.05), pulse(t, T.popT, T.popT + 0.1, T.tossT - 0.05, T.tossT + 0.05));
+        arm(mago, "R", headPt(mago, 0.28, 0.06, 0.1), get); arm(mago, "L", headPt(mago, 0.28, 0.06, -0.1), get);
+        rotWorld(mago.b("DEF-spine.003"), MF.left, -0.1 * get);
+        // face: surprised brows at the door bang, at the idea and at the TNT
+        mago.b("brows").position.y += 0.012 * Math.max(pulse(t, 0.6, 0.65, 1.6, 1.9), pulse(t, T.idea - 0.05, T.idea, T.idea + 0.6, T.idea + 0.8), pulse(t, T.popT, T.popT + 0.05, T.boom, T.boom + 0.2));
+        let e = 0; for (const b of [1.9, 3.4, 5.1, 7.4, 9.4, 11.3, 13.7, 15.2, 16.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+      }
+
+      // ---------- secondary motion (simulated once): hats, beards, Santa's belly ----------
+      const N = DUR * FPS + 1, qW = (b) => { const q = new THREE.Quaternion(); b.getWorldQuaternion(q); return q; };
+      const pt = (b, x, y, z) => () => { const p = V3(x, y, z); b.localToWorld(p); return p; };
+      const SPR = simulateSprings(N, FPS, poseAt, [
+        { ref: pt(mago.b("DEF-head"), 0, 0.35, 0), frame: () => qW(mago.b("DEF-head")), f: 2.3, z: 0.3, g: 0.06, lim: 0.5 },
+        { ref: pt(mago.b("DEF-spine.003"), 0, 0.1, 0.2), frame: () => qW(mago.b("DEF-spine.003")), f: 2.6, z: 0.3, g: 0.035, lim: 0.25, minB: -0.02 },
+        { ref: pt(santa.b("DEF-head"), 0, 0.35, 0), frame: () => qW(santa.b("DEF-head")), f: 1.8, z: 0.25, g: 0.09, lim: 0.6 },
+        { ref: pt(santa.b("DEF-spine.003"), 0, 0.1, 0.25), frame: () => qW(santa.b("DEF-spine.003")), f: 2.4, z: 0.3, g: 0.035, lim: 0.25, minB: -0.02 },
+        { ref: pt(santa.b("DEF-hips"), 0, 0.1, 0.2), frame: () => qW(santa.b("DEF-hips")), f: 1.9, z: 0.2, g: 0.025, lim: 0.12, gy: true },
+      ]);
+      const eu = new THREE.Euler(), qq = new THREE.Quaternion();
+      const tilt = (b, x, z) => { if (!b) return; eu.set(z, 0, -x); b.quaternion.multiply(qq.setFromEuler(eu)); };
+      function springs(t) {
+        const f = clamp(Math.round(t * FPS), 0, N - 1), g = (k, i) => SPR[k][f * 2 + i];
+        [0.35, 0.6, 0.9].forEach((k, i) => tilt(mago.b("hat." + (i + 1)), g(0, 0) * k, g(0, 1) * k));
+        [0.5, 0.8].forEach((k, i) => tilt(mago.b("beard." + (i + 1)), g(1, 0) * k, g(1, 1) * k));
+        [0.35, 0.65, 1.0].forEach((k, i) => tilt(santa.b("hat." + (i + 1)), g(2, 0) * k, g(2, 1) * k));
+        [0.5, 0.8].forEach((k, i) => tilt(santa.b("beard." + (i + 1)), g(3, 0) * k, g(3, 1) * k));
+        const bl = santa.b("belly"); if (bl) { const v = g(4, 1); bl.scale.set(1 + v * 0.8, 1 - v * 1.2, 1 + v * 0.8); }
+      }
+      // where the gifts leave his hands (pose evaluated once per toss)
+      const REL = {}; for (const k of ["toss1", "toss2", "tossT"]) { poseAt(T[k]); REL[k] = wp(mago.b("DEF-hand.R")).lerp(wp(mago.b("DEF-hand.L")), 0.5).add(V3(0, 0.05, 0)); }
+
+      // ---------- props per frame ----------
+      const SACK_TOP = 0.36;
+      function arc(obj, t, t0, dur, A, Bp, h, spin = 1) { const u = (t - t0) / dur; obj.visible = u >= 0 && u <= 1; if (!obj.visible) return u > 1;
+        const g = u * u * (3 - 2 * u) * 0.3 + u * 0.7; obj.position.copy(A).lerp(Bp, g); obj.position.y += 4 * h * g * (1 - g); obj.rotation.set(g * 5 * spin, g * 7 * spin, 0); return false; }
+      function props(t) {
+        // door: bursts open with an overshoot, light spills in, closes at the end with a small bounce
+        const o = t - T.doorOpen, c = t - T.doorClose;
+        let ang = o < 0 ? 0 : -1.75 - 0.25 * Math.sin(Math.min(o, 0.6) / 0.6 * Math.PI * 2.5) * Math.exp(-o * 5) * (o < 0.6 ? 1 : 0) - (o < 0.12 ? (1 - o / 0.12) * -1.75 : 0);
+        if (c > 0) ang = c < 0.12 ? -1.75 * (1 - c / 0.12) : 0.06 * Math.sin((c - 0.12) * 40) * Math.exp(-(c - 0.12) * 10);
+        hinge.rotation.y = ang; spill.material.opacity = clamp(-ang / 1.75, 0, 1) * 0.85;
+        // printer: printing in the press windows
+        const on = (t > 0 && t < 0.6) || (t > T.press + 0.1 && t < T.pop1) || (t > T.pop1 + 0.35 && t < T.pop2) || (t > T.rapid - 0.1 && t < T.popT);
+        if (PR.head) PR.head.position.x = PRrest.head.x + (on ? 0.32 * Math.sin(t * 21) : 0.55);
+        if (PR.bed) PR.bed.position.z = PRrest.bed.z + (on ? 0.25 * Math.sin(t * 8.3) : 0);
+        if (nozzleMat) nozzleMat.color.set(on ? "#F2C14E" : "#2E2160");
+        // mate: bench -> El Mago -> Santa -> El Mago -> bench -> El Mago
+        const owner = t < T.mW0 ? "bench" : t < T.give ? "M" : t < T.back ? "S" : t < T.press ? "M" : t < T.mPick ? "bench" : "M";
+        if (owner === "bench") { mate.position.set(-0.98, 0.58, -0.66); mate.rotation.set(0, 0, 0); }
+        else { const c2 = owner === "M" ? mago : santa, hp = wp(c2.b("DEF-hand.R")), F = frame(c2); mate.position.copy(hp).add(F.fwd.clone().multiplyScalar(0.03)).add(V3(0, -0.04, 0));
+               const sipping = owner === "S" ? pulse(t, T.sip0 + 0.1, T.sip0 + 0.3, T.relief - 0.15, T.relief) : pulse(t, T.mSip + 0.1, T.mSip + 0.3, T.mSip + 0.5, T.mSip + 0.7) + pulse(t, T.mSip2 + 0.1, T.mSip2 + 0.3, DUR, DUR + 1);
+               mate.rotation.set(0, c2.W.rotation.y, 0); mate.rotateOnWorldAxis(F.right, -0.6 * sipping); }
+        // sack: on Santa's back, dropped by the stool, shaken upside down, on his lap, filling with gifts, on his shoulder
+        const fill = t < 10.6 ? 0.18 : t < 11.4 ? 0.45 : t < T.boom ? 0.7 : 1.0;
+        let bounce = 0; for (const lt of [10.6, 11.2, 11.0, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, T.boom]) { const d = t - lt; if (d > 0 && d < 0.5) bounce += Math.sin(d / 0.5 * Math.PI * 2) * Math.exp(-d * 7) * 0.12; }
+        const SF = frame(santa); let sp, sq = 0, rot = 0, sc = 1;
+        if (t < T.sit + 0.45) { sp = wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(-0.24)).add(V3(0, -0.12, 0)); rot = 0.3; }
+        else if (t < T.shake0) { const d = clamp((t - T.sit - 0.45) / 0.18, 0, 1); sp = wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(-0.24)).lerp(K, d); sp.y = lerp(0.55, 0, d * d); rot = 0.3 * (1 - d); }
+        else if (t < T.sad1 + 0.1) { const up = pulse(t, T.shake0, T.shake0 + 0.25, T.shake1 - 0.1, T.shake1 + 0.2);
+               sp = wp(santa.b("DEF-hand.R")).lerp(wp(santa.b("DEF-hand.L")), 0.5).add(V3(0, -0.12 + 0.28 * up, 0)); rot = Math.PI * up; }
+        else if (t < T.shoulder) { const d = clamp((t - T.sad1 - 0.1) / 0.2, 0, 1); sp = wp(santa.b("DEF-hips")).add(SF.fwd.clone().multiplyScalar(0.25)).lerp(K, d); sp.y = lerp(0.18, 0, d); }
+        else if (t < T.exit) { const d = clamp((t - T.shoulder) / 0.25, 0, 1); sp = K.clone().lerp(wp(santa.b("DEF-shoulder.R")).add(V3(0, 0.02, 0)).add(SF.fwd.clone().multiplyScalar(-0.1)), d); rot = -0.9 * d; }
+        else sp = V3(0, -5, 0);
+        sack.position.copy(sp); sack.rotation.set(0, 0, 0); sack.rotateOnWorldAxis(SF.right, rot);
+        sq = bounce; const fs = 0.55 + 0.45 * fill; sack.scale.set(fs * (1.25 - 0.25 * fill) * (1 - sq / 2), fs * (0.55 + 0.45 * fill) * (1 + sq), fs * (1.25 - 0.25 * fill) * (1 - sq / 2));
+        const mouth = K.clone().add(V3(0, SACK_TOP * (0.55 + 0.45 * Math.max(fill, 0.45)) * 0.95, 0));
+        // gifts: clickers and creeper held up, tossed in an arc; eight straight from the printer; the TNT
+        CLICK.forEach((g, i) => { const off = V3((i - 1.5) * 0.06, 0, 0);
+          if (t >= T.pop1 && t < T.toss1) { g.visible = true; g.position.copy(wp(mago.b("DEF-hand.R")).lerp(wp(mago.b("DEF-hand.L")), 0.5)).add(V3(0, 0.07, 0)).add(off); g.rotation.set(0, t * 2 + i, 0); }
+          else arc(g, t, T.toss1 + 0.04 * i, 0.5, REL.toss1.clone().add(off), mouth, 0.35, 1 + i * 0.2); });
+        if (t >= T.pop2 && t < T.toss2) { CREEPER.visible = true; CREEPER.position.copy(wp(mago.b("DEF-hand.R")).lerp(wp(mago.b("DEF-hand.L")), 0.5)).add(V3(0, 0.06, 0)); CREEPER.rotation.set(0, t * 2, 0); }
+        else arc(CREEPER, t, T.toss2, 0.5, REL.toss2, mouth, 0.35);
+        RAPID.forEach((g, i) => arc(g, t, T.rapid + i * 0.1, 0.45, PRINT_OUT, mouth, 0.45, 1.3));
+        if (t >= T.popT && t < T.tossT) { TNT.visible = true; TNT.position.copy(wp(mago.b("DEF-hand.R")).lerp(wp(mago.b("DEF-hand.L")), 0.5)).add(V3(0, 0.06, 0)); TNT.rotation.set(0, Math.sin(t * 30) * 0.15, 0); }
+        else arc(TNT, t, T.tossT, 0.45, REL.tossT, mouth, 0.35);
+        // sparkles at the printer pops and the TNT fuse; confetti at the boom
+        SPK.forEach((m, i) => { const pops = [T.pop1, T.pop2, T.popT]; let best = -1, dt = 9; for (const p of pops) { const d = t - p - (i % 5) * 0.015; if (d > 0 && d < dt) { dt = d; best = p; } }
+          m.visible = dt < 0.8; if (!m.visible) return; const v = V3((rnd(i) - 0.5) * 1.1, 0.8 + rnd(i + 50) * 1.0, (rnd(i + 99) - 0.3) * 0.8);
+          const base = best === T.popT ? TNT.position.clone().add(V3(0, 0.16, 0)) : PRINT_OUT; m.position.copy(base).add(v.multiplyScalar(dt * 0.6)); m.position.y -= 1.2 * dt * dt; m.scale.setScalar(1 - dt / 0.8); });
+        CONF.forEach((m, i) => { const d = t - T.boom - (i % 7) * 0.01; m.visible = d > 0 && d < 2.2; if (!m.visible) return;
+          const v = V3((rnd(i) - 0.5) * 1.6, 1.4 + rnd(i + 3) * 1.4, (rnd(i + 9) - 0.5) * 1.2); m.position.copy(mouth).add(v.multiplyScalar(d)); m.position.y -= 2.2 * d * d * (1 - Math.min(d, 1) * 0.6);
+          m.position.y = Math.max(m.position.y, 0.01); m.rotation.set(d * (3 + i % 5), d * (4 + i % 3), d * 2); });
+        // sweat drops while he is hot; the moth flies out of the empty sack; the idea bulb; dust puffs
+        SWEAT.forEach((m, i) => { const per = 0.9, ph = ((t - 0.3 + i * 0.3) % per + per) % per; m.visible = t > 0.3 && t < T.give && ph < 0.55;
+          if (m.visible) { const p = headPt(santa, 0.08, 0.05, (i - 1) * 0.12); m.position.copy(p).add(V3(0, -ph * 0.35 - 1.2 * ph * ph, 0)); } });
+        const md = t - 6.3; moth.visible = md > 0 && md < 1.3;
+        if (moth.visible) { moth.position.copy(wp(santa.b("DEF-hand.R")).lerp(wp(santa.b("DEF-hand.L")), 0.5)).add(V3(0.1 * Math.sin(md * 9) + md * 0.25, 0.1 + md * 0.55, 0.05 * Math.cos(md * 7)));
+          moth.rotation.set(0.3, md * 2, 0); moth.children.forEach((w) => { if (w.name) w.rotation.y = (w.name === "w1" ? 1 : -1) * Math.sin(md * 60) * 0.9; }); }
+        const bd = t - T.idea; bulb.visible = bd > 0 && bd < 0.9;
+        if (bulb.visible) { bulb.position.copy(headPt(mago, 0.52, 0.0, 0)); const s = 0.9 + 0.35 * Math.exp(-bd * 6) * Math.sin(bd * 25); bulb.scale.setScalar(s * Math.min(1, bd * 8) * (bd > 0.75 ? (0.9 - bd) / 0.15 : 1)); }
+        PUFF.forEach((m, i) => { const ev = [[T.doorOpen, V3(0.85, 0.2, -1.0)], [T.sit + 0.62, V3(S.x, 0.06, S.z + 0.1)], [T.boom, mouth]][Math.floor(i / 6)];
+          const d = t - ev[0] - (i % 6) * 0.02; m.visible = d > 0 && d < 0.6; if (!m.visible) return; const a = (i % 6) * 1.05;
+          m.position.copy(ev[1]).add(V3(Math.cos(a) * d * 0.5, d * 0.25, Math.sin(a) * d * 0.4)); m.scale.setScalar(0.6 + d * 2.2); m.material.opacity = 0.7 * (1 - d / 0.6); });
+        bulbs.forEach((b, k) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k + Math.floor(t * 3)) % 4]));
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, u = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (u - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobM.scale.setScalar(1 - Math.min(0.4, mago.W.position.y * 4));
+        blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z + (t > T.sit + 0.5 && t < T.sE0 ? 0.1 : 0)); blobS.visible = santa.W.visible;
+        blobK.position.set(K.x, 0.003, K.z); blobK.visible = sack.position.y < 0.05 && sack.position.y > -1;
+      }
+
+      // ---------- camera: four shots, cut on action (research: wide entrance, two-shot, insert, wide hero) ----------
+      const SHOTS = [
+        { t: 0, d: 3.2, fov: 40, from: [0.25, 2.25, 5.3], to: [0.25, 1.95, 4.6], lookFrom: [0.05, 0.62, -0.55], lookTo: [0.15, 0.6, -0.5] },
+        { t: 3.2, d: 4.8, fov: 30, from: [0.55, 1.4, 2.65], to: [0.45, 1.32, 2.35], lookFrom: [0.25, 0.58, -0.4], lookTo: [0.28, 0.55, -0.42] },
+        { t: 8.0, d: 4.5, fov: 34, from: [-0.95, 1.6, 2.55], to: [-0.7, 1.5, 2.25], lookFrom: [0.05, 0.6, -0.6], lookTo: [0.1, 0.62, -0.55] },
+        { t: 12.5, d: 4.5, fov: 36, from: [0.3, 1.85, 4.5], to: [0.2, 1.65, 3.95], lookFrom: [0.2, 0.62, -0.55], lookTo: [0.15, 0.6, -0.5] },
+      ];
+      function renderAt(t) { poseAt(t); springs(t); props(t); cameraAt(camera, SHOTS, t); renderer.render(scene, camera); }
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T;
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

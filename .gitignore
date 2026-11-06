@@ -25,3 +25,6 @@ videos/experimentos/*/hf/assets/
 videos/experimentos/*/hf/.hyperframes/
 videos/**/.*.hf-transaction-*/
 videos/**/work-*-*/
+videos/*/hf3d/lib/
+videos/*/hf3d/assets/
+videos/*/hf3d/.hyperframes/

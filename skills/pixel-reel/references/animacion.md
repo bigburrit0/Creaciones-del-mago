@@ -26,7 +26,7 @@ const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool: ["#fx1", 
 
 | Llamada | Qué hace | Devuelve |
 |---|---|---|
-| `R.actor(sel, key, x, y, {scale, flip})` | Crea un actor con su sprite inicial, con el ancla en (x, y) | actor |
+| `R.actor(sel, key, x, y, {scale, flip, shadow, cast})` | Crea un actor con su sprite inicial, con el ancla en (x, y). `shadow`: elipse en el piso que lo sigue (personajes). `cast`: sombra proyectada de un sprite 3D (tira `<key>.shadow`), con los mismos cuadros | actor |
 | `a.play(t, key, {dur, fps, frames, reverse, flip, mode})` | Reproduce una animación. Si es un bucle, `dur` dice cuánto dura | tiempo de fin |
 | `a.frame(t, key, i)` | Pone un cuadro fijo (estados de objetos) | t |
 | `a.walk(t, dur, x, y, key, {flip})` | Camina hasta (x, y) en pasos mientras corre el bucle | fin |
@@ -43,6 +43,7 @@ Reglas:
 - **Escribir las llamadas de cada actor en orden de tiempo**: los movimientos recuerdan dónde terminó el anterior.
 - Para la dirección W se usa `flip: true` sobre la animación E. El espejo se hace sobre el ancla (los pies).
 - Para los ítems chicos, `scale: 0.5` (bloques de 2×2, sigue siendo pixel art).
+- Sprites renderizados desde 3D (`pixelize3d.py`): la sombra proyectada va en un `<div class="cs3d">` aparte con `mix-blend-mode: multiply` y `opacity` ~0.6, debajo de los personajes, pasado como `{ cast: "#id" }`.
 - El orden de pintado va por `z-index` en el CSS. Para pasar por detrás de algo, se cambia con `a.z(t, n)` en el momento justo, por ejemplo cuando un personaje se va hacia el fondo.
 
 ## Recetas

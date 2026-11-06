@@ -26,6 +26,8 @@
       #ov-vignette { z-index: 45; opacity: 0.6; }
       .csh { position: absolute; left: 0; top: 0; width: 160px; height: 48px; margin-left: -80px; margin-top: -26px;
              background: url(assets/light/shadow.png) no-repeat; image-rendering: pixelated; mix-blend-mode: multiply; opacity: 0.6; z-index: 8; }
+      /* cast shadows of the pre-rendered 3D props (same frames as the prop, multiply) */
+      .cs3d { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; mix-blend-mode: multiply; opacity: 0.6; z-index: 2; }
       .mote { position: absolute; left: 0; top: 0; width: 4px; height: 4px; background: #fff3b0; z-index: 31; opacity: 0; }
     </style>
   </head>
@@ -36,6 +38,8 @@
         <img id="plate" src="assets/pr/plates/taller.png" alt="" />
         <img id="ov-shadows" class="ov" src="assets/light/shadows.png" alt="" />
         <img id="ov-light" class="ov" src="assets/light/light.png" alt="" />
+        <div id="printer-cs" class="cs3d"></div><div id="stool-cs" class="cs3d"></div><div id="sack-cs" class="cs3d hid"></div>
+        <div id="tree-cs" class="cs3d"></div><div id="fan-cs" class="cs3d"></div>
         <div id="mago-sh" class="csh"></div>
         <div id="papa-sh" class="csh hid"></div>
         <!-- set and props -->
@@ -97,17 +101,19 @@
       // ----- positions (art px, 270x480 grid) -----
       // measured on the approved empty workshop (plate_taller v1); the door is the one drawn on the right wall
       const P = { door: [244, 352], bench: [80, 240], offer: [134, 386], seat: [190, 386], sack: [150, 390],
-                  hands: [80, 150], printerOut: [80, 172], sackIn: [150, 364] };
+                  hands: [80, 150], printerOut: [98, 166], sackIn: [150, 364], printer: [98, 196] };
       const S = (dx, dy) => [P.seat[0] + dx, P.seat[1] + dy];      // points relative to Papá Noel's seat
 
       // ----- set, ambient loops -----
       const garland = R.actor("#garland", "obj.garland", 135, 74);   garland.play(0, "obj.garland", { dur: 15 });
-      const tree = R.actor("#tree", "obj.xmas_tree", 205, 192);     tree.play(0, "obj.xmas_tree", { dur: 15 });
-      const fan = R.actor("#fan", "obj.fan", 34, 372);              fan.play(0, "obj.fan", { dur: 15, fps: 12 });
+      // props rendered from 3D (biblioteca/3d): real volume, light from the upper left, cast shadows
+      const tree = R.actor("#tree", "obj.tree3d", 205, 207, { cast: "#tree-cs" });   tree.play(0, "obj.tree3d", { dur: 15 });
+      const fan = R.actor("#fan", "obj.fan3d", 34, 382, { cast: "#fan-cs" });       fan.play(0, "obj.fan3d", { dur: 15 });
       R.actor("#wreath", "obj.wreath", 243, 215);                // on the door drawn in the background
-      const printer = R.actor("#printer", "obj.printer", 80, 198);
-      R.actor("#stool", "obj.stool", P.seat[0], P.seat[1] - 14);
-      const sack = R.actor("#sack", "obj.sack", ...P.sack);
+      const printer = R.actor("#printer", "obj.printer3d_idle", ...P.printer, { cast: "#printer-cs" });   // right end of the bench: not hidden by the wizard
+      printer.play(0, "obj.printer3d_loop", { dur: 7.75 });       // already printing when the story starts
+      R.actor("#stool", "obj.stool3d", P.seat[0], P.seat[1] - 4, { cast: "#stool-cs" });
+      const sack = R.actor("#sack", "obj.sack3d", ...P.sack, { cast: "#sack-cs" });
 
       // ----- 0-1.75 s : the door bursts open, Papá Noel staggers in and collapses on the stool -----
       R.fx(0.02, "fx.fx_puff", 236, 330);
@@ -116,7 +122,7 @@
       papa.walk(0.25, 1.1, P.seat[0], P.seat[1], "papa_noel.walk_hot_W");
       R.fx(0.4, "fx.fx_sweat", 240, 252, { loop: true, dur: 1.0 });
       papa.play(1.35, "papa_noel.sit_plop_S", { fps: 10 }); papa.pop(1.55, 0.88);
-      sack.show(1.4); sack.frame(1.4, "obj.sack", 0); R.fx(1.4, "fx.fx_puff", ...S(-9, 0));
+      sack.show(1.4); sack.frame(1.4, "obj.sack3d", 0); sack.pop(1.4, 0.7); R.fx(1.4, "fx.fx_puff", ...S(-9, 0));
 
       const mago = R.actor("#mago", "mago.press_button_N", ...P.bench, { shadow: "#mago-sh" });
       mago.play(0, "mago.press_button_N", { dur: 0.5 });
@@ -148,12 +154,12 @@
       mago.walk(6.9, 0.55, P.bench[0], P.bench[1], "mago.walk_E", { flip: true });
       mago.play(7.45, "mago.turn_S_to_N", { fps: 10 });
       mago.play(7.75, "mago.press_button_N", { dur: 0.65, fps: 10 });
-      printer.play(7.75, "obj.printer", { frames: [1, 2], mode: "loop", dur: 0.65, fps: 8 });
+      printer.play(7.75, "obj.printer3d_print", { fps: 20 });     // 13 frames: the gift grows layer by layer
       papa.frame(7.7, "papa_noel.refreshed_S", 1);
 
       // ----- 8.4-11.6 s : the gifts -----
       mago.play(8.4, "mago.turn_S_to_N", { reverse: true, fps: 15 });
-      function ding(t) { printer.frame(t, "obj.printer", 3); printer.frame(t + 0.12, "obj.printer", 0); R.fx(t, "fx.fx_sparkle", 80, 160); }
+      function ding(t) { printer.frame(t, "obj.printer3d_done", 0); printer.frame(t + 0.12, "obj.printer3d_idle", 0); R.fx(t, "fx.fx_sparkle", P.printer[0], 160); }
       function give(t, ids, toss, spread) {      // item get above the head, then toss into the sack
         ding(t - 0.15);
         mago.play(t, "mago.item_get_S", { fps: 13 });
@@ -165,22 +171,22 @@
         mago.frame(toss + 0.2, "mago.idle_S", 0);
       }
       give(8.6, ["cafe", "banana", "suculenta", "hamster"], 8.95, 22);
-      sack.frame(9.15, "obj.sack", 1);
+      sack.frame(9.15, "obj.sack3d", 1); sack.pop(9.15, 0.86);
       give(9.4, ["creeper"], 9.7, 0);
       // rapid fire: the printer shoots eight more straight into the sack
       mago.frame(10.0, "mago.item_get_S", 1);
-      printer.play(10.0, "obj.printer", { frames: [3, 0], mode: "loop", dur: 0.8, fps: 10 });
+      printer.play(10.0, "obj.printer3d_rapid", { dur: 0.7 });    // one gift every 0.1 s
       ["pokebox", "dragon", "f40", "garaje", "plegable", "hoja", "penarol", "nacional"].forEach((id, i) => {
         const t = 10.0 + i * 0.1;
         const it = R.actor("#it-" + id, "item." + id, ...P.printerOut, { scale: 0.75 });
         it.show(t); it.arc(t, 0.3, P.sackIn[0], P.sackIn[1], 60, 4); it.hide(t + 0.3);
       });
-      sack.frame(10.4, "obj.sack", 2);
+      sack.frame(10.4, "obj.sack3d", 2); sack.pop(10.4, 0.86);
       // TNT: the fuse sparkles, Papá Noel jumps, it goes into the sack and pops into confetti
       give(10.85, ["tnt"], 11.35, 0);
       R.fx(11.0, "fx.fx_sparkle", P.hands[0] + 6, P.hands[1] - 44, { loop: true, dur: 0.35 });
       papa.play(10.85, "papa_noel.startled_S", { fps: 10 });
-      sack.frame(11.55, "obj.sack", 3); sack.pop(11.55, 0.8);
+      sack.frame(11.55, "obj.sack3d", 3); sack.pop(11.55, 0.8);
       R.fx(11.55, "fx.fx_puff", P.sack[0], P.sack[1] - 30);
       R.fx(11.58, "fx.fx_confetti", P.sack[0], P.sack[1] - 50);
 

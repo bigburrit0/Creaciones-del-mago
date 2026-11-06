@@ -19,3 +19,9 @@ service-account*.json
 # pixel-reel: image-model candidates (approved sheets are copied to videos/biblioteca/sheets/)
 videos/biblioteca/candidates/
 videos/biblioteca/packs/
+# 3D: libraries and models copied by build.sh (re-downloadable), HyperFrames caches
+videos/experimentos/*/hf/lib/
+videos/experimentos/*/hf/assets/
+videos/experimentos/*/hf/.hyperframes/
+videos/**/.*.hf-transaction-*/
+videos/**/work-*-*/

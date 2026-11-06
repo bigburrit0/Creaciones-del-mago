@@ -48,6 +48,8 @@ Trabajar en este orden. Cada etapa tiene una salida concreta y, cuando correspon
 
 Los **gates 2 a 4 nunca se aprueban solos**: mostrarle `contact.png` a la persona y aprobar con `--approve hoja.png=N`. En el gate 5 se aprueba sola la mejor variante que pase el control; si ninguna pasa, se vuelve a pedir una vez con las correcciones de `references/gemini.md`. Siempre conviene correr primero `--dry-run` y fijar un tope de gasto con `--max-images`. Para verificar la clave sin gastar: `scripts/gemini_check.py`, que muestra solo el largo de la clave y los modelos de imagen disponibles. Detalles en `references/gemini.md`.
 
+**2c. Props y personajes desde 3D (opcional, "sprites pre-renderizados").** Para objetos con volumen y movimiento mecánico (impresora, bolsa que se llena, ventilador que oscila, árbol con luces) o para tener muchos cuadros por animación sin que el dibujo cambie entre cuadros. Se modela con primitivas en un script de Blender (`bpy`, se instala con `pip install bpy` en un venv; ver `scripts/blender/pixel3d.py`) y se renderiza a la resolución de arte con la cámara 3/4 del escenario. `scripts/pixelize3d.py` convierte los renders en tiras de sprites: un material por píxel (voto de mayoría), luz en bandas de la paleta (toon), contorno de 1 px, línea en los bordes de profundidad y la sombra proyectada en una tira aparte (`<key>.shadow`). `assemble.py` suma solas las tiras de `biblioteca/3d/sprites/atlas3d.json` al atlas. Ejemplo completo: `videos/biblioteca/3d/taller_props.py`. El mismo modelo se exporta a `.glb` (`PIXEL3D_GLB=ruta.glb`) para usarlo en 3D en tiempo real (three.js dentro de HyperFrames).
+
 **3. Animatic, sin esperar a las imágenes.** `python3 scripts/placeholders.py biblioteca/sprites.json <reel>/placeholder-sheets --reel <reel>/reel.json` genera hojas provisorias con los mismos nombres y formato, así que todo lo que sigue funciona igual. Con eso se arma, anima y renderiza el reel completo: se fijan el timing, la puesta y el audio mientras se generan las imágenes reales.
 
 **4. Ensamblado.** `python3 scripts/assemble.py biblioteca/sprites.json biblioteca/sheets:<reel>/placeholder-sheets <reel>/reel.json <reel>/hf`. Hace tres cosas:
@@ -82,6 +84,8 @@ Cuando llegan hojas reales nuevas, se vuelve a correr la etapa 4 y se renderiza.
 | `scripts/draw_fx.py` | Dibuja las hojas de efectos sin modelo de imagen (destellos, polvo, confeti, corazones, sudor, idea, vapor, espiral, polilla, anillo, notas, motas) |
 | `scripts/draw_light.py` | Luz de ventana, sombras de contacto, viñeta y sombra de personajes, pixel-crisp con dithering |
 | `scripts/qc.py` | Control de calidad de una hoja (lo usa el generador; sirve también para hojas hechas a mano) |
+| `scripts/blender/pixel3d.py` | Modelar y renderizar en Blender para sprites: escena, cámara 3/4, luz, materiales de paleta, render de luz e ids por cuadro, exportar `.glb` |
+| `scripts/pixelize3d.py` | Renders 3D → tiras de sprites en la paleta (bandas toon, contorno, líneas de profundidad, sombra proyectada) + `atlas3d.json` |
 | `scripts/placeholders.py` | Hojas provisorias en el formato exacto (`--noisy` imita los defectos del modelo, para probar) |
 | `scripts/slice_sheets.py` | Hoja → tiras por animación + `atlas.json`/`atlas.js` + revisión + reporte |
 | `scripts/chiptune.py` | Cues → `sfx.wav`, `music.wav`, `ambience.wav` (`--list` muestra los 30 efectos) |

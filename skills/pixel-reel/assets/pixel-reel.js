@@ -40,6 +40,9 @@
     R.actor = function (sel, startKey, x, y, o) {
       o = o || {};
       const a = { sel, key: null, x: x || 0, y: y || 0, flip: !!o.flip, sc: o.scale || 1 };
+      // optional cast-shadow element (a pre-rendered 3D sprite's "<key>.shadow" strip, shown with a multiply blend):
+      // it gets the same frames, position and squash as the actor; keys without a shadow strip leave it empty
+      const cast = o.cast || null, ALL = cast ? [sel, cast] : sel;
       a.use = function (t, key, frame, flip) {
         const s = spec(key);
         if (flip !== undefined) a.flip = flip;
@@ -52,6 +55,13 @@
           transformOrigin: s.ax * S + "px " + s.ay * S + "px",
           scaleX: (fl ? -1 : 1) * a.sc, scaleY: a.sc, backgroundPosition: -(frame || 0) * s.w * S + "px 0px",
         }, t);
+        if (cast) {
+          const cs = atlas.sprites[key + ".shadow"];
+          tl.set(cast, cs ? { width: s.w * S, height: s.h * S, backgroundImage: "url(" + base + cs.file + ")",
+            backgroundSize: s.frames * s.w * S + "px " + s.h * S + "px", marginLeft: -s.ax * S, marginTop: -s.ay * S,
+            transformOrigin: s.ax * S + "px " + s.ay * S + "px", scaleX: (fl ? -1 : 1) * a.sc, scaleY: a.sc,
+            backgroundPosition: -(frame || 0) * s.w * S + "px 0px" } : { backgroundImage: "none" }, t);
+        }
         a.key = key; return a;
       };
       // play an animation: {dur} for loops, {frames:[...]} custom order, {reverse}, {fps}, {flip}
@@ -65,26 +75,27 @@
         if ((p.mode || s.mode) === "loop") {
           const dur = p.dur || order.length * dt;
           let k = 0;
-          for (let tt = t; tt < t + dur - 1e-6; tt += dt, k++) tl.set(sel, frameCss(s, order[k % order.length]), tt);
+          for (let tt = t; tt < t + dur - 1e-6; tt += dt, k++) tl.set(ALL, frameCss(s, order[k % order.length]), tt);
           end = t + dur;
         } else {
-          order.forEach((f, k) => tl.set(sel, frameCss(s, f), t + k * dt));
+          order.forEach((f, k) => tl.set(ALL, frameCss(s, f), t + k * dt));
           end = t + order.length * dt;
         }
         return end;
       };
       a.frame = function (t, key, f, flip) { a.use(t, key, f, flip); return t; };
       const sh = o.shadow || null;              // optional contact-shadow element: follows x, stays on the floor
-      a.place = function (t, x, y) { a.x = x; a.y = y; tl.set(sel, { x: x * S, y: y * S }, t); if (sh) tl.set(sh, { x: x * S, y: y * S }, t); return t; };
+      a.place = function (t, x, y) { a.x = x; a.y = y; tl.set(ALL, { x: x * S, y: y * S }, t); if (sh) tl.set(sh, { x: x * S, y: y * S }, t); return t; };
       const ground = (t, dur, x0, y0, x1, y1, ease) => { if (sh) tl.fromTo(sh, { x: x0 * S, y: y0 * S }, { x: x1 * S, y: y1 * S, duration: dur, ease: ease || "none", modifiers: SNAP, immediateRender: false }, t); };
-      a.show = function (t) { tl.set(sh ? [sel, sh] : sel, { opacity: 1 }, t); return t; };
-      a.hide = function (t) { tl.set(sh ? [sel, sh] : sel, { opacity: 0 }, t); return t; };
+      const VIS = [sel].concat(sh ? [sh] : [], cast ? [cast] : []);
+      a.show = function (t) { tl.set(VIS, { opacity: 1 }, t); return t; };
+      a.hide = function (t) { tl.set(VIS, { opacity: 0 }, t); return t; };
       a.z = function (t, z) { tl.set(sel, { zIndex: z }, t); return t; };
       // stepped straight move
       // straight move: smooth (eased, snapped to the art grid) or stepped (legacy)
       a.moveTo = function (t, dur, x, y, steps, ease) {
         const e = SMOOTH ? (ease || "power1.inOut") : "steps(" + (steps || Math.max(1, Math.round(dur * 8))) + ")";
-        tl.fromTo(sel, { x: a.x * S, y: a.y * S }, { x: x * S, y: y * S, duration: dur, ease: e, modifiers: SMOOTH ? SNAP : {}, immediateRender: false }, t);
+        tl.fromTo(ALL, { x: a.x * S, y: a.y * S }, { x: x * S, y: y * S, duration: dur, ease: e, modifiers: SMOOTH ? SNAP : {}, immediateRender: false }, t);
         ground(t, dur, a.x, a.y, x, y, e);
         a.x = x; a.y = y; return t + dur;
       };
@@ -121,7 +132,7 @@
       // squash & stretch pop (appear, land, sit)
       a.pop = function (t, from) {
         if (SMOOTH) {
-          tl.fromTo(sel, { scaleY: (from || 0.8) * a.sc, scaleX: (a.flip ? -1 : 1) * a.sc * 1.08 }, { scaleY: a.sc, scaleX: (a.flip ? -1 : 1) * a.sc, duration: 0.28, ease: "elastic.out(1.1, 0.45)", immediateRender: false }, t);
+          tl.fromTo(ALL, { scaleY: (from || 0.8) * a.sc, scaleX: (a.flip ? -1 : 1) * a.sc * 1.08 }, { scaleY: a.sc, scaleX: (a.flip ? -1 : 1) * a.sc, duration: 0.28, ease: "elastic.out(1.1, 0.45)", immediateRender: false }, t);
           return t + 0.28;
         }
         tl.fromTo(sel, { scaleY: (from || 0.8) * a.sc }, { keyframes: [{ scaleY: 1.12 * a.sc, duration: 0.07, ease: "steps(1)" }, { scaleY: 0.96 * a.sc, duration: 0.07, ease: "steps(1)" }, { scaleY: a.sc, duration: 0.07, ease: "steps(1)" }], immediateRender: false }, t);
@@ -147,11 +158,11 @@
         const kf = []; const n = Math.max(2, Math.round(dur * 20));
         for (let i = 0; i < n; i++) kf.push({ x: (a.x + (i % 2 ? -amp : amp)) * S, duration: dur / n, ease: "steps(1)" });
         kf.push({ x: a.x * S, duration: 0.001 });
-        tl.fromTo(sel, { x: a.x * S }, { keyframes: kf, immediateRender: false }, t);
+        tl.fromTo(ALL, { x: a.x * S }, { keyframes: kf, immediateRender: false }, t);
         return t + dur;
       };
       if (startKey) a.use(0, startKey, 0);
-      tl.set(sel, { x: a.x * S, y: a.y * S }, 0);
+      tl.set(ALL, { x: a.x * S, y: a.y * S }, 0);
       if (sh) tl.set(sh, { x: a.x * S, y: a.y * S }, 0);
       return a;
     };

@@ -2,12 +2,29 @@
 
   python3 assemble.py LIBRARY/sprites.json SHEETS_DIR REEL/reel.json HF_PROJECT_DIR [--cues REEL/cues.json] [--no-quantize]
 
-Writes into HF_PROJECT_DIR/assets/:  pr/ (atlas.js, atlas.json, sprites/, plates/, review/, slice_report.md),
+Writes into HF_PROJECT_DIR/assets/:  pr/ (atlas.js, atlas.json, sprites/, plates/, review/, slice_report.md;
+pre-rendered 3D sprites from LIBRARY_DIR/3d/sprites/atlas3d.json are merged in, see pixelize3d.py),
 audio/ (sfx.wav, music.wav, ambience.wav), pixel-reel.js, gsap.min.js (copied from a local node_modules if found).
 Run placeholders.py first to get an animatic while the real sheets are not ready: same names, drop-in replacement.
 """
 import argparse, glob, os, shutil, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); SKILL = os.path.dirname(HERE)
+
+
+def merge_3d(library, pr):
+    """Pre-rendered 3D sprites (pixelize3d.py output in LIBRARY_DIR/3d/sprites) join the atlas; same key wins over a sheet."""
+    import json
+    src = os.path.join(os.path.dirname(os.path.abspath(library)), "3d", "sprites")
+    a3 = os.path.join(src, "atlas3d.json")
+    if not os.path.exists(a3): return
+    ent = json.load(open(a3)); atlas = json.load(open(os.path.join(pr, "atlas.json")))
+    os.makedirs(os.path.join(pr, "sprites", "3d"), exist_ok=True)
+    for k, e in ent.items():
+        shutil.copy(os.path.join(src, os.path.basename(e["file"])), os.path.join(pr, "sprites", "3d"))
+        atlas["sprites"][k] = e
+    json.dump(atlas, open(os.path.join(pr, "atlas.json"), "w"), indent=1)
+    open(os.path.join(pr, "atlas.js"), "w").write("window.PR_ATLAS = " + json.dumps(atlas) + ";\n")
+    print("3d sprites:", len(ent))
 
 
 def main():
@@ -17,6 +34,7 @@ def main():
     cmd = [sys.executable, os.path.join(HERE, "slice_sheets.py"), a.library, a.sheets, os.path.join(assets, "pr"), "--reel", a.reel]
     if a.no_quantize: cmd.append("--no-quantize")
     subprocess.run(cmd, check=True)
+    merge_3d(a.library, os.path.join(assets, "pr"))
     cues = a.cues or os.path.join(os.path.dirname(a.reel), "cues.json")
     if os.path.exists(cues): subprocess.run([sys.executable, os.path.join(HERE, "chiptune.py"), cues, os.path.join(assets, "audio")], check=True)
     shutil.copy(os.path.join(SKILL, "assets", "pixel-reel.js"), assets)

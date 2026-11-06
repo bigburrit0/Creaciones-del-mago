@@ -102,3 +102,14 @@ cd videos/papa-noel-en-ojotas/hf && npx hyperframes render -o ../papa-noel-en-oj
 ```
 
 Para regenerar las provisorias (no se versionan): `python3 skills/pixel-reel/scripts/placeholders.py videos/biblioteca/sprites.json videos/papa-noel-en-ojotas/placeholder-sheets --reel videos/papa-noel-en-ojotas/reel.json`.
+
+## Versión 3D toon (2026-11-07)
+
+El usuario eligió la dirección 3D toon. La misma historia en 17 s (en 3D cada acción necesita un poco más de tiempo para leerse), cuatro planos cortados en la acción. Proyecto: `hf3d/` (armado con `build3d.sh`), audio `cues3d.json`, render `papa-noel-en-ojotas-3d.mp4`.
+
+| Tiempo | Plano | Qué pasa |
+|---|---|---|
+| 0,0–3,2 | General, se acerca despacio | La puerta se abre de golpe (polvo, entra la luz del verano). El Mago, en la impresora, se da vuelta sorprendido. Papá Noel entra arrastrando las ojotas, transpirado, con la bolsa a la espalda, y se desploma en el banquito (aplaste); la bolsa cae al lado |
+| 3,2–8,0 | Dos personajes | Papá Noel se abanica. El Mago llega con el mate y se lo ofrece; Papá Noel toma, alivio (se le bajan los lentes), lo devuelve y el Mago toma. Papá Noel da vuelta la bolsa vacía y la sacude: sale una polilla. Tristeza; el Mago piensa y salta con la idea (lamparita) |
+| 8,0–12,5 | Impresora y bolsa | El Mago vuelve a la impresora y aprieta. Presenta los cuatro clickers delante de la cara y los tira a la bolsa; después la alcancía Creeper; la impresora escupe ocho productos seguidos; el TNT con la mecha chispeando: Papá Noel salta del susto, cae en la bolsa y explota en confeti |
+| 12,5–17,0 | General final | Festejo (el Mago baila, Papá Noel se levanta con los brazos arriba). Papá Noel se carga la bolsa al hombro, va hasta la puerta, se da vuelta y saluda, sale; la puerta se cierra. El Mago toma mate |

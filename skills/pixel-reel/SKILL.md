@@ -79,6 +79,7 @@ Cuando llegan hojas reales nuevas, se vuelve a correr la etapa 4 y se renderiza.
 | `scripts/gen_prompts.py` | Prompts en orden de aprobación, catálogo legible y `palette.png` |
 | `scripts/gemini_generate.py` | Genera las hojas que faltan con Gemini: variantes, control de calidad, hoja de contacto, aprobación y log |
 | `scripts/gemini_check.py` | Verifica la clave (solo su largo) y la conexión, y lista los modelos de imagen, sin gastar |
+| `scripts/draw_fx.py` | Dibuja las hojas de efectos sin modelo de imagen (destellos, polvo, confeti, corazones, sudor, idea, vapor, espiral, polilla, anillo, notas, motas) |
 | `scripts/qc.py` | Control de calidad de una hoja (lo usa el generador; sirve también para hojas hechas a mano) |
 | `scripts/placeholders.py` | Hojas provisorias en el formato exacto (`--noisy` imita los defectos del modelo, para probar) |
 | `scripts/slice_sheets.py` | Hoja → tiras por animación + `atlas.json`/`atlas.js` + revisión + reporte |

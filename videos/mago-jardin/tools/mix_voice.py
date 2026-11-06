@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 # when each phrase starts (seconds), matching the on-screen beats
-CUES = [0.30, 2.45, 4.00, 8.10]   # «No da tomates:» / «da benteveos.» / «Es un comedero...» / «Escribime...»
+CUES = [0.30, 2.45, 3.95, 8.10]   # «No da tomates:» / «da benteveos.» / «Es un comedero...» / «Escribime...»
 SINGLE_START = 0.30
 VOICE_CLEAN = ("highpass=f=90,lowpass=f=12000,"
                "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,"

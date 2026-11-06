@@ -4,6 +4,7 @@ Video 1080×1920, 30 fps, hecho con [HyperFrames](https://hyperframes.heygen.com
 
 - `mago-jardin.mp4`: el video sin textos.
 - `mago-jardin-texto.mp4`: el reel con los textos en pantalla, listo para la voz en off (ver `VOZ.md`).
+- `mago-jardin-final.mp4`: el reel final con la voz en off de Gemini (`voz/`, `tools/tts_gemini.py`).
 - `guia-voz.mp4`: guía para grabar la voz (no se publica).
 - `tools/mix_voice.py`: mezcla la voz grabada con el celular y baja la música mientras se habla.
 - `index.html`: la composición de HyperFrames (línea de tiempo GSAP).

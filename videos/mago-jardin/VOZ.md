@@ -1,7 +1,17 @@
-# Reel «La huerta de los pájaros»: último paso, la voz
+# Reel «La huerta de los pájaros»: la voz
 
-El video ya tiene los textos en pantalla, la música y los efectos: `mago-jardin-texto.mp4` (10 s, 9:16).
-Solo falta la voz en off.
+**Listo para publicar:** `mago-jardin-final.mp4` (10 s, 9:16), con textos, música, efectos y voz en off
+generada con la API de Gemini (TTS, voz Charon, acento rioplatense). Las tomas están en `voz/v1.wav` … `v4.wav`.
+
+Para regenerar la voz (cuota gratis: 3 pedidos por minuto y unos 10 por día y modelo; el script espera solo):
+
+```bash
+python3 tools/tts_gemini.py voz --model gemini-3.1-flash-tts-preview      # --voice para cambiar la voz
+python3 tools/mix_voice.py mago-jardin-texto.mp4 mago-jardin-final.mp4 voz/v1.wav voz/v2.wav voz/v3.wav voz/v4.wav
+```
+
+`tts_gemini.py` pide «No da tomates... da benteveos.» en una sola toma (sola, la frase corta salía «Ah, tomates»)
+y la corta en la pausa. Si preferís tu propia voz, seguí con lo de abajo.
 
 ## 1. Grabar
 
@@ -12,7 +22,7 @@ Grabá con el celular, en un lugar sin eco (un placard con ropa sirve), a un pal
 |---|---|---|
 | 0,3 s | «No da tomates:» | `PLANTÁS ESTO.`, crece el arbolito |
 | 2,45 s | «da benteveos.» | `COSECHÁS ESTO.`, sale el comedero (decilo justo ahí) |
-| 4,0 s | «Es un comedero impreso en 3D, en PETG para el sol.» | llegan los pájaros, el Mago va a la silla |
+| 3,95 s | «Es un comedero impreso en 3D, en PETG para el sol.» | llegan los pájaros, el Mago va a la silla |
 | 8,1 s | «Escribime y te paso el precio.» | se abre el cuadro final («Escribime por mensaje») |
 
 Dos formas de grabarla:

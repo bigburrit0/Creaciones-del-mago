@@ -99,31 +99,34 @@ t = load("trunk.png")
 H, W = t.shape[:2]
 ta = t[..., 3] > 0
 rows = np.nonzero(ta.any(1))[0]
-band = t[rows.min() + 20: rows.min() + 60]                                 # a clean stem section
-bg_ = band[..., 1] > band[..., 0] + 6
-solid_ = band[..., 3] > 0
-stemcol = ((solid_ & bg_) | (solid_ & (band[..., :3].sum(2) < 200))).sum(0) > band.shape[0] * 0.8   # green stem or its dark outline
-cols = np.nonzero(stemcol)[0]
-mid = int(np.median(np.nonzero((solid_ & bg_).sum(0) > band.shape[0] * 0.8)[0]))
-lo = hi = mid                                                               # contiguous run around the stem centre
-while lo - 1 in cols: lo -= 1
-while hi + 1 in cols: hi += 1
-# match the width of the real trunk where it starts, keep only green / outline pixels (no soil)
-tw = np.nonzero(ta[rows.min() + 30])[0]
-tw = tw[np.abs(tw - mid) < 30]
-cols = np.arange(tw.min(), tw.max() + 1)
-pix = solid_ & (bg_ | (band[..., :3].sum(2) < 200))
-stem = np.zeros_like(band); stem[:, cols] = band[:, cols] * pix[:, cols, None]
+# drawn clean in the stem's own palette (tiling a cut-out section repeated its specks as dashes):
+# dark outline | light bark | mid | green | dark outline, with a bark notch every few art-pixels
+y0 = rows.min() + 60                                                       # a clean row of the real stem
+xs = np.nonzero(ta[y0])[0]
+mid = int(np.median(xs[np.abs(xs - np.median(xs)) < 40]))
+xs = xs[np.abs(xs - mid) < 20]
+x0, x1 = xs.min(), xs.max() + 1                                            # same width as the real stem
+OUT, HI, MIDC, GREEN, NOTCH = (8, 14, 40), (150, 134, 106), (108, 119, 90), (61, 104, 81), (44, 80, 66)
+w = x1 - x0
+profile = [OUT] * 3 + [HI] * round(w * 0.22) + [MIDC] * round(w * 0.2)
+profile += [GREEN] * (w - len(profile) - 3) + [OUT] * 3
 c = load("canopy.png")
 cy = np.nonzero((c[..., 3] > 0).any(1))[0]
 top = cy.max() + CANOPY_DY - 40                                            # hidden under the canopy
+bottom = rows.min() + 40                                                   # overlaps the real trunk a little
 up = np.zeros_like(t)
-y = top
-while y < rows.min() + 20:
-    h = min(band.shape[0], rows.min() + 20 - y)
-    up[y:y + h] = stem[:h]; y += h
+for x, col in zip(range(x0, x1), profile):
+    up[top:bottom, x, :3] = col
+    up[top:bottom, x, 3] = 255
+ART = 5                                                                    # one art-pixel in this layer
+for k, y in enumerate(range(top + 12, bottom - 10, 7 * ART)):
+    gx = x0 + 3 + round(w * 0.42) + (ART if k % 2 else 0)                  # notch on the green side
+    up[y:y + ART, gx:gx + 2 * ART, :3] = NOTCH
+    hx = x0 + 3 + (ART if k % 2 else 0)                                    # small dark mark on the light side
+    up[y + 3 * ART:y + 4 * ART, hx:hx + ART, :3] = MIDC
+cols = np.arange(x0, x1)
 save(up, "trunk_up.png")
-print("trunk_up cols", cols.min(), cols.max(), "rows", top, rows.min() + 20)
+print("trunk_up cols", x0, x1, "rows", top, bottom)
 
 # ---------- short rope from the canopy to the feeder ring (2 art-pixels wide)
 rope = np.zeros_like(t)

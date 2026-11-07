@@ -26,7 +26,7 @@ Gate history in the Christmas reel: 1140 → 299 → 82 → 5 → 0 bad frames.
 
 ## Faster loops
 
-- Window check: load the page in Playwright and call `__qa(t)` over just the seconds you changed.
+- Window check: `node videos/biblioteca/3d/web/jumpwin.cjs T0 T1` (hf3d served on 8768) runs the gate's pose-jump detector and the contact checks on just the seconds you changed: two minutes instead of thirty.
 - Frames: `node videos/biblioteca/3d/web/frames3d.cjs PORT OUT t1 t2 ...` → `OUT/sheet.png`.
 - Expose internals for probing with `window.__dbg = { mago, santa, SPR, ... }` (left in the reference scene).
 

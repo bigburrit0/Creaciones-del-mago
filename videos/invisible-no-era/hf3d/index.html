@@ -181,6 +181,7 @@
       const SFW = (c, k) => frame(c).fwd.multiplyScalar(k);
       const via = (c, A, B, k, bulge = 0.14) => A.clone().lerp(B, k).add(frame(c).fwd.multiplyScalar(bulge * Math.sin(Math.PI * k)));   // hands travel in an arc in front of the beard
       const behind = (c, side) => { const F = frame(c); return wp(c.b("DEF-hips")).add(F.fwd.clone().multiplyScalar(-0.3)).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.13)).add(V3(0, 0.1, 0)); };
+      const atSide = (c, side) => { const F = frame(c); return wp(c.b("DEF-hips")).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.27)).add(F.fwd.clone().multiplyScalar(-0.05)).add(V3(0, 0.06, 0)); };   // morning: the gift held low at his side
       const readPt = (c, side) => headPt(c, -0.22, c === santa ? 0.38 : 0.34, side === "L" ? -0.05 : 0.05);
       const lookPt = (c, side) => { const F = frame(c); return wp(c.b("DEF-spine.003")).add(F.fwd.clone().multiplyScalar(c === santa ? 0.44 : 0.36)).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.06)).add(V3(0, -0.02, 0)); };
       let P1 = V3(0.07, 0.55, 0), P2 = V3(0.07, 0.55, 0), GIFT = { M: { pos: V3(), rot: 0 }, S: { pos: V3(), rot: 0 } }, SLIP = { S: null, M: null };
@@ -236,9 +237,9 @@
         const raise = V3(0, 0.06 * pulse(t, T.card - 0.1, T.card + 0.3, DUR, DUR + 1), 0);
         if (morning) {
           { const k = ss(clamp((t - 18.22) / 0.68, 0, 1));                                    // from behind his back around his left side (an arc outside the belly)
-            sL(behind(santa, "L").lerp(towards(P1, santa.W.position, 0.06), k).add(SF.left.clone().multiplyScalar(0.16 * Math.sin(Math.PI * k))), 1 - ss(clamp((t - (T.h1 + 0.05)) / 0.3, 0, 1))); }
+            sL(via(santa, atSide(santa, "L"), towards(P1, santa.W.position, 0.06), k, 0.08), 1 - ss(clamp((t - (T.h1 + 0.05)) / 0.3, 0, 1))); }
           mL(via(mago, lookPt(mago, "L"), towards(P1, mago.W.position, 0.06), pulse(t, T.h1 - 0.25, T.h1 - 0.05, T.h1 + 0.1, T.h1 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h1 - 0.35)) / 0.3, 0, 1)));
-          mR(behind(mago, "R").lerp(towards(P2, mago.W.position, 0.06), ss(clamp((t - (T.h1 + 0.35)) / 0.4, 0, 1))), 1 - ss(clamp((t - (T.h2 + 0.1)) / 0.3, 0, 1)));
+          mR(via(mago, atSide(mago, "R"), towards(P2, mago.W.position, 0.06), ss(clamp((t - (T.h1 + 0.35)) / 0.4, 0, 1)), 0.08), 1 - ss(clamp((t - (T.h2 + 0.1)) / 0.3, 0, 1)));
           sL(via(santa, lookPt(santa, "L"), towards(P2, santa.W.position, 0.06), pulse(t, T.h2 - 0.25, T.h2 - 0.05, T.h2 + 0.1, T.h2 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h2 - 0.45)) / 0.4, 0, 1)));
         }
         // ---- faces: blinks, brows up at the reveals and when caught, El Mago's eyes dart in the freeze

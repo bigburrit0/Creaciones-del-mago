@@ -1,6 +1,12 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**KIT COMPARTIDO + "INVISIBLE NO ERA" (tarea programada, 2026-11-07 1:20 Montevideo):** el usuario pidió el kit y el reel 1, con todos los chequeos, nada "lazy" y categorías de todo lo que sale en pantalla.
+- Kit: `videos/biblioteca/3d/web/escena3d.js` (escenario con luz de día/noche/amanecer, elenco con colisionadores y barbas, impresora, props, IK con guardia de contacto, resortes, voces, subtítulos píldora o cinéticos, placa, cámara con planos encuadrados/barridos/zooms/POV, QA común). El reel de Navidad se pasó al kit: cuadros idénticos píxel a píxel y puerta de calidad 0/1260.
+- Reel: `videos/invisible-no-era/` (27,4 s): `BRIEF.md`, `ON_SCREEN.md` (categorías y evidencia), `GUION.md` (beats y caption: principal + 2 alternativas de los 3 redactores Haiku), `voces.json` → `voz/`, `cues.json`, `build.sh`, `hf3d/`. Render: `invisible-no-era.mp4`. Puerta de calidad 0/1644, 0 saltos, determinista; 0 parpadeos; -13,9 LUFS; las 7 líneas se entienden. Publicar el martes 1/12.
+- Lecciones nuevas en `skills/reel-3d-toon/references/lecciones.md` (escenificar mirando a cámara, muebles sólidos, arcos de manos, placas que tapan cambios, paredes teseladas). Herramienta nueva: `videos/biblioteca/3d/web/jumpwin.cjs` (saltos en una ventana, 2 min).
+- Siguiente: comentarios del usuario; reel 2 "¿Reyes Magos? Mago soy yo" (publicar 28/12).
+
 **V2 DEL REEL DE NAVIDAD (2026-11-07, noche):** el usuario pidió una V2 con las mismas voces y otro ángulo de cámara y estilo de edición. Hecho en `videos/papa-noel-en-ojotas/hf3d-v2/` → `papa-noel-en-ojotas-3d-v2.mp4`: 16 planos encuadrados midiendo la cabeza (contrapicados, picados, travellings, plano a dos, detrás de la impresora, holandés), zooms de golpe, barridos, sacudones, destello y subtítulos palabra por palabra con título gancho. Puerta de calidad 0/1260, 0 parpadeos, -12,7 LUFS. Detalle en `GUION.md` → "Versión 2". Programado: a la 1:20 (Montevideo) arranca el kit compartido + "Invisible no era" (`videos/invisible-no-era/BRIEF.md`).
 
 **LECCIONES, CAPTION Y PRÓXIMOS REELS (2026-11-07, tarde):** al usuario le encantó el reel. Pidió guardar todo lo aprendido para no repetir errores, el texto para la descripción (con subagentes Haiku, algo "marketinero") y planificar 3 reels más con un equipo Haiku que busque ideas (memes y referencias 2026).

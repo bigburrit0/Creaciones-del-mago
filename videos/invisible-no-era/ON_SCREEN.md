@@ -2,7 +2,23 @@
 
 Written before building (BRIEF.md: "create categories for everything that will go on screen and make sure everything in
 that list is carefully crafted"). Each item: what it must look like, the detail it needs, how it moves, and the check
-that proves it is done. ✅ = done and checked (evidence in brackets).
+that proves it is done.
+
+## Result (2026-11-07)
+
+✅ Every item below was built and checked. Evidence:
+- **QA gate:** 0 bad frames out of 1644, 0 pose jumps, deterministic. It covers furniture, walls, door, beards, hands, gifts, slips and bodies (history: 658 → 0 violation frames, and 68 → 8 → 1 → 1 → 0 jumps).
+- **Flicker scan of the render:** 0 frames. It caught one wall-precision glitch, which is fixed in the kit.
+- **Loudness:** -13.9 LUFS, peak -1.5 dBFS.
+- **Voices:** all 7 lines intelligible in the final mix (Gemini transcription).
+- **Frames:** contact sheets of every beat were reviewed at each iteration.
+
+Changes made while building, for the reasons the checks gave:
+- El Mago draws with his left hand and does "shhh" with his right, because the right hand crossed his beard.
+- They rise out of the crouch to reach the button, and snap their hands back when they see each other: crouched, their faces were at hand height.
+- When caught, they turn to face each other, because their backs were to every possible camera.
+- The tiny figures hop off the printer into their hands, because Papá Noel's belly keeps him 0.6 m from the bed.
+- In the morning the gifts start at their sides, because hands going behind the back flipped the elbows.
 
 ## 1. Story beats (27 s, voice first; line lengths measured: s1 2.45, m1 1.83, s2 1.75, m2 1.37, s3 2.47, m3 1.05, m4 2.57)
 

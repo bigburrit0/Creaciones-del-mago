@@ -122,7 +122,7 @@ least 4% of the frame height in the insert).
 
 ## Execution plan
 
-**Step 0: a shared scene kit (do once, before Reel 1).** Move the reusable parts of `papa-noel-en-ojotas/hf3d/index.html`
+**Step 0: a shared scene kit (done 2026-11-07: `biblioteca/3d/web/escena3d.js`).** Move the reusable parts of `papa-noel-en-ojotas/hf3d/index.html`
 into `videos/biblioteca/3d/web/escena3d.js`:
 - the room and door builder;
 - characters and colliders;

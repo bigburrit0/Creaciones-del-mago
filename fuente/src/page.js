@@ -126,7 +126,7 @@
     shots.forEach(function (s) {
       if (s.classList.contains('is-done') || s.closest('[hidden]')) return;
       var r = s.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) { if (s._k >= 0) busy = true; return; }
+      if (r.bottom < 0 || r.top > vh || r.right < 0 || r.left > innerWidth) { if (s._k >= 0) busy = true; return; }
       if (s._k < 0) s._k = 0;
       s._k = Math.min(1, s._k + 0.045);
       var done = Math.floor(s._k * s._rows) / s._rows;
@@ -154,13 +154,21 @@
   var active = -1;
   var wide = function () { return innerWidth > 900; };
 
-  // a shelf shows one row on a wide screen and two rows otherwise; "ver los N" opens the rest
+  // a shelf shows one row on a wide screen and two rows otherwise; "ver los N" opens the rest.
+  // The featured shelf (ajedrez) shows one more row. On a phone the other shelves are a
+  // row you swipe sideways (CSS turns the grid into a flex row), so nothing is hidden there.
   function limits() {
     shelves.forEach(function (sh) {
       var grid = sh.querySelector('.grid');
-      var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-      var lim = cols >= 5 ? cols : cols * 2;
       var items = Array.prototype.slice.call(grid.children);
+      if (getComputedStyle(grid).display === 'flex') {
+        items.forEach(function (it) { it.hidden = false; });
+        sh.querySelector('.shelf__all').hidden = true;
+        return;
+      }
+      var feat = sh.hasAttribute('data-feature');
+      var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      var lim = cols >= 5 ? cols * (feat ? 2 : 1) : cols * (feat ? 3 : 2);
       var open = sh.classList.contains('is-open');
       items.forEach(function (it, i) { it.hidden = !open && i >= lim; });
       var btn = sh.querySelector('.shelf__all');
@@ -171,6 +179,7 @@
     queuePrint();
   }
   shelves.forEach(function (sh) {
+    sh.querySelector('.grid').addEventListener('scroll', queuePrint, { passive: true });
     sh.querySelector('.shelf__all').addEventListener('click', function () {
       var opening = !sh.classList.contains('is-open');
       var shown = sh.querySelectorAll('.item:not([hidden])').length;
@@ -229,6 +238,9 @@
     if (sr.top > innerHeight * 0.5) cur = -1;
     if (cur !== active) { active = cur; mark(); }
     if (nowBar) nowBar.classList.toggle('is-shown', !wide() && cur > -1 && mr.bottom < navH && sr.bottom > navH + 160);
+    // on a phone the order bar is there from the shop on, even empty, so WhatsApp is one tap away
+    var reach = !wide() && sr.top < innerHeight * 0.5;
+    if (reach !== invReach) { invReach = reach; invShow(); }
   }
   // each shelf's badge pops the first time its title comes into view
   if ('IntersectionObserver' in window) {
@@ -253,6 +265,10 @@
   var inv = document.querySelector('.inv');
   var invSlots = inv && inv.querySelector('.inv__slots');
   var invSay = inv && inv.querySelector('.inv__say');
+  var invSend = inv && inv.querySelector('[data-inv-send]');
+  var invWa = inv && inv.querySelector('[data-wa-order]');
+  var invReach = false;
+  function invShow() { if (inv) inv.classList.toggle('is-on', order.length > 0 || invReach); }
   var dlgMsg = document.querySelector('[data-msg]');
   var dlgInv = document.querySelector('.dialog__inv');
   var dlgSay = document.querySelector('[data-say]');
@@ -277,13 +293,17 @@
       b.querySelector('span').textContent = on ? 'En tu pedido' : 'Lo quiero';
     });
     if (inv) {
-      inv.classList.toggle('is-on', n > 0);
+      invShow();
+      if (invSend) invSend.innerHTML = n ? 'Mandar<em> pedido</em>' : 'Escribime';
+      if (invWa) invWa.setAttribute('aria-label', n ? 'Mandar pedido por WhatsApp' : 'Escribime por WhatsApp');
       invSlots.innerHTML = '';
       order.slice(-6).forEach(function (o) {
         var s = document.createElement('span'); s.className = 'slot' + (added === o.id ? ' is-new' : '');
         var im = document.createElement('img'); im.src = thumb(o); im.alt = ''; s.appendChild(im); invSlots.appendChild(s);
       });
-      invSay.innerHTML = '<b>' + n + (n === 1 ? ' cosa' : ' cosas') + ' en tu pedido</b><span>' + order.map(function (o) { return o.n; }).join(', ') + '</span>';
+      invSay.innerHTML = n
+        ? '<b>' + n + (n === 1 ? ' cosa' : ' cosas') + '<em> en tu pedido</em></b><span>' + order.map(function (o) { return o.n; }).join(', ') + '</span>'
+        : '<b>Tocá «Lo quiero»</b><span>y tu pedido se arma acá. O escribime directo.</span>';
     }
     if (dlgInv) {
       dlgInv.innerHTML = '';
@@ -329,6 +349,20 @@
   // ------------------------------------------------- the peek: an item window
   var peek = document.querySelector('.peek');
   var peekCur = null;
+  var peekImg = peek && peek.querySelector('[data-peek-img]');
+  var peekCap = peek && peek.querySelector('[data-peek-cap]');
+  var peekThumbs = peek && peek.querySelector('[data-peek-thumbs]');
+  var peekFotos = [], peekI = 0;
+  // more photos of the same piece (the colors it was already printed in)
+  function showFoto(i, anim) {
+    if (peekFotos.length < 2) return;
+    peekI = (i + peekFotos.length) % peekFotos.length;
+    var f = peekFotos[peekI];
+    peekImg.src = f[0]; peekImg.alt = peekCur.getAttribute('data-name') + ': ' + f[1];
+    peekCap.textContent = f[1] + ' · ' + (peekI + 1) + ' de ' + peekFotos.length;
+    Array.prototype.forEach.call(peekThumbs.children, function (b, k) { if (k === peekI) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    if (anim && !reduce) { var s = peek.querySelector('.peek__shot'); s.classList.remove('is-swap'); void s.offsetWidth; s.classList.add('is-swap'); }
+  }
   var peekPick = peek && peek.querySelector('[data-peek-pick]');
   function syncPeek() {
     if (!peekCur || !peekPick) return;
@@ -343,8 +377,19 @@
     peekCur = it;
     var full = it.querySelector('.full');
     peek.querySelector('[data-peek-where]').textContent = it.closest('.shelf').getAttribute('data-name');
-    var img = peek.querySelector('[data-peek-img]');
+    var img = peekImg;
     img.src = full.getAttribute('src'); img.alt = full.getAttribute('alt');
+    try { peekFotos = JSON.parse(it.getAttribute('data-fotos') || '[]'); } catch (e) { peekFotos = []; }
+    peekThumbs.innerHTML = '';
+    peekThumbs.hidden = peekCap.hidden = peekFotos.length < 2;
+    peekFotos.forEach(function (f, k) {
+      var b = document.createElement('button'); b.type = 'button';
+      b.setAttribute('aria-label', 'Foto ' + (k + 1) + ': ' + f[1]);
+      var im = document.createElement('img'); im.src = f[0]; im.alt = ''; im.loading = 'lazy'; b.appendChild(im);
+      b.addEventListener('click', function () { showFoto(k, true); });
+      peekThumbs.appendChild(b);
+    });
+    showFoto(0);
     peek.querySelector('[data-peek-name]').textContent = it.getAttribute('data-name');
     peek.querySelector('[data-peek-line]').innerHTML = it.querySelector('p').innerHTML;
 
@@ -379,11 +424,28 @@
       if (peekCur) toggle(peekCur.getAttribute('data-id'), peek.querySelector('.peek__shot'));
     });
     // swipe on a phone
-    var sx = null;
-    peek.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    // on the photo it walks the photos of this piece; anywhere else, the next piece
+    var sx = null, onMedia = false;
+    peek.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; onMedia = !!e.target.closest('.peek__media'); }, { passive: true });
     peek.addEventListener('touchend', function (e) {
       if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null;
-      if (Math.abs(dx) > 60) stepPeek(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) <= 60) return;
+      if (onMedia && peekFotos.length > 1) showFoto(peekI + (dx < 0 ? 1 : -1), true);
+      else stepPeek(dx < 0 ? 1 : -1);
+    });
+  }
+
+  // ------------------------------------------------- armá tu ajedrez
+  // Same message as build.py writes for the default choice.
+  var arma = document.querySelector('[data-arma]');
+  if (arma) {
+    var armaSend = arma.querySelector('[data-arma-send]');
+    var val = function (n) { return arma.querySelector('[name="' + n + '"]').value; };
+    arma.addEventListener('change', function () {
+      var msg = 'Hola, vi la web y quiero un ajedrez:\n- Juego: ' + val('juego') +
+        '\n- Colores: ' + val('c1').toLowerCase() + ' contra ' + val('c2').toLowerCase() +
+        '\n- ' + val('tablero') + '\n¿Me pasás precio y para cuándo estaría?';
+      armaSend.href = WA + encodeURIComponent(msg);
     });
   }
 

@@ -1,4 +1,7 @@
-# id -> (source, fx, fy, zoom)
+# id -> (source, fx, fy, zoom[, flags])
+# flags: "m" = foto de celular, se retoca (ver imgs.py) · "g" = foto de galería, sin versión de 32 px
+import os
+V = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'vendidos') + os.sep
 P = "/mnt/user-data/uploads/creaciones del mago/Proyecto 3D/"
 X = "/mnt/user-data/uploads/creaciones del mago/Pics/"
 PHOTOS = {
@@ -55,32 +58,32 @@ PHOTOS = {
   "rack-hex":    (P+"Estante Rack Organizador para Hot Wheels/rack.JPG", .55, .5, 1.0),
   "tres-en-uno": (P+"Exhibidor de Pared 3 en 1 para Hot Wheels/pared.JPG", .5, .5, 1.0),
   "modular":     (P+"Estante Organizador Modular para autos/modular.JPG", .5, .5, 1.0),
-  "ascensor":    (P+"Elevador AUDI/2-fully assembled.jfif", .5, .5, 1.0),
+  "ascensor-d":    (P+"Elevador AUDI/2-fully assembled.jfif", .5, .5, 1.0, "g"),
   "kaido":       (P+"Exhibidor Premium para Kaido House  Mini GT 164/1-KaidoHouse.JPG", .5, .5, 1.0),
   "infinito":    (P+"Modulo infinito-autos/Modulo infinito-autos-1.JPG", .5, .5, 1.0),
   "podio":       (P+"Podio Exhibidor para Autos/podio.JPG", .5, .5, 1.0),
   "torre":       (P+"Soporte Exhibidor de Pared para Autos/soporte-autos.JPG", .5, .5, 1.0),
   "rack-132":    (P+"Estante ranck autos 1-32/Ranck 1-32.JPG", .5, .5, 1.0),
-  # ajedrez y juegos
-  "medieval":    (P+"Ajedrez medieval/WhatsApp Image 2026-10-10 at 5.40.41 PM (2).jpeg", .5, .5, 1.0),
+  # ajedrez y juegos (fotos de los diseñadores; las que terminan en -d se ven en la ventana del producto)
+  "medieval-d":    (P+"Ajedrez medieval/WhatsApp Image 2026-10-10 at 5.40.41 PM (2).jpeg", .5, .5, 1.0, "g"),
   "medieval-p":  (P+"Ajedres medieval premium/Ajedrez-Medieval-prem-02.JPG", .5, .5, 1.0),
-  "vikingos":    (P+"Ajedrez vikingos/Ajedrez vikingos-1.JPG", .5, .5, 1.0),
+  "vikingos-d":    (P+"Ajedrez vikingos/Ajedrez vikingos-1.JPG", .5, .5, 1.0, "g"),
   "grecia":      (P+"Ajedrez-antiguaGrecia/Ajedrez-antiguaGrecia-10.JPG", .5, .5, 1.0),
   "hp":          (P+"AjedrezHP/AjedrezHP-1.JPG", .5, .5, 1.0),
   "sw-caja":     (P+"Starwars chess/Starwars chess-2.JPG", .5, .5, 1.0),
   "sw-piezas":   (P+"Starwars chess2/Starwars chess2-3.JPG", .5, .5, 1.0),
-  "mc-ajedrez":  (P+"Minecraft ajedrez/Minecraft ajedrez-10.JPG", .5, .5, 1.0),
-  "perros-gatos":(P+"Ajedrez perro vs gatos/Ajedrez perro vs gatos-4.JPG", .5, .5, 1.0),
+  "mc-ajedrez-d":  (P+"Minecraft ajedrez/Minecraft ajedrez-10.JPG", .5, .5, 1.0, "g"),
+  "perros-gatos-d":(P+"Ajedrez perro vs gatos/Ajedrez perro vs gatos-4.JPG", .5, .5, 1.0, "g"),
   "plegable":    (P+"Ajedrez minimalista/Ajedrez minimalista-4.JPG", .5, .5, 1.0),
-  "minimal":     (P+"Ajedrez minimal2/Ajedrez minimal2-1.JPG", .5, .5, 1.0),
+  "minimal-d":     (P+"Ajedrez minimal2/Ajedrez minimal2-1.JPG", .5, .5, 1.0, "g"),
   "escultorico": (P+"Ajedrez moderno-escultorico/Ajedrez moderno-escultorico-2.JPG", .5, .5, 1.0),
-  "tablero":     (P+"Tablero ajedrez/Tablero.jpg", .5, .5, 1.0),
+  "tablero-d":     (P+"Tablero ajedrez/Tablero.jpg", .5, .5, 1.0, "g"),
   "domino":      (P+"Domino/domino.JPG", .5, .5, 1.0),
   # pajaros y jardin
   "hoja":        (P+"Comedero de aves1/Comedero aves.JPG", .5, .5, 1.0),
   "redondo":     (P+"Comedero de aves2/comedero de aves.JPG", .5, .5, 1.0),
-  "elfico":      (P+"Comedero de aves3/comedero1.JPG", .5, .5, 1.0),
-  "casita":      (P+"Comedor aves elegante/comedor elegante.JPG", .5, .5, 1.0),
+  "elfico-d":      (P+"Comedero de aves3/comedero1.JPG", .5, .5, 1.0, "g"),
+  "casita-d":      (P+"Comedor aves elegante/comedor elegante.JPG", .5, .5, 1.0, "g"),
   "driftwood":   (P+"Pajarera1/Pajarera.JPG", .62, .5, 1.0),
   "gota":        (P+"Pajarera minimal/minimal3.JPG", .5, .5, 1.0),
   "espiral":     (P+"Pajarera nido en espiral/Nido en espiral2.JPG", .5, .5, 1.0),
@@ -88,7 +91,7 @@ PHOTOS = {
   "maceta":      (P+"Maceta acolchada/maceta2.JPG", .5, .5, 1.0),
   "cosechador":  (P+"Cortador de fruta arereo con cuchilla/cortador fruta.JPG", .5, .5, 1.0),
   # casa y deco
-  "repisa":      (P+"Derretido/derretido.JPG", .5, .5, 1.0),
+  "repisa-d":      (P+"Derretido/derretido.JPG", .5, .5, 1.0, "g"),
   "bowl":        (P+"Bowl derretido/bowl-derretido4.JPG", .5, .5, 1.0),
   "cassette":    (P+"Audio cassete gigante/casetteG-3.JPG", .5, .5, 1.0),
   "mesa-luz":    (P+"Organizador libro mesa de noche/Libro2.JPG", .5, .5, 1.0),
@@ -106,4 +109,34 @@ PHOTOS = {
   "job-piezas":  (X+"IMG_5147.JPG", .5, .5, 1.0),
   "job-fruta":   (X+"IMG_5199.JPG", .5, .5, 1.0),
   "job-penarol": (X+"IMG_7082.JPG", .5, .5, 1.0),
+  # ajedrez vendidos (fotos propias, 7/11/2026). La primera de cada uno va en la tarjeta,
+  # las que terminan en -2, -3... se ven en la ventana del producto.
+  "medieval":    (V+"medieval-negro-dorado.jpg", .56, .6, 1.2, "m"),
+  "medieval-2":  (V+"medieval-gris-dorado-detalle.jpg", .42, .55, 1.1, "mg"),
+  "medieval-3":  (V+"medieval-gris-blanco.jpg", .52, .5, 1.05, "mg"),
+  "medieval-4":  (V+"medieval-plateado-negro.jpg", .5, .5, 1.05, "mg"),
+  "medieval-5":  (V+"medieval-gris-dorado.jpg", .5, .55, 1.0, "mg"),
+  "vikingos":    (V+"vikingos-dorado-gris-tablero-1.jpg", .5, .5, 1.0, "m"),
+  "vikingos-2":  (V+"vikingos-blanco-negro.jpg", .5, .45, 1.0, "mg"),
+  "perros-gatos":   (V+"perros-gatos-perros-1.jpg", .55, .55, 1.05, "m"),
+  "perros-gatos-2": (V+"perros-gatos-gatos-1.jpg", .5, .55, 1.0, "mg"),
+  "perros-gatos-3": (V+"perros-gatos-perros-2.jpg", .5, .55, 1.0, "mg"),
+  "perros-gatos-4": (V+"perros-gatos-gatos-2.jpg", .6, .55, 1.0, "mg"),
+  "minimal":     (V+"minimal-negro-blanco-1.jpg", .5, .55, 1.0, "m"),
+  "minimal-2":   (V+"minimal-negro-blanco-arriba.jpg", .5, .5, 1.0, "mg"),
+  "minimal-3":   (V+"minimal-negro-blanco-2.jpg", .5, .55, 1.0, "mg"),
+  "mc-ajedrez":   (V+"minecraft-ajedrez-piezas.jpg", .45, .6, 1.0, "m"),
+  "mc-ajedrez-2": (V+"minecraft-ajedrez-caja.jpg", .5, .6, 1.0, "mg"),
+  "mc-ajedrez-3": (V+"minecraft-ajedrez-arriba.jpg", .5, .5, 1.0, "mg"),
+  "tablero":     (V+"vikingos-dorado-gris-tablero-2.jpg", .55, .55, 1.0, "m"),
+  "pieza":       (V+"caballo-dragon.jpg", .5, .54, 1.3, "m"),
+  # otros vendidos (fotos propias, 7/11/2026)
+  "contador":    (V+"contador-magic-frente.jpg", .5, .42, 1.25, "m"),
+  "contador-2":  (V+"contador-magic-mano.jpg", .5, .45, 1.15, "mg"),
+  "contador-3":  (V+"contador-magic-costado.jpg", .5, .45, 1.2, "mg"),
+  "contador-4":  (V+"contador-magic-lateral.jpg", .5, .5, 1.2, "mg"),
+  "casita":      (V+"comedero-casita.jpg", .5, .62, 1.05, "m"),
+  "elfico":      (V+"comedero-elfico-dorado.jpg", .5, .52, 1.0, "m"),
+  "repisa":      (V+"repisa-derretida-roja.jpg", .5, .5, 1.0, "m"),
+  "ascensor":    (V+"ascensor-negro.jpg", .5, .58, 1.0, "m"),
 }

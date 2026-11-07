@@ -4,7 +4,7 @@ import os, sys, html, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from catalog import SHELVES, icon_svg
+from catalog import SHELVES, FOTOS, icon_svg
 
 WA = "https://wa.me/59892104419?text="
 from urllib.parse import quote
@@ -23,13 +23,44 @@ def item_html(shelf, it):
     mine = shelf.get("mine") == "all" or iid in shelf.get("mine", ())
     tag = ''
     msg = it[3] if len(it) > 3 else (shelf.get("pre", "") + name)
-    return (f'<article class="item" data-id="{iid}" data-name="{e(name)}" data-line="{e(msg)}"{" data-mine" if mine else ""}>'
-            f'<button class="shot" type="button" aria-label="Ver {e(name)} más grande">'
+    fotos = FOTOS.get(iid, [])
+    gal, label = '', f'Ver {e(name)} más grande'
+    if len(fotos) > 1:
+        gal = ' data-fotos="' + e(json.dumps([[f"assets/p/{f}.webp", c] for f, c in fotos], ensure_ascii=False)) + '"'
+        label = f'Ver {e(name)}: {len(fotos)} fotos'
+        tag = f'<span class="nfotos" aria-hidden="true">{icon_svg("foto")}{len(fotos)}</span>'
+    return (f'<article class="item" data-id="{iid}" data-name="{e(name)}" data-line="{e(msg)}"{" data-mine" if mine else ""}{gal}>'
+            f'<button class="shot" type="button" aria-label="{label}">'
             f'<img class="full" src="assets/p/{iid}.webp" width="600" height="600" alt="{e(name)} impreso en 3D" loading="lazy" decoding="async">'
             f'<img class="px pix" src="assets/p/{iid}-px.png" width="32" height="32" alt="" loading="lazy"><i class="line" aria-hidden="true"></i>{tag}</button>'
             f'<i class="plank" aria-hidden="true"></i>'
             f'<h4>{e(name)}</h4><p>{fact}</p>'
             f'<button class="pick" type="button" aria-pressed="false"><span>Lo quiero</span></button></article>')
+
+# "Armá tu ajedrez": three choices and the WhatsApp message is written. Works without JS
+# (the link carries the default choice); page.js rewrites it on every change.
+ARMA_SKIP = ("tablero", "pieza", "domino")
+ARMA_COLORES = ["Negro", "Blanco", "Dorado", "Plateado", "Gris", "Otro (te digo cuál)"]
+ARMA_TABLERO = ["Con tablero", "Solo las piezas"]
+def arma_message(juego, c1, c2, tablero):
+    return (f"Hola, vi la web y quiero un ajedrez:\n- Juego: {juego}\n- Colores: {c1.lower()} contra {c2.lower()}\n"
+            f"- {tablero}\n¿Me pasás precio y para cuándo estaría?")
+def arma_html(shelf):
+    juegos = [name for iid, name, *_ in shelf["items"] if iid not in ARMA_SKIP] + ["Otro (te mando una foto)"]
+    def sel(name, label, opts, pick):
+        o = ''.join(f'<option{" selected" if x == pick else ""}>{e(x)}</option>' for x in opts)
+        return f'<label class="arma__f"><span>{label}</span><select name="{name}">{o}</select></label>'
+    return ('<div class="arma" data-arma>'
+            f'<div class="arma__head"><span class="shelf__badge">{icon_svg("caballo")}</span><div>'
+            '<h4>Armá tu ajedrez</h4><p>Elegí el juego, los colores y el tablero. El mensaje de WhatsApp se arma solo.</p></div></div>'
+            '<div class="arma__fields">'
+            + sel("juego", "Juego", juegos, juegos[0])
+            + sel("c1", "Un bando", ARMA_COLORES, "Negro")
+            + sel("c2", "El otro", ARMA_COLORES, "Dorado")
+            + sel("tablero", "Tablero", ARMA_TABLERO, ARMA_TABLERO[0])
+            + '</div>'
+            f'<a class="btn" data-arma-send href="{e(wa(arma_message(juegos[0], "Negro", "Dorado", ARMA_TABLERO[0])))}">{WA_ICON}<span>Pedir este ajedrez por WhatsApp</span></a>'
+            '</div>')
 
 def shop_html():
     tabs, panels = [], []
@@ -38,12 +69,15 @@ def shop_html():
         tabs.append(f'<a class="shelf-tab" href="#estante-{s["id"]}" data-i="{i}" aria-label="{e(name)}, {len(s["items"])}">'
                     f'{icon_svg(s["icon"])}<span>{e(s["tab"])}</span><small>{len(s["items"])}</small></a>')
         items = ''.join(item_html(s, it) for it in s["items"])
-        panels.append(f'<section class="shelf" id="estante-{s["id"]}" data-i="{i}" data-name="{e(name)}" aria-labelledby="h-{s["id"]}">'
+        feat = s.get("feature")
+        panels.append(f'<section class="shelf" id="estante-{s["id"]}" data-i="{i}" data-name="{e(name)}"{" data-feature" if feat else ""} aria-labelledby="h-{s["id"]}">'
                       f'<header class="shelf__head"><span class="shelf__badge">{icon_svg(s["icon"])}</span>'
                       f'<div><h3 id="h-{s["id"]}">{e(name)}</h3><p class="shelf__intro">{s["intro"]}</p></div></header>'
                       f'<div class="grid">{items}</div>'
-                      f'<button class="shelf__all" type="button" aria-expanded="false" hidden>{icon_svg("down")}<span>Ver los {len(s["items"])}</span></button>'
-                      f'</section>')
+                      + ('' if feat else f'<p class="shelf__swipe" aria-hidden="true">Deslizá para ver los {len(s["items"])} {icon_svg("right")}</p>')
+                      + f'<button class="shelf__all" type="button" aria-expanded="false" hidden>{icon_svg("down")}<span>Ver los {len(s["items"])}</span></button>'
+                      + (arma_html(s) if feat else '')
+                      + '</section>')
     return ('<nav class="shelves" id="categorias" aria-label="Categorías">' + ''.join(tabs)
             + f'<span class="menu-cursor" aria-hidden="true">{icon_svg("cursor")}</span></nav>'
             '<div class="shelf-now">'
@@ -104,7 +138,7 @@ def jsonld():
         "alternateName": "Creaciones del Mago, impresión 3D en Montevideo",
         "url": SITE,
         "description": ("Servicio de impresión y diseño 3D en Montevideo, Uruguay. Imprimo piezas de hasta 25 cm por lado en PLA o PETG, con hasta 4 colores: "
-                        "autos a escala, ajedrez, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso."),
+                        "ajedrez personalizados, autos a escala, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso."),
         "slogan": "Imprimo en 3D en Montevideo. Mandame tu idea.",
         "logo": SITE + "assets/px/apple-touch-icon.png",
         "image": SITE + "assets/px/og.png",
@@ -151,5 +185,7 @@ out = (TEMPLATE
        .replace('{{I_LEFT}}', icon_svg('left')).replace('{{I_RIGHT}}', icon_svg('right'))
        .replace('{{N_ITEMS}}', str(sum(len(s["items"]) for s in SHELVES))))
 assert '{{' not in out, out[out.index('{{'):out.index('{{') + 40]
-open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(out)
+# writes next to assets/: the build folder if it has its own copy, otherwise the repo root
+DEST = ROOT if os.path.isdir(os.path.join(ROOT, 'assets')) else os.path.dirname(ROOT)
+open(os.path.join(DEST, 'index.html'), 'w', encoding='utf-8').write(out)
 print('index.html', len(out), 'bytes,', sum(len(s["items"]) for s in SHELVES), 'items')

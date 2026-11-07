@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Impresión 3D en Montevideo, a medida y catálogo | Creaciones del Mago</title>
-<meta name="description" content="Imprimo en 3D en Montevideo: autos para armar, ajedrez, exhibidores y piezas a medida. Hasta 25 cm por lado, en PLA o PETG. Precio y fecha por WhatsApp.">
+<meta name="description" content="Imprimo en 3D en Montevideo: ajedrez personalizados, autos para armar, exhibidores y piezas a medida. Hasta 25 cm por lado, en PLA o PETG. Precio y fecha por WhatsApp.">
 <link rel="canonical" href="https://creacionesdelmago.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#1F1A3D">
@@ -35,6 +35,7 @@
 <header class="hud">
   <a class="hud__mark" href="#inicio"><img class="pix" src="assets/px/glifo-linea.png" width="52" height="56" alt=""><span class="hud__name">Creaciones del Mago</span></a>
   <nav class="hud__links" aria-label="Secciones">
+    <a href="#estante-ajedrez">Ajedrez</a>
     <a href="#catalogo">Catálogo</a>
     <a href="#a-medida">A medida</a>
     <a href="#preguntas">Cómo pedir</a>
@@ -165,17 +166,21 @@
 
 </main>
 
-<!-- the inventory: appears with the first "Lo quiero" -->
+<!-- the inventory: appears with the first "Lo quiero" (on a phone, as soon as you reach the shop) -->
 <div class="inv" aria-label="Tu pedido">
   <div class="inv__slots" aria-hidden="true"></div>
-  <p class="inv__say"></p>
-  <a class="btn" data-wa-order href="{{WA_GENERAL}}" aria-label="Mandar pedido por WhatsApp">{{WA_ICON}}<span>Mandar pedido</span></a>
+  <a class="inv__say" href="#pedido"></a>
+  <a class="btn" data-wa-order href="{{WA_GENERAL}}" aria-label="Escribime por WhatsApp">{{WA_ICON}}<span data-inv-send>Escribime</span></a>
 </div>
 <!-- the peek: an RPG item window -->
 <dialog class="peek" aria-labelledby="peek-name">
   <div class="peek__win">
     <p class="peek__bar"><span data-peek-where></span><button class="peek__x" type="button" data-peek-close aria-label="Cerrar">×</button></p>
-    <div class="peek__shot"><img data-peek-img src="" alt="" width="600" height="600"></div>
+    <div class="peek__media">
+      <div class="peek__shot"><img data-peek-img src="" alt="" width="600" height="600"></div>
+      <p class="peek__cap" data-peek-cap hidden></p>
+      <div class="peek__thumbs" data-peek-thumbs hidden></div>
+    </div>
     <div class="peek__body">
       <h3 id="peek-name" data-peek-name></h3>
       <p data-peek-line></p>

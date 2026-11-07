@@ -28,6 +28,7 @@ Outside this repo, the packaged `reel-3d-toon.skill` (built by `empaquetar.sh`) 
 
 | What | Path |
 |---|---|
+| **Shared scene kit** (stage, workshop set with day/night/dawn light, cast with colliders and beard tracking, printer, props and effects, arm IK with contact guard, springs, voices and talk nods, pill or kinetic subtitles, end card, camera rig with framed shots/whips/snap zooms/shake/flash/POV, common QA) | `videos/biblioteca/3d/web/escena3d.js` (example: `videos/invisible-no-era/hf3d/index.html`) |
 | Character builder library (Blender, headless) | `videos/biblioteca/3d/toonchar.py` (lathe, tube, drape, displace, skin, smooth and **transfer** weights, AO bake, export) |
 | Characters | `videos/biblioteca/3d/mago3d.py`, `santa3d.py` → `glb/*.glb` (46 CC0 mocap clips each) |
 | Props | `videos/biblioteca/3d/taller_props.py`, printer `glb/printer.glb` |
@@ -58,7 +59,7 @@ proportions per `RESEARCH_3D_TOON.md`, colliders sized from the meshes, beard/ha
 to move visibly (the beard springs once moved 0.004 rad: invisible). Rebuild: `EGL_PLATFORM=surfaceless
 /opt/bpy/bin/python mago3d.py -- glb/mago.glb` (both characters in parallel take ~1 min).
 
-**3. Scene** (`hf3d/index.html` from the reference): timing table `T`, routes as curves (`CatmullRomCurve3`, arc-length,
+**3. Scene** (`hf3d/index.html` on the kit; copy `videos/invisible-no-era/hf3d/index.html` as the starting point): timing table `T`, routes as curves (`CatmullRomCurve3`, arc-length,
 heading from the tangent), clips with measured walk speed, IK reaches queued then solved after both bodies are posed,
 the contact guard, props with real radii, shots. Voices as `<audio data-who data-text>`; subtitles, talk nods and the
 end card read them (one source of truth). Build: `build3d.sh` (copies libs, models, fonts, voices; makes the talk

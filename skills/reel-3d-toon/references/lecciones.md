@@ -57,3 +57,20 @@ Each row: what the person saw → the real cause → the rule now → where it i
 - The key is never printed: scripts send `proxy-injected`.
 - Trademarked characters (Minecraft, Pokémon, One Piece, Star Wars) appear in the catalogue; in NEW reels prefer
   original or commercially licensed designs on screen (MakerWorld default licence is personal use only).
+
+## From "Invisible no era" (2026-11-07, the first reel on the shared kit)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| — | 700-line scenes copied per reel | Build on `escena3d.js` (stage, set, light presets, cast, rig, props, voices, overlays, camera rig, QA). A refactor is finished only when the old reel renders **pixel-identical** frames (hash at 10 times) and passes its gate |
+| Shots at the printer showed only backs and hats | Characters at a workbench face the back wall, and every camera must also look toward the walls | Stage so faces point at a usable camera: turn them to face each other, use POV inserts, or a high top view. Over-the-shoulder from above fails with big hats: put the camera at face height or re-stage |
+| Hands brushing faces when reaching from a crouch | Crouch clips put the head at hand height | Rise out of the crouch to reach; give reaches near faces extra clearance (`arm(..., clear = 0.09)`) |
+| El Mago inside the bench all day; Papá Noel's knot in the table | Positions chosen without measuring bodies against furniture | Furniture is solid in QA (boxes and cylinders vs every body collider). Measure first: robe r 0.23, belly r 0.26, Papá Noel's jacket knot reaches 0.36 m in front |
+| Papá Noel could not reach the printer bed | His belly keeps him 0.6 m away | Bring the prop to the hand (a hand-over, or the workshop's magic: the figures hop into the hands) instead of stepping into furniture |
+| Hands passing through the beard between two targets | Straight lines between targets cross the beard | Move hands along arcs that bulge forward (`via()`); hand-overs on the camera side; never reach across the belly |
+| Pose jumps (elbow flips) | Moves under 0.4 s, hands going behind the back | At least 0.6 s for behind-the-back moves, 0.4–0.5 s for reaches; one arm never has two overlapping reaches (release first, then the next) |
+| Night looked like day in close shots | The desk lamp at 2.4 lit the whole bench | Check every light preset on real frames; night lamp 0.8, LED 0.6 |
+| A head turn read the camera position | `turnTo(…, camera.position)` used the previous frame's camera | Poses never read the camera (determinism): aim at a fixed point where the shot puts the lens |
+| Staging changes and teleports | — | Hide them under a full-frame time card ("Esa noche…") and declare those windows in `window.__JUMP_OK` (the gate skips jumps only there) |
+| The paper slip hidden by the hand | Slip centred on the palm | Hold paper above the mitten, facing the reader; POV insert at fov 55 so the slip fills the frame and the handwriting (Caveat) reads at phone size |
+| A line came out different from the script ("¿Soy yo?") | TTS acting | Keep what works and change the subtitle to match what was said |

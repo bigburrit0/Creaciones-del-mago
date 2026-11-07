@@ -15,7 +15,7 @@ The dialogue lengths below are estimates: in each reel the voices are generated 
 
 ---
 
-## Reel 1: "Invisible no era" (20 s)
+## Reel 1: "Invisible no era" (20 s) — made 2026-11-07 (27 s), see `invisible-no-era/`
 
 **Logline.** The workshop does its amigo invisible. Papá Noel and El Mago each draw the other's name and sneak to the
 printer at night to make the gift in secret. They bump into each other at the printer. The gifts: a tiny El Mago

@@ -219,26 +219,27 @@
         // Papá Noel: draw, read, hide behind his back; night: button, grab the gift, hide; morning: hand over, take, look, click
         const sL = (P, w) => arm(santa, "L", P, w), sR = (P, w) => arm(santa, "R", P, w), mL = (P, w) => arm(mago, "L", P, w), mR = (P, w) => arm(mago, "R", P, w);
         { const dig = 0.03 * pulse(t, 0.5, 0.6, 0.65, 0.75);
-          let P = via(santa, IN.clone().add(V3(0.03, -dig, 0.02)), readPt(santa, "L"), ss(clamp((t - 0.78) / 0.3, 0, 1))); P = via(santa, P, behind(santa, "L"), ss(clamp((t - T.hide1) / 0.35, 0, 1)), 0.1);
+          let P = via(santa, IN.clone().add(V3(0.03, -dig, 0.02)), readPt(santa, "L"), ss(clamp((t - 0.78) / 0.3, 0, 1))); P = via(santa, P, behind(santa, "L"), ss(clamp((t - T.hide1) / 0.65, 0, 1)), 0.05);
           sL(P, pulse(t, T.draw1, T.draw1 + 0.28, 7.42, 7.6)); }
         { const dig = 0.03 * pulse(t, 4.0, 4.1, 4.15, 4.25);
           mL(via(mago, IN.clone().add(V3(-0.03, -dig, -0.02)), readPt(mago, "L"), ss(clamp((t - 4.0) / 0.45, 0, 1)), 0.12), pulse(t, T.draw2, T.draw2 + 0.28, 7.42, 7.6));
-          mR(headPt(mago, 0.03, 0.22, 0.09), pulse(t, T.shh - 0.25, T.shh + 0.25, 7.42, 7.6)); }                       // "shhh": a finger in front of his moustache
+          mR(headPt(mago, 0.03, 0.22, 0.09), pulse(t, T.shh - 0.5, T.shh + 0.2, 7.42, 7.6)); }                       // "shhh": a finger in front of his moustache
         // night: both reach for the button and stop short of each other; then each grabs the other's gift and hides it
         arm(santa, "L", PB.clone().add(V3(0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.3, T.freeze - 0.05, T.freeze + 0.02, T.freeze + 0.3), null, 0.09);
         arm(mago, "R", PB.clone().add(V3(-0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.3, T.freeze - 0.05, T.freeze + 0.02, T.freeze + 0.3), null, 0.09);
         const catchS = wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(0.44)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0));
         const catchM = wp(mago.b("DEF-spine.003")).add(MF.fwd.clone().multiplyScalar(0.36)).add(MF.right.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0));
-        sL(via(santa, catchS, behind(santa, "L"), ss(clamp((t - T.hide) / 0.35, 0, 1)), 0.08), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
-        mR(via(mago, catchM, behind(mago, "R"), ss(clamp((t - T.hide) / 0.35, 0, 1)), 0.08), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
+        sL(via(santa, catchS, behind(santa, "L"), ss(clamp((t - T.hide) / 0.4, 0, 1)), 0.05), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
+        mR(via(mago, catchM, behind(mago, "R"), ss(clamp((t - T.hide) / 0.4, 0, 1)), 0.05), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
         // morning: Papá Noel hands El Mago his gift (left hand), El Mago hands Papá Noel his (right hand); each looks at the tiny version of himself
         const clickDip = (k) => V3(0, -0.012 * [0, 0.2, 0.4].reduce((a, d) => a + pulse(t, T.click + d - 0.03, T.click + d, T.click + d + 0.02, T.click + d + 0.07), 0) * k, 0);
         const raise = V3(0, 0.06 * pulse(t, T.card - 0.1, T.card + 0.3, DUR, DUR + 1), 0);
         if (morning) {
-          sL(behind(santa, "L").lerp(towards(P1, santa.W.position, 0.06), ss(clamp((t - T.ex0) / 0.4, 0, 1))), 1 - ss(clamp((t - (T.h1 + 0.1)) / 0.3, 0, 1)));
+          { const k = ss(clamp((t - 18.22) / 0.68, 0, 1));                                    // from behind his back around his left side (an arc outside the belly)
+            sL(behind(santa, "L").lerp(towards(P1, santa.W.position, 0.06), k).add(SF.left.clone().multiplyScalar(0.16 * Math.sin(Math.PI * k))), 1 - ss(clamp((t - (T.h1 + 0.05)) / 0.3, 0, 1))); }
           mL(via(mago, lookPt(mago, "L"), towards(P1, mago.W.position, 0.06), pulse(t, T.h1 - 0.25, T.h1 - 0.05, T.h1 + 0.1, T.h1 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h1 - 0.35)) / 0.3, 0, 1)));
           mR(behind(mago, "R").lerp(towards(P2, mago.W.position, 0.06), ss(clamp((t - (T.h1 + 0.35)) / 0.4, 0, 1))), 1 - ss(clamp((t - (T.h2 + 0.1)) / 0.3, 0, 1)));
-          sL(via(santa, lookPt(santa, "L"), towards(P2, santa.W.position, 0.06), pulse(t, T.h2 - 0.25, T.h2 - 0.05, T.h2 + 0.1, T.h2 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h2 - 0.35)) / 0.3, 0, 1)));
+          sL(via(santa, lookPt(santa, "L"), towards(P2, santa.W.position, 0.06), pulse(t, T.h2 - 0.25, T.h2 - 0.05, T.h2 + 0.1, T.h2 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h2 - 0.45)) / 0.4, 0, 1)));
         }
         // ---- faces: blinks, brows up at the reveals and when caught, El Mago's eyes dart in the freeze
         let e = 0; for (const b of [0.9, 3.4, 6.2, 9.1, 12.4, 16.2, 19.3, 21.5, 25.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }

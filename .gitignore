@@ -32,3 +32,5 @@ videos/*/voz3d/_take_*.wav
 videos/*/hf3d-v2/lib/
 videos/*/hf3d-v2/assets/
 videos/*/hf3d-v2/.hyperframes/
+videos/*/qa.json
+videos/*/qa.log

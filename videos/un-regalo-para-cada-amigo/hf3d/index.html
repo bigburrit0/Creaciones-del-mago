@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 25.3, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.36) 100%); }
+      /* kinetic word-by-word captions (Instagram safe area: not the top 220 px nor the bottom 450 px) */
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      #hook { position: absolute; left: 70px; right: 70px; top: 250px; text-align: center; font: 700 104px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #F2C14E; font-size: 70px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      /* the counter: which friend we are on */
+      #badge { position: absolute; left: 50%; top: 236px; width: 190px; height: 132px; margin-left: -95px; border-radius: 66px; background: #F2C14E; border: 8px solid #150A34;
+               box-shadow: 0 10px 0 rgba(21, 10, 52, 0.45); display: flex; align-items: center; justify-content: center; font: 700 82px/1 "Fredoka", sans-serif; color: #150A34; visibility: hidden; }
+      #badge small { font-size: 46px; color: #7A4A12; margin-left: 4px; margin-top: 18px; }
+      /* handwritten note */
+      #note { position: absolute; left: 520px; top: 520px; font: 700 92px/1 "Caveat", cursive; color: #FFF6E5; -webkit-text-stroke: 10px #150A34; paint-order: stroke fill;
+              text-shadow: 0 8px 0 rgba(21, 10, 52, 0.45); visibility: hidden; transform-origin: 20% 80%; }
+      #note svg { position: absolute; left: -150px; top: 70px; overflow: visible; }
+      /* process banner */
+      #banner { position: absolute; left: 90px; right: 90px; top: 250px; text-align: center; visibility: hidden; }
+      #banner div { display: inline-block; padding: 18px 40px 22px; border-radius: 60px; background: #2E2160; border: 7px solid #150A34; color: #FFF6E5;
+                    font: 700 62px/1.05 "Fredoka", sans-serif; box-shadow: 0 10px 0 rgba(21, 10, 52, 0.45); }
+      #banner div span { color: #F2C14E; }
+      /* proof: the real pieces (the site's photos) as polaroids */
+      #proof { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); visibility: hidden; }
+      #proof .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 104px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                   text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #proof .st { position: absolute; left: 0; right: 0; top: 1300px; text-align: center; font: 600 46px/1.2 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+      .pol { position: absolute; width: 288px; padding: 16px 16px 0; background: #FFFDF6; border-radius: 6px; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.3); transform-origin: 50% 50%; }
+      .pol img { display: block; width: 256px; height: 256px; object-fit: cover; border-radius: 2px; }
+      .pol div { font: 700 54px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 10px 0 16px; }
+      #card { position: absolute; left: 70px; right: 70px; top: 1000px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 64px/1.05 "Fredoka", sans-serif; color: #C0392B; }
+      #card .k1 { font: 700 54px/1.1 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 92px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 44px/1.2 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="25.3" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Un regalo<br><span>para cada</span> amigo</div>
+      <div id="badge"><span id="badgeN">1</span><small>/5</small></div>
+      <div id="note">(esta no se muere)<svg width="160" height="150" viewBox="0 0 160 150"><path d="M150 8 C 120 60, 80 90, 22 120" fill="none" stroke="#150A34" stroke-width="20" stroke-linecap="round"/><path d="M150 8 C 120 60, 80 90, 22 120" fill="none" stroke="#FFF6E5" stroke-width="9" stroke-linecap="round"/><path d="M48 92 L 18 122 L 58 132" fill="none" stroke="#150A34" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><path d="M48 92 L 18 122 L 58 132" fill="none" stroke="#FFF6E5" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div id="banner"><div>Impresos en 3D<br><span>en mi taller</span></div></div>
+      <div id="subs"></div>
+      <div id="proof">
+        <div class="tt">Así son<br>de verdad</div>
+        <div class="pol" style="left: 76px; top: 540px"><img src="assets/p/cafe.webp" alt=""><div>café</div></div>
+        <div class="pol" style="left: 396px; top: 520px"><img src="assets/p/suculenta.webp" alt=""><div>suculenta</div></div>
+        <div class="pol" style="left: 716px; top: 548px"><img src="assets/p/hamster.webp" alt=""><div>hámster</div></div>
+        <div class="pol" style="left: 236px; top: 912px"><img src="assets/p/calavera.webp" alt=""><div>calavera</div></div>
+        <div class="pol" style="left: 556px; top: 900px"><img src="assets/p/banana.webp" alt=""><div>banana</div></div>
+        <div class="st">Clickers y llaveros impresos en 3D · Montevideo</div>
+      </div>
+      <div id="card"><div class="k0">¿Cuál es tu amigo?</div><div class="k1">Clickers y llaveros impresos en 3D</div><div class="k2">¡Etiquetalo!</div><div class="k3">Te paso precio y fecha por mensaje</div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="25.3" data-track-index="1" data-volume="0.45"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="25.3" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-amb" class="clip" src="assets/audio/ambience.wav" data-start="0" data-duration="25.3" data-track-index="3" data-volume="0.35"></audio>
+      <audio id="v-m1" class="clip" src="assets/voz/m1.wav" data-start="0.15" data-duration="2.52" data-track-index="4" data-volume="1" data-who="mago" data-text="Un regalo para cada amigo que tenés."></audio>
+      <audio id="v-m2" class="clip" src="assets/voz/m2.wav" data-start="2.85" data-duration="1.56" data-track-index="5" data-volume="1" data-who="mago" data-text="Para el que no arranca sin café."></audio>
+      <audio id="v-s1" class="clip" src="assets/voz/s1.wav" data-start="4.45" data-duration="1.5" data-track-index="6" data-volume="1" data-who="santa" data-text="Aaaahhh…"></audio>
+      <audio id="v-m3" class="clip" src="assets/voz/m3.wav" data-start="6.05" data-duration="1.55" data-track-index="7" data-volume="1" data-who="mago" data-text="Para el que mata hasta los cactus."></audio>
+      <audio id="v-m4" class="clip" src="assets/voz/m4.wav" data-start="8.7" data-duration="1.8" data-track-index="8" data-volume="1" data-who="mago" data-text="Para el que no sale de su casa."></audio>
+      <audio id="v-m5" class="clip" src="assets/voz/m5.wav" data-start="11.1" data-duration="2.48" data-track-index="9" data-volume="1" data-who="mago" data-text="Para el que dice “¡me muero!” por todo."></audio>
+      <audio id="v-m6" class="clip" src="assets/voz/m6.wav" data-start="14.1" data-duration="1.25" data-track-index="10" data-volume="1" data-who="mago" data-text="Y para el que se hace el banana…"></audio>
+      <audio id="v-s2" class="clip" src="assets/voz/s2.wav" data-start="15.55" data-duration="1.104" data-track-index="11" data-volume="1" data-who="santa" data-text="¿Quién? ¿Yo?"></audio>
+      <audio id="v-m7" class="clip" src="assets/voz/m7.wav" data-start="21.0" data-duration="1.651" data-track-index="12" data-volume="1" data-who="mago" data-text="¿Cuál es tu amigo? Etiquetalo."></audio>
+    </div>
+    <script type="module">
+      /* "Un regalo para cada amigo" (25.3 s, 3D toon, reach reel N1 of ../../PLAN_NOVIEMBRE.md): five friend types, each
+         matched to a real clicker or keychain from the catalogue; Papá Noel plays two of them. Selling structure from
+         ../../RESEARCH_NOVIEMBRE_2026.md: hook in frame 1, identity beats, process, real proof (the site's photos), one
+         comment CTA. On-screen categories and checks: ../ON_SCREEN.md. Built on the shared kit (escena3d.js). */
+      import * as THREE from "three";
+      import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, minDistToMeshes } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, workshop, cast, makeFX, unwrap, hd, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 25.3, FPS = 60, WO = 0.0024, PW = WO * 0.5;
+      const { renderer, scene, camera } = stage(); renderer.localClippingEnabled = true;
+      const { DOOR, hinge, spill, WIN, motes, mpos, NM, bench, tree, bulbs, setLight } = workshop();
+      spill.material.opacity = 0;                                     // the door stays closed
+      const { mago, santa, ALLCOLS, BTRACK, blobM, blobS, blobK, printer, PR, PRrest, nozzleMat } = await cast();
+      blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+
+      // ---------- timing (voice first: the lines' measured lengths set every beat) ----------
+      const T = { m1: 0.15, b1: 2.75, m2: 2.85, lid: 4.2, s1: 4.45, b2: 5.95, m3: 6.05, note: 7.6, b3: 8.6, m4: 8.7, duck: 10.3, b4: 11.0, m5: 11.1, faint: 11.85,
+                  faint1: 12.75, brain: 13.3, b5: 14.05, m6: 14.1, shades: 14.95, b6: 15.4, s2: 15.55, slide: 16.0, proc: 16.9, proof: 18.4, b7: 20.9, m7: 21.0, card: 22.75, exit: 99 };
+
+      // ---------- the display: the round side table, a felt disc and a hand-lettered tag under each piece ----------
+      const TB = V3(0.7, 0, -0.36), TOP = 0.62, TR = 0.22;
+      const table = new THREE.Group(); table.position.copy(TB); scene.add(table);
+      cyl(TR, TR - 0.01, 0.035, "#A0603A", 0, TOP - 0.018, 0, table, { seg: 32 }); cyl(TR - 0.005, TR - 0.005, 0.008, "#B0703F", 0, TOP + 0.001, 0, table, { seg: 32, line: false });
+      cyl(0.03, 0.038, TOP - 0.05, "#8A5638", 0, (TOP - 0.05) / 2 + 0.02, 0, table); cyl(0.14, 0.15, 0.025, "#8A5638", 0, 0.012, 0, table, { seg: 24 });
+      const Mt = (c, o = {}) => toon(c, { spec: 0.3, ...o });
+      function part(geo, c, parent, x = 0, y = 0, z = 0, o = {}) { const m = new THREE.Mesh(geo, o.mat || Mt(c, o.mo)); m.position.set(x, y, z); if (o.rot) m.rotation.set(...o.rot); if (o.scale) m.scale.set(...o.scale);
+        shade(m); parent.add(m); if (o.line !== false) outline(m, o.w ?? PW); return m; }
+      const lathe = (pts, n = 32) => new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), n);
+      const stripes = (base, line, n, vertical) => { const t = canvasTex(64, 64, (g, w, h) => { g.fillStyle = base; g.fillRect(0, 0, w, h); g.fillStyle = line;
+        for (let k = 0; k < n; k++) vertical ? g.fillRect(k * w / n, 0, w / n / 2.4, h) : g.fillRect(0, k * h / n, w, h / n / 3); }); return t; };
+
+      // the five products, modelled from the site's photos (assets/p): each has a "top" that moves when it is clicked
+      function makeProduct(kind) {
+        const g = new THREE.Group(), top = new THREE.Group(); g.add(top); const P = { g, top, kind };
+        if (kind === "cafe") {               // white cup tapering to the base, tan ribbed sleeve, big black lid (the clicker)
+          part(lathe([[0.001, 0], [0.02, 0], [0.0215, 0.003], [0.0262, 0.05], [0.0268, 0.052], [0.001, 0.052]]), "#F4F1EA", g);
+          const sl = lathe([[0.0232, 0.014], [0.0242, 0.0146], [0.0262, 0.042], [0.0252, 0.0428]], 72), p = sl.attributes.position;
+          for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i), a = Math.atan2(z, x), f = 1 + 0.035 * Math.max(0, Math.cos(a * 28)); p.setX(i, x * f); p.setZ(i, z * f); }
+          sl.computeVertexNormals(); part(sl, "#B98A4E", g, 0, 0, 0, { mo: { spec: 0.15 } });
+          part(lathe([[0.0272, 0.0495], [0.0292, 0.0515], [0.0294, 0.0585], [0.028, 0.0605], [0.0245, 0.062], [0.0235, 0.068], [0.013, 0.0712], [0.001, 0.0712]]), "#1E1B22", top, 0, 0, 0, { mo: { spec: 0.45 } });
+          part(new RoundedBoxGeometry(0.012, 0.004, 0.006, 2, 0.0015), "#0C0A10", top, 0, 0.0705, 0.016, { line: false });
+        } else if (kind === "suculenta") {   // olive pot with print lines, brown soil, teal rosette in three rings (the clicker)
+          const pt = part(lathe([[0.001, 0], [0.021, 0], [0.023, 0.004], [0.0265, 0.031], [0.0298, 0.0335], [0.0302, 0.0405], [0.0272, 0.0412], [0.0258, 0.036], [0.001, 0.036]]), "#ffffff", g,
+            0, 0, 0, { mo: { map: stripes("#7F7446", "#968A58", 16, false), spec: 0.1 } }); pt.material.map.repeat.set(1, 1);
+          part(new THREE.CylinderGeometry(0.0258, 0.0258, 0.003, 24), "#5E3C24", g, 0, 0.0365, 0, { line: false });
+          for (const [n, rad, tilt, len, r0, a0] of [[11, 0.017, 1.08, 0.025, 0.0062, 0], [8, 0.0095, 0.7, 0.024, 0.006, 0.3], [5, 0.003, 0.25, 0.02, 0.0052, 0.1]]) for (let k = 0; k < n; k++) {
+            const a = a0 + k / n * Math.PI * 2, geo = new THREE.ConeGeometry(r0, len, 6); geo.translate(0, len / 2, 0);
+            const leaf = new THREE.Group(); leaf.position.set(Math.cos(a) * rad, 0.036, Math.sin(a) * rad); leaf.rotation.set(0, -a, 0); top.add(leaf);
+            const m = part(geo, k % 2 ? "#2A8F84" : "#33A092", leaf, 0, 0, 0, { rot: [0, 0, -tilt], mo: { spec: 0.35 } }); m.rotation.order = "YXZ"; }
+        } else if (kind === "hamster") {     // grey half egg with a zigzag rim, navy cushion, beige hamster with brown patches (the clicker)
+          const sh = part(lathe([[0.001, 0], [0.018, 0.002], [0.027, 0.01], [0.031, 0.022], [0.0322, 0.031]]), "#868C94", g, 0, 0, 0, { mo: { spec: 0.25 } }); sh.material.side = THREE.DoubleSide;
+          for (let k = 0; k < 13; k++) { const a = k / 13 * Math.PI * 2; part(new THREE.ConeGeometry(0.0058, 0.011, 4), "#868C94", g, Math.cos(a) * 0.0305, 0.035, Math.sin(a) * 0.0305, { rot: [0, -a + Math.PI / 4, 0], line: false }); }
+          part(new THREE.SphereGeometry(0.0272, 20, 12), "#28418F", g, 0, 0.027, 0, { scale: [1, 0.36, 1], mo: { spec: 0.2 } });
+          const hb = new THREE.Group(); hb.position.y = 0.024; top.add(hb);
+          part(new THREE.SphereGeometry(0.02, 20, 14), "#D8B086", hb, 0, 0.016, 0, { scale: [1, 1.05, 0.92] });
+          part(new THREE.SphereGeometry(0.0168, 20, 14), "#D8B086", hb, 0, 0.041, 0.002);
+          part(new THREE.SphereGeometry(0.0095, 12, 8), "#8E5B34", hb, 0.0085, 0.049, 0.007, { scale: [1, 0.7, 0.75], line: false });
+          part(new THREE.SphereGeometry(0.011, 12, 8), "#8E5B34", hb, -0.011, 0.022, -0.009, { scale: [1, 1.1, 0.8], line: false });
+          for (const s of [-1, 1]) { part(new THREE.SphereGeometry(0.0058, 10, 8), "#8E5B34", hb, s * 0.0125, 0.055, -0.002, { scale: [1, 1, 0.55] });
+            part(new THREE.SphereGeometry(0.0026, 8, 6), "#141018", hb, s * 0.0068, 0.0445, 0.0152, { line: false, mo: { spec: 0.9 } });
+            part(new THREE.SphereGeometry(0.0042, 8, 6), "#E6C39C", hb, s * 0.0062, 0.028, 0.0168, { line: false }); }
+          part(new THREE.SphereGeometry(0.0024, 8, 6), "#E87A9A", hb, 0, 0.0395, 0.0178, { line: false });
+          P.hb = hb;
+        } else if (kind === "calavera") {    // white skull (sockets, nose, teeth), red brain cap with folds (the clicker), split ring
+          part(new THREE.SphereGeometry(0.026, 24, 16), "#EDEBE6", g, 0, 0.033, 0, { scale: [1, 0.9, 1.04] });
+          part(new RoundedBoxGeometry(0.032, 0.017, 0.026, 2, 0.006), "#EDEBE6", g, 0, 0.011, 0.006);
+          for (const s of [-1, 1]) part(new THREE.SphereGeometry(0.0078, 12, 8), "#2B2530", g, s * 0.0105, 0.03, 0.0222, { scale: [1, 1.05, 0.5], line: false });
+          part(new THREE.ConeGeometry(0.0034, 0.007, 3), "#2B2530", g, 0, 0.0195, 0.0262, { rot: [Math.PI, 0, 0], line: false });
+          part(new THREE.BoxGeometry(0.022, 0.0012, 0.002), "#9C9790", g, 0, 0.0095, 0.0192, { line: false });
+          for (const x of [-0.0066, 0, 0.0066]) part(new THREE.BoxGeometry(0.0009, 0.007, 0.002), "#9C9790", g, x, 0.0095, 0.0193, { line: false });
+          const br = new THREE.SphereGeometry(0.0215, 40, 18, 0, Math.PI * 2, 0, Math.PI * 0.52), bp = br.attributes.position, n = new THREE.Vector3();
+          for (let i = 0; i < bp.count; i++) { n.fromBufferAttribute(bp, i).normalize(); let d = 0.0011 * Math.sin(n.x * 38 + 2 * Math.sin(n.z * 25)) * Math.sin(n.z * 34 + n.y * 9);
+            d -= 0.0022 * Math.exp(-Math.pow(n.x / 0.06, 2)) * (n.y > 0.2 ? 1 : 0); bp.setXYZ(i, bp.getX(i) + n.x * d, bp.getY(i) + n.y * d, bp.getZ(i) + n.z * d); }
+          br.computeVertexNormals(); part(br, "#D33A2C", top, 0, 0.043, 0, { scale: [1, 0.82, 1.1], mo: { spec: 0.25 } });
+          const ringG = new THREE.Group(); ringG.position.set(0.026, 0.047, -0.004); g.add(ringG); P.ring = ringG;
+          part(new THREE.TorusGeometry(0.004, 0.0013, 6, 12), "#C8C8D0", ringG, 0, 0, 0, { rot: [0, Math.PI / 2, 0], mo: { spec: 0.9 }, line: false });
+          part(new THREE.TorusGeometry(0.0125, 0.0016, 8, 24), "#C8C8D0", ringG, 0.0005, -0.016, 0, { rot: [0, Math.PI / 2, 0], mo: { spec: 0.9 }, w: PW * 0.6 });
+        } else if (kind === "banana") {      // yellow peel petals splayed out, a white rounded core (the clicker)
+          part(new THREE.CylinderGeometry(0.006, 0.0075, 0.005, 10), "#6B4428", g, 0, 0.0025, 0, { line: false });
+          part(new THREE.CylinderGeometry(0.0148, 0.013, 0.016, 20), "#F2C531", g, 0, 0.012, 0);
+          for (let k = 0; k < 4; k++) { const a = Math.PI / 4 + k * Math.PI / 2, geo = new THREE.SphereGeometry(1, 14, 10); geo.translate(0, 1, 0);
+            const pg = new THREE.Group(); pg.position.set(Math.cos(a) * 0.009, 0.018, Math.sin(a) * 0.009); pg.rotation.set(0, -a, 0); g.add(pg);
+            part(geo, "#F2C531", pg, 0, 0, 0, { rot: [0, 0, -1.95], scale: [0.0118, 0.026, 0.0052], w: PW * 0.6, mo: { spec: 0.35 } }); }
+          part(new THREE.CapsuleGeometry(0.0128, 0.026, 8, 16), "#F4F0E4", top, 0, 0.0395, 0, { mo: { spec: 0.15 } });
+          const gl = new THREE.Group(); gl.position.set(0, 0.0495, 0.0118); top.add(gl); P.shades = gl;
+          for (const s of [-1, 1]) part(new THREE.CylinderGeometry(0.0058, 0.0058, 0.0016, 16), "#150A34", gl, s * 0.0062, 0, 0, { rot: [Math.PI / 2, 0, 0], mo: { spec: 0.9 }, w: PW * 0.5 });
+          part(new THREE.BoxGeometry(0.004, 0.0012, 0.0012), "#150A34", gl, 0, 0.0015, 0, { line: false });
+        }
+        scene.add(g); return P;
+      }
+      const ORDER = ["cafe", "suculenta", "hamster", "calavera", "banana"], LABEL = { cafe: "café", suculenta: "suculenta", hamster: "hámster", calavera: "calavera", banana: "banana" };
+      const ROWX = [-0.16, -0.08, 0, 0.08, 0.16], ROWZ = 0.035, PS = 1.25, ANG = [0.12, 0.06, 0, -0.06, -0.12];   // a straight row facing the camera
+      const PROD = {}; ORDER.forEach((k, i) => { const p = makeProduct(k), a = ANG[i]; p.g.position.set(TB.x + ROWX[i], TOP + 0.004, TB.z + ROWZ); p.g.rotation.y = a; p.g.scale.setScalar(PS); PROD[k] = p;
+        const felt = new THREE.Mesh(new THREE.CircleGeometry(0.038, 24), toon(i % 2 ? "#3A2A6A" : "#2E2160", { rim: 0 })); felt.rotation.x = -Math.PI / 2; felt.position.set(p.g.position.x, TOP + 0.0025, p.g.position.z); shade(felt); scene.add(felt);
+        const tex = canvasTex(160, 56, (g2, w, h) => { g2.fillStyle = "#FBF6E6"; g2.fillRect(0, 0, w, h); g2.fillStyle = "rgba(79,134,198,0.3)"; g2.fillRect(0, 44, w, 2);
+          g2.save(); g2.translate(w / 2, h / 2 + 3); g2.rotate(-0.04); g2.fillStyle = "#24306B"; g2.font = '700 40px "Caveat"'; g2.textAlign = "center"; g2.textBaseline = "middle"; g2.fillText(LABEL[k], 0, 0); g2.restore(); });
+        tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+        const tag = new THREE.Mesh(new THREE.PlaneGeometry(0.046, 0.016), toon("#ffffff", { map: tex, rim: 0 })); tag.material.side = THREE.DoubleSide;
+        tag.position.set(TB.x + ROWX[i], TOP + 0.009, TB.z + ROWZ + 0.05); tag.rotation.set(-0.55, a, 0, "YXZ"); shade(tag); /* not added: tags sat in the caption zone */ });
+      const topOf = (k) => PROD[k].g.position.clone().add(V3(0, 0.05, 0));
+      // the dead cactus (behind the succulent): a terracotta pot, three olive segments drooping, browned tips
+      const CAC = V3(-0.07, 0.5775, -0.72), cactus = new THREE.Group(); cactus.position.copy(CAC); cactus.scale.setScalar(1.5); cactus.rotation.y = -0.5; scene.add(cactus);
+      part(lathe([[0.001, 0], [0.016, 0], [0.0205, 0.028], [0.0228, 0.03], [0.0228, 0.035], [0.0195, 0.035], [0.0185, 0.031], [0.001, 0.031]]), "#C46A3C", cactus, 0, 0, 0, { mo: { spec: 0.15 } });
+      part(new THREE.CylinderGeometry(0.019, 0.019, 0.003, 18), "#5E3C24", cactus, 0, 0.031, 0, { line: false });
+      const CS = []; { let par = cactus, y = 0.031; for (let k = 0; k < 3; k++) { const j = new THREE.Group(); j.position.set(0, y, 0); par.add(j); CS.push(j);
+        part(new THREE.CapsuleGeometry(0.0078 - k * 0.0012, 0.016, 6, 12), ["#7E8C3A", "#8A8A38", "#8C7A34"][k], j, 0, 0.0118, 0, { mo: { spec: 0.1 } });
+        for (let s = 0; s < 6; s++) { const a = s / 6 * Math.PI * 2; part(new THREE.ConeGeometry(0.0009, 0.004, 3), "#E9D8B4", j, Math.cos(a) * 0.0078, 0.008 + (s % 2) * 0.006, Math.sin(a) * 0.0078, { rot: [0, 0, -Math.PI / 2], line: false }).rotation.y = -a; }
+        par = j; y = 0.024; } part(new THREE.SphereGeometry(0.005, 8, 6), "#6E5A2C", CS[2], 0, 0.026, 0, { line: false }); }
+      const fallen = part(new THREE.SphereGeometry(0.008, 8, 6), "#7E6A30", scene, CAC.x + 0.05, CAC.y + 0.003, CAC.z + 0.03, { scale: [1.6, 0.35, 0.9], line: false });
+
+      // the printer's copies for the process montage: the same five, revealed bottom-up by a rising cut plane
+      const BED = V3(-0.42, 0.655, -0.8), CLIP = new THREE.Plane(V3(0, -1, 0), 99), clipMats = new Set();
+      const BEDP = ORDER.map((k) => { const p = makeProduct(k); p.g.position.copy(BED); p.g.scale.setScalar(1.6); p.g.visible = false;
+        p.g.traverse((m) => { if (m.material) for (const mt of [].concat(m.material)) { mt.clippingPlanes = [CLIP]; clipMats.add(mt); } }); return p; });
+      const cutGlow = new THREE.Mesh(new THREE.CircleGeometry(0.05, 32), new THREE.MeshBasicMaterial({ color: "#7FD3FF", transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+      cutGlow.rotation.x = -Math.PI / 2; scene.add(cutGlow);
+      // comic marks
+      const markTex = (txt, col, fs = 104) => { const t = canvasTex(128, 128, (g) => { g.font = `700 ${fs}px "Fredoka"`; g.textAlign = "center"; g.textBaseline = "middle"; g.lineWidth = 14; g.strokeStyle = "#150A34"; g.strokeText(txt, 64, 70); g.fillStyle = col; g.fillText(txt, 64, 70); }); t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping; return t; };
+      const mark = (txt, col, fs) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: markTex(txt, col, fs), transparent: true, depthTest: false, fog: false })); s.renderOrder = 10; s.visible = false; scene.add(s); return s; };
+      const ZZ = [mark("z", "#9CC9E8", 84), mark("Z", "#9CC9E8", 104)], BANG = mark("?", "#FF6B57");
+      const ghostTex = canvasTex(160, 192, (g) => { g.lineWidth = 12; g.strokeStyle = "#150A34"; g.fillStyle = "#F4F6FF";
+        g.beginPath(); g.moveTo(26, 120); g.bezierCurveTo(22, 30, 138, 30, 134, 120); for (let k = 0; k < 4; k++) g.quadraticCurveTo(134 - k * 27 - 6, 168 - (k % 2) * 6, 134 - (k + 1) * 27, 150); g.lineTo(26, 120); g.closePath(); g.stroke(); g.fill();
+        g.fillStyle = "#150A34"; g.beginPath(); g.ellipse(62, 88, 8, 11, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(98, 88, 8, 11, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(80, 116, 9, 7, 0, 0, 7); g.fill();
+        g.fillStyle = "rgba(255,150,170,0.6)"; g.beginPath(); g.ellipse(48, 104, 9, 5, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(112, 104, 9, 5, 0, 0, 7); g.fill(); });
+      ghostTex.wrapS = ghostTex.wrapT = THREE.ClampToEdgeWrapping;
+      const GHOST = new THREE.Sprite(new THREE.SpriteMaterial({ map: ghostTex, transparent: true, depthTest: false, fog: false })); GHOST.renderOrder = 11; GHOST.visible = false; scene.add(GHOST);
+      const XEYES = [mark("x", "#FFFFFF", 96), mark("x", "#FFFFFF", 96)];
+      const { SPK } = makeFX();
+
+      // ---------- staging ----------
+      const MD = V3(0.25, 0, -0.5), SD = V3(1.22, 0, -0.62), hM = 0.75, hS = -0.85;
+      const LENS = V3(0.59, 0.92, 1.64), LENS_S = V3(0.9, 1.0, 0.35);                    // fixed points where the hook/CTA and Papá Noel's shots put the lens (poses never read the camera)
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, armNow, handC, towards, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.L"), SF.fwd, 0.16); rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1); rotWorld(mago.b("DEF-upper_arm.R"), MF.fwd, -0.1);
+        const turnTo = (c, P, k) => { const dir = P.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- El Mago: to camera for the hook, a glance at the display, the faint, to camera again for the CTA
+        const disp = TB.clone().setY(0.7);
+        turnTo(mago, LENS, Math.max(pulse(t, -1, 0, 1.05, 1.35), pulse(t, T.b7 - 0.2, T.b7 + 0.1, DUR, DUR + 1)));
+        turnTo(mago, disp, pulse(t, 1.1, 1.4, 2.4, 2.8) * 0.8);
+        // ---- Papá Noel: the yawn (head back, a stretch), caught for "¿Quién? ¿Yo?" (head to camera, hand to his chest)
+        const yw = pulse(t, T.s1 - 0.1, T.s1 + 0.35, T.s1 + 1.15, T.s1 + 1.55);
+        rotWorld(santa.b("DEF-head"), SF.left, -0.38 * yw); rotWorld(santa.b("DEF-spine.003"), SF.left, -0.1 * yw);
+        turnTo(santa, LENS_S, pulse(t, T.s2 - 0.2, T.s2 + 0.05, T.proc + 0.2, T.proc + 0.5));
+        rotWorld(santa.b("DEF-head"), SF.left, 0.1 * pulse(t, T.slide - 0.05, T.slide + 0.1, T.proc, T.proc + 0.3));
+        // ---- arms (IK)
+        const mL = (P, w, c0) => arm(mago, "L", P, w, null, c0), mR = (P, w, c0) => arm(mago, "R", P, w, null, c0), sL = (P, w, c0) => arm(santa, "L", P, w, null, c0), sR = (P, w, c0) => arm(santa, "R", P, w, null, c0);
+        mL(TB.clone().add(V3(-0.2, 0.27, 0.08)), pulse(t, 0.35, 0.8, 2.35, 2.8), 0.07);
+        { const sh = wp(mago.b("DEF-upper_arm.L")), dir = LENS.clone().sub(sh).normalize();                    // CTA: points at the viewer
+          mL(sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.m7 - 0.1, T.m7 + 0.3, T.card + 0.3, T.card + 0.8), 0.08); }
+        for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side));     // the stretch
+          arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.26)).add(V3(0, 0.26, 0)).add(SF.fwd.clone().multiplyScalar(side === "R" ? 0.14 : 0.04)), yw, null, 0.08); }   // the right side faces the door: that arm stretches forward
+        sL(wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(0.44)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0)), pulse(t, T.s2 + 0.25, T.s2 + 0.6, T.proc + 0.1, T.proc + 0.5), 0.07);
+        // ---- faces: blinks, brows; Papá Noel's glasses slide down
+        let e = 0; for (const b of [1.6, 4.9, 8.1, 12.9, 17.2, 20.4, 23.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+        mago.b("brows").position.y += 0.012 * Math.max(pulse(t, 0.2, 0.35, 1.0, 1.3), pulse(t, T.m7, T.m7 + 0.15, T.m7 + 1.0, T.m7 + 1.3));
+        santa.b("brows").position.y += 0.014 * pulse(t, T.slide - 0.05, T.slide + 0.08, T.proc, T.proc + 0.3);
+        santa.b("glasses").position.y -= 0.016 * pulse(t, T.slide - 0.05, T.slide + 0.12, T.proc, T.proc + 0.3);
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { N, SPR, springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props, light and effects per frame ----------
+      const SLOT = 0.3, PH = [0.075, 0.08, 0.075, 0.075, 0.08].map((h) => h * 1.6);
+      function props(t) {
+        setLight("day");
+        mago.W.visible = blobM.visible = !(t >= T.b1 && t < T.b7);          // El Mago narrates the close-ups off screen (his wide brim would sit in every one); he stays posed in place, so nothing jumps
+
+        // clicks: the café lid, the hamster's duck, the brain, the banana core (with sunglasses), each piece once more in the montage
+        const press = (t0) => pulse(t, t0 - 0.03, t0, t0 + 0.03, t0 + 0.1);
+        PROD.cafe.top.position.y = -0.004 * (press(T.lid) + press(T.lid + 0.22));
+        PROD.suculenta.top.position.y = -0.003 * press(T.note + 0.05);
+        PROD.hamster.top.position.y = 0.009 * pulse(t, 9.55, 9.75, 9.95, 10.1) - 0.011 * pulse(t, T.duck - 0.05, T.duck, T.b4, T.b4 + 0.1) - 0.003 * press(T.duck + 0.3);
+        PROD.hamster.hb.rotation.z = 0.12 * Math.sin(t * 9) * pulse(t, 9.55, 9.7, 9.9, 10.1);
+        PROD.calavera.top.position.y = -0.004 * (press(T.brain) + press(T.brain + 0.2));
+        PROD.calavera.ring.rotation.x = 0.35 * Math.sin((t - T.brain) * 11) * Math.exp(-Math.max(0, t - T.brain) * 2.5) * (t > T.brain ? 1 : 0) + 0.05 * Math.sin(t * 2.1);
+        const pop = ss(clamp((t - (T.shades - 0.15)) / 0.12, 0, 1));
+        PROD.banana.top.position.y = 0.008 * pop - 0.004 * press(T.m6 + 0.5);
+        PROD.banana.shades.visible = t > T.shades; PROD.banana.shades.scale.setScalar(t > T.shades ? 1 + 0.6 * Math.exp(-(t - T.shades) * 10) * Math.cos((t - T.shades) * 30) : 0.001);
+        // the cactus droops further on "mata"; the dead tip falls
+        const droop = ss(clamp((t - (T.m3 + 0.6)) / 0.9, 0, 1));
+        CS[0].rotation.z = 0.16 + 0.12 * droop; CS[1].rotation.z = 0.75 + 0.4 * droop; CS[2].rotation.z = 0.7 + 0.45 * droop;
+        // process montage: each copy prints bottom-up in its slot (cut plane + glow line), the head races, the nozzle glows
+        const on = t >= T.proc && t < T.proof, k = Math.floor((t - T.proc) / SLOT);
+        BEDP.forEach((p, i) => { p.g.visible = on && i === Math.min(4, k); p.g.rotation.y = 0.4 + (t - T.proc) * 0.8; });
+        const u = on ? clamp(((t - T.proc) - Math.min(4, k) * SLOT) / (SLOT * 0.85), 0, 1) : 1, cutY = on ? BED.y + 0.002 + PH[Math.min(4, k)] * u : 99;
+        CLIP.constant = cutY; cutGlow.visible = on && u < 1; cutGlow.position.set(BED.x, cutY, BED.z); cutGlow.material.opacity = 0.22 + 0.08 * Math.sin(t * 40);
+        if (PR.head) PR.head.position.x = PRrest.head.x + (on ? 0.32 * Math.sin(t * 31) : 0.55);
+        if (PR.bed) PR.bed.position.z = PRrest.bed.z + (on ? 0.25 * Math.sin(t * 12.3) : 0);
+        if (nozzleMat) nozzleMat.color.set(on ? "#F2C14E" : "#2E2160");
+        // sparkles: the succulent that never dies, the banana's sunglasses, the end of the montage
+        SPK.forEach((m, i) => { const evs = [[T.note, topOf("suculenta")], [T.shades, topOf("banana").add(V3(0, 0.02, 0))], [T.proof - 0.25, BED.clone().add(V3(0, 0.12, 0))]]; let best = null, dt = 9;
+          for (const [t0, P] of evs) { const d = t - t0 - (i % 5) * 0.015; if (d > 0 && d < dt) { dt = d; best = P; } }
+          m.visible = dt < 0.6; if (!m.visible) return; const v = V3((rnd(i) - 0.5) * 0.35, 0.25 + rnd(i + 50) * 0.35, (rnd(i + 99) - 0.3) * 0.25);
+          m.position.copy(best).add(v.multiplyScalar(dt * 0.6)); m.position.y -= 0.45 * dt * dt; m.scale.setScalar(0.45 * (1 - dt / 0.6)); });
+        // comic marks: the yawn's z's, Papá Noel's "?"
+        ZZ.forEach((s, i) => { const d = t - T.s1 - 0.35 - i * 0.3; s.visible = d > 0 && d < 0.9; if (!s.visible) return;
+          s.position.copy(headPt(santa, 0.42 + d * 0.25, 0.1, -0.12 - d * 0.1)); s.scale.setScalar(0.1 + i * 0.03); s.material.opacity = d > 0.7 ? (0.9 - d) / 0.2 : 1; });
+        { const d = t - (T.s2 + 0.05); BANG.visible = d > 0 && d < 0.75; if (BANG.visible) { BANG.position.copy(headPt(santa, 0.3, 0.12, 0.26)); const kk = Math.min(1, d / 0.08);
+          BANG.scale.setScalar(0.16 * kk * (1 + 0.25 * Math.exp(-d * 12) * Math.sin(d * 40))); BANG.material.opacity = d > 0.6 ? (0.75 - d) / 0.15 : 1; } }
+        { const d = t - (T.faint + 0.05), P0 = topOf("calavera"), sk = PROD.calavera.g; GHOST.visible = d > 0 && d < 1.0;                       // "¡me muero!": the skull gives up its little ghost
+          if (GHOST.visible) { const up = 0.09 * ss(clamp(d / 0.8, 0, 1)); GHOST.position.copy(P0).add(V3(0.012 * Math.sin(d * 9), 0.02 + up, 0)); GHOST.scale.set(0.05, 0.06, 1).multiplyScalar(Math.min(1, d / 0.12));
+            GHOST.material.opacity = d > 0.75 ? (1.0 - d) / 0.25 : 0.95; }
+          XEYES.forEach((x, i) => { x.visible = d > 0 && d < 1.3; if (!x.visible) return; const q = V3((i ? 1 : -1) * 0.0105, 0.03, 0.026).multiplyScalar(PS); q.applyAxisAngle(V3(0, 1, 0), sk.rotation.y); x.position.copy(sk.position).add(q); x.scale.setScalar(0.022); }); }
+        bulbs.forEach((b, k2) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k2 + Math.floor(t * 3)) % 4]));
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, uu = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (uu - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing (every camera looks toward the back or side walls) ----------
+      const SHOTS = [
+        { t: 0.0, d: T.b1, fov: 46, from: [0.6, 0.93, 1.72], to: [0.58, 0.91, 1.56], look: [0.44, 0.77, -0.34] },                    // hook: El Mago and the five pieces
+        { t: T.b1, d: T.s1 - T.b1, fov: 32, subj: "cafe", h: 0.27, az: 10, el: 14, v: 0.0, whip: 1 },                         // 1/5 café
+        { t: T.s1, d: T.b2 - T.s1, fov: 34, subj: "santa", h: 1.0, az: -38, el: 4, v: 0.14 },                                      // the yawn
+        { t: T.b2, d: T.m3 + 1.35 - T.b2, fov: 32, subj: "cactus", h: 0.3, az: -22, el: 12, v: 0.06, whip: -1 },                // 2/5 the dead cactus
+        { t: T.m3 + 1.35, d: T.b3 - T.m3 - 1.35, fov: 32, subj: "suculenta", h: 0.27, az: -6, el: 16, v: 0.0, whip: 1 },     // ...the succulent that never dies
+        { t: T.b3, d: T.b4 - T.b3, fov: 32, subj: "hamster", h: 0.27, az: 4, el: 14, v: 0.0, whip: -1 },                       // 3/5 hámster
+        { t: T.b4, d: T.faint1 - T.b4, fov: 32, subj: "calavera", h: 0.3, az: 12, el: 12, v: -0.12, whip: 1 },                  // 4/5 calavera: "¡me muero!", its little ghost leaves
+        { t: T.faint1, d: T.b5 - T.faint1, fov: 30, subj: "calavera", h: 0.2, az: 18, el: 10, v: 0.03 },                         // the brain clicks
+        { t: T.b5, d: T.b6 - T.b5, fov: 32, subj: "banana", h: 0.27, az: 14, el: 12, v: 0.0, whip: -1 },                       // 5/5 banana
+        { t: T.b6, d: T.proc - T.b6, fov: 32, subj: "santa", h: 0.95, az: -24, el: 3, v: 0.1 },                                    // "¿Quién? ¿Yo?"
+        { t: T.proc, d: T.proof - T.proc, fov: 28, subj: "bed", h: 0.3, az: 8, el: 32, v: 0.05, whip: 1 },                        // the process montage
+        { t: T.proof, d: T.b7 - T.proof, fov: 28, subj: "bed", h: 0.3, az: 8, el: 32, v: 0.05 },                                   // (under the proof panel)
+        { t: T.b7, d: DUR - T.b7, fov: 46, from: [0.6, 0.93, 1.72], to: [0.58, 0.91, 1.56], look: [0.44, 0.77, -0.34] },           // CTA: the hook shot again (loop)
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props,
+        points: { cafe: () => topOf("cafe"), suculenta: () => topOf("suculenta"), cactus: CAC.clone().add(V3(0, 0.07, 0)), hamster: () => topOf("hamster"), calavera: () => topOf("calavera"), banana: () => topOf("banana"), bed: BED.clone().add(V3(0, 0.06, 0)) },
+        punch: [[T.lid, 0.08], [T.duck, 0.1], [T.faint + 0.05, 0.12], [T.brain, 0.08], [T.shades, 0.12], [T.slide, 0.14]],
+        shake: [[T.faint + 0.05, 0.004, 0.3]], flash: [[T.proof, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+      // ---------- text: kinetic captions, hook, counter, note, banner, proof, end card ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 2.6] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const badge = document.getElementById("badge"), badgeN = document.getElementById("badgeN"), note = document.getElementById("note"), banner = document.getElementById("banner"), proof = document.getElementById("proof");
+      const POLS = [...proof.querySelectorAll(".pol")], ROT = [-6, 3, 7, -4, 5], BEATS = [T.b1, T.b2, T.b3, T.b4, T.b5];
+      function dom(t) {
+        let n = 0; BEATS.forEach((b, i) => { if (t >= b) n = i + 1; }); const bOn = n > 0 && t < T.b6 - 0.05;
+        badge.style.visibility = bOn ? "visible" : "hidden"; if (bOn) { if (badgeN.textContent !== String(n)) badgeN.textContent = String(n); const a = clamp((t - BEATS[n - 1]) / 0.22, 0, 1);
+          badge.style.transform = `scale(${(0.5 + 0.5 * backOut(a)).toFixed(3)}) rotate(${(-4 + 8 * (n % 2)).toFixed(1)}deg)`; }
+        const nt = Math.min(clamp((t - T.note) / 0.2, 0, 1), clamp((T.b3 - 0.05 - t) / 0.1, 0, 1)); note.style.visibility = nt > 0 ? "visible" : "hidden";
+        if (nt > 0) { note.style.opacity = nt.toFixed(3); note.style.transform = `rotate(-7deg) scale(${(0.7 + 0.3 * backOut(clamp((t - T.note) / 0.25, 0, 1))).toFixed(3)})`; }
+        const bn = Math.min(clamp((t - T.proc - 0.05) / 0.15, 0, 1), clamp((T.proof - t) / 0.08, 0, 1)); banner.style.visibility = bn > 0 ? "visible" : "hidden";
+        if (bn > 0) banner.style.transform = `scale(${(0.6 + 0.4 * backOut(clamp((t - T.proc - 0.05) / 0.2, 0, 1))).toFixed(3)}) rotate(-2deg)`;
+        const pv = t >= T.proof && t < T.b7; proof.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { proof.style.opacity = Math.min(1, (t - T.proof) / 0.08, (T.b7 - t) / 0.1).toFixed(3);
+          POLS.forEach((p, i) => { const a = clamp((t - T.proof - 0.15 - i * 0.17) / 0.24, 0, 1); p.style.opacity = a > 0 ? "1" : "0";
+            p.style.transform = `translateY(${((1 - ss(a)) * -140).toFixed(1)}px) rotate(${(ROT[i] + (1 - a) * 14).toFixed(2)}deg) scale(${(1.25 - 0.25 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate (skills/reel-3d-toon/references/qa.md): the shared checks plus the furniture */
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const FURN = [{ name: "table", kind: "cyl", c: TB, r: TR + 0.005, y1: TOP + 0.1 }, { name: "bench", kind: "box", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }];
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          let d; if (F.kind === "cyl") { const h = Math.hypot(p.x - F.c.x, p.z - F.c.z) - F.r; d = p.y > F.y1 ? Math.hypot(Math.max(h, 0), p.y - F.y1) : h; }
+          else { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); d = q.distanceTo(p); }
+          if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, SPR, BTRACK, frame, THREE, PROD, scene, renderer, camera };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

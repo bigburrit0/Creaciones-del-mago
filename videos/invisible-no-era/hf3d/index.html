@@ -86,9 +86,9 @@
 
       // ---------- props ----------
       // side table with the bowl of slips (in front of the closed door), the "AMIGO INVISIBLE" sign above the door
-      const TB = V3(0.62, 0, -0.72), TOP = 0.62;
+      const TB = V3(0.72, 0, -0.66), TOP = 0.62, TR = 0.18;
       const table = new THREE.Group(); table.position.copy(TB); scene.add(table);
-      cyl(0.21, 0.2, 0.035, "#A0603A", 0, TOP - 0.018, 0, table, { seg: 28 }); cyl(0.205, 0.205, 0.008, "#B0703F", 0, TOP + 0.001, 0, table, { seg: 28, line: false });
+      cyl(TR, TR - 0.01, 0.035, "#A0603A", 0, TOP - 0.018, 0, table, { seg: 28 }); cyl(TR - 0.005, TR - 0.005, 0.008, "#B0703F", 0, TOP + 0.001, 0, table, { seg: 28, line: false });
       cyl(0.03, 0.038, TOP - 0.05, "#8A5638", 0, (TOP - 0.05) / 2 + 0.02, 0, table); cyl(0.13, 0.14, 0.025, "#8A5638", 0, 0.012, 0, table, { seg: 24 });
       const bowl = new THREE.Group(); bowl.position.set(TB.x, TOP + 0.002, TB.z); scene.add(bowl);
       { const outer = [[0.001, 0], [0.05, 0.003], [0.084, 0.02], [0.1, 0.048], [0.106, 0.07], [0.101, 0.075]].map(([r, y]) => new THREE.Vector2(r, y));
@@ -160,29 +160,29 @@
       const T = { draw1: 0.25, read1: 1.0, hide1: 2.95, draw2: 3.75, read2: 4.4, shh: 5.3, card1: 7.3, night: 7.62, sneak0: 7.95, sneak1: 10.7, freeze: 11.05, s2: 11.5, m2: 13.3,
                   whistle: 14.7, print0: 15.5, print1: 16.85, ding: 17.0, grab: 17.05, hide: 17.45, card2: 17.85, morning: 18.15, ex0: 18.45, h1: 18.95, h2: 19.75, look: 20.1,
                   s3: 20.2, click: 22.75, m3: 23.35, card: 24.45, exit: 99 };
-      const MD = V3(0.12, 0, -0.62), SD = V3(1.14, 0, -0.62), hMD = 1.35, hSD = -1.35;                         // day: either side of the table
-      const PB = V3(-0.42, 0.68, -0.64);                                                                     // the printer's button
-      const MN = new THREE.CatmullRomCurve3([V3(-1.2, 0, 0.35), V3(-1.0, 0, 0.05), V3(-0.84, 0, -0.2), V3(-0.74, 0, -0.31)], false, "centripetal");
-      const SN = new THREE.CatmullRomCurve3([V3(1.05, 0, -0.2), V3(0.5, 0, -0.14), V3(0.12, 0, -0.24), V3(-0.1, 0, -0.31)], false, "centripetal");
+      const MD = V3(0.3, 0, -0.5), SD = V3(1.22, 0, -0.5), hMD = 1.45, hSD = -1.45;                         // day: either side of the table
+      const PB = V3(-0.42, 0.63, -0.64);                                                                     // the printer's button
+      const MN = new THREE.CatmullRomCurve3([V3(-1.2, 0, 0.35), V3(-1.0, 0, 0.05), V3(-0.93, 0, 0.0), V3(-0.84, 0, -0.08)], false, "centripetal");
+      const SN = new THREE.CatmullRomCurve3([V3(1.05, 0, -0.2), V3(0.5, 0, -0.14), V3(0.2, 0, -0.02), V3(0.0, 0, -0.08)], false, "centripetal");
       const MM = V3(-0.28, 0, -0.18), SM = V3(0.42, 0, -0.2), hMM = 1.4, hSM = -1.4;                          // morning: face to face
       const LENS = MM.clone().add(V3(Math.sin(0.314), 0, Math.cos(0.314)).multiplyScalar(2));                // where the deadpan camera is (fixed: poses never read the camera)
       const tanH = (cv, u) => { const d = cv.getTangentAt(clamp(u, 0, 1)); return Math.atan2(d.x, d.z); };
-      const hMP = hd(V3(-0.74, 0, -0.31), PB), hSP = hd(V3(-0.1, 0, -0.31), PB);
+      const hMP = hd(V3(-0.84, 0, -0.08), PB), hSP = hd(V3(0.0, 0, -0.08), PB);
       const vSc = santa.stanceSpeed("Crouch_Fwd_Loop"), vMc = mago.stanceSpeed("Crouch_Fwd_Loop"), sd = T.sneak1 - T.sneak0;
       console.log("crouch speeds", vSc.toFixed(3), vMc.toFixed(3));
       for (const [c, path, v, off] of [[santa, SN, vSc, 0.2], [mago, MN, vMc, 0.6]]) {
         c.add("Idle_Loop", -0.3, T.card1 + 0.4, { off });
         c.add("Crouch_Fwd_Loop", T.card1 + 0.4, T.sneak1 + 0.15, { speed: clamp(path.getLength() / sd / Math.max(v, 0.05), 0.4, 1.6) });
-        c.add("Crouch_Idle_Loop", T.sneak1 - 0.05, T.freeze + 0.5, { off });                         // caught: they straighten up
-        c.add("Idle_Loop", T.freeze + 0.3, T.card2 + 0.35, { off: off + 0.15 });
+        c.add("Idle_Loop", T.sneak1 - 0.12, T.card2 + 0.35, { off: off + 0.15 });                    // they rise out of the crouch to reach the button
         c.add("Idle_Loop", T.card2 + 0.3, DUR + 1, { off: off + 0.3 });
       }
       const { frame, wp, IKQ, arm, armNow, handC, towards, headPt, solveArms } = makeRig([mago, santa]);
       const { LINES, ENV, talk } = await voices(FPS);
       const SFW = (c, k) => frame(c).fwd.multiplyScalar(k);
+      const via = (c, A, B, k, bulge = 0.14) => A.clone().lerp(B, k).add(frame(c).fwd.multiplyScalar(bulge * Math.sin(Math.PI * k)));   // hands travel in an arc in front of the beard
       const behind = (c, side) => { const F = frame(c); return wp(c.b("DEF-hips")).add(F.fwd.clone().multiplyScalar(-0.3)).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.13)).add(V3(0, 0.1, 0)); };
-      const readPt = (c, side) => headPt(c, -0.22, 0.25, side === "L" ? -0.05 : 0.05);
-      const lookPt = (c, side) => { const F = frame(c); return wp(c.b("DEF-spine.003")).add(F.fwd.clone().multiplyScalar(0.3)).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.06)).add(V3(0, -0.02, 0)); };
+      const readPt = (c, side) => headPt(c, -0.22, c === santa ? 0.38 : 0.34, side === "L" ? -0.05 : 0.05);
+      const lookPt = (c, side) => { const F = frame(c); return wp(c.b("DEF-spine.003")).add(F.fwd.clone().multiplyScalar(c === santa ? 0.44 : 0.36)).add((side === "L" ? F.left : F.right).clone().multiplyScalar(0.06)).add(V3(0, -0.02, 0)); };
       let P1 = V3(0.07, 0.55, 0), P2 = V3(0.07, 0.55, 0), GIFT = { M: { pos: V3(), rot: 0 }, S: { pos: V3(), rot: 0 } }, SLIP = { S: null, M: null };
 
       function poseAt(t) {
@@ -219,25 +219,26 @@
         // Papá Noel: draw, read, hide behind his back; night: button, grab the gift, hide; morning: hand over, take, look, click
         const sL = (P, w) => arm(santa, "L", P, w), sR = (P, w) => arm(santa, "R", P, w), mL = (P, w) => arm(mago, "L", P, w), mR = (P, w) => arm(mago, "R", P, w);
         { const dig = 0.03 * pulse(t, 0.5, 0.6, 0.65, 0.75);
-          let P = IN.clone().add(V3(0.03, -dig, 0.02)).lerp(readPt(santa, "L"), ss(clamp((t - 0.78) / 0.3, 0, 1))).lerp(behind(santa, "L"), ss(clamp((t - T.hide1) / 0.35, 0, 1)));
-          sL(P, pulse(t, T.draw1, T.draw1 + 0.28, T.card1, T.card1 + 0.1)); }
+          let P = via(santa, IN.clone().add(V3(0.03, -dig, 0.02)), readPt(santa, "L"), ss(clamp((t - 0.78) / 0.3, 0, 1))); P = via(santa, P, behind(santa, "L"), ss(clamp((t - T.hide1) / 0.35, 0, 1)), 0.1);
+          sL(P, pulse(t, T.draw1, T.draw1 + 0.28, 7.42, 7.6)); }
         { const dig = 0.03 * pulse(t, 4.0, 4.1, 4.15, 4.25);
-          mR(IN.clone().add(V3(-0.03, -dig, 0.02)).lerp(readPt(mago, "R"), ss(clamp((t - 4.22) / 0.25, 0, 1))), pulse(t, T.draw2, T.draw2 + 0.28, 6.95, 7.2));
-          mL(headPt(mago, 0.03, 0.22, 0.09), pulse(t, T.shh - 0.05, T.shh + 0.25, 6.9, 7.15)); }                       // "shhh": a finger in front of his moustache
+          mL(via(mago, IN.clone().add(V3(-0.03, -dig, -0.02)), readPt(mago, "L"), ss(clamp((t - 4.0) / 0.45, 0, 1)), 0.12), pulse(t, T.draw2, T.draw2 + 0.28, 7.42, 7.6));
+          mR(headPt(mago, 0.03, 0.22, 0.09), pulse(t, T.shh - 0.25, T.shh + 0.25, 7.42, 7.6)); }                       // "shhh": a finger in front of his moustache
         // night: both reach for the button and stop short of each other; then each grabs the other's gift and hides it
-        sL(PB.clone().add(V3(0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.1, T.freeze, 11.7, 12.0));
-        mR(PB.clone().add(V3(-0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.1, T.freeze, 11.7, 12.0));
-        const grabS = GM_BED.clone().add(V3(0, 0.06, 0)), grabM = GS_BED.clone().add(V3(0, 0.06, 0));
-        sL(grabS.clone().lerp(behind(santa, "L"), ss(clamp((t - T.hide) / 0.3, 0, 1))), pulse(t, T.grab - 0.15, T.grab + 0.15, T.card2, T.card2 + 0.1));
-        mR(grabM.clone().lerp(behind(mago, "R"), ss(clamp((t - T.hide) / 0.3, 0, 1))), pulse(t, T.grab - 0.15, T.grab + 0.15, T.card2, T.card2 + 0.1));
+        arm(santa, "L", PB.clone().add(V3(0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.3, T.freeze - 0.05, T.freeze + 0.02, T.freeze + 0.3), null, 0.09);
+        arm(mago, "R", PB.clone().add(V3(-0.07, 0, 0.01)), pulse(t, T.sneak1 - 0.3, T.freeze - 0.05, T.freeze + 0.02, T.freeze + 0.3), null, 0.09);
+        const catchS = wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(0.44)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0));
+        const catchM = wp(mago.b("DEF-spine.003")).add(MF.fwd.clone().multiplyScalar(0.36)).add(MF.right.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0));
+        sL(via(santa, catchS, behind(santa, "L"), ss(clamp((t - T.hide) / 0.35, 0, 1)), 0.08), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
+        mR(via(mago, catchM, behind(mago, "R"), ss(clamp((t - T.hide) / 0.35, 0, 1)), 0.08), pulse(t, T.grab - 0.6, T.grab - 0.3, T.card2 + 0.1, T.card2 + 0.3));
         // morning: Papá Noel hands El Mago his gift (left hand), El Mago hands Papá Noel his (right hand); each looks at the tiny version of himself
         const clickDip = (k) => V3(0, -0.012 * [0, 0.2, 0.4].reduce((a, d) => a + pulse(t, T.click + d - 0.03, T.click + d, T.click + d + 0.02, T.click + d + 0.07), 0) * k, 0);
         const raise = V3(0, 0.06 * pulse(t, T.card - 0.1, T.card + 0.3, DUR, DUR + 1), 0);
         if (morning) {
           sL(behind(santa, "L").lerp(towards(P1, santa.W.position, 0.06), ss(clamp((t - T.ex0) / 0.4, 0, 1))), 1 - ss(clamp((t - (T.h1 + 0.1)) / 0.3, 0, 1)));
-          mL(lookPt(mago, "L").lerp(towards(P1, mago.W.position, 0.06), pulse(t, T.h1 - 0.25, T.h1 - 0.05, T.h1 + 0.1, T.h1 + 0.4)).add(clickDip(1)).add(raise), ss(clamp((t - (T.h1 - 0.35)) / 0.3, 0, 1)));
+          mL(via(mago, lookPt(mago, "L"), towards(P1, mago.W.position, 0.06), pulse(t, T.h1 - 0.25, T.h1 - 0.05, T.h1 + 0.1, T.h1 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h1 - 0.35)) / 0.3, 0, 1)));
           mR(behind(mago, "R").lerp(towards(P2, mago.W.position, 0.06), ss(clamp((t - (T.h1 + 0.35)) / 0.4, 0, 1))), 1 - ss(clamp((t - (T.h2 + 0.1)) / 0.3, 0, 1)));
-          sR(lookPt(santa, "R").lerp(towards(P2, santa.W.position, 0.06), pulse(t, T.h2 - 0.25, T.h2 - 0.05, T.h2 + 0.1, T.h2 + 0.4)).add(clickDip(1)).add(raise), ss(clamp((t - (T.h2 - 0.35)) / 0.3, 0, 1)));
+          sL(via(santa, lookPt(santa, "L"), towards(P2, santa.W.position, 0.06), pulse(t, T.h2 - 0.25, T.h2 - 0.05, T.h2 + 0.1, T.h2 + 0.4), 0.1).add(clickDip(1)).add(raise), ss(clamp((t - (T.h2 - 0.35)) / 0.3, 0, 1)));
         }
         // ---- faces: blinks, brows up at the reveals and when caught, El Mago's eyes dart in the freeze
         let e = 0; for (const b of [0.9, 3.4, 6.2, 9.1, 12.4, 16.2, 19.3, 21.5, 25.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
@@ -252,15 +253,16 @@
         const slipAt = (s, c, side, open, t0) => { const vis = t >= t0 && t < T.card1 + 0.05; s.visible = vis; if (!vis) return;
           const F = frame(c), h = handC(c, side); s.position.copy(h).add(F.fwd.clone().multiplyScalar(0.03)).add(V3(0, 0.065, 0));      // pinched at its lower edge, above the mitten
           const face = headPt(c, 0, 0.1); s.lookAt(face); s.rotateX(-0.25); s.userData.fold(open); };
-        slipAt(slipS, santa, "L", ss(clamp((t - T.read1) / 0.3, 0, 1)), 0.62); slipAt(slipM, mago, "R", ss(clamp((t - T.read2) / 0.3, 0, 1)), 4.12);
+        slipAt(slipS, santa, "L", ss(clamp((t - T.read1) / 0.3, 0, 1)), 0.62); slipAt(slipM, mago, "L", ss(clamp((t - T.read2) / 0.3, 0, 1)), 4.12);
         const held = (c, side, F, toward) => ({ pos: handC(c, side).add(V3(0, -0.045, 0)).add(F.fwd.clone().multiplyScalar(0.01)), rot: toward });
         const giftState = (owner0, side0, owner1, side1, tH, bed) => {
-          if (t < T.grab) return { pos: bed.clone(), rot: 0 };
           const a = held(owner0, side0, frame(owner0), owner0.W.rotation.y), b = held(owner1, side1, frame(owner1), owner1.W.rotation.y + Math.PI);
+          if (t < T.grab - 0.32) return { pos: bed.clone(), rot: 0 };
+          if (t < T.grab) { const f = ss((t - (T.grab - 0.32)) / 0.32), P = bed.clone().lerp(a.pos, f); P.y += 0.22 * 4 * f * (1 - f); return { pos: P, rot: lerp(0, a.rot, f) + f * Math.PI * 2 }; }
           if (!morning || t < tH - 0.12) return a; if (t < tH + 0.12) { const P = (owner0 === santa ? P1 : P2).clone().sub(V3(0, 0.04, 0)); return { pos: P, rot: a.rot }; }
           const pr = pulse(t, T.card - 0.1, T.card + 0.3, DUR, DUR + 1); return { pos: b.pos, rot: lerp(b.rot, 0.35, pr) }; };
-        GIFT.M = giftState(santa, "L", mago, "L", T.h1, GM_BED); GIFT.S = giftState(mago, "R", santa, "R", T.h2, GS_BED);
-        for (const g of [GIFT.M, GIFT.S]) { const c0 = g.pos.clone().add(V3(0, 0.06, 0)), c1 = t < T.grab ? c0 : pushOut(c0, 0.06, ALLCOLS()); g.pos.add(c1.sub(c0)); }
+        GIFT.M = giftState(santa, "L", mago, "L", T.h1, GM_BED); GIFT.S = giftState(mago, "R", santa, "L", T.h2, GS_BED);
+        for (const g of [GIFT.M, GIFT.S]) { const c0 = g.pos.clone().add(V3(0, 0.06, 0)), c1 = t < T.grab - 0.32 ? c0 : pushOut(c0, 0.06, ALLCOLS()); g.pos.add(c1.sub(c0)); }
       }
       // hand-over meeting points: between the two chests, a little toward the camera, outside both
       for (const [k, tt] of [["P1", T.h1], ["P2", T.h2]]) { poseAt(tt); const m = wp(mago.b("DEF-spine.003")), sn = wp(santa.b("DEF-spine.003"));
@@ -304,7 +306,7 @@
       // ---------- camera and editing (the V2 style; every camera looks toward the back or side walls) ----------
       const pov = (c, slip) => (t) => ({ p: headPt(c, 0.03, 0.26, 0), l: slip.getWorldPosition(V3(0, 0, 0)), fov: 55, roll: 0 });
       const SHOTS = [
-        { t: 0.0, d: 1.35, fov: 40, from: [0.58, 1.6, 3.2], to: [0.6, 1.5, 2.9], look: [0.63, 0.92, -0.75] },                         // the table, the bowl, the sign
+        { t: 0.0, d: 1.35, fov: 40, from: [0.3, 1.6, 3.2], to: [0.34, 1.5, 2.9], look: [0.74, 0.92, -0.7] },                         // the table, the bowl, the sign
         { t: 1.35, d: 0.75, fn: pov(santa, slipS) },                                                                                     // his POV: "El Mago"
         { t: 2.1, d: 1.6, fov: 32, subj: "santa", h: 1.05, az: -50, el: 2, v: 0.1 },                                                     // Papá Noel: "¡Uy… me tocó!"
         { t: 3.7, d: 0.75, fov: 34, subj: "mago", h: 1.15, az: 15, el: 6, v: 0.08, whip: -1 },                                          // El Mago draws
@@ -341,11 +343,11 @@
       const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
       const ARM = /^(hand|thumb|sleeve|cuff|arm)/;
       const meshesOf = (c, excl) => c.meshes.filter((m) => !excl || !excl.test(m.name));
-      const FURN = [{ name: "table", kind: "cyl", c: TB, r: 0.215, y1: TOP + 0.09 }, { name: "bench", kind: "box", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }];
+      const FURN = [{ name: "table", kind: "cyl", c: TB, r: TR + 0.005, y1: TOP + 0.09 }, { name: "bench", kind: "box", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }];
       function qa(t) {
         lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
         // gifts: away from every body except the hands holding them (and both during a hand-over)
-        for (const [g, nm, hold0, hold1, tH] of [[giftM, "giftM", santa, mago, T.h1], [giftS, "giftS", mago, santa, T.h2]]) if (g.visible && t >= T.grab) {
+        for (const [g, nm, hold0, hold1, tH] of [[giftM, "giftM", santa, mago, T.h1], [giftS, "giftS", mago, santa, T.h2]]) if (g.visible && t >= T.grab - 0.32) {
           const cen = g.position.clone().add(V3(0, 0.06, 0)); for (const c of [mago, santa]) { const holder = (t < tH ? hold0 : hold1) === c || Math.abs(t - tH) < 0.3;
             const r = minDistToMeshes(cen, meshesOf(c, holder ? ARM : null)); if (r.d < 0.035) out.push(["gift", nm, c === mago ? "mago" : "santa", r.mesh, +r.d.toFixed(3)]); } }
         for (const [s, holder] of [[slipS, santa], [slipM, mago]]) if (s.visible) { const p = s.getWorldPosition(V3(0, 0, 0)); for (const c of [mago, santa]) { const r = minDistToMeshes(p, meshesOf(c, c === holder ? ARM : null)); if (r.d < 0.02) out.push(["slip", c === mago ? "mago" : "santa", r.mesh, +r.d.toFixed(3)]); } }
@@ -359,7 +361,7 @@
       }
       window.__qa = qa;
       window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
-      window.__draw3d = renderAt; window.__T = T; window.__dbg = { mago, santa, SPR, BTRACK, frame, THREE, P1, P2, giftM, giftS };
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [[7.4, 7.84], [17.95, 18.34]];      // staging changes hidden by the full-frame time cards window.__dbg = { mago, santa, SPR, BTRACK, frame, THREE, P1, P2, giftM, giftS };
       renderAt(0);
       markReady();
     </script>

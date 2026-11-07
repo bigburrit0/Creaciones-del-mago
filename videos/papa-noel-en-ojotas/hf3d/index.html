@@ -393,7 +393,7 @@
         // exhausted posture while walking in and fanning; sad slump; head tilt back to sip
         const tired = Math.max(pulse(t, T.sW0, T.sW0 + 0.3, T.sit + 0.3, T.sit + 0.7) * 0.16, pulse(t, T.shake1, T.shake1 + 0.2, T.sad1 - 0.1, T.sad1 + 0.25) * 0.12);
         rotWorld(santa.b("DEF-spine.003"), SF.left, tired);
-        rotWorld(santa.b("DEF-head"), SF.left, tired * 1.4 - 0.18 * pulse(t, T.sip0 + 0.15, T.sip0 + 0.4, T.relief - 0.1, T.relief + 0.15)
+        rotWorld(santa.b("DEF-head"), SF.left, tired * 1.15 - 0.18 * pulse(t, T.sip0 + 0.15, T.sip0 + 0.4, T.relief - 0.1, T.relief + 0.15)
                                                 + 0.1 * pulse(t, T.shake1, T.shake1 + 0.25, T.sad1 - 0.1, T.sad1 + 0.25));
         rotWorld(santa.b("DEF-head"), SF.up, 0.35 * pulse(t, T.press - 0.3, T.press, T.boom - 0.2, T.boom) * Math.sign(-1));   // looks toward the printer
         // arms (IK): fan himself, take the mate and sip, hand it back, shake the sack, hold it sad, startled, cheer, sack on shoulder, wave

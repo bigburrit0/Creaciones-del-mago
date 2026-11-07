@@ -44,20 +44,22 @@ export function stage(o = {}) {
   }
 
 // ---------- the workshop set (metres): floor, walls, door on a hinge, window, shelves, bench, rug, tree, light ----------
+// Big planes are tiled in ~0.5 m cells: a single huge quad seen at a steep angle lost depth/fog precision in the
+// software renderer and drew the back wall over the bench for one frame ("Invisible no era", t = 17.617).
 export function workshop(o = {}) {
   let beam = null;
     const planks = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#A0603A"; g.fillRect(0, 0, w, h); g.fillStyle = "#8A5638";
       for (let y = 0; y < h; y += 16) g.fillRect(0, y, w, 2); [[14, 0], [44, 16], [6, 32], [36, 48]].forEach(([x, y]) => g.fillRect(x, y, 2, 16));
       g.fillStyle = "#B0703F"; for (let y = 4; y < h; y += 16) g.fillRect(0, y, w, 1); g.fillStyle = "#94593A"; g.fillRect(20, 22, 10, 1); g.fillRect(48, 54, 8, 1); });
     planks.repeat.set(14, 14);
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), toon("#ffffff", { map: planks, rim: 0 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(10, 10, 20, 20), toon("#ffffff", { map: planks, rim: 0 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
     const wallTex = () => { const t = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#E8A846"; g.fillRect(0, 0, w, h);
       for (let y = 0; y < h; y += 16) { g.fillStyle = "#F2C14E"; g.fillRect(0, y, w, 3); g.fillStyle = "#C98A2B"; g.fillRect(0, y + 14, w, 2); } }); return t; };
     const DOOR = { x0: 0.4, x1: 1.3, h: 1.55, z: -1.1 };
     function wall(x0, x1, y0, y1, z) { const t = wallTex(); t.repeat.set((x1 - x0) / 0.7, (y1 - y0) / 0.7);
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, y1 - y0), toon("#ffffff", { map: t, rim: 0 })); m.position.set((x0 + x1) / 2, (y0 + y1) / 2, z); m.receiveShadow = true; scene.add(m); return m; }
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, y1 - y0, Math.max(1, Math.ceil((x1 - x0) / 0.5)), Math.max(1, Math.ceil((y1 - y0) / 0.5))), toon("#ffffff", { map: t, rim: 0 })); m.position.set((x0 + x1) / 2, (y0 + y1) / 2, z); m.receiveShadow = true; scene.add(m); return m; }
     wall(-3, DOOR.x0, 0, 3, -1.1); wall(DOOR.x1, 3, 0, 3, -1.1); wall(DOOR.x0, DOOR.x1, DOOR.h, 3, -1.1);
-    { const t = wallTex(); t.repeat.set(9, 4.3); const l = new THREE.Mesh(new THREE.PlaneGeometry(9, 3), toon("#ffffff", { map: t, rim: 0 })); l.rotation.y = Math.PI / 2; l.position.set(-1.45, 1.5, 3.4); l.receiveShadow = true; scene.add(l);
+    { const t = wallTex(); t.repeat.set(9, 4.3); const l = new THREE.Mesh(new THREE.PlaneGeometry(9, 3, 18, 6), toon("#ffffff", { map: t, rim: 0 })); l.rotation.y = Math.PI / 2; l.position.set(-1.45, 1.5, 3.4); l.receiveShadow = true; scene.add(l);
       const r = l.clone(); r.rotation.y = -Math.PI / 2; r.position.set(1.5, 1.5, 3.4); scene.add(r); }
     rbox(9, 0.08, 0.03, "#6E3B22", 0, 0.04, -1.09, null, { line: false });
     // door: frame, outside (bright summer yard), panel on a hinge with a wreath, light spilling in when open

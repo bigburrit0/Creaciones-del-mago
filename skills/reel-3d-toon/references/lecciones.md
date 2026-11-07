@@ -33,6 +33,9 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | El Mago's face hidden by his hat in the last shot | Camera high (1.3 m) and close, looking down | For a character talking to camera: eye level (~0.8 m), ~3 m away, look target below him so he sits in the upper half (above the card) |
 | Characters too close for the hand-off | Positions chosen by eye | Meeting points computed from the poses, between the bodies, toward the camera, outside both |
 
+| V2 shots were extreme close-ups or the camera ended up behind a character | Camera coordinates guessed by eye; the characters are bigger than assumed, and the head bone sits at the neck | Frame character shots from the measured head position: frame height in metres at the subject, azimuth, elevation and vertical offset (`shotCam` in `hf3d-v2`), aim 10 cm above the head bone |
+| Shots blocked by the foreground tree or the open door panel; the void showing | The set has no front wall; set dressing near the camera | Every camera looks toward the back or side walls; check frames for blockers (tree at (1.12, 0.65), the open door panel on the right) before rendering |
+
 ## Voices, subtitles, audio
 
 | Seen | Cause | Rule |

@@ -161,6 +161,15 @@ El usuario eligió la dirección 3D toon. La misma historia en 21 s (en 3D cada 
 | 12,5–17,95 | General final | Festejo (el Mago baila, Papá Noel se levanta con los brazos arriba). Papá Noel se carga la bolsa al hombro, camina hacia la puerta y saluda desde adentro del taller. Se da vuelta, se pasa la bolsa a la espalda y sale derecho por el medio de la puerta; la puerta (abre hacia adentro) se cierra detrás de él. El mate vuela solo del estante a la mano del Mago (magia) y toma |
 | 17,95–21,0 | El Mago de frente | El Mago baja el mate y le habla a cámara. Placa final: "Regalos impresos en 3D · ¡Pedí el tuyo! · Escribime por mensaje · Creaciones del Mago · Montevideo" (sin teléfono en el video; el número va en el caption) |
 
+### Versión 2 (2026-11-07): misma animación, voces y sonido; otra cámara y otra edición
+
+`hf3d-v2/` (mismo `build3d.sh`), render `papa-noel-en-ojotas-3d-v2.mp4`. Lo único que cambia es la cámara y la edición, así que la animación y el sonido son los mismos de la V1 (la puerta de calidad da lo mismo).
+- 16 planos en vez de 5, cortados en la acción y en el diálogo: picado desde abajo a la puerta, primer plano del Mago sorprendido, travelling siguiendo a Papá Noel, plano a dos desde abajo para el mate, primer plano del "¡Ahh…!", picado desde arriba sobre la bolsa vacía, contrapicado del Mago con la idea, plano desde detrás de la impresora para "¡A imprimir!", plano holandés del TNT, contrapicado del festejo, plano profundo con el Mago en primer término mientras Papá Noel se va.
+- Los planos de personajes se encuadran midiendo la cabeza en la pose (altura de cuadro en metros, ángulo y elevación), no con coordenadas a ojo: así no salen ni demasiado cerca ni tapados.
+- Zooms de golpe (sorpresa, idea, explosión), barridos con desenfoque en tres cortes, sacudón de cámara (portazo, desplome, explosión, puerta), destello blanco en la explosión.
+- Subtítulos cinéticos: palabra por palabra al ritmo de la voz, la palabra que se dice en el color del personaje. Título gancho al principio: "Papá Noel vs. el diciembre uruguayo".
+- Regla nueva: el set no tiene pared delantera, así que todas las cámaras miran hacia el fondo o las paredes laterales; el árbol de adelante y la hoja abierta de la puerta tapan algunos ángulos (revisar cuadros antes de renderizar).
+
 ### Diálogo (voces con Gemini TTS)
 
 Papá Noel: voz Algenib (grave, un poco rasposa, gordo bonachón). El Mago: voz Charon (la misma del reel del jardín). Acento rioplatense de Montevideo. Cada personaje se grabó en UNA sola toma (las líneas cortas solas salen mal) y se cortó en las pausas con `biblioteca/tts_lineas.py`; recortes y volumen parejo (-16 LUFS) en `voces3d.json` → `_edits`. La música baja debajo de cada línea. Mientras habla, cada personaje asiente al ritmo de su voz (envolvente de volumen, sin boca: la tapa la barba).

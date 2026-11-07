@@ -34,6 +34,8 @@ for f in sorted(glob.glob("hf3d/assets/voz/*.wav")):
 json.dump(env, open("hf3d/assets/voz/env.json", "w"))
 print("voices:", {k: len(v) for k, v in env.items()})
 PY
+# V2 (same scene and sound, new camera and editing) shares the built libs and assets
+mkdir -p hf3d-v2 && rm -rf hf3d-v2/lib hf3d-v2/assets && cp -r hf3d/lib hf3d/assets hf3d-v2/
 echo ok
 # QA gate (run before rendering): cd hf3d && python3 -m http.server 8768 &  then  node ../../biblioteca/3d/web/qa3d.cjs 8768 qa.json
 # Render: cd hf3d && npx hyperframes render --fps 60 --workers 4 -o ../papa-noel-en-ojotas-3d.mp4

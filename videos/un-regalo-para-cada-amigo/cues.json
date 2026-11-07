@@ -585,13 +585,6 @@
    25.3
   ]
  },
- "ambience": [
-  {
-   "type": "cicadas",
-   "from": 0,
-   "to": 25.3,
-   "level": 0.07
-  }
- ],
+ "ambience": [],
  "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"
 }

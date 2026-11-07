@@ -169,8 +169,17 @@ def music(cfg, D):
     return m * g
 
 
-def write(path, x, peak=0.85):
-    x = x / max(1e-9, np.abs(x).max()) * peak
+def dc_block(x, f0=20.0):
+    """removes DC and sub-audio drift: pulse waves are not centred on zero, and the music ducking moved that offset
+    up and down (a thump at every duck). A zero-phase high-pass at f0 (FFT; no scipy needed)."""
+    X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X *= np.clip(f / f0, 0, 1) ** 2; return np.fft.irfft(X, len(x))
+
+
+def write(path, x, peak=0.85, boost=True):
+    """boost=True normalises the stem to `peak` (music, effects). boost=False only scales DOWN if it would pass `peak`, so
+    levels set in the cues are kept (ambience: before, any ambience was boosted to a 0.5 peak and its level ignored)."""
+    x = dc_block(x); m = np.abs(x).max()
+    if boost or m > peak: x = x / max(1e-9, m) * peak
     w = wave.open(path, "wb"); w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((np.clip(x, -1, 1) * 32767).astype("<i2").tobytes()); w.close()
 
@@ -190,7 +199,8 @@ def main():
     amb = np.zeros(int(D * SR))
     for a in cues.get("ambience", []):
         y = AMB[a["type"]](a["to"] - a["from"], a.get("level", 0.2)); put(amb, y, a["from"])
-    if np.abs(amb).max() > 0: write(os.path.join(out, "ambience.wav"), amb, 0.5)
+    if np.abs(amb).max() > 0: write(os.path.join(out, "ambience.wav"), amb, 0.5, boost=False)
+    elif os.path.exists(os.path.join(out, "ambience.wav")): write(os.path.join(out, "ambience.wav"), amb + 1e-9, 0.5, boost=False)   # silent stem, so the page still finds it
     print("audio ->", out)
 
 

@@ -10,6 +10,7 @@ Reach reel N1 from `../PLAN_NOVIEMBRE.md` (publish Fri 13 Nov). Its job is to be
 - **Loudness:** -14.0 LUFS, peak -1.8 dBFS.
 - **Voices:** 8 of 8 lines intelligible in the final mix (transcription). On the full mix the transcriber once heard "banana" as "boludo", the commoner phrase. The clip alone and the mixed segment both transcribe as "banana", and the subtitle and the banana in sunglasses show it on screen.
 - **Contact sheet** of the real frames reviewed.
+- **Audio fix (after delivery):** the person heard a buzz in the background. It was the cicada ambience. The synth ignored its level, and it is noise switched on and off at 37 Hz, measured in the mix at 34 dB above the background. The music also carried a DC offset. Fixes: no ambience; DC removed from every stem; the music level restored (volume 0.6, matching the approved balance). The mix was rebuilt and swapped in with `biblioteca/remezclar.py`, with the video stream byte-identical. Result: buzz 4.7 dB (none), -14.2 LUFS, peak -2.7 dBFS, every spoken line clear (transcription with `gemini-3.5-flash-lite`).
 
 ## 1. Selling structure (voice first; measured lines: m1 2.52, m2 1.56, m3 1.55, m4 1.80, m5 2.48, m6 1.25, m7 1.65, s1 1.50 (yawn), s2 1.10)
 

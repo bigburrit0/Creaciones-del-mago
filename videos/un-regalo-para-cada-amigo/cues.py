@@ -30,7 +30,7 @@ duck = [[round(a - 0.05, 2), round(a + d + 0.08, 2), 0.36] for a, d in V.values(
 cues = {"duration": DUR, "sfx": sfx,
         "music": {"bpm": 124, "start": 0.1, "melody": melody, "chords": [0, 5, 0, 7, 0, 5, 0, 7, 9, 5, 7, 0, 0], "duck": duck,
                   "end_chord": {"t": T["card"], "notes": [0, 4, 7, 12]}, "fade_out": [24.6, DUR]},
-        "ambience": [{"type": "cicadas", "from": 0, "to": DUR, "level": 0.07}],
+        "ambience": [],   # no cicadas: high-passed noise gated at 37 Hz, heard as a buzz under the whole reel
         "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"}
 json.dump(cues, open("cues.json", "w"), indent=1)
 print(len(sfx), "effects")

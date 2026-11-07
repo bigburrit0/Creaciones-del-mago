@@ -170,19 +170,23 @@ El usuario eligió la dirección 3D toon. La misma historia en 21 s (en 3D cada 
 - Subtítulos cinéticos: palabra por palabra al ritmo de la voz, la palabra que se dice en el color del personaje. Título gancho al principio: "Papá Noel vs. el diciembre uruguayo".
 - Regla nueva: el set no tiene pared delantera, así que todas las cámaras miran hacia el fondo o las paredes laterales; el árbol de adelante y la hoja abierta de la puerta tapan algunos ángulos (revisar cuadros antes de renderizar).
 
-Caption de la V2 (retoma el título gancho del video):
+Caption de la V2 (formato "último momento", distinto de punta a punta al de la V1):
 
 ```
-Papá Noel vs. el diciembre uruguayo. Ganó diciembre. 🥵
+🚨 ÚLTIMO MOMENTO: Papá Noel cambió las botas por ojotas.
 
-Entró al taller en ojotas, pidió un mate y sacudió la bolsa: vacía. «¡Me quedé sin regalos!»
-El Mago dijo las palabras mágicas: «¡A imprimir!» 🧙 Y la impresora hizo el resto: clickers, una alcancía y un TNT que explota en confeti.
+Testigos aseguran que llegó a un taller de Montevideo derretido, aceptó un mate sin dudarlo y confesó lo peor: no le quedaba ni un regalo. Minutos después, una impresora 3D empezó a trabajar a toda máquina.
 
-¿Te falta el regalo del amigo invisible? Te lo imprimo yo 🎁
-Escribime al 092 104 419 con una foto o el link de MakerWorld y te paso precio y fecha, sin compromiso. Cada pedido lleva mínimo 48 horas, así que no lo dejes para el 23.
-Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+Lo que se sabe hasta ahora:
+• Salieron clickers, llaveros, figuras y hasta un TNT de confeti.
+• Se piden por WhatsApp al 092 104 419, con una foto o un link de MakerWorld.
+• Precio y fecha antes de empezar, sin compromiso.
+• Cada pedido lleva mínimo 48 horas.
+• Entrega sin costo en La Unión, La Blanqueada y parte de Buceo; envíos a todo Uruguay.
 
-#Montevideo #RegalosDeNavidad #AmigoInvisible #Impresion3D #HechoEnUruguay #DiciembreUruguayo #CreacionesDelMago
+Seguiremos informando. 🎄
+
+#UltimoMomento #Montevideo #RegalosDeNavidad #Impresion3D #HechoEnUruguay #CreacionesDelMago
 ```
 
 ### Diálogo (voces con Gemini TTS)

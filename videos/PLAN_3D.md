@@ -9,6 +9,11 @@ Yes. The approach I recommend is the **"pre-rendered sprites" pipeline** (Donkey
 
 The result keeps the pixel-art look, but the motion comes from real animation. It is no longer 4 AI drawings, so it is neither choppy nor robotic. And the characters are always identical, because there is one model instead of one drawing per frame.
 
+## Status (2026-11-07): first full 3D reel done
+
+`papa-noel-en-ojotas-3d.mp4` (21 s, voices, subtitles, end card, QA gate 0/1260). The workflow, rules and lessons are now
+a skill: `skills/reel-3d-toon/SKILL.md`. Next reels: `PLAN_PROXIMOS_REELS.md`.
+
 ## Decision (2026-11-06, night): 3D toon is the direction
 
 - The user chose **3D toon** over pixel art from 3D, and asked for proper proportions and animation.

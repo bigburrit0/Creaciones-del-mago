@@ -38,6 +38,12 @@ Several hosts were blocked (threejs.org, littlepolygon, vulkan docs), so numbers
 | 13 | **Walls and doors are solid too** (added 2026-11-07, after "Santa ghosts through the door"). The gate samples every collider (arms included) and the sack against the back wall, the door frame and the swinging door panel (a box on its hinge). A wide character crosses a doorway through its MIDDLE and square to the wall (a curve: in through the centre, then turn), never on the diagonal. The doorway is sized from the widest body plus the sack (0.84 m for Santa). He waves well inside the room, puts the sack on his back (centred) only while turning to leave, and walks straight out; the door swings into the room, so it closes behind him without touching him | `PIN`, `POUT`, `qa()` |
 | 14 | **A part that rests on another takes the weights of the surface under it** (added 2026-11-07, after "the beard ghosts through the body at the end"). Measured: the beard tip sank 4–6.5 cm into the robe and belt in EVERY frame (Santa: 1.6–3.6 cm into the tank top). The beard followed the chest bones (spine.003/.002 and the springs) while the belt and robe follow the hips, so any pose that bends the spine apart from the bind pose drives them through each other. Fix: `toonchar.transfer_weights()` gives each beard vertex below the chin the interpolated weights of the nearest robe, belt or shirt point, blending to the head weights at the chin; no spring bones on the resting part. The gate tracks 460 (El Mago) and 439 (Santa) beard points that rest on the body: none may sink more than 1.2 cm along the body normal | `toonchar.py`, `mago3d.py`, `santa3d.py`, `qa()` |
 
+| 15 | **The gate measures what is visible.** A beard's inner face compressing against the chin is fine; the body coming within 8 mm of the beard's OUTER surface is not (1.2 cm where the beard is thin). Thresholds are written next to each check | `qa()` |
+| 16 | **No blind windows and no teleports.** A prop changing hands is animated (hand-off, toss, magic float with a catch reach) and checked while in flight | `poseAt`, `qa()` |
+| 17 | **Carried props hide with their carrier.** A sack trailing behind someone who turns behind a wall stays visible and floats: centre it on the body and walk straight away | `props` |
+
+The full list of lessons (with the voice, subtitle, camera and process ones) is in `skills/reel-3d-toon/references/lecciones.md`.
+
 ## Result
 
 - **Gate:** 1020 of 1020 frames with zero contact violations and zero pose jumps, and identical pixels for a frame drawn in any order.

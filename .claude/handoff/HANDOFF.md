@@ -1,6 +1,13 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**LECCIONES, CAPTION Y PRÓXIMOS REELS (2026-11-07, tarde):** al usuario le encantó el reel. Pidió guardar todo lo aprendido para no repetir errores, el texto para la descripción (con subagentes Haiku, algo "marketinero") y planificar 3 reels más con un equipo Haiku que busque ideas (memes y referencias 2026).
+- Lecciones: nueva skill `skills/reel-3d-toon/` (SKILL.md + `references/lecciones.md`, `voces-y-texto.md`, `qa.md`; paquete `skills/reel-3d-toon.skill` con `empaquetar.sh` para subirla a claude.ai). Ayudas nuevas: `videos/biblioteca/3d/web/frames3d.cjs`, `flicker_scan.py`, `videos/biblioteca/check_voces.py`. Reglas 15–17 en `RESEARCH_3D_CONTACT.md`.
+- Caption: `papa-noel-en-ojotas/GUION.md` → "Caption para Instagram" (principal + 2 alternativas). Publicar antes del 20/11.
+- Ideas: `videos/RESEARCH_IDEAS_2026.md` (formatos 2026, referencias locales, productos y licencias, calendario a marzo 2027).
+- Plan: `videos/PLAN_PROXIMOS_REELS.md` → 1) "Invisible no era" (amigo invisible, publicar 1/12), 2) "¿Reyes Magos? Mago soy yo" (Reyes, 28/12), 3) "Ola de calor, vuelta a clases" (llaveros con nombre, 20/2). Paso 0: sacar un kit de escena compartido (`escena3d.js`).
+- Siguiente: que el usuario apruebe los tres guiones; empezar por el paso 0 y el reel 1.
+
 **PUERTA, BARBA, VOCES, TEXTO Y CIERRE (2026-11-07):** el usuario vio a Papá Noel atravesar la puerta y la barba metiéndose en el cuerpo al final; pidió arreglarlo, sumar voces y texto y cerrar el reel.
 - Puerta: abre hacia adentro (bisagra a la derecha), vano de 0,90 m. Papá Noel entra y sale por el MEDIO, de frente a la pared (curvas `PIN`/`POUT`), saluda bien adentro, se pasa la bolsa a la espalda al darse vuelta y sale derecho; la puerta se cierra detrás de él.
 - Barba: la punta se hundía 4–6,5 cm en la túnica y el cinturón en TODOS los cuadros (seguía a los huesos del pecho; el cinturón, a la cadera). Ahora cada punto de la barba toma los pesos de la superficie que tiene debajo: `toonchar.transfer_weights()` en `mago3d.py` y `santa3d.py`.

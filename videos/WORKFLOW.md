@@ -1,5 +1,7 @@
 # Videos pixel art con Claude + Gemini + HyperFrames: qué se retrabajó y cómo evitarlo
 
+> **2026-11-07:** la dirección elegida es el **3D toon**. Su flujo, reglas y errores a no repetir están en `skills/reel-3d-toon/SKILL.md` (y `references/lecciones.md`). Este documento queda para los reels en pixel art.
+
 > **Puesto en práctica:** el workflow quedó como skill exportable en [`skills/pixel-reel`](../skills/pixel-reel/SKILL.md) (también como `pixel-reel.skill` para instalar). La biblioteca del Mago está en [`biblioteca/`](biblioteca/README.md), y el primer reel hecho con este método es [`papa-noel-en-ojotas/`](papa-noel-en-ojotas/GUION.md).
 
 Informe de los dos videos hechos hasta ahora (`mate-power-up/` y `mago-jardin/`) y propuesta de workflow para los próximos.

@@ -84,9 +84,55 @@ Todo lo que se apruebe queda en la biblioteca: el próximo reel del Mago ya tien
 
 ## Caption para Instagram
 
-> Papá Noel llegó al taller derretido y con la bolsa vacía. Por suerte la impresora no se toma vacaciones.
-> ¿Amigo invisible antes del 24? Pedí con tiempo: cada pedido lleva mínimo 48 horas.
-> Escribime al 092 104 419 y te paso precio y fecha, sin compromiso. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+Versión 3D (2026-11-07). Salió de tres redactores (subagentes Haiku: humor, urgencia práctica y voz de personaje); se
+eligió y se pulió a mano: gancho de menos de 110 caracteres, primera persona como en la web, solo datos reales.
+
+**Principal**
+
+```
+En Montevideo, en diciembre, hasta Papá Noel se derrite. 🥵
+
+Llegó al taller en ojotas, con la bolsa vacía y una polilla de compañía. El Mago le dio un mate 🧉, prendió la impresora y salvó la Navidad: clickers, una alcancía, ocho regalos más y un TNT que explota en confeti.
+
+¿Amigo invisible en el laburo y cero ideas? Te lo imprimo yo 🎁
+Escribime al 092 104 419 con una foto o el link de MakerWorld y te paso precio y fecha, sin compromiso. Cada pedido lleva mínimo 48 horas: no lo dejes para el 23.
+Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+#Montevideo #RegalosDeNavidad #AmigoInvisible #Impresion3D #HechoEnUruguay #RegalosOriginales #CreacionesDelMago
+```
+
+**Alternativa: diario del Mago**
+
+```
+Diario del Mago, diciembre: entró Papá Noel en ojotas, derretido. 🧙
+
+Le di un mate. Sacudió la bolsa: vacía. «¡Me quedé sin regalos!»
+Tuve una idea: ¡a imprimir! La impresora escupió clickers, una alcancía y un TNT que explotó en confeti 🎉
+Se fue diciendo «¡Jo, jo, jo!». Yo me quedé con el mate.
+
+¿Te falta un regalo? Escribime al 092 104 419 y te paso precio y fecha, sin compromiso. Mínimo 48 horas.
+Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+#Navidad #RegalosUruguay #Impresion3D #Montevideo #ElMago #CreacionesDelMago
+```
+
+**Alternativa: diálogo**
+
+```
+Papá Noel: —¡Me quedé sin regalos! 😱
+El Mago: —Tomá un mate. Tengo una idea.
+Papá Noel: —¿Cuál?
+El Mago: —¡A imprimir! 🖨️
+
+Moraleja: si te quedaste corto de regalos, no te estreses. Y si el calor de diciembre te tiene sin ganas de nada, primero un matecito. 🧉
+
+Escribime al 092 104 419: te paso precio y fecha, sin compromiso. Cada pedido lleva mínimo 48 horas.
+Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+#RegalosDeNavidad #Impresion3D #Montevideo #AmigoInvisible #HechoEnUruguay #CreacionesDelMago
+```
+
+Versión anterior (pixel art): "Papá Noel llegó al taller derretido y con la bolsa vacía. Por suerte la impresora no se toma vacaciones…"
 
 ## Estado
 

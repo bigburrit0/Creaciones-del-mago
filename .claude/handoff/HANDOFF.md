@@ -1,6 +1,11 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-06
 
 ## Próximo paso exacto
+**SIN GLITCHES NI FANTASMAS (2026-11-07):** el usuario vio "glitching" en los personajes y el mate atravesando los cuerpos al tomar; pidió que no pase NUNCA, con el equipo de investigación. Detalle en `videos/RESEARCH_3D_CONTACT.md`.
+- Glitch: AnimationMixer no reescribe huesos sin cambio → dibujar el mismo t dos veces (HyperFrames lo hace) apilaba IK y rotaciones. Arreglado en `toon3d.js` (snapshot del pose puro de los clips, cada t se dibuja una vez), más pesos con ease, sin bind pose si no hay clip, IK sin NaN.
+- Contacto: colisionadores por personaje (`addCollider`, incluido el ala del sombrero como disco), IK con objetivos y palma fuera de los cuerpos, pose de tomar mate (bombilla al bigote, mate delante de la barba), punto de pasaje del mate entre los dos, guardia de contacto en cada cuadro, lanzamiento por IK (el clip de hechizo atravesaba la barba).
+- PUERTA DE CALIDAD obligatoria antes de renderizar: `node videos/biblioteca/3d/web/qa3d.cjs PUERTO informe.json` con `hf3d` servido por http (sale 1 si hay contacto, salto de pose o no determinismo). Resultado: 1020/1020 cuadros sin violaciones.
+
 **REEL 3D TOON (2026-11-07):** el usuario pidió aprender y aplicar peso, volumen y formas que se apoyan en otras (ej.: la barba tiene que caer sobre el cuerpo, no meterse adentro) con agentes Haiku, armar una lista de categorías, aplicarlas y hacer el reel.
 - Categorías y reglas: `videos/RESEARCH_3D_FORMS.md` (contacto/drapeado, peso, volumen/deformación, formas secundarias, superficie y luz horneada, set y cámara) + qué se aplicó.
 - Biblioteca de personajes: `videos/biblioteca/3d/toonchar.py`; El Mago v2 `mago3d.py`; Papá Noel `santa3d.py` → `glb/mago.glb`, `glb/santa.glb` (46 clips cada uno). Ayudas web compartidas: `videos/biblioteca/3d/web/toon3d.js`.

@@ -93,7 +93,7 @@ def lockf(u):                   # 1 at the centre of a lock, 0 between locks
 def bplace(u, v):
     ztop = 0.748 + 0.05 * u * u
     zbot = 0.352 + 0.15 * u * u - 0.03 * lockf(u) - 0.035 * math.exp(-((u - DOM) / 0.18) ** 2)
-    return u * (1.55 - 0.42 * v), ztop + (zbot - ztop) * (v ** 0.92)
+    return u * (1.28 - 0.3 * v), ztop + (zbot - ztop) * (v ** 0.92)      # stays on the front: the arms hang free at the sides
 def bthick(u, v):
     side = max(0.0, 1 - abs(u) ** 3) ** 0.6
     body = 0.5 + 0.5 * math.sin(math.pi * min(1.0, 0.12 + v * 1.25))     # fuller under the chin, thinner at the tip

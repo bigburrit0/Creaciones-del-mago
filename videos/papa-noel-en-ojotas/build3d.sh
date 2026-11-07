@@ -14,3 +14,4 @@ cp ../biblioteca/3d/web/toon3d.js hf3d/lib/
 cp ../biblioteca/3d/glb/mago.glb ../biblioteca/3d/glb/santa.glb ../biblioteca/3d/glb/printer.glb hf3d/assets/
 python3 ../../skills/pixel-reel/scripts/chiptune.py cues3d.json hf3d/assets/audio
 echo ok
+# QA gate (run before rendering): cd hf3d && python3 -m http.server 8768 &  then  node ../../biblioteca/3d/web/qa3d.cjs 8768 qa.json

@@ -70,18 +70,43 @@ export class Character {
       if (!NO_LINE.test(name) && !NO_LINE.test(m.name)) outline(m, wOut);
     }
     this.rest = {}; for (const k in this.bones) this.rest[k] = { q: this.bones[k].quaternion.clone(), p: this.bones[k].position.clone(), s: this.bones[k].scale.clone() };
+    this.all = Object.values(this.bones); this.snap = null; this.cols = [];
+    this.meshes = sk;
+  }
+  /* colliders (research: bone-attached spheres and capsules, sized from the mesh). a, b: bind-pose model coordinates
+     (W must still be at the origin, unrotated, unscaled, skeleton in its bind pose: call right after construction). */
+  // disc: { normal: [x, y, z], R: radius } turns the collider into a thin disc of half-thickness r (a hat brim)
+  addCollider(name, bone, a, b, r, disc, arm) {
+    const bn = this.b(bone); this.W.updateMatrixWorld(true);
+    const la = bn.worldToLocal(new THREE.Vector3(...a)), lb = b ? bn.worldToLocal(new THREE.Vector3(...b)) : null;
+    let ln = null; if (disc) { const q = new THREE.Quaternion(); bn.getWorldQuaternion(q); ln = new THREE.Vector3(...disc.normal).applyQuaternion(q.invert()); }
+    this.cols.push({ name, bone: bn, la, lb, r, owner: this, ln, R: disc ? disc.R : 0, arm: arm || null });
+  }
+  colliders(noArms = false) {
+    return this.cols.filter((c) => !(noArms && c.arm)).map((c) => { const o = { name: c.name, owner: this, r: c.r, arm: c.arm, a: c.bone.localToWorld(c.la.clone()), b: c.lb ? c.bone.localToWorld(c.lb.clone()) : null };
+      if (c.ln) { const q = new THREE.Quaternion(); c.bone.getWorldQuaternion(q); o.n = c.ln.clone().applyQuaternion(q).normalize(); o.R = c.R; } return o; });
   }
   b(n) { return this.bones[n.replace(/\./g, "")]; }
   clip(n) { const c = THREE.AnimationClip.findByName(this.anims, n); if (!c) throw new Error("no clip " + n); return c; }
   add(name, a, b, o = {}) { const e = Object.assign({ c: name, a, b, fade: 0.22, loop: true, speed: 1, off: 0 }, o); e.act = this.mixer.clipAction(this.clip(name).clone()); e.act.play(); e.act.setEffectiveWeight(0); this.sched.push(e); return e; }
   apply(t) {
+    // AnimationMixer only writes a bone when its sampled value changed since the last update. Our procedural layers
+    // (IK, world rotations) edit bones after the mixer, so rendering the same t twice would stack them (one-frame
+    // glitches). Restore the last pure clip pose first: every frame is then rebuilt from the clips alone.
+    if (this.snap) for (let i = 0; i < this.all.length; i++) { const b = this.all[i], s = this.snap[i]; b.quaternion.copy(s[0]); b.position.copy(s[1]); b.scale.copy(s[2]); }
     for (const k of ["hat1", "hat2", "hat3", "beard1", "beard2", "belly", "eyes", "brows", "glasses"]) {
       const b = this.bones[k]; if (b) { b.quaternion.copy(this.rest[k].q); b.position.copy(this.rest[k].p); b.scale.copy(this.rest[k].s); } }
-    const ws = this.sched.map((e) => (t < e.a || t > e.b ? 0 : Math.min(1, (t - e.a) / e.fade, (e.b - t) / e.fade)));
-    const sum = ws.reduce((x, y) => x + y, 0) || 1;
+    const ws = this.sched.map((e) => (t < e.a || t > e.b ? 0 : ss(Math.min(1, (t - e.a) / e.fade, (e.b - t) / e.fade))));   // eased crossfades
+    let sum = ws.reduce((x, y) => x + y, 0);
+    if (sum < 1e-6) {          // no clip active at this instant (back-to-back clips): hold the nearest one, never the bind pose
+      let best = 0, bd = Infinity; this.sched.forEach((e, i) => { const d = t < e.a ? e.a - t : t > e.b ? t - e.b : 0; if (d < bd) { bd = d; best = i; } });
+      ws[best] = 1; sum = 1; }
     this.sched.forEach((e, i) => { const d = e.act.getClip().duration, lt = (t - e.a) * e.speed + e.off;
       e.act.time = e.loop ? ((lt % d) + d) % d : clamp(lt, 0, d - 1e-3); e.act.setEffectiveWeight(ws[i] / sum); });
-    this.mixer.update(0); this.W.updateMatrixWorld(true);
+    this.mixer.update(0);
+    if (!this.snap) this.snap = this.all.map((b) => [b.quaternion.clone(), b.position.clone(), b.scale.clone()]);
+    else for (let i = 0; i < this.all.length; i++) { const b = this.all[i], s = this.snap[i]; s[0].copy(b.quaternion); s[1].copy(b.position); s[2].copy(b.scale); }
+    this.W.updateMatrixWorld(true);
   }
   // walking speed of a clip: how fast a planted foot slides back (no foot sliding when the path matches it)
   stanceSpeed(name) {
@@ -104,10 +129,15 @@ export function rotWorld(bone, axis, angle) {
   bone.quaternion.copy(_q2.invert().multiply(nw)); bone.updateMatrixWorld(true);
 }
 // aim a bone so that its child point moves from `from` toward `to` (world), weight w
+const finite = (q) => Number.isFinite(q.x) && Number.isFinite(q.y) && Number.isFinite(q.z) && Number.isFinite(q.w);
 function aim(bone, from, to, w) {
   const o = new THREE.Vector3(); bone.getWorldPosition(o);
-  const a = from.clone().sub(o).normalize(), b = to.clone().sub(o).normalize();
+  const a = from.clone().sub(o), b = to.clone().sub(o);
+  if (a.lengthSq() < 1e-10 || b.lengthSq() < 1e-10) return;          // degenerate: keep the pose
+  a.normalize(); b.normalize();
+  if (a.dot(b) < -0.9999) return;                                       // opposite vectors: setFromUnitVectors is unstable
   const dq = new THREE.Quaternion().setFromUnitVectors(a, b); const id = new THREE.Quaternion(); id.slerp(dq, w);
+  if (!finite(id)) return;
   bone.parent.getWorldQuaternion(_q2); const bw = new THREE.Quaternion(); bone.getWorldQuaternion(bw);
   bone.quaternion.copy(_q2.invert().multiply(id.multiply(bw))); bone.updateMatrixWorld(true);
 }
@@ -119,7 +149,9 @@ export function ikArm(upper, fore, hand, target, pole, w) {
   const a = s.distanceTo(e), b = e.distanceTo(h); let d = clamp(s.distanceTo(target), 0.05, (a + b) * 0.999);
   const dir = target.clone().sub(s).normalize(); const tgt = s.clone().add(dir.clone().multiplyScalar(d));
   const cosA = clamp((a * a + d * d - b * b) / (2 * a * d), -1, 1), ang = Math.acos(cosA);
-  const pv = pole.clone().sub(s); pv.sub(dir.clone().multiplyScalar(pv.dot(dir))).normalize();
+  const pv = pole.clone().sub(s); pv.sub(dir.clone().multiplyScalar(pv.dot(dir)));
+  if (pv.lengthSq() < 1e-8) { pv.set(0, -1, 0).sub(dir.clone().multiplyScalar(-dir.y)); if (pv.lengthSq() < 1e-8) pv.set(1, 0, 0); }
+  pv.normalize();
   const elbow = s.clone().add(dir.clone().multiplyScalar(Math.cos(ang) * a)).add(pv.multiplyScalar(Math.sin(ang) * a));
   aim(upper, e, elbow, w); fore.getWorldPosition(e); hand.getWorldPosition(h); aim(fore, h, tgt, w);
 }
@@ -151,4 +183,29 @@ export function cameraAt(cam, shots, t) {
   let s = shots[0]; for (const sh of shots) if (t >= sh.t) s = sh;
   const f = seg(t, s.t, s.t + s.d), p = s.from.map((v, i) => lerp(v, s.to[i], f)), l = s.lookFrom.map((v, i) => lerp(v, s.lookTo[i], f));
   cam.fov = s.fov; cam.updateProjectionMatrix(); cam.position.set(...p); cam.lookAt(...l);
+}
+
+/* ---------- contact: distances to colliders, pushing points out (research: target = surface + normal x clearance) ---------- */
+const _c = new THREE.Vector3();
+export function closestOnSeg(p, a, b) { if (!b) return a.clone(); const ab = b.clone().sub(a), t = clamp(p.clone().sub(a).dot(ab) / Math.max(ab.lengthSq(), 1e-9), 0, 1); return a.clone().add(ab.multiplyScalar(t)); }
+export function colDist(p, c) {
+  let q;
+  if (c.n) { const v = p.clone().sub(c.a), h = v.dot(c.n), rad = v.sub(c.n.clone().multiplyScalar(h)), rl = rad.length(); q = c.a.clone().add(rl > c.R ? rad.multiplyScalar(c.R / rl) : rad); }
+  else q = closestOnSeg(p, c.a, c.b);
+  const d = p.distanceTo(q); return { d: d - c.r, n: d > 1e-6 ? p.clone().sub(q).divideScalar(d) : new THREE.Vector3(0, 1, 0) }; }
+// move p until it is at least `clear` outside every collider (a few passes; colliders overlap)
+export function pushOut(p, clear, cols, iters = 5) {
+  const q = p.clone();
+  for (let it = 0; it < iters; it++) { let moved = false;
+    for (const c of cols) { const { d, n } = colDist(q, c); if (d < clear) { q.add(n.multiplyScalar(clear - d + 1e-4)); moved = true; } }
+    if (!moved) break; }
+  return q;
+}
+// exact check against the skinned meshes: smallest distance from a sphere centre to the posed vertices of `meshes`
+const _v3 = new THREE.Vector3();
+export function minDistToMeshes(center, meshes, stride = 1) {
+  let best = Infinity, who = null;
+  for (const m of meshes) { const n = m.geometry.attributes.position.count;
+    for (let i = 0; i < n; i += stride) { m.getVertexPosition(i, _v3); _v3.applyMatrix4(m.matrixWorld); const d = _v3.distanceToSquared(center); if (d < best) { best = d; who = m.name; } } }
+  return { d: Math.sqrt(best), mesh: who };
 }

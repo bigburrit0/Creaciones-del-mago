@@ -108,7 +108,7 @@ def lockf(u):
 def bplace(u, v):
     ztop = 0.815 + 0.06 * u * u
     zbot = 0.53 + 0.12 * u * u - 0.025 * lockf(u) - 0.03 * math.exp(-((u - DOM) / 0.2) ** 2)
-    return u * (1.5 - 0.4 * v), ztop + (zbot - ztop) * (v ** 0.95)
+    return u * (1.25 - 0.3 * v), ztop + (zbot - ztop) * (v ** 0.95)      # stays on the front: the arms hang free at the sides
 def bthick(u, v):
     return 0.075 * max(0.0, 1 - abs(u) ** 3) ** 0.6 * (0.5 + 0.5 * math.sin(math.pi * min(1.0, 0.1 + v * 1.3))) * (0.8 + 0.2 * lockf(u))
 T.drape("beard", [torso, head], "beard", 23, 16, bplace, bthick, lambda u, v: 0.025 * max(0.0, v - 0.55) ** 2 * 4 * (1 - abs(u)))

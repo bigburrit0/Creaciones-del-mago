@@ -32,3 +32,14 @@ Reel 1 of the chess series (`../PLAN_AJEDREZ.md`), a reach reel. Research: `../R
 The final caption is in `../PLAN_AJEDREZ.md` → "Copy for the five reels", number 1.
 - **Same-day story:** a poll, "¿Vikingo o caballero?".
 - **Reply to every VIKINGO or CABALLERO comment:** a private reply with the photos and "¿es para vos o para regalar?".
+
+## Result (2026-11-07)
+
+Render: `vikingo-o-caballero.mp4` (26.8 s, 1080×1920, 60 fps). All checks below were run on it.
+
+- **QA gate:** 0 bad frames out of 1608, 0 pose jumps, deterministic.
+- **Flicker scan:** 0 frames. The first render had one: a one-frame head snap on Papá Noel's laugh. The talk envelope is now smoothed and the reel was re-rendered.
+- **Loudness:** -13.6 LUFS, peak -1.5 dBFS.
+- **No steady buzz:** the 15-49 Hz envelope peak is 15 dB over the background; the cicada buzz measured 34 dB.
+- **Voices:** every line clear in the final mix (transcription).
+- **Contact sheet** of the final frames reviewed.

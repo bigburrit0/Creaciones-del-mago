@@ -1,6 +1,30 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**SERIE DE AJEDREZ (2026-11-07, noche):** el usuario dijo que los ajedreces medieval y vikingo son de lo que más se vende y pidió:
+- tres equipos de 3 Haiku cada uno (marketing, humor y guion, edición y ritmo);
+- guardar la investigación;
+- 5 guiones;
+- el copy con los mismos redactores de antes;
+- renderizar el primero.
+
+Hecho:
+- **Investigación:** `videos/RESEARCH_AJEDREZ_2026.md` (incluye la auditoría y corrección de la investigación de noviembre).
+- **Guiones y copy:** `videos/PLAN_AJEDREZ.md` (los 5 guiones y los 5 captions curados de los 3 redactores; un error de envío gratis corregido).
+- **Kit de ajedrez:** `videos/biblioteca/3d/web/ajedrez3d.js` (tablero, set vikingo y set medieval modelados desde las fotos del sitio).
+- **Reel 1:** `videos/vikingo-o-caballero/` → `vikingo-o-caballero.mp4` (26,8 s). Puerta de calidad 0/1608, 0 saltos; -13,6 LUFS; todas las voces claras.
+  - El primer render tuvo 1 cuadro de parpadeo: un cabeceo de un cuadro por la risa en "¡Cebame uno!".
+  - Se suavizó la envolvente de voz en `build.sh` y se volvió a renderizar.
+- **Sintetizador:** sonidos nuevos clack, thud, lur y bell.
+- **Lecciones:** en `skills/reel-3d-toon/references/lecciones.md`.
+
+Pendiente del usuario:
+- la fecha de corte para Navidad (reel 5);
+- la licencia comercial de los diseños vikingo y medieval;
+- si la serie de ajedrez va antes que N2 y N3 de noviembre.
+
+Siguiente: reel 2 "Una más" cuando lo pida.
+
 **POSTEO DE NOVIEMBRE PARA VENDER (2026-11-07, tarde):** el usuario pidió un equipo de 5 investigadores Haiku muy enfocados en marketing (ventas, embudo, estructura de reel), analizar, escribir 3 guiones de noviembre y hacer el primero.
 - Investigación y análisis: `videos/RESEARCH_NOVIEMBRE_2026.md` (señales de Instagram: tiempo de visualización, likes y envíos por alcance; gancho en 1,5 s; un solo CTA tipo comentario; producto real al final; calendario uruguayo; qué es sólido y qué no).
 - Guiones: `videos/PLAN_NOVIEMBRE.md`: N1 "Un regalo para cada amigo" (alcance, vie 13/11), N2 "Mandame una foto" (consideración, mar 17/11), N3 "¿Llego para Navidad?" (conversión, lun 23/11). Hay decisiones pendientes del usuario: fecha de corte, oferta, foto de una pieza real hecha desde una foto, respuesta a "Comentá FOTO".

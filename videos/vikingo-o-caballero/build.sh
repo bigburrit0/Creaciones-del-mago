@@ -31,6 +31,7 @@ for f in sorted(glob.glob("hf3d/assets/voz/*.wav")):
     hop = 800; n = len(x) // hop; r = np.sqrt((x[:n * hop].reshape(n, hop) ** 2).mean(1)); r = r / max(1e-6, np.percentile(r, 95))
     y = np.zeros(n); v = 0.0
     for i, a in enumerate(np.clip(r, 0, 1)): v = a if a > v else v * 0.8; y[i] = v
+    y = np.convolve(np.pad(y, 2, mode='edge'), [0.1, 0.2, 0.4, 0.2, 0.1], 'valid')   # no one-frame head snaps on laughs and plosives (flicker scan, 'Vikingo o caballero' 16.7 s)
     env[os.path.basename(f)[:-4]] = [round(float(a), 3) for a in y]
 json.dump(env, open("hf3d/assets/voz/env.json", "w"))
 PY

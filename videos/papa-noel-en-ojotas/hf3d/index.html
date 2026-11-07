@@ -198,16 +198,17 @@
         c.addCollider("upper" + sd, "DEF-upper_arm." + sd, P3("DEF-upper_arm." + sd), P3("DEF-forearm." + sd), r, null, sd);
         c.addCollider("fore" + sd, "DEF-forearm." + sd, P3("DEF-forearm." + sd), P3("DEF-hand." + sd), r * 0.9, null, sd); }
       const ALLCOLS = () => [...mago.colliders(), ...santa.colliders()];
-      function beardTrack(c) {           // beard vertices lying on the body (< 3 cm) paired with their nearest body vertex and its normal
+      function beardTrack(c) {           // beard vertices lying on the body (< 3 cm) paired with their nearest body vertex, its normal and the beard thickness above
         const beard = c.meshes.find((m) => m.name === "beard"), bodies = c.meshes.filter((m) => /^(robe|shirt|head|belt|jacket)$/.test(m.name)), out = [];
         c.W.updateMatrixWorld(true); const v = new THREE.Vector3(), nm = new THREE.Matrix3();
         const bp = bodies.map((m) => { const a = m.geometry.attributes.position, P = []; for (let j = 0; j < a.count; j++) P.push(v.fromBufferAttribute(a, j).clone().applyMatrix4(m.matrixWorld)); return P; });
-        const ba = beard.geometry.attributes.position;
+        const ba = beard.geometry.attributes.position, BP = []; for (let i = 0; i < ba.count; i++) BP.push(v.fromBufferAttribute(ba, i).clone().applyMatrix4(beard.matrixWorld));
         for (let i = 0; i < ba.count; i++) { const p = v.fromBufferAttribute(ba, i).clone().applyMatrix4(beard.matrixWorld); let best = 1e9, bm = -1, bj = -1;
           bp.forEach((P, k) => P.forEach((q, j) => { const d = q.distanceToSquared(p); if (d < best) { best = d; bm = k; bj = j; } }));
           if (Math.sqrt(best) > 0.03) continue; const m = bodies[bm]; nm.getNormalMatrix(m.matrixWorld);
           const nl = new THREE.Vector3().fromBufferAttribute(m.geometry.attributes.normal, bj), nw = nl.clone().applyMatrix3(nm).normalize();
-          out.push({ i, m, j: bj, nl, d0: p.clone().sub(bp[bm][bj]).dot(nw) }); }
+          let th = 0; for (const q of BP) { const w = q.clone().sub(p), a = w.dot(nw); if (a > th && w.lengthSq() - a * a < 0.015 * 0.015) th = a; }
+          out.push({ i, m, j: bj, nl, d0: p.clone().sub(bp[bm][bj]).dot(nw), th }); }
         return { beard, pairs: out };
       }
       const BTRACK = [beardTrack(mago), beardTrack(santa)];
@@ -445,7 +446,7 @@
         rotWorld(mago.b("DEF-head"), MF.left, 0.08 * dM);
         DP.M = drinkPose(mago, 0.1, 0.19);
         const catchW = pulse(t, T.mPick - 0.45, T.mPick - 0.1, T.mSip2 + 0.05, T.mSip2 + 0.3);
-        const catchP = wp(mago.b("DEF-spine.003")).add(MF.fwd.clone().multiplyScalar(0.3)).add(MF.right.clone().multiplyScalar(0.13)).add(V3(0, -0.12, 0));
+        const catchP = wp(mago.b("DEF-spine.003")).add(MF.fwd.clone().multiplyScalar(0.4)).add(MF.right.clone().multiplyScalar(0.2)).add(V3(0, -0.14, 0));
         arm(mago, "R", catchP.lerp(DP.M.grip, dM), Math.max(dM, catchW));
         arm(mago, "L", headPt(mago, -0.06, 0.22, -0.04), pulse(t, T.think, T.think + 0.25, T.idea - 0.2, T.idea + 0.05), null, 0.04);   // hand rests on the beard
         rotWorld(mago.b("DEF-head"), MF.fwd, 0.15 * pulse(t, T.think, T.think + 0.25, T.idea - 0.05, T.idea + 0.1));
@@ -477,7 +478,8 @@
         if (owner === "bench") { MATE.pos.set(-0.98, 0.58, -0.66); MATE.q.identity(); }
         else if (t < T.mPick + 0.15 && t > T.mPick - 0.5) {            // magic: the mate floats from the bench into his hand
           const f = ss(clamp((t - (T.mPick - 0.5)) / 0.65, 0, 1)), F = frame(mago), hc = handC(mago, "R"), dst = hc.clone().sub(V3(0, 0.07, 0)).sub(F.right.clone().multiplyScalar(0.045));
-          MATE.pos.copy(V3(-0.98, 0.58, -0.66).lerp(dst, f)); MATE.pos.y += 0.22 * 4 * f * (1 - f); MATE.q.setFromAxisAngle(V3(0, 1, 0), f * Math.PI * 2 + mago.W.rotation.y * f); }
+          MATE.pos.copy(V3(-0.98, 0.58, -0.66).lerp(dst, f)); MATE.pos.y += 0.22 * 4 * f * (1 - f); MATE.q.setFromAxisAngle(V3(0, 1, 0), f * Math.PI * 2 + mago.W.rotation.y * f);
+          const c0 = MATE.pos.clone().add(V3(0, 0.0625, 0)), c1 = pushOut(c0, 0.07, ALLCOLS()); MATE.pos.add(c1.sub(c0)); }
         else { const c2 = owner === "M" ? mago : santa, F = frame(c2), hc = handC(c2, "R");
           let base = hc.clone().sub(V3(0, 0.07, 0)).sub(F.right.clone().multiplyScalar(0.045)); const q = new THREE.Quaternion().setFromAxisAngle(V3(0, 1, 0), c2.W.rotation.y);
           const h1 = pulse(t, T.give - 0.22, T.give - 0.08, T.give + 0.08, T.give + 0.22), h2 = pulse(t, T.back - 0.22, T.back - 0.08, T.back + 0.08, T.back + 0.22);
@@ -619,7 +621,7 @@
         const bad = (q) => !(Number.isFinite(q.x) && Number.isFinite(q.y) && Number.isFinite(q.z) && Number.isFinite(q.w));
         for (const c of [mago, santa]) for (const b of c.all) if (bad(b.quaternion)) { out.push(["nan", b.name]); break; }
         const meshesOf = (c, excl) => c.meshes.filter((m) => !excl || !excl.test(m.name));
-        const owner = t < T.mW0 ? null : t < T.give ? mago : t < T.back ? santa : t < T.press ? mago : t < T.mPick ? null : mago;
+        const owner = t < T.mW0 ? null : t < T.give ? mago : t < T.back ? santa : t < T.press ? mago : t < T.mPick - 0.5 ? null : mago;      // the floating mate is checked too
         if (owner) { const cen = V3(0, 0.05 * 1.25, 0).applyQuaternion(mate.quaternion).add(mate.position);
           for (const c of [mago, santa]) { const hold = c === owner || Math.abs(t - T.give) < 0.3 || Math.abs(t - T.back) < 0.3;
             const r = minDistToMeshes(cen, meshesOf(c, hold ? ARM : null)); if (r.d < 0.05) out.push(["mate", c === mago ? "mago" : "santa", r.mesh, +r.d.toFixed(3)]); } }
@@ -639,14 +641,15 @@
           if (Math.abs(p.z + 1.1) < r && !(p.x - r > DOOR.x0 + 0.035 && p.x + r < DOOR.x1 - 0.035 && p.y + r < DOOR.h)) out.push(["wall", who, nm2, +p.x.toFixed(2), +p.z.toFixed(2)]);
           const d = p.clone().sub(dc), loc = axes.map((ax, i) => clamp(d.dot(ax), -half[i], half[i])), q = dc.clone(); loc.forEach((v, i) => q.add(axes[i].clone().multiplyScalar(v)));
           if (q.distanceTo(p) < r - 0.005) out.push(["door", who, nm2, +(r - q.distanceTo(p)).toFixed(3)]); }
-        // beards: every point that rests on the body stays on it (sinking > 1.2 cm into the robe, shirt or head fails)
+        // beards: every point that rests on the body stays on it. Fails when the body comes within 8 mm of the beard's OUTER
+        // surface (it would show through), and never more than 1.2 cm where the beard is thin (edges)
         for (const [k, B] of [[0, BTRACK[0]], [1, BTRACK[1]]]) { const c = k ? santa : mago; if (!c.W.visible) continue; let worst = 0, wm = null;
           const P = new THREE.Vector3(), Bq = new THREE.Vector3(), O = new THREE.Vector3();
           for (const pr of B.pairs) { B.beard.getVertexPosition(pr.i, P); P.applyMatrix4(B.beard.matrixWorld);
             pr.m.getVertexPosition(pr.j, Bq); Bq.applyMatrix4(pr.m.matrixWorld);
             O.fromBufferAttribute(pr.m.geometry.attributes.position, pr.j).addScaledVector(pr.nl, 0.02); pr.m.applyBoneTransform(pr.j, O); O.applyMatrix4(pr.m.matrixWorld);
-            const n = O.sub(Bq).normalize(), d = P.sub(Bq).dot(n), sink = pr.d0 - d; if (d < -0.004 && sink > worst) { worst = sink; wm = pr.m.name; } }
-          if (worst > 0.012) out.push(["beard-in-body", k ? "santa" : "mago", wm, +worst.toFixed(3)]); }
+            const n = O.sub(Bq).normalize(), d = P.sub(Bq).dot(n), sink = pr.d0 - d, over = sink - Math.max(0.012, pr.th - 0.008); if (d < -0.004 && over > worst) { worst = over; wm = pr.m.name; } }
+          if (worst > 0) out.push(["beard-in-body", k ? "santa" : "mago", wm, +worst.toFixed(3)]); }
         for (const a of mago.colliders()) for (const b of santa.colliders()) { const q1 = a.b ? a.a.clone().lerp(a.b, 0.5) : a.a; if (colDist(q1, b).d < a.r - 0.02) out.push(["bodies", a.name, b.name]); }
         const J = {}; for (const [k, c] of [["m", mago], ["s", santa]]) for (const b of ["DEF-head", "DEF-hips", "DEF-hand.L", "DEF-hand.R", "DEF-forearm.L", "DEF-forearm.R"]) J[k + b] = wp(c.b(b)).toArray().map((v) => +v.toFixed(4));
         return { t, out, J };

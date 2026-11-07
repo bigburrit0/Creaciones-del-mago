@@ -1,6 +1,13 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**POSTEO DE NOVIEMBRE PARA VENDER (2026-11-07, tarde):** el usuario pidió un equipo de 5 investigadores Haiku muy enfocados en marketing (ventas, embudo, estructura de reel), analizar, escribir 3 guiones de noviembre y hacer el primero.
+- Investigación y análisis: `videos/RESEARCH_NOVIEMBRE_2026.md` (señales de Instagram: tiempo de visualización, likes y envíos por alcance; gancho en 1,5 s; un solo CTA tipo comentario; producto real al final; calendario uruguayo; qué es sólido y qué no).
+- Guiones: `videos/PLAN_NOVIEMBRE.md`: N1 "Un regalo para cada amigo" (alcance, vie 13/11), N2 "Mandame una foto" (consideración, mar 17/11), N3 "¿Llego para Navidad?" (conversión, lun 23/11). Hay decisiones pendientes del usuario: fecha de corte, oferta, foto de una pieza real hecha desde una foto, respuesta a "Comentá FOTO".
+- Hecho N1: `videos/un-regalo-para-cada-amigo/` → `un-regalo-para-cada-amigo.mp4` (25,3 s). Cinco productos reales del catálogo modelados desde las fotos del sitio, prueba real con esas fotos ("Así son de verdad") y CTA "Etiquetalo". Puerta de calidad 0/1518, 0 saltos, determinista; 0 parpadeos; -14,0 LUFS; 8/8 voces. Caption, texto alternativo e historia del mismo día en `GUION.md`.
+- Lecciones nuevas en `skills/reel-3d-toon/references/lecciones.md` (estructura de venta, fila recta de productos, ala del sombrero, etiquetas en la zona de subtítulos, cortar tomas a mano).
+- Siguiente: comentarios del usuario; N2 cuando lo pida.
+
 **KIT COMPARTIDO + "INVISIBLE NO ERA" (tarea programada, 2026-11-07 1:20 Montevideo):** el usuario pidió el kit y el reel 1, con todos los chequeos, nada "lazy" y categorías de todo lo que sale en pantalla.
 - Kit: `videos/biblioteca/3d/web/escena3d.js` (escenario con luz de día/noche/amanecer, elenco con colisionadores y barbas, impresora, props, IK con guardia de contacto, resortes, voces, subtítulos píldora o cinéticos, placa, cámara con planos encuadrados/barridos/zooms/POV, QA común). El reel de Navidad se pasó al kit: cuadros idénticos píxel a píxel y puerta de calidad 0/1260.
 - Reel: `videos/invisible-no-era/` (27,4 s): `BRIEF.md`, `ON_SCREEN.md` (categorías y evidencia), `GUION.md` (beats y caption: principal + 2 alternativas de los 3 redactores Haiku), `voces.json` → `voz/`, `cues.json`, `build.sh`, `hf3d/`. Render: `invisible-no-era.mp4`. Puerta de calidad 0/1644, 0 saltos, determinista; 0 parpadeos; -13,9 LUFS; las 7 líneas se entienden. Publicar el martes 1/12.

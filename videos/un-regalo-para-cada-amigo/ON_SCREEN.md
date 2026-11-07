@@ -2,6 +2,15 @@
 
 Reach reel N1 from `../PLAN_NOVIEMBRE.md` (publish Fri 13 Nov). Its job is to be **sent and tagged**. Same rule as the last reel: every item on screen is listed here, with its detail, its motion and the check that proves it is done.
 
+## Result (2026-11-07)
+
+✅ Built and checked. Render: `un-regalo-para-cada-amigo.mp4` (25.3 s, 1080×1920, 60 fps).
+- **QA gate:** 0 bad frames out of 1518, 0 pose jumps, deterministic. The first run had 4 frames of Papá Noel's forearm touching the closed door during the stretch; that arm now stretches forward.
+- **Flicker scan of the render:** 0 frames.
+- **Loudness:** -14.0 LUFS, peak -1.8 dBFS.
+- **Voices:** 8 of 8 lines intelligible in the final mix (transcription). On the full mix the transcriber once heard "banana" as "boludo", the commoner phrase. The clip alone and the mixed segment both transcribe as "banana", and the subtitle and the banana in sunglasses show it on screen.
+- **Contact sheet** of the real frames reviewed.
+
 ## 1. Selling structure (voice first; measured lines: m1 2.52, m2 1.56, m3 1.55, m4 1.80, m5 2.48, m6 1.25, m7 1.65, s1 1.50 (yawn), s2 1.10)
 
 | Time | Stage | Content | Line |

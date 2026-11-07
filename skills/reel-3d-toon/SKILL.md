@@ -49,6 +49,14 @@ Setup in a fresh container (lost when it is reclaimed): `videos/PLAN_3D.md` → 
 **0. Idea and script** (`GUION.md`): one set, 2 characters max, 4-5 shots cut on action, 15-25 s. Hook in the first
 2 s. Every action is a clip (walk, idle, sit, dance, interact, wave...) or an IK reach; no clip that sweeps through the
 body. Ideas bank and calendar: `videos/RESEARCH_IDEAS_2026.md`, `videos/PLAN_PROXIMOS_REELS.md`.
+For a reel that must **sell**, use the structure in `videos/RESEARCH_NOVIEMBRE_2026.md`:
+- the hook spoken and on screen within 1.5 s, with the product in frame 1;
+- identity or tension beats;
+- the process;
+- real proof (the site's product photos in `assets/p`);
+- ONE comment-type CTA.
+
+Plan each reel's funnel stage and its same-day story (`videos/PLAN_NOVIEMBRE.md`; example: `videos/un-regalo-para-cada-amigo/`).
 
 **1. Voices first** (`references/voces-y-texto.md`): lines in `voces.json`, `python3 videos/biblioteca/tts_lineas.py
 voces.json voz/` (one request per character), check each line with `check_voces.py clips`, trim with `_edits`, read

@@ -25,7 +25,7 @@ the video.
 
 ---
 
-## N1 "Un regalo para cada amigo" (reach, about 24 s, publish Fri 13 Nov)
+## N1 "Un regalo para cada amigo" (reach, about 24 s, publish Fri 13 Nov) — made 2026-11-07 (25.3 s), see `un-regalo-para-cada-amigo/`
 
 **Idea.** A list of friend types, each matched to a real clicker or keychain from the catalogue. It is made to be sent: everyone has "el que no arranca sin café". Papá Noel plays two of the types, and the punchline is his.
 

@@ -10,7 +10,7 @@ cp "$THREE/examples/jsm/loaders/GLTFLoader.js" hf3d/lib/addons/loaders/
 cp "$THREE/examples/jsm/utils/BufferGeometryUtils.js" hf3d/lib/addons/utils/
 cp "$THREE/examples/jsm/geometries/RoundedBoxGeometry.js" hf3d/lib/addons/geometries/
 cp hf/assets/gsap.min.js hf3d/lib/
-cp ../biblioteca/3d/web/toon3d.js hf3d/lib/
+cp ../biblioteca/3d/web/toon3d.js ../biblioteca/3d/web/escena3d.js hf3d/lib/
 cp ../biblioteca/3d/glb/mago.glb ../biblioteca/3d/glb/santa.glb ../biblioteca/3d/glb/printer.glb hf3d/assets/
 python3 ../../skills/pixel-reel/scripts/chiptune.py cues3d.json hf3d/assets/audio
 # subtitles font (Fredoka, OFL) and the voices (voz3d/, made with ../biblioteca/tts_lineas.py voces3d.json voz3d)

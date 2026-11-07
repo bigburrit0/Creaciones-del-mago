@@ -2,13 +2,38 @@
 # adjective, one line per item, nothing invented. Facts come from the MakerWorld
 # profiles in the project docs, the v3 brief (Drive) or what the photo shows.
 # Each item: (id, name, line[, whatsapp line]). "mine" = his own photos.
+# "feature": the shelf goes first and shows more items (v10: ajedrez).
 
 SHELVES = [
   {
+    "id": "ajedrez", "tab": "Ajedrez", "name": "Ajedrez y dominó", "icon": "caballo",
+    "go": "ajedrez y dominó", "mine": ("medieval", "vikingos", "perros-gatos", "minimal", "mc-ajedrez", "tablero", "pieza"),
+    "feature": True,
+    "intro": "Los siete primeros los imprimí yo: tocá la foto y mirá los colores en que ya los hice. Casi todos son solo las piezas; el tablero va aparte.",
+    "items": [
+      ("medieval", "Ajedrez medieval", "Caballeros a caballo y torres de castillo. Más de 10 horas de impresora."),
+      ("vikingos", "Ajedrez vikingo", "Reyes con espada y reinas con escudo."),
+      ("perros-gatos", "Perros contra gatos", "Los gatos de un lado, los perros del otro. Vos elegís bando."),
+      ("minimal", "Ajedrez minimalista", "Piezas lisas, sin adornos. Sirve para jugar todos los días."),
+      ("mc-ajedrez", "Ajedrez de Minecraft", "Trae tablero y caja para guardar todo."),
+      ("tablero", "Tablero rompecabezas", "Tamaño reglamentario. Se arma por partes y no trae piezas."),
+      ("pieza", "Pieza suelta", "Un caballo dragón, o la que le falte a tu juego. Mandame una foto.", "Pieza suelta de ajedrez (te mando una foto)"),
+      ("medieval-p", "Ajedrez medieval detallado", "Otra versión del medieval, con más detalle en cada pieza."),
+      ("grecia", "Ajedrez de la antigua Grecia", "Minotauro contra Hércules. Este sí trae tablero: 52 × 50 cm."),
+      ("escultorico", "Ajedrez escultórico", "Rey de 8 cm. Tiene lugar para imanes."),
+      ("plegable", "Ajedrez de viaje", "Se pliega en un tubo de 24 cm con las piezas adentro."),
+      ("hp", "Ajedrez de Harry Potter", "Con Harry, Hermione, Ron y el Sombrero Seleccionador."),
+      ("sw-caja", "Ajedrez de Star Wars con caja", "Piezas de unos 5 cm y una caja para llevarlas."),
+      ("sw-piezas", "Ajedrez de Star Wars", "Con X-Wings, AT-ST y tauntauns. Son piezas delicadas."),
+      ("domino", "Dominó", "Las 28 fichas, con su caja."),
+    ],
+  },
+  {
     "id": "clickers", "tab": "Clickers", "name": "Clickers y llaveros", "icon": "clicker",
     "go": "clickers y llaveros", "pre": "Clicker: ", "mine": "all",
-    "intro": "Se aprietan y hacen clic. Para tener en la mano mientras esperás o estudiás. También hago flexis, torres de dados y contadores para Magic: preguntame.",
+    "intro": "Se aprietan y hacen clic. Para tener en la mano mientras esperás o estudiás. También hago flexis y torres de dados: preguntame.",
     "items": [
+      ("contador", "Contador de vidas para Magic", "Dos ruedas del 0 al 9 para llevar la cuenta en la partida.", "Contador de vidas para Magic"),
       ("cafe", "Vasito de café", "Tapa negra y faja marrón, como el de la cafetería."),
       ("banana", "Banana", "Media pelada. Esta no se pone negra."),
       ("suculenta", "Suculenta", "En su macetita. No hay que regarla."),
@@ -43,7 +68,8 @@ SHELVES = [
   {
     "id": "exhibidores", "tab": "Exhibidores", "name": "Exhibidores para autitos", "icon": "panal",
     "go": "exhibidores para autitos", "pre": "Exhibidor: ",
-    "intro": "Para sacar los Hot Wheels y los Matchbox de la caja y tenerlos a la vista. Todos son para escala 1:64, menos el estante 1:32. Fotos de los diseñadores.",
+    "mine": ("ascensor",),
+    "intro": "Para sacar los Hot Wheels y los Matchbox de la caja y tenerlos a la vista. Todos son para escala 1:64, menos el estante 1:32. El ascensor negro lo imprimí yo; el resto son fotos de los diseñadores.",
     "items": [
       ("garaje", "Garaje de pared", "Entran 6 autitos. Se cuelga y se puede apilar."),
       ("panal", "Panal de pared", "Celdas que se enganchan. Si crece la colección, le sumás más."),
@@ -56,27 +82,6 @@ SHELVES = [
       ("podio", "Podio", "Para un solo auto: el preferido."),
       ("torre", "Torre de pared", "Estantes finitos, un auto en cada uno."),
       ("rack-132", "Estante 1:32", "Para autos más grandes, de escala 1:32."),
-    ],
-  },
-  {
-    "id": "ajedrez", "tab": "Ajedrez", "name": "Ajedrez y dominó", "icon": "caballo",
-    "go": "ajedrez y dominó",
-    "intro": "Casi todos son solo las piezas, sin tablero. El tablero también lo imprimo, aparte. Fotos de los diseñadores.",
-    "items": [
-      ("medieval", "Ajedrez medieval", "Caballeros con armadura y torres de castillo. Más de 10 horas de impresora."),
-      ("medieval-p", "Ajedrez medieval detallado", "Otra versión del medieval, con más detalle en cada pieza."),
-      ("vikingos", "Ajedrez vikingo", "Reyes con espada y reinas con escudo."),
-      ("grecia", "Ajedrez de la antigua Grecia", "Minotauro contra Hércules. Este sí trae tablero: 52 × 50 cm."),
-      ("hp", "Ajedrez de Harry Potter", "Con Harry, Hermione, Ron y el Sombrero Seleccionador."),
-      ("sw-caja", "Ajedrez de Star Wars con caja", "Piezas de unos 5 cm y una caja para llevarlas."),
-      ("sw-piezas", "Ajedrez de Star Wars", "Con X-Wings, AT-ST y tauntauns. Son piezas delicadas."),
-      ("mc-ajedrez", "Ajedrez de Minecraft", "Trae tablero y caja para guardar todo."),
-      ("perros-gatos", "Perros contra gatos", "Los gatos de un lado, los perros del otro. Vos elegís bando."),
-      ("plegable", "Ajedrez de viaje", "Se pliega en un tubo de 24 cm con las piezas adentro."),
-      ("minimal", "Ajedrez minimalista", "Piezas lisas, sin adornos."),
-      ("escultorico", "Ajedrez escultórico", "Rey de 8 cm. Tiene lugar para imanes."),
-      ("tablero", "Tablero rompecabezas", "Tamaño reglamentario. Se arma por partes y no trae piezas."),
-      ("domino", "Dominó", "Las 28 fichas, con su caja."),
     ],
   },
   {
@@ -131,7 +136,8 @@ SHELVES = [
   {
     "id": "jardin", "tab": "Jardín", "name": "Pájaros y jardín", "icon": "pajaro",
     "go": "pájaros y jardín",
-    "intro": "Para el balcón, el fondo o la huerta. Si va al sol, conviene PETG: preguntame. Fotos de los diseñadores.",
+    "mine": ("elfico", "casita"),
+    "intro": "Para el balcón, el fondo o la huerta. Si va al sol, conviene PETG: preguntame. Los comederos élfico y casita los imprimí yo; el resto son fotos de los diseñadores.",
     "items": [
       ("hoja", "Comedero hoja", "Tiene forma de hoja y se cuelga de una rama."),
       ("redondo", "Comedero redondo", "Abierto y con techito. Se cuelga o se apoya."),
@@ -148,7 +154,8 @@ SHELVES = [
   {
     "id": "casa", "tab": "Casa", "name": "Casa", "icon": "casa",
     "go": "cosas para la casa",
-    "intro": "Cosas raras y útiles para la casa. Fotos de los diseñadores.",
+    "mine": ("repisa",),
+    "intro": "Cosas raras y útiles para la casa. La repisa roja la imprimí yo; el resto son fotos de los diseñadores.",
     "items": [
       ("repisa", "Repisa derretida", "Un estante de pared que parece que gotea."),
       ("bowl", "Bowl derretido", "Para dejar las llaves cuando llegás."),
@@ -160,6 +167,30 @@ SHELVES = [
   },
 ]
 
+
+# Más fotos de un producto: se ven en su ventana (tocando la foto). La primera es la de la tarjeta.
+# Cada una: (archivo en assets/p sin .webp, qué se ve).
+FOTOS = {
+  "medieval": [("medieval", "Negro contra dorado"), ("medieval-2", "Gris contra dorado, de cerca"),
+               ("medieval-3", "Gris contra blanco"), ("medieval-4", "Plateado contra negro"),
+               ("medieval-5", "Gris contra dorado"), ("medieval-d", "Dorado y gris, en un tablero de madera")],
+  "vikingos": [("vikingos", "Dorado contra gris, en el tablero rompecabezas"), ("vikingos-2", "Blanco contra negro"),
+               ("vikingos-d", "Foto del diseñador")],
+  "perros-gatos": [("perros-gatos", "Los perros, en amarillo"), ("perros-gatos-2", "Los gatos, en gris"),
+                   ("perros-gatos-3", "Los perros de cerca"), ("perros-gatos-4", "Los gatos, con su torre"),
+                   ("perros-gatos-d", "Foto del diseñador")],
+  "minimal": [("minimal", "Negro contra blanco"), ("minimal-2", "Visto de arriba"), ("minimal-3", "Desde el lado blanco"),
+              ("minimal-d", "Foto del diseñador")],
+  "mc-ajedrez": [("mc-ajedrez", "Las piezas y las casillas del tablero"), ("mc-ajedrez-2", "Con su caja"),
+                 ("mc-ajedrez-3", "Todo junto, visto de arriba"), ("mc-ajedrez-d", "Foto del diseñador")],
+  "tablero": [("tablero", "Con el ajedrez vikingo arriba (las piezas van aparte)"), ("tablero-d", "Foto del diseñador")],
+  "contador": [("contador", "De frente"), ("contador-2", "En la mano, para ver el tamaño"), ("contador-3", "De costado"),
+               ("contador-4", "La tapa")],
+  "ascensor": [("ascensor", "Dos torres, en negro"), ("ascensor-d", "Foto del diseñador")],
+  "elfico": [("elfico", "En dorado"), ("elfico-d", "Foto del diseñador")],
+  "casita": [("casita", "Lila, con el techo rosa"), ("casita-d", "Foto del diseñador")],
+  "repisa": [("repisa", "En rojo"), ("repisa-d", "Foto del diseñador")],
+}
 
 # 12x12 pixel icons, one string per row ('#' = ink)
 ICONS = {
@@ -183,6 +214,7 @@ ICONS.update({
   "right":   ["............","............","....#.......","....##......","....###.....","....####....","....###.....","....##......","....#.......","............","............","............"],
   "down":    ["............","............","............","...######...","....####....",".....##.....","............","...######...","....####....",".....##.....","............","............"],
   "libro":   ["............",".####.####..",".#..#.#..#..",".#..#.#..#..",".#..#.#..#..",".#..#.#..#..",".#..#.#..#..",".####.####..","....###.....","............","............","............"],
+  "foto":    ["............","....###.....",".##########.",".#...##...#.",".#..#..#..#.",".#.#....#.#.",".#.#....#.#.",".#..#..#..#.",".#...##...#.",".##########.","............","............"],
   "cursor":  ["............","...#........","...##.......","...###......","...####.....","...#####....","...####.....","...###......","...##.......","...#........","............","............"],
 })
 

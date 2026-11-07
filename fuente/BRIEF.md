@@ -140,3 +140,22 @@ a Creaciones del Mago a quien busca un ajedrez o un ajedrez personalizado.
 - Personalización: solo lo confirmado (colores, tamaño, material, tema, diseño desde foto). Grabado de
   nombres y caras: "preguntame", nunca prometido. Marcas ajenas solo en el cuerpo y en las tarjetas.
 - El giro de venta va siempre al final, después de resolver la pregunta.
+
+## v10 (7/11/2026, catálogo lite y ajedrez primero)
+
+Dueño: actualizar el catálogo con las fotos de los ajedrez vendidos (celular, por WhatsApp), que sea
+más fácil llegar al fondo y pedir o hablar por WhatsApp, y foco en ajedrez, el nicho que mejor anda.
+Base: cuatro investigaciones en paralelo, resumidas en `INVESTIGACION-CATALOGO-LITE.md`.
+
+- Ajedrez es el primer estante (y link "Ajedrez" arriba). Siete juegos con fotos propias de vendidos;
+  la foto del diseñador pasa a la galería. Nuevos: "Pieza suelta" (caballo dragón) y, en clickers,
+  "Contador de vidas para Magic". Casita, élfico, repisa y ascensor también con foto propia.
+- Galería por producto (`FOTOS` en `tools/catalog.py`): la ventana del producto muestra todas las
+  fotos con lo que se ve en cada una (los colores en que ya se hizo).
+- "Armá tu ajedrez": juego, color de cada bando y tablero; el WhatsApp se escribe solo.
+- Celular: los demás estantes se deslizan de costado (la página bajó de ~22 a ~19 pantallas) y la
+  barra de pedido está siempre desde el catálogo, aunque esté vacía.
+- Fotos: retoque automático honesto en `tools/imgs.py`; lo que necesita IA (fondos, detalle en
+  piezas negras) está en `fotos/IMAGENES-ANTIGRAVITY.md`, con reglas para no cambiar el producto.
+- La etiqueta «Foto mía» sigue fuera (decisión del dueño): qué fotos son propias lo dicen el texto
+  de cada estante y los pies de la galería.

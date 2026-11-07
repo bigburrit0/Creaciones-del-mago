@@ -7,6 +7,8 @@
 - La puerta de calidad (`qa3d.cjs`) ahora también revisa paredes, marco, hoja de la puerta y ~450 puntos de cada barba apoyados en el cuerpo. Reglas 13 y 14 en `videos/RESEARCH_3D_CONTACT.md`.
 - Voces (Gemini TTS, clave inyectada por el proxy, nunca impresa): `videos/biblioteca/tts_lineas.py` (una toma por personaje, cortada en las pausas, recortes y -16 LUFS) con `papa-noel-en-ojotas/voces3d.json` → `voz3d/`. Papá Noel: Algenib; el Mago: Charon. Líneas, tiempos y subtítulos: `GUION.md` → "Diálogo".
 - Texto: subtítulos con el color de cada personaje (Fredoka, zona segura) y placa final "Regalos impresos en 3D · ¡Pedí el tuyo! · Escribime por mensaje". El reel dura 21 s, con 5 planos.
+- Resultado: puerta de calidad 0/1260 cuadros con problemas, 0 saltos, determinista; 0 cuadros con parpadeo en el render; mezcla -12,7 LUFS con todas las voces inteligibles. Render: `videos/papa-noel-en-ojotas/papa-noel-en-ojotas-3d.mp4` (21 s, 60 fps; `cd hf3d && npx hyperframes render --fps 60 --workers 4 -o ../papa-noel-en-ojotas-3d.mp4`, unos 15 min).
+- Siguiente: comentarios del usuario; publicar con el caption de `GUION.md`.
 
 **SIN GLITCHES NI FANTASMAS (2026-11-07):** el usuario vio "glitching" en los personajes y el mate atravesando los cuerpos al tomar; pidió que no pase NUNCA, con el equipo de investigación. Detalle en `videos/RESEARCH_3D_CONTACT.md`.
 - Glitch: AnimationMixer no reescribe huesos sin cambio → dibujar el mismo t dos veces (HyperFrames lo hace) apilaba IK y rotaciones. Arreglado en `toon3d.js` (snapshot del pose puro de los clips, cada t se dibuja una vez), más pesos con ease, sin bind pose si no hay clip, IK sin NaN.

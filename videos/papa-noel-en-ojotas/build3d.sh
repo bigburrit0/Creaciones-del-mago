@@ -36,3 +36,4 @@ print("voices:", {k: len(v) for k, v in env.items()})
 PY
 echo ok
 # QA gate (run before rendering): cd hf3d && python3 -m http.server 8768 &  then  node ../../biblioteca/3d/web/qa3d.cjs 8768 qa.json
+# Render: cd hf3d && npx hyperframes render --fps 60 --workers 4 -o ../papa-noel-en-ojotas-3d.mp4

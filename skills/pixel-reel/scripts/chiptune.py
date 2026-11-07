@@ -93,6 +93,13 @@ def fx_flutter(p=1): return cat(*[crush(lp(noise(0.04), 0.35) * dec(0.04, 45), 4
 def fx_flap(p=1): return crush(lp(noise(0.05), 0.35) * dec(0.05, 45), 4) * 0.45
 def fx_peck(p=1): return sq(2600 * p, 0.018) * dec(0.018, 220) * 0.35
 def fx_click(p=1): return noise(0.02) * dec(0.02, 300) * 0.6 + sq(2400 * p, 0.02) * dec(0.02, 250) * 0.4
+def fx_rustle(p=1): return crush(hp(noise(0.16), 0.5) * np.abs(np.sin(np.linspace(0, 3 * np.pi, int(0.16 * SR)))) * dec(0.16, 6)) * 0.35
+def fx_tiptoe(p=1):
+    x = tri(note(-5) * p, 0.07) * dec(0.07, 45); y = sq(note(7) * p, 0.02, 0.125) * dec(0.02, 160) * 0.3; x[:len(y)] += y; return x * 0.45
+def fx_sting(p=1): return mix(*[sq(note(s) * p, 0.35, 0.25) * dec(0.35, 9) * 0.22 for s in (0, 6, 11)])
+def fx_whistle(p=1, d=0.7):
+    tt = t(d); f = note(19) * p * (1 + 0.12 * np.sin(2 * np.pi * 1.6 * tt) + 0.05 * np.sin(2 * np.pi * 7 * tt))
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(tt), 0.04, 0.12) * 0.28
 def fx_ding(p=1): return (sq(note(24) * p, 0.25, 0.25) * dec(0.25, 10) + tri(note(31) * p, 0.25) * dec(0.25, 12) * 0.5) * 0.3
 def fx_printer(p=1, d=0.8):
     tt = t(d); f = 140 * p + 20 * np.sign(np.sin(2 * np.pi * 6 * tt))
@@ -115,6 +122,12 @@ FX = {k[3:]: v for k, v in globals().items() if k.startswith("fx_") and callable
 def amb_cicadas(d, level):
     tt = t(d); base = hp(noise(d), 0.7) * (0.6 + 0.4 * (np.sin(2 * np.pi * 37 * tt) > 0))
     swell = 0.5 + 0.5 * np.sin(2 * np.pi * tt / 4.3) ** 2; return base * swell * level
+def amb_crickets(d, level):
+    y = np.zeros(int(d * SR)); r = np.random.default_rng(7)
+    for k in range(int(d * 2.2)):
+        at = r.uniform(0, max(0.01, d - 0.3)); n = int(0.025 * SR); tt = np.arange(n) / SR; f = r.uniform(4200, 4800)
+        for j in range(3): i = int((at + j * 0.045) * SR); seg = np.sin(2 * np.pi * f * tt) * np.sin(np.pi * tt / 0.025) * r.uniform(0.4, 1.0); y[i:i + n] += seg[:max(0, min(n, len(y) - i))]
+    return y * level
 def amb_waves(d, level):
     w = lp(noise(d), 0.05); w = w - lp(w, 0.002); return w * (0.55 + 0.45 * np.sin(2 * np.pi * t(d) / 3.1) ** 2) * level * 4
 def amb_birds(d, level):
@@ -122,7 +135,7 @@ def amb_birds(d, level):
     while tt < d - 0.4:
         y = fx_chirp(0.9 + (k * 0.37) % 0.4); i = int(tt * SR); x[i:i + len(y)] += y[:len(x) - i] * level * 2; tt += 0.7 + (k * 0.53) % 0.9; k += 1
     return x
-AMB = {"cicadas": amb_cicadas, "waves": amb_waves, "birds": amb_birds}
+AMB = {"cicadas": amb_cicadas, "waves": amb_waves, "birds": amb_birds, "crickets": amb_crickets}
 
 
 def put(buf, x, at, gain=1.0):

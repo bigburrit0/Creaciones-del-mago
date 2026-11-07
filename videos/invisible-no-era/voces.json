@@ -1,0 +1,59 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo in the summer, playing amigo invisible (Secret Santa) at the workshop: a big, jolly old man with a deep, slightly gravelly, warm voice. Out of breath and dramatic when tired, a hearty belly laugh when happy. Natural, quick comedic timing, not slow. Sneaky and caught-out when whispering; delighted and surprised at the end.",
+  "lines": [
+   [
+    "s1",
+    "¡Uy… me tocó!"
+   ],
+   [
+    "s2",
+    "¿Vos también acá?"
+   ],
+   [
+    "s3",
+    "¡Jo, jo! ¿Soy yo?"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago: a kind, older wizard from Montevideo with a warm, calm voice and a playful smile. Friendly and a bit mischievous when he has an idea. Natural pace, not slow. Whispering conspiratorially for the secret, caught-out and innocent when he is found, a dry deadpan for the punchline, warm and inviting at the end.",
+  "lines": [
+   [
+    "m1",
+    "Shhh… es secreto."
+   ],
+   [
+    "m2",
+    "Yo… pasaba."
+   ],
+   [
+    "m3",
+    "Invisible no era."
+   ],
+   [
+    "m4",
+    "Clickers para el amigo invisible. ¡Pedí el tuyo!"
+   ]
+  ]
+ },
+ "_edits": {
+  "m2": {
+   "squeeze": [
+    0.39,
+    1.169,
+    0.45
+   ]
+  },
+  "m4": {
+   "squeeze": [
+    1.5445,
+    2.2687,
+    0.35
+   ]
+  }
+ },
+ "_note": "s3 came out as a laugh and '¿Soy yo?' (kept: he is looking at a tiny figure of himself); m2 keeps a comic pause; m4 pause shortened"
+}

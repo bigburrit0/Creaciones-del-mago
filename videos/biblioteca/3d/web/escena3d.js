@@ -134,7 +134,7 @@ export function workshop(o = {}) {
   const led = new THREE.PointLight("#7FD3FF", 0, 1.2, 1.8); led.position.set(-0.36, 0.8, -0.66); scene.add(led);
   const PRESET = {
     day: { sun: ["#FFE0A0", 2.3], hemi: ["#FFE9CC", "#5A4650", 1.0], front: ["#FFF1DC", 0.75], fog: "#d9a874", bg: "#3a2a4a", night: 0, lamp: 0, led: 0, beam: ["#FFF0C8", 0.07], motes: "#FFF3B0" },
-    night: { sun: ["#8FA6FF", 0.75], hemi: ["#4E5C9E", "#1C1530", 0.5], front: ["#9FB0F0", 0.22], fog: "#2A2B55", bg: "#120E2A", night: 1, lamp: 2.4, led: 0.9, beam: ["#AFC4FF", 0.09], motes: "#CFE0FF" },
+    night: { sun: ["#8FA6FF", 0.7], hemi: ["#4E5C9E", "#1C1530", 0.45], front: ["#9FB0F0", 0.2], fog: "#2A2B55", bg: "#120E2A", night: 1, lamp: 0.8, led: 0.6, beam: ["#AFC4FF", 0.09], motes: "#CFE0FF" },
     dawn: { sun: ["#FFB98A", 1.9], hemi: ["#FFD7C2", "#4A3650", 0.9], front: ["#FFE2D0", 0.6], fog: "#E0A58A", bg: "#3A2A4A", night: 0, lamp: 0.4, led: 0, beam: ["#FFD2B0", 0.08], motes: "#FFE3C8" },
   };
   const _a = new THREE.Color(), _b = new THREE.Color();
@@ -403,10 +403,11 @@ export function camRig({ camera, shots, chars, points = {}, poseAt, props = null
   function measure() { const hp = new THREE.Vector3();
     for (const s of shots) if (s.subj) { const P = V3(0, 0, 0), n = 5;
       for (let k = 0; k < n; k++) { const tt = s.t + s.d * (k + 0.5) / n; poseAt(tt); if (props) props(tt);
-        if (points[s.subj]) hp.copy(points[s.subj]); else { chars[s.subj].b("DEF-head").getWorldPosition(hp); hp.y += 0.1; } if (s.aim) hp.add(V3(...s.aim)); P.add(hp); }
+        if (points[s.subj]) hp.copy(typeof points[s.subj] === "function" ? points[s.subj]() : points[s.subj]); else { chars[s.subj].b("DEF-head").getWorldPosition(hp); hp.y += 0.1; } if (s.aim) hp.add(V3(...s.aim)); P.add(hp); }
       s.P = P.multiplyScalar(1 / n); if (s.track) { poseAt(s.t + s.d / 2); s.rx0 = chars[s.subj].W.position.x; s.rz0 = chars[s.subj].W.position.z; } } }
   function shotCam(s, t) {
     const f = ss(clamp((t - s.t) / s.d, 0, 1));
+    if (s.fn) return s.fn(t, f);                       // custom shot (a POV, a shot tied to a moving prop): { p, l, fov, roll }
     if (!s.subj) return { p: V3(...s.from).lerp(V3(...s.to), f), l: s.look2 ? V3(...s.look).lerp(V3(...s.look2), f) : V3(...s.look), fov: s.fov, roll: s.roll || 0 };
     const P = s.P.clone(); if (s.track) { const r = chars[s.subj].W.position; P.x = r.x + (s.P.x - s.rx0); P.z = r.z + (s.P.z - s.rz0); }
     const D = s.h / 2 / Math.tan(THREE.MathUtils.degToRad(s.fov / 2)) * lerp(s.push ? s.push[0] : 1.05, s.push ? s.push[1] : 0.95, f), az = THREE.MathUtils.degToRad(s.az), el = THREE.MathUtils.degToRad(s.el);

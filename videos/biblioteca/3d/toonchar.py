@@ -229,6 +229,34 @@ def smooth_weights(o, passes=3, k=0.5):
             else: g.remove([i])
 
 
+def transfer_weights(o, support, mask):
+    """A part RESTING on another must move exactly like the surface under it, or the two drift apart in any pose that
+    differs from the bind pose (the beard tip sank 5 cm into the robe and belt: the beard followed the chest bones,
+    the belt the hips). Each vertex takes the weights of the nearest point on `support` (interpolated over the nearest
+    face), mixed in by mask(world_pos) in [0, 1]; normalised, at most 4 influences. Call after the supports are skinned."""
+    verts, owner, polys = [], [], []
+    for s in support:
+        mw = s.matrix_world; gn = {g.index: g.name for g in s.vertex_groups}; off = len(verts)
+        for v in s.data.vertices:
+            verts.append(mw @ v.co); owner.append({gn[g.group]: g.weight for g in v.groups})
+        polys += [[i + off for i in p.vertices] for p in s.data.polygons]
+    tree = BVHTree.FromPolygons(verts, polys); gn = {g.index: g.name for g in o.vertex_groups}; new = []
+    for v in o.data.vertices:
+        p = o.matrix_world @ v.co; own = {gn[g.group]: g.weight for g in v.groups}; m = max(0.0, min(1.0, mask(p)))
+        if m <= 0: new.append(own); continue
+        loc, _, fi, _ = tree.find_nearest(p); ids = polys[fi]
+        ws = [1.0 / ((verts[i] - loc).length + 1e-4) for i in ids]; tw = sum(ws); w = {n: (1 - m) * x for n, x in own.items()}
+        for i, k in zip(ids, ws):
+            for n, x in owner[i].items(): w[n] = w.get(n, 0.0) + m * x * k / tw
+        new.append(w)
+    for v, w in zip(o.data.vertices, new):
+        top = dict(sorted(((n, x) for n, x in w.items() if x > 1e-4), key=lambda kv: -kv[1])[:4]); tot = sum(top.values()) or 1
+        for g in o.vertex_groups:
+            if g.name not in top: g.remove([v.index])
+        for n, x in top.items():
+            g = o.vertex_groups.get(n) or o.vertex_groups.new(name=n); g.add([v.index], x / tot, "REPLACE")
+
+
 def bind_all():
     arm = ST["arm"]
     for o in ST["parts"]:

@@ -105,11 +105,30 @@ Para regenerar las provisorias (no se versionan): `python3 skills/pixel-reel/scr
 
 ## Versión 3D toon (2026-11-07)
 
-El usuario eligió la dirección 3D toon. La misma historia en 17 s (en 3D cada acción necesita un poco más de tiempo para leerse), cuatro planos cortados en la acción. Proyecto: `hf3d/` (armado con `build3d.sh`), audio `cues3d.json`, render `papa-noel-en-ojotas-3d.mp4`.
+El usuario eligió la dirección 3D toon. La misma historia en 21 s (en 3D cada acción necesita un poco más de tiempo para leerse), con voces, subtítulos y placa final; cinco planos cortados en la acción. Proyecto: `hf3d/` (armado con `build3d.sh`), audio `cues3d.json`, voces `voces3d.json` → `voz3d/`, render `papa-noel-en-ojotas-3d.mp4`.
 
 | Tiempo | Plano | Qué pasa |
 |---|---|---|
 | 0,0–3,2 | General, se acerca despacio | La puerta se abre de golpe (polvo, entra la luz del verano). El Mago, en la impresora, se da vuelta sorprendido. Papá Noel entra arrastrando las ojotas, transpirado, con la bolsa a la espalda, y se desploma en el banquito (aplaste); la bolsa cae al lado |
 | 3,2–8,0 | Dos personajes | Papá Noel se abanica. El Mago llega con el mate y se lo ofrece; Papá Noel toma, alivio (se le bajan los lentes), lo devuelve y el Mago toma. Papá Noel da vuelta la bolsa vacía y la sacude: sale una polilla. Tristeza; el Mago piensa y salta con la idea (lamparita) |
 | 8,0–12,5 | Impresora y bolsa | El Mago vuelve a la impresora y aprieta. Presenta los cuatro clickers delante de la cara y los tira a la bolsa; después la alcancía Creeper; la impresora escupe ocho productos seguidos; el TNT con la mecha chispeando: Papá Noel salta del susto, cae en la bolsa y explota en confeti |
-| 12,5–17,0 | General final | Festejo (el Mago baila, Papá Noel se levanta con los brazos arriba). Papá Noel se carga la bolsa al hombro, va hasta la puerta, se da vuelta y saluda, sale; la puerta se cierra. El Mago toma mate |
+| 12,5–17,95 | General final | Festejo (el Mago baila, Papá Noel se levanta con los brazos arriba). Papá Noel se carga la bolsa al hombro, camina hacia la puerta y saluda desde adentro del taller. Se da vuelta, se pasa la bolsa a la espalda y sale derecho por el medio de la puerta; la puerta (abre hacia adentro) se cierra detrás de él. El mate vuela solo del estante a la mano del Mago (magia) y toma |
+| 17,95–21,0 | El Mago de frente | El Mago baja el mate y le habla a cámara. Placa final: "Regalos impresos en 3D · ¡Pedí el tuyo! · Escribime por mensaje · Creaciones del Mago · Montevideo" (sin teléfono en el video; el número va en el caption) |
+
+### Diálogo (voces con Gemini TTS)
+
+Papá Noel: voz Algenib (grave, un poco rasposa, gordo bonachón). El Mago: voz Charon (la misma del reel del jardín). Acento rioplatense de Montevideo. Cada personaje se grabó en UNA sola toma (las líneas cortas solas salen mal) y se cortó en las pausas con `biblioteca/tts_lineas.py`; recortes y volumen parejo (-16 LUFS) en `voces3d.json` → `_edits`. La música baja debajo de cada línea. Mientras habla, cada personaje asiente al ritmo de su voz (envolvente de volumen, sin boca: la tapa la barba).
+
+| Entra | Quién | Línea (subtítulo) | Momento |
+|---|---|---|---|
+| 0,85 | Papá Noel | ¡Uf… qué calor, che! | Entra derretido |
+| 3,6 | El Mago | Tomá, un matecito. | Le ofrece el mate |
+| 5,08 | Papá Noel | ¡Ahh…! | Alivio después del sorbo |
+| 6,29 | Papá Noel | ¡Me quedé sin regalos! | Sacude la bolsa vacía |
+| 7,9 | El Mago | ¡Tengo una idea! | Salta con la lamparita |
+| 9,18 | El Mago | ¡A imprimir! | Aprieta el botón de la impresora |
+| 12,68 | Papá Noel | ¡Jo, jo, jo! ¡Gracias, Mago! | Festejo después del confeti |
+| 15,45 | Papá Noel | ¡Feliz Navidad! | Saluda antes de irse |
+| 17,9 | El Mago | Regalos impresos en 3D. ¡Pedí el tuyo! | Placa final (sin subtítulo: la placa dice lo mismo) |
+
+Subtítulos: una píldora por línea con el color de cada personaje (Papá Noel rojo, el Mago violeta con letra dorada), letra Fredoka, dentro de la zona segura de Instagram (ni los 220 px de arriba ni los 450 de abajo).

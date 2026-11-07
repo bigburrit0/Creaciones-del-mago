@@ -128,6 +128,11 @@ for o in list(T.ST["parts"]):
     elif n == "shaft": T.skin(o, ["DEF-shin." + side, "DEF-foot." + side], 3, 2)
     elif n in ("sleeve", "cuff"): T.skin(o, ["DEF-upper_arm." + side, "DEF-forearm." + side, "DEF-hand." + side], 4); T.smooth_weights(o, 4)
     elif n in ("hand", "thumb"): T.skin(o, ["DEF-hand." + side])
+# the beard rests on the chin, robe and belt: every point takes the weights of the surface under it (the chin part
+# follows the head, the rest the body), so it never sinks in whatever the pose. No spring bones on it
+beard = next(o for o in T.ST["parts"] if o.name.split(".")[0] == "beard")
+T.transfer_weights(beard, [o for o in T.ST["parts"] if o.name.split(".")[0] in ("robe", "belt", "head", "cheek")], lambda p: 1.0)
+T.smooth_weights(beard, 1)
 T.bind_all()
 # ---- baked contact shading (rest pose; arms excluded because they move away from the body)
 static = [o for o in T.ST["parts"] if o.name.split(".")[0] not in ("sleeve", "cuff", "hand", "thumb", "eye", "glint")]

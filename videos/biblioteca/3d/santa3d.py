@@ -139,6 +139,11 @@ for o in list(T.ST["parts"]):
     elif n in ("foot", "flop", "strap"): T.skin(o, ["DEF-foot." + side, "DEF-toe." + side], 3, 2)
     elif n == "arm": T.skin(o, ["DEF-upper_arm." + side, "DEF-forearm." + side, "DEF-hand." + side], 4); T.smooth_weights(o, 4)
     elif n in ("hand", "thumb"): T.skin(o, ["DEF-hand." + side])
+# the beard rests on the chin, tank top and belly: every point takes the weights of the surface under it (the chin
+# part follows the head, the rest the body and the belly jiggle), so it never sinks in whatever the pose
+beard = next(o for o in T.ST["parts"] if o.name.split(".")[0] == "beard")
+T.transfer_weights(beard, [o for o in T.ST["parts"] if o.name.split(".")[0] in ("shirt", "head", "cheek")], lambda p: 1.0)
+T.smooth_weights(beard, 1)
 T.bind_all()
 static = [o for o in T.ST["parts"] if o.name.split(".")[0] not in ("arm", "hand", "thumb", "lens", "lglint", "rim", "bridge")]
 T.bake_ao(static, static)

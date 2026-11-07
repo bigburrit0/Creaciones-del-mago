@@ -170,6 +170,21 @@ El usuario eligió la dirección 3D toon. La misma historia en 21 s (en 3D cada 
 - Subtítulos cinéticos: palabra por palabra al ritmo de la voz, la palabra que se dice en el color del personaje. Título gancho al principio: "Papá Noel vs. el diciembre uruguayo".
 - Regla nueva: el set no tiene pared delantera, así que todas las cámaras miran hacia el fondo o las paredes laterales; el árbol de adelante y la hoja abierta de la puerta tapan algunos ángulos (revisar cuadros antes de renderizar).
 
+Caption de la V2 (retoma el título gancho del video):
+
+```
+Papá Noel vs. el diciembre uruguayo. Ganó diciembre. 🥵
+
+Entró al taller en ojotas, pidió un mate y sacudió la bolsa: vacía. «¡Me quedé sin regalos!»
+El Mago dijo las palabras mágicas: «¡A imprimir!» 🧙 Y la impresora hizo el resto: clickers, una alcancía y un TNT que explota en confeti.
+
+¿Te falta el regalo del amigo invisible? Te lo imprimo yo 🎁
+Escribime al 092 104 419 con una foto o el link de MakerWorld y te paso precio y fecha, sin compromiso. Cada pedido lleva mínimo 48 horas, así que no lo dejes para el 23.
+Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+#Montevideo #RegalosDeNavidad #AmigoInvisible #Impresion3D #HechoEnUruguay #DiciembreUruguayo #CreacionesDelMago
+```
+
 ### Diálogo (voces con Gemini TTS)
 
 Papá Noel: voz Algenib (grave, un poco rasposa, gordo bonachón). El Mago: voz Charon (la misma del reel del jardín). Acento rioplatense de Montevideo. Cada personaje se grabó en UNA sola toma (las líneas cortas solas salen mal) y se cortó en las pausas con `biblioteca/tts_lineas.py`; recortes y volumen parejo (-16 LUFS) en `voces3d.json` → `_edits`. La música baja debajo de cada línea. Mientras habla, cada personaje asiente al ritmo de su voz (envolvente de volumen, sin boca: la tapa la barba).

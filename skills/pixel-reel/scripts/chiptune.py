@@ -115,6 +115,22 @@ def fx_chirp(p=1):
     return x
 
 
+# chess (RESEARCH_AJEDREZ_2026.md, sound team): a wooden "clack" = a 5 ms noise tick + a 1.8 kHz ping (30 ms) + a ~420 Hz
+# wooden body (60 ms); a heavier "thud" when a piece falls; a viking lur (a low horn with a slow attack and a bend up);
+# a small bell for check
+def fx_clack(p=1):
+    n = int(0.09 * SR); y = np.zeros(n); tk = hp(noise(0.005), 0.5) * np.linspace(1, 0, int(0.005 * SR)); y[:len(tk)] += tk * 0.5
+    tt = t(0.09); y += np.sin(2 * np.pi * 1800 * p * tt) * np.exp(-tt * 110) * 0.35 + np.sin(2 * np.pi * 420 * p * tt) * np.exp(-tt * 45) * 0.55
+    return y * 0.8
+def fx_thud(p=1):
+    tt = t(0.22); f = 180 * p * np.exp(-tt * 9); ph = 2 * np.pi * np.cumsum(f) / SR
+    return (np.sin(ph) * np.exp(-tt * 14) * 0.8 + lp(noise(0.22), 0.2) * np.exp(-tt * 30) * 0.3) * 0.9
+def fx_lur(p=1, d=0.9):
+    tt = t(d); f = note(-29) * p * (1 + 0.335 * np.clip(tt / 0.25, 0, 1) ** 2)                 # E2 bending up a fourth
+    ph = 2 * np.pi * np.cumsum(f) / SR; x = np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.3 * np.sin(3 * ph) + 0.12 * np.sin(4 * ph)
+    return lp(x, 0.25) * env(len(tt), 0.12, 0.25) * 0.45
+def fx_bell(p=1):
+    tt = t(1.0); return (np.sin(2 * np.pi * 1320 * p * tt) * 0.5 + np.sin(2 * np.pi * 2640 * p * tt) * 0.25 + np.sin(2 * np.pi * 3960 * p * tt) * 0.1) * np.exp(-tt * 4.5) * 0.5
 FX = {k[3:]: v for k, v in globals().items() if k.startswith("fx_") and callable(v)}
 
 

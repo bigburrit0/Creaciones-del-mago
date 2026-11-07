@@ -1,0 +1,49 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo in the summer, playing chess against his friend El Mago: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing, never slow. First line: proud and boastful, chest out (he is from the North Pole, so of course he plays the vikings). Second line: celebrating far too early, a triumphant belly laugh. Third line: he misunderstood 'jaque mate' and thinks his friend is offering him a mate (the Uruguayan drink): delighted and innocent, happily asking him to pour one.",
+  "lines": [
+   [
+    "s1",
+    "Yo soy vikingo. ¡Soy del norte!"
+   ],
+   [
+    "s2",
+    "¡Jo, jo! ¡Ganamos!"
+   ],
+   [
+    "s3",
+    "¿Mate? ¡Dale! ¡Cebame uno!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, playing chess against his friend Papá Noel. First line: an epic, dramatic movie-trailer announcement, but short. Second line: calm and confident, a little smug. Third line: completely deadpan, dry, almost bored, the winning move. Fourth line: warm and inviting, straight to the viewer, a playful challenge.",
+  "lines": [
+   [
+    "m1",
+    "Vikingos contra caballeros."
+   ],
+   [
+    "m2",
+    "Yo soy caballero."
+   ],
+   [
+    "m3",
+    "Jaque mate."
+   ],
+   [
+    "m4",
+    "¿Y vos? ¿Vikingo o caballero? Comentá."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "s1": [
+   1.0,
+   4.95
+  ]
+ },
+ "_note": "s1: the take opened with a laugh (0.1-1.0 s), cut off; s3 keeps its little laugh"
+}

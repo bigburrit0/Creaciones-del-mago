@@ -97,3 +97,14 @@ una máscara del producto: se pega el producto original encima del fondo nuevo.
    de arriba (45°), con todo el tablero adentro de la foto.
 5. Una foto de cerca del rey y del caballo, a la altura de las piezas.
 6. Una foto con una moneda o una mano al lado, para que se vea el tamaño.
+
+## Resultado de la primera tanda (8/11/2026)
+
+Aceptadas (en `fotos/ia/`): ascensor, caballo dragón, casita, comedero élfico, contador, medieval
+(negro y dorado y el detalle), minimalista, gatos, repisa, vikingo (tablero 1). Las que cambiaron el
+fondo dicen "(fondo retocado)" en la galería.
+
+Rechazadas (cambiaban el producto), siguen con el retoque automático:
+- `minecraft-ajedrez-piezas.jpg`: las piezas negras quedaron derretidas.
+- `vikingos-dorado-gris-tablero-2.jpg`: borró la esquina del tablero.
+- `perros-gatos-perros-1.jpg`: contorno marrón recortado alrededor de los perros.

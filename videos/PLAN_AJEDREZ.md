@@ -162,18 +162,24 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 #AjedrezVikingo #AjedrezMedieval #Ajedrez #Impresion3D #Montevideo #RegalosDeNavidad #CreacionesDelMago
 ```
 
-**2. Una más**
+**2. Una más** (final caption after the audit: `una-mas/GUION.md`)
 ```
-Una pieza más y paramos… dije 32 veces. Ajedrez vikingo impreso en 3D en Montevideo, capa por capa 🖨️
+Una pieza más y paramos… Ajedrez vikingo impreso en 3D en Montevideo, pieza por pieza. ¿Ya está? 🛡️
 
-La impresora no para: la reina, el vidente, la iglesia, el barco dragón… Papá Noel la desenchufó y igual salió un peón más.
-Un juego completo lleva muchas horas de impresora (el medieval, más de 10). Por eso el precio sale del peso y del tiempo de impresión.
+Papá Noel me preguntó "¿Ya está?" toda la noche. Yo, siempre: "una más". Se durmió parado, y a la mañana estaban las 32.
 
-Comentá MEDIEVAL o VIKINGO y te mando fotos de cada pieza 👇
+Lo hago yo, pieza por pieza, a pedido. Vos elegís dos cosas:
+• el tema: vikingo o medieval
+• los colores de cada bando (hasta 4 por pieza)
+Tamaño hasta 25 cm por pieza (el rey de torneo mide 9,5 cm). Son las piezas; el tablero va aparte.
+Y si se te pierde una, la reimprimo a partir de fotos y medidas.
 
-Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+Comentá VIKINGO o MEDIEVAL y te paso precio y fecha 👇
 
-#AjedrezVikingo #AjedrezMedieval #Impresion3D #Ajedrez #Montevideo #CreacionesDelMago
+Por WhatsApp al 092 104 419, antes de empezar y sin compromiso. Un juego completo lleva muchas horas de impresora: pedilo con tiempo.
+Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
+
+#AjedrezVikingo #AjedrezMedieval #Ajedrez #Impresion3D #Montevideo #CreacionesDelMago
 ```
 
 **3. Elegí tu bando**

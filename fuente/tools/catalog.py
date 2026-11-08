@@ -171,25 +171,25 @@ SHELVES = [
 # Más fotos de un producto: se ven en su ventana (tocando la foto). La primera es la de la tarjeta.
 # Cada una: (archivo en assets/p sin .webp, qué se ve).
 FOTOS = {
-  "medieval": [("medieval", "Negro contra dorado"), ("medieval-2", "Gris contra dorado, de cerca"),
+  "medieval": [("medieval", "Negro contra dorado (fondo retocado)"), ("medieval-2", "Gris contra dorado, de cerca"),
                ("medieval-3", "Gris contra blanco"), ("medieval-4", "Plateado contra negro"),
                ("medieval-5", "Gris contra dorado"), ("medieval-d", "Dorado y gris, en un tablero de madera")],
-  "vikingos": [("vikingos", "Dorado contra gris, en el tablero rompecabezas"), ("vikingos-2", "Blanco contra negro"),
+  "vikingos": [("vikingos", "Dorado contra gris, en el tablero rompecabezas (fondo retocado)"), ("vikingos-2", "Blanco contra negro"),
                ("vikingos-d", "Foto del diseñador")],
   "perros-gatos": [("perros-gatos", "Los perros, en amarillo"), ("perros-gatos-2", "Los gatos, en gris"),
                    ("perros-gatos-3", "Los perros de cerca"), ("perros-gatos-4", "Los gatos, con su torre"),
                    ("perros-gatos-d", "Foto del diseñador")],
-  "minimal": [("minimal", "Negro contra blanco"), ("minimal-2", "Visto de arriba"), ("minimal-3", "Desde el lado blanco"),
+  "minimal": [("minimal", "Negro contra blanco (fondo retocado)"), ("minimal-2", "Visto de arriba"), ("minimal-3", "Desde el lado blanco"),
               ("minimal-d", "Foto del diseñador")],
   "mc-ajedrez": [("mc-ajedrez", "Las piezas y las casillas del tablero"), ("mc-ajedrez-2", "Con su caja"),
                  ("mc-ajedrez-3", "Todo junto, visto de arriba"), ("mc-ajedrez-d", "Foto del diseñador")],
   "tablero": [("tablero", "Con el ajedrez vikingo arriba (las piezas van aparte)"), ("tablero-d", "Foto del diseñador")],
-  "contador": [("contador", "De frente"), ("contador-2", "En la mano, para ver el tamaño"), ("contador-3", "De costado"),
+  "contador": [("contador", "De frente (fondo retocado)"), ("contador-2", "En la mano, para ver el tamaño"), ("contador-3", "De costado"),
                ("contador-4", "La tapa")],
-  "ascensor": [("ascensor", "Dos torres, en negro"), ("ascensor-d", "Foto del diseñador")],
-  "elfico": [("elfico", "En dorado"), ("elfico-d", "Foto del diseñador")],
-  "casita": [("casita", "Lila, con el techo rosa"), ("casita-d", "Foto del diseñador")],
-  "repisa": [("repisa", "En rojo"), ("repisa-d", "Foto del diseñador")],
+  "ascensor": [("ascensor", "Dos torres, en negro (fondo retocado)"), ("ascensor-d", "Foto del diseñador")],
+  "elfico": [("elfico", "En dorado (fondo retocado)"), ("elfico-d", "Foto del diseñador")],
+  "casita": [("casita", "Lila, con el techo rosa (fondo retocado)"), ("casita-d", "Foto del diseñador")],
+  "repisa": [("repisa", "En rojo (fondo retocado)"), ("repisa-d", "Foto del diseñador")],
 }
 
 # 12x12 pixel icons, one string per row ('#' = ink)

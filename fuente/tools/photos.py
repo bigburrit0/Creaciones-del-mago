@@ -111,7 +111,7 @@ PHOTOS = {
   "job-penarol": (X+"IMG_7082.JPG", .5, .5, 1.0),
   # ajedrez vendidos (fotos propias, 7/11/2026). La primera de cada uno va en la tarjeta,
   # las que terminan en -2, -3... se ven en la ventana del producto.
-  "medieval":    (V+"medieval-negro-dorado.jpg", .56, .6, 1.2, "m"),
+  "medieval":    (V+"medieval-negro-dorado.jpg", .5, .55, 1.0, "m"),
   "medieval-2":  (V+"medieval-gris-dorado-detalle.jpg", .42, .55, 1.1, "mg"),
   "medieval-3":  (V+"medieval-gris-blanco.jpg", .52, .5, 1.05, "mg"),
   "medieval-4":  (V+"medieval-plateado-negro.jpg", .5, .5, 1.05, "mg"),
@@ -136,7 +136,7 @@ PHOTOS = {
   "contador-3":  (V+"contador-magic-costado.jpg", .5, .45, 1.2, "mg"),
   "contador-4":  (V+"contador-magic-lateral.jpg", .5, .5, 1.2, "mg"),
   "casita":      (V+"comedero-casita.jpg", .5, .62, 1.05, "m"),
-  "elfico":      (V+"comedero-elfico-dorado.jpg", .5, .52, 1.0, "m"),
+  "elfico":      (V+"comedero-elfico-dorado.jpg", .5, .5, 1.0, "m"),
   "repisa":      (V+"repisa-derretida-roja.jpg", .5, .5, 1.0, "m"),
   "ascensor":    (V+"ascensor-negro.jpg", .5, .58, 1.0, "m"),
 }

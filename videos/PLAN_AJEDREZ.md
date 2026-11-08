@@ -13,7 +13,7 @@ The pieces are modelled from the site's photos in `biblioteca/3d/web/ajedrez3d.j
 | # | Reel | Stage | Joke | CTA keyword | DM flow (private reply, within 7 days) | Metric |
 |---|---|---|---|---|---|---|
 | 1 | **¿Vikingo o caballero?** (made first) | reach | Papá Noel is viking "because he's from the north"; "jaque mate", "¿mate? ¡dale, cebá uno!" | VIKINGO / CABALLERO | photos of that set and "¿para quién es?" | sends and comments per reach |
-| 2 | **Una más** | reach / craft | the printer's "una pieza más y paramos"… 32 times | MEDIEVAL / VIKINGO | the piece-by-piece photos | average watch time |
+| 2 | **Una más** (audited 2026-11-08) | reach / craft | "¿Ya está?" "Una más." while the hours pass and the board fills; a 33rd piece: "si se te pierde una… ¡una más!" | VIKINGO / MEDIEVAL | price and date, "¿para quién es?" | average watch time, comments |
 | 3 | **Elegí tu bando** | consideration | Papá Noel paints the vikings red and white: "¡ese rey soy yo!" | COLORES | the colour options | DMs per 1,000 views |
 | 4 | **Las preguntas de Papá Noel** | consideration | four quick objections, four honest answers | DUDA (answered by a person) | a human reply | saves, questions |
 | 5 | **Culpa de las piezas** | conversion | he loses again, blames the pieces, wants his own set for Christmas | PEDIR | the WhatsApp link and **your real cut-off date** | WhatsApp chats before the cut-off |
@@ -56,20 +56,29 @@ They sit between the November reels already planned (`PLAN_NOVIEMBRE.md`). If th
 
 ---
 
-## Reel 2: "Una más" (reach / craft, about 22 s)
+## Reel 2: "Una más" (reach / craft, about 24 s) — audited and rewritten 2026-11-08 (`una-mas/AUDIT.md`)
 
-**Idea.** The printer makes the viking set, layer by layer. Every time El Mago says "una más y paramos", it prints another piece. Papá Noel counts.
+**Idea.** El Mago prints a whole viking set, piece by piece, in two colours. Papá Noel keeps asking "¿Ya está?" and El Mago keeps answering "Una más", while the light goes from day to night to dawn and Papá Noel falls asleep standing up. At 32/32 he wakes up, and one more pawn prints: "Y si se te pierde una… ¡una más!"
 
-| Time | Action | Line |
+Why it was rewritten (`RESEARCH_AJEDREZ_2_2026.md`):
+- Non-players could not read the first draft's hook.
+- The CTA asked about a set it never showed.
+- The unplugged printer read as a glitch or a fire.
+- The labour illusion says to show the work and the time honestly, as care.
+
+| Beat | Action | Line |
 |---|---|---|
-| 0-2 | the dragon prow grows layer by layer (warm glow); hook "32 piezas" | M: "Una pieza más y paramos." |
-| 2-7 | queen, seer, stave church, one after another; the bench fills | S: "¿Cuántas van?" |
-| 7-9 | El Mago, calm | M: "Treinta y dos." |
-| 9-11 | Papá Noel, glasses down | S: "¡¿Treinta y dos?!" |
-| 11-13 | Papá Noel unplugs the printer (a puff). Beep… it prints one tiny pawn anyway | M: "Una más." |
-| 13-16 | real photos; "Un juego completo lleva muchas horas de impresora" | — |
-| 16-19 | the printer again (loop) | M: "¿Medieval o vikingo? Comentá cuál y te mando las fotos." |
-| 19-22 | card | — |
+| Hook | the king prints layer by layer; "Ajedrez vikingo impreso en 3D", counter 1/32 | M: "Treinta y dos piezas. ¡A imprimir!" |
+| Montage (day) | each piece sparkles from the bed to its square (clack); counter to 9 | — |
+| Ask 1 | Papá Noel | S: "¿Ya está?" M: "Una más." |
+| Montage (evening) | the light changes; the silver side starts; counter to 21 | — |
+| Ask 2 | Papá Noel yawns | S: "¿Y ahora?" M: "Una más." |
+| Montage (night) | Papá Noel dozes standing; counter to 31 | — |
+| 32/32 (dawn) | full board, ding | S: "¡¿Ya está?!" |
+| Button | a 33rd pawn prints | M: "Y si se te pierde una… ¡una más!" |
+| Proof | viking and medieval photos | — |
+| CTA | El Mago | M: "¿Vikingo o medieval? Comentá cuál y te paso precio y fecha." |
+| Card | the full board (loop) | — |
 
 ---
 

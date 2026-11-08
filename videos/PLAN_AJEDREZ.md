@@ -153,9 +153,9 @@ The same three Haiku caption writers as in earlier reels each wrote all five cap
 Papá Noel eligió vikingos "porque es del norte". Mis caballeros saltaron en L, los vikingos festejaron antes de tiempo… y jaque mate.
 Él escuchó "mate" y me pidió que le cebara uno 🧉
 
-Comentá VIKINGO o CABALLERO 👇
+Comentá VIKINGO o CABALLERO y te paso precio y fecha 👇
 
-Los imprimo yo, en mi taller: elegís los colores de cada bando (hasta 4 por pieza) y el tamaño (el rey de torneo mide 9,5 cm; puedo llegar a 25 cm por pieza). El tablero va aparte.
+Los imprimo yo, pieza por pieza, a pedido: elegís los colores de cada bando (hasta 4 por pieza) y el tamaño (el rey de torneo mide 9,5 cm; puedo llegar a 25 cm por pieza). Son las piezas; el tablero va aparte.
 Te paso precio y fecha por WhatsApp al 092 104 419 antes de empezar, sin compromiso. Un juego completo lleva muchas horas de impresora: pedilo con tiempo.
 Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
 

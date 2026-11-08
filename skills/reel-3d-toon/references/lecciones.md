@@ -105,3 +105,17 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | Close-ups of El Mago hid his eyes | The brim is above the eye line | El Mago's close-ups at el -9° (from below the brim), aim slightly above the head |
 | The gate passed the first time | No hands touch pieces (the pieces move by magic); characters stand outside the table's footprint (the slab is checked as a box, plus the legs) | Keep pieces character-free; check characters against furniture slabs and legs, not a solid box under a table |
 | One flicker frame in a close-up while Papá Noel laughs (16.7 s) | The talk-nod envelope had an instant attack: a laugh made it zigzag 0.36 → 1.0 → 0.8 → 1.0 between frames, so the head snapped for one frame. The pose-jump gate (4 cm) is too coarse to see it; the flicker scan of the render caught it | `build.sh` smooths the envelope with a 5-frame window (one-frame rises fall from 0.89 to under 0.4, no zigzags). Copy it from `videos/vikingo-o-caballero/build.sh` for new reels |
+
+## From "Una más" (2026-11-08, chess reel 2; `videos/RESEARCH_AJEDREZ_2_2026.md`, `videos/una-mas/AUDIT.md`)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The first draft's hook meant nothing to a non-player; its CTA asked about a set it never showed; an unplugged printer that kept printing read as a glitch, and its "puff" as smoke | Jokes written from inside the product | Name the product in words in frame 1; make numbers visible (a counter); magic reads as magic (a gesture and sparkles, no smoke near a printer); the CTA asks only about what was shown, and rewards the comment (price and date) |
+| — | The labour illusion (Buell & Norton 2011) and the handmade effect (Fuchs et al. 2015) are the strongest evidence we have | Show the work honestly (piece by piece, layers rising), with time passing (the light: day, night, dawn) and no failed prints or stalling; frame it as care ("lo hago yo, pieza por pieza, a pedido") |
+| Board shots showed an empty middle while the pieces landed at the ends | The board was framed from the front, centred | Frame the side that is filling (three-quarter views from the left, then the right); go wide only for the full board |
+| El Mago's "Una más" close-ups showed the side of his head | He was turned towards the printer behind him | A character delivering a line looks at something in front of the camera; the action he watches can be off screen |
+| 42 frames with Papá Noel's chin in his beard while dozing | A deep head bend (0.42 rad) | Take droops mostly from the upper spine (0.14) and only a little from the head (0.26) |
+| Voice trims cut words | The `_raw` clips are already cut to speech, so trims are measured in the raw clip (`silencedetect` on `<id>_raw.wav`), not in the take | Measure in the raw clip; a `squeeze` uses absolute times in the raw clip |
+| **A background render ran in the repository root** (it rendered the website and left a `.hyperframes/` cache there) | The `cd` at the start of a `run_in_background` command did not take effect | Start background renders as `bash -c 'cd DIR \|\| exit 9; echo "cwd: $(pwd)" > ../render.log; npx hyperframes render ... >> ../render.log 2>&1'`, and check the first log line |
+| The transcription model returned 429 in bursts | Per-minute limits on the free tier (the daily quota had reset) | Retry with 20 s waits; fall back to `CHECK_MODEL=gemini-3.5-flash-lite` |
+| The printer whir is a buzzy square wave | — | The printer whir plays only under the printer close-ups, never under the whole reel |

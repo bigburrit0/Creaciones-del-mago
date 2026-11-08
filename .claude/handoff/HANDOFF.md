@@ -1,6 +1,21 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**"UNA MÁS" (tarea programada, 2026-11-08 2:00 Montevideo):** reel 2 de ajedrez, con auditoría del guion y una investigación desde otro punto de vista.
+- **Investigación:** `videos/RESEARCH_AJEDREZ_2_2026.md`, con cuatro ángulos nuevos y el análisis de toda la investigación anterior:
+  - la voz del cliente;
+  - la competencia en Uruguay;
+  - la psicología del regalo hecho a mano (labor illusion, handmade effect);
+  - un crítico.
+- **Auditoría:** `videos/una-mas/AUDIT.md`. El guion se reescribió:
+  - el producto se nombra en el cuadro 1 y hay un contador 1/32;
+  - el paso de las horas se cuenta con la luz;
+  - sale el gag de la impresora desenchufada;
+  - el CTA ofrece precio y fecha.
+- **Reel:** `videos/una-mas/` (27,2 s). Puerta de calidad 0/1632. El primer intento de render corrió en la raíz del repo (el `cd` no tomó) y se relanzó con `bash -c`.
+- **Caption y DM:** en `videos/una-mas/GUION.md` (los 3 redactores, curado).
+- **Siguiente:** reel 3, "Elegí tu bando", cuando el usuario lo pida.
+
 **SERIE DE AJEDREZ (2026-11-07, noche):** el usuario dijo que los ajedreces medieval y vikingo son de lo que más se vende y pidió:
 - tres equipos de 3 Haiku cada uno (marketing, humor y guion, edición y ritmo);
 - guardar la investigación;

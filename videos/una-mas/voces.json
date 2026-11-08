@@ -1,0 +1,62 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, waiting all day for his friend's 3D printer to finish a chess set so they can play: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. First line: eager and impatient, like a kid on a car trip. Second line: hours later, tired and whiny, in the middle of a yawn. Third line: he just woke up with a start at dawn, surprised and delighted, almost shouting.",
+  "lines": [
+   [
+    "s1",
+    "¿Ya está?"
+   ],
+   [
+    "s2",
+    "¿Y ahora?"
+   ],
+   [
+    "s3",
+    "¡¿Ya está?!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, 3D-printing a whole chess set piece by piece. First line: enthusiastic, rolling up his sleeves, his catchphrase at the end. Second and third lines: calm, focused, not looking up from the printer, exactly the same flat delivery both times (the repetition is the joke). Fourth line: playful and proud, a little pause after 'una', then a satisfied punchline. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Treinta y dos piezas. ¡A imprimir!"
+   ],
+   [
+    "m2",
+    "Una más."
+   ],
+   [
+    "m3",
+    "Una más."
+   ],
+   [
+    "m4",
+    "Y si se te pierde una… ¡una más!"
+   ],
+   [
+    "m5",
+    "¿Vikingo o medieval? Comentá cuál y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_edits": {
+  "m1": {
+   "from": 0.36
+  },
+  "s2": {
+   "to": 0.85
+  },
+  "m4": {
+   "squeeze": [
+    1.67,
+    2.62,
+    0.4
+   ]
+  }
+ },
+ "_note": "trims on the raw clips (which are already cut to speech): m1 lead-in blip; s2 ends after '¿Y ahora?' (its yawn was inaudible); m4's pause after 'una…' shortened to about 0.45 s"
+}

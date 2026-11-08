@@ -131,6 +131,9 @@ def fx_lur(p=1, d=0.9):
     return lp(x, 0.25) * env(len(tt), 0.12, 0.25) * 0.45
 def fx_bell(p=1):
     tt = t(1.0); return (np.sin(2 * np.pi * 1320 * p * tt) * 0.5 + np.sin(2 * np.pi * 2640 * p * tt) * 0.25 + np.sin(2 * np.pi * 3960 * p * tt) * 0.1) * np.exp(-tt * 4.5) * 0.5
+def fx_snore(p=1, d=0.9):
+    tt = t(d); a = np.sin(np.pi * np.clip(tt / d, 0, 1)) ** 1.5
+    return (lp(noise(d), 0.05) * 0.9 + np.sin(2 * np.pi * 85 * p * tt) * 0.35 * np.sign(np.sin(2 * np.pi * 28 * tt))) * a * 0.35
 FX = {k[3:]: v for k, v in globals().items() if k.startswith("fx_") and callable(v)}
 
 

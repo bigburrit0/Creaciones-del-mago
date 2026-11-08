@@ -62,3 +62,15 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 **Alt text:**
 
 > Animación 3D: una impresora 3D imprime un ajedrez vikingo pieza por pieza, en bronce y plata, desde el día hasta el amanecer; al final, fotos reales de los ajedreces vikingo y medieval.
+
+## Result (2026-11-08)
+
+`una-mas.mp4`: 27.2 s, 1080×1920, 60 fps.
+
+- **QA gate:** 0 bad frames out of 1632, 0 pose jumps, deterministic. The first gate run flagged 42 frames of Papá Noel's chin in his beard while dozing; the droop was moved to the upper spine.
+- **Flicker scan:** 0 frames.
+- **Loudness:** -14.1 LUFS, peak -4.1 dBFS. HyperFrames' mix came out at -15.0 because the 32 clacks capped its gain, so the mix was rebuilt with `biblioteca/remezclar.py`. The video stream is byte-identical.
+- **No steady buzz:** the 37 Hz test is at 4.2 dB (the cicadas were 34); no DC.
+- **Voices:** all 8 lines clear in the final mix (transcription).
+- **Contact sheet** of the final frames reviewed.
+- **First render attempt:** it ran in the repository root (its `cd` did not take) and was stopped and relaunched with `bash -c`. See the lessons.

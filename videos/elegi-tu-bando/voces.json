@@ -1,0 +1,58 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, ordering a 3D-printed viking chess set from his friend: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. First line: proud and demanding, a little vain, pointing at his own red-and-white suit on the last two words. Second line: amazed and delighted, he just recognised himself in a chess piece, almost laughing.",
+  "lines": [
+   [
+    "s1",
+    "Lo quiero rojo y blanco. ¡Como yo!"
+   ],
+   [
+    "s2",
+    "¡Ese rey soy yo!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, repainting a chess set with a magic gesture. First line: warm and clear, explaining while he casts the spell. Second line: proud, showing off a detail. Third line: completely deadpan and dry, a little pause after 'Bueno'. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Elegís los colores de cada bando."
+   ],
+   [
+    "m2",
+    "Hasta cuatro por pieza."
+   ],
+   [
+    "m3",
+    "Bueno… vikingo sos."
+   ],
+   [
+    "m4",
+    "¿Qué colores le pondrías vos? Comentá colores y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "m3": [
+   7.0,
+   8.8
+  ],
+  "m4": [
+   9.9,
+   14.8
+  ]
+ },
+ "_edits": {
+  "m4": {
+   "squeeze": [
+    1.19,
+    2.71,
+    0.35
+   ]
+  }
+ },
+ "_note": "the automatic split put '¿Qué colores le pondrías vos?' into m3: m3 and m4 were re-cut from the take at the measured pauses; m4's pause between its two sentences shortened"
+}

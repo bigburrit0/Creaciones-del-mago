@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 21.6, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.36) 100%); }
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      /* hook: names the product in words (RESEARCH_AJEDREZ_2_2026.md, rule 1) */
+      #hook { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; font: 700 104px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #F2C14E; font-size: 66px; }
+      /* the two decisions, then the four colours of one piece */
+      #sides { position: absolute; left: 0; right: 0; top: 250px; display: flex; justify-content: center; gap: 28px; visibility: hidden; }
+      .side { padding: 14px 26px 18px; border-radius: 40px; background: #FBF4E4; border: 7px solid #150A34; box-shadow: 0 10px 0 rgba(21, 10, 52, 0.45);
+              font: 700 46px/1 "Fredoka", sans-serif; color: #2E2160; display: flex; align-items: center; gap: 12px; }
+      .dot { width: 46px; height: 46px; border-radius: 50%; border: 5px solid #150A34; display: inline-block; }
+      #palette { position: absolute; left: 0; right: 0; top: 250px; text-align: center; visibility: hidden; }
+      #palette .lab { font: 700 74px/1 "Fredoka", sans-serif; color: #FFF6E5; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; margin-bottom: 18px; }
+      #palette .row { display: flex; justify-content: center; gap: 22px; }
+      #palette .dot { width: 92px; height: 92px; border-width: 8px; box-shadow: 0 8px 0 rgba(21, 10, 52, 0.45); }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      #proof { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); visibility: hidden; }
+      #proof .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 104px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                   text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #proof .st { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font: 600 46px/1.2 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+      .pol { position: absolute; width: 330px; padding: 17px 17px 0; background: #FFFDF6; border-radius: 6px; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.3); transform-origin: 50% 50%; }
+      .pol img { display: block; width: 296px; height: 296px; object-fit: cover; border-radius: 2px; }
+      .pol div { font: 700 54px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 10px 0 16px; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 66px/1.05 "Fredoka", sans-serif; color: #C0392B; }
+      #card .k1 { font: 700 50px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 84px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 42px/1.25 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21.6" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Ajedrez vikingo<br><span>impreso en 3D, en tus colores</span></div>
+      <div id="sides"><div class="side"><span class="dot" style="background:#C8302A"></span><span class="dot" style="background:#F4F1EA"></span>un bando</div><div class="side"><span class="dot" style="background:#5B3FA0"></span><span class="dot" style="background:#F2C14E"></span>el otro</div></div>
+      <div id="palette"><div class="lab">4 colores</div><div class="row"><span class="dot" style="background:#C8302A"></span><span class="dot" style="background:#F4F1EA"></span><span class="dot" style="background:#EBC3A0"></span><span class="dot" style="background:#2A2530"></span></div></div>
+      <div id="subs"></div>
+      <div id="proof">
+        <div class="tt">Así son<br>de verdad</div>
+        <div class="pol" style="left: 140px; top: 470px"><img src="assets/p/vikingos.webp" alt=""><div>bronce</div></div>
+        <div class="pol" style="left: 600px; top: 492px"><img src="assets/p/medieval-p.webp" alt=""><div>rojo y negro</div></div>
+        <div class="pol" style="left: 372px; top: 905px"><img src="assets/p/medieval.webp" alt=""><div>dorado y gris</div></div>
+        <div class="st">Cada bando, en los colores que elijas</div>
+      </div>
+      <div id="card"><div class="k0">Elegí tu bando</div><div class="k1">Ajedreces impresos en 3D,<br>en tus colores</div><div class="k2">¡Comentá COLORES!</div><div class="k3">Hasta 4 colores por pieza<br>Te paso precio y fecha por mensaje</div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="21.6" data-track-index="1" data-volume="0.6"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="21.6" data-track-index="2" data-volume="1"></audio>
+      <audio id="v-s1" class="clip" src="assets/voz/s1.wav" data-start="0.1" data-duration="2.824" data-track-index="4" data-volume="1" data-who="santa" data-text="Lo quiero rojo y blanco. ¡Como yo!"></audio>
+      <audio id="v-m1" class="clip" src="assets/voz/m1.wav" data-start="3.05" data-duration="1.889" data-track-index="5" data-volume="1" data-who="mago" data-text="Elegís los colores de cada bando."></audio>
+      <audio id="v-m2" class="clip" src="assets/voz/m2.wav" data-start="6.3" data-duration="1.176" data-track-index="6" data-volume="1" data-who="mago" data-text="Hasta cuatro por pieza."></audio>
+      <audio id="v-s2" class="clip" src="assets/voz/s2.wav" data-start="8.25" data-duration="1.117" data-track-index="7" data-volume="1" data-who="santa" data-text="¡Ese rey soy yo!"></audio>
+      <audio id="v-m3" class="clip" src="assets/voz/m3.wav" data-start="10.05" data-duration="1.8" data-track-index="8" data-volume="1" data-who="mago" data-text="Bueno… vikingo sos."></audio>
+      <audio id="v-m4" class="clip" src="assets/voz/m4.wav" data-start="14.55" data-duration="3.705" data-track-index="9" data-volume="1" data-who="mago" data-text="¿Qué colores le pondrías vos? Comentá COLORES y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "Elegí tu bando" (21.6 s, 3D toon; chess series reel 3, audited in ../AUDIT.md): Papá Noel wants his viking side red and
+         white, "¡como yo!". El Mago's raised hand repaints it rank by rank, then his own side in his colours (the two decisions),
+         then the king in four colours, until it looks like Papá Noel: "¡Ese rey soy yo!" / "Bueno… vikingo sos." Rules:
+         ../../RESEARCH_AJEDREZ_2_2026.md. Built on escena3d.js + ajedrez3d.js, the table layout of reel 1. */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, workshop, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { chessKit } from "./lib/ajedrez3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 21.6, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage();
+      const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight } = workshop();
+      spill.material.opacity = 0;
+      const { mago, santa, BTRACK, blobM, blobS, blobK, PR, PRrest, nozzleMat } = await cast();
+      blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+
+      // ---------- timing (voice first) ----------
+      const T = { s1: 0.1, sweepS: 3.05, m1: 3.05, sweepM: 4.35, kingCU: 5.95, m2: 6.3, steps: [6.45, 6.9, 7.35], s2: 8.25, turn: 9.4, m3: 10.05,
+                  proof: 11.95, cta: 14.45, m4: 14.55, card: 18.4, exit: 99 };
+
+      // ---------- the chess table and the board (reel 1's layout) ----------
+      const TC = V3(0.55, 0, -0.32), TOP = 0.58;
+      const tbl = new THREE.Group(); tbl.position.copy(TC); scene.add(tbl);
+      rbox(0.6, 0.04, 0.56, "#8A5638", 0, TOP - 0.02, 0, tbl, { r: 0.15 }); rbox(0.54, 0.05, 0.5, "#6E3B22", 0, TOP - 0.065, 0, tbl, { line: false });
+      for (const [x, z] of [[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]]) rbox(0.04, TOP - 0.04, 0.04, "#6E3B22", x, (TOP - 0.04) / 2, z, tbl);
+      const CK = chessKit(scene, { wo: WO });
+      const B = CK.board(); B.g.position.set(TC.x, TOP, TC.z); B.g.rotation.y = -Math.PI / 2; B.g.updateMatrixWorld(true);
+      const sq = (f, r) => B.sq(f, r);
+      // the viking set: El Mago's side bronze (ranks 1-2), Papá Noel's side silver (ranks 7-8), as in reel 2
+      const BACK = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"], COLM = CK.SIDES.bronze, COLS = CK.SIDES.silver;
+      const NEWS = ["#C8302A", "#F4F1EA", "#7A1A16"], NEWM = ["#5B3FA0", "#F2C14E", "#2E2160"];                 // Papá Noel: red and white; El Mago: purple and gold
+      const PIECES = [];
+      for (const [side, col, nw, r0, r1, face] of [["M", COLM, NEWM, 0, 1, Math.PI], ["S", COLS, NEWS, 7, 6, 0]]) for (let f = 0; f < 8; f++)
+        for (const [type, r] of [[BACK[f], r0], ["pawn", r1]]) { const g = CK.piece("viking", type, col); g.rotation.order = "YXZ"; g.position.copy(sq(f, r)); g.rotation.y = face + B.g.rotation.y;
+          const mats = []; g.children.forEach((ch, idx) => ch.traverse((m) => { if (m.isMesh && m.material && m.material.isMeshToonMaterial) { const c0 = m.material.color.clone();
+            let k = 0, best = 9; col.forEach((c, i) => { const d = new THREE.Color(c).sub(c0); const e = Math.abs(d.r) + Math.abs(d.g) + Math.abs(d.b); if (e < best) { best = e; k = i; } });   // nearest of the side's three colours
+            mats.push({ m: m.material, c0, c1: new THREE.Color(nw[k]), idx }); } }));
+          // the sweep: rank by rank from each player's end, file by file
+          const rankOrder = side === "S" ? (r === 7 ? 0 : 1) : (r === 0 ? 0 : 1), t0 = (side === "S" ? T.sweepS : T.sweepM) + rankOrder * 0.55 + f * 0.06;
+          PIECES.push({ g, side, type, f, r, mats, tc: t0, home: g.position.clone(), yaw: g.rotation.y }); }
+      const KING = PIECES.find((p) => p.side === "S" && p.type === "king");
+      // the king in four colours, part by part (child index in ajedrez3d.js's viking king): red robe and base, white beard, crown and trim, skin face and hands, black sword
+      const K4 = { red: "#C8302A", white: "#F4F1EA", skin: "#EBC3A0", black: "#2A2530" };
+      const K4MAP = (idx) => [0, 2].includes(idx) ? ["red", -1] : [1, 10, 14].includes(idx) ? ["white", -1] : idx >= 5 && idx <= 9 ? ["white", -1] : idx === 4 ? ["white", 0] : [3, 15, 16].includes(idx) ? ["skin", 1] : [11, 12, 13].includes(idx) ? ["black", 2] : ["red", -1];
+      for (const q of KING.mats) { const [name, step] = K4MAP(q.idx); q.c4 = new THREE.Color(K4[name]); q.step = step; }
+      const { SPK } = makeFX();
+
+      // ---------- staging ----------
+      const MD = V3(TC.x - 0.6, 0, TC.z), SD = V3(TC.x + 0.62, 0, TC.z), hM = Math.PI / 2, hS = -Math.PI / 2;
+      const LENS_C = V3(1.08, 1.05, 1.04), LENS_S = V3(0.22, 1.05, 0.82);
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.L"), SF.fwd, 0.16); rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1); rotWorld(mago.b("DEF-upper_arm.R"), MF.fwd, -0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- heads
+        turnTo(mago, LENS_C, pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1));
+        rotWorld(mago.b("DEF-head"), MF.left, 0.12 * pulse(t, T.sweepS - 0.2, T.sweepS + 0.2, T.steps[2] + 0.6, T.steps[2] + 1.0));      // eyes on the board while he casts
+        rotWorld(santa.b("DEF-head"), SF.left, -0.12 * pulse(t, 0.0, 0.3, 2.6, 3.0));                                                         // chin up: proud
+        rotWorld(santa.b("DEF-head"), SF.left, 0.14 * pulse(t, T.sweepS, T.sweepS + 0.3, T.s2 - 0.3, T.s2));                                // watches his army change
+        turnTo(santa, LENS_S, pulse(t, T.s2 - 0.15, T.s2 + 0.05, T.m3, T.m3 + 0.3));
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.07 * pulse(t, T.s2 - 0.1, T.s2 + 0.15, T.s2 + 1.0, T.s2 + 1.3));                     // leans in: "¡Ese rey soy yo!"
+        // ---- arms: Papá Noel's hand to his chest on "¡Como yo!" and on "¡soy yo!"; El Mago casts with a raised left hand; points for the CTA
+        const chest = wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(0.44)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0));
+        arm(santa, "L", chest, Math.max(pulse(t, 1.75, 2.05, 2.7, 3.05), pulse(t, T.s2 + 0.1, T.s2 + 0.4, T.s2 + 1.1, T.s2 + 1.45)), null, 0.07);
+        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.12)).add(MF.fwd.clone().multiplyScalar(0.24)).add(V3(0, 0.12 + 0.02 * Math.sin(t * 6), 0)), pulse(t, T.sweepS - 0.35, T.sweepS, T.steps[2] + 0.3, T.steps[2] + 0.7), null, 0.08); }
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.m4 + 1.7, T.m4 + 2.25, T.card + 0.3, T.card + 0.8), null, 0.08); }   // a 0.55 s reach (0.35 s flipped the elbow: QA)
+        // ---- faces
+        let e = 0; for (const b of [1.5, 4.1, 7.9, 12.6, 16.2, 19.8]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+        mago.b("brows").position.y += 0.012 * pulse(t, T.m2, T.m2 + 0.15, T.m2 + 0.9, T.m2 + 1.2) - 0.008 * pulse(t, T.m3 - 0.2, T.m3, T.m3 + 1.6, T.m3 + 1.9);
+        santa.b("brows").position.y += 0.015 * Math.max(pulse(t, T.s2 - 0.1, T.s2 + 0.05, T.s2 + 1.0, T.s2 + 1.3), pulse(t, 2.2, 2.35, 2.8, 3.0));
+        santa.b("glasses").position.y -= 0.016 * pulse(t, T.s2 - 0.05, T.s2 + 0.1, T.s2 + 1.0, T.s2 + 1.3);
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props: the repaint (colour sweep with sparkles), the king's four colours, the king turning to Papá Noel ----------
+      const tmp = new THREE.Color();
+      function props(t) {
+        setLight("day");
+        if (PR.head) PR.head.position.x = PRrest.head.x + 0.55; if (nozzleMat) nozzleMat.color.set("#2E2160");
+        for (const p of PIECES) { const k = ss(clamp((t - p.tc) / 0.18, 0, 1));
+          for (const q of p.mats) { tmp.copy(q.c0).lerp(q.c1, k);
+            if (q.c4) tmp.lerp(q.c4, ss(clamp((t - T.steps[Math.max(0, q.step)]) / 0.2, 0, 1)));                 // the king's four colours, one step at a time
+            q.m.color.copy(tmp); }
+          const pop = t > p.tc && t < p.tc + 0.25 ? Math.sin((t - p.tc) / 0.25 * Math.PI) : 0; p.g.position.copy(p.home); p.g.position.y += 0.012 * pop; p.g.rotation.set(0, p.yaw, 0); p.g.scale.setScalar(1 + 0.06 * pop); }
+        // the king: a little hop at each colour step, then he turns round to Papá Noel ("¡Ese rey soy yo!")
+        { const h = T.steps.reduce((a, s) => a + (t > s && t < s + 0.25 ? Math.sin((t - s) / 0.25 * Math.PI) : 0), 0); KING.g.position.y += 0.01 * h;
+          const tr = ss(clamp((t - T.turn) / 0.35, 0, 1)); KING.g.rotation.y = KING.yaw + Math.PI * tr; KING.g.position.y += 0.025 * Math.sin(Math.PI * clamp((t - T.turn) / 0.35, 0, 1)); }
+        // sparkles: a swirl over each piece as it changes; a bigger burst at each of the king's colour steps
+        SPK.forEach((m, i) => { let best = null, dt = 9;
+          const evs = PIECES.map((p) => [p.tc, p.home.clone().add(V3(0, 0.06, 0))]); for (const s of T.steps) evs.push([s, KING.home.clone().add(V3(0, 0.07, 0))]);
+          for (const [t0, Q] of evs) { const d = t - t0 - (i % 5) * 0.01; if (d > 0 && d < dt) { dt = d; best = Q; } }
+          const life = 0.4; m.visible = dt < life && i < 14; if (!m.visible) return;
+          const a = i * 2.4 + dt * 9, r = 0.02 + dt * 0.06; m.position.copy(best).add(V3(Math.cos(a) * r, dt * 0.12, Math.sin(a) * r)); m.scale.setScalar(0.22 * (1 - dt / life)); });
+        bulbs.forEach((b, k2) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k2 + Math.floor(t * 3)) % 4]));
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, uu = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (uu - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing ----------
+      const kingCam = (t) => { const k = KING.home; return { p: k.clone().add(V3(-0.23, 0.16, 0.17)), l: k.clone().add(V3(0.01, 0.062, 0)), fov: 34, roll: 0 }; };
+      const kingCamS = (t) => { const k = KING.home; return { p: k.clone().add(V3(0.17, 0.12, 0.13)), l: k.clone().add(V3(0, 0.06, 0)), fov: 38, roll: 0 }; };   // from Papá Noel's side: the king turns round to face him (and us)
+      const SHOTS = [
+        { t: 0.0, d: T.sweepS, fov: 48, from: [TC.x - 0.45, 1.06, TC.z + 0.78], to: [TC.x - 0.42, 1.04, TC.z + 0.72], look: [TC.x + 0.25, 0.76, TC.z - 0.1] },           // hook: the set in bronze and silver, Papá Noel behind it
+        { t: T.sweepS, d: T.sweepM - T.sweepS, fov: 46, from: [TC.x + 0.3, 0.9, TC.z + 0.38], to: [TC.x + 0.28, 0.88, TC.z + 0.34], look: [TC.x + 0.08, 0.61, TC.z - 0.02], whip: 1 },   // his side turns red and white
+        { t: T.sweepM, d: T.kingCU - T.sweepM, fov: 46, from: [TC.x - 0.32, 0.88, TC.z + 0.4], to: [TC.x - 0.3, 0.87, TC.z + 0.36], look: [TC.x - 0.1, 0.61, TC.z - 0.02], whip: -1 },  // El Mago's side: purple and gold
+        { t: T.kingCU, d: T.s2 - 0.05 - T.kingCU, fn: kingCam, whip: 1 },                                                                                               // the king, four colours
+        { t: T.s2 - 0.05, d: T.turn - 0.1 - T.s2 + 0.05, fov: 32, subj: "santa", h: 0.85, az: -40, el: 2, v: 0.06 },                                                          // "¡Ese rey soy yo!"
+        { t: T.turn - 0.1, d: T.m3 + 0.05 - T.turn, fn: kingCamS },                                                                                                            // the king turns round to him
+        { t: T.m3 - 0.05, d: T.proof - T.m3 + 0.05, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                        // "Bueno… vikingo sos."
+        { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                   // (under the proof panel)
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                              // CTA
+        { t: T.card, d: DUR - T.card, fov: 54, from: [TC.x, 1.0, TC.z + 0.92], to: [TC.x, 0.98, TC.z + 0.86], look: [TC.x, 0.64, TC.z - 0.02] },                       // the card over the repainted set
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props, points: {},
+        punch: [[T.steps[2], 0.06], [T.s2 + 0.05, 0.12], [T.m3 + 0.9, 0.08]], flash: [[T.proof, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+      // ---------- text: kinetic captions, hook, the two decisions, the four colours, proof, card ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 2.95] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const sides = document.getElementById("sides"), SIDES = [...sides.querySelectorAll(".side")], palette = document.getElementById("palette"), PDOTS = [...palette.querySelectorAll(".dot")];
+      const proof = document.getElementById("proof"), POLS = [...proof.querySelectorAll(".pol")], ROT = [-5, 4, -2];
+      function dom(t) {
+        const sv = t >= T.sweepS && t < T.kingCU; sides.style.visibility = sv ? "visible" : "hidden";
+        if (sv) SIDES.forEach((el, i) => { const a = clamp((t - (i ? T.sweepM : T.sweepS) - 0.1) / 0.22, 0, 1); el.style.opacity = a > 0 ? "1" : "0"; el.style.transform = `scale(${(0.5 + 0.5 * backOut(a)).toFixed(3)}) rotate(${i ? 2 : -2}deg)`; });
+        const pv0 = t >= T.kingCU + 0.2 && t < T.s2 - 0.05; palette.style.visibility = pv0 ? "visible" : "hidden";
+        if (pv0) PDOTS.forEach((d, i) => { const at = i < 1 ? T.kingCU + 0.25 : T.steps[i - 1]; const a = clamp((t - at) / 0.2, 0, 1); d.style.opacity = a > 0 ? "1" : "0"; d.style.transform = `scale(${(0.4 + 0.6 * backOut(a)).toFixed(3)})`; });
+        const pv = t >= T.proof && t < T.cta; proof.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { proof.style.opacity = Math.min(1, (t - T.proof) / 0.08, (T.cta - t) / 0.1).toFixed(3);
+          POLS.forEach((p, i) => { const a = clamp((t - T.proof - 0.15 - i * 0.3) / 0.26, 0, 1); p.style.opacity = a > 0 ? "1" : "0";
+            p.style.transform = `translateY(${((1 - ss(a)) * -150).toFixed(1)}px) rotate(${(ROT[i] + (1 - a) * 14).toFixed(2)}deg) scale(${(1.25 - 0.25 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks plus the furniture (the chess table's top and legs, the bench) and the pieces */
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const FURN = [{ name: "tableTop", min: V3(TC.x - 0.3, TOP - 0.09, TC.z - 0.28), max: V3(TC.x + 0.3, TOP + 0.03, TC.z + 0.28) },
+        ...[[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]].map(([x, z], i) => ({ name: "leg" + i, min: V3(TC.x + x - 0.02, 0, TC.z + z - 0.02), max: V3(TC.x + x + 0.02, TOP, TC.z + z + 0.02) })),
+        { name: "bench", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }];
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)), d = q.distanceTo(p);
+          if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        for (const pc of PIECES) { const p = pc.home.clone().add(V3(0, 0.03, 0));
+          for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) { const d = k.b ? (() => { const ab = k.b.clone().sub(k.a), u = clamp(p.clone().sub(k.a).dot(ab) / ab.lengthSq(), 0, 1); return k.a.clone().add(ab.multiplyScalar(u)).distanceTo(p); })() : k.a.distanceTo(p);
+            if (d < k.r + 0.02) out.push(["piece", nm, k.name, pc.type, +(k.r + 0.02 - d).toFixed(3)]); } }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, PIECES, KING, B, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

@@ -1,6 +1,16 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
 
 ## Próximo paso exacto
+**"ELEGÍ TU BANDO" (tarea programada del 9/11 a las 2:00, que llegó y se hizo el 12/11):** reel 3 de ajedrez.
+- **Auditoría:** `videos/elegi-tu-bando/AUDIT.md`:
+  - el producto se nombra en el cuadro 1;
+  - se repintan los dos bandos ("un bando" y "el otro");
+  - el rey en 4 colores queda igual a Papá Noel (el chiste y la función a la vez);
+  - el CTA ofrece precio y fecha.
+- **Reel:** `videos/elegi-tu-bando/` (21,6 s). Puerta de calidad 0/1296, 0 saltos.
+- **Caption y DM:** en `GUION.md`.
+- **Siguiente:** reel 4, "Las preguntas de Papá Noel", cuando lo pida.
+
 **"UNA MÁS" (tarea programada, 2026-11-08 2:00 Montevideo):** reel 2 de ajedrez, con auditoría del guion y una investigación desde otro punto de vista.
 - **Investigación:** `videos/RESEARCH_AJEDREZ_2_2026.md`, con cuatro ángulos nuevos y el análisis de toda la investigación anterior:
   - la voz del cliente;

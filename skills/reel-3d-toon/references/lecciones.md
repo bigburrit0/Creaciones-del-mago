@@ -119,3 +119,12 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | **A background render ran in the repository root** (it rendered the website and left a `.hyperframes/` cache there) | The `cd` at the start of a `run_in_background` command did not take effect | Start background renders as `bash -c 'cd DIR \|\| exit 9; echo "cwd: $(pwd)" > ../render.log; npx hyperframes render ... >> ../render.log 2>&1'`, and check the first log line |
 | The transcription model returned 429 in bursts | Per-minute limits on the free tier (the daily quota had reset) | Retry with 20 s waits; fall back to `CHECK_MODEL=gemini-3.5-flash-lite` |
 | The printer whir is a buzzy square wave | — | The printer whir plays only under the printer close-ups, never under the whole reel |
+
+## From "Elegí tu bando" (chess reel 3; scheduled for 2026-11-09, run on 2026-11-12)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The scheduled run reached the session 3.5 days late | The session or container was idle or reclaimed when the trigger fired | Scheduled work can arrive late: check the date when it runs, say so in the summary, and still do the whole job |
+| A question line ended up inside the previous clip (m3 had "Bueno… vikingo sos." plus "¿Qué colores le pondrías vos?") | The pauses inside a two-sentence CTA are as long as the pauses between lines | Check every clip's length against its words (about 2.5-3 words per second). Re-cut from the take at the measured pauses, and record the cuts in `_cuts_from_take` |
+| — | A customisation feature needs to be *seen* | Show the choice as the two decisions it is (both sides repainted, labelled) and a "4 colores" piece built part by part. Recolour toon materials by blending each mesh's own colour to the new one, matching the old colour to the nearest of the side's three (exact hex compare breaks under colour management) |
+| An elbow flip at the start of a pointing gesture | A 0.35 s reach | Reaches that start from the idle pose take at least 0.5 s |

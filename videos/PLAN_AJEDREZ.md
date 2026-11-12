@@ -15,7 +15,7 @@ The pieces are modelled from the site's photos in `biblioteca/3d/web/ajedrez3d.j
 | 1 | **¿Vikingo o caballero?** (made first) | reach | Papá Noel is viking "because he's from the north"; "jaque mate", "¿mate? ¡dale, cebá uno!" | VIKINGO / CABALLERO | photos of that set and "¿para quién es?" | sends and comments per reach |
 | 2 | **Una más** (audited 2026-11-08) | reach / craft | "¿Ya está?" "Una más." while the hours pass and the board fills; a 33rd piece: "si se te pierde una… ¡una más!" | VIKINGO / MEDIEVAL | price and date, "¿para quién es?" | average watch time, comments |
 | 3 | **Elegí tu bando** | consideration | Papá Noel paints the vikings red and white: "¡ese rey soy yo!" | COLORES | the colour options | DMs per 1,000 views |
-| 4 | **Las preguntas de Papá Noel** | consideration | four quick objections, four honest answers | DUDA (answered by a person) | a human reply | saves, questions |
+| 4 | **Las preguntas de Papá Noel** (audited 2026-11-12) | consideration | his list of questions, a counter 1/4 … 4/4, then the list unrolls to the floor: 5/87 | DUDA (answered by a person, with price and date) | a human reply | saves, questions |
 | 5 | **Culpa de las piezas** | conversion | he loses again, blames the pieces, wants his own set for Christmas | PEDIR | the WhatsApp link and **your real cut-off date** | WhatsApp chats before the cut-off |
 
 **Proposed dates:**
@@ -96,20 +96,22 @@ Script and caption: `elegi-tu-bando/GUION.md`.
 
 ---
 
-## Reel 4: "Las preguntas de Papá Noel" (consideration, about 24 s)
+## Reel 4: "Las preguntas de Papá Noel" (consideration, 27.2 s) — audited and rewritten 2026-11-12 (`las-preguntas-de-papa-noel/AUDIT.md`)
 
-**Idea.** Papá Noel wants the viking king *now* and fires off the four questions real customers ask. El Mago answers each with a fact and a visual.
+**Idea.** Papá Noel reads his questions off his famous list, a counter keeps score (1/4 … 4/4), and El Mago answers each one with a fact and a visual. At 4/4 the list unrolls to the floor and the counter spins to 5/87.
 
 | Time | Visual | Line |
 |---|---|---|
-| 0-2 | Papá Noel holds up the viking king; hook "¿Cuánto sale?" | S: "¿Cuánto sale?" |
-| 2-5 | a chat bubble (no number) | M: "Te paso precio y fecha antes de empezar. Sin compromiso." |
-| 5-9 | the king beside a ruler: 9.5 cm | S: "¿Es para jugar o para mirar?" M: "Para jugar: tamaño torneo, o el que quieras." |
-| 9-13 | a pawn missing; the printer reprints it | S: "¿Y si se me pierde una pieza?" M: "Te la imprimo de nuevo." |
-| 13-16 | the board alone | S: "¿Y el tablero?" M: "Va aparte. Te lo digo antes." |
-| 16-19 | real photos | — |
-| 19-21.5 | CTA | M: "¿Otra duda? Comentá DUDA." |
-| 21.5-24 | card | — |
+| 0-1.4 | Papá Noel with his scroll beside the viking set; hook "Ajedrez vikingo / impreso en 3D"; counter "Pregunta 1/4" | S: "¿Cuánto sale?" |
+| 1.4-3.8 | El Mago; two chat stickers pop: "precio ✓", "fecha ✓" (no number) | M: "Te paso precio y fecha antes de empezar." |
+| 3.8-8.7 | 2/4. The king hops to the empty centre, a ruler rises beside it: 9,5 cm; on "o más grande" the king grows | S: "¿Es para jugar o para mirar?" M: "Para jugar. Tamaño torneo, o más grande." |
+| 8.7-12.5 | 3/4. A pawn hops off the table and rolls away; the printer reprints it layer by layer; it pops back onto its square | S: "¿Y si se me pierde una?" M: "Te la imprimo de nuevo." |
+| 12.5-15.4 | 4/4. The pieces float up, the board slides out and stands on the floor in front of the table; tags "las piezas" / "el tablero: aparte" | S: "¿Y el tablero?" M: "Va aparte: yo hago las piezas." |
+| 15.4-17.7 | The scroll drops, unrolls to the floor and rolls toward the camera; the counter spins to 5/87 | S: "¡Esperá, que tengo más!" |
+| 17.7-19.6 | El Mago, deadpan | M: "Las demás… en comentarios." |
+| 19.6-21.8 | "Así son de verdad": vikingo, medieval, medieval in colours | — |
+| 21.8-24.9 | El Mago points at the viewer | M: "Comentá duda y te contesto, con precio y fecha." |
+| 24.9-27.2 | card over the set, back on its board | — |
 
 ---
 

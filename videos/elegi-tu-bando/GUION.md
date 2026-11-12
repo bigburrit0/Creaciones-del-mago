@@ -48,3 +48,14 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 > ¡Hola! Gracias por comentar 👑 ¿Para quién es el ajedrez? Contame qué colores te imaginás para cada bando y te paso las opciones, con precio y fecha, por WhatsApp. Sin compromiso.
 
 **Same-day story:** a poll, "¿Qué colores le pondrías a tu bando?", with two pairs to choose from, plus a WhatsApp link sticker.
+
+## Result (2026-11-12)
+
+`elegi-tu-bando.mp4`: 21.6 s, 1080×1920, 60 fps. The render ran with an explicit `cd` (first log line checked).
+
+- **QA gate:** 0 bad frames out of 1296, 0 pose jumps, deterministic. One elbow flip was fixed first: El Mago's pointing reach went from 0.35 s to 0.55 s.
+- **Flicker scan:** 0 frames.
+- **Loudness:** -14.4 LUFS, peak -1.1 dBFS.
+- **No steady buzz:** 37 Hz at 2.6 dB; no DC.
+- **Voices:** all 6 lines clear in the final mix. "vikingo sos" runs together, as in natural Rioplatense speech; the subtitle shows it written out.
+- **Contact sheet** of the final frames reviewed.

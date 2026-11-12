@@ -82,20 +82,17 @@ Why it was rewritten (`RESEARCH_AJEDREZ_2_2026.md`):
 
 ---
 
-## Reel 3: "Elegí tu bando" (consideration, about 22 s)
+## Reel 3: "Elegí tu bando" (consideration, 21.6 s) — audited and made (`elegi-tu-bando/AUDIT.md`)
 
-**Idea.** Papá Noel wants his vikings in his own colours. El Mago's wand repaints the army one sweep at a time. The viking king ends up dressed as Papá Noel.
+Papá Noel wants his viking side "rojo y blanco, ¡como yo!". El Mago's magic repaints it, then his own side in purple and gold: the two decisions, labelled on screen. The king gets four colours (red, white, skin, black) until it looks like Papá Noel: "¡Ese rey soy yo!" / "Bueno… vikingo sos."
 
-| Time | Action | Line |
-|---|---|---|
-| 0-2 | the viking army in bronze; Papá Noel points | S: "Lo quiero rojo y blanco. Como yo." |
-| 2-6 | a wand sweep: the pieces turn red and white, rank by rank (sparkles) | M: "Elegís los colores de cada bando." |
-| 6-9 | close-up: a four-colour piece | M: "Hasta cuatro por pieza." |
-| 9-12 | the viking king, in Papá Noel's colours, seems to look back at him | S: "¡Ese rey soy yo!" |
-| 12-14 | El Mago, deadpan | M: "Bueno… vikingo sos." (callback to reel 1) |
-| 14-17 | real photos of three colourways (gold and grey, red and black, bronze) | — |
-| 17-19.5 | CTA | M: "¿Qué colores le pondrías vos? Comentá COLORES." |
-| 19.5-22 | card | — |
+The audit added:
+- the product named in frame 1;
+- both sides repainted;
+- the four-colour king as the joke;
+- a reward in the CTA ("…Comentá COLORES y te paso precio y fecha").
+
+Script and caption: `elegi-tu-bando/GUION.md`.
 
 ---
 
@@ -182,23 +179,7 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 #AjedrezVikingo #AjedrezMedieval #Ajedrez #Impresion3D #Montevideo #CreacionesDelMago
 ```
 
-**3. Elegí tu bando**
-```
-¡Ese rey soy yo! Ajedrez vikingo impreso en 3D en Montevideo, en los colores que elijas para cada bando 🎨
-
-Papá Noel quiso sus vikingos rojo y blanco, "como él". Bueno… vikingo es.
-Vos elegís:
-• los colores de cada bando (hasta 4 por pieza)
-• el tamaño (rey de torneo de 9,5 cm, o hasta 25 cm por pieza)
-• PLA para adentro, o PETG si va al sol o se usa mucho
-El tablero va aparte.
-
-Comentá COLORES y te paso las opciones 👇
-
-Precio y fecha por WhatsApp al 092 104 419, sin compromiso. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
-
-#AjedrezVikingo #AjedrezMedieval #AjedrezPersonalizado #Impresion3D #Montevideo #CreacionesDelMago
-```
+**3. Elegí tu bando**: the final caption after the audit is in `elegi-tu-bando/GUION.md`.
 
 **4. Las preguntas de Papá Noel**
 ```

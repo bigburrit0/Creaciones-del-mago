@@ -183,21 +183,7 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 
 **3. Elegí tu bando**: the final caption after the audit is in `elegi-tu-bando/GUION.md`.
 
-**4. Las preguntas de Papá Noel**
-```
-¿Cuánto sale un ajedrez medieval o vikingo impreso en 3D? Papá Noel me preguntó todo, acá en Montevideo 🤔
-
-¿Cuánto sale? Depende del peso y de las horas de impresora. Te paso precio y fecha antes de empezar, sin compromiso.
-¿Para jugar o para mirar? Para jugar, en tamaño de torneo (rey de 9,5 cm) o el que quieras.
-¿Y si se pierde una pieza? La vuelvo a imprimir a partir de fotos y medidas.
-¿Y el tablero? Va aparte: el juego son las piezas.
-
-¿Otra duda? Comentá DUDA y te contesto 👇
-
-WhatsApp 092 104 419. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
-
-#AjedrezMedieval #AjedrezVikingo #Impresion3D #Ajedrez #Montevideo #CreacionesDelMago
-```
+**4. Las preguntas de Papá Noel**: the final caption and DM after the audit are in `las-preguntas-de-papa-noel/GUION.md`.
 
 **5. Culpa de las piezas** (fill in the date before publishing)
 ```

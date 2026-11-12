@@ -128,3 +128,16 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | A question line ended up inside the previous clip (m3 had "Bueno… vikingo sos." plus "¿Qué colores le pondrías vos?") | The pauses inside a two-sentence CTA are as long as the pauses between lines | Check every clip's length against its words (about 2.5-3 words per second). Re-cut from the take at the measured pauses, and record the cuts in `_cuts_from_take` |
 | — | A customisation feature needs to be *seen* | Show the choice as the two decisions it is (both sides repainted, labelled) and a "4 colores" piece built part by part. Recolour toon materials by blending each mesh's own colour to the new one, matching the old colour to the nearest of the side's three (exact hex compare breaks under colour management) |
 | An elbow flip at the start of a pointing gesture | A 0.35 s reach | Reaches that start from the idle pose take at least 0.5 s |
+
+## From "Las preguntas de Papá Noel" (chess reel 4, scheduled for 2026-11-12 20:00, arrived on time)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| A FAQ reel had no comic engine | Four answers in a row are a list, not a story | Give the questions an engine: the character's own prop (Papá Noel's list), a visible counter (1/4 … 4/4, an open loop) and a payoff that breaks it (5/87). The punchline can also be the bridge to the CTA ("Las demás… en comentarios") |
+| `_cuts_from_take` looked like a script option | It is only a record: `tts_lineas.py` does not read it | Re-cut by hand with the split's own trim filter (`silenceremove` both ends), store the cut points in `voces.json`, then `--post-only` for the squeezes |
+| The list's handwriting faced away from the camera | A strip built from code: the side vector and the triangle winding decide the front face | Check the written side on a frame; flip the width vector (not the texture) so the text reads left to right from the camera |
+| A head turn read last frame's prop position | The list's place is set after the arms are solved, so `poseAt` saw the previous frame's value (breaks determinism) | Poses aim at fixed points (`LISTREF`), never at props placed later in the frame |
+| The falling pawn showed mostly table legs and the list | Cameras placed for the start of a move, not its whole path | Frame the whole path (board edge to floor), and route the motion across the frame (the pawn rolls along x past a front camera), away from other props |
+| A lying piece would sink into the floor when tumbling | Rotating about the base origin | Rotate a piece about its centre: origin = centre − q·(0, h/2, 0); a lying piece rolls about its long axis at its radius |
+| One frame of beard in body while he looked down at the list | A 0.2 rad head bend | As for dozing: take part of a downward look from the upper spine |
+| A ruler "at true scale" needs a true model | The kit's king was ~9.6 cm | Measure the toon meshes (`Box3` without outlines) and scale the piece to the stated size (0.095 m), then draw the ruler in real centimetres |

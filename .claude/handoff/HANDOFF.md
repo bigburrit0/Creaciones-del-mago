@@ -1,6 +1,16 @@
-# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-07
+# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-12
 
 ## Próximo paso exacto
+**"LAS PREGUNTAS DE PAPÁ NOEL" (tarea programada del 12/11 a las 20:00, llegó a tiempo):** reel 4 de ajedrez.
+- **Auditoría:** `videos/las-preguntas-de-papa-noel/AUDIT.md`. El borrador era un FAQ seco; ahora:
+  - el chiste es la lista de Papá Noel, con un contador "Pregunta 1/4 … 4/4";
+  - a 4/4 la lista se desenrolla hasta el piso y el contador salta a 5/87: "¡Esperá, que tengo más!", y El Mago responde seco: "Las demás… en comentarios.";
+  - cada respuesta tiene su imagen: stickers de precio y fecha (sin número), la regla con el rey a 9,5 cm reales, el peón que se cae y se reimprime capa por capa, el tablero que se va aparte;
+  - el CTA ofrece precio y fecha ("Comentá DUDA y te contesto, con precio y fecha").
+- **Reel:** `videos/las-preguntas-de-papa-noel/` (27,2 s). Puerta de calidad 0/1632, 0 saltos.
+- **Caption y DM:** en `GUION.md` (los 3 redactores, curado; esta vez ninguno escribió "envío gratis a todo Uruguay").
+- **Siguiente:** reel 5, "Culpa de las piezas", que necesita la fecha límite de Navidad del dueño. No empezar sin pedido.
+
 **"ELEGÍ TU BANDO" (tarea programada del 9/11 a las 2:00, que llegó y se hizo el 12/11):** reel 3 de ajedrez.
 - **Auditoría:** `videos/elegi-tu-bando/AUDIT.md`:
   - el producto se nombra en el cuadro 1;
@@ -9,7 +19,7 @@
   - el CTA ofrece precio y fecha.
 - **Reel:** `videos/elegi-tu-bando/` (21,6 s). Puerta de calidad 0/1296, 0 saltos.
 - **Caption y DM:** en `GUION.md`.
-- **Siguiente:** reel 4, "Las preguntas de Papá Noel", cuando lo pida.
+- **Siguiente:** reel 4, "Las preguntas de Papá Noel" (hecho el 12/11, ver arriba).
 
 **"UNA MÁS" (tarea programada, 2026-11-08 2:00 Montevideo):** reel 2 de ajedrez, con auditoría del guion y una investigación desde otro punto de vista.
 - **Investigación:** `videos/RESEARCH_AJEDREZ_2_2026.md`, con cuatro ángulos nuevos y el análisis de toda la investigación anterior:

@@ -1,0 +1,76 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, who just lost a game of chess again to his friend: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. First line: an indignant sore loser, pointing at the board, outraged. Second line: sulking for a second, then a childish, determined wish, almost stamping his foot on the last two words. Third line: eager and practical, a real question.",
+  "lines": [
+   [
+    "s1",
+    "¡Me hicieron trampa las piezas!"
+   ],
+   [
+    "s2",
+    "Quiero el mío. ¡Para Navidad!"
+   ],
+   [
+    "s3",
+    "¿Hasta cuándo lo puedo pedir?"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, who prints chess sets in 3D. First line: completely deadpan and dry, a small pause after 'no pierden'. Second line: warm and practical, honest advice from a craftsman. Third line: clear and friendly, saying the date slowly and distinctly. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Las piezas no pierden. Vos sí."
+   ],
+   [
+    "m2",
+    "Entonces no esperes: un juego lleva muchas horas de impresora."
+   ],
+   [
+    "m3",
+    "Hasta el veintitrés de diciembre."
+   ],
+   [
+    "m4",
+    "Comentá pedir y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "s2": [
+   2.9,
+   6.9
+  ],
+  "s3": [
+   6.95,
+   8.56
+  ]
+ },
+ "_edits": {
+  "s2": {
+   "squeeze": [
+    [
+     0.586,
+     1.162,
+     0.3
+    ],
+    [
+     1.82,
+     2.612,
+     0.25
+    ]
+   ]
+  },
+  "m1": {
+   "squeeze": [
+    1.559,
+    2.179,
+    0.42
+   ]
+  }
+ },
+ "_note": "the automatic split put '¡Para Navidad!' at the start of s3 (the take added a sulking 'Mmm…' before 'quiero el mío', and its pauses were as long as the gaps between lines): s2 and s3 were re-cut by hand from the take (take seconds) with the split's own trim filter. s2 is 'Mmm… quiero el mío. ¡Para Navidad!' (the subtitle matches what was said); its two inner pauses shortened to 0.3 and 0.25 s; m1's pause after 'no pierden' 0.62 -> 0.42 s (still deadpan). Raw-clip seconds."
+}

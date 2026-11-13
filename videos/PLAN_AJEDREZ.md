@@ -16,7 +16,7 @@ The pieces are modelled from the site's photos in `biblioteca/3d/web/ajedrez3d.j
 | 2 | **Una más** (audited 2026-11-08) | reach / craft | "¿Ya está?" "Una más." while the hours pass and the board fills; a 33rd piece: "si se te pierde una… ¡una más!" | VIKINGO / MEDIEVAL | price and date, "¿para quién es?" | average watch time, comments |
 | 3 | **Elegí tu bando** | consideration | Papá Noel paints the vikings red and white: "¡ese rey soy yo!" | COLORES | the colour options | DMs per 1,000 views |
 | 4 | **Las preguntas de Papá Noel** (audited 2026-11-12) | consideration | his list of questions, a counter 1/4 … 4/4, then the list unrolls to the floor: 5/87 | DUDA (answered by a person, with price and date) | a human reply | saves, questions |
-| 5 | **Culpa de las piezas** | conversion | he loses again, blames the pieces, wants his own set for Christmas | PEDIR | the WhatsApp link and **your real cut-off date** | WhatsApp chats before the cut-off |
+| 5 | **Culpa de las piezas** (audited 2026-11-13) | conversion | he loses again, blames the pieces, wants his own set for Christmas | PEDIR | the WhatsApp link and **your real cut-off date** | WhatsApp chats before the cut-off |
 
 **Proposed dates:**
 - Tue 10 Nov: reel 1.
@@ -117,20 +117,23 @@ Script and caption: `elegi-tu-bando/GUION.md`.
 
 ---
 
-## Reel 5: "Culpa de las piezas" (conversion, about 22 s; needs your cut-off date)
+## Reel 5: "Culpa de las piezas" (conversion, 24.2 s) — audited and rewritten 2026-11-13 (`culpa-de-las-piezas/AUDIT.md`)
 
-**Idea.** A rematch. Papá Noel loses again and blames the pieces, which all turn to look at him. He wants his own set for Christmas, and the real cut-off date closes the reel.
+**Idea.** The rematch: the scholar's mate again. Papá Noel blames the pieces, and his own vikings turn round to stare at him. He wants his own set for Christmas; El Mago tells him the real cut-off.
 
-| Time | Action | Line |
+| Time | Visual | Line |
 |---|---|---|
-| 0-2 | the board mid-game; the viking king tips over again (callback); hook "Revancha" | S: "¡Me hicieron trampa las piezas!" |
-| 2-5 | every piece slowly turns to face him | M: "Las piezas no pierden. Vos sí." |
-| 5-8 | Papá Noel, offended… then thinks | S: "Quiero el mío. Para Navidad." |
-| 8-11 | the printer starts, the warm glow | M: "Entonces pedilo ya: un juego lleva muchas horas." |
-| 11-14 | a calendar page with **[your real cut-off date]** | M: "Pedí antes del [fecha]." |
-| 14-17 | real photos | — |
-| 17-19.5 | CTA | M: "Comentá PEDIR y te paso precio y fecha." |
-| 19.5-22 | card with the cut-off date | — |
+| 0-1 | the mid-game (vikings vs medieval); the viking king tips over; hook "Ajedrez vikingo vs. medieval / impreso en 3D", badge "LA REVANCHA" | — |
+| 0.55-2.6 | Papá Noel points at the board | S: "¡Me hicieron trampa las piezas!" |
+| 2.6-4.45 | his vikings turn round one by one to stare at him; he sweats | — |
+| 4.45-7.3 | El Mago, deadpan | M: "Las piezas no pierden. Vos sí." |
+| 7.3-9.8 | Papá Noel sulks… then cheers | S: "Mmm… quiero el mío. ¡Para Navidad!" |
+| 9.8-13.45 | a red viking king rises layer by layer on the printer; El Mago at work | M: "Entonces no esperes: un juego lleva muchas horas de impresora." |
+| 13.45-14.65 | Papá Noel leans in | S: "¿Hasta cuándo lo puedo pedir?" |
+| 14.65-16.75 | a calendar page: 23 DICIEMBRE, "último día para pedir", circled in red | M: "Hasta el veintitrés de diciembre." |
+| 16.75-19 | "Así son de verdad": vikingo, medieval, medieval in colours | — |
+| 19-21.7 | El Mago points at the viewer | M: "Comentá PEDIR y te paso precio y fecha." |
+| 21.7-24.2 | card over the board (the king standing again): "Pedidos para Navidad: hasta el 23 de diciembre" | — |
 
 ---
 

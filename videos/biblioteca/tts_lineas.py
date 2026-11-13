@@ -6,7 +6,7 @@ Usage: python3 tts_lineas.py LINES.json OUT_DIR [--model MODEL]
 
 LINES.json: {"Santa": {"voice": "Algenib", "style": "...", "lines": [["s1", "text"], ...]}, ...}
 Writes OUT_DIR/<id>_raw.wav (the cut takes), then OUT_DIR/<id>.wav after the optional "_edits" (keep a span with
-"from"/"to", or shorten an inner pause with "squeeze": [start, end, new_length]) and loudness matching, and
+"from"/"to", or shorten inner pauses with "squeeze": [start, end, new_length], or a list of them) and loudness matching, and
 OUT_DIR/durations.json. --post-only redoes the edits without calling the API.
 
 The API key is never read or printed here: the session's network proxy injects it for
@@ -118,9 +118,10 @@ def post(out_dir, cfg):
             continue
         for i, _ in c["lines"]:
             src, dst, ed = os.path.join(out_dir, f"{i}_raw.wav"), os.path.join(out_dir, f"{i}.wav"), edits.get(i, {})
-            if "squeeze" in ed:                    # [start, end, new_length] of an inner pause
-                s0, e0, keep = ed["squeeze"]
-                cut = f"aselect='not(between(t,{s0 + keep / 2:.3f},{e0 - keep / 2:.3f}))',asetpts=N/SR/TB,"
+            if "squeeze" in ed:                    # [start, end, new_length] of an inner pause, or a list of them
+                sqs = ed["squeeze"] if isinstance(ed["squeeze"][0], list) else [ed["squeeze"]]
+                spans = "+".join(f"between(t,{s0 + keep / 2:.3f},{e0 - keep / 2:.3f})" for s0, e0, keep in sqs)
+                cut = f"aselect='not({spans})',asetpts=N/SR/TB,"
             else:
                 cut = ""
             span = ["-ss", f"{ed.get('from', 0):.3f}"] + (["-to", f"{ed['to']:.3f}"] if "to" in ed else [])

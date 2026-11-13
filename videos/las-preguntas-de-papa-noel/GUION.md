@@ -54,3 +54,16 @@ If there is no answer in about 24 h, send once:
 ## Suggested publish date
 
 Sunday 22/11, as in the plan (after reel 3 on Wednesday 18/11).
+
+## Result (2026-11-13)
+
+`las-preguntas-de-papa-noel.mp4`: 27.2 s, 1080×1920, 60 fps.
+- QA gate: 0 bad frames out of 1632, 0 pose jumps, deterministic.
+- Flicker scan: 0 frames.
+- Loudness: -13.7 LUFS, true peak -1.2 dBFS.
+- No steady buzz: the 37 Hz test in the band above 6 kHz is 7.5 dB above the median (the cicadas were 34 dB). The
+  same band shows a 16-20 Hz modulation at 15-19 dB, which the earlier chess reels show too: it is the music, not a buzz.
+- Voices: all eleven lines clear in the transcription of the mix ("Para jugar" was once heard as a question; the
+  subtitles show it as an answer).
+- The first render had the "9,5 cm" label under the counter for 0.6 s; the label now sits just above the mark and the
+  ruler shot aims higher (re-rendered; the audio track is unchanged).

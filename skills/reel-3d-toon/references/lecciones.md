@@ -141,3 +141,13 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | A lying piece would sink into the floor when tumbling | Rotating about the base origin | Rotate a piece about its centre: origin = centre − q·(0, h/2, 0); a lying piece rolls about its long axis at its radius |
 | One frame of beard in body while he looked down at the list | A 0.2 rad head bend | As for dozing: take part of a downward look from the upper spine |
 | A ruler "at true scale" needs a true model | The kit's king was ~9.6 cm | Measure the toon meshes (`Box3` without outlines) and scale the piece to the stated size (0.095 m), then draw the ruler in real centimetres |
+
+## From "Culpa de las piezas" (chess reel 5, scheduled for 2026-11-13 2:00, arrived on time)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The draft caption said "para que llegue antes de Navidad, pedilo antes del [fecha]" | A cut-off written as a delivery promise, and "antes del 23" means the 22nd | Say the owner's date exactly as the last day included ("hasta el 23 de diciembre"), call it the last day to ORDER, and keep the honest "un juego lleva muchas horas: cuanto antes, mejor" next to it |
+| The TTS added a sulking "Mmm…" and the split cut the line in the wrong place | Acting adds words and pauses | Check each clip's words against its length; keep what works and make the subtitle match what was said. `tts_lineas.py` now takes a list of squeezes for one line |
+| A piece's fall was hidden by its neighbours from three camera positions | The falling piece sits among its own pieces and the attacker | Pick the piece's fall direction first (onto an empty square), then the camera on the side away from the attacker, raised above the pawns, close (fov 38) |
+| A crowd gag (pieces turning round) barely read | 180° turns of small pieces look alike from far away | Shoot it as the character's POV from close above, and add a second, readable beat: after turning, each piece tilts back to look up at him |
+| A "character at work" wide shot showed only his hat | High camera, the character between the lens and the work | When the work is the point, cut to a second angle of the work itself (two printer angles), not to the worker's back |

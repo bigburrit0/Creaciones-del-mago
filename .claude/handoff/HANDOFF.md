@@ -1,6 +1,18 @@
-# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-12
+# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-13
 
 ## Próximo paso exacto
+**"CULPA DE LAS PIEZAS" (tarea programada del 13/11 a las 2:00, llegó a tiempo):** reel 5 de ajedrez, el último de la serie.
+- **Fecha límite de Navidad (la dio el dueño el 12/11):** el último día para pedir es el 23 de diciembre ("hasta el 23 de diciembre"). Es el último día de pedido, no una promesa de entrega.
+- **Auditoría:** `videos/culpa-de-las-piezas/AUDIT.md`:
+  - el producto se nombra en el cuadro 1;
+  - la revancha es el mate del pastor: el rey vikingo cae y sus propios vikingos se dan vuelta a mirar a Papá Noel ("Las piezas no pierden. Vos sí.");
+  - un rey vikingo rojo se imprime capa por capa;
+  - Papá Noel pregunta "¿Hasta cuándo lo puedo pedir?" y aparece la hoja de calendario con el 23;
+  - el caption borrador prometía entrega ("para que llegue antes de Navidad") y se corrigió.
+- **Reel:** `videos/culpa-de-las-piezas/` (24,2 s). Puerta de calidad 0/1452, 0 saltos.
+- **Caption y DM:** en `GUION.md`.
+- **La serie de ajedrez está completa** (5 reels). No empezar nada nuevo sin pedido.
+
 **"LAS PREGUNTAS DE PAPÁ NOEL" (tarea programada del 12/11 a las 20:00, llegó a tiempo):** reel 4 de ajedrez.
 - **Auditoría:** `videos/las-preguntas-de-papa-noel/AUDIT.md`. El borrador era un FAQ seco; ahora:
   - el chiste es la lista de Papá Noel, con un contador "Pregunta 1/4 … 4/4";
@@ -9,7 +21,7 @@
   - el CTA ofrece precio y fecha ("Comentá DUDA y te contesto, con precio y fecha").
 - **Reel:** `videos/las-preguntas-de-papa-noel/` (27,2 s). Puerta de calidad 0/1632, 0 saltos.
 - **Caption y DM:** en `GUION.md` (los 3 redactores, curado; esta vez ninguno escribió "envío gratis a todo Uruguay").
-- **Siguiente:** reel 5, "Culpa de las piezas", que necesita la fecha límite de Navidad del dueño. No empezar sin pedido.
+- **Siguiente:** reel 5, "Culpa de las piezas" (hecho el 13/11, ver arriba).
 
 **"ELEGÍ TU BANDO" (tarea programada del 9/11 a las 2:00, que llegó y se hizo el 12/11):** reel 3 de ajedrez.
 - **Auditoría:** `videos/elegi-tu-bando/AUDIT.md`:

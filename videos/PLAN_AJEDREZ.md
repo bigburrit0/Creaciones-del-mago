@@ -190,19 +190,7 @@ Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo U
 
 **4. Las preguntas de Papá Noel**: the final caption and DM after the audit are in `las-preguntas-de-papa-noel/GUION.md`.
 
-**5. Culpa de las piezas** (fill in the date before publishing)
-```
-Papá Noel perdió otra vez y culpa a las piezas. Ajedrez vikingo y medieval impreso en 3D en Montevideo, para Navidad 🎄
-
-Ahora quiere el suyo. Le dije la verdad: un juego completo lleva muchas horas de impresora, así que hay que pedirlo con tiempo.
-Para que llegue antes de Navidad, pedilo antes del [fecha].
-
-Comentá PEDIR y te escribo 👇
-
-Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso. Entrego sin costo en La Unión, La Blanqueada y parte de Buceo, y mando a todo Uruguay.
-
-#AjedrezVikingo #AjedrezMedieval #RegalosDeNavidad #Impresion3D #Montevideo #CreacionesDelMago
-```
+**5. Culpa de las piezas**: the final caption and DM after the audit, with the owner's cut-off (23 December), are in `culpa-de-las-piezas/GUION.md`.
 
 **DM by private reply** (one per comment, within 7 days). Example for VIKINGO:
 

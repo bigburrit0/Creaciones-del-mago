@@ -289,7 +289,7 @@
         RULER.position.copy(sq(4, 4)).add(V3(-0.006, 0, 0));
         const lk = t >= T.proof ? 0 : pulse(t, T.ruler + 0.35, T.ruler + 0.5, 10.75, 10.9), top95 = sq(4, 3).y + 0.095;
         MARK.visible = LABEL.visible = lk > 0.001; MARK.position.set((KC.x + RULER.position.x) / 2 - 0.004, top95, KC.z); MARK.scale.set(Math.max(0.01, lk), 1, 1);
-        LABEL.position.set(RULER.position.x + 0.012, top95 + 0.032, KC.z + 0.01); LABEL.scale.set(0.075 * lk, 0.03 * lk, 1);
+        LABEL.position.set(RULER.position.x + 0.012, top95 + 0.02, KC.z + 0.01);   /* just above the mark, and the ruler shot aims higher: 3.2 cm above it the counter covered it (7.3-7.9 s, first render) */ LABEL.scale.set(0.075 * lk, 0.03 * lk, 1);
         // the lost pawn and the reprint
         { const g = PAWN.g; if (t >= T.fall && t < T.proof) { const f = pawnFall(t); g.position.copy(f.p); g.quaternion.copy(f.q); g.visible = t < T.m3 - 0.06; } }   /* rolled out of the shot: gone (lost) */
         REPR.visible = t >= T.popBack && t < T.proof; if (REPR.visible) { const d = t - T.popBack, k = clamp(d / 0.16, 0, 1);
@@ -321,7 +321,7 @@
 
       // ---------- camera and editing (cuts every 0.5-2.5 s; every camera looks toward the back or side walls) ----------
       const growK = (t) => pulse(t, T.grow, T.grow + 0.3, 10.75, 11.05);
-      const rulerCam = (t, f) => { const m = KC.clone().lerp(sq(4, 4), 0.5), g = growK(t); return { p: m.clone().add(V3(0.0, 0.1 + 0.05 * g, 0.42 - 0.04 * f + 0.22 * g)), l: m.clone().add(V3(0, 0.068 + 0.036 * g, 0)), fov: 32, roll: 0 }; };   // pulls back as the king grows
+      const rulerCam = (t, f) => { const m = KC.clone().lerp(sq(4, 4), 0.5), g = growK(t); return { p: m.clone().add(V3(0.0, 0.115 + 0.05 * g, 0.42 - 0.04 * f + 0.22 * g)), l: m.clone().add(V3(0, 0.085 + 0.036 * g, 0)), fov: 32, roll: 0 }; };   // pulls back as the king grows
       const SHOTS = [
         { t: 0.0, d: 1.35, fov: 46, from: [-0.18, 1.12, 1.08], to: [-0.15, 1.1, 1.03], look: [0.8, 0.7, -0.18] },                     // hook: the set and Papá Noel with his list
         { t: 1.35, d: T.q2 - 1.35, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                              // "Te paso precio y fecha…" (stickers)

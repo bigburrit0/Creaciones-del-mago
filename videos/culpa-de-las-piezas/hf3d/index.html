@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 24.2, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.36) 100%); }
+      /* kinetic word-by-word captions (Instagram safe area: not the top 220 px nor the bottom 450 px) */
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      /* hook: names the product in words (RESEARCH_AJEDREZ_2_2026.md, rule 1); the badge is the callback to reel 1 */
+      #hook { position: absolute; left: 50px; right: 50px; top: 430px; text-align: center; font: 700 92px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #E8B04A; font-size: 72px; }
+      #badge { position: absolute; left: 50%; top: 240px; width: 440px; height: 120px; margin-left: -220px; border-radius: 60px; background: #C0392B; border: 8px solid #150A34; box-sizing: border-box;
+               box-shadow: 0 10px 0 rgba(21, 10, 52, 0.45); display: flex; align-items: center; justify-content: center; font: 700 52px/1 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 2px; white-space: nowrap; visibility: hidden; }
+      /* the calendar page: the owner's real cut-off (last order day, not a delivery promise) */
+      #cal { position: absolute; left: 590px; top: 470px; width: 400px; border-radius: 30px; background: #FFFDF6; border: 8px solid #150A34; box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45);
+             overflow: hidden; text-align: center; visibility: hidden; transform-origin: 50% 0%; }
+      #cal .hd { background: #C0392B; color: #FFF6E5; font: 700 54px/1 "Fredoka", sans-serif; letter-spacing: 4px; padding: 20px 0 18px; border-bottom: 8px solid #150A34; }
+      #cal .dd { position: relative; font: 700 230px/1 "Fredoka", sans-serif; color: #2E2160; padding: 12px 0 0; }
+      #cal svg { position: absolute; left: 50px; top: 4px; width: 284px; height: 236px; overflow: visible; }
+      #cal .ft { font: 700 58px/1 "Caveat", cursive; color: #C0392B; padding: 0 0 24px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      #proof { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); visibility: hidden; }
+      #proof .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 104px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                   text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #proof .st { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font: 600 46px/1.2 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+      .pol { position: absolute; width: 330px; padding: 17px 17px 0; background: #FFFDF6; border-radius: 6px; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.3); transform-origin: 50% 50%; }
+      .pol img { display: block; width: 296px; height: 296px; object-fit: cover; border-radius: 2px; }
+      .pol div { font: 700 58px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 10px 0 16px; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 62px/1.05 "Fredoka", sans-serif; color: #C0392B; }
+      #card .k1 { font: 700 48px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 90px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 42px/1.25 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k3 b { color: #C0392B; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.2" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="badge">LA REVANCHA</div>
+      <div id="hook">Ajedrez vikingo<br>vs. medieval<br><span>impreso en 3D</span></div>
+      <div id="cal"><div class="hd">DICIEMBRE</div><div class="dd">23<svg viewBox="0 0 284 236"><ellipse id="ring" cx="142" cy="122" rx="128" ry="98" pathLength="100" fill="none" stroke="#E0302A" stroke-width="12" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-8 142 122)"/></svg></div><div class="ft">último día para pedir</div></div>
+      <div id="subs"></div>
+      <div id="proof">
+        <div class="tt">Así son<br>de verdad</div>
+        <div class="pol" style="left: 140px; top: 470px"><img src="assets/p/vikingos.webp" alt=""><div>vikingo</div></div>
+        <div class="pol" style="left: 600px; top: 492px"><img src="assets/p/medieval-p.webp" alt=""><div>medieval</div></div>
+        <div class="pol" style="left: 372px; top: 905px"><img src="assets/p/medieval.webp" alt=""><div>en tus colores</div></div>
+        <div class="st">Ajedreces impresos en 3D · Montevideo</div>
+      </div>
+      <div id="card"><div class="k0">¿Lo querés para Navidad?</div><div class="k1">Ajedrez vikingo y medieval,<br>impreso en 3D pieza por pieza</div><div class="k2">¡Comentá PEDIR!</div><div class="k3">Pedidos hasta el <b>23 de diciembre</b><br>Te paso precio y fecha por mensaje</div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.2" data-track-index="1" data-volume="0.6"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="24.2" data-track-index="2" data-volume="1"></audio>
+      <audio id="v-s1" class="clip" src="assets/voz/s1.wav" data-start="0.55" data-duration="1.976" data-track-index="4" data-volume="1" data-who="santa" data-text="¡Me hicieron trampa las piezas!"></audio>
+      <audio id="v-m1" class="clip" src="assets/voz/m1.wav" data-start="4.5" data-duration="2.448" data-track-index="5" data-volume="1" data-who="mago" data-text="Las piezas no pierden. Vos sí."></audio>
+      <audio id="v-s2" class="clip" src="assets/voz/s2.wav" data-start="7.35" data-duration="2.389" data-track-index="6" data-volume="1" data-who="santa" data-text="Mmm… quiero el mío. ¡Para Navidad!"></audio>
+      <audio id="v-m2" class="clip" src="assets/voz/m2.wav" data-start="9.9" data-duration="3.427" data-track-index="7" data-volume="1" data-who="mago" data-text="Entonces no esperes: un juego lleva muchas horas de impresora."></audio>
+      <audio id="v-s3" class="clip" src="assets/voz/s3.wav" data-start="13.5" data-duration="1.05" data-track-index="8" data-volume="1" data-who="santa" data-text="¿Hasta cuándo lo puedo pedir?"></audio>
+      <audio id="v-m3" class="clip" src="assets/voz/m3.wav" data-start="14.7" data-duration="1.608" data-track-index="9" data-volume="1" data-who="mago" data-text="Hasta el 23 de diciembre."></audio>
+      <audio id="v-m4" class="clip" src="assets/voz/m4.wav" data-start="19.05" data-duration="2.729" data-track-index="10" data-volume="1" data-who="mago" data-text="Comentá PEDIR y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "Culpa de las piezas" (24.2 s, 3D toon; chess series reel 5, audited in ../AUDIT.md): the rematch of reel 1, the
+         scholar's mate again. The viking king tips over; Papá Noel blames the pieces, and his own vikings turn round one by
+         one to stare at him. "Las piezas no pierden. Vos sí." He wants his own set for Christmas; a red viking king prints
+         layer by layer; the owner's real cut-off: "Hasta el 23 de diciembre" (the last day to order, never a delivery
+         promise). Real photos, then ONE comment CTA with a reward (PEDIR: precio y fecha). Rules:
+         ../../RESEARCH_AJEDREZ_2_2026.md. Built on escena3d.js + ajedrez3d.js, from the reel 4 scene. */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, colDist } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, workshop, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { chessKit } from "./lib/ajedrez3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 24.2, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage(); renderer.localClippingEnabled = true;
+      const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree } = workshop();
+      spill.material.opacity = 0; tree.position.set(1.68, 0, -0.62);
+      const { mago, santa, BTRACK, blobM, blobS, blobK, PR, PRrest, nozzleMat } = await cast();
+      blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+
+      // ---------- timing (voice first: the measured lines decide the beats) ----------
+      const T = { tip: 0.1, s1: 0.55, stare: 2.7, m1: 4.5, vos: 6.48, s2: 7.35, navidad: 9.13, m2: 9.9, print0: 9.85, print1: 13.2, s3: 13.5, m3: 14.7, cal: 14.75, ring: 15.2,
+                  proof: 16.75, cta: 19.0, m4: 19.05, card: 21.7, exit: 99 };
+
+      // ---------- the chess table and the board (as in reels 1-4) ----------
+      const TC = V3(0.55, 0, -0.32), TOP = 0.58;
+      const tbl = new THREE.Group(); tbl.position.copy(TC); scene.add(tbl);
+      rbox(0.6, 0.04, 0.56, "#8A5638", 0, TOP - 0.02, 0, tbl, { r: 0.15 }); rbox(0.54, 0.05, 0.5, "#6E3B22", 0, TOP - 0.065, 0, tbl, { line: false });
+      for (const [x, z] of [[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]]) rbox(0.04, TOP - 0.04, 0.04, "#6E3B22", x, (TOP - 0.04) / 2, z, tbl);
+      const CK = chessKit(scene, { wo: WO });
+      const B = CK.board(); B.g.position.set(TC.x, TOP, TC.z); B.g.rotation.y = -Math.PI / 2; B.g.updateMatrixWorld(true);
+      const sq = (f, r) => B.sq(f, r);
+      // the rematch, as reel 1 ended: medieval (red, El Mago, ranks 1-2) vs viking (bronze, Papá Noel, ranks 7-8), the scholar's
+      // mate on the board: 1.e4 e5 2.Bc4 Nc6 3.Qh5 Nf6?? 4.Qxf7# (the f7 pawn is gone)
+      const COLM = CK.SIDES.red, COLV = CK.SIDES.bronze, BACK = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
+      const toonH = (g) => { const bb = new THREE.Box3(); g.updateMatrixWorld(true); g.traverse((m) => { if (m.isMesh && m.material && m.material.isMeshToonMaterial) bb.expandByObject(m); }); return bb.max.y - bb.min.y; };
+      const MOVED = { "M:pawn:4:1": [4, 3], "M:bishop:5:0": [2, 3], "M:queen:3:0": [5, 6], "V:pawn:4:6": [4, 4], "V:knight:1:7": [2, 5], "V:knight:6:7": [5, 5], "V:pawn:5:6": null };
+      const PCS = [];
+      for (const [side, set, col, r0, r1, face] of [["M", "medieval", COLM, 0, 1, Math.PI], ["V", "viking", COLV, 7, 6, 0]]) for (let f = 0; f < 8; f++) for (const [type, r] of [[BACK[f], r0], ["pawn", r1]]) {
+        const key = `${side}:${type}:${f}:${r}`; const to = key in MOVED ? MOVED[key] : [f, r]; if (!to) continue;
+        const g = CK.piece(set, type, col); g.rotation.order = "YXZ"; g.position.copy(sq(to[0], to[1])); g.rotation.y = face + B.g.rotation.y;
+        const p = { side, type, f: to[0], r: to[1], g, home: g.position.clone(), rot0: g.rotation.y, s0: 1 };
+        if (type === "king") { p.s0 = 0.095 / toonH(g); g.scale.setScalar(p.s0); }                 // tournament size: 9.5 cm, as in reel 4
+        PCS.push(p); }
+      const KINGV = PCS.find((p) => p.side === "V" && p.type === "king");
+      // his own army turns round to stare at him: every viking but the fallen king, in a wave from the queen's side
+      const STARE = PCS.filter((p) => p.side === "V" && p !== KINGV).sort((a, b) => (a.r === b.r ? a.f - b.f : b.r - a.r) || 0);
+      STARE.forEach((p, i) => { p.t0 = T.stare + i * 0.055 + 0.03 * rnd(i); });
+      // the printer bed: a red viking king (his own set, the colours he chose in reel 3) revealed bottom-up by a rising cut plane, a small glow cap
+      const BED = V3(-0.42, 0.655, -0.8), CLIP = new THREE.Plane(V3(0, -1, 0), 99), PH = 0.095;
+      const TPL = CK.piece("viking", "king", CK.SIDES.red); TPL.scale.setScalar(0.095 / toonH(TPL)); TPL.position.copy(BED); TPL.rotation.y = 0.5; TPL.visible = false;
+      TPL.traverse((m) => { if (m.material) for (const mt of [].concat(m.material)) mt.clippingPlanes = [CLIP]; });
+      const cap = new THREE.Mesh(new THREE.CircleGeometry(0.026, 28), new THREE.MeshBasicMaterial({ color: "#FFC27A", transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+      cap.rotation.x = -Math.PI / 2; scene.add(cap);
+      const { SPK, SWEAT } = makeFX();
+
+      // ---------- staging (as in reels 2-4: El Mago at the medieval end, Papá Noel at the viking end) ----------
+      const MD = V3(TC.x - 0.6, 0, TC.z), SD = V3(TC.x + 0.62, 0, TC.z), hM = Math.PI / 2, hS = -Math.PI / 2;
+      const LENS_C = V3(1.08, 1.05, 1.04), BOARDPT = V3(TC.x + 0.1, TOP + 0.05, TC.z);       // poses aim at fixed points, never at props placed later in the frame
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.L"), SF.fwd, 0.16); rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1); rotWorld(mago.b("DEF-upper_arm.R"), MF.fwd, -0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- Papá Noel: watches the mate; points at the board, outraged (left hand, camera side, 0.55 s reach); sweats under the stare;
+        //      sulks ("Mmm…", a look away taken mostly from the upper spine), then both arms up for "¡Para Navidad!"; leans in to ask
+        const look = pulse(t, -1, 0, T.s1 + 0.2, T.s1 + 0.5), stareK = pulse(t, T.stare - 0.1, T.stare + 0.2, T.m1 + 0.2, T.m1 + 0.5);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.07 * Math.max(look, stareK)); rotWorld(santa.b("DEF-head"), SF.left, 0.12 * Math.max(look, stareK));
+        { const sh = wp(santa.b("DEF-upper_arm.L")); arm(santa, "L", sh.clone().add(SF.fwd.clone().multiplyScalar(0.36)).add(SF.left.clone().multiplyScalar(0.06)).add(V3(0, -0.06, 0)), pulse(t, T.s1 - 0.15, T.s1 + 0.4, T.s1 + 1.7, T.s1 + 2.25), null, 0.08); }
+        const sulk = pulse(t, T.s2 - 0.15, T.s2 + 0.15, T.s2 + 0.7, T.s2 + 1.0);
+        rotWorld(santa.b("DEF-spine.003"), V3(0, 1, 0), 0.22 * sulk); turnTo(santa, V3(SD.x, 1.0, SD.z + 1.0), 0.45 * sulk);
+        const cheer = pulse(t, T.navidad - 0.55, T.navidad, T.navidad + 0.6, T.navidad + 1.1);
+        for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side));
+          arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.24)).add(V3(0, 0.28, 0)).add(SF.fwd.clone().multiplyScalar(0.08)), cheer, null, 0.08); }
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.06 * pulse(t, T.s3 - 0.15, T.s3 + 0.1, T.s3 + 0.9, T.s3 + 1.2));
+        // ---- El Mago: watches the board, deadpan; to the viewer for the date and the CTA (pointing: a 0.55 s reach)
+        rotWorld(mago.b("DEF-head"), MF.left, 0.1 * pulse(t, -1, 0, T.s1, T.s1 + 0.4));
+        turnTo(mago, LENS_C, Math.max(pulse(t, T.m3 - 0.25, T.m3 + 0.05, T.proof, T.proof + 0.1), pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1)));
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.m4 + 0.1, T.m4 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
+        // ---- faces: blinks; Papá Noel's brows up when he loses and while stared at, down for the sulk; El Mago's slow deadpan blink on "Vos sí"
+        let e = 0; for (const b of [1.6, 3.9, 8.2, 11.0, 12.9, 15.9, 18.4, 20.6, 23.1]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        { const u = (t - (T.vos + 0.6)) * FPS; if (u >= 0 && u < 30) e = Math.max(e, u < 8 ? u / 8 : u < 20 ? 1 : 1 - (u - 20) / 10); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+        mago.b("brows").position.y -= 0.006 * pulse(t, T.m1 - 0.2, T.m1, T.m1 + 2.6, T.m1 + 2.9);
+        santa.b("brows").position.y += 0.014 * Math.max(pulse(t, T.tip + 0.3, T.tip + 0.45, T.s1 + 1.6, T.s1 + 2.0), stareK, pulse(t, T.s3, T.s3 + 0.12, T.s3 + 0.8, T.s3 + 1.1)) - 0.01 * sulk;
+        santa.b("glasses").position.y -= 0.012 * stareK;
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props ----------
+      function props(t) {
+        setLight("day");
+        bulbs.forEach((b, k2) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k2 + Math.floor(t * 3)) % 4]));
+        const live = t < T.proof;                   // after the proof panel: the starting mid-game again (the loop)
+        for (const p of PCS) { const g = p.g; g.position.copy(p.home); g.rotation.set(0, p.rot0, 0); g.scale.setScalar(p.s0); }
+        // the mate: the viking king wobbles, then tips over forward onto the empty e7 square (resigns)
+        if (live && t > T.tip) { const k = KINGV.g, w = clamp((t - T.tip) / 0.28, 0, 1), f = clamp((t - T.tip - 0.25) / 0.3, 0, 1), a = 1.5 * f * f;
+          k.rotation.z = 0.12 * Math.sin((t - T.tip) * 30) * (1 - f) * (w < 1 ? 1 : 0.6); k.rotation.x = TIPSIGN * a; k.position.y += 0.021 * Math.sin(a); }
+        // the stare: each viking turns round (half a turn, eased, a tiny lift as it pivots) to face Papá Noel, and stays so
+        if (live) for (const p of STARE) { const u = ss(clamp((t - p.t0) / 0.42, 0, 1)), up = ss(clamp((t - p.t0 - 0.4) / 0.25, 0, 1)) * 0.28;
+          p.g.rotation.y = p.rot0 + Math.PI * u; p.g.position.y += 0.006 * Math.sin(Math.PI * u);
+          p.g.rotation.x = -up; p.g.position.y += 0.017 * Math.sin(up); }       /* ...and tilts back to look up at him (pivot on the base edge) */
+        // the print: his red king rises layer by layer
+        let printing = false; TPL.visible = t >= T.print0 && t < T.proof;
+        if (TPL.visible) { const u = clamp((t - T.print0) / (T.print1 - T.print0), 0, 1); CLIP.constant = BED.y + 0.001 + PH * u; printing = u < 1;
+          cap.visible = printing; cap.position.set(BED.x, CLIP.constant, BED.z); cap.material.opacity = 0.35 + 0.12 * Math.sin(t * 40); cap.scale.setScalar(0.7 + 0.5 * Math.sin(Math.PI * clamp(u, 0, 1)) * (u < 0.15 ? 1.6 : 0.8)); }
+        else { CLIP.constant = 99; cap.visible = false; }
+        if (PR.head) PR.head.position.x = PRrest.head.x + (printing ? 0.3 * Math.sin(t * 23) : 0.55);
+        if (PR.bed) PR.bed.position.z = PRrest.bed.z + (printing ? 0.2 * Math.sin(t * 9.1) : 0);
+        if (nozzleMat) nozzleMat.color.set(printing ? "#F2C14E" : "#2E2160");
+        // sweat: two drops slide down his temple while the army stares
+        SWEAT.forEach((m, i) => { const d = t - (T.stare + 1.2 + i * 0.3); m.visible = d > 0 && d < 0.9 && live; if (!m.visible) return;
+          m.position.copy(headPt(santa, 0.1 - 0.12 * d - 0.1 * d * d, 0.1, (i ? -1 : 1) * 0.135)); m.scale.set(1, 1.4, 1).multiplyScalar(Math.min(1, d / 0.12)); });
+        // sparkles: the print done
+        SPK.forEach((m, i) => { const d = t - T.print1 - (i % 5) * 0.01; m.visible = d > 0 && d < 0.45 && i < 12 && live; if (!m.visible) return;
+          const v = V3((rnd(i) - 0.5) * 0.3, 0.2 + rnd(i + 50) * 0.3, (rnd(i + 99) - 0.5) * 0.3);
+          m.position.copy(BED).add(V3(0, 0.1, 0)).add(v.multiplyScalar(d * 0.7)); m.position.y -= 0.4 * d * d; m.scale.setScalar(0.3 * (1 - d / 0.45)); });
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, uu = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (uu - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+      const TIPSIGN = 1;
+
+      // ---------- camera and editing (cuts every 0.7-2.8 s; every camera looks toward the back or side walls) ----------
+      const SHOTS = [
+        { t: 0.0, d: 1.0, fov: 38, from: [0.5, 0.88, -0.56], to: [0.51, 0.87, -0.55], look: [0.72, 0.65, -0.28] },                                                   // hook: the mate again, the viking king tips over
+        { t: 1.0, d: T.stare - 0.1 - 1.0, fov: 34, subj: "santa", h: 1.05, az: -35, el: 4, v: 0.2 },                                                                // "¡Me hicieron trampa las piezas!"
+        { t: T.stare - 0.1, d: 3.95 - T.stare + 0.1, fov: 44, from: [0.88, 1.0, -0.3], to: [0.87, 0.99, -0.3], look: [0.55, 0.6, -0.3] },                      // his own army turns round to stare at him
+        { t: 3.95, d: T.m1 - 0.05 - 3.95, fov: 32, subj: "santa", h: 0.82, az: -40, el: 2, v: 0.06 },                                                              // he sweats
+        { t: T.m1 - 0.05, d: T.s2 - 0.05 - T.m1 + 0.05, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                // "Las piezas no pierden. Vos sí."
+        { t: T.s2 - 0.05, d: 9.8 - T.s2 + 0.05, fov: 34, subj: "santa", h: 1.25, az: -32, el: 6, v: 0.32, whip: 1 },                                             // "Mmm… quiero el mío. ¡Para Navidad!"
+        { t: 9.8, d: 11.55 - 9.8, fov: 28, subj: "bed", h: 0.2, az: -28, el: 24, v: 0.0, whip: -1 },                                                               // his red king, layer by layer
+        { t: 11.55, d: T.s3 - 0.05 - 11.55, fov: 30, subj: "bed", h: 0.26, az: 32, el: 14, v: 0.0, whip: 1 },                                                       // another angle: his king nearly done (a ding at the top layer)
+        { t: T.s3 - 0.05, d: T.m3 - 0.05 - T.s3 + 0.05, fov: 32, subj: "santa", h: 0.85, az: -40, el: 2, v: 0.06 },                                                // "¿Hasta cuándo lo puedo pedir?"
+        { t: T.m3 - 0.05, d: T.proof - T.m3 + 0.05, fov: 38, subj: "mago", h: 1.3, az: 38, el: -3, v: 0.12, aim: [0.04, 0.0, -0.26], whip: 1 },                    // "Hasta el 23 de diciembre." (the calendar page on the right)
+        { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                               // (under the proof panel: the reset)
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                          // CTA
+        { t: T.card, d: DUR - T.card, fov: 54, from: [TC.x, 1.0, TC.z + 0.92], to: [TC.x, 0.98, TC.z + 0.86], look: [TC.x, 0.64, TC.z - 0.02] },                   // the card over the board, the king standing again
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props, points: { bed: BED.clone().add(V3(0, 0.05, 0)) },
+        punch: [[T.tip + 0.6, 0.06], [T.vos, 0.1], [T.navidad, 0.08], [T.ring, 0.06]],
+        shake: [[T.tip + 0.6, 0.003, 0.25]], flash: [[T.proof, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+
+      // ---------- text: kinetic captions, hook and badge, the calendar page, proof, end card ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 1.0] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const badge = document.getElementById("badge"), cal = document.getElementById("cal"), ring = document.getElementById("ring"), proof = document.getElementById("proof"), POLS = [...proof.querySelectorAll(".pol")], ROT = [-5, 4, -2];
+      function dom(t) {
+        { const v = t < 1.0; badge.style.visibility = v ? "visible" : "hidden"; if (v) badge.style.transform = `rotate(${(-2 + Math.sin(t * 3)).toFixed(2)}deg) scale(${(0.9 + 0.1 * backOut(clamp((t + 0.2) / 0.25, 0, 1))).toFixed(3)})`; }
+        // the calendar page drops in on "Hasta el…", the 23 gets circled on "veintitrés"
+        { const v = t >= T.cal && t < T.proof; cal.style.visibility = v ? "visible" : "hidden";
+          if (v) { const a = clamp((t - T.cal) / 0.3, 0, 1); cal.style.transform = `translateY(${((1 - ss(a)) * -120).toFixed(1)}px) rotate(${(3 + 4 * (1 - a) + 0.8 * Math.sin((t - T.cal) * 2.5)).toFixed(2)}deg) scale(${(0.85 + 0.15 * backOut(a)).toFixed(3)})`;
+            ring.setAttribute("stroke-dashoffset", (100 * (1 - ss(clamp((t - T.ring) / 0.45, 0, 1)))).toFixed(2)); } }
+        const pv = t >= T.proof && t < T.cta; proof.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { proof.style.opacity = Math.min(1, (t - T.proof) / 0.08, (T.cta - t) / 0.1).toFixed(3);
+          POLS.forEach((p, i) => { const a = clamp((t - T.proof - 0.15 - i * 0.3) / 0.26, 0, 1); p.style.opacity = a > 0 ? "1" : "0";
+            p.style.transform = `translateY(${((1 - ss(a)) * -150).toFixed(1)}px) rotate(${(ROT[i] + (1 - a) * 14).toFixed(2)}deg) scale(${(1.25 - 0.25 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks plus the furniture (the chess table's top and legs, the bench) and the pieces wherever they are */
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const FURN = [{ name: "tableTop", min: V3(TC.x - 0.3, TOP - 0.09, TC.z - 0.28), max: V3(TC.x + 0.3, TOP + 0.03, TC.z + 0.28) },
+        ...[[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]].map(([x, z], i) => ({ name: "leg" + i, min: V3(TC.x + x - 0.02, 0, TC.z + z - 0.02), max: V3(TC.x + x + 0.02, TOP, TC.z + z + 0.02) })),
+        { name: "bench", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }];
+      const boxD = (p, F) => { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); return q.distanceTo(p); };
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          const d = boxD(p, F); if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        // pieces: no body part (arms included) inside one; the fallen king: its crown stays above the board, off the queen and its neighbours
+        for (const p of PCS) { const q = p.g.position.clone().add(V3(0, 0.03, 0));
+          for (const [nm, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders()) { const d = colDist(q, k).d; if (d < 0.02) out.push(["piece", nm, k.name, p.type, +(0.02 - d).toFixed(3)]); } }
+        { const top = V3(0, 0.085, 0).applyQuaternion(KINGV.g.quaternion).multiplyScalar(KINGV.s0 / KINGV.s0).add(KINGV.g.position);
+          if (top.y < TOP + B.T + 0.004) out.push(["king-into-board", +top.y.toFixed(3)]);
+          for (const p of PCS) if (p !== KINGV && Math.hypot(top.x - p.g.position.x, top.z - p.g.position.z) < 0.022) out.push(["king-on-piece", p.side + p.type]); }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, PCS, KINGV, B, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

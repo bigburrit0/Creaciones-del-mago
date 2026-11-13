@@ -55,3 +55,18 @@ If there is no answer in about 24 h, send once:
 
 Thursday 26/11, in Black Week, as in the plan (after reel 4 on Sunday 22/11). It leaves almost four weeks before the
 cut-off.
+
+## Result (2026-11-13)
+
+`culpa-de-las-piezas.mp4`: 24.2 s, 1080×1920, 60 fps.
+- QA gate: 0 bad frames out of 1452, 0 pose jumps, deterministic (it passed the first time).
+- Flicker scan: 0 frames.
+- Loudness: -14.1 LUFS, true peak -2.3 dBFS (the render's own mix peaked at -1.0 dB; the sound was rebuilt with
+  `remezclar.py`, the picture byte-identical).
+- No steady buzz: 37 Hz is 5.7 dB above the median in the band above 6 kHz (the cicadas were 34 dB); the 16 Hz
+  modulation is the music, as in reels 1-4.
+- Voices: the first mix check heard "Vos sí" as "o sí" and "Comentá PEDIR" as "Comenzá a pedir". A pop sat on "Vos";
+  it moved after the word, and the music now ducks deeper (0.18) under the punchline and the CTA. The new mix reads
+  "Las piezas no pierden, vos sí" and "Hasta el 23 de diciembre". One check still heard "Comená a pedir"; the subtitles
+  and the card spell PEDIR.
+- The container restarted at 64% of the first render; it was relaunched.

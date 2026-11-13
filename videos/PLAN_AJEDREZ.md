@@ -27,6 +27,8 @@ The pieces are modelled from the site's photos in `biblioteca/3d/web/ajedrez3d.j
 
 They sit between the November reels already planned (`PLAN_NOVIEMBRE.md`). If the chess series takes priority, N2 and N3 move to December.
 
+**Christmas cut-off (given by the owner on 12/11):** the last day to order is **23 December** ("hasta el 23 de diciembre"). It is the last order day, not a delivery promise.
+
 **What I need from you before reel 5:**
 - The last order date for Christmas, for a full set. A set takes many printer hours (the medieval, more than 10), plus shipping.
 - Whether your viking and medieval designs have a commercial licence. If they come from MakerWorld or Printables, check each model's page.

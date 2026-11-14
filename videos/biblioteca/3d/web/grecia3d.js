@@ -132,10 +132,14 @@ export function greekKit(scene, o = {}) {
     P(S(0.0118), C, g, 0, y1 + 0.031, -0.0078, { scale: [1.12, 1.65, 0.36] });                                                             // the pelt down his back
     P(S(0.0066), C, g, 0, y1 + 0.0528, 0.0014);
     P(S(0.0049), C, g, 0, y1 + 0.0488, 0.0046, { scale: [1, 1.12, 0.72] });                                                                // beard
-    P(new THREE.SphereGeometry(0.0078, 14, 10, 0, Math.PI * 2, 0, Math.PI * 0.56), A, g, 0, y1 + 0.0538, -0.0004, { scale: [1.05, 1.08, 1.12] });   // the lion's head as a hood
-    P(S(0.0036), A, g, 0, y1 + 0.0598, 0.0062, { scale: [1.25, 0.7, 1] });
+    P(new THREE.SphereGeometry(0.0078, 14, 10, 0, Math.PI * 2, 0, Math.PI * 0.5), A, g, 0, y1 + 0.0556, -0.0012, { scale: [1.05, 1.08, 1.12] });   // the lion's head as a hood, pushed back: his face shows
+    P(S(0.0034), A, g, 0, y1 + 0.0612, 0.0058, { scale: [1.25, 0.7, 1] });                                                                // the lion's muzzle over his brow
+    for (let k = 0; k < 11; k++) { const a = Math.PI * (0.05 + 0.9 * k / 10), x = Math.cos(a) * 0.0086, z = -Math.sin(a) * 0.0086 * 0.3 - 0.001;   // the mane, a fringe around the hood
+      P(new THREE.ConeGeometry(0.0021, 0.0058, 5), A, g, x, y1 + 0.0548 - Math.abs(Math.cos(a)) * 0.004, z, { rot: [0.35, 0, -Math.cos(a) * 1.25 + Math.PI] , line: false }); }
+    for (const s of [-1, 1]) P(S(0.0009, 8, 6), D, g, s * 0.0024, y1 + 0.0532, 0.0071, { line: false });                                 // his own eyes, under the hood
+    P(S(0.0013, 8, 6), C, g, 0, y1 + 0.0519, 0.0077, { line: false });                                                                     // his nose
     for (const s of [-1, 1]) { P(S(0.0022, 8, 6), A, g, s * 0.0056, y1 + 0.0612, -0.0008); P(S(0.0028, 8, 6), A, g, s * 0.003, y1 + 0.0438, 0.0084);   // ears; the paws knotted on his chest
-      P(S(0.0008, 8, 6), D, g, s * 0.0025, y1 + 0.0605, 0.0094, { line: false }); }
+      P(S(0.0008, 8, 6), D, g, s * 0.0029, y1 + 0.0622, 0.0046, { line: false }); }
     limb(g, [-0.0126, y1 + 0.041, 0], [-0.0146, y1 + 0.026, 0.002], 0.0037, 0.0032, C); limb(g, [-0.0146, y1 + 0.026, 0.002], [-0.014, y1 + 0.0135, 0.0045], 0.003, 0.0034, C);
     P(S(0.0036), C, g, -0.014, y1 + 0.0115, 0.0048);
     const arm = new THREE.Group(); arm.position.set(0.0126, y1 + 0.041, 0); g.add(arm);

@@ -245,4 +245,9 @@ The Gemini key is a proxy-injected network secret: never print it. Keep model id
 | W3 El laberinto | `el-laberinto` | tonic 2, dorian, drone | the Minotaur and Hercules kings and simpler pieces from `grecia.webp`; the 52 × 50 board with a meander border at true size; the top-down labyrinth; the measuring tape at true scale; his finger never enters a piece | Sun 6/12 |
 | W4 El mantel | `el-mantel` | tonic 0, ionian (warm, Christmas), sparse bells | the board's parts from `tablero.webp`; the tablecloth (10 × 10 checks, a soft fold that tips a pawn); the Christmas Eve table; the red vikings and the calendar page from `culpa-de-las-piezas` | Sun 13/12 |
 
+**What the photos show (looked at on 14/11, before building):**
+- `grecia.webp`: the board has red and gold squares inside a ring of white, rocky ruin walls with a Greek temple (columns and a pediment) on one side; the gold side has the Minotaur king on a column, the red side Hercules; the soldiers are hoplites with round shields. W3's "labyrinth" is these white walls seen from above (no meander border on the real board). Model the walls, the temple, the two kings and hoplites; the 52 × 50 cm includes the walls.
+- `tablero.webp`: a black-and-white board in a grey frame with rounded corners. The photo does not show where its parts join: show four quadrants and the four sides of the frame clicking together, and keep the line to the site's words ("se arma por partes").
+- `plegable.webp` (W2, done): an octagonal tube with the squares on its faces, toothed caps, faceted pieces in cream and tan inside.
+
 A reel is **finished** when `videos/REEL/REEL.mp4` is committed and `videos/REEL/GUION.md` has a "Result" section.

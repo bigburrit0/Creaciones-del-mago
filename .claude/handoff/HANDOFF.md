@@ -1,6 +1,20 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
+**ESTADO DE LA SEGUNDA TANDA (14/11, noche; el dueño pidió "empezá a trabajar en los videos de ajedrez"; la ocarina de 12 huecos es para OTRA sesión):**
+- **W1 "Los gatos tiran todo":** TERMINADO. `videos/los-gatos-tiran-todo/los-gatos-tiran-todo.mp4` (23,0 s), commiteado y enviado. Controles en la sección "Result" de `GUION.md`. El render salió a -15,8 LUFS y se remezcló a -14,6.
+- **W2 "La gaviota":** renderizando (3 workers). Al terminar:
+  - parpadeos, LUFS (remezclar si hace falta), zumbido, voces de la mezcla, hoja de contacto;
+  - sección "Result" en `GUION.md`, commit del mp4, enviarlo.
+- **W3 "El laberinto":**
+  - kit nuevo `videos/biblioteca/3d/web/grecia3d.js`: muros de dos filas con pasillo, templo, Minotauro, Hércules, hoplitas, columnas, pegasos;
+  - escena en un patio mediterráneo;
+  - puerta de calidad 0/1380, 0 saltos; música medida;
+  - caption y DM en `GUION.md`;
+  - falta renderizar DESPUÉS de W2 (nunca dos renders juntos), con los mismos controles.
+- **W4 "El mantel":** `videos/el-mantel/voces.json` listo; la cuota de TTS se renueva a las 08:00 UTC. Después: kit del tablero rompecabezas (4 cuadrantes + 4 lados del marco), mantel a cuadros, mesa de Nochebuena, cues (C ionian), QA, render, copy.
+- **Las tareas programadas de las 2:00 (15-18/11)** siguen con el próximo reel W sin terminar; primero terminan lo que esté a medias.
+
 **NOVIEMBRE, SEGUNDA TANDA (pedido del 14/11):** "más reels de noviembre", investigación con Haiku, foco ajedrez pero con otras imágenes; la música era muy alta y molesta, que sea suave, tipo ambience.
 - **Investigación:** `videos/RESEARCH_NOVIEMBRE_2_2026.md`. Cinco Haiku: formatos visuales, calendario de Uruguay, embudo y personas, humor, música ambiental.
 - **Otras imágenes:** los otros ajedreces del catálogo: perros vs gatos, antigua Grecia (trae tablero de 52 × 50), de viaje (tubo de 24 cm), tablero rompecabezas, escultórico, minimalista. También escenarios nuevos fuera del taller.

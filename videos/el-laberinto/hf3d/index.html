@@ -196,10 +196,10 @@
       // his mitten's path (the tip): along the passage of the walls at his end, a dead end at the corner, back the other way, another dead end, back
       /* the mitten is 10 cm long and his arm reaches about 0.35 m from the shoulder (measured): the PALM follows the middle of the
          wall band at his end (the passage), 4 cm above the highest block under the mitten, within his reach (z +0.05..+0.235) */
-      const BAND_X = TC.x + B.IN + (B.BD / 2 - B.IN) / 2, PALM_UP = 0.042;
+      const BAND_X = TC.x + B.IN + (B.BD / 2 - B.IN) / 2, PALM_UP = 0.056;
       const TRK = [[T.trace, 0.12], [T.trace + 0.55, 0.225], [T.trace + 0.75, 0.215], [T.trace + 1.4, 0.05], [T.trace + 1.6, 0.06], [T.traceEnd - 0.25, 0.14], [T.traceEnd, 0.14]];
       function tipAt(t) { let z = TRK[0][1]; for (let i = 1; i < TRK.length; i++) { const [t0, z0] = TRK[i - 1], [t1, z1] = TRK[i]; if (t >= t0) z = lerp(z0, z1, ss(clamp((t - t0) / (t1 - t0), 0, 1))); }
-        const Z = TC.z + z; let y = 0; for (let k = -5; k <= 5; k++) for (const dx of [-0.03, 0, 0.03]) y = Math.max(y, wallTop(BAND_X + dx, Z + k * 0.01, 0.004)); return V3(BAND_X, y + PALM_UP, Z); }
+        const Z = TC.z + z; let y = 0; for (let k = -5; k <= 5; k++) for (const dx of [-0.05, -0.025, 0, 0.025, 0.05]) y = Math.max(y, wallTop(BAND_X + dx, Z + k * 0.01, 0.004)); return V3(BAND_X, y + PALM_UP, Z); }
       function poseAt(t) {
         IKQ.length = 0;
         santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
@@ -211,7 +211,8 @@
         const lean = pulse(t, T.lean, T.lean + 0.55, T.traceEnd, T.traceEnd + 0.5);
         rotWorld(santa.b("DEF-spine.003"), SF.left, 0.2 * lean); rotWorld(santa.b("DEF-head"), SF.left, 0.08 * lean);
         { const w = pulse(t, T.lean + 0.1, T.trace, T.traceEnd, T.traceEnd + 0.55); if (w > 0.001) { const palm = tipAt(t), sh = wp(santa.b("DEF-upper_arm.L"));
-            arm(santa, "L", palm.clone().add(sh.clone().sub(palm).normalize().multiplyScalar(0.035)), w, null, 0.05); } }
+            const lift = 0.16 * (1 - w);                                 /* coming in and going out, the hand arcs over the walls */
+            arm(santa, "L", palm.clone().add(sh.clone().sub(palm).normalize().multiplyScalar(0.035)).add(V3(0, lift, 0)), w, null, 0.05); } }
         const wow = pulse(t, T.s2 - 0.2, T.s2 + 0.3, T.s2 + 1.4, T.s2 + 1.9);
         for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side)); arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.27)).add(SF.fwd.clone().multiplyScalar(0.05)).add(V3(0, 0.0, 0)), wow, null, 0.08); }
         rotWorld(santa.b("DEF-spine.003"), SF.left, -0.07 * wow);
@@ -251,7 +252,7 @@
       // ---------- camera and editing (every camera looks toward a wall) ----------
       const X = TC.x, Z = TC.z, BY = TOP + BT;
       const SHOTS = [
-        { t: 0.0, d: T.mino, fov: 50, from: [X - 0.23, BY + 0.17, Z + 0.125], to: [X, BY + 1.12, Z + 0.06], look: [X - 0.23, BY, Z + 0.1], look2: [X, BY, Z + 0.0] },                   // the labyrinth from above; it rises into a board
+        { t: 0.0, d: T.mino, fov: 30, from: [X - 0.225, BY + 0.5, Z + 0.135], to: [X, BY + 1.95, Z + 0.06], look: [X - 0.225, BY, Z + 0.1], look2: [X, BY, Z + 0.0] },                   // the labyrinth from above; it rises into a board
         { t: T.mino, d: T.herc - T.mino, fov: 34, from: [X + 0.03, BY + 0.1, Z + 0.07], to: [X + 0.0, BY + 0.098, Z + 0.065], look: [X - 0.175, BY + 0.075, Z + 0.025] },                // the Minotaur lowers its horns
         { t: T.herc, d: T.lean - T.herc, fov: 38, from: [X - 0.03, BY + 0.11, Z - 0.03], to: [X - 0.01, BY + 0.108, Z - 0.025], look: [X + 0.175, BY + 0.08, Z + 0.025] },               // Hercules raises his club
         { t: T.lean, d: T.trace + 0.2 - T.lean, fov: 40, subj: "santa", h: 1.1, az: -42, el: 14, v: 0.3, whip: 1 },                                                                // he leans over the walls

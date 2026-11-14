@@ -1,0 +1,147 @@
+{
+ "duration": 26.0,
+ "sfx": [
+  {
+   "t": 3.0500000000000003,
+   "s": "chirp",
+   "pitch": 0.55,
+   "gain": 0.4
+  },
+  {
+   "t": 3.45,
+   "s": "whoosh",
+   "pitch": 1.2,
+   "gain": 0.45
+  },
+  {
+   "t": 3.75,
+   "s": "tap",
+   "pitch": 1.2,
+   "gain": 0.4
+  },
+  {
+   "t": 4.0,
+   "s": "chirp",
+   "pitch": 0.6,
+   "gain": 0.45
+  },
+  {
+   "t": 13.2,
+   "s": "tap",
+   "pitch": 0.9,
+   "gain": 0.3
+  },
+  {
+   "t": 12.35,
+   "s": "click",
+   "pitch": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 13.28,
+   "s": "peck",
+   "pitch": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 13.58,
+   "s": "peck",
+   "pitch": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 13.88,
+   "s": "peck",
+   "pitch": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 16.05,
+   "s": "chirp",
+   "pitch": 0.55,
+   "gain": 0.35
+  },
+  {
+   "t": 23.45,
+   "s": "chime",
+   "gain": 0.6
+  },
+  {
+   "t": 2.86,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 5.51,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 12.46,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 19.81,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 18.07,
+   "s": "tap",
+   "pitch": 0.9,
+   "gain": 0.7
+  }
+ ],
+ "music": {
+  "style": "ambient",
+  "bpm": 120,
+  "start": 0.0,
+  "tonic": 7,
+  "mode": "mixolydian",
+  "chords": [
+   7,
+   5,
+   0,
+   7
+  ],
+  "chord_beats": 8,
+  "drone": false,
+  "duck": [
+   [
+    0.1,
+    2.88,
+    0.34
+   ],
+   [
+    4.65,
+    5.6,
+    0.34
+   ],
+   [
+    5.75,
+    12.29,
+    0.18
+   ],
+   [
+    14.1,
+    16.03,
+    0.34
+   ],
+   [
+    19.95,
+    23.62,
+    0.18
+   ]
+  ],
+  "end_chord": {
+   "t": 23.45
+  },
+  "fade_out": [
+   25.2,
+   26.0
+  ]
+ },
+ "ambience": [],
+ "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"
+}

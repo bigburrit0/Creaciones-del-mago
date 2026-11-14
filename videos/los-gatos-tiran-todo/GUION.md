@@ -48,3 +48,16 @@ If there is no answer in about 24 h, send once:
 ## Suggested publish date
 
 Sunday 29/11 (after "Culpa de las piezas" on Thursday 26/11).
+
+## Result (2026-11-14)
+
+`los-gatos-tiran-todo.mp4`: 23.0 s, 1080 × 1920, 60 fps.
+
+| Check | Result |
+|---|---|
+| QA gate | 0 bad frames of 1380, 0 pose jumps |
+| Flicker scan | 0 frames (cuts at 1.1, 2.45, 4.15, 6.0, 7.1, 9.37, 9.75, 11.75, 13.15, 14.8, 17.0, 20.55) |
+| Loudness | the render came out at -15.8 LUFS; re-mixed with `remezclar.py` to -14.6 LUFS, peak -3.0 dBFS (picture byte-identical, same md5) |
+| Steady buzz | none (no 37 Hz line above 6 kHz; the high band sits at -31.5 dBFS, like "Culpa de las piezas") |
+| Voices in the mix | all five lines clear, transcribed as written ("Perro o gato, comentá cuál y te paso precio y fecha") |
+| Contact sheet | 15 real frames looked at: hook, both sides, the hop, the leap, the three taps, the drop onto the rug, "¡Eso no es una jugada!", the smug cats, the proof, the CTA, the card |

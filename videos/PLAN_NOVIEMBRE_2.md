@@ -1,137 +1,159 @@
-# November, second wave: four chess reels with other products and other settings (scripts, 2026-11-14)
+# November, second wave: four chess reels with the shop's other sets (scripts, 2026-11-14)
 
-The research is in `RESEARCH_NOVIEMBRE_2_2026.md`. The rules stay the same:
+The research is in `RESEARCH_NOVIEMBRE_2_2026.md`. The owner chose **other chess sets, new stories**: the first draft of
+this plan (a dogs-eager joke, a suitcase, a broken running gag, a puzzle Papá Noel can't solve) was replaced by the four
+scripts below.
+
+The rules stay the same:
 - the product is named in words in frame 1;
-- one joke, which proves a real feature;
-- real photos, then ONE comment CTA that rewards the comment with price and date;
-- honest urgency: the last day to order is 23 December;
-- no prices, weights or trademarks on screen.
+- one joke, which a non-player gets in 3 s and which proves a real feature;
+- real photos (the product's own photo from `assets/p`), then ONE comment CTA that rewards the comment with price and date;
+- honest urgency: the last day to order for Christmas is 23 December, never a delivery promise;
+- no prices, weights, finish claims or trademarks.
 
-What changes for this wave:
-- **Other products:** dogs vs cats, ancient Greece, travel, the puzzle board. Their own photos are the proof.
-- **Other settings:** each reel leaves the chess table in the workshop at least once:
+What is new for this wave:
+- **Other sets:** dogs vs cats, the travel chess, ancient Greece, the puzzle board.
+- **Other settings:** none of these reels happens at the workshop's chess table:
   - Papá Noel's holiday living room;
-  - his bedroom with a suitcase;
-  - the beach at sunset;
-  - a top-down "satisfying" build.
-- **Music:** the soft ambient bed (`"style": "ambient"`, page volume 0.22).
+  - the beach;
+  - a top-down labyrinth;
+  - the Christmas Eve table.
+- **Music:** the soft ambient bed (`"style": "ambient"` in `chiptune.py`, page volume 0.22, checked with `biblioteca/nivel_musica.py`).
 - **Sound effects:** never on a spoken word.
 
-Voices first, as always: the line lengths below are estimates until the voices are recorded and measured.
+The scheduled runs build them one per night at 2:00 (15, 16, 17 and 18 November). Voices first, as always: the times
+below are estimates until the voices are measured.
 
-| # | Reel | Stage | Product (photo) | New setting | Joke | CTA | Date |
+| # | Reel | Stage | Set (photo) | Setting | Joke | CTA | Publish |
 |---|---|---|---|---|---|---|---|
-| W1 | **¿Perro o gato?** | reach | Perros contra gatos (`perros-gatos.webp`) | Papá Noel's holiday living room, sofa and rug, the sea in the window | The dogs hop eagerly when it's their turn; the cats move when they feel like it… and mate in one move | PERRO / GATO | Sun 29/11 |
-| W2 | **Cabe en la valija** | consideration | Ajedrez de viaje (`plegable.webp`) | His bedroom with a suitcase, then the beach at sunset | A full-size board doesn't fit in his suitcase; a 24 cm tube does | VIAJE | Thu 3/12 |
-| W3 | **Este sí trae tablero** | reach | Antigua Grecia (`grecia.webp`) | A top-down "labyrinth" reveal of the 52 × 50 board | The running gag breaks: "¿Y el tab…?" — "Este sí lo trae." | MINOTAURO | Sun 6/12 |
-| W4 | **El tablero que faltaba** | conversion (cross-sell) | Tablero rompecabezas (`tablero.webp`) | Top-down: the parts click together, satisfying | Papá Noel is hopeless at puzzles; the magic assembles it | TABLERO | Sun 13/12 |
+| W1 | **Los gatos tiran todo** | reach | Perros contra gatos (`perros-gatos.webp`) | Papá Noel's holiday living room | The cat queen pushes a dog pawn off the table, slowly, looking at him | PERRO / GATO | Sun 29/11 |
+| W2 | **La gaviota** | consideration | Ajedrez de viaje (`plegable.webp`) | The beach, a summer afternoon | A seagull steals his king from an open board; the travel set keeps the pieces inside | VIAJE | Thu 3/12 |
+| W3 | **El laberinto** | reach | Antigua Grecia (`grecia.webp`) | Top-down: a stone labyrinth that becomes the board | Papá Noel gets lost in the board's Greek-key border | MINOTAURO | Sun 6/12 |
+| W4 | **El mantel** | conversion, cross-sell | Tablero rompecabezas (`tablero.webp`) | The Christmas Eve table | He plays his new pieces on a checked tablecloth | TABLERO | Sun 13/12 |
 
 The chess series' reel 5 ("Culpa de las piezas") stays on Thu 26/11 (Black Friday week). N2 "Mandame una foto" and N3
 in `PLAN_NOVIEMBRE.md` are still waiting for the owner's decision.
 
+**Facts to confirm with the owner (until then, only the site's own words):**
+- Travel chess: the site says "se pliega en un tubo de 24 cm con las piezas adentro". Does the board fold into the tube?
+- Dogs vs cats: can each side be in its own colours?
+- Puzzle board: how many parts, and what colours?
+
 ---
 
-## W1 "¿Perro o gato?" (reach, about 24 s)
+## W1 "Los gatos tiran todo" (reach, about 24 s)
 
-**Idea.** The dogs-vs-cats set as a personality test: dogs are eager, cats do what they want. The two-choice CTA invites
-comments and tags (people tag the friend on the other side).
+**Idea.** Everyone who has had a cat knows it: cats push things off tables, slowly, while looking at you. Here the cat
+side plays like a cat. The feature: cats on one side, dogs on the other, and you choose your side. The two-choice CTA
+brings comments and tags.
 
 | Time | Visual | Line |
 |---|---|---|
-| 0-2 | the living room: the board on a low table, dogs on one side, cats on the other; hook "Ajedrez perros vs. gatos / impreso en 3D" | S: "¿Perros contra gatos?" |
-| 2-4 | El Mago, a hand over the board | M: "Elegí tu bando." |
-| 4-7 | Papá Noel points at the dogs; a dog pawn hops forward at once, its tail wagging (a spring) | S: "¡Los perros, obvio!" |
-| 7-10 | the cats' turn: the cat knight turns its back on the board and licks a paw | S: "¡Dale, movete!" |
-| 10-13 | El Mago, deadpan | M: "Los gatos mueven cuando quieren." |
-| 13-15.5 | the cat queen glides across the board in one move; the dog king's ears droop (mate) | — |
-| 15.5-18 | real photo: "Así son de verdad", the dogs-vs-cats set | — |
-| 18-21.5 | El Mago points at the viewer | M: "¿Perro o gato? Comentá cuál y te paso precio y fecha." |
-| 21.5-24 | card: "¿Perro o gato? ¡Comentá cuál!", "Pedidos para Navidad: hasta el 23 de diciembre" | — |
+| 0-2 | Papá Noel's holiday living room (sofa, rug, a small tree, the sea in the window); the dogs-vs-cats set on a low table; hook "Ajedrez perros vs. gatos / impreso en 3D" | S: "¡Yo juego con los perros!" |
+| 2-4 | El Mago settles on the other side | M: "Y yo, con los gatos." |
+| 4-6.5 | a dog pawn hops forward, eager, its tail wagging (a spring) | — |
+| 6.5-10 | the cats' turn. The cat queen walks to a dog pawn at the edge of the table, looks at Papá Noel, and pushes it off with a paw, slowly. A beat. It drops onto the rug (a soft "toc") | — |
+| 10-12 | Papá Noel, outraged | S: "¡Eso no es una jugada!" |
+| 12-14.5 | El Mago, deadpan | M: "Para un gato, sí." |
+| 14.5-16 | every cat piece turns its head to Papá Noel, smug; the dog king's ears droop | — |
+| 16-18.5 | real photo: "Así son de verdad" (`perros-gatos.webp`), "Los gatos de un lado, los perros del otro" | — |
+| 18.5-22 | El Mago points at the viewer | M: "¿Perro o gato? Comentá tu bando y te paso precio y fecha." |
+| 22-24.5 | card: "¿Perro o gato?", "¡Comentá tu bando!", "Pedidos para Navidad: hasta el 23 de diciembre" | — |
 
 **To build:**
-- the dog and cat pieces, modelled from the photo like `ajedrez3d.js`: hounds and pugs, cats with pointed ears; kings and queens with crowns;
-- the living-room set.
+- the dog and cat pieces, modelled from the photo like `ajedrez3d.js`: hounds and pugs on round pedestals, cats with pointed ears; kings and queens with crowns;
+- the living-room set;
+- the cat queen's paw (a small arm on the piece, or the whole piece leaning and nudging).
+
+The pushed pawn lands on the rug, never through the table or a body.
 
 ---
 
-## W2 "Cabe en la valija" (consideration, about 24 s)
+## W2 "La gaviota" (consideration, about 24 s)
 
-**Idea.** Summer travel (peak from 20 Dec). Papá Noel packs for the beach, in his flip-flops, a callback to "Papá Noel en
-ojotas". A full board will not fit.
+**Idea.** Summer in Montevideo, and the city's seagulls. Papá Noel plays on the sand with an ordinary open board; a
+seagull steals his king. The travel set keeps the pieces inside. Peak summer travel starts on 20 December.
 
 | Time | Visual | Line |
 |---|---|---|
-| 0-2 | his suitcase on the bed; he pushes a full-size board in, it won't close; hook "Ajedrez de viaje / impreso en 3D" | S: "¡No entra!" |
-| 2-4 | El Mago pulls a small tube out of his sleeve (sparkles) | M: "Probá con este." |
-| 4-6 | Papá Noel, unconvinced | S: "¿Un tubo?" |
-| 6-10 | the tube opens and unfolds, the pieces inside | M: "Se pliega: veinticuatro centímetros, con las piezas adentro." |
-| 10-13 | the tube drops into the suitcase; it closes with a click | — |
-| 13-15.5 | the beach at sunset: the two playing on a towel | S: "¡Me lo llevo a la playa!" |
-| 15.5-18 | real photo: "Así son de verdad", the travel chess | — |
-| 18-21.5 | El Mago points at the viewer | M: "¿Te vas de viaje? Comentá VIAJE y te paso precio y fecha." |
-| 21.5-24 | card with the 23 December order date | — |
+| 0-2 | the beach on a summer afternoon: Papá Noel in flip-flops, an open board on a towel; hook "Ajedrez de viaje / impreso en 3D" | S: "¡Partidita en la playa!" |
+| 2-4.5 | a seagull swoops in, grabs his king and flies off (a squawk) | — |
+| 4.5-6 | Papá Noel jumps up, arms out | S: "¡Mi rey!" |
+| 6-10 | El Mago pulls a small tube from his sleeve (sparkles); it shows the pieces inside, then closes with a click | M: "Por eso, el de viaje: se pliega en un tubo de veinticuatro centímetros, con las piezas adentro." |
+| 10-12.5 | the seagull lands beside the closed tube, pecks it, gets nothing, and looks offended | — |
+| 12.5-14.5 | Papá Noel, to the seagull, triumphant | S: "¡Ja! ¡Ahora no podés!" |
+| 14.5-16.5 | the two playing on the towel at sunset | — |
+| 16.5-19 | real photo: "Así son de verdad" (`plegable.webp`) | — |
+| 19-22 | El Mago points at the viewer | M: "¿Te vas de vacaciones? Comentá VIAJE y te paso precio y fecha." |
+| 22-24.5 | card with the 23 December order date | — |
 
-**To confirm with the owner first:** does the tube open into the board, or are only the pieces inside? If only the
-pieces, the 6-10 s beat shows the pieces coming out, and the line stays exactly as the site says it.
+**To confirm first:** the beat at 6-10 s shows what the site says (it folds into a tube, the pieces inside). If the owner
+confirms the board folds into the tube, show the board folding up. Otherwise show the closed tube and the pieces coming
+out of it, and keep the site's words.
 
 **To build:**
 - the tube and its pieces, from `plegable.webp`;
-- the bedroom with the suitcase;
-- the beach at sunset (sand, sea, a towel, an umbrella).
+- the beach set: sand, sea, sky at sunset, a towel, an umbrella;
+- the seagull, white and grey, with a wing flap and a beak that grips the king. The king flies off with it, carried and never teleported.
 
 ---
 
-## W3 "Este sí trae tablero" (reach, about 23 s)
+## W3 "El laberinto" (reach, about 23 s)
 
-**Idea.** The series has said "el tablero va aparte" three times. Here the running gag breaks: the ancient Greece set
-does come with its board.
+**Idea.** The Minotaur lived in a labyrinth, and the Greek board has a Greek-key (meander) border. Papá Noel follows it
+with his finger and gets lost. The feature: Minotaur against Hercules, and this set comes with its own board, 52 × 50 cm.
 
 | Time | Visual | Line |
 |---|---|---|
-| 0-2 | top-down: a labyrinth pattern dissolves into the Greek board, Minotaur on one side, Hercules on the other; hook "Ajedrez de la antigua Grecia / impreso en 3D" | S: "¿Minotauro contra Hércules?" |
-| 2-4.5 | the two kings face off (the Minotaur lowers its horns) | M: "Mitología en el tablero." |
-| 4.5-6.5 | Papá Noel, by reflex | S: "¿Y el tab…?" |
-| 6.5-10 | El Mago cuts him off, deadpan; the board slides into view, a measuring tape along its sides | M: "Este sí lo trae: cincuenta y dos por cincuenta." |
-| 10-12 | Papá Noel, glasses down | S: "¡¿En serio?!" |
-| 12-15 | a slow push-in over the board: Hercules, the Minotaur, the pieces in a row | — |
-| 15-17.5 | real photo: the Greek set | — |
-| 17.5-20.5 | El Mago points at the viewer | M: "Comentá MINOTAURO y te paso precio y fecha." |
+| 0-2 | top-down: a stone labyrinth; the camera rises and it resolves into the Greek board; hook "Ajedrez de la antigua Grecia / impreso en 3D" | M: "Minotauro contra Hércules." |
+| 2-4 | the two kings face off: the Minotaur lowers its horns, Hercules raises his club | — |
+| 4-7 | Papá Noel follows the meander border with his finger, round and round, lost | S: "¿Y por dónde se sale?" |
+| 7-9.5 | El Mago, deadpan | M: "Es un ajedrez. Se sale ganando." |
+| 9.5-12.5 | a slow push-in over the whole board, a measuring tape along two sides | M: "Y este trae su tablero: cincuenta y dos por cincuenta." |
+| 12.5-14.5 | Papá Noel, impressed, glasses down | S: "¡Qué tablero!" |
+| 14.5-17 | real photo: "Así son de verdad" (`grecia.webp`) | — |
+| 17-20.5 | El Mago points at the viewer | M: "Comentá MINOTAURO y te paso precio y fecha." |
 | 20.5-23 | card | — |
 
 **To build:**
-- the Greek pieces: the Minotaur and Hercules kings, plus simpler column-like pieces, from `grecia.webp`;
-- the 52 × 50 board with a Greek-key border;
-- the top-down labyrinth.
+- the Greek pieces from `grecia.webp`: a Minotaur king and Hercules king, plus simpler pieces (columns, helmets, amphorae, whatever the photo shows);
+- the 52 × 50 board with a meander border;
+- the top-down labyrinth that dissolves into it.
+
+His finger follows the border without entering any piece.
 
 ---
 
-## W4 "El tablero que faltaba" (conversion and cross-sell, about 24 s)
+## W4 "El mantel" (conversion and cross-sell, about 24 s)
 
-**Idea.** The board that "va aparte", at last, for everyone who already has pieces, five days before the end of
-primary school and ten before the cut-off.
+**Idea.** Christmas Eve (24 December is officially "Día de la Familia" in Uruguay). Papá Noel got his red viking set
+(reel 5) and plays it on his checked Christmas tablecloth. The puzzle board, for anyone who already has pieces.
 
 | Time | Visual | Line |
 |---|---|---|
-| 0-2 | top-down: a pile of board parts on the table; hook "Tablero de ajedrez impreso en 3D, por partes" | S: "¿Y el tablero?" |
-| 2-4.5 | El Mago | M: "Este se arma por partes." |
-| 4.5-8 | Papá Noel tries; he forces a corner part upside down, then another | S: "¡No encaja!" |
-| 8-11.5 | El Mago snaps his fingers: the parts fly into place one by one, click, click, click (a satisfying top-down shot) | M: "Tamaño reglamentario. Sin piezas: para el ajedrez que ya tenés." |
-| 11.5-13.5 | the viking set from the series hops onto it, rank by rank | — |
-| 13.5-16 | a calendar page: 23 DICIEMBRE, "último día para pedir" | M: "Pedidos hasta el veintitrés de diciembre." |
-| 16-18.5 | real photo: the puzzle board | — |
-| 18.5-21.5 | El Mago points at the viewer | M: "Comentá TABLERO y te paso precio y fecha." |
-| 21.5-24 | card | — |
+| 0-2 | the Christmas Eve table: the red viking pieces set out on a red-and-white checked tablecloth; hook "Tablero de ajedrez impreso en 3D, por partes" | S: "¡Ya tengo mi ajedrez!" |
+| 2-4.5 | El Mago looks at the tablecloth: too many squares, the pieces sitting on the lines and wobbling on a fold | M: "Eso es un mantel." |
+| 4.5-6.5 | a pawn tips over on the fold; Papá Noel, unbothered | S: "¿Y qué tiene?" |
+| 6.5-10.5 | El Mago snaps his fingers: the puzzle board's parts fly in one by one and click together on the table (top-down, satisfying) | M: "Un tablero reglamentario, que se arma por partes. Para las piezas que ya tenés." |
+| 10.5-12.5 | the red vikings hop onto the board, rank by rank, steady | — |
+| 12.5-15 | a calendar page: 23 DICIEMBRE, "último día para pedir" | M: "Pedidos hasta el veintitrés de diciembre." |
+| 15-17.5 | real photo: "Así son de verdad" (`tablero.webp`) | — |
+| 17.5-21 | El Mago points at the viewer | M: "¿Ya tenés las piezas? Comentá TABLERO y te paso precio y fecha." |
+| 21-23.5 | card | — |
 
 **To build:**
-- the board parts, from `tablero.webp` (how many parts and which colours: ask the owner);
+- the board's parts, from `tablero.webp`;
+- the tablecloth: a cloth with a soft fold and 10 × 10 checks;
+- the Christmas Eve table set;
 - the calendar page, reused from "Culpa de las piezas".
+
+The board "se arma por partes y no trae piezas": the viking pieces are his own, already bought.
 
 ---
 
-## Caption notes (for the caption writers, when each reel is made)
+## Caption notes (for the three caption writers, when each reel is made)
 
 - Each caption names the product in its first line.
-- Each caption answers its one objection: which side, does it fit a bag, is the board included, what size.
-- Each caption ends with the WhatsApp and the delivery zones.
+- Each caption answers the reel's one objection: which side, does it travel, is the board included, what about the board.
+- Each caption ends with the WhatsApp number and the delivery zones.
 - "Hasta el 23 de diciembre" is the last order day, never a delivery promise.
-- 24 December is officially "Día de la Familia" in Uruguay, a possible local touch.

@@ -4,12 +4,11 @@
 **NOVIEMBRE, SEGUNDA TANDA (pedido del 14/11):** "más reels de noviembre", investigación con Haiku, foco ajedrez pero con otras imágenes; la música era muy alta y molesta, que sea suave, tipo ambience.
 - **Investigación:** `videos/RESEARCH_NOVIEMBRE_2_2026.md`. Cinco Haiku: formatos visuales, calendario de Uruguay, embudo y personas, humor, música ambiental.
 - **Otras imágenes:** los otros ajedreces del catálogo: perros vs gatos, antigua Grecia (trae tablero de 52 × 50), de viaje (tubo de 24 cm), tablero rompecabezas, escultórico, minimalista. También escenarios nuevos fuera del taller.
-- **Guiones:** `videos/PLAN_NOVIEMBRE_2.md`:
-  - W1 "¿Perro o gato?";
-  - W2 "Cabe en la valija";
-  - W3 "Este sí trae tablero";
-  - W4 "El tablero que faltaba".
-  Ninguno está hecho todavía.
+- **Guiones:** `videos/PLAN_NOVIEMBRE_2.md` (reescritos el 14/11 a pedido del dueño: otros ajedreces, historias nuevas; se crean programados a las 2:00 del 15, 16, 17 y 18/11):
+  - W1 "Los gatos tiran todo" (15/11);
+  - W2 "La gaviota" (16/11);
+  - W3 "El laberinto" (17/11);
+  - W4 "El mantel" (18/11).
 - **Música:** `chiptune.py` tiene `"style": "ambient"`; los seis reels de noviembre se remezclaron (imagen idéntica) con la música 22-25 dB bajo las voces. Medidor: `videos/biblioteca/nivel_musica.py`.
 - **Preguntas al dueño:**
   - ¿el tubo de viaje se abre en tablero?

@@ -11,6 +11,8 @@ cues.json:
   "music": {"bpm": 140, "start": 0.3, "melody": [[4, 1], [4, 1], [4, 2]], "chords": [0, 0, 5, 7],
             "beats_per_bar": 4, "octave": 0, "duck": [[5.0, 6.9, 0.35]], "fade_out": [14.2, 15.0],
             "end_chord": {"t": 14.0, "notes": [0, 4, 7, 12]}},
+  (or a soft bed: "music": {"style": "ambient", "bpm": 120, "tonic": 4, "mode": "aeolian", "chords": [4, 2, 0, 4],
+            "chord_beats": 8, "drone": true, "duck": [...], "end_chord": {"t": 14.0}, "fade_out": [14.2, 15.0]})
   "ambience": [ {"type": "cicadas", "from": 0, "to": 15, "level": 0.15} ]
 }
 Melody notes are semitones from C5 (0 = C, 4 = E, 7 = G, 12 = next C, null = rest); durations in beats.
@@ -162,7 +164,61 @@ def put(buf, x, at, gain=1.0):
     if n > 0 and i >= 0: buf[i:i + n] += x[:n] * gain
 
 
+SCALES = {"ionian": [0, 2, 4, 5, 7, 9, 11], "dorian": [0, 2, 3, 5, 7, 9, 10], "aeolian": [0, 2, 3, 5, 7, 8, 10], "mixolydian": [0, 2, 4, 5, 7, 9, 10]}
+
+
+def fft_lp(x, fc, order=2):
+    """zero-phase low-pass (Butterworth-like magnitude), no scipy"""
+    X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X /= np.sqrt(1 + (f / fc) ** (2 * order)); return np.fft.irfft(X, len(x))
+
+
+def pad_voice(f, d, a=1.2, r=1.4, det=0.003):
+    """one pad note: two slightly detuned triangles plus a sine an octave below, slow attack and release"""
+    n = int(d * SR); tt = np.arange(n) / SR
+    x = sum(0.6 * tri(f * (1 + c), d) + 0.45 * np.sin(np.pi * f * (1 + c) * tt + ph) for c, ph in ((-det, 0.3), (det, 1.9))) / 2   # mostly 150-500 Hz: audible on a phone speaker, under the voice band
+    return x * env(n, min(a, d / 2), min(r, d / 2))
+
+
+def bell(f, d=2.4):
+    """a soft kalimba-like note: a sine with a fast-decaying octave partial"""
+    tt = t(d); x = np.sin(2 * np.pi * f * tt) * np.exp(-tt * 2.4) + 0.18 * np.sin(4 * np.pi * f * tt) * np.exp(-tt * 7)
+    return x * env(len(tt), 0.008, 0.25)
+
+
+def ambient(cfg, D):
+    """"style": "ambient" (the owner found the chiptune lead loud and annoying): slow pads on the given chord roots (one
+    chord every `chord_beats`, default 8 beats), voiced low in the scale of `tonic` + `mode`, an optional root drone,
+    a very sparse soft bell on each chord change (off the beat), all low-passed at `cutoff` (900 Hz) so nothing sits in
+    the 1-4 kHz speech band. No melody, no drums, no noise (a steady noise layer once read as a buzz)."""
+    b = 60 / cfg.get("bpm", 120); start = cfg.get("start", 0.0); tonic = cfg.get("tonic", 0) % 12; sc = SCALES[cfg.get("mode", "ionian")]
+    span = cfg.get("chord_beats", 8) * b; roots = cfg.get("chords") or [tonic]; degs = [(tonic + x) % 12 for x in sc]
+    pads, bells = np.zeros(int(D * SR)), np.zeros(int(D * SR))
+    def tones(r):
+        i = min(range(7), key=lambda k: (r - degs[k]) % 12)
+        return (degs[(i + 2) % 7] - degs[i]) % 12, (degs[(i + 4) % 7] - degs[i]) % 12
+    k, pos = 0, start
+    while pos < D:
+        r = roots[k % len(roots)] % 12; th, fi = tones(r); d = span + 1.4; at = max(0.0, pos - 0.7)
+        for s, oc, g in ((r, -2, 0.55), (r + fi, -2, 0.4), (r + th, -1, 0.35), (r + fi, -1, 0.25)):
+            put(pads, pad_voice(note(s, oc), min(d, D - at + 0.05), a=0.6 if k == 0 else 1.2), at, g)
+        if cfg.get("bells", True):
+            put(bells, bell(note(r + (th if k % 2 else fi), 0)), pos + 1.5 * b, 0.22)
+        k += 1; pos += span
+    if cfg.get("drone"):
+        dr = np.sin(2 * np.pi * note(tonic, -3) * t(D)) * env(int(D * SR), 1.5, 2.0); pads += 0.18 * dr
+    ec = cfg.get("end_chord")
+    if ec:
+        th, fi = tones(tonic)
+        for s, oc, g in ((tonic, -2, 0.5), (tonic + fi, -2, 0.35), (tonic + th, -1, 0.3), (tonic + 12, -1, 0.2)):
+            put(pads, pad_voice(note(s, oc), D - ec["t"] + 0.05, a=0.8, r=1.0), ec["t"], g)
+        put(bells, bell(note(tonic + 12, 0)), ec["t"] + 0.2, 0.25)
+    m = fft_lp(pads, cfg.get("cutoff", 900)) + fft_lp(bells, 2200)
+    fi_n = int(min(1.0, D) * SR); m[:fi_n] *= np.linspace(0, 1, fi_n)
+    return m
+
+
 def music(cfg, D):
+    if cfg.get("style") == "ambient": return duck_fade(ambient(cfg, D), cfg)
     m = np.zeros(int(D * SR)); b = 60 / cfg.get("bpm", 132); pos = cfg.get("start", 0.0); oc = cfg.get("octave", 0)
     for s, beats in cfg.get("melody", []):
         dur = beats * b
@@ -177,6 +233,10 @@ def music(cfg, D):
     ec = cfg.get("end_chord")
     if ec:
         for s in ec["notes"]: put(m, sq(note(s), 1.4, 0.25) * dec(1.4, 2.2) * env(int(1.4 * SR), 0.01, 0.6), ec["t"], 0.12)
+    return duck_fade(m, cfg)
+
+
+def duck_fade(m, cfg):
     g = np.ones(len(m))
     for t0, t1, lvl in cfg.get("duck", []):
         i0, i1 = int(t0 * SR), int(t1 * SR); ramp = int(0.08 * SR)

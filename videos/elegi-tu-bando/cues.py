@@ -1,4 +1,5 @@
-"""cues.json from the scene's timing table. The medieval tune of reel 1 (D Dorian, 100 bpm); a sparkle swish per rank as it
+"""cues.json from the scene's timing table. Music: a soft ambient bed since 2026-11-14 (the owner found the chiptune
+lead loud and annoying): slow pads, nothing above 900 Hz, a sparse bell; the page plays it at volume 0.22. The medieval tune of reel 1 (D Dorian, 100 bpm); a sparkle swish per rank as it
 repaints and a soft tap per piece; a pop and a chime at each of the king's colour steps; a 'surprise' on "¡Ese rey soy
 yo!"; a hop for the king turning round. No ambience, no printer."""
 import json
@@ -27,7 +28,7 @@ b5 = [[14, 1], [12, 1], [9, 1], [11, 1]]; b6 = [[14, 4]]
 melody = [n for b in (b1, b2, b3, b4, b1, b2, b3, b5, b6) for n in b]
 duck = [[round(a - 0.05, 2), round(a + d + 0.08, 2), 0.34] for a, d in V.values()]
 cues = {"duration": DUR, "sfx": sfx,
-        "music": {"bpm": 100, "start": 0.1, "melody": melody, "chords": [2, 0, 2, 9, 2, 0, 7, 2, 2], "duck": duck,
-                  "end_chord": {"t": T["card"], "notes": [2, 5, 9, 14]}, "fade_out": [20.8, DUR]},
+        "music": {"style": "ambient", "bpm": 120, "start": 0.0, "tonic": 2, "mode": "dorian", "chords": [2,7,0,2], "chord_beats": 8, "drone": True,
+                  "duck": duck, "end_chord": {"t": T["card"]}, "fade_out": [20.8, DUR]},
         "ambience": [], "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"}
 json.dump(cues, open("cues.json", "w"), indent=1); print(len(sfx), "effects")

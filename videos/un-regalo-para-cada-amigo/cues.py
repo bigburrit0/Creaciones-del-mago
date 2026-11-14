@@ -28,8 +28,8 @@ bar = [[[0, .5], [4, .5], [7, .5], [9, .5], [7, 1], [4, 1]], [[5, .5], [4, .5], 
 melody = [n for _ in range(3) for b in bar for n in b] + [[0, 4]]
 duck = [[round(a - 0.05, 2), round(a + d + 0.08, 2), 0.36] for a, d in V.values()]
 cues = {"duration": DUR, "sfx": sfx,
-        "music": {"bpm": 124, "start": 0.1, "melody": melody, "chords": [0, 5, 0, 7, 0, 5, 0, 7, 9, 5, 7, 0, 0], "duck": duck,
-                  "end_chord": {"t": T["card"], "notes": [0, 4, 7, 12]}, "fade_out": [24.6, DUR]},
+        "music": {"style": "ambient", "bpm": 120, "start": 0.0, "tonic": 0, "mode": "ionian", "chords": [0,5,9,7], "chord_beats": 8, "drone": False,
+                  "duck": duck, "end_chord": {"t": T["card"]}, "fade_out": [24.6, DUR]},
         "ambience": [],   # no cicadas: high-passed noise gated at 37 Hz, heard as a buzz under the whole reel
         "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"}
 json.dump(cues, open("cues.json", "w"), indent=1)

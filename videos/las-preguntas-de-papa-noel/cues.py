@@ -1,4 +1,5 @@
-"""cues.json from the scene's timing table. Viking palette (RESEARCH_AJEDREZ_2026.md, sound team): E Aeolian at 120 bpm with
+"""cues.json from the scene's timing table. Music: a soft ambient bed since 2026-11-14 (the owner found the chiptune
+lead loud and annoying): slow pads, nothing above 900 Hz, a sparse bell; the page plays it at volume 0.22. Viking palette (RESEARCH_AJEDREZ_2026.md, sound team): E Aeolian at 120 bpm with
 a lur call; a page-turn rustle and a bell tick for each question on the list; a hop and a wooden clack for the king; a
 sparkle for the ruler and a pop for the growth; the lost pawn: a clack on the board's edge, two bounces on the floor and
 a sad little fall; the printer whir ONLY under its close-up; a pop and a ding for the reprint; the board: a whoosh out, a
@@ -45,7 +46,7 @@ b5 = [[16, 1], [14, 1], [11, 1], [12, 1]]; b6 = [[16, 4]]
 melody = [n for b in (b1, b2, b3, b4, b1, b2, b3, b4, b1, b2, b3, b4, b5, b6) for n in b]
 duck = [[round(a - 0.05, 2), round(a + d + 0.08, 2), 0.34] for a, d in V.values()]
 cues = {"duration": DUR, "sfx": sfx,
-        "music": {"bpm": 120, "start": 0.1, "melody": melody, "chords": [4, 2, 0, 4, 4, 2, 7, 4, 9, 7, 2, 4, 4, 4], "duck": duck,
-                  "end_chord": {"t": T["card"], "notes": [4, 7, 11, 16]}, "fade_out": [26.4, DUR]},
+        "music": {"style": "ambient", "bpm": 120, "start": 0.0, "tonic": 4, "mode": "aeolian", "chords": [4,0,7,2], "chord_beats": 8, "drone": True,
+                  "duck": duck, "end_chord": {"t": T["card"]}, "fade_out": [26.4, DUR]},
         "ambience": [], "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"}
 json.dump(cues, open("cues.json", "w"), indent=1); print(len(sfx), "effects")

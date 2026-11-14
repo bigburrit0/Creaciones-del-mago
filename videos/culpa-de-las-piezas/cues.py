@@ -1,4 +1,5 @@
-"""cues.json from the scene's timing table. Viking palette (RESEARCH_AJEDREZ_2026.md, sound team: E Aeolian, 120 bpm, a lur
+"""cues.json from the scene's timing table. Music: a soft ambient bed (the owner found the chiptune lead loud and
+annoying, 2026-11-14): slow E Aeolian pads with a root drone, a sparse bell, nothing above 900 Hz. Viking palette (RESEARCH_AJEDREZ_2026.md, sound team: E Aeolian, 120 bpm, a lur
 call) for Papá Noel's rematch; the mate: a bell, a wobble and a thud, a sad little tune; the stare: a soft scrape per
 viking turning round and a sting when the last one faces him, a gulp-like surprise as he sweats; a pop on "Vos sí"; a
 cheer on "¡Para Navidad!" (item_get); the printer whir ONLY under its close-up, a ding when the king is done; the calendar
@@ -28,7 +29,7 @@ b5 = [[16, 1], [14, 1], [11, 1], [12, 1]]; b6 = [[16, 4]]
 melody = [n for b in (b1, b2, b3, b4, b1, b2, b3, b4, b1, b5, b6) for n in b]
 duck = [[round(a - 0.05, 2), round(a + d + 0.08, 2), 0.18 if k in ("m1", "m4") else 0.34] for k, (a, d) in V.items()]   # deeper under the punchline and the CTA: "Vos sí" and "Comentá PEDIR" must read in the mix + [[T["stare"], T["m1"], 0.5]]
 cues = {"duration": DUR, "sfx": sfx,
-        "music": {"bpm": 120, "start": 0.1, "melody": melody, "chords": [4, 2, 0, 4, 4, 2, 7, 4, 9, 7, 4], "duck": duck,
-                  "end_chord": {"t": T["card"], "notes": [4, 7, 11, 16]}, "fade_out": [23.4, DUR]},
+        "music": {"style": "ambient", "bpm": 120, "start": 0.0, "tonic": 4, "mode": "aeolian", "chords": [4, 0, 7, 2], "chord_beats": 8, "drone": True,
+                  "duck": duck, "end_chord": {"t": T["card"]}, "fade_out": [23.4, DUR]},
         "ambience": [], "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one (and under the stare)"}
 json.dump(cues, open("cues.json", "w"), indent=1); print(len(sfx), "effects")

@@ -1,0 +1,20 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on Christmas Eve in Montevideo, at the family table, setting out his new red viking chess pieces on a checked red-and-white tablecloth: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. First line: proud and delighted, showing off. Second line: completely unbothered, a shrug in the voice.",
+  "lines": [
+   ["s1", "¡Ya tengo mi ajedrez!"],
+   ["s2", "¿Y qué tiene?"]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, on Christmas Eve. First line: dry and amused, stating the obvious. Second line: proud and clear, presenting a product, a short pause between the two sentences. Third line: friendly and clear, saying the date slowly. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   ["m1", "Eso es un mantel."],
+   ["m2", "Un tablero reglamentario, que se arma por partes. Para las piezas que ya tenés."],
+   ["m3", "Pedidos hasta el veintitrés de diciembre."],
+   ["m4", "¿Ya tenés las piezas? Comentá TABLERO y te paso precio y fecha."]
+  ]
+ }
+}

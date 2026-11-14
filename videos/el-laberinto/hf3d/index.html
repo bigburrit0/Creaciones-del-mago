@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 23.0, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.3) 100%); }
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      #hook { position: absolute; left: 40px; right: 40px; top: 300px; text-align: center; font: 700 100px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #E8B04A; font-size: 74px; }
+      /* the board's size, on "cincuenta y dos por cincuenta" */
+      #len { position: absolute; left: 50%; top: 470px; margin-left: -260px; width: 520px; padding: 14px 0 18px; border-radius: 40px; background: #FBF4E4; border: 7px solid #150A34;
+             box-shadow: 0 10px 0 rgba(21, 10, 52, 0.45); text-align: center; font: 700 80px/1 "Fredoka", sans-serif; color: #2E2160; visibility: hidden; }
+      #len small { display: block; font: 600 36px/1.1 "Fredoka", sans-serif; color: #7A4A12; margin-top: 6px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      #proof { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); visibility: hidden; }
+      #proof .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 104px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                   text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #proof .st { position: absolute; left: 60px; right: 60px; top: 1330px; text-align: center; font: 600 46px/1.25 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+      .pol { position: absolute; width: 560px; padding: 22px 22px 0; background: #FFFDF6; border-radius: 6px; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.3); transform-origin: 50% 50%; }
+      .pol img { display: block; width: 516px; height: 516px; object-fit: cover; border-radius: 2px; }
+      .pol div { font: 700 58px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 12px 0 18px; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 60px/1.05 "Fredoka", sans-serif; color: #2B7BB0; }
+      #card .k1 { font: 700 46px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 72px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 40px/1.25 "Fredoka", sans-serif; margin-top: 10px; } #card .k3 b { color: #C0392B; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="23.0" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Ajedrez de la<br>antigua Grecia<br><span>impreso en 3D</span></div>
+      <div id="len"><span id="lenT">52 cm</span><small>con su tablero</small></div>
+      <div id="subs"></div>
+      <div id="proof">
+        <div class="tt">Así es<br>de verdad</div>
+        <div class="pol" style="left: 260px; top: 520px"><img src="assets/p/grecia.webp" alt=""><div>Minotauro contra Hércules</div></div>
+        <div class="st">Con su tablero de 52 × 50 cm, muros y templo incluidos</div>
+      </div>
+      <div id="card"><div class="k0">Minotauro contra Hércules</div><div class="k1">Ajedrez de la antigua Grecia,<br>impreso en 3D, con su tablero</div><div class="k2">¡Comentá MINOTAURO!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="23.0" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="23.0" data-track-index="2" data-volume="1"></audio>
+      <audio id="v-m1" class="clip" src="assets/voz/m1.wav" data-start="0.25" data-duration="2.425" data-track-index="4" data-volume="1" data-who="mago" data-text="Minotauro contra Hércules."></audio>
+      <audio id="v-s1" class="clip" src="assets/voz/s1.wav" data-start="4.3" data-duration="2.121" data-track-index="5" data-volume="1" data-who="santa" data-text="¿Y por dónde se sale?"></audio>
+      <audio id="v-m2" class="clip" src="assets/voz/m2.wav" data-start="6.9" data-duration="2.489" data-track-index="6" data-volume="1" data-who="mago" data-text="Es un ajedrez. Se sale ganando."></audio>
+      <audio id="v-m3" class="clip" src="assets/voz/m3.wav" data-start="9.75" data-duration="3.108" data-track-index="7" data-volume="1" data-who="mago" data-text="Y este trae su tablero: 52 por 50."></audio>
+      <audio id="v-s2" class="clip" src="assets/voz/s2.wav" data-start="13.15" data-duration="1.474" data-track-index="8" data-volume="1" data-who="santa" data-text="¡Qué tablero!"></audio>
+      <audio id="v-m4" class="clip" src="assets/voz/m4.wav" data-start="17.25" data-duration="2.7" data-track-index="9" data-volume="1" data-who="mago" data-text="Comentá MINOTAURO y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "El laberinto" (23 s, 3D toon; November second wave W3, ../../PLAN_NOVIEMBRE_2.md, audited in ../AUDIT.md): the shop's
+         ancient-Greece chess in a whitewashed courtyard. From straight above, the white ruin walls around the board read as
+         a labyrinth; the camera rises and it is a chess board. "Minotauro contra Hércules": the Minotaur lowers its horns,
+         Hercules raises his club. Papá Noel follows the passage between the walls with his mitten, hits a dead end, turns
+         back, hits another: "¿Y por dónde se sale?" El Mago, deadpan: "Es un ajedrez. Se sale ganando." Two magic tape
+         measures: "Y este trae su tablero: cincuenta y dos por cincuenta" (the site). "¡Qué tablero!" The real photo; ONE
+         comment CTA (MINOTAURO, price and date). Soft ambient music. */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, colDist } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { greekKit } from "./lib/grecia3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 23.0, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage();
+      const { mago, santa, BTRACK, blobM, blobS, blobK, printer } = await cast();
+      printer.visible = false; blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+
+      // ---------- the courtyard: terracotta tiles, whitewashed walls (back and both sides), a blue door, a window with blue
+      // shutters, bougainvillea over the wall, an olive tree and a lemon tree in pots, an amphora, string lights ----------
+      scene.background = new THREE.Color("#9CC7E6"); scene.fog.color.set("#EADFCB"); scene.fog.density = 0.02;
+      const tileTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#E6D2B4"; g.fillRect(0, 0, w, h); const C = ["#C4703F", "#BB6838", "#CB7C49", "#B9663B"];
+        for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) { g.fillStyle = C[(i * 3 + j) % 4]; g.fillRect(i * 32 + 1.5, j * 32 + 1.5, 29, 29); g.fillStyle = "rgba(255,220,180,0.18)"; g.fillRect(i * 32 + 4, j * 32 + 4, 12, 3); } });
+      tileTex.repeat.set(16, 16);
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(9.6, 9.6, 19, 19), toon("#ffffff", { map: tileTex, rim: 0 })); floor.rotation.x = -Math.PI / 2; floor.position.set(0.4, 0, 0.5); floor.receiveShadow = true; scene.add(floor);
+      const stucco = (seed) => canvasTex(128, 128, (g, w, h) => { g.fillStyle = "#F4EFE4"; g.fillRect(0, 0, w, h); for (let k = 0; k < 160; k++) { g.fillStyle = k % 3 ? "rgba(200,190,170,0.18)" : "rgba(255,255,255,0.5)"; const s = 1 + rnd(k + seed) * 3; g.fillRect(rnd(k * 3 + seed) * w, rnd(k * 7 + seed) * h, s, s); } });
+      const wallMat = (seed, rep) => { const tx = stucco(seed); tx.repeat.set(rep[0], rep[1]); return toon("#ffffff", { map: tx, rim: 0 }); };
+      const WALL_H = 2.7, BACKZ = -1.55, LEFTX = -1.75, RIGHTX = 2.6;
+      { const m = new THREE.Mesh(new THREE.PlaneGeometry(RIGHTX - LEFTX, WALL_H, 18, 6), wallMat(1, [6, 3])); m.position.set((LEFTX + RIGHTX) / 2, WALL_H / 2, BACKZ); m.receiveShadow = true; scene.add(m); }
+      for (const [x, ry] of [[LEFTX, Math.PI / 2], [RIGHTX, -Math.PI / 2]]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(4.2, WALL_H, 9, 6), wallMat(x > 0 ? 3 : 2, [4, 3])); m.rotation.y = ry; m.position.set(x, WALL_H / 2, BACKZ + 2.1); m.receiveShadow = true; scene.add(m);
+        rbox(0.12, 0.08, 4.2, "#E6DFD0", x + (x > 0 ? -0.04 : 0.04), WALL_H, BACKZ + 2.1, null, { r: 0.2 }); }
+      rbox(RIGHTX - LEFTX, 0.08, 0.12, "#E6DFD0", (LEFTX + RIGHTX) / 2, WALL_H, BACKZ + 0.04, null, { r: 0.2 });                                      // the coping along the top
+      rbox(RIGHTX - LEFTX, 0.14, 0.03, "#7FA6C9", (LEFTX + RIGHTX) / 2, 0.07, BACKZ + 0.015, null, { r: 0.2, line: false });                           // a blue skirting band
+      // the blue door (closed) and the window with open blue shutters (the sea in it)
+      { const g = new THREE.Group(); g.position.set(-0.55, 0, BACKZ + 0.02); scene.add(g);
+        rbox(1.0, 2.0, 0.05, "#E6DFD0", 0, 1.0, 0, g, { r: 0.1 }); rbox(0.86, 1.9, 0.06, "#2F6FA8", 0, 0.95, 0.01, g, { r: 0.08 });
+        for (const [x, y] of [[-0.2, 1.38], [0.2, 1.38], [-0.2, 0.55], [0.2, 0.55]]) rbox(0.3, 0.6, 0.02, "#3A7DB8", x, y, 0.045, g, { r: 0.15 });
+        sph(0.03, "#E8B04A", 0.33, 1.0, 0.07, g, { line: true }); }
+      const seaTex = canvasTex(64, 64, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#8EC5E8"); gr.addColorStop(0.45, "#CFE7F2"); gr.addColorStop(0.5, "#3F8FBF"); gr.addColorStop(1, "#2C6E9C");
+        g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = "#FFFFFF"; g.fillRect(40, 18, 6, 4); g.fillStyle = "#6CB0D8"; for (let y = 36; y < h; y += 7) g.fillRect((y * 5) % w, y, 14, 1); });
+      seaTex.wrapS = seaTex.wrapT = THREE.ClampToEdgeWrapping;
+      { const g = new THREE.Group(); g.position.set(1.55, 1.45, BACKZ + 0.02); scene.add(g);
+        const glass = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.8), new THREE.MeshBasicMaterial({ map: seaTex, color: "#ffffff" })); glass.position.z = 0.012; g.add(glass);
+        for (const [w, h, x, y] of [[0.74, 0.07, 0, 0.435], [0.74, 0.09, 0, -0.44], [0.07, 0.86, -0.345, 0], [0.07, 0.86, 0.345, 0], [0.62, 0.035, 0, 0], [0.035, 0.8, 0, 0]]) rbox(w, h, 0.05, "#2F6FA8", x, y, 0.03, g, { r: 0.2 });
+        for (const s of [-1, 1]) { const sh = new THREE.Group(); sh.position.set(s * 0.38, 0, 0.04); sh.rotation.y = s * -0.35; g.add(sh); rbox(0.34, 0.86, 0.03, "#3A7DB8", s * 0.17, 0, 0, sh, { r: 0.15 });
+          for (let k = 0; k < 7; k++) rbox(0.3, 0.018, 0.012, "#2A5F94", s * 0.17, -0.36 + k * 0.12, 0.02, sh, { line: false }); }
+        rbox(0.84, 0.05, 0.14, "#E6DFD0", 0, -0.47, 0.06, g, { r: 0.2 });
+        for (const x of [-0.25, 0, 0.25]) { cyl(0.07, 0.05, 0.1, "#B9663B", x, -0.39, 0.07, g); for (let k = 0; k < 5; k++) sph(0.03, k % 2 ? "#D8406E" : "#5C9A4A", x + (rnd(k + x * 9) - 0.5) * 0.08, -0.31 + rnd(k + 5) * 0.04, 0.07, g); } }
+      // bougainvillea over the back wall and down beside the door
+      { const g = new THREE.Group(); scene.add(g); let k = 0;
+        for (let x = LEFTX + 0.1; x < 0.5; x += 0.09) { const n = x < -1.0 ? 4 : 2; for (let j = 0; j < n; j++, k++) { const y = WALL_H + 0.02 - j * 0.16 - rnd(k) * 0.12, z = BACKZ + 0.06 + rnd(k + 3) * 0.05;
+          sph(0.055 + rnd(k + 7) * 0.03, k % 3 ? "#D23F7A" : "#B12F68", x + (rnd(k + 1) - 0.5) * 0.06, y, z, g, { mo: { flatShading: true } }); if (k % 2) sph(0.04, "#4E8A3E", x + 0.04, y + 0.05, z - 0.01, g, { mo: { flatShading: true } }); } }
+        for (let j = 0; j < 9; j++, k++) sph(0.05 + rnd(k) * 0.02, k % 3 ? "#D23F7A" : "#4E8A3E", -1.16 + (rnd(k + 2) - 0.5) * 0.14, 2.55 - j * 0.2, BACKZ + 0.08, g, { mo: { flatShading: true } }); }
+      // an olive tree (back left), a lemon tree (back right), a big amphora by the left wall
+      const tree = (x, z, leaf, fruit) => { const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g);
+        cyl(0.2, 0.15, 0.36, "#B9663B", 0, 0.18, 0, g); cyl(0.21, 0.21, 0.04, "#A85A33", 0, 0.36, 0, g, { line: false });
+        cyl(0.035, 0.05, 1.0, "#7A6048", 0, 0.85, 0, g, { rot: [0, 0, 0.08] });
+        for (let k = 0; k < 9; k++) { const a = k * 2.4, r = 0.12 + rnd(k + x) * 0.18; sph(0.17 + rnd(k + 4) * 0.08, leaf, Math.cos(a) * r, 1.32 + rnd(k + 9) * 0.32, Math.sin(a) * r * 0.7, g, { mo: { flatShading: true }, line: true }); }
+        if (fruit) for (let k = 0; k < 8; k++) { const a = k * 1.9; sph(0.032, fruit, Math.cos(a) * 0.27, 1.25 + rnd(k + 2) * 0.35, Math.sin(a) * 0.2 + 0.08, g); }
+        return g; };
+      tree(-1.25, -1.15, "#859E5E", null); tree(2.1, -1.12, "#4F8A3A", "#F2D037");
+      { const g = new THREE.Group(); g.position.set(-1.45, 0, -0.05); scene.add(g);
+        const m = new THREE.Mesh(new THREE.LatheGeometry([[0.001, 0], [0.09, 0.02], [0.2, 0.28], [0.21, 0.42], [0.16, 0.6], [0.07, 0.7], [0.06, 0.8], [0.1, 0.84], [0.001, 0.84]].map(([r, y]) => new THREE.Vector2(r, y)), 24), toon("#C0703F"));
+        shade(m); g.add(m); outline(m, WO); rbox(0.2, 0.025, 0.02, "#2A1F1A", 0, 0.42, 0.205, g, { line: false });
+        for (const s of [-1, 1]) cyl(0.012, 0.012, 0.22, "#B9663B", s * 0.13, 0.66, 0, g, { rot: [0, 0, s * 0.55] }); }
+      // string lights along the back wall
+      const BULBS = []; for (let k = 0; k <= 16; k++) { const u = k / 16, x = lerp(LEFTX + 0.15, RIGHTX - 0.15, u), y = 2.42 - 0.28 * 4 * u * (1 - u);
+        BULBS.push(sph(0.025, "#FFE7A6", x, y, BACKZ + 0.2, null, { basic: true })); }
+      { const pts = BULBS.map((b) => b.position.clone().add(V3(0, 0.03, 0))); const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.004, 4), new THREE.MeshBasicMaterial({ color: "#3A2E2A" })); scene.add(m); }
+      // light: a warm late afternoon
+      const sun = new THREE.DirectionalLight("#FFE2B0", 2.1); sun.position.set(-1.8, 3.4, 1.4); sun.target.position.set(0.4, 0, -0.4);
+      sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536); Object.assign(sun.shadow.camera, { left: -2.6, right: 2.6, top: 2.6, bottom: -2.6, near: 0.5, far: 9 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; scene.add(sun, sun.target);
+      scene.add(new THREE.HemisphereLight("#E2EEFA", "#C98A5A", 1.0));
+      { const f = new THREE.DirectionalLight("#FFF1E0", 0.65); f.position.set(1.2, 1.8, 3.2); scene.add(f); }
+
+      // ---------- timing (voice first: the measured lines decide the beats) ----------
+      const T = { m1: 0.25, mino: 1.55, herc: 2.7, lean: 3.7, s1: 4.3, trace: 4.45, traceEnd: 6.75, m2: 6.9, m3: 9.75, tapes: 9.5, tape1: 10.75, tape2: 11.75, s2: 13.15,
+                  proof: 14.95, cta: 17.15, m4: 17.25, card: 20.3, exit: 99 };
+
+      // ---------- the table (whitewashed legs, a wooden top) and the Greek set ----------
+      const TC = V3(0.45, 0, -0.35), TOP = 0.58, THX = 0.32, THZ = 0.31;
+      { const g = new THREE.Group(); g.position.copy(TC); scene.add(g);
+        rbox(THX * 2, 0.04, THZ * 2, "#A87A50", 0, TOP - 0.02, 0, g, { r: 0.15 }); rbox(THX * 2 - 0.06, 0.06, THZ * 2 - 0.06, "#8E6440", 0, TOP - 0.07, 0, g, { line: false });
+        for (const [x, z] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) rbox(0.045, TOP - 0.04, 0.045, "#EDE6D8", x * (THX - 0.05), (TOP - 0.04) / 2, z * (THZ - 0.05), g, { r: 0.2 }); }
+      const GK = greekKit(scene, { wo: WO });
+      const B = GK.board(); B.g.position.set(TC.x, TOP, TC.z); B.g.rotation.y = -Math.PI / 2; B.g.updateMatrixWorld(true);
+      const sq = (f, r) => B.sq(f, r), BT = B.T, BACK = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
+      const toonH = (g) => { const bb = new THREE.Box3(); g.updateMatrixWorld(true); g.traverse((m) => { if (m.isMesh && m.material && m.material.isMeshToonMaterial) bb.expandByObject(m); }); return bb.max.y - bb.min.y; };
+      const PCS = [];
+      for (const [col, r0, r1, face] of [[GK.SIDES.gold, 0, 1, Math.PI], [GK.SIDES.red, 7, 6, 0]]) for (let f = 0; f < 8; f++) for (const [type, r] of [[BACK[f], r0], ["pawn", r1]]) {
+        const g = GK.piece(type, col); g.rotation.order = "YXZ"; g.position.copy(sq(f, r)); g.rotation.y = face + B.g.rotation.y; let s0 = 1;
+        if (type === "king") { s0 = 0.095 / toonH(g); g.scale.setScalar(s0); } PCS.push({ type, gold: r0 === 0, g, home: g.position.clone(), rot0: g.rotation.y, s0 }); }
+      const KM = PCS.find((p) => p.type === "king" && p.gold), KH = PCS.find((p) => p.type === "king" && !p.gold);
+      // the walls in world space (for the mitten's path and the QA)
+      const WB = B.BLOCKS.map((b) => { const bx = new THREE.Box3(b.min.clone(), b.max.clone()).applyMatrix4(B.g.matrixWorld); return { min: bx.min, max: bx.max }; });
+      const wallTop = (x, z, r = 0.014) => { let y = TOP + BT; for (const b of WB) if (x > b.min.x - r && x < b.max.x + r && z > b.min.z - r && z < b.max.z + r) y = Math.max(y, b.max.y); return y; };
+      // ---------- the two magic tape measures (52 cm along the front, 50 cm along Papá Noel's end), at true scale ----------
+      const tapeTex = (L) => canvasTex(Math.round(L * 2000), 24, (g, w, h) => { g.fillStyle = "#F2C94C"; g.fillRect(0, 0, w, h); g.fillStyle = "#2A2018";
+        for (let mm = 0; mm <= L * 1000; mm += 10) { const x = mm * 2, big = mm % 100 === 0, mid = mm % 50 === 0; g.fillRect(x, 0, 2, big ? 14 : mid ? 10 : 6); }
+        g.font = "700 11px sans-serif"; g.textAlign = "center"; for (let cm = 10; cm < L * 100; cm += 10) g.fillText(String(cm), cm * 20, 23); });
+      const TAPES = [[0.52, V3(TC.x - 0.26, TOP + 0.0025, TC.z + 0.25 + 0.016), 0], [0.5, V3(TC.x + 0.26 + 0.016, TOP + 0.0025, TC.z - 0.25), -Math.PI / 2]].map(([L, o, ry], i) => {
+        const tx = tapeTex(L); tx.wrapS = tx.wrapT = THREE.ClampToEdgeWrapping; tx.anisotropy = 8;
+        const geo = new THREE.PlaneGeometry(1, 0.02); geo.translate(0.5, 0, 0);
+        const strip = new THREE.Mesh(geo, toon("#ffffff", { map: tx, rim: 0, side: THREE.DoubleSide })); strip.rotation.set(-Math.PI / 2, 0, 0);
+        const g = new THREE.Group(); g.position.copy(o); g.rotation.y = ry; g.add(strip); scene.add(g);
+        const cs = new THREE.Group(); g.add(cs); rbox(0.05, 0.036, 0.046, "#F2C14E", -0.027, 0.018, 0, cs, { r: 0.25 }); rbox(0.052, 0.012, 0.048, "#2A2018", -0.027, 0.012, 0, cs, { r: 0.3, line: false });
+        cyl(0.012, 0.012, 0.004, "#C0392B", -0.027, 0.018, 0.0245, cs, { rot: [Math.PI / 2, 0, 0], line: false });
+        const hook = rbox(0.004, 0.012, 0.022, "#9AA3AE", 0, 0.004, 0, g, { line: false });
+        return { L, g, strip, tx, cs, hook, i }; });
+      const { SPK } = makeFX();
+
+      // ---------- staging (as in the chess reels: El Mago at the gold end, Papá Noel at his red end) ----------
+      const MD = V3(TC.x - 0.64, 0, TC.z), SD = V3(TC.x + 0.645, 0, TC.z), hM = Math.PI / 2, hS = -Math.PI / 2;
+      const LENS_C = V3(0.98, 1.05, 1.0);
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      // his mitten's path (the tip): along the passage of the walls at his end, a dead end at the corner, back the other way, another dead end, back
+      const PASS_X = TC.x + (B.IN + (B.BD / 2 - B.IN - 0.011) * 0.52 + 0.0055), MIT = 0.072;
+      const TRK = [[T.trace, 0.06], [T.trace + 0.6, 0.215], [T.trace + 0.8, 0.205], [T.trace + 1.45, -0.04], [T.trace + 1.65, -0.03], [T.traceEnd - 0.2, 0.1], [T.traceEnd, 0.1]];
+      function tipAt(t) { let z = TRK[0][1]; for (let i = 1; i < TRK.length; i++) { const [t0, z0] = TRK[i - 1], [t1, z1] = TRK[i]; if (t >= t0) z = lerp(z0, z1, ss(clamp((t - t0) / (t1 - t0), 0, 1))); }
+        const x = PASS_X, Z = TC.z + z; let y = 0; for (let k = -2; k <= 2; k++) y = Math.max(y, wallTop(x, Z + k * 0.01)); return V3(x, y + 0.012, Z); }
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16); rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- Papá Noel: leans over the walls and follows the passage with his left mitten (lost); impressed by the board (glasses down, both hands open)
+        const lean = pulse(t, T.lean, T.lean + 0.55, T.traceEnd, T.traceEnd + 0.5);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.16 * lean); rotWorld(santa.b("DEF-head"), SF.left, 0.1 * lean);
+        { const w = pulse(t, T.lean + 0.1, T.trace, T.traceEnd, T.traceEnd + 0.55); if (w > 0.001) { const tip = tipAt(t), sh = wp(santa.b("DEF-upper_arm.L")), d = tip.clone().sub(sh).normalize();
+            arm(santa, "L", tip.clone().sub(d.multiplyScalar(MIT)), w, null, 0.05); } }
+        const wow = pulse(t, T.s2 - 0.2, T.s2 + 0.3, T.s2 + 1.4, T.s2 + 1.9);
+        for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side)); arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.24)).add(SF.fwd.clone().multiplyScalar(0.16)).add(V3(0, -0.06, 0)), wow, null, 0.08); }
+        rotWorld(santa.b("DEF-spine.003"), SF.left, -0.07 * wow);
+        // ---- El Mago: deadpan (heavy lids) for "Se sale ganando"; the magic hand for the tape measures; to the viewer for the CTA (a 0.55 s reach)
+        const magic = pulse(t, T.tapes - 0.35, T.tapes + 0.15, T.m3 + 0.6, T.m3 + 1.1);
+        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.12)).add(MF.fwd.clone().multiplyScalar(0.22)).add(V3(0, 0.1 + 0.02 * Math.sin(t * 5), 0)), magic, null, 0.08); }
+        turnTo(mago, LENS_C, pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1));
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.m4 + 0.1, T.m4 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
+        turnTo(santa, TC.clone().add(V3(0.2, 0, 0.12)), 0.6 * lean);
+        let e = 0; for (const b of [1.2, 3.4, 9.9, 12.4, 16.2, 18.9, 21.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        const lids = 0.5 * pulse(t, T.m2 + 0.6, T.m2 + 0.9, T.m2 + 2.3, T.m2 + 2.6);
+        mago.b("eyes").scale.y = 1 - Math.max(0.9 * e, lids);
+        santa.b("brows").position.y += 0.016 * Math.max(wow, 0.6 * pulse(t, T.s1, T.s1 + 0.2, T.s1 + 1.8, T.s1 + 2.2));
+        mago.b("brows").position.y += 0.01 * pulse(t, T.m1, T.m1 + 0.15, T.m1 + 1.6, T.m1 + 2.0);
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props ----------
+      function props(t) {
+        for (const p of PCS) { p.g.position.copy(p.home); p.g.rotation.set(0, p.rot0, 0); p.g.scale.setScalar(p.s0); }
+        // the face-off: the Minotaur lowers its horns and leans in; Hercules raises his club
+        { const k = pulse(t, T.mino + 0.25, T.mino + 0.6, T.lean + 0.2, T.lean + 0.7); KM.g.userData.head.rotation.x = 0.55 * k + 0.04 * k * Math.sin(t * 18) * pulse(t, T.mino + 0.6, T.mino + 0.7, T.mino + 1.0, T.mino + 1.1); KM.g.rotation.x = 0.1 * k; }
+        { const k = pulse(t, T.herc + 0.15, T.herc + 0.5, T.lean + 0.3, T.lean + 0.8); KH.g.userData.club.rotation.x = -2.3 * k; KH.g.rotation.x = -0.06 * k; }
+        // the tape measures: pop in by magic, run out along the front (52) and along his end (50), lock
+        const on = t >= T.tapes && t < T.proof, pop = ss(clamp((t - T.tapes) / 0.25, 0, 1));
+        TAPES.forEach((tp, i) => { tp.g.visible = on; if (!on) return; const t0 = i ? T.tape2 : T.tape1, k = ss(clamp((t - t0) / 0.6, 0, 1)), len = Math.max(0.0005, tp.L * k + 0.004);
+          tp.cs.scale.setScalar(Math.max(0.001, pop)); tp.strip.scale.x = len; tp.tx.repeat.x = len / tp.L; tp.tx.offset.x = 0; tp.hook.position.x = len; tp.hook.visible = pop > 0.99; });
+        SPK.forEach((m, i) => { const d = t - T.tapes - (i % 5) * 0.01; m.visible = d > 0 && d < 0.45 && i < 14; if (!m.visible) return; const Q = i % 2 ? TAPES[0].g.position : TAPES[1].g.position;
+          const v = V3((rnd(i) - 0.5) * 0.3, 0.2 + rnd(i + 50) * 0.25, (rnd(i + 99) - 0.5) * 0.3); m.position.copy(Q).add(V3(0, 0.03, 0)).add(v.multiplyScalar(d * 0.7)); m.position.y -= 0.4 * d * d; m.scale.setScalar(0.25 * (1 - d / 0.45)); });
+        BULBS.forEach((b, i) => b.scale.setScalar(1 + 0.08 * Math.sin(t * 2 + i)));
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing (every camera looks toward a wall) ----------
+      const X = TC.x, Z = TC.z, BY = TOP + BT;
+      const SHOTS = [
+        { t: 0.0, d: T.mino, fov: 50, from: [X - 0.16, BY + 0.2, Z + 0.185], to: [X, BY + 1.12, Z + 0.06], look: [X - 0.16, BY, Z + 0.155], look2: [X, BY, Z + 0.0] },                   // the labyrinth from above; it rises into a board
+        { t: T.mino, d: T.herc - T.mino, fov: 34, from: [X + 0.03, BY + 0.1, Z + 0.07], to: [X + 0.0, BY + 0.098, Z + 0.065], look: [X - 0.175, BY + 0.075, Z + 0.025] },                // the Minotaur lowers its horns
+        { t: T.herc, d: T.lean - T.herc, fov: 38, from: [X - 0.03, BY + 0.11, Z - 0.03], to: [X - 0.01, BY + 0.108, Z - 0.025], look: [X + 0.175, BY + 0.08, Z + 0.025] },               // Hercules raises his club
+        { t: T.lean, d: T.trace + 0.2 - T.lean, fov: 40, subj: "santa", h: 1.1, az: -42, el: 14, v: 0.3, whip: 1 },                                                                // he leans over the walls
+        { t: T.trace + 0.2, d: T.traceEnd + 0.05 - T.trace - 0.2, fov: 42, from: [X + 0.2, BY + 0.42, Z + 0.13], to: [X + 0.2, BY + 0.4, Z + 0.125], look: [X + 0.2, BY, Z + 0.085] },   // his mitten in the labyrinth, from above
+        { t: T.traceEnd + 0.05, d: T.tapes + 0.05 - T.traceEnd - 0.05, fov: 32, subj: "mago", h: 0.95, az: 48, el: -9, v: 0.12 },                                                   // "Es un ajedrez. Se sale ganando."
+        { t: T.tapes + 0.05, d: T.s2 - 0.1 - T.tapes - 0.05, fov: 50, from: [X, BY + 0.9, Z + 1.05], to: [X, BY + 0.78, Z + 0.88], look: [X, BY - 0.01, Z - 0.02] },                   // the whole board, the tapes: 52 × 50
+        { t: T.s2 - 0.1, d: T.proof - T.s2 + 0.1, fov: 34, subj: "santa", h: 1.0, az: -35, el: 4, v: 0.15 },                                                                       // "¡Qué tablero!"
+        { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                              // (under the proof panel)
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                                         // CTA
+        { t: T.card, d: DUR - T.card, fov: 54, from: [X, 1.05, Z + 0.95], to: [X, 1.03, Z + 0.89], look: [X, 0.66, Z - 0.02] },                                                    // the card over the board
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props,
+        punch: [[T.herc + 0.5, 0.06], [T.s2 + 0.05, 0.08]], shake: [[T.herc + 0.5, 0.0015, 0.2]], flash: [[T.proof, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+
+      // ---------- text ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 1.45] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const proof = document.getElementById("proof"), POLS = [...proof.querySelectorAll(".pol")], len = document.getElementById("len"), lenT = document.getElementById("lenT");
+      const TAG1 = T.tape1 + 0.55, TAG2 = T.tape2 + 0.5;
+      function dom(t) {
+        { const v = t >= TAG1 && t < T.s2 - 0.1; len.style.visibility = v ? "visible" : "hidden";
+          if (v) { lenT.textContent = t >= TAG2 ? "52 × 50 cm" : "52 cm"; const k = clamp((t - (t >= TAG2 ? TAG2 : TAG1)) / 0.25, 0, 1); len.style.transform = `scale(${(0.6 + 0.4 * backOut(k)).toFixed(3)}) rotate(-2deg)`; } }
+        const pv = t >= T.proof && t < T.cta; proof.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { proof.style.opacity = Math.min(1, (t - T.proof) / 0.08, (T.cta - t) / 0.1).toFixed(3);
+          POLS.forEach((p) => { const a = clamp((t - T.proof - 0.15) / 0.3, 0, 1); p.style.opacity = a > 0 ? "1" : "0";
+            p.style.transform = `translateY(${((1 - ss(a)) * -150).toFixed(1)}px) rotate(${(-3 + (1 - a) * 14).toFixed(2)}deg) scale(${(1.2 - 0.2 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks (no door here: a dummy one far away), the table, the walls of the board (every block) and the
+         temple against both bodies (his mitten in the labyrinth), every piece and the tape measures against both bodies */
+      const DOOR = { x0: 40, x1: 41, h: 1.55, z: -40 }, hinge = new THREE.Group(); hinge.position.set(50, 0, 50); scene.add(hinge);
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const TB = new THREE.Box3(B.TBOX.min.clone(), B.TBOX.max.clone()).applyMatrix4(B.g.matrixWorld);
+      const FURN = [{ name: "tableTop", min: V3(TC.x - THX, TOP - 0.1, TC.z - THZ), max: V3(TC.x + THX, TOP, TC.z + THZ) },
+        ...[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([x, z], i) => ({ name: "leg" + i, min: V3(TC.x + x * (THX - 0.05) - 0.025, 0, TC.z + z * (THZ - 0.05) - 0.025), max: V3(TC.x + x * (THX - 0.05) + 0.025, TOP, TC.z + z * (THZ - 0.05) + 0.025) })),
+        ...WB.map((b, i) => ({ name: "wall" + i, min: b.min, max: b.max })), { name: "temple", min: TB.min, max: TB.max }];
+      const boxD = (p, F) => { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); return q.distanceTo(p); };
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          const d = boxD(p, F); if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        const pts = PCS.map((p) => ["piece-" + p.type, p.g.position.clone().add(V3(0, 0.03, 0))]);
+        for (const p of PCS.filter((q) => q.type === "king")) pts.push(["king-top", p.g.localToWorld(V3(0, 0.09, 0))]);
+        { const club = KH.g.userData.club; pts.push(["club", club.localToWorld(V3(0.003, -0.04, 0.02))]); }
+        for (const tp of TAPES) if (tp.g.visible) pts.push(["tape", tp.g.localToWorld(V3(-0.027, 0.02, 0))], ["tape-end", tp.hook.getWorldPosition(V3(0, 0, 0))]);
+        for (const [nm, p] of pts) for (const [cn, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders()) { const d = colDist(p, k).d; if (d < 0.02) out.push(["prop", nm, cn, k.name, +d.toFixed(3)]); }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, PCS, B, WB, TAPES, KM, KH, tipAt, handC, wp, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

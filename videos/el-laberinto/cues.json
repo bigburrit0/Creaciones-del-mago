@@ -1,0 +1,116 @@
+{
+ "duration": 23.0,
+ "sfx": [
+  {
+   "t": 2.8000000000000003,
+   "s": "thud",
+   "pitch": 0.8,
+   "gain": 0.5
+  },
+  {
+   "t": 3.1500000000000004,
+   "s": "whoosh",
+   "pitch": 1.1,
+   "gain": 0.4
+  },
+  {
+   "t": 6.55,
+   "s": "tap",
+   "pitch": 0.7,
+   "gain": 0.3
+  },
+  {
+   "t": 9.5,
+   "s": "pop",
+   "gain": 0.35
+  },
+  {
+   "t": 12.85,
+   "s": "click",
+   "pitch": 0.9,
+   "gain": 0.4
+  },
+  {
+   "t": 20.3,
+   "s": "chime",
+   "gain": 0.6
+  },
+  {
+   "t": 3.61,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 6.66,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 17.06,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 15.32,
+   "s": "tap",
+   "pitch": 0.9,
+   "gain": 0.7
+  }
+ ],
+ "music": {
+  "style": "ambient",
+  "bpm": 120,
+  "start": 0.0,
+  "tonic": 2,
+  "mode": "dorian",
+  "chords": [
+   2,
+   0,
+   7,
+   2
+  ],
+  "chord_beats": 8,
+  "drone": true,
+  "duck": [
+   [
+    0.2,
+    2.75,
+    0.34
+   ],
+   [
+    4.25,
+    6.5,
+    0.34
+   ],
+   [
+    6.85,
+    9.47,
+    0.18
+   ],
+   [
+    9.7,
+    12.94,
+    0.34
+   ],
+   [
+    13.1,
+    14.7,
+    0.34
+   ],
+   [
+    17.2,
+    20.03,
+    0.18
+   ]
+  ],
+  "end_chord": {
+   "t": 20.3
+  },
+  "fade_out": [
+   22.2,
+   23.0
+  ]
+ },
+ "ambience": [],
+ "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"
+}

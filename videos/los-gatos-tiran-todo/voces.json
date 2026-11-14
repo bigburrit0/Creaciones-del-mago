@@ -1,0 +1,41 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, playing a game of chess with his friend in his holiday living room: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. First line: proud and cheerful, a dog lover choosing his side. Second line: outraged, on his feet, he can't believe what the cat just did.",
+  "lines": [
+   [
+    "s1",
+    "¡Yo juego con los perros!"
+   ],
+   [
+    "s2",
+    "¡Eso no es una jugada!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, a cat lover. First line: calm and pleased, choosing his side. Second line: completely deadpan and dry. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Los gatos, conmigo."
+   ],
+   [
+    "m2",
+    "Para un gato, sí."
+   ],
+   [
+    "m3",
+    "¿Perro o gato? Comentá cuál y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "s1": [
+   0.0,
+   2.6
+  ]
+ },
+ "_note": "the take added a laugh ('Ja, ja.', 2.9-3.9 s in the take) after s1: s1 re-cut by hand to end before it (take seconds), with the split's own trim filter"
+}

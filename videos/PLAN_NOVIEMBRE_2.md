@@ -235,3 +235,14 @@ Each run reads this section. `REEL` is the reel's folder name: `los-gatos-tiran-
    - Then stop. The next reel has its own run.
 
 The Gemini key is a proxy-injected network secret: never print it. Keep model identifiers out of commits and files.
+
+## Per-reel notes for the runs (order: W1 → W2 → W3 → W4)
+
+| Reel | Folder (REEL) | Music (ambient) | Model and build | Publish |
+|---|---|---|---|---|
+| W1 Los gatos tiran todo | `los-gatos-tiran-todo` | tonic 0, ionian (cozy) | dog and cat pieces from `perros-gatos.webp`; the living room; the cat queen's slow push; the pawn falls onto the rug | Sun 29/11 |
+| W2 La gaviota | `la-gaviota` | tonic 7, mixolydian (summer); a soft seagull call never on a word; no steady wave noise (a sea swell only below 300 Hz, checked with the buzz test) | the tube and its pieces from `plegable.webp`; the seagull (the king flies off WITH it, carried); the beach set, cameras toward the sea or a backdrop | Thu 3/12 |
+| W3 El laberinto | `el-laberinto` | tonic 2, dorian, drone | the Minotaur and Hercules kings and simpler pieces from `grecia.webp`; the 52 × 50 board with a meander border at true size; the top-down labyrinth; the measuring tape at true scale; his finger never enters a piece | Sun 6/12 |
+| W4 El mantel | `el-mantel` | tonic 0, ionian (warm, Christmas), sparse bells | the board's parts from `tablero.webp`; the tablecloth (10 × 10 checks, a soft fold that tips a pawn); the Christmas Eve table; the red vikings and the calendar page from `culpa-de-las-piezas` | Sun 13/12 |
+
+A reel is **finished** when `videos/REEL/REEL.mp4` is committed and `videos/REEL/GUION.md` has a "Result" section.

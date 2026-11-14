@@ -152,3 +152,9 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | A crowd gag (pieces turning round) barely read | 180° turns of small pieces look alike from far away | Shoot it as the character's POV from close above, and add a second, readable beat: after turning, each piece tilts back to look up at him |
 | A "character at work" wide shot showed only his hat | High camera, the character between the lens and the work | When the work is the point, cut to a second angle of the work itself (two printer angles), not to the worker's back |
 | The mix check heard "Vos sí" as "o sí" (the clean clip read fine) | A pop effect placed exactly on the punchline's first word masked the soft Rioplatense "v" | Never put an effect on a word: place it after the line. Duck the music deeper (0.18) under a short punchline and under the CTA, and re-check the mix with `remezclar.py` (no re-render) |
+
+## Music (2026-11-14: "la música es muy alta y molesta")
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The owner found the music loud and annoying | Measured on reel 5: the chiptune bed sat only 8 dB under the voices while they spoke and level with them in the gaps; square-wave harmonics sit in the 1-4 kHz speech band | Use `"style": "ambient"` in `chiptune.py` (slow detuned pads, a root drone, a sparse bell, low-passed at 900 Hz) at page volume 0.22. Check with `videos/biblioteca/nivel_musica.py HF3D_DIR`: the bed 20-25 dB under the voices, 12-16 dB under them in the gaps (K-weighted). A sound-only change goes through `remezclar.py`, the picture byte-identical |

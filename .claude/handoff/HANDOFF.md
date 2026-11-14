@@ -1,6 +1,22 @@
-# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-13
+# Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
+**NOVIEMBRE, SEGUNDA TANDA (pedido del 14/11):** "más reels de noviembre", investigación con Haiku, foco ajedrez pero con otras imágenes; la música era muy alta y molesta, que sea suave, tipo ambience.
+- **Investigación:** `videos/RESEARCH_NOVIEMBRE_2_2026.md`. Cinco Haiku: formatos visuales, calendario de Uruguay, embudo y personas, humor, música ambiental.
+- **Otras imágenes:** los otros ajedreces del catálogo: perros vs gatos, antigua Grecia (trae tablero de 52 × 50), de viaje (tubo de 24 cm), tablero rompecabezas, escultórico, minimalista. También escenarios nuevos fuera del taller.
+- **Guiones:** `videos/PLAN_NOVIEMBRE_2.md`:
+  - W1 "¿Perro o gato?";
+  - W2 "Cabe en la valija";
+  - W3 "Este sí trae tablero";
+  - W4 "El tablero que faltaba".
+  Ninguno está hecho todavía.
+- **Música:** `chiptune.py` tiene `"style": "ambient"`; los seis reels de noviembre se remezclaron (imagen idéntica) con la música 22-25 dB bajo las voces. Medidor: `videos/biblioteca/nivel_musica.py`.
+- **Preguntas al dueño:**
+  - ¿el tubo de viaje se abre en tablero?
+  - ¿para qué son los imanes del escultórico?
+  - ¿colores por bando en perros vs gatos?
+  - ¿cuántas partes y qué colores tiene el tablero rompecabezas?
+
 **"CULPA DE LAS PIEZAS" (tarea programada del 13/11 a las 2:00, llegó a tiempo):** reel 5 de ajedrez, el último de la serie.
 - **Fecha límite de Navidad (la dio el dueño el 12/11):** el último día para pedir es el 23 de diciembre ("hasta el 23 de diciembre"). Es el último día de pedido, no una promesa de entrega.
 - **Auditoría:** `videos/culpa-de-las-piezas/AUDIT.md`:

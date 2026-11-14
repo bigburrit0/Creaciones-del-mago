@@ -157,3 +157,81 @@ The board "se arma por partes y no trae piezas": the viking pieces are his own, 
 - Each caption answers the reel's one objection: which side, does it travel, is the board included, what about the board.
 - Each caption ends with the WhatsApp number and the delivery zones.
 - "Hasta el 23 de diciembre" is the last order day, never a delivery promise.
+
+---
+
+## Production steps for the scheduled runs (W1-W4, one per night at 2:00, 15-18 November)
+
+Each run reads this section. `REEL` is the reel's folder name: `los-gatos-tiran-todo`, `la-gaviota`, `el-laberinto` or
+`el-mantel`.
+
+0. **Setup check.**
+   - The container may have been rebuilt or restarted. Confirm `/opt/bpy`, `/opt/three/node_modules/three`,
+     `/opt/fonts/node_modules/@fontsource` and `/opt/assets3d/ual` exist; if not, follow `videos/PLAN_3D.md` → "Reinstall".
+   - Read `skills/reel-3d-toon/SKILL.md`, `references/lecciones.md` (all of it) and `references/qa.md`.
+1. **Quick audit** (no new research team). Check the script against the rules above and in `RESEARCH_AJEDREZ_2_2026.md`:
+   - the product is named in frame 1;
+   - one joke that proves a real feature;
+   - a real photo before the CTA;
+   - ONE CTA with a reward;
+   - honest urgency;
+   - no price, weight, finish or trademark.
+   Fix what fails, voice first, and write `videos/REEL/AUDIT.md` (keep / change / why).
+2. **The reel**, in `videos/REEL/`, following `skills/reel-3d-toon`.
+   - **Voices first.** Use `videos/biblioteca/tts_lineas.py`, one request per character (El Mago is Charon, Papá Noel is Algenib).
+     - Check every clip's length against its words. When a split is wrong, re-cut by hand from the take with the split's own trim filter, record the cuts in `_cuts_from_take`, then run `--post-only` (a squeeze can be a list).
+     - Transcribe every clip with `check_voces.py`. On a 429, wait 20 s or use `CHECK_MODEL=gemini-3.5-flash-lite`. Print the whole JSON.
+   - **ON_SCREEN.md:** everything on screen, by category, each with its check.
+   - **The scene.** Start from the latest finished scene (`videos/culpa-de-las-piezas/hf3d/index.html` and `build.sh` at first).
+     - Model the new pieces from the product photo like `videos/biblioteca/3d/web/ajedrez3d.js`, without changing the existing pieces.
+     - Build the new setting with every camera looking toward a wall, the sea or a backdrop.
+     - Poses never read props placed later in the frame.
+     - Nothing passes through anything (table, bodies, pieces). No prop teleports.
+   - **Music:** only the soft ambient bed.
+     - In `cues.py`: `"music": {"style": "ambient", "bpm": 120, "tonic": …, "mode": …, "chords": […], "chord_beats": 8, "duck": …, "end_chord": {"t": T["card"]}, "fade_out": […]}`. The page plays it at volume **0.22**.
+     - Check with `python3 videos/biblioteca/nivel_musica.py videos/REEL/hf3d`: the bed about 20-25 dB under the voices and 12-16 dB under them in the gaps.
+     - Never put a sound effect on a spoken word. No steady noise.
+   - **Preview frames** at every risky moment.
+     - El Mago's close-ups from below his brim.
+     - No text in the top 232-400 px except the hook or badge.
+     - Reaches last at least 0.5 s.
+   - **QA gate:** 0 bad frames, the new set's furniture included.
+   - **Render in the background with an explicit cd**:
+     `bash -c 'cd /home/user/Creaciones-del-mago/videos/REEL/hf3d || exit 9; echo "cwd: $(pwd)" > ../render.log; npx hyperframes render --fps 60 --workers 4 -o ../REEL.mp4 >> ../render.log 2>&1; echo "exit $?" >> ../render.log'`.
+     Check the first log line. If the container restarts mid-render, delete any stale `work-*` folder and relaunch.
+   - **After the render:**
+     - flicker scan: 0 frames;
+     - loudness about -14 LUFS, peak under -1 dB (a sound-only fix goes through `remezclar.py`);
+     - the steady-buzz check;
+     - voices by transcription of the mix;
+     - a contact sheet of REAL frames from the mp4, looked at before delivery.
+3. **Copy.**
+   - Use the three Haiku caption writers via SendMessage: `ad2446449fd1e351f` (humour), `ad05eff09effdc36b` (practical), `a5498758dc63992a4` (character). If one is unreachable, spawn a new Haiku writer with that angle.
+   - Curate by hand into one caption plus the private-reply DM (ask "¿para quién es?"). Put them in `videos/REEL/GUION.md` and update this plan.
+   - **Facts only** (first person singular, Rioplatense "vos"):
+     - the product's own site line;
+     - colours per side, up to 4 per piece, where the set allows it;
+     - up to 25 cm per piece;
+     - PLA (indoors) or PETG (sun, heavy use);
+     - made to order, piece by piece;
+     - price and date by WhatsApp 092 104 419, before starting, no commitment;
+     - most sets are pieces only and the board is separate. Ancient Greece includes a 52 × 50 board; the travel chess folds into a 24 cm tube with the pieces inside;
+     - the last day to order for Christmas is 23 December;
+     - free delivery ONLY in La Unión, La Blanqueada and part of Buceo, shipping to all of Uruguay.
+   - **Never:**
+     - a phone number in the video;
+     - a price;
+     - any other date;
+     - a delivery promise;
+     - "48 h" for a set;
+     - weight, felt, finish or magnet-strength claims;
+     - trademarks or real people;
+     - "envío gratis a todo Uruguay".
+4. **Wrap up.**
+   - Commit and push, the final mp4 included; never leave a stale render untracked.
+   - Send the video with SendUserFile.
+   - Update `.claude/handoff/HANDOFF.md` and the skill's lessons.
+   - Write a short summary for the user IN SPANISH: what the audit changed, the checks, the caption and DM ready to paste, and the publish date.
+   - Then stop. The next reel has its own run.
+
+The Gemini key is a proxy-injected network secret: never print it. Keep model identifiers out of commits and files.

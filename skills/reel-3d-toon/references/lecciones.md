@@ -167,3 +167,10 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | — | A new chess set with animal pieces | `biblioteca/3d/web/mascotas3d.js`: seated animals on round bases, built from the product photo; animated parts in `userData` (head, ears, tail, a pivoting front paw); each piece scaled from its measured toon height |
 | A falling pawn grazed the table's edge for 8 frames | It dropped as soon as its centre passed the edge, while half its base was still over the table | A piece drops only when its whole base is past the edge (centre + base radius + a margin) |
 | The dogs read as brown blobs | They were shot from behind (they face the other army) | Shoot each army from the opposite side, so the camera sees their faces |
+
+## From "El laberinto" (November second wave W3, 2026-11-14)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The page never became ready (the frame tool timed out with no page error) | An endless loop in the new kit's wall builder: the condition that cut a block short of the temple's gap also matched every block after the gap | Test a new kit in node first, with `document` stubbed (`board()` and every piece, with their sizes): it runs in 50 ms and a hang shows at once. Guard builder loops |
+| `'flatShading' is not a property of THREE.MeshToonMaterial` (hundreds of warnings) | Toon materials have no flat shading | For faceted stone and rock, use non-indexed geometry with recomputed normals (`facets()` in `grecia3d.js`) |

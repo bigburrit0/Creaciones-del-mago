@@ -127,13 +127,13 @@
       // bougainvillea over the back wall and down beside the door
       { const g = new THREE.Group(); scene.add(g); let k = 0;
         for (let x = LEFTX + 0.1; x < 0.5; x += 0.09) { const n = x < -1.0 ? 4 : 2; for (let j = 0; j < n; j++, k++) { const y = WALL_H + 0.02 - j * 0.16 - rnd(k) * 0.12, z = BACKZ + 0.06 + rnd(k + 3) * 0.05;
-          sph(0.055 + rnd(k + 7) * 0.03, k % 3 ? "#D23F7A" : "#B12F68", x + (rnd(k + 1) - 0.5) * 0.06, y, z, g, { mo: { flatShading: true } }); if (k % 2) sph(0.04, "#4E8A3E", x + 0.04, y + 0.05, z - 0.01, g, { mo: { flatShading: true } }); } }
-        for (let j = 0; j < 9; j++, k++) sph(0.05 + rnd(k) * 0.02, k % 3 ? "#D23F7A" : "#4E8A3E", -1.16 + (rnd(k + 2) - 0.5) * 0.14, 2.55 - j * 0.2, BACKZ + 0.08, g, { mo: { flatShading: true } }); }
+          sph(0.055 + rnd(k + 7) * 0.03, k % 3 ? "#D23F7A" : "#B12F68", x + (rnd(k + 1) - 0.5) * 0.06, y, z, g, { seg: 8 }); if (k % 2) sph(0.04, "#4E8A3E", x + 0.04, y + 0.05, z - 0.01, g, { seg: 8 }); } }
+        for (let j = 0; j < 9; j++, k++) sph(0.05 + rnd(k) * 0.02, k % 3 ? "#D23F7A" : "#4E8A3E", -1.16 + (rnd(k + 2) - 0.5) * 0.14, 2.55 - j * 0.2, BACKZ + 0.08, g, { seg: 8 }); }
       // an olive tree (back left), a lemon tree (back right), a big amphora by the left wall
       const tree = (x, z, leaf, fruit) => { const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g);
         cyl(0.2, 0.15, 0.36, "#B9663B", 0, 0.18, 0, g); cyl(0.21, 0.21, 0.04, "#A85A33", 0, 0.36, 0, g, { line: false });
         cyl(0.035, 0.05, 1.0, "#7A6048", 0, 0.85, 0, g, { rot: [0, 0, 0.08] });
-        for (let k = 0; k < 9; k++) { const a = k * 2.4, r = 0.12 + rnd(k + x) * 0.18; sph(0.17 + rnd(k + 4) * 0.08, leaf, Math.cos(a) * r, 1.32 + rnd(k + 9) * 0.32, Math.sin(a) * r * 0.7, g, { mo: { flatShading: true }, line: true }); }
+        for (let k = 0; k < 9; k++) { const a = k * 2.4, r = 0.12 + rnd(k + x) * 0.18; sph(0.17 + rnd(k + 4) * 0.08, leaf, Math.cos(a) * r, 1.32 + rnd(k + 9) * 0.32, Math.sin(a) * r * 0.7, g, { line: true, seg: 8 }); }
         if (fruit) for (let k = 0; k < 8; k++) { const a = k * 1.9; sph(0.032, fruit, Math.cos(a) * 0.27, 1.25 + rnd(k + 2) * 0.35, Math.sin(a) * 0.2 + 0.08, g); }
         return g; };
       tree(-1.25, -1.15, "#859E5E", null); tree(2.1, -1.12, "#4F8A3A", "#F2D037");

@@ -19,9 +19,10 @@ export function greekKit(scene, o = {}) {
   const SIDES = { gold: ["#D9A92E", "#F4D575", "#5A3E0C"], red: ["#B8432F", "#DE7254", "#3E120C"] };   // [main, accent, dark (eyes, nostrils)]
   const STONE = "#F1EDE4", STONE_B = "#D9D3C6";
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  const facets = (geo) => { const g = geo.index ? geo.toNonIndexed() : geo; g.computeVertexNormals(); return g; };   // flat facets (MeshToonMaterial has no flatShading)
   const rnd = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   function P(geo, c, parent, x = 0, y = 0, z = 0, opt = {}) {
-    const m = new THREE.Mesh(geo, toon(c, { spec: opt.spec ?? 0.5, flatShading: !!opt.flat })); m.position.set(x, y, z);
+    const m = new THREE.Mesh(opt.flat ? facets(geo) : geo, toon(c, { spec: opt.spec ?? 0.5 })); m.position.set(x, y, z);
     if (opt.rot) m.rotation.set(...opt.rot); if (opt.scale) m.scale.set(...opt.scale); shade(m); parent.add(m);
     if (opt.line !== false) outline(m, opt.w ?? WO); return m;
   }
@@ -162,8 +163,7 @@ export function greekKit(scene, o = {}) {
     for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), k = seed * 31 + i * 7.3;
       if (y > -h / 2 + 1e-6) { const top = y > h / 2 - 1e-6, f = top ? 0.88 : 1;
         p.setXYZ(i, x * f + (rnd(k) - 0.5) * Math.min(w, 0.03) * 0.16, y + (top ? (rnd(k + 2) - 0.5) * h * 0.18 : (rnd(k + 3) - 0.5) * h * 0.06), z * f + (rnd(k + 1) - 0.5) * Math.min(d, 0.03) * 0.16); } }
-    geo.computeVertexNormals();
-    const m = new THREE.Mesh(geo, toon(c, { flatShading: true, rim: 0.2 })); shade(m); outline(m, WO * 1.4); return m;
+    const m = new THREE.Mesh(facets(geo), toon(c, { rim: 0.2 })); shade(m); outline(m, WO * 1.4); return m;
   }
   function board(opt = {}) {
     const SQ = 0.05, BW = 0.5, BD = 0.52, T = 0.012, IN = SQ * 4, g = new THREE.Group(); scene.add(g);
@@ -199,7 +199,7 @@ export function greekKit(scene, o = {}) {
           let len = 0.055 + rnd(seed * 3.1) * 0.05; if (to - u - len < 0.03) len = to - u;
           if (sd.fix < 0 && sd.along === "z") {                                     // the temple's place: no wall there
             if (u >= -TEMPLE_Z - 0.001 && u < TEMPLE_Z) { u = TEMPLE_Z; continue; }
-            if (u + len > -TEMPLE_Z) { len = -TEMPLE_Z - u; if (len < 0.015) { u = TEMPLE_Z; continue; } } }
+            if (u < -TEMPLE_Z && u + len > -TEMPLE_Z) { len = -TEMPLE_Z - u; if (len < 0.015) { u = TEMPLE_Z; continue; } } }
           const mid = u + len / 2;
           const corner = sd.along === "x" && Math.abs(mid) > L - 0.06;
           const h = (corner ? 0.062 + rnd(seed) * 0.022 : (0.028 + rnd(seed + 0.5) * 0.03 + (row === 0 ? 0.008 : 0)) * sd.lo);
@@ -219,7 +219,7 @@ export function greekKit(scene, o = {}) {
     box(dW, 0.005, wZ, 0, 0.0025, 0); box(dW - 0.006, 0.005, wZ - 0.008, 0, 0.0075, 0);
     const colH = 0.05;
     for (let k = 0; k < 6; k++) { const z = (k - 2.5) * (wZ - 0.024) / 5;
-      for (const x of [dW / 2 - 0.009, -dW / 2 + 0.009]) { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.0042, 0.0049, colH, 12), toon(STONE, { flatShading: true, spec: 0.15 })); m.position.set(x, 0.01 + colH / 2, z); shade(m); TPL.add(m); outline(m, WO * 1.2);
+      for (const x of [dW / 2 - 0.009, -dW / 2 + 0.009]) { const m = new THREE.Mesh(facets(new THREE.CylinderGeometry(0.0042, 0.0049, colH, 12)), toon(STONE, { spec: 0.15 })); m.position.set(x, 0.01 + colH / 2, z); shade(m); TPL.add(m); outline(m, WO * 1.2);
         box(0.011, 0.003, 0.011, x, 0.01 + colH + 0.0015, z); } }
     box(dW - 0.004, 0.009, wZ - 0.004, 0, 0.01 + colH + 0.0075, 0);
     { const sh = new THREE.Shape(); sh.moveTo(-(wZ - 0.004) / 2, 0); sh.lineTo((wZ - 0.004) / 2, 0); sh.lineTo(0, 0.026); sh.closePath();

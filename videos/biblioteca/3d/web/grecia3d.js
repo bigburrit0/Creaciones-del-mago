@@ -17,7 +17,7 @@ import { toon, outline, shade } from "./toon3d.js";
 export function greekKit(scene, o = {}) {
   const WO = (o.wo ?? 0.0024) * 0.4;
   const SIDES = { gold: ["#D9A92E", "#F4D575", "#5A3E0C"], red: ["#B8432F", "#DE7254", "#3E120C"] };   // [main, accent, dark (eyes, nostrils)]
-  const STONE = "#F1EDE4", STONE_B = "#D9D3C6";
+  const STONE = "#F1EDE4", STONE_B = "#A89C88";   /* the slab shows in the passages: darker, so the labyrinth reads from above */
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
   const facets = (geo) => { const g = geo.index ? geo.toNonIndexed() : geo; g.computeVertexNormals(); return g; };   // flat facets (MeshToonMaterial has no flatShading)
   const rnd = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
@@ -186,7 +186,7 @@ export function greekKit(scene, o = {}) {
       { along: "z", fix: BW / 2, band: BW / 2 - IN, lo: 0.6 },      // h-file side (local +x): the front in the reel, kept low
       { along: "z", fix: -BW / 2, band: BW / 2 - IN, lo: 1.0 },     // a-file side (local -x): the temple
     ];
-    const CORR = 0.011, PASS = [];
+    const CORR = 0.016, PASS = [];
     for (const sd of sides) {
       const sg = Math.sign(sd.fix), inner = (sd.band - CORR) * 0.52, outer = sd.band - CORR - inner;
       const cIn = sg * (IN + inner / 2), cOut = sg * (IN + inner + CORR + outer / 2), cPass = sg * (IN + inner + CORR / 2);

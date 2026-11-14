@@ -194,10 +194,12 @@
       const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
       const { LINES, ENV, talk } = await voices(FPS);
       // his mitten's path (the tip): along the passage of the walls at his end, a dead end at the corner, back the other way, another dead end, back
-      const PASS_X = TC.x + (B.IN + (B.BD / 2 - B.IN - 0.011) * 0.52 + 0.0055), MIT = 0.072;
-      const TRK = [[T.trace, 0.06], [T.trace + 0.6, 0.215], [T.trace + 0.8, 0.205], [T.trace + 1.45, -0.04], [T.trace + 1.65, -0.03], [T.traceEnd - 0.2, 0.1], [T.traceEnd, 0.1]];
+      /* the mitten is 10 cm long and his arm reaches about 0.35 m from the shoulder (measured): the PALM follows the middle of the
+         wall band at his end (the passage), 4 cm above the highest block under the mitten, within his reach (z +0.05..+0.235) */
+      const BAND_X = TC.x + B.IN + (B.BD / 2 - B.IN) / 2, PALM_UP = 0.042;
+      const TRK = [[T.trace, 0.12], [T.trace + 0.55, 0.225], [T.trace + 0.75, 0.215], [T.trace + 1.4, 0.05], [T.trace + 1.6, 0.06], [T.traceEnd - 0.25, 0.14], [T.traceEnd, 0.14]];
       function tipAt(t) { let z = TRK[0][1]; for (let i = 1; i < TRK.length; i++) { const [t0, z0] = TRK[i - 1], [t1, z1] = TRK[i]; if (t >= t0) z = lerp(z0, z1, ss(clamp((t - t0) / (t1 - t0), 0, 1))); }
-        const x = PASS_X, Z = TC.z + z; let y = 0; for (let k = -2; k <= 2; k++) y = Math.max(y, wallTop(x, Z + k * 0.01)); return V3(x, y + 0.012, Z); }
+        const Z = TC.z + z; let y = 0; for (let k = -5; k <= 5; k++) for (const dx of [-0.03, 0, 0.03]) y = Math.max(y, wallTop(BAND_X + dx, Z + k * 0.01, 0.004)); return V3(BAND_X, y + PALM_UP, Z); }
       function poseAt(t) {
         IKQ.length = 0;
         santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
@@ -207,11 +209,11 @@
         const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
         // ---- Papá Noel: leans over the walls and follows the passage with his left mitten (lost); impressed by the board (glasses down, both hands open)
         const lean = pulse(t, T.lean, T.lean + 0.55, T.traceEnd, T.traceEnd + 0.5);
-        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.16 * lean); rotWorld(santa.b("DEF-head"), SF.left, 0.1 * lean);
-        { const w = pulse(t, T.lean + 0.1, T.trace, T.traceEnd, T.traceEnd + 0.55); if (w > 0.001) { const tip = tipAt(t), sh = wp(santa.b("DEF-upper_arm.L")), d = tip.clone().sub(sh).normalize();
-            arm(santa, "L", tip.clone().sub(d.multiplyScalar(MIT)), w, null, 0.05); } }
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.2 * lean); rotWorld(santa.b("DEF-head"), SF.left, 0.08 * lean);
+        { const w = pulse(t, T.lean + 0.1, T.trace, T.traceEnd, T.traceEnd + 0.55); if (w > 0.001) { const palm = tipAt(t), sh = wp(santa.b("DEF-upper_arm.L"));
+            arm(santa, "L", palm.clone().add(sh.clone().sub(palm).normalize().multiplyScalar(0.035)), w, null, 0.05); } }
         const wow = pulse(t, T.s2 - 0.2, T.s2 + 0.3, T.s2 + 1.4, T.s2 + 1.9);
-        for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side)); arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.24)).add(SF.fwd.clone().multiplyScalar(0.16)).add(V3(0, -0.06, 0)), wow, null, 0.08); }
+        for (const [side, f] of [["L", SF.left], ["R", SF.right]]) { const sh = wp(santa.b("DEF-upper_arm." + side)); arm(santa, side, sh.clone().add(f.clone().multiplyScalar(0.27)).add(SF.fwd.clone().multiplyScalar(0.05)).add(V3(0, 0.0, 0)), wow, null, 0.08); }
         rotWorld(santa.b("DEF-spine.003"), SF.left, -0.07 * wow);
         // ---- El Mago: deadpan (heavy lids) for "Se sale ganando"; the magic hand for the tape measures; to the viewer for the CTA (a 0.55 s reach)
         const magic = pulse(t, T.tapes - 0.35, T.tapes + 0.15, T.m3 + 0.6, T.m3 + 1.1);
@@ -249,13 +251,13 @@
       // ---------- camera and editing (every camera looks toward a wall) ----------
       const X = TC.x, Z = TC.z, BY = TOP + BT;
       const SHOTS = [
-        { t: 0.0, d: T.mino, fov: 50, from: [X - 0.16, BY + 0.2, Z + 0.185], to: [X, BY + 1.12, Z + 0.06], look: [X - 0.16, BY, Z + 0.155], look2: [X, BY, Z + 0.0] },                   // the labyrinth from above; it rises into a board
+        { t: 0.0, d: T.mino, fov: 50, from: [X - 0.23, BY + 0.17, Z + 0.125], to: [X, BY + 1.12, Z + 0.06], look: [X - 0.23, BY, Z + 0.1], look2: [X, BY, Z + 0.0] },                   // the labyrinth from above; it rises into a board
         { t: T.mino, d: T.herc - T.mino, fov: 34, from: [X + 0.03, BY + 0.1, Z + 0.07], to: [X + 0.0, BY + 0.098, Z + 0.065], look: [X - 0.175, BY + 0.075, Z + 0.025] },                // the Minotaur lowers its horns
         { t: T.herc, d: T.lean - T.herc, fov: 38, from: [X - 0.03, BY + 0.11, Z - 0.03], to: [X - 0.01, BY + 0.108, Z - 0.025], look: [X + 0.175, BY + 0.08, Z + 0.025] },               // Hercules raises his club
         { t: T.lean, d: T.trace + 0.2 - T.lean, fov: 40, subj: "santa", h: 1.1, az: -42, el: 14, v: 0.3, whip: 1 },                                                                // he leans over the walls
-        { t: T.trace + 0.2, d: T.traceEnd + 0.05 - T.trace - 0.2, fov: 42, from: [X + 0.2, BY + 0.42, Z + 0.13], to: [X + 0.2, BY + 0.4, Z + 0.125], look: [X + 0.2, BY, Z + 0.085] },   // his mitten in the labyrinth, from above
+        { t: T.trace + 0.2, d: T.traceEnd + 0.05 - T.trace - 0.2, fov: 42, from: [X + 0.215, BY + 0.4, Z + 0.17], to: [X + 0.215, BY + 0.385, Z + 0.165], look: [X + 0.215, BY, Z + 0.13] },   // his mitten in the labyrinth, from above
         { t: T.traceEnd + 0.05, d: T.tapes + 0.05 - T.traceEnd - 0.05, fov: 32, subj: "mago", h: 0.95, az: 48, el: -9, v: 0.12 },                                                   // "Es un ajedrez. Se sale ganando."
-        { t: T.tapes + 0.05, d: T.s2 - 0.1 - T.tapes - 0.05, fov: 50, from: [X, BY + 0.9, Z + 1.05], to: [X, BY + 0.78, Z + 0.88], look: [X, BY - 0.01, Z - 0.02] },                   // the whole board, the tapes: 52 × 50
+        { t: T.tapes + 0.05, d: T.s2 - 0.1 - T.tapes - 0.05, fov: 50, from: [X, BY + 0.85, Z + 1.0], to: [X, BY + 0.72, Z + 0.84], look: [X, BY - 0.13, Z + 0.1] },                   // the whole board, the tapes: 52 × 50
         { t: T.s2 - 0.1, d: T.proof - T.s2 + 0.1, fov: 34, subj: "santa", h: 1.0, az: -35, el: 4, v: 0.15 },                                                                       // "¡Qué tablero!"
         { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                              // (under the proof panel)
         { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                                         // CTA
@@ -300,6 +302,12 @@
         { const club = KH.g.userData.club; pts.push(["club", club.localToWorld(V3(0.003, -0.04, 0.02))]); }
         for (const tp of TAPES) if (tp.g.visible) pts.push(["tape", tp.g.localToWorld(V3(-0.027, 0.02, 0))], ["tape-end", tp.hook.getWorldPosition(V3(0, 0, 0))]);
         for (const [nm, p] of pts) for (const [cn, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders()) { const d = colDist(p, k).d; if (d < 0.02) out.push(["prop", nm, cn, k.name, +d.toFixed(3)]); }
+        /* the mittens and thumbs (exact skinned boxes, 2 mm inside) never enter a wall block, the temple or a piece: the body colliders don't cover hands */
+        for (const [c, nm] of [[santa, "santa"], [mago, "mago"]]) for (const mn of ["handL", "handR", "thumbL", "thumbR"]) { const hm = c.meshes.find((m) => m.name === mn); if (!hm) continue;
+          const bb = new THREE.Box3().setFromObject(hm, true).expandByScalar(-0.002); if (bb.isEmpty()) continue;
+          WB.forEach((F, i) => { if (bb.intersectsBox(new THREE.Box3(F.min, F.max))) out.push(["mitten-wall", nm, mn, i, +(Math.min(bb.max.y, F.max.y) - Math.max(bb.min.y, F.min.y)).toFixed(3)]); });
+          if (bb.intersectsBox(TB)) out.push(["mitten-temple", nm, mn]);
+          for (const p of PCS) if (p.g.position.distanceTo(bb.getCenter(V3(0, 0, 0))) < 0.2 && bb.intersectsBox(new THREE.Box3().setFromObject(p.g, true))) out.push(["mitten-piece", nm, mn, p.type]); }
         const J = QB(out, []);
         return { t, out, J };
       }

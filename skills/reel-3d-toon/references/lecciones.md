@@ -158,3 +158,12 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | Seen | Cause | Rule |
 |---|---|---|
 | The owner found the music loud and annoying | Measured on reel 5: the chiptune bed sat only 8 dB under the voices while they spoke and level with them in the gaps; square-wave harmonics sit in the 1-4 kHz speech band | Use `"style": "ambient"` in `chiptune.py` (slow detuned pads, a root drone, a sparse bell, low-passed at 900 Hz) at page volume 0.22. Check with `videos/biblioteca/nivel_musica.py HF3D_DIR`: the bed 20-25 dB under the voices, 12-16 dB under them in the gaps (K-weighted). A sound-only change goes through `remezclar.py`, the picture byte-identical |
+
+## From "Los gatos tiran todo" (November second wave W1, 2026-11-14)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| — | A new setting without building a new room | Redress the workshop: hide the workshop props (bench, shelves, printer) by region, re-texture the walls (toon materials only: the window glass and the night sky are basic materials and must be left alone), swap the window's picture, add furniture with QA boxes |
+| — | A new chess set with animal pieces | `biblioteca/3d/web/mascotas3d.js`: seated animals on round bases, built from the product photo; animated parts in `userData` (head, ears, tail, a pivoting front paw); each piece scaled from its measured toon height |
+| A falling pawn grazed the table's edge for 8 frames | It dropped as soon as its centre passed the edge, while half its base was still over the table | A piece drops only when its whole base is past the edge (centre + base radius + a margin) |
+| The dogs read as brown blobs | They were shot from behind (they face the other army) | Shoot each army from the opposite side, so the camera sees their faces |

@@ -238,7 +238,7 @@
         // the board: hidden until the snap; each part flies in from outside and settles with a small bounce
         PB.g.visible = t >= T.parts - 0.05;
         PB.parts.forEach((pt, i) => { const t0 = T.parts + (i < 4 ? i * 0.3 : 1.25 + (i - 4) * 0.25), u = clamp((t0 === 0 ? 0 : t - t0) / 0.45, 0, 1);
-          pt.g.visible = t >= t0; const from = pt.home.clone().add(pt.out.clone().multiplyScalar(0.05)).add(V3(0, 0.2, 0));   /* from just above its place, below both hats (QA: from the sides the frame's long sides crossed their heads, from high up El Mago's brim) */
+          pt.g.visible = t >= t0; const from = pt.home.clone().add(V3(0, 0.14, 0));   /* from just above its place, below both hats (QA: from the sides the frame's long sides crossed their heads, from high up El Mago's brim) */
           pt.g.position.copy(flyArc(from, pt.home, ss(u), 0.03)); pt.g.position.y += 0.004 * Math.sin(Math.PI * clamp((u - 0.8) / 0.2, 0, 1)); pt.g.rotation.y = (1 - ss(u)) * (i % 2 ? 1.1 : -1.1);
           pt.g.scale.setScalar(Math.max(0.001, 0.25 + 0.75 * ss(clamp(u * 1.8, 0, 1)))); });
         // sparkles: the snap (the pieces leave), each piece landing back
@@ -260,7 +260,7 @@
         { t: T.snap - 0.05, d: T.parts - T.snap + 0.05, fov: 40, subj: "mago", h: 1.3, az: 40, el: 2, v: 0.22, whip: 1 },                                                  // El Mago's magic
         { t: T.parts, d: T.pieces - 0.1 - T.parts, fov: 50, from: [X, CL + 1.05, Z + 0.04], to: [X, CL + 0.98, Z + 0.035], look: [X, CL, Z] },                            // the parts fit together, from above
         { t: T.pieces - 0.1, d: T.m3 - 0.15 - T.pieces + 0.1, fov: 42, from: [X - 0.04, CL + 0.55, Z + 0.66], to: [X - 0.02, CL + 0.5, Z + 0.6], look: [X, CL + 0.02, Z - 0.03] },   // the pieces land, rank by rank
-        { t: T.m3 - 0.15, d: T.proof - T.m3 + 0.15, fov: 38, subj: "mago", h: 1.3, az: 40, el: -3, v: 0.12, aim: [-0.26, 0.0, 0.22], whip: 1 },                             // "Pedidos hasta el 23 de diciembre." (the calendar page on the right)
+        { t: T.m3 - 0.15, d: T.proof - T.m3 + 0.15, fov: 38, subj: "mago", h: 1.3, az: 40, el: -3, v: 0.12, aim: [0.18, 0.0, -0.15], whip: 1 },                             // "Pedidos hasta el 23 de diciembre." (the calendar page on the right)
         { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                     // (under the proof panel)
         { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                                 // CTA
         { t: T.card, d: DUR - T.card, fov: 54, from: [X, 1.05, Z + 0.95], to: [X, 1.03, Z + 0.89], look: [X, 0.66, Z - 0.02] },                                            // the card over the board

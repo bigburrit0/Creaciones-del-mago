@@ -174,3 +174,12 @@ Each row: what the person saw → the real cause → the rule now → where it i
 |---|---|---|
 | The page never became ready (the frame tool timed out with no page error) | An endless loop in the new kit's wall builder: the condition that cut a block short of the temple's gap also matched every block after the gap | Test a new kit in node first, with `document` stubbed (`board()` and every piece, with their sizes): it runs in 50 ms and a hang shows at once. Guard builder loops |
 | `'flatShading' is not a property of THREE.MeshToonMaterial` (hundreds of warnings) | Toon materials have no flat shading | For faceted stone and rock, use non-indexed geometry with recomputed normals (`facets()` in `grecia3d.js`) |
+
+## From "El mantel" (November second wave W4, 2026-11-15)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| Papá Noel's jacket knot was 4 cm inside the table in every frame | A tablecloth hanging 17 cm over the edge makes the table wider and lower: the knot that cleared a bare table now met the cloth | The hanging cloth is part of the table's QA box. Keep Papá Noel 5 cm further away (0.67 m from a 0.62 m table's centre) |
+| The board's long frame sides flew through both heads | Parts flew in from 0.45 m out along the table's axis, which is where the characters stand | Parts that assemble by magic drop from just above their place (14 cm) and grow as they fall; never fly them in along the players' axis |
+| El Mago's raised hand grazed the table's edge on the way up and down | The reach goes straight from his idle hand to the target, low past the table's edge | Lift the target by (1 − weight) × 15 cm, so the hand arcs over furniture |
+| The calendar page covered El Mago's face, then pushed him off the frame | The `aim` offset moves the camera and its target together, so the subject moves the OTHER way on screen; a small contact sheet was misread | To put a subject on the left, aim to the camera's right: aim = right × k, where right = (cos az, 0, −sin az). Check the full-size frame |

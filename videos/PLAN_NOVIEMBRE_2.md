@@ -4,10 +4,13 @@ The research is in `RESEARCH_NOVIEMBRE_2_2026.md`. The owner chose **other chess
 this plan (a dogs-eager joke, a suitcase, a broken running gag, a puzzle Papá Noel can't solve) was replaced by the four
 scripts below.
 
-**Status (15/11):**
-- W1 `los-gatos-tiran-todo/los-gatos-tiran-todo.mp4`, W2 `la-gaviota/la-gaviota.mp4` and W3 `el-laberinto/el-laberinto.mp4` are finished: each `GUION.md` has the caption, the DM and a Result section.
-- W4 `el-mantel` has passed its QA gate (0/1470) and has its caption; it is rendering.
-- New kits: `biblioteca/3d/web/grecia3d.js` (the Greek set with its walls and temple) and `biblioteca/3d/web/tablero3d.js` (the puzzle board in eight parts).
+**Status (15/11): all four are finished.** Each `GUION.md` has the caption, the DM and a Result section:
+- W1 `los-gatos-tiran-todo/los-gatos-tiran-todo.mp4`;
+- W2 `la-gaviota/la-gaviota.mp4`;
+- W3 `el-laberinto/el-laberinto.mp4`;
+- W4 `el-mantel/el-mantel.mp4`.
+
+New kits: `biblioteca/3d/web/grecia3d.js` (the Greek set with its walls and temple) and `biblioteca/3d/web/tablero3d.js` (the puzzle board in eight parts).
 
 The rules stay the same:
 - the product is named in words in frame 1;

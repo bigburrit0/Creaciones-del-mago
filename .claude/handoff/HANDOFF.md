@@ -1,14 +1,16 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
-**ESTADO DE LA SEGUNDA TANDA (actualizado 15/11 madrugada; el dueño pidió "empezá a trabajar en los videos de ajedrez" y después "intentalo de nuevo" tras un reinicio; la ocarina de 12 huecos es para OTRA sesión):**
-- **W1 "Los gatos tiran todo" y W2 "La gaviota": TERMINADOS**, commiteados y enviados. Los controles están en la sección "Result" de cada `GUION.md`. Los dos renders salieron a -15,5/-15,8 LUFS y se remezclaron a -14,4/-14,6.
-- **W3 "El laberinto":** renderizando (3 workers). Puerta de calidad 0/1380; caption listo. Al terminar:
-  - parpadeos (cortes en `index.html` → SHOTS), LUFS (`remezclar.py` si hace falta), zumbido, voces de la mezcla, hoja de contacto;
-  - "Result" en `GUION.md`, commit del mp4, enviarlo.
-- **W4 "El mantel":** voces OK, escena OK, puerta de calidad 0/1470, caption listo. Falta renderizar DESPUÉS de W3 (nunca dos renders juntos) y los mismos controles.
-- Los servidores http se cortan a las 2 h. Si hace falta: `cd videos/REEL/hf3d && python3 -m http.server PUERTO` (8782 W3, 8783 W4).
-- **Las tareas programadas de las 2:00 (15-18/11)** encontrarán todo hecho o en render: solo deben terminar lo que falte.
+**SEGUNDA TANDA DE NOVIEMBRE: LOS CUATRO REELS TERMINADOS (15/11, ~2:30 UTC).** Todos están commiteados, enviados, con caption, DM y la sección "Result" en `GUION.md`:
+- W1 "Los gatos tiran todo": publicar el domingo 29/11;
+- W2 "La gaviota": publicar el jueves 3/12;
+- W3 "El laberinto": publicar el domingo 6/12;
+- W4 "El mantel": publicar el domingo 13/12.
+
+Las tareas programadas de las 2:00 (15-18/11) deben decir en una línea que ya están los cuatro y parar.
+- No empezar nada nuevo sin pedido.
+- La ocarina de 12 huecos es para OTRA sesión.
+- Siguen abiertas las preguntas al dueño: el tubo de viaje, los colores de perros vs gatos, las partes del tablero rompecabezas, los imanes del escultórico.
 
 **NOVIEMBRE, SEGUNDA TANDA (pedido del 14/11):** "más reels de noviembre", investigación con Haiku, foco ajedrez pero con otras imágenes; la música era muy alta y molesta, que sea suave, tipo ambience.
 - **Investigación:** `videos/RESEARCH_NOVIEMBRE_2_2026.md`. Cinco Haiku: formatos visuales, calendario de Uruguay, embudo y personas, humor, música ambiental.

@@ -75,3 +75,32 @@ Fuentes:
 | La gaviota | verano en la playa: bossa con guitarra, shaker y steel drum | **rayón de disco + la música se corta** cuando roba el rey; picotazos «bonk»; trombón triste para la gaviota |
 | El laberinto | épica griega: lira, timbales, flauta en re dórico | golpe grave con el Minotauro, grillos cuando se pierde, «ba-dum-tss» después de «Se sale ganando», redoble para las cintas |
 | El mantel | Nochebuena: cascabeles, celesta y pizzicato con un villancico tradicional | «bonk» del peón en el pliegue, rayón de disco en «Eso es un mantel», magia con brillo, campanita del 23 |
+
+## Resultado (15/11/2026)
+
+Los 12 reels tienen música y efectos nuevos. Cada uno tiene su partitura en `videos/REEL/musica.py`, que usa `biblioteca/banda.py` (los instrumentos y los efectos) y `biblioteca/estilos.py` (los géneros). `biblioteca/rehacer_audio.py REEL --swap` genera el sonido, lo nivela, lo remezcla y controla el resultado. Solo se cambió el sonido: la imagen de cada video es idéntica byte a byte.
+
+| Reel | Música | Remates cómicos | Crítica (encaje / calidad) |
+|---|---|---|---|
+| ¿Vikingo o caballero? | épica en re menor que pasa a mayor cuando festejan; candombe para el mate | golpe grave en el jaque mate, «ba-dum-tss» después del mate | — |
+| Un regalo para cada amigo | vidriera saltarina (pizzicato, marimba, xilofón) | «uh-oh» del cactus, silbato que baja en «¡me muero!», brillo «rizz» de la banana | — |
+| Una más | día saltarín → caja de música con reloj → amanecer | ronquidos, «ta-da» con las 32 piezas, «ba-dum-tss» | — |
+| Elegí tu bando | ukelele, palmas, glockenspiel | brillo del rey de 4 colores, «rizz» en «¡Ese rey soy yo!», «ba-dum-tss» | — |
+| Papá Noel en ojotas (las dos ediciones) | candombe con «Jingle Bells» en marimba | «ka-ching» de los regalos, confeti | 9 / 8 |
+| Las preguntas de Papá Noel | concurso de TV (contrabajo, escobillas, vibráfono) | «ding» por pregunta, silbato que baja con la lista, «ba-dum-tss» | — |
+| Culpa de las piezas | tango → villancico («Jingle Bells») | «dun dun duuun» cuando lo miran, golpe grave después de «Vos sí.», campanita del 23 | 9 / 8 |
+| Los gatos tiran todo | travesura con pizzicato y clarinete | silencio en los tres golpecitos, caño de metal en la caída, golpe grave en «Para un gato, sí.» | 8 / 9 |
+| Invisible no era | espías de madrugada (guitarra apagada, contrabajo, silbido) | rayón de disco cuando se encuentran, silbido inocente, grillos, «rizz» | — |
+| La gaviota | bossa con steel drum | rayón de disco y corte cuando roba el rey, «bonk» en los picotazos, trombón triste | 9 / 8 |
+| El laberinto | épica griega (timbales, metales, lira, flauta) | golpe grave con la maza, un grillo, «ba-dum-tss» rápido, «ta-da» | 9 / 8 |
+| El mantel | Nochebuena con «Deck the Halls», cascabeles y celesta | rayón de disco en «Eso es un mantel», «boing» y «bonk» del peón, brillo de magia | — |
+
+La crítica la hace un modelo que escucha la mezcla (`critica_audio.py`). Se pasó por 5 reels; los demás se controlaron con las mismas medidas, sin esa escucha.
+
+**Controles en los 13 videos:**
+- la imagen idéntica (md5);
+- entre -14,1 y -14,4 LUFS, pico por debajo de -4 dBFS;
+- ningún zumbido;
+- la música unos 22 dB por debajo de las voces mientras hablan y nunca por encima de -10 dB en los silencios;
+- ningún efecto empieza sobre una palabra (`banda.py` lo controla, y descarta los efectos viejos que lo hacían);
+- todas las líneas se entienden en la mezcla (transcripción).

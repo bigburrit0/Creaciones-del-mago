@@ -183,3 +183,14 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | The board's long frame sides flew through both heads | Parts flew in from 0.45 m out along the table's axis, which is where the characters stand | Parts that assemble by magic drop from just above their place (14 cm) and grow as they fall; never fly them in along the players' axis |
 | El Mago's raised hand grazed the table's edge on the way up and down | The reach goes straight from his idle hand to the target, low past the table's edge | Lift the target by (1 − weight) × 15 cm, so the hand arcs over furniture |
 | The calendar page covered El Mago's face, then pushed him off the frame | The `aim` offset moves the camera and its target together, so the subject moves the OTHER way on screen; a small contact sheet was misread | To put a subject on the left, aim to the camera's right: aim = right × k, where right = (cos az, 0, −sin az). Check the full-size frame |
+
+## Music and effects (2026-11-15: "La música no tiene mucho sentido")
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The owner found the music meaningless | Ten reels shared one ambient bed of slow chords that only changed key: no genre, no rhythm, no stop at the punchlines | Each reel gets a style that fits its story (`biblioteca/estilos.py`: epic, bossa, Greek, carol, tango, quiz, candombe, lullaby, ukulele, spy, bouncy). The score lives in `REEL/musica.py`; the music stops dead for comic beats and swells into reveals |
+| Effects were 8-bit blips that marked actions but never made anyone laugh | Square-wave effects only | Original comic effects with the function of the trending ones (`banda.py`): a boom with a tail, a metal pipe that bounces, a record scratch, a sad trombone, "dun dun duuun", a rimshot, crickets, a boing, slide whistles, a cash register, a bonk, a smug glint. 3 to 6 per reel, in the gaps |
+| Trending meme audio can't be used as is | Third-party recordings; business accounts can't use commercial music | Make sound-alikes in function, never copies. For a trending song, the owner picks it in Instagram's licensed library when publishing |
+| HeyGen, Openverse and Lyria were unavailable | The network blocks the first two; Lyria 3 has a 0 quota on the free key | Synthesise with numpy (additive plucks and mallets, reeds, brass, drums, a convolution reverb). `rehacer_audio.py REEL --swap` re-scores a finished reel without touching its picture |
+| An old effect started inside a word | The old cues allowed some names inside lines | `Song.old_sfx` drops every inherited effect that starts inside a line; `Song.write` lists any new one that does |
+| The music sounded too quiet after the switch | Real instruments carry less energy than square waves | Level by measurement: about 22 dB under the voices, never above -10 dB in the gaps (`rehacer_audio.py` sets the page's volume) |

@@ -1,6 +1,13 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
+**MÚSICA Y EFECTOS NUEVOS (15/11):** el dueño dijo «La música no tiene mucho sentido» y pidió música acorde a cada video y efectos humorísticos que estén de moda.
+- Auditoría y resultado: `videos/AUDIT_MUSICA.md`.
+- Los 12 reels (13 videos) tienen partitura propia (`videos/REEL/musica.py`) y efectos cómicos originales.
+- Solo cambió el sonido: la imagen es idéntica.
+- Herramientas: `biblioteca/banda.py`, `biblioteca/estilos.py`, `biblioteca/rehacer_audio.py REEL --swap` y `biblioteca/critica_audio.py`.
+- **De ahora en más, cada reel nuevo lleva su `musica.py` y no el colchón ambient.**
+
 **SEGUNDA TANDA DE NOVIEMBRE: LOS CUATRO REELS TERMINADOS (15/11, ~2:30 UTC).** Todos están commiteados, enviados, con caption, DM y la sección "Result" en `GUION.md`:
 - W1 "Los gatos tiran todo": publicar el domingo 29/11;
 - W2 "La gaviota": publicar el jueves 3/12;

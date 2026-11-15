@@ -27,3 +27,11 @@ Pedidos para Navidad: hasta el 23 de diciembre.
 ¿Para quién es la ocarina? ¿Ya toca algo o arranca de cero?
 Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso.
 ```
+
+## Result (2026-11-15)
+
+`doce-agujeros.mp4`: 24.65 s, 1080×1920, 60 fps.
+- QA gate 0/1479 bad frames, 0 jumps, deterministic; flicker scan 0 frames.
+- Sound rebuilt with `remezclar.py` to -14.1 LUFS (peak -4.2 dBFS); music 25 dB under the voices, 18 dB under them in the gaps.
+- Mix transcription: every line clear.
+- The scale (synthesised, "Sonido digital") climbs as each gold cap pops off a hole; the product beat turns it over (10 on top, 2 for the thumbs); it floats back to Papá Noel's mittens for the CTA.

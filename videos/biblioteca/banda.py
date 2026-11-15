@@ -176,7 +176,7 @@ def tom(fr=120, g=1.0, d=0.45):
 def timpani(fr=f("D2"), g=1.0, d=1.6):
     y = additive(fr, d, [(1, 1.0, 2.2), (1.5, 0.5, 3.0), (1.99, 0.35, 3.5), (2.44, 0.2, 4.5)])
     th = lp(noise(0.06), 300) * edec(0.06, 50); y[:len(th)] += th * 0.8; return y * g
-def candombe(kind, g=1.0):
+def candombe_drum(kind, g=1.0):
     """the three tambores of candombe: chico (high, short), repique (middle, open), piano (low, deep) and the 'madera' (stick on the shell)"""
     if kind == "madera": return wood(1300, 0.7 * g)
     fr, d, k = {"chico": (360, 0.12, 30), "repique": (240, 0.25, 14), "piano": (110, 0.45, 7)}[kind]
@@ -225,12 +225,12 @@ def fx_dundun(p=1.0):
     for at in (0.0, 0.4, 0.8):
         k = timpani(f("C2") if at < 0.8 else f("B1"), 0.6, 1.2); i = int(at * SR); y[i:i + len(k)] += k[:len(y) - i]
     return reverb(y, 1.4, 0.25) * 0.5
-def fx_rimshot(p=1.0):
-    """'ba-dum-tss' after a bad joke"""
-    y = np.zeros(int(1.3 * SR))
-    for at, z in ((0.0, tom(160 * p, 0.8, 0.3)), (0.16, tom(110 * p, 0.9, 0.35)), (0.34, kick(0.6))):
+def fx_rimshot(p=1.0, fast=False):
+    """'ba-dum-tss' after a bad joke; fast=True fits a 0.35 s gap (a quicker roll, a shorter cymbal)"""
+    y = np.zeros(int(1.3 * SR)); k = 0.55 if fast else 1.0
+    for at, z in ((0.0, tom(160 * p, 0.8, 0.3)), (0.16 * k, tom(110 * p, 0.9, 0.35)), (0.34 * k, kick(0.6))):
         i = int(at * SR); y[i:i + len(z)] += z[:len(y) - i]
-    cy = hp(noise(0.95), 5500) * np.exp(-T(0.95) * 4.5) * 0.45; i = int(0.34 * SR); y[i:i + len(cy)] += cy[:len(y) - i]
+    cy = hp(noise(0.95), 5500) * np.exp(-T(0.95) * (11 if fast else 4.5)) * 0.45; i = int(0.34 * k * SR); y[i:i + len(cy)] += cy[:len(y) - i]
     return y * 0.8
 def fx_crickets(p=1.0, d=1.6):
     """awkward silence"""
@@ -369,6 +369,15 @@ class Song:
         if i < self.n: n = min(len(y), self.n - i); self.sfx[i:i + n] += y[:n] * g
         self.fxlog.append((round(t, 3), OLD.get(name, name), allow_on_word))
     def stop(self, t0, t1, ramp=0.03): self.stops.append((t0, t1, ramp))
+    def old_sfx(self, path, skip=(), gain=1.0, only_before=None):
+        """the reel's existing action-synced effects (cues.json), each re-voiced with the new sounds (OLD map); skip names or (name, t) pairs"""
+        for c in json.load(open(path)).get("sfx", []):
+            nm = c["s"]
+            if nm in skip or any(isinstance(k, tuple) and k[0] == nm and abs(k[1] - c["t"]) < 0.06 for k in skip): continue
+            for k in range(c.get("n", 1)):
+                t = c["t"] + k * c.get("every", 0)
+                if only_before and t >= only_before: continue
+                self.fx(nm, t, min(0.9, c.get("gain", 0.5) * gain), c.get("pitch", 1.0) * c.get("pitch_step", 1.0) ** k)
     def on_word(self):
         """effects that start inside a spoken line (never allowed unless marked): (t, name, the line)"""
         return [(t, n, txt[:30]) for t, n, ok in self.fxlog for a, b, txt in self.voices if a + 0.05 < t < b - 0.05 and not ok]

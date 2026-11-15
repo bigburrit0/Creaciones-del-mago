@@ -1,0 +1,35 @@
+{
+  "id": 6,
+  "fuente": "partituras/partitura-6.md",
+  "compas": "3/4 (pag.1), 3/8 (pag.5)",
+  "tonalidad": "Si menor / Re mayor",
+  "tempo": "negra=188",
+  "bajo": [
+    { "compas": "1", "nota": "B1" }, { "compas": "2", "nota": "B1" }, { "compas": "3", "nota": "B1" }, { "compas": "4", "nota": "B1/B2 (tremolo)" },
+    { "compas": "5", "nota": "B1" }, { "compas": "6", "nota": "B2" }, { "compas": "7", "nota": "B1" }, { "compas": "8", "nota": "B2" },
+    { "compas": "9", "nota": "B1" }, { "compas": "10", "nota": "B2" }, { "compas": "11", "nota": "B1" }, { "compas": "12", "nota": "B2" },
+    { "compas": "13", "nota": "B1" }, { "compas": "14", "nota": "B2" }, { "compas": "15", "nota": "B1" }, { "compas": "16", "nota": "B2" },
+    { "compas": "pag5-1", "nota": "E2" }, { "compas": "pag5-2", "nota": "Eb2" }, { "compas": "pag5-3", "nota": "D2" },
+    { "compas": "pag5-4", "nota": "F#3" }, { "compas": "pag5-5", "nota": "B1" }
+  ],
+  "theremin": [
+    { "compas": "1", "nota": "B4" }, { "compas": "2", "nota": "B4" }, { "compas": "3", "nota": "B4" }, { "compas": "4", "nota": "B4" },
+    { "compas": "5", "nota": "A4" }, { "compas": "6", "nota": "A4" }, { "compas": "7", "nota": "A4" }, { "compas": "8", "nota": "A4" },
+    { "compas": "9", "nota": "A5" }, { "compas": "10", "nota": "A5" }, { "compas": "11", "nota": "A5" }, { "compas": "12", "nota": "G5" },
+    { "compas": "13", "nota": "E5" }, { "compas": "14", "nota": "A4" }, { "compas": "15", "nota": "A4" }, { "compas": "16", "nota": "A4" },
+    { "compas": "pag5-1", "nota": "G6", "nota_ajustada_rango": "G5" }, { "compas": "pag5-2", "nota": "F#6", "nota_ajustada_rango": "F#5" },
+    { "compas": "pag5-3", "nota": "F6", "nota_ajustada_rango": "F5" }, { "compas": "pag5-4", "nota": "E5" }, { "compas": "pag5-5", "nota": "F#5" },
+    { "compas": "pag5-6a8", "nota": "percusivo (sin altura fija, ver bateria)" }
+  ],
+  "synth_pad": "Pad con el acorde staccato marcado en la RH (dos notas por golpe, ya son triadas implicitas con la LH); en el tema melodico (mm.9-13) sostiene el acorde de fondo mientras el theremin lleva la melodia.",
+  "bateria": {
+    "regla": "3/4 a negra=188 (muy rapido): K tiempo 1, S tiempo 3, H en la subdivision mas rapida de la RH. En 3/8 (pag.5): un golpe fuerte por compas con acento en cada nota (>).",
+    "secciones": [
+      { "compases": "1-4 (15ma, intro)", "patron": "cresc. de p a ff: entra solo H, suma K-S hacia el rit./ff de m.4" },
+      { "compases": "5-8", "patron": "K-.-S fijo, H en corchea con los staccatos, C en cada acento" },
+      { "compases": "9-13 (Segno, tema)", "patron": "mismo patron, C en las notas de gracia (grace notes) y en los picos melodicos" },
+      { "compases": "14-16", "patron": "igual a mm.5-8" },
+      { "compases": "pag.5 (3/8, teaser)", "patron": "un golpe de K+C por compas en cada (>), bars 6-8: hits percusivos de x-notehead ya son literalmente la parte de bateria/percusion de ese pasaje" }
+    ]
+  }
+}

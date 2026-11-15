@@ -1,0 +1,46 @@
+{
+  "id": 5,
+  "fuente": "partituras/partitura-5.md",
+  "compas": "4/4",
+  "tonalidad": "Fa# menor / La mayor",
+  "tempo": "negra=120",
+  "bajo": [
+    { "compas": "1", "nota": "C#2" }, { "compas": "2", "nota": "C#4" }, { "compas": "3", "nota": "C#4" },
+    { "compas": "4", "nota": "F#2" }, { "compas": "5", "nota": "D2" }, { "compas": "6", "nota": "E2" }, { "compas": "7", "nota": "C#2" },
+    { "compas": "8", "nota": "F#2" }, { "compas": "9", "nota": "D2" }, { "compas": "10", "nota": "E2" }, { "compas": "11", "nota": "C#2" },
+    { "compas": "12", "nota": "F#2" }, { "compas": "13", "nota": "D2" }, { "compas": "14", "nota": "E2" }, { "compas": "15", "nota": "C#2" },
+    { "compas": "16", "nota": "F#2" }, { "compas": "17", "nota": "D2" }, { "compas": "18", "nota": "E2" }, { "compas": "19", "nota": "C#2" },
+    { "compas": "20", "nota": "F#2" }, { "compas": "21", "nota": "D2" }, { "compas": "22", "nota": "E2" }, { "compas": "23", "nota": "C#2" },
+    { "compas": "24", "nota": "F#2" }, { "compas": "25", "nota": "D2" }, { "compas": "26", "nota": "E2" }, { "compas": "27", "nota": "C#2" },
+    { "compas": "28", "nota": "F#2" }, { "compas": "29", "nota": "D2" }, { "compas": "30", "nota": "E2" }, { "compas": "31", "nota": "C#2" },
+    { "compas": "32", "nota": "F#2" }, { "compas": "33", "nota": "D2" }, { "compas": "34", "nota": "E2" }, { "compas": "35", "nota": "C#2" },
+    { "compas": "36", "nota": "F#2" }, { "compas": "37", "nota": "D2" }, { "compas": "38", "nota": "E2" }, { "compas": "39", "nota": "C#2" },
+    { "compas": "40", "nota": "F#2" }, { "compas": "41", "nota": "D2" }, { "compas": "42", "nota": "E2" }, { "compas": "43", "nota": "C#2" },
+    { "compas": "44", "nota": "F#2" }, { "compas": "45", "nota": "D2" }, { "compas": "46", "nota": "E2" }, { "compas": "47", "nota": "C#2" }
+  ],
+  "nota_bajo": "El patron F#-D-E-C# de 4 compases se repite durante casi toda la pieza (secciones A, B y C) — es la base ideal para una linea de bajo ostinato.",
+  "theremin": [
+    { "compas": "1", "nota": "C#5" }, { "compas": "4", "nota": "A5" }, { "compas": "5", "nota": "F#5" }, { "compas": "6", "nota": "E5" },
+    { "compas": "7", "nota": "F5" }, { "compas": "8", "nota": "A5" }, { "compas": "9", "nota": "A5" }, { "compas": "10", "nota": "G#5" },
+    { "compas": "11", "nota": "F5" }, { "compas": "12", "nota": "A5" }, { "compas": "13", "nota": "A5" }, { "compas": "14", "nota": "G#5" },
+    { "compas": "15", "nota": "E5" }, { "compas": "16", "nota": "F#4" }, { "compas": "17", "nota": "G#4" }, { "compas": "18", "nota": "D4" },
+    { "compas": "19", "nota": "E4" }, { "compas": "20", "nota": "C#4" }, { "compas": "21", "nota": "D4" }, { "compas": "22", "nota": "F#4" },
+    { "compas": "23", "nota": "C#4" }, { "compas": "24", "nota": "F#4" }, { "compas": "25", "nota": "D4" }, { "compas": "26", "nota": "F#4" },
+    { "compas": "27", "nota": "F#4" }, { "compas": "28", "nota": "C#5" }, { "compas": "29", "nota": "D5" }, { "compas": "30", "nota": "D5" },
+    { "compas": "31", "nota": "B4" }, { "compas": "32", "nota": "A4" }, { "compas": "33", "nota": "A4" }, { "compas": "34", "nota": "G#4" },
+    { "compas": "35", "nota": "F4" }, { "compas": "36", "nota": "A5" }, { "compas": "37", "nota": "A5" }, { "compas": "38", "nota": "E6", "nota_ajustada_rango": "E5" },
+    { "compas": "39", "nota": "C#6", "nota_ajustada_rango": "C#5" }, { "compas": "40", "nota": "A4" }, { "compas": "41", "nota": "A4" },
+    { "compas": "42", "nota": "B4" }, { "compas": "43", "nota": "B4" }, { "compas": "44", "nota": "A5" }, { "compas": "45", "nota": "A5" },
+    { "compas": "46", "nota": "B5" }, { "compas": "47", "nota": "B5" }
+  ],
+  "synth_pad": "Pad en octavas sobre el ostinato de la LH (F#-D-E-C#), un compas por acorde, coherente con la armonia de cada seccion (Intro arpegiada / Seccion A y B en acordes / Seccion C en octavas).",
+  "bateria": {
+    "regla": "4/4 a negra=120: K 1 y 3, S 2 y 4, H en semicorchea (sigue el ostinato constante de la LH).",
+    "secciones": [
+      { "compases": "1-7 (Intro)", "patron": "entra suave, H solo, sin K/S hasta m.4 (mp), crescendo hacia la Seccion A" },
+      { "compases": "8-15 (Seccion A, |: repite)", "patron": "K-S completo, H en semicorchea, C en cada ataque de corchea con acento" },
+      { "compases": "16-31 (Seccion B)", "patron": "mismo patron, mas suelto (mf), fills breves en los silencios de la RH" },
+      { "compases": "32-47 (Seccion C, clímax)", "patron": "C en m.38 (pico E6) y m.47 (final, :|| repite), intensidad maxima" }
+    ]
+  }
+}

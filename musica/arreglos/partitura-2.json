@@ -1,0 +1,48 @@
+{
+  "id": 2,
+  "fuente": "partituras/partitura-2.md",
+  "compas": "4/4",
+  "tonalidad": "La menor / Do mayor",
+  "tempo": "negra=130, f",
+  "bajo": [
+    { "compas": "1", "nota": "A2" }, { "compas": "2", "nota": "G2" },
+    { "compas": "3", "nota": "F2" }, { "compas": "4", "nota": "B2" },
+    { "compas": "5", "nota": "E3" }, { "compas": "6", "nota": "E3" },
+    { "compas": "7", "nota": "C3" }, { "compas": "8", "nota": "C3" },
+    { "compas": "9", "nota": "D3" }, { "compas": "10", "nota": "C3" },
+    { "compas": "11", "nota": "B2" }, { "compas": "12", "nota": "B2" },
+    { "compas": "13", "nota": "E3" }, { "compas": "14", "nota": "D3" },
+    { "compas": "15", "nota": "C3" }, { "compas": "16", "nota": "B2" },
+    { "compas": "17", "nota": "C3" }, { "compas": "18", "nota": "B2" },
+    { "compas": "19", "nota": "C3" }, { "compas": "20", "nota": "B2" },
+    { "compas": "21", "nota": "D3" }, { "compas": "22", "nota": "C3" },
+    { "compas": "23", "nota": "B2" }, { "compas": "24", "nota": "B2" }
+  ],
+  "theremin": [
+    { "compas": "1", "nota": "A4" }, { "compas": "2", "nota": "A4" },
+    { "compas": "3", "nota": "A4" }, { "compas": "4", "nota": "A4" },
+    { "compas": "5", "nota": "D5" }, { "compas": "6", "nota": "G5" },
+    { "compas": "7", "nota": "A5" }, { "compas": "8", "nota": "G5" },
+    { "compas": "9", "nota": "F5" }, { "compas": "10", "nota": "E5" },
+    { "compas": "11", "nota": "F#5" }, { "compas": "12", "nota": "E5" },
+    { "compas": "13", "nota": "D5" }, { "compas": "14", "nota": "G5" },
+    { "compas": "15", "nota": "C6", "nota_ajustada_rango": "C5" },
+    { "compas": "16", "nota": "B5" }, { "compas": "17", "nota": "A5" },
+    { "compas": "18", "nota": "E5" }, { "compas": "19", "nota": "A5" },
+    { "compas": "20", "nota": "C#5" }, { "compas": "21", "nota": "F5" },
+    { "compas": "22", "nota": "A4" }, { "compas": "23", "nota": "F#5" },
+    { "compas": "24", "nota": "E5" }
+  ],
+  "nota_theremin": "m.15 (C6, clímax de la pieza) se queda tal cual o se baja una octava a C5 según la regla de rango cómodo; buen punto de 'hook' para el reel.",
+  "synth_pad": "Pad sostenido con cada diada de mano izquierda (nota+quinta) completada con la tercera de la tonalidad; mismo ritmo que la LH (negras x4 por compás).",
+  "bateria": {
+    "regla": "4/4 a negra=130, f: groove tipo rock medio.",
+    "secciones": [
+      { "compases": "1-4", "patron": "K 1 y 3, S 2 y 4, H corchea constante (introducción, mantiene pulso)" },
+      { "compases": "5-14 (|: repite)", "patron": "igual patron, H pasa a tresillo de corchea donde la RH tiene tresillos (m.6,7,9,10,14) para seguir el fraseo" },
+      { "compases": "15", "patron": "C en el climax (C6), K doble en el ataque" },
+      { "compases": "16-22", "patron": "patron base, acentos C en cada nota con (sin ligadura) marcada como pico melodico" },
+      { "compases": "23-24 (:|| repite)", "patron": "igual a mm.11-12" }
+    ]
+  }
+}

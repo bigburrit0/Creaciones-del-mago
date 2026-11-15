@@ -1,0 +1,38 @@
+{
+  "id": 8,
+  "fuente": "partituras/partitura-8.md",
+  "compas": "4/4 (mm.1-22), 3/4 (mm.23-25)",
+  "tonalidad": "La menor/Do mayor -> Re menor/Fa mayor (m.23)",
+  "tempo": "Adagio",
+  "bajo": [
+    { "compas": "1", "nota": "F2" }, { "compas": "2", "nota": "C2" }, { "compas": "3", "nota": "F2" }, { "compas": "4", "nota": "C2" },
+    { "compas": "5", "nota": "F2" }, { "compas": "6", "nota": "C2" }, { "compas": "7", "nota": "F2" }, { "compas": "8", "nota": "C2" },
+    { "compas": "9", "nota": "F2" }, { "compas": "10", "nota": "C2" }, { "compas": "11", "nota": "F2" }, { "compas": "12", "nota": "C2" },
+    { "compas": "13", "nota": "G2" }, { "compas": "14", "nota": "A2" }, { "compas": "15", "nota": "G2" }, { "compas": "16", "nota": "F2" },
+    { "compas": "17", "nota": "E2" }, { "compas": "18", "nota": "F2" }, { "compas": "19", "nota": "F#1" }, { "compas": "20", "nota": "Bb2" },
+    { "compas": "21", "nota": "G2" }, { "compas": "22", "nota": "C2" }, { "compas": "23", "nota": "D2" }, { "compas": "24", "nota": "C2" },
+    { "compas": "25", "nota": "F2" }
+  ],
+  "theremin": [
+    { "compas": "1", "nota": "F4" }, { "compas": "2", "nota": "A4" }, { "compas": "3", "nota": "(silencio, RH en reposo)" },
+    { "compas": "4", "nota": "E5" }, { "compas": "5", "nota": "D6", "nota_ajustada_rango": "D5" },
+    { "compas": "6", "nota": "B5" }, { "compas": "7", "nota": "D6", "nota_ajustada_rango": "D5" },
+    { "compas": "8", "nota": "B5" }, { "compas": "9", "nota": "D6", "nota_ajustada_rango": "D5" },
+    { "compas": "10", "nota": "B5" }, { "compas": "11", "nota": "E6", "nota_ajustada_rango": "E5" },
+    { "compas": "12", "nota": "D6", "nota_ajustada_rango": "D5" },
+    { "compas": "13", "nota": "D5" }, { "compas": "14", "nota": "G5" }, { "compas": "15", "nota": "A5" }, { "compas": "16", "nota": "D5" },
+    { "compas": "17", "nota": "G5" }, { "compas": "18", "nota": "G5" }, { "compas": "19", "nota": "G5" }, { "compas": "20", "nota": "G5" },
+    { "compas": "21", "nota": "G4" }, { "compas": "22", "nota": "D4" }, { "compas": "23", "nota": "(silencio, RH descansa)" },
+    { "compas": "24", "nota": "(silencio)" }, { "compas": "25", "nota": "(silencio)" }
+  ],
+  "nota_general": "mm.1-2, 23-25: la RH esta en silencio o es acorde largo; en esos compases el theremin descansa y el synth lleva toda la textura armonica.",
+  "synth_pad": "Pad largo (redonda) con el acorde arpegiado de la RH en mm.1-2, 15-20; en mm.23-25 (nueva tonalidad, 3/4) sostiene la triada staccato de la LH como colchon continuo detras de los golpes staccato.",
+  "bateria": {
+    "regla": "Adagio, muy lento: sin bateria marcada (pieza intima); si se necesita pulso para el reel, un solo golpe de caja suave (brush) en cada tiempo fuerte del compas, sin bombo.",
+    "secciones": [
+      { "compases": "1-12", "patron": "tacet o brush muy suave en el tiempo 1 de cada compas, dejando que el rubato del piano respire" },
+      { "compases": "13-22", "patron": "brush en tiempos 1 y 3 (4/4), marcando el pulso de las figuras arpegiadas" },
+      { "compases": "23-25 (3/4, nueva tonalidad)", "patron": "brush en tiempo 1, siguiendo los staccato de la LH" }
+    ]
+  }
+}

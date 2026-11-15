@@ -1,0 +1,36 @@
+{
+  "id": 4,
+  "fuente": "partituras/partitura-4.md",
+  "compas": "2/2 (cut time)",
+  "tonalidad": "Sol menor",
+  "tempo": "negra=155",
+  "bajo": [
+    { "compas": "1", "nota": "Bb2" }, { "compas": "2", "nota": "F3" },
+    { "compas": "3", "nota": "A2" }, { "compas": "4", "nota": "F3" },
+    { "compas": "5", "nota": "G2" }, { "compas": "6", "nota": "E3" },
+    { "compas": "7", "nota": "F2" }, { "compas": "8", "nota": "C#3" },
+    { "compas": "9", "nota": "Bb2" }, { "compas": "10", "nota": "F3" },
+    { "compas": "11", "nota": "C3" }, { "compas": "12", "nota": "G3" },
+    { "compas": "13", "nota": "C3" }, { "compas": "14", "nota": "G3" },
+    { "compas": "15", "nota": "G2" }, { "compas": "16", "nota": "E3" }
+  ],
+  "theremin": [
+    { "compas": "1", "nota": "A5" }, { "compas": "2", "nota": "F#5" },
+    { "compas": "3", "nota": "G5" }, { "compas": "4", "nota": "E5" },
+    { "compas": "5", "nota": "F5" }, { "compas": "6", "nota": "Eb5" },
+    { "compas": "7", "nota": "E5" }, { "compas": "8", "nota": "C#5" },
+    { "compas": "9", "nota": "A5" }, { "compas": "10", "nota": "F#5" },
+    { "compas": "11", "nota": "Bb5" }, { "compas": "12", "nota": "G#5" },
+    { "compas": "13", "nota": "C6", "nota_ajustada_rango": "C5" },
+    { "compas": "14", "nota": "A5" }, { "compas": "15", "nota": "A5" },
+    { "compas": "16", "nota": "G5" }
+  ],
+  "nota_rh": "La RH suena 8va arriba en la partitura original; las notas de arriba son las ESCRITAS (igual que la fuente), coherentes con el resto del arreglo que trabaja en tono escrito.",
+  "synth_pad": "Pad de medio compás (redonda partida en dos blancas por compás) con la tríada implicada por cada grupo de 4 corcheas de la RH (ya forman arpegios de acorde, p.ej. m.1: Bb-D-G).",
+  "bateria": {
+    "regla": "2/2 a negra=155 (rapido, cut time -> se siente en 2): K en el 'beat' 1 (negra 1), S en el 'beat' 2 (negra 3), H en corchea constante.",
+    "secciones": [
+      { "compases": "1-16 (|: :|| loop completo)", "patron": "K . S . por compas (siente 2), H en cada corchea de la RH; C en el primer golpe de cada repeticion (m.1 y m.9)" }
+    ]
+  }
+}

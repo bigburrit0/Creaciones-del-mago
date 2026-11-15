@@ -1,0 +1,51 @@
+{
+  "id": 1,
+  "fuente": "partituras/partitura-1.md",
+  "compas": "4/4",
+  "tonalidad": "Sol menor",
+  "tempo": "negra=60, poco a poco accel. desde m.5",
+  "bajo": [
+    { "compas": "1", "nota": "Bb2", "duracion": "w" },
+    { "compas": "2", "nota": "A2", "duracion": "w" },
+    { "compas": "3", "nota": "G2", "duracion": "w" },
+    { "compas": "4", "nota": "F2", "duracion": "w" },
+    { "compas": "5", "notas": ["Bb1", "F2"], "duracion": "h,h" },
+    { "compas": "6", "notas": ["A1", "D1"], "duracion": "h,h" },
+    { "compas": "7", "nota": "G1", "duracion": "w" },
+    { "compas": "8", "nota": "C2", "duracion": "w" },
+    { "compas": "9", "notas": ["Bb1", "Bb2", "D2", "Bb2"], "duracion": "q,q,q,q" },
+    { "compas": "10", "notas": ["A1", "A2", "F2", "A2"], "duracion": "q,q,q,q" }
+  ],
+  "theremin": [
+    { "compas": "1", "notas": ["A5", "G5", "F#5", "G5"] },
+    { "compas": "2", "notas": ["G5", "F5", "E5", "F5"] },
+    { "compas": "3", "notas": ["F5", "E5", "D#5", "E5"] },
+    { "compas": "4", "notas": ["E5", "D5", "C#5", "D5"] },
+    { "compas": "5", "notas": ["A5", "G5", "F#5", "G5"] },
+    { "compas": "6", "notas": ["Bb5", "A5", "G#5", "A5"] },
+    { "compas": "7", "notas": ["C6", "Bb5", "A5", "Bb5"] },
+    { "compas": "8", "notas": ["A5", "G5", "F5", "E5"] },
+    { "compas": "9", "notas": ["A5", "G5", "F#5", "G5"] },
+    { "compas": "10", "notas": ["G5", "F5", "E5", "F5"] }
+  ],
+  "synth_pad": [
+    { "compas": "1", "acorde": ["Bb3", "D4", "G4"], "duracion": "w" },
+    { "compas": "2", "acorde": ["A3", "C4", "F4"], "duracion": "w" },
+    { "compas": "3", "acorde": ["G3", "Bb3", "Eb4"], "duracion": "w" },
+    { "compas": "4", "acorde": ["F3", "A3", "D4"], "duracion": "w" },
+    { "compas": "5", "acorde": ["Bb3", "D4", "F4"], "duracion": "w" },
+    { "compas": "6", "acorde": ["A3", "C4", "Eb4"], "duracion": "w" },
+    { "compas": "7", "acorde": ["G3", "Bb3", "D4"], "duracion": "w" },
+    { "compas": "8", "acorde": ["C4", "Eb4", "G4"], "duracion": "w" },
+    { "compas": "9", "acorde": ["Bb3", "D4", "F4"], "duracion": "w" },
+    { "compas": "10", "acorde": ["A3", "C4", "F4"], "duracion": "w" }
+  ],
+  "bateria": {
+    "regla": "4/4: K en 1 y 3, S en 2 y 4, H en el valor mas rapido de ese compas, C en cada (>) de la RH.",
+    "secciones": [
+      { "compases": "1-4", "patron": "K . S . | hi-hat con los pulsos del arpegio, sin acentos todavia (textura ambiental, mp)" },
+      { "compases": "5-8 (poco a poco accel.)", "patron": "K S K S por negra + H en corchea; C en cada 16avo marcado (>) al inicio de cada grupo de 4" },
+      { "compases": "9-10", "patron": "H en sextillo/tresillo completo; C en cada nota (>) inicial de grupo; relleno (fill) de caja en el ultimo tiempo de m.10 preparando el salto de pagina" }
+    ]
+  }
+}

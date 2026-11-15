@@ -1,0 +1,58 @@
+{
+  "id": 3,
+  "fuente": "partituras/partitura-3.md",
+  "compas": "3/4",
+  "tonalidad": "La menor",
+  "tempo": "negra=170",
+  "bajo": [
+    { "compas": "1", "nota": "(silencio, LH tacet)" },
+    { "compas": "2", "nota": "B2" }, { "compas": "3", "nota": "E3" },
+    { "compas": "4", "nota": "A2" }, { "compas": "5", "nota": "A2" },
+    { "compas": "6", "nota": "B2" }, { "compas": "7", "nota": "E3" },
+    { "compas": "8", "nota": "A2" }, { "compas": "9", "nota": "A2" },
+    { "compas": "10", "nota": "Bb2" }, { "compas": "11", "nota": "Bb2" },
+    { "compas": "12", "nota": "G2" }, { "compas": "13", "nota": "F2" },
+    { "compas": "14", "nota": "F3" }, { "compas": "15", "nota": "E3" },
+    { "compas": "16", "nota": "A2" }, { "compas": "17", "nota": "A2" },
+    { "compas": "18", "nota": "A2" }, { "compas": "19", "nota": "A2" },
+    { "compas": "20", "nota": "A2" }, { "compas": "21", "nota": "D3" },
+    { "compas": "22", "nota": "D3" }, { "compas": "23", "nota": "B2" },
+    { "compas": "24", "nota": "G2" }, { "compas": "25", "nota": "C3" },
+    { "compas": "26", "nota": "C3" }, { "compas": "27", "nota": "F3" },
+    { "compas": "28", "nota": "E3" }, { "compas": "29", "nota": "F#3" },
+    { "compas": "30", "nota": "A2" }, { "compas": "31", "nota": "F2" },
+    { "compas": "32", "nota": "F2" }, { "compas": "33", "nota": "E2" },
+    { "compas": "34", "nota": "E2" }, { "compas": "35", "nota": "A2" },
+    { "compas": "36", "nota": "A2" }, { "compas": "37", "nota": "A2" }
+  ],
+  "theremin": [
+    { "compas": "2", "nota": "B4" }, { "compas": "3", "nota": "C5" },
+    { "compas": "4", "nota": "A4" }, { "compas": "5", "nota": "E5" },
+    { "compas": "6", "nota": "E5" }, { "compas": "7", "nota": "F5" },
+    { "compas": "8", "nota": "C5" }, { "compas": "9", "nota": "E5" },
+    { "compas": "10", "nota": "F5" }, { "compas": "11", "nota": "E5" },
+    { "compas": "12", "nota": "C5" }, { "compas": "13", "nota": "B4" },
+    { "compas": "14", "nota": "D5" }, { "compas": "15", "nota": "E5" },
+    { "compas": "16", "nota": "A4" }, { "compas": "17", "nota": "C5" },
+    { "compas": "18", "nota": "D5" }, { "compas": "19", "nota": "E5" },
+    { "compas": "20", "nota": "C#5" }, { "compas": "21", "nota": "G5" },
+    { "compas": "22", "nota": "F5" }, { "compas": "23", "nota": "D5" },
+    { "compas": "24", "nota": "D5" }, { "compas": "25", "nota": "F5" },
+    { "compas": "26", "nota": "E5" }, { "compas": "27", "nota": "C5" },
+    { "compas": "28", "nota": "D5" }, { "compas": "29", "nota": "E5" },
+    { "compas": "30", "nota": "E5" }, { "compas": "31", "nota": "A5" },
+    { "compas": "32", "nota": "A5" }, { "compas": "33", "nota": "G#5" },
+    { "compas": "34", "nota": "E5" }, { "compas": "35", "nota": "E4" },
+    { "compas": "36", "nota": "D5" }, { "compas": "37", "nota": "E5" }
+  ],
+  "synth_pad": "Pad con el acorde staccato de mano izquierda de cada compás (ya es tríada en casi todos los compases); donde la LH es una sola nota (mm.16-18, 31-37 parcial) se completa con la tríada de La menor sobre esa raíz.",
+  "bateria": {
+    "regla": "3/4 a negra=170 (rapido): K en tiempo 1, S en tiempo 3, H en corchea/staccato siguiendo los acordes staccato de la LH.",
+    "secciones": [
+      { "compases": "1", "patron": "silencio (anacrusa de RH sola)" },
+      { "compases": "2-18 (tema A, repite)", "patron": "K-.-S patron fijo por compas, H marca cada acorde staccato de la LH (dos golpes por compas)" },
+      { "compases": "19-30 (tema B)", "patron": "mismo patron, C en los picos melodicos (m.21 G5, m.31 A5)" },
+      { "compases": "31-37", "patron": "crescendo con relleno hacia el final de la pagina 1 (fill en m.37)" }
+    ]
+  }
+}

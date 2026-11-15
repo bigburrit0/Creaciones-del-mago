@@ -1,0 +1,46 @@
+{
+  "banda": ["piano (fuente)", "bateria", "sintetizador", "bajo", "theremin"],
+  "nota_spec_banda": "El mapeo de instrumentos a partir del piano es un default documentado en README.md; la especificacion exacta decidida en otra sesion (rangos, reglas de mezcla, etc.) no estaba disponible para esta sesion y deberia reemplazar estas reglas si difiere.",
+  "partituras": [
+    {
+      "id": 1, "compas": "4/4", "armadura": "2 bemoles (Sol menor)", "tempo": "negra=60, accel. desde m.5",
+      "alcance": "pag 1 de 8 (mm.1-10) visible", "completa": false,
+      "piano": "partituras/partitura-1.md", "arreglo": "arreglos/partitura-1.json"
+    },
+    {
+      "id": 2, "compas": "4/4", "armadura": "0 (La menor/Do mayor)", "tempo": "negra=130, f",
+      "alcance": "completa, 24/24 compases", "completa": true,
+      "piano": "partituras/partitura-2.md", "arreglo": "arreglos/partitura-2.json"
+    },
+    {
+      "id": 3, "compas": "3/4", "armadura": "0 (La menor)", "tempo": "negra=170",
+      "alcance": "pag 1 de 2 (mm.1-37) visible", "completa": false,
+      "piano": "partituras/partitura-3.md", "arreglo": "arreglos/partitura-3.json"
+    },
+    {
+      "id": 4, "compas": "2/2 (cut time)", "armadura": "2 bemoles (Sol menor)", "tempo": "negra=155",
+      "alcance": "completa, 16/16 compases", "completa": true,
+      "piano": "partituras/partitura-4.md", "arreglo": "arreglos/partitura-4.json"
+    },
+    {
+      "id": 5, "compas": "4/4", "armadura": "3 sostenidos (Fa# menor/La mayor)", "tempo": "negra=120",
+      "alcance": "completa, 47/47 compases", "completa": true,
+      "piano": "partituras/partitura-5.md", "arreglo": "arreglos/partitura-5.json"
+    },
+    {
+      "id": 6, "compas": "3/4 (pag 1), 3/8 (pag 5)", "armadura": "2 sostenidos (Si menor/Re mayor)", "tempo": "negra=188",
+      "alcance": "pag 1 (mm.1-16) + teaser pag 5 visibles", "completa": false,
+      "piano": "partituras/partitura-6.md", "arreglo": "arreglos/partitura-6.json"
+    },
+    {
+      "id": 7, "compas": "4/4", "armadura": "4 bemoles (pag 1) / 1 bemol (pag 49)", "tempo": "accel., mp",
+      "alcance": "pag 1 (mm.1-2) + teaser pag 49 (mm.46-51) visibles de 49 paginas", "completa": false,
+      "piano": "partituras/partitura-7.md", "arreglo": "arreglos/partitura-7.json"
+    },
+    {
+      "id": 8, "compas": "4/4 (mm.1-22), 3/4 (mm.23-25)", "armadura": "0 bemoles -> 1 bemol (m.23)", "tempo": "Adagio",
+      "alcance": "pag 1 de 13 (mm.1-25) visible", "completa": false,
+      "piano": "partituras/partitura-8.md", "arreglo": "arreglos/partitura-8.json"
+    }
+  ]
+}

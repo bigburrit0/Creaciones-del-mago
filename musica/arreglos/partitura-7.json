@@ -1,0 +1,29 @@
+{
+  "id": 7,
+  "fuente": "partituras/partitura-7.md",
+  "compas": "4/4",
+  "tonalidad": "Mib/Lab (4 bemoles) en pag.1; Sib (1 bemol) en pag.49",
+  "tempo": "accel., mp",
+  "nota_general": "Pieza casi totalmente paywalleada (solo mm.1-2 y 46-51 visibles). El arreglo de bajo/theremin/synth/bateria solo puede cubrir esos compases; falta el grueso de la pieza (mm.3-45).",
+  "bajo": [
+    { "compas": "1-2", "nota": "(silencio, LH en reposo)" },
+    { "compas": "46", "nota": "Bb1" }, { "compas": "47", "nota": "Ab1" }, { "compas": "48", "nota": "Gb1" },
+    { "compas": "49", "nota": "(recortado en la vista previa)" }, { "compas": "50", "nota": "(recortado en la vista previa)" },
+    { "compas": "51", "nota": "(recortado, solo F#3 visible)" }
+  ],
+  "theremin": [
+    { "compas": "1", "nota": "Eb6", "nota_ajustada_rango": "Eb5" },
+    { "compas": "2", "nota": "F5" },
+    { "compas": "46", "nota": "G5" }, { "compas": "47", "nota": "D6", "nota_ajustada_rango": "D5" },
+    { "compas": "48", "nota": "Bb5" }, { "compas": "49", "nota": "Ab5" }, { "compas": "50", "nota": "G5" }, { "compas": "51", "nota": "F#5" }
+  ],
+  "synth_pad": "Pad con el acorde de cada golpe de RH (ya vienen en diadas/acordes en mm.46-51); en mm.1-2 (solo corre melodica rapida, sin acorde claro) el pad sostiene la tonica de la tonalidad de esa pagina.",
+  "bateria": {
+    "regla": "4/4, accel.: K 1 y 3, S 2 y 4, H en quintillos/sextillos de la RH cuando los hay.",
+    "secciones": [
+      { "compases": "1-2", "patron": "solo H siguiendo los quintillos/sextillo de la RH, sin K/S (textura de carrera, antes del accel.)" },
+      { "compases": "46-48", "patron": "K-S fijo, H en las semicorcheas staccato de la LH Voz 1, C en cada nota con stacc. marcada" },
+      { "compases": "49-51", "patron": "igual patron (datos de LH recortados en la vista previa, se completa cuando se consiga la pagina 2-48)" }
+    ]
+  }
+}

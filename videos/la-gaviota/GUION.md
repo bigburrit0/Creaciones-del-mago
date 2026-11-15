@@ -45,3 +45,16 @@ If there is no answer in about 24 h, send once:
 ## Suggested publish date
 
 Thursday 3/12 (summer travel; after "Los gatos tiran todo" on Sunday 29/11).
+
+## Result (2026-11-15)
+
+`la-gaviota.mp4`: 26.0 s, 1080 × 1920, 60 fps.
+
+| Check | Result |
+|---|---|
+| QA gate | 0 bad frames of 1560, 0 pose jumps |
+| Flicker scan | 0 frames (cuts at 2.95, 4.65, 5.6, 6.95, 7.95, 9.3, 10.65, 12.55, 14.15, 16.0, 17.7, 19.9, 23.45) |
+| Loudness | the render came out at -15.5 LUFS. It was re-mixed with `remezclar.py` to -14.4 LUFS, peak -3.3 dBFS. The picture is byte-identical (same md5) |
+| Steady buzz | none: no 37 Hz line above 6 kHz, and the high band sits at -33.3 dBFS. There is no wave noise |
+| Voices in the mix | every line is clear. "…y las piezas van adentro" is heard as "piezas" (the re-recorded take) |
+| Contact sheet | 19 real frames were looked at: the hook, the gull taking the king in its beak and flying off with it, "¡Mi rey!", the swap, the pieces hopping off, the fold, the 24 cm tag, the pieces going in, the gull pecking the closed tube, "¡Ja!", the sunset, the proof, the card |

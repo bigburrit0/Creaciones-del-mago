@@ -33,6 +33,6 @@ for hf3d, mp4 in jobs:
     print(run("python3", os.path.join(HERE, "remezclar.py"), hf3d, mp4, out).stdout.strip().splitlines()[-1])
     eb = run("ffmpeg", "-nostats", "-i", out, "-af", "ebur128=peak=true", "-f", "null", "-").stderr
     I = re.findall(r"I:\s+(-?[0-9.]+) LUFS", eb)[-1]; P = re.findall(r"Peak:\s+(-?[0-9.]+) dBFS", eb)[-1]
-    same = vmd5(mp4) == vmd5(out); bz = run("python3", os.path.join(SCR, "buzz.py"), out).stdout.strip()
+    same = vmd5(mp4) == vmd5(out); bz = run("python3", os.path.join(HERE, "zumbido.py"), out).stdout.strip()
     print(f"  {I} LUFS, peak {P} dBFS, picture identical: {same} | {bz}")
     if swap and same: subprocess.run(["cp", out, mp4]); print("  swapped ->", mp4)

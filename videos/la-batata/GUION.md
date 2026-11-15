@@ -26,3 +26,11 @@ Pedidos para Navidad: hasta el 23 de diciembre.
 ¿Para quién es la ocarina?
 Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso.
 ```
+
+## Result (2026-11-15)
+
+`la-batata.mp4`: 25.3 s, 1080×1920, 60 fps.
+- QA gate 0/1518 bad frames, 0 jumps, deterministic; flicker scan 0 frames.
+- Sound rebuilt with `remezclar.py` to -14.1 LUFS (peak -4.4 dBFS); music 24 dB under the voices, 16 dB under them in the gaps.
+- Mix transcription: every line clear ("Comentá BATATA" read as written).
+- The ocarina plays the opening of "Oda a la alegría" (synthesised; badge "Sonido digital"); it ends in El Mago's hand for the product beat and the CTA.

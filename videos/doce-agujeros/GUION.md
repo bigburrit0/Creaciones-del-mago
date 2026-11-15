@@ -35,3 +35,10 @@ Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso.
 - Sound rebuilt with `remezclar.py` to -14.1 LUFS (peak -4.2 dBFS); music 25 dB under the voices, 18 dB under them in the gaps.
 - Mix transcription: every line clear.
 - The scale (synthesised, "Sonido digital") climbs as each gold cap pops off a hole; the product beat turns it over (10 on top, 2 for the thumbs); it floats back to Papá Noel's mittens for the CTA.
+
+### Music from the owner's score (2026-11-15, second mix)
+
+The ambient bed was replaced by music made from the owner's score p02 (vals en la menor, 3/4), bars 1-13 (`../biblioteca/partituras/`, used with the owner's
+permission), with `../biblioteca/partitura_synth.py`: a soft music box, a pad and a bass, ducked under the voices and out
+under the ocarina. Rebuild: `bash ../ocarina/build_reel.sh "b1 b2 b3 b4 b5" "escala" "p02-vals-la-menor 1-13 1.0"`, then `remezclar.py` (the picture is byte-identical).
+Levels: music -24.1 dB under the voices, -16.6 dB in the gaps; -14.1 LUFS; every line clear in the mix transcription.

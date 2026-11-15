@@ -183,3 +183,13 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | The board's long frame sides flew through both heads | Parts flew in from 0.45 m out along the table's axis, which is where the characters stand | Parts that assemble by magic drop from just above their place (14 cm) and grow as they fall; never fly them in along the players' axis |
 | El Mago's raised hand grazed the table's edge on the way up and down | The reach goes straight from his idle hand to the target, low past the table's edge | Lift the target by (1 − weight) × 15 cm, so the hand arcs over furniture |
 | The calendar page covered El Mago's face, then pushed him off the frame | The `aim` offset moves the camera and its target together, so the subject moves the OTHER way on screen; a small contact sheet was misread | To put a subject on the left, aim to the camera's right: aim = right × k, where right = (cos az, 0, −sin az). Check the full-size frame |
+
+## From the ocarina reels (2026-11-15)
+
+| Seen | Cause | Rule |
+|---|---|---|
+| A floating prop ended up perched on El Mago's hat in the CTA | The float point sat on the line between the CTA camera and him | After its beat, a floating prop lands in a character's hand (palm at chest height) or on furniture; check the CTA frame for it |
+| A flight path from the float point to the sofa crossed Papá Noel's chest | The rest spot was behind him | Route props away from bodies; landing in the holder's mittens is the simplest |
+| The jacket's knot went through the piano he pushed | The knot reaches 0.36 m in front of him | Keep pushed props 0.45 m + half their depth ahead of Papá Noel |
+| Renders run one at a time | HyperFrames holds a render lock per account | Queue QA gates in parallel, renders serially |
+| — | The owner's own scores (`videos/biblioteca/partituras/`, permission given 15/11) | Background music can come from those scores via `partitura_synth.py`, matched in loudness to the ambient bed, out under any instrument that plays on screen |

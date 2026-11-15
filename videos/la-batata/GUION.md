@@ -34,3 +34,10 @@ Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso.
 - Sound rebuilt with `remezclar.py` to -14.1 LUFS (peak -4.4 dBFS); music 24 dB under the voices, 16 dB under them in the gaps.
 - Mix transcription: every line clear ("Comentá BATATA" read as written).
 - The ocarina plays the opening of "Oda a la alegría" (synthesised; badge "Sonido digital"); it ends in El Mago's hand for the product beat and the CTA.
+
+### Music from the owner's score (2026-11-15, second mix)
+
+The ambient bed was replaced by music made from the owner's score p01 (la menor, ♩=130), bars 5-18 (`../biblioteca/partituras/`, used with the owner's
+permission), with `../biblioteca/partitura_synth.py`: a soft music box, a pad and a bass, ducked under the voices and out
+under the ocarina. Rebuild: `bash ../ocarina/build_reel.sh "a1 a2 a3 a4 a5" "oda" "p01-la-menor-130 5-18 1.0"`, then `remezclar.py` (the picture is byte-identical).
+Levels: music -23.0 dB under the voices, -14.7 dB in the gaps; -14.1 LUFS; every line clear in the mix transcription.

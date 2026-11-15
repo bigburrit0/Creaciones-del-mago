@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 23.0, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.36) 100%); }
+      /* kinetic word-by-word captions (Instagram safe area: not the top 220 px nor the bottom 450 px) */
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      /* hook: names the product in words (rule 1) */
+      #hook { position: absolute; left: 50px; right: 50px; top: 300px; text-align: center; font: 700 96px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook b { color: #E8B04A; } #hook i { font-style: normal; color: #D9D2C5; }
+      #hook span { color: #E8B04A; font-size: 70px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      #proof { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); visibility: hidden; }
+      #proof .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 104px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                   text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #proof .st { position: absolute; left: 0; right: 0; top: 1330px; text-align: center; font: 600 46px/1.2 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+      .pol { position: absolute; width: 560px; padding: 22px 22px 0; background: #FFFDF6; border-radius: 6px; box-shadow: 0 16px 0 rgba(0, 0, 0, 0.3); transform-origin: 50% 50%; }
+      .pol img { display: block; width: 516px; height: 516px; object-fit: cover; border-radius: 2px; }
+      .pol div { font: 700 62px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 12px 0 18px; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 70px/1.05 "Fredoka", sans-serif; } #card .k0 .d { color: #8A5A3B; } #card .k0 .g { color: #6E6A86; }
+      #card .k1 { font: 700 48px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 86px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 42px/1.25 "Fredoka", sans-serif; margin-top: 10px; } #card .k3 b { color: #C0392B; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="23.0" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Ajedrez<br><b>perros</b> vs. <i>gatos</i><br><span>impreso en 3D</span></div>
+      <div id="subs"></div>
+      <div id="proof">
+        <div class="tt">Así son<br>de verdad</div>
+        <div class="pol" style="left: 260px; top: 520px"><img src="assets/p/perros-gatos.webp" alt=""><div>el bando de los perros</div></div>
+        <div class="st">Los gatos de un lado, los perros del otro</div>
+      </div>
+      <div id="card"><div class="k0">¿<span class="d">Perro</span> o <span class="g">gato</span>?</div><div class="k1">Ajedrez perros vs. gatos,<br>impreso en 3D pieza por pieza</div><div class="k2">¡Comentá tu bando!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="23.0" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="23.0" data-track-index="2" data-volume="1"></audio>
+      <audio id="v-s1" class="clip" src="assets/voz/s1.wav" data-start="0.15" data-duration="2.227" data-track-index="4" data-volume="1" data-who="santa" data-text="¡Yo juego con los perros!"></audio>
+      <audio id="v-m1" class="clip" src="assets/voz/m1.wav" data-start="2.5" data-duration="1.584" data-track-index="5" data-volume="1" data-who="mago" data-text="Los gatos, conmigo."></audio>
+      <audio id="v-s2" class="clip" src="assets/voz/s2.wav" data-start="9.75" data-duration="1.919" data-track-index="6" data-volume="1" data-who="santa" data-text="¡Eso no es una jugada!"></audio>
+      <audio id="v-m2" class="clip" src="assets/voz/m2.wav" data-start="11.85" data-duration="0.759" data-track-index="7" data-volume="1" data-who="mago" data-text="Para un gato, sí."></audio>
+      <audio id="v-m3" class="clip" src="assets/voz/m3.wav" data-start="17.1" data-duration="3.532" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Perro o gato? Comentá cuál y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "Los gatos tiran todo" (23 s, 3D toon; November second wave W1, ../../PLAN_NOVIEMBRE_2.md, audited in ../AUDIT.md):
+         the shop's dogs-vs-cats chess set, in Papá Noel's holiday living room. He plays the dogs, El Mago the cats. A dog
+         pawn hops forward, eager; the cat queen leaps across the board, looks at him, and taps the pawn off the table, three
+         slow taps. "¡Eso no es una jugada!" - "Para un gato, sí." The real photo, then ONE comment CTA (PERRO / GATO, price
+         and date). Soft ambient music. Built on escena3d.js + ajedrez3d.js (board) + mascotas3d.js (the pieces). */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, colDist } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, workshop, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { chessKit } from "./lib/ajedrez3d.js";
+      import { petKit } from "./lib/mascotas3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 23.0, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage();
+      const WS = workshop();
+      const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree, rug, bench, glass, stool } = WS;
+      const { mago, santa, BTRACK, blobM, blobS, blobK, printer } = await cast();
+      blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+
+      // ---------- Papá Noel's holiday living room (the workshop shell, redressed: no bench, shelves or printer) ----------
+      spill.material.opacity = 0; bench.visible = false; printer.visible = false; if (stool) stool.visible = false;
+      { const wp0 = new THREE.Vector3();                                                     // the workshop's shelves, spools, thermos and mandarins (all left of the window, against the back wall)
+        for (const ch of [...scene.children]) if (ch.isMesh && !ch.geometry.type.startsWith("Plane")) { ch.getWorldPosition(wp0);
+          if (wp0.x > -1.4 && wp0.x < 0.05 && wp0.y > 0.45 && wp0.y < 1.45 && wp0.z > -1.06 && wp0.z < -0.55) ch.visible = false; } }
+      const paper = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#A9BFA4"; g.fillRect(0, 0, w, h); g.fillStyle = "#9CB397"; for (let x = 0; x < w; x += 16) g.fillRect(x, 0, 6, h);
+        g.fillStyle = "#C7D6B8"; for (let y = 8; y < h; y += 32) for (let x = 11; x < w; x += 32) { g.beginPath(); g.arc(x, y, 2, 0, 7); g.fill(); } });
+      for (const ch of scene.children) if (ch.isMesh && ch.geometry.type === "PlaneGeometry" && ch.material.isMeshToonMaterial && ch.material.map) {   /* walls only (the window glass and the night sky are basic materials) */
+        const p = ch.position; const isBack = Math.abs(p.z + 1.1) < 0.01, isSide = Math.abs(Math.abs(ch.rotation.y) - Math.PI / 2) < 0.01;
+        if (isBack || isSide) { const t = paper.clone(); t.needsUpdate = true; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.copy(ch.material.map.repeat); ch.material = toon("#ffffff", { map: t, rim: 0 }); shade(ch); } }
+      const seaTex = canvasTex(128, 96, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, 56); gr.addColorStop(0, "#7FB6E0"); gr.addColorStop(1, "#D4ECF5"); g.fillStyle = gr; g.fillRect(0, 0, w, 58);
+        g.fillStyle = "#FFF6D8"; g.beginPath(); g.arc(98, 22, 9, 0, 7); g.fill(); g.fillStyle = "#5B9FC8"; g.fillRect(0, 56, w, 22); g.fillStyle = "#86BCD8"; for (let x = 0; x < w; x += 18) g.fillRect(x, 62 + (x % 36 ? 6 : 0), 9, 2);
+        g.fillStyle = "#E7D3A8"; g.fillRect(0, 78, w, 8); g.fillStyle = "#B9A27A"; g.fillRect(0, 86, w, 10);
+        g.fillStyle = "#FFFFFF"; [[30, 18], [42, 14], [60, 24]].forEach(([x, y]) => { g.fillRect(x, y, 5, 1); g.fillRect(x + 5, y - 1, 4, 1); }); });          // sky, the sea, the rambla's wall, a few gulls
+      seaTex.wrapS = seaTex.wrapT = THREE.ClampToEdgeWrapping; glass.material.map = seaTex; glass.material.needsUpdate = true;
+      // the sofa under the window, a floor lamp, a framed picture, a plant; the tree by the side wall; the rug under the game table
+      const SOFA = { x0: -1.3, x1: -0.48, z0: -1.0, z1: -0.66 };
+      { const g = new THREE.Group(); g.position.set((SOFA.x0 + SOFA.x1) / 2, 0, (SOFA.z0 + SOFA.z1) / 2); scene.add(g); const W = SOFA.x1 - SOFA.x0, D = SOFA.z1 - SOFA.z0;
+        rbox(W, 0.2, D, "#C96A4A", 0, 0.22, 0.01, g, { r: 0.25 }); rbox(W, 0.36, 0.1, "#B85C40", 0, 0.48, -D / 2 + 0.05, g, { r: 0.3 });
+        for (const s of [-1, 1]) rbox(0.09, 0.3, D, "#B85C40", s * (W / 2 - 0.045), 0.32, 0.01, g, { r: 0.3 });
+        for (const s of [-1, 1]) rbox(0.33, 0.1, D - 0.08, "#D9805E", s * 0.19, 0.36, 0.03, g, { r: 0.35 });
+        rbox(0.18, 0.16, 0.06, "#F2C14E", -0.22, 0.5, -0.09, g, { r: 0.4, rot: [0.1, 0, 0.15] }); rbox(0.18, 0.16, 0.06, "#4F86C6", 0.22, 0.5, -0.09, g, { r: 0.4, rot: [0.1, 0, -0.15] });
+        for (const [x, z] of [[-W / 2 + 0.06, -D / 2 + 0.06], [W / 2 - 0.06, -D / 2 + 0.06], [-W / 2 + 0.06, D / 2 - 0.06], [W / 2 - 0.06, D / 2 - 0.06]]) cyl(0.018, 0.012, 0.12, "#5A3A26", x, 0.06, z, g); }
+      { const g = new THREE.Group(); g.position.set(-1.33, 0, -0.45); scene.add(g); cyl(0.11, 0.13, 0.03, "#2E2160", 0, 0.015, 0, g); cyl(0.012, 0.012, 1.3, "#2E2160", 0, 0.66, 0, g);
+        cyl(0.09, 0.15, 0.17, "#FBF4E4", 0, 1.33, 0, g, { mo: { emissive: new THREE.Color("#5A4A20") } }); }
+      { rbox(0.42, 0.32, 0.03, "#8A5638", -0.9, 1.52, -1.085, null, { r: 0.1 });
+        const art = canvasTex(64, 48, (g, w, h) => { g.fillStyle = "#F3E3BC"; g.fillRect(0, 0, w, h); g.fillStyle = "#5B9FC8"; g.fillRect(0, 26, w, 22); g.fillStyle = "#E86A4A"; g.beginPath(); g.arc(46, 18, 7, 0, 7); g.fill();
+          g.fillStyle = "#2E2160"; g.fillRect(14, 20, 3, 14); g.beginPath(); g.moveTo(10, 20); g.lineTo(22, 20); g.lineTo(16, 10); g.fill(); });
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(0.36, 0.26), toon("#ffffff", { map: art, rim: 0 })); m.position.set(-0.9, 1.52, -1.068); scene.add(m); }
+      { const g = new THREE.Group(); g.position.set(0.2, 0, -0.95); scene.add(g); cyl(0.07, 0.055, 0.14, "#C0392B", 0, 0.07, 0, g);
+        for (let k = 0; k < 7; k++) { const a = k / 7 * Math.PI * 2; const l = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), toon(k % 2 ? "#2F5A32" : "#5C9A4A")); l.scale.set(0.5, 1.6, 0.5); l.position.set(Math.cos(a) * 0.05, 0.25, Math.sin(a) * 0.05); l.rotation.set(Math.sin(a) * 0.5, 0, -Math.cos(a) * 0.5); shade(l); g.add(l); outline(l, WO); } }
+      tree.position.set(1.62, 0, -0.68); rug.position.set(0.55, 0.004, -0.1); rug.scale.setScalar(1.05);
+
+      // ---------- timing (voice first: the measured lines decide the beats) ----------
+      const T = { s1: 0.15, m1: 2.5, hop: 4.35, leap: 6.05, step: 6.75, look: 7.1, taps: [7.75, 8.35, 8.95], land: 9.42, s2: 9.75, m2: 11.85, smug: 13.15, proof: 14.8, cta: 17.0, m3: 17.1, card: 20.55, exit: 99 };
+
+      // ---------- the game table and the board (as in the chess reels; the board 5 cm nearer the front edge, so a pawn can go over it) ----------
+      const TC = V3(0.55, 0, -0.32), TOP = 0.58;
+      const tbl = new THREE.Group(); tbl.position.copy(TC); scene.add(tbl);
+      rbox(0.6, 0.04, 0.56, "#8A5638", 0, TOP - 0.02, 0, tbl, { r: 0.15 }); rbox(0.54, 0.05, 0.5, "#6E3B22", 0, TOP - 0.065, 0, tbl, { line: false });
+      for (const [x, z] of [[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]]) rbox(0.04, TOP - 0.04, 0.04, "#6E3B22", x, (TOP - 0.04) / 2, z, tbl);
+      const CK = chessKit(scene, { wo: WO });
+      const B = CK.board(); B.g.position.set(TC.x, TOP, TC.z + 0.05); B.g.rotation.y = -Math.PI / 2; B.g.updateMatrixWorld(true);
+      const sq = (f, r) => B.sq(f, r), BT = B.T, EDGE = TC.z + 0.05 + B.W / 2;                    // the board's front edge (0.8 cm from the table's)
+      // the dogs-vs-cats set: dogs (Papá Noel, ranks 7-8, facing El Mago), cats (El Mago, ranks 1-2, facing Papá Noel)
+      const PK = petKit(scene, { wo: WO }), BACK = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
+      const HGT = { king: 0.095, queen: 0.086, bishop: 0.08, knight: 0.072, rook: 0.07, pawn: 0.056 };
+      const toonH = (g) => { const bb = new THREE.Box3(); g.updateMatrixWorld(true); g.traverse((m) => { if (m.isMesh && m.material && m.material.isMeshToonMaterial) bb.expandByObject(m); }); return bb.max.y - bb.min.y; };
+      const PCS = [];
+      for (const [kind, r0, r1, face] of [["cat", 0, 1, Math.PI / 2], ["dog", 7, 6, -Math.PI / 2]]) for (let f = 0; f < 8; f++) for (const [type, r] of [[BACK[f], r0], ["pawn", r1]]) {
+        const g = PK.piece(kind, type, PK.COLS[kind]); g.rotation.order = "YXZ"; g.rotation.y = face; g.position.copy(sq(f, r));
+        const s0 = HGT[type] / toonH(g); g.scale.setScalar(s0);
+        PCS.push({ kind, type, f, r, g, home: g.position.clone(), rot0: face, s0 }); }
+      const PAWN = PCS.find((p) => p.kind === "dog" && p.type === "pawn" && p.f === 7), QUEEN = PCS.find((p) => p.kind === "cat" && p.type === "queen");
+      const KINGD = PCS.find((p) => p.kind === "dog" && p.type === "king");
+      const H5 = sq(7, 4), G4 = sq(6, 3), G5 = sq(6, 4);
+      const { SPK } = makeFX();
+
+      // ---------- staging (as in the chess reels: El Mago at the cats' end, Papá Noel at the dogs' end) ----------
+      const MD = V3(TC.x - 0.6, 0, TC.z), SD = V3(TC.x + 0.62, 0, TC.z), hM = Math.PI / 2, hS = -Math.PI / 2;
+      const LENS_C = V3(1.08, 1.05, 1.04), BOARDPT = V3(0.6, 0.62, -0.1);                         // poses aim at fixed points, never at props placed later in the frame
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- Papá Noel: a hand on his chest ("¡Yo juego con los perros!"); watches the cat (a look down taken mostly from the upper spine);
+        //      outraged, points at the board (left hand, camera side, a 0.55 s reach)
+        arm(santa, "L", wp(santa.b("DEF-spine.003")).add(SF.fwd.clone().multiplyScalar(0.44)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0)), pulse(t, T.s1 - 0.1, T.s1 + 0.45, T.s1 + 1.9, T.s1 + 2.4), null, 0.07);
+        const watch = pulse(t, T.leap - 0.1, T.leap + 0.2, T.s2 - 0.2, T.s2 + 0.1);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.08 * watch); rotWorld(santa.b("DEF-head"), SF.left, 0.1 * watch); turnTo(santa, BOARDPT, 0.3 * watch);
+        { const sh = wp(santa.b("DEF-upper_arm.L")); arm(santa, "L", sh.clone().add(SF.fwd.clone().multiplyScalar(0.36)).add(SF.left.clone().multiplyScalar(0.1)).add(V3(0, -0.05, 0)), pulse(t, T.s2 - 0.15, T.s2 + 0.4, T.s2 + 1.6, T.s2 + 2.15), null, 0.08); }
+        rotWorld(santa.b("DEF-spine.003"), SF.left, -0.05 * pulse(t, T.s2 - 0.1, T.s2 + 0.2, T.s2 + 1.6, T.s2 + 2.0));          // leans back, offended
+        // ---- El Mago: a hand on his chest ("Los gatos, conmigo"); watches his cat; deadpan; to the viewer for the CTA (pointing: a 0.55 s reach)
+        arm(mago, "R", wp(mago.b("DEF-spine.003")).add(MF.fwd.clone().multiplyScalar(0.36)).add(MF.right.clone().multiplyScalar(0.1)).add(V3(0, -0.04, 0)), pulse(t, T.m1 - 0.25, T.m1 + 0.3, T.m1 + 1.4, T.m1 + 1.9), null, 0.07);
+        rotWorld(mago.b("DEF-head"), MF.left, 0.1 * pulse(t, T.leap - 0.2, T.leap + 0.1, T.s2, T.s2 + 0.3));
+        turnTo(mago, LENS_C, pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1));
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.m3 + 0.1, T.m3 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
+        // ---- faces: blinks; Papá Noel's brows up when he picks his side and when outraged; El Mago's slow deadpan blink after "sí"
+        let e = 0; for (const b of [1.4, 3.6, 6.4, 10.4, 15.9, 18.2, 21.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        { const u = (t - (T.m2 + 0.85)) * FPS; if (u >= 0 && u < 30) e = Math.max(e, u < 8 ? u / 8 : u < 20 ? 1 : 1 - (u - 20) / 10); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+        mago.b("brows").position.y += 0.01 * pulse(t, T.m1, T.m1 + 0.15, T.m1 + 1.0, T.m1 + 1.3) - 0.006 * pulse(t, T.m2 - 0.2, T.m2, T.m2 + 1.2, T.m2 + 1.5);
+        santa.b("brows").position.y += 0.014 * Math.max(pulse(t, T.s1, T.s1 + 0.15, T.s1 + 1.0, T.s1 + 1.3), pulse(t, T.taps[2], T.taps[2] + 0.12, T.s2 + 1.8, T.s2 + 2.1));
+        santa.b("glasses").position.y -= 0.012 * pulse(t, T.land - 0.1, T.land + 0.05, T.s2 + 1.6, T.s2 + 1.9);
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props: the pieces' acting ----------
+      const qAx = (ax, a) => new THREE.Quaternion().setFromAxisAngle(ax, a);
+      const hopArc = (A, Bp, u, h) => A.clone().lerp(Bp, u).add(V3(0, 4 * h * u * (1 - u), 0));
+      const TAPD = 0.0165;                                                               // each tap moves the pawn (and the queen, following) this far toward the edge
+      function pawnState(t) {               // the eager dog pawn: h7 -> h5 in one hop; then the cat taps it, three times, and over the edge onto the rug
+        const P0 = PAWN.home; if (t < T.hop) return { p: P0.clone(), q: qAx(V3(0, 1, 0), PAWN.rot0), tip: 0 };
+        let p = hopArc(P0, H5, ss(clamp((t - T.hop) / 0.45, 0, 1)), 0.05), z = H5.z, tip = 0;
+        T.taps.forEach((tt, i) => { const u = ss(clamp((t - tt - 0.12) / 0.22, 0, 1)); z += TAPD * u; if (i === 2) tip = u; });
+        p.z = z; let q = qAx(V3(1, 0, 0), 0.0).multiply(qAx(V3(0, 1, 0), PAWN.rot0));
+        if (t >= T.taps[2] + 0.12) {                        // the third tap: it slides on over the edge, tips and falls (gravity) onto the rug, and lies there
+          const u = t - (T.taps[2] + 0.12), slide = Math.min(u, 0.25), zDrop = TC.z + 0.28 + 0.03;          /* it drops only once its whole base is past the table's edge (QA: it grazed the edge) */
+          p.z = Math.min(H5.z + 3 * TAPD + (zDrop - H5.z - 3 * TAPD) * ss(slide / 0.25), zDrop) + 0.05 * Math.max(0, u - 0.25);
+          const fall = Math.max(0, u - 0.25), y0 = P0.y; p.y = Math.max(0.006, y0 - 0.5 * 9.8 * fall * fall);
+          const ang = Math.min(Math.PI / 2, 1.2 * slide / 0.25 * 0.4 + fall * 5.5);
+          q = qAx(V3(1, 0, 0), ang).multiply(qAx(V3(0, 1, 0), PAWN.rot0));
+          if (p.y <= 0.006) p.y = 0.006 + 0.016 * PAWN.s0 / 1.0 * 0.9; }
+        return { p, q, tip }; }
+      function queenState(t) {              // the cat queen: one leap d1 -> g4 (cats jump), a step to g5, a look at him, three slow taps with her right paw
+        const Q0 = QUEEN.home; if (t < T.leap) return { p: Q0.clone(), look: 0, paw: 0 };
+        let p = t < T.step ? hopArc(Q0, G4, ss(clamp((t - T.leap) / 0.55, 0, 1)), 0.09) : hopArc(G4, G5, ss(clamp((t - T.step) / 0.3, 0, 1)), 0.02);
+        let paw = 0; T.taps.forEach((tt, i) => { paw = Math.max(paw, pulse(t, tt, tt + 0.18, tt + 0.32, tt + 0.5)); if (i < 2) p.z += TAPD * ss(clamp((t - tt - 0.12) / 0.22, 0, 1)); });
+        const look = pulse(t, T.look, T.look + 0.3, T.proof, T.proof + 0.1);
+        return { p, look, paw }; }
+      function props(t) {
+        setLight("day");
+        bulbs.forEach((b, k2) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k2 + Math.floor(t * 3)) % 4]));
+        const live = t < T.proof;                                                         // under the proof panel the set is reset (the card shows the start)
+        for (const p of PCS) { const g = p.g, U = g.userData; g.position.copy(p.home); g.quaternion.copy(qAx(V3(0, 1, 0), p.rot0)); g.scale.setScalar(p.s0);
+          U.head.rotation.set(0, 0, 0); U.tail.rotation.set(0, 0, 0); U.paw.rotation.set(0, 0, 0); U.ears.forEach((e) => e.rotation.set(0, 0, 0)); }
+        // the dogs wag (eager), harder for the pawn that hops
+        for (const p of PCS) if (p.kind === "dog") p.g.userData.tail.rotation.y = 0.35 * Math.sin(t * 9 + p.f) * (p === PAWN ? 1.6 * pulse(t, T.hop - 0.4, T.hop, T.taps[0], T.taps[0] + 0.3) + 0.2 : 0.25);
+        if (live) { const s = pawnState(t); PAWN.g.position.copy(s.p); PAWN.g.quaternion.copy(s.q);
+          const q = queenState(t), U = QUEEN.g.userData; QUEEN.g.position.copy(q.p);
+          U.head.rotation.x = -0.32 * q.look; U.head.rotation.y = -0.25 * q.look;          // she looks up at him...
+          U.paw.rotation.z = -1.05 * q.paw; U.paw.rotation.x = -0.35 * q.paw;              // ...while her right paw goes out, sideways, toward the pawn
+          U.tail.rotation.z = 0.25 * Math.sin(t * 2.2) * q.look; }
+        // the smug beat: every cat looks up at him; the dog king's ears droop
+        const smug = live ? pulse(t, T.smug, T.smug + 0.35, T.proof, T.proof + 0.1) : 0;
+        for (const p of PCS) if (p.kind === "cat" && p !== QUEEN) { p.g.userData.head.rotation.x = -0.3 * smug; p.g.userData.head.rotation.y = -0.15 * smug * Math.sin(p.f); }
+        KINGD.g.userData.ears.forEach((e) => { e.rotation.z = e.userData.s * 0.5 * smug; });
+        // sparkles: the leap's landing (a few), the pawn landing on the rug
+        SPK.forEach((m, i) => { let best = null, dt = 9;
+          for (const [t0, Q] of [[T.leap + 0.55, G4.clone().add(V3(0, 0.03, 0))], [T.land, V3(H5.x, 0.03, EDGE + 0.07)]]) { const d = t - t0 - (i % 5) * 0.01; if (d > 0 && d < dt) { dt = d; best = Q; } }
+          m.visible = live && dt < 0.4 && i < 10; if (!m.visible) return; const v = V3((rnd(i) - 0.5) * 0.25, 0.15 + rnd(i + 50) * 0.2, (rnd(i + 99) - 0.5) * 0.25);
+          m.position.copy(best).add(v.multiplyScalar(dt * 0.7)); m.position.y -= 0.4 * dt * dt; m.scale.setScalar(0.22 * (1 - dt / 0.4)); });
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, uu = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (uu - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing (cuts every 0.6-2.5 s; every camera looks toward a wall) ----------
+      const SHOTS = [
+        { t: 0.0, d: 1.1, fov: 46, from: [0.4, 0.92, 0.4], to: [0.41, 0.91, 0.38], look: [0.6, 0.64, -0.3] },                                                  // hook: dogs vs cats, the living room behind
+        { t: 1.1, d: 2.45 - 1.1, fov: 34, subj: "santa", h: 1.05, az: -35, el: 4, v: 0.2 },                                                                      // "¡Yo juego con los perros!"
+        { t: 2.45, d: T.hop - 0.2 - 2.45, fov: 32, subj: "mago", h: 0.95, az: 48, el: -8, v: 0.12 },                                                            // "Los gatos, conmigo."
+        { t: T.hop - 0.2, d: T.leap - 0.05 - T.hop + 0.2, fov: 40, from: [0.28, 0.86, 0.16], to: [0.29, 0.85, 0.15], look: [0.64, 0.62, -0.13], whip: 1 },         // the eager dog pawn hops forward
+        { t: T.leap - 0.05, d: T.look - T.leap + 0.05, fov: 42, from: [0.86, 0.92, 0.3], to: [0.84, 0.91, 0.28], look: [0.45, 0.62, -0.22], whip: -1 },              // the cat queen leaps across the board
+        { t: T.look, d: T.taps[2] + 0.42 - T.look, fov: 36, from: [0.3, 0.74, 0.03], to: [0.31, 0.74, 0.03], look: [0.6, 0.64, -0.1] },                         // the look, the taps (side view)
+        { t: T.taps[2] + 0.42, d: T.s2 - T.taps[2] - 0.42, fov: 40, from: [0.62, 0.62, 0.32], to: [0.62, 0.6, 0.3], look: [0.58, 0.0, 0.0] },                  // it lands on the rug (a look down)
+        { t: T.s2, d: T.m2 - 0.1 - T.s2, fov: 34, subj: "santa", h: 1.05, az: -35, el: 4, v: 0.2 },                                                            // "¡Eso no es una jugada!"
+        { t: T.m2 - 0.1, d: T.smug - T.m2 + 0.1, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                    // "Para un gato, sí."
+        { t: T.smug, d: T.proof - T.smug, fov: 42, from: [0.92, 0.86, 0.12], to: [0.91, 0.85, 0.1], look: [0.4, 0.64, -0.3] },                                   // the cats, smug; the dog king's ears droop
+        { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                            // (under the proof panel: the reset)
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                       // CTA
+        { t: T.card, d: DUR - T.card, fov: 54, from: [TC.x, 1.0, TC.z + 0.92], to: [TC.x, 0.98, TC.z + 0.86], look: [TC.x, 0.64, TC.z - 0.02] },                // the card over the set, back at the start
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props,
+        punch: [[T.taps[2], 0.06], [T.s2 + 0.05, 0.08], [T.m2 + 0.05, 0.1]], shake: [[T.land, 0.003, 0.25]], flash: [[T.proof, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+
+      // ---------- text: kinetic captions, hook, proof, end card ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 1.1] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const proof = document.getElementById("proof"), POLS = [...proof.querySelectorAll(".pol")];
+      function dom(t) {
+        const pv = t >= T.proof && t < T.cta; proof.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { proof.style.opacity = Math.min(1, (t - T.proof) / 0.08, (T.cta - t) / 0.1).toFixed(3);
+          POLS.forEach((p, i) => { const a = clamp((t - T.proof - 0.15) / 0.3, 0, 1); p.style.opacity = a > 0 ? "1" : "0";
+            p.style.transform = `translateY(${((1 - ss(a)) * -150).toFixed(1)}px) rotate(${(-3 + (1 - a) * 14).toFixed(2)}deg) scale(${(1.2 - 0.2 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks plus the furniture (the game table's top and legs, the sofa) and the pieces wherever they are */
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const FURN = [{ name: "tableTop", min: V3(TC.x - 0.3, TOP - 0.09, TC.z - 0.28), max: V3(TC.x + 0.3, TOP + 0.03, TC.z + 0.28) },
+        ...[[-0.26, -0.24], [0.26, -0.24], [-0.26, 0.24], [0.26, 0.24]].map(([x, z], i) => ({ name: "leg" + i, min: V3(TC.x + x - 0.02, 0, TC.z + z - 0.02), max: V3(TC.x + x + 0.02, TOP, TC.z + z + 0.02) })),
+        { name: "sofa", min: V3(SOFA.x0, 0, SOFA.z0), max: V3(SOFA.x1, 0.66, SOFA.z1) }, { name: "lamp", min: V3(-1.45, 0, -0.57), max: V3(-1.21, 1.42, -0.33) }];
+      const boxD = (p, F) => { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); return q.distanceTo(p); };
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          const d = boxD(p, F); if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        for (const p of PCS) { const q = p.g.position.clone().add(V3(0, 0.03, 0));
+          for (const [nm, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders()) { const d = colDist(q, k).d; if (d < 0.02) out.push(["piece", nm, k.name, p.kind + p.type, +(0.02 - d).toFixed(3)]); } }
+        // the falling pawn never enters the table; the queen and the pawn never overlap (her paw only touches it)
+        { const p = PAWN.g.position; if (p.y < TOP - 0.005 && p.y > 0.03 && p.z < TC.z + 0.28 + 0.012) out.push(["pawn-table", +p.z.toFixed(3), +p.y.toFixed(3)]);
+          const d = Math.hypot(p.x - QUEEN.g.position.x, p.z - QUEEN.g.position.z); if (d < 0.034 && Math.abs(p.y - QUEEN.g.position.y) < 0.03) out.push(["queen-pawn", +d.toFixed(3)]); }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, PCS, PAWN, QUEEN, B, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

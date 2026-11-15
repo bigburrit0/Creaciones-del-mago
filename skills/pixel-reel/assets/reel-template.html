@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/pixel-reel.js"></script>
+    <script src="assets/pr/atlas.js"></script>
+    <style>
+      :root { --ground: #e9d8b4; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); }
+      #stage, #plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      #plate { image-rendering: pixelated; display: block; }
+      .act { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; }
+      .pr-fx { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; opacity: 0; z-index: 40; }
+      .hid { opacity: 0; }
+      /* paint order: props < characters < items < fx */
+      #door { z-index: 4; } #hero { z-index: 11; } .item { z-index: 20; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="15" data-track-index="0" data-track-kind="graphics"
+           data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
+        <img id="plate" src="assets/pr/plates/SET.png" alt="" />
+        <!-- one div per actor: props, characters, items -->
+        <div id="door" class="act"></div>
+        <div id="hero" class="act"></div>
+        <div id="it-1" class="act item hid"></div>
+        <!-- effect pool -->
+        <div id="fx1" class="pr-fx"></div><div id="fx2" class="pr-fx"></div><div id="fx3" class="pr-fx"></div>
+        <div id="fx4" class="pr-fx"></div><div id="fx5" class="pr-fx"></div><div id="fx6" class="pr-fx"></div>
+      </div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="15" data-track-index="1" data-volume="0.5"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="15" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-amb" class="clip" src="assets/audio/ambience.wav" data-start="0" data-duration="15" data-track-index="3" data-volume="0.35"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool: ["#fx1", "#fx2", "#fx3", "#fx4", "#fx5", "#fx6"] });
+
+      // positions in art pixels (270x480 grid), from reel.json
+      const P = { door: [238, 262], start: [80, 240], center: [135, 330] };
+
+      const door = R.actor("#door", "obj.door_R", ...P.door);
+      const hero = R.actor("#hero", "CHAR.idle_S", ...P.start);
+
+      // beats, in time order per actor
+      hero.play(0, "CHAR.idle_S", { dur: 1 });
+      hero.walk(1, 1.2, ...P.center, "CHAR.walk_E");
+      hero.play(2.2, "CHAR.surprised_S");
+      R.fx(2.3, "fx.fx_sparkle", P.center[0], P.center[1] - 100);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

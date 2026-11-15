@@ -1,0 +1,66 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo in the summer heat: a big, jolly old man with a deep, slightly gravelly, warm voice. Out of breath and dramatic when tired, a hearty belly laugh when happy. Natural, quick comedic timing, not slow.",
+  "lines": [
+   [
+    "s1",
+    "¡Uf… qué calor, che!"
+   ],
+   [
+    "s2",
+    "¡Ahh… qué rico!"
+   ],
+   [
+    "s3",
+    "¡Pero me quedé sin regalos!"
+   ],
+   [
+    "s4",
+    "¡Jo, jo, jo! ¡Gracias, Mago!"
+   ],
+   [
+    "s5",
+    "¡Feliz Navidad!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago: a kind, older wizard from Montevideo with a warm, calm voice and a playful smile. Friendly and a bit mischievous when he has an idea. Natural pace, not slow.",
+  "lines": [
+   [
+    "m1",
+    "Tomá, un matecito."
+   ],
+   [
+    "m2",
+    "¡Tengo una idea!"
+   ],
+   [
+    "m3",
+    "¡A imprimir!"
+   ],
+   [
+    "m4",
+    "Regalos impresos en 3D. ¡Pedí el tuyo!"
+   ]
+  ]
+ },
+ "_edits": {
+  "s2": {
+   "to": 1.19
+  },
+  "s3": {
+   "from": 0.7
+  },
+  "m1": {
+   "squeeze": [
+    0.306,
+    0.832,
+    0.2
+   ]
+  }
+ },
+ "_note": "s2 keeps only the satisfied 'Ahh...' (the line must fit 5.15-6.25 s); s3 drops 'Pero...'; m1's pause after 'Tomá' shortened"
+}

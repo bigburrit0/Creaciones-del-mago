@@ -1,0 +1,85 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, about to order a 3D-printed viking chess set from his friend, reading his questions one by one off his long Christmas list: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing, eager and a little impatient, firing each question as soon as he gets the last answer. Clear, well-articulated words. Last line: delighted, unrolling the rest of his very long list, he just discovered he has many more questions.",
+  "lines": [
+   [
+    "s1",
+    "¿Cuánto sale?"
+   ],
+   [
+    "s2",
+    "¿Es para jugar o para mirar?"
+   ],
+   [
+    "s3",
+    "¿Y si se me pierde una?"
+   ],
+   [
+    "s4",
+    "¿Y el tablero?"
+   ],
+   [
+    "s5",
+    "¡Esperá, que tengo más!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, patiently answering his friend's questions about a chess set he prints in 3D. The first four lines: calm, clear, reassuring, short and to the point, a craftsman who knows his work. Fifth line: completely deadpan and dry, a little pause after 'Las demás'. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Te paso precio y fecha antes de empezar."
+   ],
+   [
+    "m2",
+    "Para jugar. Tamaño torneo, o más grande."
+   ],
+   [
+    "m3",
+    "Te la imprimo de nuevo."
+   ],
+   [
+    "m4",
+    "Va aparte: yo hago las piezas."
+   ],
+   [
+    "m5",
+    "Las demás… en comentarios."
+   ],
+   [
+    "m6",
+    "Comentá duda y te contesto, con precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "m1": [
+   0.0,
+   3.2
+  ],
+  "m2": [
+   3.4,
+   7.6
+  ]
+ },
+ "_edits": {
+  "m2": {
+   "squeeze": [
+    0.515,
+    1.904,
+    0.35
+   ]
+  },
+  "m5": {
+   "squeeze": [
+    0.596,
+    1.319,
+    0.45
+   ]
+  }
+ },
+ "_note": "the automatic split put 'Para jugar.' at the end of m1 (its pause before 'Tamaño torneo' was 1.4 s, longer than the gap between lines): m1 and m2 were re-cut by hand from the take at the measured pauses (_cuts_from_take, take seconds) with the split's own trim filter; m2's inner pause shortened to 0.35 s, m5's deadpan pause after 'Las demás' to 0.45 s (raw-clip times)"
+}

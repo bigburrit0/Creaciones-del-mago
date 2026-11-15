@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/pixel-reel.js"></script>
+    <script src="assets/pr/atlas.js"></script>
+    <style>
+      :root { --ground: #e9d8b4; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); }
+      #stage, #plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      #plate { image-rendering: pixelated; display: block; }
+      .act { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; }
+      .pr-fx { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; opacity: 0; z-index: 40; }
+      .hid { opacity: 0; }
+      /* paint order: decor < door < printer < stool < sack < Papá Noel < El Mago < items < fx */
+      #garland, #tree, #wreath { z-index: 3; } #door { z-index: 4; } #printer { z-index: 5; } #fan { z-index: 5; }
+      #stool { z-index: 6; } #sack { z-index: 7; } #papa { z-index: 10; } #mago { z-index: 11; } .item { z-index: 20; }
+      /* depth & light overlays (pixel-crisp, dithered, palette colours) */
+      .ov { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; image-rendering: pixelated; pointer-events: none; }
+      #ov-shadows { z-index: 1; mix-blend-mode: multiply; opacity: 0.55; }
+      #ov-light { z-index: 2; mix-blend-mode: screen; opacity: 0.5; }
+      #ov-vignette { z-index: 45; opacity: 0.6; }
+      .csh { position: absolute; left: 0; top: 0; width: 160px; height: 48px; margin-left: -80px; margin-top: -26px;
+             background: url(assets/light/shadow.png) no-repeat; image-rendering: pixelated; mix-blend-mode: multiply; opacity: 0.6; z-index: 8; }
+      /* cast shadows of the pre-rendered 3D props (same frames as the prop, multiply) */
+      .cs3d { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; mix-blend-mode: multiply; opacity: 0.6; z-index: 2; }
+      .mote { position: absolute; left: 0; top: 0; width: 4px; height: 4px; background: #fff3b0; z-index: 31; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <div id="stage" class="clip" data-start="0" data-duration="15" data-track-index="0" data-track-kind="graphics"
+           data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
+        <img id="plate" src="assets/pr/plates/taller.png" alt="" />
+        <img id="ov-shadows" class="ov" src="assets/light/shadows.png" alt="" />
+        <img id="ov-light" class="ov" src="assets/light/light.png" alt="" />
+        <div id="printer-cs" class="cs3d"></div><div id="stool-cs" class="cs3d"></div><div id="sack-cs" class="cs3d hid"></div>
+        <div id="tree-cs" class="cs3d"></div><div id="fan-cs" class="cs3d"></div>
+        <div id="mago-sh" class="csh"></div>
+        <div id="papa-sh" class="csh hid"></div>
+        <!-- set and props -->
+        <div id="garland" class="act"></div>
+        <div id="tree" class="act"></div>
+        <div id="wreath" class="act"></div>
+        <div id="printer" class="act"></div>
+        <div id="fan" class="act"></div>
+        <div id="stool" class="act"></div>
+        <div id="sack" class="act hid"></div>
+        <!-- characters -->
+        <div id="papa" class="act hid"></div>
+        <div id="mago" class="act"></div>
+        <!-- items -->
+        <div id="it-cafe" class="act item hid"></div>
+        <div id="it-banana" class="act item hid"></div>
+        <div id="it-suculenta" class="act item hid"></div>
+        <div id="it-hamster" class="act item hid"></div>
+        <div id="it-creeper" class="act item hid"></div>
+        <div id="it-pokebox" class="act item hid"></div>
+        <div id="it-dragon" class="act item hid"></div>
+        <div id="it-f40" class="act item hid"></div>
+        <div id="it-garaje" class="act item hid"></div>
+        <div id="it-plegable" class="act item hid"></div>
+        <div id="it-hoja" class="act item hid"></div>
+        <div id="it-penarol" class="act item hid"></div>
+        <div id="it-nacional" class="act item hid"></div>
+        <div id="it-tnt" class="act item hid"></div>
+        <div id="m1" class="mote"></div><div id="m2" class="mote"></div><div id="m3" class="mote"></div><div id="m4" class="mote"></div>
+        <div id="m5" class="mote"></div><div id="m6" class="mote"></div><div id="m7" class="mote"></div><div id="m8" class="mote"></div>
+        <img id="ov-vignette" class="ov" src="assets/light/vignette.png" alt="" />
+        <!-- effect pool -->
+        <div id="fx1" class="pr-fx"></div><div id="fx2" class="pr-fx"></div><div id="fx3" class="pr-fx"></div>
+        <div id="fx4" class="pr-fx"></div><div id="fx5" class="pr-fx"></div><div id="fx6" class="pr-fx"></div>
+        <div id="fx7" class="pr-fx"></div><div id="fx8" class="pr-fx"></div><div id="fx9" class="pr-fx"></div>
+        <div id="fx10" class="pr-fx"></div><div id="fx11" class="pr-fx"></div><div id="fx12" class="pr-fx"></div>
+      </div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="15" data-track-index="1" data-volume="0.5"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="15" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-amb" class="clip" src="assets/audio/ambience.wav" data-start="0" data-duration="15" data-track-index="3" data-volume="0.35"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const fxPool = Array.from({ length: 12 }, (_, i) => "#fx" + (i + 1));
+      const R = PixelReel(tl, window.PR_ATLAS, { base: "assets/pr/", fxPool, videoFps: 60 });
+
+      // dust motes drifting in the window light (deterministic paths, snapped to the art grid)
+      for (let i = 1; i <= 8; i++) {
+        const x0 = 112 + ((i * 37) % 84), y0 = 168 + ((i * 53) % 130), ph = i * 1.7, kf = [];
+        for (let k = 1; k <= 60; k++) {
+          const t = k / 60 * 15;
+          kf.push({ x: (x0 + Math.sin(t * 0.6 + ph) * 6 - t * 0.6) * 4, y: (y0 + t * 1.6 + Math.sin(t * 0.9 + ph) * 3) * 4, duration: 0.25, ease: "none" });
+        }
+        tl.fromTo("#m" + i, { x: x0 * 4, y: y0 * 4 }, { keyframes: kf, modifiers: { x: (v) => Math.round(parseFloat(v) / 4) * 4 + "px", y: (v) => Math.round(parseFloat(v) / 4) * 4 + "px" } }, 0);
+        for (let k = 0; k < 15 / 0.5; k++) tl.set("#m" + i, { opacity: [0, 0.5, 0.9, 0.5][(k + i) % 4] }, k * 0.5);
+      }
+
+      // ----- positions (art px, 270x480 grid) -----
+      // measured on the approved empty workshop (plate_taller v1); the door is the one drawn on the right wall
+      const P = { door: [244, 352], bench: [80, 240], offer: [134, 386], seat: [190, 386], sack: [150, 390],
+                  hands: [80, 150], printerOut: [98, 166], sackIn: [150, 364], printer: [98, 196] };
+      const S = (dx, dy) => [P.seat[0] + dx, P.seat[1] + dy];      // points relative to Papá Noel's seat
+
+      // ----- set, ambient loops -----
+      const garland = R.actor("#garland", "obj.garland", 135, 74);   garland.play(0, "obj.garland", { dur: 15 });
+      // props rendered from 3D (biblioteca/3d): real volume, light from the upper left, cast shadows
+      const tree = R.actor("#tree", "obj.tree3d", 205, 207, { cast: "#tree-cs" });   tree.play(0, "obj.tree3d", { dur: 15 });
+      const fan = R.actor("#fan", "obj.fan3d", 34, 382, { cast: "#fan-cs" });       fan.play(0, "obj.fan3d", { dur: 15 });
+      R.actor("#wreath", "obj.wreath", 243, 215);                // on the door drawn in the background
+      const printer = R.actor("#printer", "obj.printer3d_idle", ...P.printer, { cast: "#printer-cs" });   // right end of the bench: not hidden by the wizard
+      printer.play(0, "obj.printer3d_loop", { dur: 7.75 });       // already printing when the story starts
+      R.actor("#stool", "obj.stool3d", P.seat[0], P.seat[1] - 4, { cast: "#stool-cs" });
+      const sack = R.actor("#sack", "obj.sack3d", ...P.sack, { cast: "#sack-cs" });
+
+      // ----- 0-1.75 s : the door bursts open, Papá Noel staggers in and collapses on the stool -----
+      R.fx(0.02, "fx.fx_puff", 236, 330);
+      const papa = R.actor("#papa", "papa_noel.walk_hot_W", ...P.door, { shadow: "#papa-sh" });
+      papa.show(0.25); papa.z(0.25, 9);
+      papa.walk(0.25, 1.1, P.seat[0], P.seat[1], "papa_noel.walk_hot_W");
+      R.fx(0.4, "fx.fx_sweat", 240, 252, { loop: true, dur: 1.0 });
+      papa.play(1.35, "papa_noel.sit_plop_S", { fps: 10 }); papa.pop(1.55, 0.88);
+      sack.show(1.4); sack.frame(1.4, "obj.sack3d", 0); sack.pop(1.4, 0.7); R.fx(1.4, "fx.fx_puff", ...S(-9, 0));
+
+      const mago = R.actor("#mago", "mago.press_button_N", ...P.bench, { shadow: "#mago-sh" });
+      mago.play(0, "mago.press_button_N", { dur: 0.5 });
+      mago.play(0.5, "mago.turn_S_to_N", { reverse: true, fps: 8 });
+      mago.play(0.875, "mago.surprised_S");
+
+      // ----- 1.75-5 s : the wizard brings his mate, Papá Noel cools down -----
+      papa.play(1.75, "papa_noel.fan_hot_S", { dur: 1.95 });
+      R.fx(1.75, "fx.fx_sweat", ...S(12, -102), { loop: true, dur: 1.9 });
+      mago.walk(1.75, 1.45, P.offer[0], P.offer[1], "mago.walk_E");
+      mago.play(3.2, "mago.offer_mate_E");
+      mago.play(3.7, "mago.idle_S", { dur: 0.7 });
+      papa.play(3.7, "papa_noel.sip_mate_S", { fps: 8 });
+      papa.play(4.4, "papa_noel.refreshed_S", { fps: 7 });
+      R.fx(4.5, "fx.fx_sparkle", ...S(0, -90));
+      mago.play(4.4, "mago.sip_mate_S", { fps: 9 });
+
+      // ----- 5-6.9 s : empty sack, sad, idea -----
+      sack.hide(5.0);
+      papa.play(5.0, "papa_noel.sack_shake_S", { fps: 10 });
+      R.fx(5.15, "fx.fx_moth", ...S(0, -120), { loop: true, dur: 0.6 });
+      papa.play(5.8, "papa_noel.sad_S", { fps: 8 });
+      mago.play(5.8, "mago.thinking_S", { dur: 0.6 });
+      mago.play(6.4, "mago.idea_S");
+      R.fx(6.45, "fx.fx_idea", P.offer[0], P.offer[1] - 108);
+      sack.show(6.4);
+
+      // ----- 6.9-8.4 s : back to the printer -----
+      mago.walk(6.9, 0.55, P.bench[0], P.bench[1], "mago.walk_E", { flip: true });
+      mago.play(7.45, "mago.turn_S_to_N", { fps: 10 });
+      mago.play(7.75, "mago.press_button_N", { dur: 0.65, fps: 10 });
+      printer.play(7.75, "obj.printer3d_print", { fps: 20 });     // 13 frames: the gift grows layer by layer
+      papa.frame(7.7, "papa_noel.refreshed_S", 1);
+
+      // ----- 8.4-11.6 s : the gifts -----
+      mago.play(8.4, "mago.turn_S_to_N", { reverse: true, fps: 15 });
+      function ding(t) { printer.frame(t, "obj.printer3d_done", 0); printer.frame(t + 0.12, "obj.printer3d_idle", 0); R.fx(t, "fx.fx_sparkle", P.printer[0], 160); }
+      function give(t, ids, toss, spread) {      // item get above the head, then toss into the sack
+        ding(t - 0.15);
+        mago.play(t, "mago.item_get_S", { fps: 13 });
+        ids.forEach((id, i) => {
+          const it = R.actor("#it-" + id, "item." + id, P.hands[0] + (i - (ids.length - 1) / 2) * spread, P.hands[1], { scale: ids.length > 1 ? 0.5 : 1 });
+          it.show(t + 0.15); it.arc(toss + 0.06 + i * 0.03, 0.22, P.sackIn[0], P.sackIn[1], 40, 4); it.hide(toss + 0.32 + i * 0.03);
+        });
+        mago.play(toss, "mago.toss_E", { fps: 20 });
+        mago.frame(toss + 0.2, "mago.idle_S", 0);
+      }
+      give(8.6, ["cafe", "banana", "suculenta", "hamster"], 8.95, 22);
+      sack.frame(9.15, "obj.sack3d", 1); sack.pop(9.15, 0.86);
+      give(9.4, ["creeper"], 9.7, 0);
+      // rapid fire: the printer shoots eight more straight into the sack
+      mago.frame(10.0, "mago.item_get_S", 1);
+      printer.play(10.0, "obj.printer3d_rapid", { dur: 0.7 });    // one gift every 0.1 s
+      ["pokebox", "dragon", "f40", "garaje", "plegable", "hoja", "penarol", "nacional"].forEach((id, i) => {
+        const t = 10.0 + i * 0.1;
+        const it = R.actor("#it-" + id, "item." + id, ...P.printerOut, { scale: 0.75 });
+        it.show(t); it.arc(t, 0.3, P.sackIn[0], P.sackIn[1], 60, 4); it.hide(t + 0.3);
+      });
+      sack.frame(10.4, "obj.sack3d", 2); sack.pop(10.4, 0.86);
+      // TNT: the fuse sparkles, Papá Noel jumps, it goes into the sack and pops into confetti
+      give(10.85, ["tnt"], 11.35, 0);
+      R.fx(11.0, "fx.fx_sparkle", P.hands[0] + 6, P.hands[1] - 44, { loop: true, dur: 0.35 });
+      papa.play(10.85, "papa_noel.startled_S", { fps: 10 });
+      sack.frame(11.55, "obj.sack3d", 3); sack.pop(11.55, 0.8);
+      R.fx(11.55, "fx.fx_puff", P.sack[0], P.sack[1] - 30);
+      R.fx(11.58, "fx.fx_confetti", P.sack[0], P.sack[1] - 50);
+
+      // ----- 11.6-15 s : celebration, Papá Noel leaves, a calm mate -----
+      papa.play(11.6, "papa_noel.joy_jump_S");
+      mago.play(11.6, "mago.joy_jump_S");
+      R.fx(11.7, "fx.fx_confetti", 150, 230);
+      R.fx(11.9, "fx.fx_hearts", ...S(0, -114));
+      mago.play(12.35, "mago.idle_S", { dur: 0.95 });
+      sack.hide(12.8);
+      papa.play(12.8, "papa_noel.sack_shoulder_S");
+      papa.z(13.3, 8);
+      papa.walk(13.3, 0.45, P.door[0], P.door[1], "papa_noel.walk_sack_E");
+      papa.play(13.75, "papa_noel.wave_S", { dur: 0.25 });
+      papa.hide(14.0); R.fx(13.95, "fx.fx_puff", 236, 330);
+      mago.play(13.3, "mago.wave_S", { dur: 0.7 });
+      mago.play(13.95, "mago.sip_mate_S", { fps: 9 });
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

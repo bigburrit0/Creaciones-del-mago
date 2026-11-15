@@ -1,0 +1,208 @@
+{
+ "project": {
+  "name": "Ejemplo",
+  "scale_reference": "hero",
+  "style": {
+   "palette": [
+    "#150A34",
+    "#2E2160",
+    "#4B3A8E",
+    "#6A58B8",
+    "#C98A2B",
+    "#F2C14E",
+    "#F0D8B2",
+    "#F0C090",
+    "#E1AE73",
+    "#D9826A",
+    "#5A3424",
+    "#8A5638",
+    "#B08A5A",
+    "#E9D8B4",
+    "#FBF4E4",
+    "#2F5A32",
+    "#5C9A4A",
+    "#9BC46A",
+    "#7A1E22",
+    "#C0392B",
+    "#E86A4A",
+    "#2B4C7E",
+    "#4F86C6",
+    "#9CC9E8"
+   ],
+   "outline": "#150A34"
+  }
+ },
+ "grid": {
+  "art_canvas": [
+   270,
+   480
+  ],
+  "scale": 4,
+  "video": [
+   1080,
+   1920
+  ],
+  "fps_video": 30
+ },
+ "characters": {
+  "hero": {
+   "model": {
+    "name": "The Hero",
+    "height_px": 96,
+    "description": "a small friendly baker with a tall white chef hat, round face, blue apron over a cream shirt, brown boots. Chibi proportions. Colours: apron #2B4C7E #4F86C6, shirt #FBF4E4, skin #F0C090 #E1AE73, boots #5A3424, outline #150A34.",
+    "cells": [
+     "front three-quarter view facing the camera (S), standing",
+     "side view facing right (E), standing",
+     "back view (N), standing",
+     "front view (S) holding a loaf of bread with both hands"
+    ]
+   },
+   "placeholder": {
+    "body": "#2B4C7E",
+    "hat": "#FBF4E4",
+    "hat_band": null,
+    "beard": null,
+    "skin": "#F0C090",
+    "boots": "#5A3424"
+   },
+   "animations": [
+    {
+     "id": "idle_S",
+     "group": "idle",
+     "dir": "S",
+     "mode": "loop",
+     "fps": 4,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "default loop",
+     "poses": [
+      "neutral standing",
+      "chest up one pixel",
+      "neutral",
+      "chest down one pixel"
+     ]
+    },
+    {
+     "id": "walk_E",
+     "group": "locomotion",
+     "dir": "E",
+     "mode": "loop",
+     "fps": 8,
+     "mirror_to_W": true,
+     "priority": "P0",
+     "holds": null,
+     "use": "cross the room",
+     "poses": [
+      "right foot forward",
+      "body low",
+      "passing, body up",
+      "left foot forward",
+      "body low",
+      "passing, body up"
+     ]
+    },
+    {
+     "id": "surprised_S",
+     "group": "emotion",
+     "dir": "S",
+     "mode": "hold",
+     "fps": 8,
+     "mirror_to_W": false,
+     "priority": "P0",
+     "holds": null,
+     "use": "something unexpected",
+     "poses": [
+      "neutral",
+      "anticipation squash",
+      "jolt, eyes wide, hands up",
+      "eyes wide, hands up (hold)"
+     ]
+    }
+   ]
+  }
+ },
+ "sets": {
+  "shop": {
+   "name": "the bakery",
+   "plate": {
+    "id": "plate_shop",
+    "description": "a cosy bakery interior seen top-down three-quarter: back wall with bread shelves, a window in the centre, a door on the right wall, wooden floor, tiles at the bottom. No characters.",
+    "anchors_art": {
+     "door": [
+      238,
+      262
+     ],
+     "window": [
+      135,
+      96
+     ],
+     "bench_front": [
+      80,
+      240
+     ]
+    }
+   },
+   "objects": [
+    {
+     "id": "door_R",
+     "format": "char",
+     "mode": "states",
+     "fps": 8,
+     "priority": "P0",
+     "use": "entrances",
+     "description": "about 34x80 art px",
+     "poses": [
+      "closed",
+      "ajar",
+      "wide open"
+     ]
+    }
+   ]
+  }
+ },
+ "fx": [
+  {
+   "id": "fx_sparkle",
+   "format": "small",
+   "mode": "once",
+   "fps": 12,
+   "priority": "P0",
+   "use": "appear",
+   "poses": [
+    "tiny star",
+    "bigger star",
+    "biggest star with dots",
+    "fading dots"
+   ]
+  },
+  {
+   "id": "fx_puff",
+   "format": "small",
+   "mode": "once",
+   "fps": 12,
+   "priority": "P0",
+   "use": "poof",
+   "poses": [
+    "small cloud",
+    "bigger cloud",
+    "biggest cloud",
+    "dust dots"
+   ]
+  }
+ ],
+ "items": {
+  "format": "item",
+  "photos_dir": "photos/<id>.jpg",
+  "list": [
+   {
+    "id": "bread",
+    "description": "a golden loaf of bread"
+   },
+   {
+    "id": "cake",
+    "description": "a strawberry cake"
+   }
+  ]
+ }
+}

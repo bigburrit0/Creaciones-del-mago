@@ -1,0 +1,62 @@
+{
+ "id": "ejemplo",
+ "duration": 15,
+ "set": "shop",
+ "decorations": "",
+ "characters": {},
+ "uses": {
+  "hero": [
+   "idle_S",
+   "walk_E",
+   "surprised_S"
+  ],
+  "objects": [
+   "door_R"
+  ],
+  "fx": [
+   "fx_sparkle",
+   "fx_puff"
+  ],
+  "items": [
+   "bread"
+  ]
+ },
+ "positions_art": {
+  "door": [
+   238,
+   262
+  ],
+  "start": [
+   80,
+   240
+  ],
+  "center": [
+   135,
+   330
+  ]
+ },
+ "beats": [
+  {
+   "t": [
+    0,
+    1
+   ],
+   "hero": "idle_S"
+  },
+  {
+   "t": [
+    1,
+    2.2
+   ],
+   "hero": "walk_E to center"
+  },
+  {
+   "t": [
+    2.2,
+    3
+   ],
+   "hero": "surprised_S",
+   "fx": "fx_sparkle above the head"
+  }
+ ]
+}

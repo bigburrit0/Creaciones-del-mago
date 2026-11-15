@@ -1,0 +1,107 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo in the summer, hanging out in a friend's 3D-printing workshop: a big, jolly old man with a deep, slightly gravelly, warm voice. First line: a huge, slow, sleepy yawn, the kind you do before your first coffee. Second line: caught out and playing innocent, smug and cool in his sunglasses, a little offended, comic.",
+  "lines": [
+   [
+    "s1",
+    "Aaaaahhh…"
+   ],
+   [
+    "s2",
+    "¿Quién, yo?"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, presenting a quick top-five of gifts straight to camera like a fun TV host. Upbeat and quick, never slow. Each 'Para el que…' line has a knowing, teasing wink, as if he knows exactly which friend you are thinking of. Dramatic and theatrical on 'me muero'. Mischievous and slow on the banana line, leaving it hanging. Warm and inviting on the last line, a little challenge to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Un regalo para cada amigo que tenés."
+   ],
+   [
+    "m2",
+    "Para el que no arranca sin café."
+   ],
+   [
+    "m3",
+    "Para el que mata hasta los cactus."
+   ],
+   [
+    "m4",
+    "Para el que no sale de su casa."
+   ],
+   [
+    "m5",
+    "Para el que dice: ¡me muero!, por todo."
+   ],
+   [
+    "m6",
+    "Y para el que se hace el banana…"
+   ],
+   [
+    "m7",
+    "¿Cuál es tu amigo? Etiquetalo."
+   ]
+  ]
+ },
+ "_edits": {
+  "m7": {
+   "squeeze": [
+    0.77,
+    1.3,
+    0.22
+   ]
+  },
+  "s2": {
+   "squeeze": [
+    0.45,
+    0.9,
+    0.2
+   ]
+  },
+  "s1": {
+   "to": 1.5
+  }
+ },
+ "_cuts_from_take": {
+  "m1": [
+   0.1,
+   2.62
+  ],
+  "m2": [
+   3.38,
+   4.94
+  ],
+  "m3": [
+   5.51,
+   6.95
+  ],
+  "m4": [
+   7.25,
+   9.05
+  ],
+  "m5": [
+   9.62,
+   12.1
+  ],
+  "m6": [
+   12.55,
+   13.8
+  ],
+  "m7": [
+   14.72,
+   16.67
+  ],
+  "s1": [
+   0.2,
+   2.52
+  ],
+  "s2": [
+   7.22,
+   8.58
+  ]
+ }
+}

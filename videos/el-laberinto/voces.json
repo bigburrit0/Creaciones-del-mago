@@ -1,0 +1,45 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, looking at a big Greek-mythology chess set with white stone walls around the board: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. First line: lost and puzzled, following the walls with his finger, looking for the way out. Second line: amazed and delighted.",
+  "lines": [
+   [
+    "s1",
+    "¿Y por dónde se sale?"
+   ],
+   [
+    "s2",
+    "¡Qué tablero!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, showing a chess set from ancient Greece. First line: dramatic and grand, like a storyteller announcing a fight. Second line: completely deadpan and dry. Third line: proud, saying the numbers slowly and clearly. Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Minotauro contra Hércules."
+   ],
+   [
+    "m2",
+    "Es un ajedrez. Se sale ganando."
+   ],
+   [
+    "m3",
+    "Y este trae su tablero: cincuenta y dos por cincuenta."
+   ],
+   [
+    "m4",
+    "Comentá minotauro y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "s1": [
+   0.0,
+   2.38
+  ]
+ },
+ "_note": "the take added a laugh after s1 (2.5-3.7 s in the take): s1 re-cut by hand to end before it (take seconds), with the split's own trim filter. Every clip read back as written ('minotauro' once as 'mi notauro'; the subtitle spells MINOTAURO)."
+}

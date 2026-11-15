@@ -1,0 +1,58 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in Montevideo, at the beach on a summer afternoon, in flip-flops: a big, jolly old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. First line: happy and relaxed, setting up a chess game on his towel. Second line: a shout of alarm, a seagull just stole his king. Third line: triumphant and cheeky, to the seagull.",
+  "lines": [
+   [
+    "s1",
+    "¡Partidita en la playa!"
+   ],
+   [
+    "s2",
+    "¡Mi rey!"
+   ],
+   [
+    "s3",
+    "¡Ja! ¡Ahora no podés!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile, at the beach with his friend. First line: calm and practical, a little amused, showing a clever object; say every word clearly, especially 'pliega' and 'piezas' (pi-E-zas, the chess pieces). Last line: warm and inviting, straight to the viewer.",
+  "lines": [
+   [
+    "m1",
+    "Por eso, el de viaje: se pliega en un tubo de veinticuatro centímetros, y las piezas van adentro."
+   ],
+   [
+    "m2",
+    "¿Te vas de vacaciones? Comentá viaje y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "s1": [
+   0.0,
+   3.0
+  ],
+  "m1": [
+   0.0,
+   7.1
+  ],
+  "m2": [
+   7.1,
+   11.6
+  ]
+ },
+ "_edits": {
+  "m1": {
+   "squeeze": [
+    1.97,
+    2.44,
+    0.25
+   ]
+  }
+ },
+ "_note": "Santa's take added 'Uff,' before s1 and a laugh after it: s1 re-cut to end before the laugh (the subtitle keeps the 'Uff'). El Mago's first take said 'pinzas' for 'piezas' (two transcriptions): re-recorded with 'y las piezas van adentro'; the split then put the start of m2 in m1 and the take repeated m2 at the end: m1 and m2 re-cut by hand (take seconds), the first m2 kept (the shorter one); m1's pause after 'el de viaje' 0.47 -> 0.25 s (raw-clip seconds)."
+}

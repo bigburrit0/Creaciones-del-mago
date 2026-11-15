@@ -1,0 +1,31 @@
+{
+ "spans": {},
+ "frames": 1380,
+ "violationFrames": 0,
+ "kinds": {},
+ "firstViolations": [],
+ "jumps": [],
+ "determinism": [
+  [
+   4.8,
+   true
+  ],
+  [
+   6,
+   true
+  ],
+  [
+   7.5,
+   true
+  ],
+  [
+   9.9,
+   true
+  ],
+  [
+   16.5,
+   true
+  ]
+ ],
+ "pageErrors": []
+}

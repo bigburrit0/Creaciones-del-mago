@@ -1,0 +1,37 @@
+__pycache__/
+*.pyc
+# pixel-reel: generated files (rebuild with skills/pixel-reel/scripts)
+videos/*/placeholder-sheets/
+videos/*/hf/assets/
+videos/*/hf/.hyperframes/
+videos/*/hf/node_modules/
+# credentials: never commit (GEMINI_API_KEY lives only in the environment settings)
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+*credentials*.json
+*secret*
+client_secret*.json
+service-account*.json
+# pixel-reel: image-model candidates (approved sheets are copied to videos/biblioteca/sheets/)
+videos/biblioteca/candidates/
+videos/biblioteca/packs/
+# 3D: libraries and models copied by build.sh (re-downloadable), HyperFrames caches
+videos/experimentos/*/hf/lib/
+videos/experimentos/*/hf/assets/
+videos/experimentos/*/hf/.hyperframes/
+videos/**/.*.hf-transaction-*/
+videos/**/work-*-*/
+videos/*/hf3d/lib/
+videos/*/hf3d/assets/
+videos/*/hf3d/.hyperframes/
+videos/*/voz3d/_take_*.wav
+videos/*/hf3d-v2/lib/
+videos/*/hf3d-v2/assets/
+videos/*/hf3d-v2/.hyperframes/
+videos/*/qa.json
+videos/*/qa.log
+videos/*/render.log

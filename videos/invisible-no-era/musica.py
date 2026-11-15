@@ -17,4 +17,5 @@ S.fx("scratch", 10.93, 0.75)                                                 # t
 S.fx("silbido", 14.72, 0.5)                                                  # both whistle, innocently
 S.fx("crickets", 16.0, 0.5, d=1.0)
 S.fx("rizz", 22.7, 0.65, d=0.6)                                              # "¿Soy yo?" ... smug
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

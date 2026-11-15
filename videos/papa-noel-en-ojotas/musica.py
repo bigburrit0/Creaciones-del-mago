@@ -16,4 +16,5 @@ final_chord(S, 17.9, ["C4", "E4", "G4"], inst=marimba, g=0.5)
 S.old_sfx("cues3d.json", skip=("item_get", "victory", "boom", "sad", "surprise"))
 S.fx("cash", 10.4, 0.55)                                                     # the gifts come out: ka-ching
 S.fx("confetti", 12.2, 0.8, d=0.45)                                                 # the TNT bursts into confetti
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

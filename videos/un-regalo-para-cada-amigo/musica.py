@@ -16,4 +16,5 @@ S.fx("uhoh", 7.63, 0.5)                                                      # t
 S.fx("slide_down", 13.6, 0.55, d=0.4)                                        # "¡me muero!" ... the faint
 S.fx("rizz", 16.68, 0.7, d=0.8)                                              # the banana: "¿Quién? ¿Yo?" ... smug
 S.fx("chime", 22.85, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

@@ -18,4 +18,5 @@ S.old_sfx("cues.json", skip=("lur", ("ding", 13.9), ("chime", 13.95), "surprise"
 S.fx("tada", T["dawn"] - 0.25, 0.6)                                          # dawn: all 32 pieces
 S.fx("rimshot", 18.09, 0.55, fast=True)                                      # "¡una más!" ba-dum-tss
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

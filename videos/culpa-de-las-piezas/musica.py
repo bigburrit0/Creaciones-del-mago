@@ -18,4 +18,5 @@ S.fx("dundun", 2.58, 0.6)                                                    # h
 S.fx("boom", 6.98, 0.85)                                                     # "Las piezas no pierden. Vos sí." ... boom
 S.fx("ding", 16.36, 0.45)                                                    # after the cut-off date
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

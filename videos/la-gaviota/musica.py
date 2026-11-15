@@ -24,4 +24,5 @@ S.fx("scratch", T["grab"] + 0.06, 0.8)                                       # t
 for i, p in enumerate(pecks): S.fx("bonk", p + 0.08, 0.85, 1.25 + 0.08 * i)   # three bonks on the closed tube
 S.fx("sadtrombone", T["leave"] + 0.05, 0.55)                                 # the gull gives up
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

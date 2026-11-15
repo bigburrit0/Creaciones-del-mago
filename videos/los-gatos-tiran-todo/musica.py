@@ -57,4 +57,5 @@ S.fx("boom", T["m2"] + 0.82, 0.9)                                      # "Para u
 S.fx("whoosh", T["hop"] - 0.29, 0.25); S.fx("whoosh", T["cta"] - 0.09, 0.3)
 S.fx("toc", T["proof"] + 0.37, 0.5, 0.8)
 S.fx("chime", T["card"] + 0.15, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

@@ -35,3 +35,11 @@ videos/*/hf3d-v2/.hyperframes/
 videos/*/qa.json
 videos/*/qa.log
 videos/*/render.log
+
+# product galleries: the rendered clip, its page assets and the one-photo backup of each reel (rebuild with biblioteca/galeria.py)
+videos/*/galeria.mp4
+videos/*/galeria/assets/
+videos/*/galeria/gsap.min.js
+videos/*/galeria/.hyperframes/
+videos/*/*_sin_galeria.mp4
+videos/*/*.mp4.tmp.mp4

@@ -19,4 +19,5 @@ S.old_sfx("cues.json", skip=("boom", "lur", "sting", ("chime", T["card"])))
 S.fx("boom", T["tip"] + 0.03, 0.95)                                          # the trending boom: checkmate
 S.fx("rimshot", T["react"], 0.6)                                             # ba-dum-tss after the mate joke
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

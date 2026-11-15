@@ -1,0 +1,44 @@
+{
+ "t0": 18.2,
+ "t1": 20.75,
+ "title": "Así son<br>de verdad",
+ "sub": "Ajedreces impresos en 3D · Montevideo",
+ "flash": true,
+ "slides": [
+  {
+   "src": "vikingos",
+   "label": "vikingo",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "vikingos",
+   "label": "el caballo-dragón",
+   "zoom": 1.8,
+   "fx": 0.55,
+   "fy": 0.55
+  },
+  {
+   "src": "medieval-p",
+   "label": "medieval",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "medieval-p",
+   "label": "el caballero",
+   "zoom": 1.7,
+   "fx": 0.5,
+   "fy": 0.45
+  },
+  {
+   "src": "medieval",
+   "label": "en tus colores",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  }
+ ]
+}

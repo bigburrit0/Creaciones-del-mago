@@ -1,0 +1,30 @@
+{
+ "t0": 15.25,
+ "t1": 17.4,
+ "title": "Así es<br>de verdad",
+ "sub": "Tamaño reglamentario. Se arma por partes y no trae piezas",
+ "flash": true,
+ "slides": [
+  {
+   "src": "tablero",
+   "label": "el tablero, armado",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "tablero",
+   "label": "blancas y negras",
+   "zoom": 1.7,
+   "fx": 0.38,
+   "fy": 0.25
+  },
+  {
+   "src": "tablero",
+   "label": "el marco",
+   "zoom": 1.7,
+   "fx": 0.72,
+   "fy": 0.62
+  }
+ ]
+}

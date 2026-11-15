@@ -1,0 +1,37 @@
+{
+ "t0": 14.95,
+ "t1": 17.15,
+ "title": "Así es<br>de verdad",
+ "sub": "Con su tablero de 52 × 50 cm, muros y templo incluidos",
+ "flash": true,
+ "slides": [
+  {
+   "src": "grecia",
+   "label": "Minotauro contra Hércules",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "grecia",
+   "label": "el Minotauro",
+   "zoom": 2.2,
+   "fx": 0.11,
+   "fy": 0.24
+  },
+  {
+   "src": "grecia",
+   "label": "el templo",
+   "zoom": 2.0,
+   "fx": 0.57,
+   "fy": 0.3
+  },
+  {
+   "src": "grecia",
+   "label": "Hércules y los suyos",
+   "zoom": 1.9,
+   "fx": 0.78,
+   "fy": 0.42
+  }
+ ]
+}

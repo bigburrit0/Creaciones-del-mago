@@ -1,0 +1,30 @@
+{
+ "t0": 17.7,
+ "t1": 19.9,
+ "title": "Así es<br>de verdad",
+ "sub": "Se pliega en un tubo de 24 cm con las piezas adentro",
+ "flash": true,
+ "slides": [
+  {
+   "src": "plegable",
+   "label": "el ajedrez de viaje",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "plegable",
+   "label": "el tubo",
+   "zoom": 1.7,
+   "fx": 0.32,
+   "fy": 0.38
+  },
+  {
+   "src": "plegable",
+   "label": "las piezas, adentro",
+   "zoom": 1.7,
+   "fx": 0.6,
+   "fy": 0.78
+  }
+ ]
+}

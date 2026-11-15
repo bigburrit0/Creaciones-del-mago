@@ -16,4 +16,5 @@ for q in ("q2", "q3", "q4"): S.fx("ding", T[q] - 0.03, 0.4, 1.2)            # qu
 S.fx("slide_down", 15.33, 0.6, d=0.3)                                        # the list unrolls to the floor
 S.fx("rimshot", 19.5, 0.6)                                                   # "Las demás… en comentarios." ba-dum-tss
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

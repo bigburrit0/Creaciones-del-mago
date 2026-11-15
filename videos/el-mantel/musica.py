@@ -24,4 +24,5 @@ S.fx("bonk", T["tip"] + 0.27, 0.75)                                   # ... and 
 S.fx("sparkle", T["snap"] + 0.05, 0.5)                                # El Mago's magic
 S.fx("ding", 14.95, 0.45)                                             # after the cut-off date
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

@@ -1,0 +1,30 @@
+{
+ "t0": 14.8,
+ "t1": 17.0,
+ "title": "Así son<br>de verdad",
+ "sub": "Los gatos de un lado, los perros del otro",
+ "flash": true,
+ "slides": [
+  {
+   "src": "perros-gatos",
+   "label": "el bando de los perros",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "perros-gatos",
+   "label": "los peones",
+   "zoom": 1.8,
+   "fx": 0.4,
+   "fy": 0.8
+  },
+  {
+   "src": "perros-gatos",
+   "label": "la corte",
+   "zoom": 1.8,
+   "fx": 0.45,
+   "fy": 0.35
+  }
+ ]
+}

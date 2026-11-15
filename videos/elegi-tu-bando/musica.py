@@ -17,4 +17,5 @@ S.fx("sparkle", T["kingCU"] - 0.02, 0.5)                                     # t
 S.fx("rizz", 9.4, 0.7, d=0.62)                                               # "¡Ese rey soy yo!" ... the smug glint
 S.fx("rimshot", 11.87, 0.55, fast=True)                                      # "Bueno… vikingo sos." ba-dum-tss
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

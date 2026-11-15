@@ -1,0 +1,44 @@
+{
+ "t0": 18.4,
+ "t1": 20.9,
+ "title": "Así son<br>de verdad",
+ "sub": "Clickers y llaveros impresos en 3D · Montevideo",
+ "flash": true,
+ "slides": [
+  {
+   "src": "cafe",
+   "label": "café",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "suculenta",
+   "label": "suculenta",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "hamster",
+   "label": "hámster",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "calavera",
+   "label": "calavera",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "banana",
+   "label": "banana",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  }
+ ]
+}

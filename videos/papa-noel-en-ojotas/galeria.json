@@ -1,0 +1,48 @@
+{
+ "t0": 17.9,
+ "t1": 20.1,
+ "title": "Regalos<br>impresos en 3D",
+ "sub": "¡Pedí el tuyo! · Montevideo",
+ "flash": false,
+ "slides": [
+  {
+   "src": "osito",
+   "label": "osito",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "hamster",
+   "label": "hámster",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "banana",
+   "label": "banana",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "cafe",
+   "label": "café",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "rana",
+   "label": "ranita",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  }
+ ],
+ "mp4s": [
+  "papa-noel-en-ojotas-3d.mp4",
+  "papa-noel-en-ojotas-3d-v2.mp4"
+ ]
+}

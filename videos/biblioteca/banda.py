@@ -376,6 +376,11 @@ class Song:
         if i < self.n: n = min(len(y), self.n - i); self.sfx[i:i + n] += y[:n] * g
         self.fxlog.append((round(t, 3), OLD.get(name, name), allow_on_word))
     def stop(self, t0, t1, ramp=0.03): self.stops.append((t0, t1, ramp))
+    def gallery_swipes(self, path="galeria_cambios.json", g=0.22):
+        """a soft swipe on each change of the real-photo gallery (biblioteca/galeria.py), unless a line is being spoken"""
+        if not os.path.exists(path): return
+        for t in json.load(open(path))["changes"]:
+            if not any(a - 0.1 < t < b + 0.05 for a, b, _ in self.voices): self.fx("whoosh", t - 0.05, g, 1.5)
     def old_sfx(self, path, skip=(), gain=1.0, only_before=None, avoid_words=True):
         """the reel's existing action-synced effects (cues.json), each re-voiced with the new sounds (OLD map); skip names or (name, t) pairs"""
         for c in json.load(open(path)).get("sfx", []):

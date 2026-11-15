@@ -27,4 +27,5 @@ S.fx("crickets", 6.45, 0.6, d=0.42)                                         # "�
 S.fx("rimshot", T["m2"] + 2.5, 0.6, fast=True)                              # "Se sale ganando." ba-dum-tss
 S.fx("tada", 14.66, 0.55)                                                   # "¡Qué tablero!" -> the real photo
 S.fx("chime", T["card"] + 0.1, 0.5)
+S.gallery_swipes()                                                           # the real photos changing
 S.write()

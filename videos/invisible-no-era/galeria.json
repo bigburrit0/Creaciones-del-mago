@@ -1,0 +1,44 @@
+{
+ "t0": 24.45,
+ "t1": 26.45,
+ "title": "Clickers<br>y llaveros",
+ "sub": "Para el amigo invisible · ¡Pedí el tuyo!",
+ "flash": false,
+ "slides": [
+  {
+   "src": "cafe",
+   "label": "café",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "banana",
+   "label": "banana",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "calavera",
+   "label": "calavera",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "hamster",
+   "label": "hámster",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  },
+  {
+   "src": "suculenta",
+   "label": "suculenta",
+   "zoom": 1,
+   "fx": 0.5,
+   "fy": 0.5
+  }
+ ]
+}

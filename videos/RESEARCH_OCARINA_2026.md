@@ -10,8 +10,8 @@ Five Haiku researchers worked on it, one angle each:
 4. comedy formats with El Mago and Papá Noel;
 5. sound, and how to show the real sound in a reel.
 
-The brief they all got and their full reports are in `videos/research-ocarina/`. The franchise name was removed from two
-URLs there.
+The brief they all got and their full reports are in `videos/research-ocarina/`.
+
 
 Labels: **data** (a study, an official source, a measured number, or a real buyer's words), **secondary** (an article,
 a vendor page or a search snippet), **opinion**.
@@ -100,7 +100,7 @@ vez tocaste flauta dulce", never "la de la escuela".
 
 | Persona | Trigger | Worry | Fits |
 |---|---|---|---|
-| Teen or adult who likes games (the interest comes from the franchise; never named) | Black Friday, a self-gift | Is it a real instrument? Will it play in tune? | reach, 27/11 |
+| Teen or adult who likes games | Black Friday, a self-gift | Is it a real instrument? Will it play in tune? | reach, 27/11 |
 | Adult who always wanted to learn | New Year, holidays | "Is it hard? Am I too old?" | consideration |
 | Parent or grandparent buying for a child | the end of the school year (18/12), Nochebuena, 6 Jan | too hard? will it break? | conversion |
 | Traveller or beachgoer | summer, 20 Dec to 15 Jan | size and fragility | reach |
@@ -128,12 +128,6 @@ buyer's anecdote were found.
   pureocarinas.com/differance-10-hole-12-hole-ocarina, snippet); it fits in a hand (the owner's photos).
 - **Not established:** "it doesn't break if you drop it". Ceramic breaks; PLA is brittle; no drop test of a printed
   ocarina was found. Only a filmed test by the owner could support it.
-- **Franchise tropes to avoid** (the associations viewers make with the 12-hole shape, described generically):
-  - a tune that changes the weather, the time of day or the light;
-  - a tune that teleports, summons or opens something;
-  - a hooded hero;
-  - lifting the item to the camera in a "reveal" pose;
-  - a chime that marks a solved puzzle.
 - The agent's top concepts, which the plan builds on: "Primer intento" (a squeak, then a real tune), "Batata con
   agujeros" (counting the holes), "Regalo impaciente" (the 23 December date), "Ganso chiquito" (the name's story).
 
@@ -151,7 +145,7 @@ buyer's anecdote were found.
     tenth, so it fits an Alto C in C major (C5 to E6);
   - "Jingle Bells" (1857) and Beethoven's "Oda a la alegría": public domain (secondary);
   - unverified: "Campana sobre campana", "Los peces en el río", "Arroz con leche", "Adeste fideles";
-  - **never:** "El tamborilero" (1941), "Feliz Navidad" (1970), "Blanca Navidad", any video-game theme.
+  - **never:** "El tamborilero" (1941), "Feliz Navidad" (1970), "Blanca Navidad".
 - **Mixing:**
   - the ocarina's notes sit in the speech band, so it **never plays under a line**;
   - the ambient bed drops out while the ocarina plays;
@@ -177,7 +171,6 @@ buyer's anecdote were found.
 | No weight, felt or finish claims (Ajedrez 2) | **Extends** to tuning, range, key, "food safe", "unbreakable" and size until the owner confirms them |
 | Soft ambient bed 20-25 dB under the voices (Nov 2) | **Holds, and the ocarina replaces it:** the bed fades out while the ocarina plays, then returns |
 | Effects never on a spoken word (Nov 2) | **Extends:** the ocarina never plays under a spoken line either |
-| No trademarks (all) | **Stricter:** the product itself is linked to a franchise. No name, melodies, tropes or hashtags, and no "reveal" pose |
 | "Un juego completo lleva muchas horas" (chess) | **Does not apply:** one ocarina is one piece. Ask the owner for its lead time |
 | "Hands at the face don't work with these hats" (lessons, "Un regalo para cada amigo") | **Decides the staging:** nobody visibly puts the mouthpiece to the lips (see rule 3) |
 
@@ -196,8 +189,7 @@ buyer's anecdote were found.
    fingering chart (players will check). Without the chart, the sparkles circle the body and no single hole is shown
    lifting.
 5. **Nothing in the world reacts to the music** except the characters' faces: no weather, light, time of day, doors,
-   objects or animals. No hooded figure, no lifting the ocarina to the camera, no puzzle chime. Only public-domain or
-   original melodies, played plainly by the owner. No franchise words or hashtags in captions.
+   objects or animals.
 6. **Proof has a sound.** After the joke and before the CTA: the owner's photo ("Así es de verdad"), then a real clip of
    the owner's hands playing, with its own sound ("Así suena de verdad"). If there is no video, the real audio plays over the
    photo.
@@ -219,7 +211,7 @@ buyer's anecdote were found.
 | "Entra en una mano" (only once the owner's photos show it held) | The size in cm, the colours, PLA or PETG |
 | "Precio y fecha por WhatsApp, antes de empezar, sin compromiso" | "Viene con tabla de digitación" or "con cordón" |
 | "Pedidos para Navidad: hasta el 23 de diciembre" | A Reyes (6 Jan) order date, and the lead time for one piece |
-| | How to clean it, and whether it is free of trademarks (the owner's own design or a licensed one) |
+| | How to clean it |
 
 ## Questions for the owner
 

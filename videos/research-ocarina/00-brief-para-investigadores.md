@@ -17,11 +17,6 @@ Not yet known: the key (for example Alto C), the range, the material (PLA or PET
 available, whether it is tuned and tested before delivery, and whether a fingering chart or a cord comes with it. Never
 assume any of these.
 
-**Trademark rule (strict).** The 12-hole ocarina is strongly associated with a famous video-game franchise. In your
-report NEVER write that franchise's name, its characters, its song titles or its game mechanics by name: write
-"[the franchise]" instead. The shop will never use its name, melodies or logos, and never imply a licence. You MAY
-note where buyer interest comes from that association, in those neutral words.
-
 **Shop rules for the reels:**
 - the product is named in words in frame 1;
 - one joke that a non-player gets in 3 s and that proves a real feature;

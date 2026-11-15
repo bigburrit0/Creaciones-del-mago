@@ -21,7 +21,7 @@ If the owner later sends the photos and a recording, swap them in (the plan belo
 - one joke, which a non-player gets in 3 s and which proves a real feature;
 - real photos, then ONE comment CTA that rewards the comment with price and date;
 - honest urgency: the last day to order for Christmas is 23 December, never a delivery promise;
-- no prices, weights, finish claims or trademarks;
+- no prices, weights or finish claims;
 - first person singular, Rioplatense "vos";
 - soft ambient music, with effects never on a spoken word.
 
@@ -33,8 +33,7 @@ If the owner later sends the photos and a recording, swap them in (the plan belo
 3. **The mouthpiece never reaches a face** (beards, brims, the contact guard). The ocarina plays by El Mago's magic: his
    gesture plus sparkles on the holes. Papá Noel's attempts are POV inserts at chest height.
 4. **Holes follow the real fingering** from the owner's chart. Without a chart, the sparkles circle the body.
-5. **Nothing in the world reacts to the music** (no weather, light, time, doors, objects). No hooded figure, no lifting
-   it to the camera, no puzzle chime. Only public-domain or original melodies. No franchise words or hashtags.
+5. **Nothing in the world reacts to the music** (no weather, light, time, doors, objects).
 6. **Proof has a sound:** the owner's photo ("Así es de verdad"), then a real clip of the owner's hands playing
    ("Así suena de verdad").
 7. **The black piece needs light:** day presets, a lit wall or the sky behind it, a rim light.
@@ -229,7 +228,6 @@ delivery date.
   - a price, a phone number in the video, or a delivery promise;
   - "afinada" without the owner's check;
   - "apta para la boca", "irrompible", "suena como cerámica", "dos octavas" or "hecho a mano";
-  - the franchise, its songs, or game words or hashtags;
   - "envío gratis a todo Uruguay".
 - The DM asks "¿para quién es?" and, for a beginner, offers the chart if there is one.
 

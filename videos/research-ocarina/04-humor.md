@@ -30,19 +30,6 @@ True in general (confirm for our model):
 
 Needs owner confirmation (never assume): key (Alto C or other), range, tuning and whether it is tested before delivery, material (PLA or PETG), size in cm, colours, whether a fingering chart or cord is included.
 
-## 4. Franchise tropes to avoid
-
-Viewers of [the franchise] associate the 12-hole shape with these, so our scripts must not use them:
-- A tune that changes the weather or the time of day. Search results on the song effects of [the franchise] describe exactly this. [secondary] (URLs omitted: they carry the title)
-- A tune that warps or teleports someone. Same source.
-- A tune that summons or opens something.
-- A hooded or cloaked hero, and a mystical "lift the item to the camera" reveal pose.
-- A specific sound cue that solves a puzzle.
-
-Specific risk to our own idea: a floating ocarina that plays itself reads as a magic song. Keep the magic to sparkles on the holes. Nothing in the world changes: no weather, no light, no time, no door. The ocarina never moves anything or anyone. Avoid the words "canción mágica" and "tocá y pasa algo" in the script. [opinion]
-
-Buyer interest in the 12-hole shape comes partly from its association with [the franchise]. [secondary] Search results show a spike in music-store interest after that game came out, but no sales data for the instrument itself. [opinion] The mention is for context only; the reels never name or imply the franchise.
-
 ## 5. Concepts (all [opinion])
 
 General rules for every concept: the ocarina plays in beats with no dialogue on top (its notes share the speech band); no sound effect under a spoken word; product named in words in the first 1.5 s; no smoke; no prop passes through anything; El Mago's magic is gesture plus sparkles. Mouthpiece is never at the lips: use a close-up insert at chest height or a POV shot.

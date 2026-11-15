@@ -49,3 +49,7 @@ The owner found the music-box version too empty and asked for piano, percussion,
 groove, the bass, a detuned saw pad and a theremin that carries the melody in the gaps between spoken lines (out under the
 voices; the piano carries it there). Everything ducks under the voices and is out under the ocarina; +2.5 dB over the old
 bed. Levels: music -22.1 dB under the voices, -11.9 dB in the gaps; -14.1 LUFS; every line clear in the mix transcription.
+
+### Exact notes (2026-11-15, fourth mix)
+
+The band now plays the owner's exact transcription (`../biblioteca/partituras/transcripciones-del-duenio.txt`): score args `p01-la-menor-130 5-24 1.0`. -14.1 LUFS; every line clear.

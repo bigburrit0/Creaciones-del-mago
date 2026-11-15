@@ -26,7 +26,7 @@ R = [  # folder, title, files, length, proposed date, caption source, DM source,
 ]
 out = ["# Creaciones del Mago: todos los reels con su copy", "",
        "Están ordenados por la fecha de publicación que propusimos. Cada caption está copiado tal cual de su `GUION.md`.",
-       "Los cuatro primeros tenían fecha antes del 15/11: si todavía no los publicaste, conviene moverlos (ver al final).", ""]
+       "Los tres primeros tenían fecha antes del 15/11: si todavía no los publicaste, conviene moverlos (ver al final).", ""]
 for k, (folder, title, files, dur, date, cap, dm, note) in enumerate(R, 1):
     out += [f"## {k}. {title}", "", f"- **Archivo:** {', '.join('`' + folder + '/' + f + '`' for f in files)} ({dur}, 1080 × 1920)", f"- **Fecha propuesta:** {date}", ""]
     out += ["**Caption**", "", "```", block_after(*cap), "```", ""]

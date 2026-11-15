@@ -1,7 +1,7 @@
 # Creaciones del Mago: todos los reels con su copy
 
 Están ordenados por la fecha de publicación que propusimos. Cada caption está copiado tal cual de su `GUION.md`.
-Los cuatro primeros tenían fecha antes del 15/11: si todavía no los publicaste, conviene moverlos (ver al final).
+Los tres primeros tenían fecha antes del 15/11: si todavía no los publicaste, conviene moverlos (ver al final).
 
 ## 1. ¿Vikingo o caballero?
 

@@ -25,7 +25,8 @@ for hf3d, mp4 in jobs:
             if os.path.exists(src): subprocess.run(["cp", src, os.path.join(hf3d, "assets", "audio", s)])
     page = os.path.join(hf3d, "index.html"); html = open(page, encoding="utf-8").read()
     mv = float(re.search(r'id="aud-music"[^>]*data-volume="([0-9.]+)"', html).group(1))
-    under, gaps, _ = level(hf3d); nv = round(min(1.0, max(0.12, mv * 10 ** ((TARGET - under) / 20))), 3)
+    under, gaps, _ = level(hf3d); GAP = float(os.environ.get("GAP_DB", "-10"))      # both: ~22 dB under the voices, never above -10 dB in the gaps
+    nv = round(min(1.0, max(0.12, mv * min(10 ** ((TARGET - under) / 20), 10 ** ((GAP - gaps) / 20)))), 3)
     html = re.sub(r'(id="aud-music"[^>]*data-volume=")[0-9.]+(")', lambda m: m.group(1) + str(nv) + m.group(2), html); open(page, "w", encoding="utf-8").write(html)
     under, gaps, line = level(hf3d); print(os.path.basename(hf3d), "music volume", mv, "->", nv, "|", line)
     out = os.path.join(SCR, os.path.basename(mp4).replace(".mp4", "_new.mp4"))

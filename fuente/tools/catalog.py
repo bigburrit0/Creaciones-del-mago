@@ -171,9 +171,12 @@ SHELVES = [
 # Más fotos de un producto: se ven en su ventana (tocando la foto). La primera es la de la tarjeta.
 # Cada una: (archivo en assets/p sin .webp, qué se ve).
 FOTOS = {
-  "medieval": [("medieval", "Negro contra dorado (fondo retocado)"), ("medieval-2", "Gris contra dorado, de cerca"),
-               ("medieval-3", "Gris contra blanco"), ("medieval-4", "Plateado contra negro"),
-               ("medieval-5", "Gris contra dorado"), ("medieval-d", "Dorado y gris, en un tablero de madera")],
+  "medieval": [("medieval", "Gris contra negro, en el tablero rompecabezas de borde dorado"), ("medieval-2", "El bando gris"),
+               ("medieval-3", "El bando negro"), ("medieval-4", "El rey: corona, armadura y espada"),
+               ("medieval-5", "El caballo: un caballero con armadura"), ("medieval-6", "La dama, con corona y capa"),
+               ("medieval-7", "El alfil: un obispo con mitra y báculo"), ("medieval-8", "El peón: soldado con espada y escudo"),
+               ("medieval-9", "Ya vendido: negro contra dorado (fondo retocado)"), ("medieval-10", "Ya vendido: gris contra blanco"),
+               ("medieval-11", "Ya vendido: plateado contra negro")],
   "vikingos": [("vikingos", "Dorado contra gris, en el tablero rompecabezas (fondo retocado)"), ("vikingos-2", "Blanco contra negro"),
                ("vikingos-d", "Foto del diseñador")],
   "perros-gatos": [("perros-gatos", "Los perros, en amarillo"), ("perros-gatos-2", "Los gatos, en gris"),

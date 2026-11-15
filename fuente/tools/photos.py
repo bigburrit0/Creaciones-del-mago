@@ -2,6 +2,7 @@
 # flags: "m" = foto de celular, se retoca (ver imgs.py) · "g" = foto de galería, sin versión de 32 px
 import os
 V = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'vendidos') + os.sep
+E = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'estudio') + os.sep
 P = "/mnt/user-data/uploads/creaciones del mago/Proyecto 3D/"
 X = "/mnt/user-data/uploads/creaciones del mago/Pics/"
 PHOTOS = {
@@ -111,11 +112,18 @@ PHOTOS = {
   "job-penarol": (X+"IMG_7082.JPG", .5, .5, 1.0),
   # ajedrez vendidos (fotos propias, 7/11/2026). La primera de cada uno va en la tarjeta,
   # las que terminan en -2, -3... se ven en la ventana del producto.
-  "medieval":    (V+"medieval-negro-dorado.jpg", .5, .55, 1.0, "m"),
-  "medieval-2":  (V+"medieval-gris-dorado-detalle.jpg", .42, .55, 1.1, "mg"),
-  "medieval-3":  (V+"medieval-gris-blanco.jpg", .52, .5, 1.05, "mg"),
-  "medieval-4":  (V+"medieval-plateado-negro.jpg", .5, .5, 1.05, "mg"),
-  "medieval-5":  (V+"medieval-gris-dorado.jpg", .5, .55, 1.0, "mg"),
+  # medieval: fotos de estudio (15/11/2026) primero, después juegos vendidos en otros colores
+  "medieval":    (E+"medieval-gris-negro-juego.jpg", .5, .5, 1.0),
+  "medieval-2":  (E+"medieval-gris-costado.jpg", .5, .5, 1.0, "g"),
+  "medieval-3":  (E+"medieval-negro-costado.jpg", .5, .5, 1.0, "g"),
+  "medieval-4":  (E+"medieval-rey.jpg", .498, .491, 1.484, "g"),   # recorte: atrás hay peones que no son de este juego
+  "medieval-5":  (E+"medieval-caballo.jpg", .5, .5, 1.0, "g"),
+  "medieval-6":  (E+"medieval-dama.jpg", .5, .5, 1.0, "g"),
+  "medieval-7":  (E+"medieval-alfil-2.jpg", .5, .5, 1.0, "g"),
+  "medieval-8":  (E+"medieval-peon.jpg", .5, .5, 1.0, "g"),
+  "medieval-9":  (V+"medieval-negro-dorado.jpg", .5, .55, 1.0, "mg"),
+  "medieval-10": (V+"medieval-gris-blanco.jpg", .52, .5, 1.05, "mg"),
+  "medieval-11": (V+"medieval-plateado-negro.jpg", .5, .5, 1.05, "mg"),
   "vikingos":    (V+"vikingos-dorado-gris-tablero-1.jpg", .5, .5, 1.0, "m"),
   "vikingos-2":  (V+"vikingos-blanco-negro.jpg", .5, .45, 1.0, "mg"),
   "perros-gatos":   (V+"perros-gatos-perros-1.jpg", .55, .55, 1.05, "m"),

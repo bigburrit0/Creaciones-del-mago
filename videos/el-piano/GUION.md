@@ -11,7 +11,7 @@ Papá Noel llegó a la rambla empujando un piano. Yo llegué con una ocarina de 
 Ocarina impresa en 3D en Montevideo: 10 agujeros arriba y 2 para los pulgares.
 ¿Entra en una mano? En una mano. Y va a todos lados.
 La hago a pedido.
-El video es una animación: la ocarina es una ilustración 3D y el sonido es digital.
+El video es una animación.
 ¿Qué te llevás a la rambla? Comentá RAMBLA y te paso precio y fecha.
 Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso.
 Envío gratis solo en La Unión, La Blanqueada y parte de Buceo; mando a todo Uruguay.
@@ -54,3 +54,7 @@ bed. Levels: music -24.9 dB under the voices, -13.3 dB in the gaps; -14.1 LUFS; 
 ### Exact notes (2026-11-15, fourth mix)
 
 The band now plays the owner's exact transcription (`../biblioteca/partituras/transcripciones-del-duenio.txt`): score args `p04-sol-menor-60 1-10 1.0`. -14.1 LUFS; every line clear.
+
+### No badge (2026-11-15)
+
+The owner asked to remove the "Sonido digital" badge and the "Ilustración 3D · sonido digital" line ("queda super implícito"); the caption keeps "El video es una animación."

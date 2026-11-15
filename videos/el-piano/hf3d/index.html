@@ -56,13 +56,11 @@
       <div id="vig"></div>
       <div id="flash"></div>
       <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
-      <div id="snd">♪ Sonido digital</div>
-      <div id="subs"></div>
+            <div id="subs"></div>
       <div id="prod">
         <div class="tt">Ocarina<br>de 12 agujeros</div>
         <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Entra en una mano</div>
         <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Impresa en 3D</div>
-        <div class="st">Ilustración 3D · sonido digital</div>
       </div>
       <div id="card"><div class="k0">¿Qué te llevás a la rambla?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá RAMBLA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
       <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="23.05" data-track-index="1" data-volume="0.22"></audio>
@@ -95,39 +93,61 @@
       await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
       const NOTES = await (await fetch("assets/oca/rambla.json")).json();
 
-      // ---------- the rambla: the promenade's paving, the low wall, the river-sea, the sky with the city across the bay, a bench, a lamp post ----------
-      scene.fog.color.set("#EBD9C8"); scene.fog.density = 0.02; scene.background = new THREE.Color("#F2D6BC");
-      const paveTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#CBB89A"; g.fillRect(0, 0, w, h); g.fillStyle = "#B9A585";
-        for (let y = 0; y < h; y += 16) { g.fillRect(0, y, w, 2); for (let x = (y / 16) % 2 ? 8 : 24; x < w; x += 32) g.fillRect(x, y, 2, 16); }
-        g.fillStyle = "#D6C5A8"; for (let k = 0; k < 40; k++) g.fillRect(rnd(k) * w, rnd(k + 5) * h, 2, 1); });
-      paveTex.repeat.set(30, 30);
-      const pave = new THREE.Mesh(new THREE.PlaneGeometry(60, 60, 60, 60), toon("#ffffff", { map: paveTex, rim: 0 })); pave.rotation.x = -Math.PI / 2; pave.receiveShadow = true; scene.add(pave);
-      const seaTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#5FA7C2"; g.fillRect(0, 0, w, h); g.fillStyle = "#7DBCD2"; for (let y = 4; y < h; y += 11) g.fillRect((y * 7) % w, y, 22, 2); });
+      // ---------- the rambla at Kibón (Pocitos), Montevideo, a clear summer day: the checkerboard paving and the pink granite bench-wall of the
+      //            Rambla Sur's design, the beach below it, the Río de la Plata, the bay's buildings, the celeste sky, the MONTEVIDEO letters ----------
+      scene.fog.color.set("#D6ECF8"); scene.fog.density = 0.012; scene.background = new THREE.Color("#9FD3F2");
+      const paveTex = canvasTex(64, 64, (g, w, h) => { for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { g.fillStyle = (i + j) % 2 ? "#C79A8E" : "#E6D8CF"; g.fillRect(i * 16, j * 16, 16, 16); }
+        g.fillStyle = "rgba(90,60,50,0.18)"; for (let k = 0; k <= 64; k += 16) { g.fillRect(k, 0, 1, 64); g.fillRect(0, k, 64, 1); } });         // the damero
+      paveTex.repeat.set(24, 24);
+      const pave = new THREE.Mesh(new THREE.PlaneGeometry(24, 24, 48, 48), toon("#ffffff", { map: paveTex, rim: 0 })); pave.rotation.x = -Math.PI / 2; pave.position.set(0, 0, 10.55); pave.receiveShadow = true; scene.add(pave);   // ends at the wall (z = -1.45)
+      // the beach below the wall: golden sand sloping to the water, a few umbrellas and towels
+      const sandTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#EED39A"; g.fillRect(0, 0, w, h); for (let k = 0; k < 90; k++) { g.fillStyle = k % 3 ? "#E2C484" : "#F6E2B4"; g.fillRect(rnd(k) * w, rnd(k + 9) * h, 2, 1); } });
+      sandTex.repeat.set(30, 8);
+      { const geo = new THREE.PlaneGeometry(60, 14, 60, 14); geo.rotateX(-Math.PI / 2); const ps = geo.attributes.position;
+        for (let i = 0; i < ps.count; i++) { const z = ps.getZ(i); ps.setY(i, -0.32 - 0.05 * (z + 7) * -1 / 14 * 14 * 0.02); } geo.computeVertexNormals();
+        const sand = new THREE.Mesh(geo, toon("#ffffff", { map: sandTex, rim: 0 })); sand.position.set(0, 0, -8.45); sand.receiveShadow = true; scene.add(sand); }
+      const seaTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#6FA9C2"; g.fillRect(0, 0, w, h); g.fillStyle = "#93C2D4"; for (let y = 4; y < h; y += 11) g.fillRect((y * 7) % w, y, 22, 2); });
       seaTex.repeat.set(24, 14);
-      const sea = new THREE.Mesh(new THREE.PlaneGeometry(80, 40, 80, 40), new THREE.MeshBasicMaterial({ map: seaTex, color: "#FFE6D0" })); sea.rotation.x = -Math.PI / 2; sea.position.set(0, -0.6, -21.5); scene.add(sea);
-      const skyTex = canvasTex(256, 128, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#7FA9D6"); gr.addColorStop(0.6, "#F4C9A6"); gr.addColorStop(1, "#F8DCC0"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
-        g.fillStyle = "#FFF0C8"; g.beginPath(); g.arc(60, 70, 13, 0, 7); g.fill();
-        g.fillStyle = "rgba(255,255,255,0.8)"; [[150, 30, 26], [178, 26, 16], [220, 52, 18]].forEach(([x, y, r]) => { g.beginPath(); g.ellipse(x, y, r, r * 0.4, 0, 0, 7); g.fill(); });
-        g.fillStyle = "#B7A7B4"; for (let x = 0; x < w; x += 7) { const hh = 5 + ((x * 37) % 23) * (x > 120 && x < 170 ? 1.3 : 0.5); g.fillRect(x, h - 14 - hh, 6, hh); }   // the city across the bay
-        g.fillStyle = "#C7B6BE"; g.fillRect(0, h - 14, w, 14); });
+      const sea = new THREE.Mesh(new THREE.PlaneGeometry(90, 40, 90, 40), new THREE.MeshBasicMaterial({ map: seaTex, color: "#ffffff" })); sea.rotation.x = -Math.PI / 2; sea.position.set(0, -0.36, -35.4); scene.add(sea);
+      const foam = new THREE.Mesh(new THREE.PlaneGeometry(90, 0.3, 90, 1), new THREE.MeshBasicMaterial({ color: "#F4FAFC", transparent: true, opacity: 0.8 })); foam.rotation.x = -Math.PI / 2; foam.position.set(0, -0.355, -15.5); scene.add(foam);
+      for (const [x, z, c] of [[-2.6, -4.2, "#E86A4A"], [1.9, -5.0, "#4F86C6"], [4.2, -3.6, "#F2C14E"], [-5.0, -6.2, "#5C9A4A"]]) {
+        const g = new THREE.Group(); g.position.set(x, -0.33, z); scene.add(g); cyl(0.02, 0.02, 1.5, "#FBF4E4", 0, 0.75, 0, g);
+        for (let k = 0; k < 8; k++) { const geo = new THREE.ConeGeometry(0.75, 0.25, 2, 1, true, k / 8 * Math.PI * 2, Math.PI / 4); const m = new THREE.Mesh(geo, toon(k % 2 ? c : "#FBF4E4", { side: THREE.DoubleSide })); m.position.y = 1.55; shade(m); g.add(m); }
+        rbox(0.5, 0.01, 1.0, k2c(c), 0.6, 0.005, 0.3, g, { line: false }); }
+      function k2c(c) { return c === "#F2C14E" ? "#4F86C6" : "#F2C14E"; }
+      const skyTex = canvasTex(256, 128, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#2E8FD8"); gr.addColorStop(0.55, "#68B8EE"); gr.addColorStop(1, "#BFE4F8"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+        g.fillStyle = "rgba(255,255,255,0.92)"; [[40, 28, 22], [62, 24, 14], [150, 40, 26], [176, 36, 16], [228, 22, 18]].forEach(([x, y, r]) => { g.beginPath(); g.ellipse(x, y, r, r * 0.42, 0, 0, 7); g.fill(); });
+        for (let x = 0; x < 120; x += 6) { const hh = 6 + ((x * 37) % 19) * 0.9; g.fillStyle = (x / 6) % 3 ? "#D9DEE6" : "#C3CBD6"; g.fillRect(x, h - 12 - hh * (1 - x / 140), 5, hh * (1 - x / 140)); }   // Pocitos' towers along the bay, to the left
+        g.fillStyle = "#B8C9D6"; g.fillRect(0, h - 12, w, 12); });
       skyTex.wrapS = skyTex.wrapT = THREE.ClampToEdgeWrapping;
-      const sky = new THREE.Mesh(new THREE.PlaneGeometry(90, 28, 8, 4), new THREE.MeshBasicMaterial({ map: skyTex, fog: false })); sky.position.set(0, 12.6, -40); scene.add(sky);
-      // the rambla's low wall, in 1 m blocks (big planes are tiled: the software renderer loses depth precision on huge quads)
-      for (let x = -6; x < 6; x += 1) { rbox(1.0, 0.46, 0.3, "#DCCFB3", x + 0.5, 0.23, -1.3, null, { r: 0.08 }); rbox(1.0, 0.05, 0.36, "#E8DDC4", x + 0.5, 0.48, -1.3, null, { r: 0.2, line: false }); }
+      const sky = new THREE.Mesh(new THREE.PlaneGeometry(110, 34, 8, 4), new THREE.MeshBasicMaterial({ map: skyTex, fog: false })); sky.position.set(0, 15.3, -55); scene.add(sky);
+      // the bench-wall (pink granite) in 1 m blocks with a seat slab on top, steps down to the sand every few metres
+      for (let x = -8; x < 8; x += 1) { rbox(1.0, 0.46, 0.3, "#C99088", x + 0.5, 0.23, -1.3, null, { r: 0.08 }); rbox(1.0, 0.06, 0.4, "#D8A49A", x + 0.5, 0.48, -1.3, null, { r: 0.25, line: false });
+        rbox(1.0, 0.36, 0.3, "#B98078", x + 0.5, -0.15, -1.6, null, { r: 0.08, line: false }); }
+      // palm trees along the promenade (behind everyone)
+      for (const [x, z] of [[-3.4, -1.0], [2.9, -1.0]]) { const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g); cyl(0.13, 0.15, 0.16, "#C99088", 0, 0.08, 0, g);
+        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.09, 2.2, 10), toon("#8A6A4A")); trunk.position.y = 1.1; shade(trunk); g.add(trunk); outline(trunk, WO);
+        for (let k = 0; k < 7; k++) { const a = k / 7 * Math.PI * 2, f = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.9, 4), toon(k % 2 ? "#3E8A3E" : "#4FA04A")); f.position.set(Math.cos(a) * 0.32, 2.12, Math.sin(a) * 0.32);
+          f.rotation.set(Math.sin(a) * 1.25, 0, -Math.cos(a) * 1.25); shade(f); g.add(f); } }
+      // the MONTEVIDEO letters (the photo spot at Kibón), behind El Mago's left on the promenade
+      { const g = new THREE.Group(); g.position.set(-2.75, 0, -1.02); g.rotation.y = 0; scene.add(g); const word = "MONTEVIDEO", cols = ["#E86A4A", "#F2C14E", "#4F86C6", "#5C9A4A", "#C0392B"];
+        [...word].forEach((ch, i) => { const tex = canvasTex(64, 64, (c, w, h) => { c.fillStyle = cols[i % 5]; c.fillRect(0, 0, w, h); c.fillStyle = "#FFFFFF"; c.font = "bold 50px Fredoka, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(ch, 32, 36); });
+          tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping; const side = toon(cols[i % 5]);
+          const m = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.34, 0.12), [side, side, side, side, toon("#ffffff", { map: tex, rim: 0 }), side]); m.position.set(i * 0.29, 0.17, 0); shade(m); g.add(m); outline(m, WO); }); }
       // the bench: wooden slats on two iron legs
       const BN = { x0: -0.3, x1: 0.4, z0: -0.92, z1: -0.6, seat: 0.42 };
       { const g = new THREE.Group(); g.position.set((BN.x0 + BN.x1) / 2, 0, (BN.z0 + BN.z1) / 2); scene.add(g); const W = BN.x1 - BN.x0;
         for (let k = 0; k < 4; k++) rbox(W, 0.025, 0.065, "#B5733F", 0, BN.seat - 0.012, -0.12 + k * 0.08, g, { r: 0.3 });
         for (let k = 0; k < 3; k++) rbox(W, 0.06, 0.022, "#B5733F", 0, 0.55 + k * 0.08, -0.16, g, { r: 0.3, rot: [-0.12, 0, 0] });
         for (const s of [-1, 1]) { rbox(0.04, 0.42, 0.3, "#3A3A48", s * (W / 2 - 0.06), 0.2, 0, g, { r: 0.3 }); rbox(0.04, 0.3, 0.04, "#3A3A48", s * (W / 2 - 0.06), 0.56, -0.16, g); } }
-      // a lamp post at the left, a palm-like pot at the right (set dressing far from everyone)
+      // a lamp post at the left (set dressing far from everyone)
       { const g = new THREE.Group(); g.position.set(-1.35, 0, -1.0); scene.add(g); cyl(0.05, 0.07, 0.12, "#2E2E3A", 0, 0.06, 0, g); cyl(0.03, 0.03, 2.3, "#2E2E3A", 0, 1.2, 0, g);
         rbox(0.16, 0.2, 0.16, "#2E2E3A", 0, 2.42, 0, g); sph(0.06, "#FFF0C8", 0, 2.4, 0, g, { basic: true }); }
-      // light: a summer late afternoon (fixed: nothing changes when the ocarina plays)
-      const sun = new THREE.DirectionalLight("#FFD2A0", 2.0); sun.position.set(-2.2, 2.8, -2.4); sun.target.position.set(0.3, 0, -0.2);
+      // light: a clear summer midday (fixed: nothing changes when the ocarina plays)
+      const sun = new THREE.DirectionalLight("#FFF2D8", 2.3); sun.position.set(-1.6, 3.6, -1.8); sun.target.position.set(0.3, 0, -0.2);
       sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536); Object.assign(sun.shadow.camera, { left: -2.6, right: 2.6, top: 2.6, bottom: -2.6, near: 0.5, far: 9 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; scene.add(sun, sun.target);
-      scene.add(new THREE.HemisphereLight("#FFE2C8", "#A88A6A", 1.0));
-      const front = new THREE.DirectionalLight("#FFF0DE", 0.75); front.position.set(1.0, 1.8, 3.2); scene.add(front);
+      scene.add(new THREE.HemisphereLight("#CFE9FF", "#D8B48A", 1.1));
+      const front = new THREE.DirectionalLight("#FFF6EA", 0.8); front.position.set(1.0, 1.8, 3.2); scene.add(front);
 
       // ---------- the upright piano (on small castors): Papá Noel pushes it from its right end; it plays no note ----------
       const PW = 0.75, PD = 0.32, PH = 0.74;
@@ -207,7 +227,7 @@
           for (const [t0, Q] of [[T.rise, ONBENCH], [T.caps, FP]]) { const d = t - t0 - (i % 5) * 0.012; if (d > 0 && d < dt) { dt = d; best = Q; } }
           m.visible = dt < 0.5 && i < 16; if (!m.visible) return; const q = V3((rnd(i) - 0.5) * 0.4, 0.15 + rnd(i + 50) * 0.25, (rnd(i + 99) - 0.5) * 0.4);
           m.position.copy(best).add(q.multiplyScalar(dt * 0.7)); m.position.y -= 0.35 * dt * dt; m.scale.setScalar(0.25 * (1 - dt / 0.5)); });
-        seaTex.offset.set((t * 0.004) % 1, (t * 0.006) % 1);
+        seaTex.offset.set((t * 0.004) % 1, (t * 0.006) % 1); foam.position.z = -15.5 + 0.15 * Math.sin(t * 0.9);
         blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
       }
 
@@ -233,7 +253,7 @@
       // ---------- text ----------
       const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 1.55] });
       const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
-      const snd = document.getElementById("snd"), prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")];
+      const snd = { style: {} }, prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")];
       function dom(t) {
         { const a = Math.min(clamp((t - T.oca + 0.2) / 0.2, 0, 1), clamp((T.ocaEnd + 0.3 - t) / 0.2, 0, 1)); snd.style.visibility = a > 0 ? "visible" : "hidden";
           if (a > 0) { snd.style.opacity = a.toFixed(3); snd.style.transform = `translateX(-50%) scale(${(0.8 + 0.2 * backOut(clamp((t - T.oca + 0.2) / 0.25, 0, 1))).toFixed(3)}) rotate(${(-2 + Math.sin(t * 3)).toFixed(2)}deg)`; } }
@@ -253,7 +273,7 @@
       function qa(t) {
         lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
         const pc = piano.position.x;
-        const FURN = [{ name: "bench", min: V3(BN.x0, 0, BN.z0), max: V3(BN.x1, 0.8, BN.z1) }, { name: "wall", min: V3(-6, 0, -1.45), max: V3(6, 0.5, -1.15) },
+        const FURN = [{ name: "bench", min: V3(BN.x0, 0, BN.z0), max: V3(BN.x1, 0.8, BN.z1) }, { name: "wall", min: V3(-8, 0, -1.45), max: V3(8, 0.52, -1.1) },
           { name: "piano", min: V3(pc - PW / 2, 0, SZ - PD / 2 - 0.01), max: V3(pc + PW / 2, PH + 0.1, SZ + PD / 2 + 0.14) }];
         for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
           if (F.name === "piano" && nm === "santa" && /^(upper|fore)/.test(k.name) && t < T.stop + 0.9) continue;

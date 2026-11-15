@@ -63,14 +63,12 @@
       <div id="vig"></div>
       <div id="flash"></div>
       <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
-      <div id="snd">♪ Sonido digital</div>
-      <div id="subs"></div>
+            <div id="subs"></div>
       <div id="cal"><div class="hd">DICIEMBRE</div><div class="dd">23<svg viewBox="0 0 284 236"><ellipse id="ring" cx="142" cy="122" rx="128" ry="98" pathLength="100" fill="none" stroke="#E0302A" stroke-width="12" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-8 142 122)"/></svg></div><div class="ft">último día para pedir</div></div>
       <div id="prod">
         <div class="tt">Ocarina<br>de 12 agujeros</div>
         <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Impresa en 3D</div>
         <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Para tu Nochebuena</div>
-        <div class="st">Ilustración 3D · sonido digital</div>
       </div>
       <div id="card"><div class="k0">¿Quién la toca en tu casa?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá NAVIDAD!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
       <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.6" data-track-index="1" data-volume="0.22"></audio>
@@ -214,7 +212,7 @@
       // ---------- text ----------
       const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 2.6] });
       const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
-      const snd = document.getElementById("snd"), prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")], cal = document.getElementById("cal"), ring = document.getElementById("ring");
+      const snd = { style: {} }, prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")], cal = document.getElementById("cal"), ring = document.getElementById("ring");
       function dom(t) {
         { const a = Math.max(Math.min(clamp((t - T.oca + 0.2) / 0.2, 0, 1), clamp((T.ocaEnd + 0.3 - t) / 0.2, 0, 1)), Math.min(clamp((t - T.sq + 0.1) / 0.1, 0, 1), clamp((T.sq + 0.9 - t) / 0.15, 0, 1)));
           snd.style.visibility = a > 0 ? "visible" : "hidden";

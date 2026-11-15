@@ -11,7 +11,7 @@ Papá Noel cree que a mi ocarina se le escapa el aire. Son doce agujeros, no un 
 Ocarina de 12 agujeros, impresa en 3D en Montevideo: 10 arriba y 2 para los pulgares.
 Cada agujero que destapás es otra nota. ¿Y eso se aprende? Si alguna vez tocaste flauta dulce, ya sabés la idea.
 La hago a pedido.
-El video es una animación: la ocarina es una ilustración 3D y el sonido es digital.
+El video es una animación.
 ¿Cuántos agujeros tiene? Comentá DOCE y te paso precio y fecha.
 Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso.
 Envío gratis solo en La Unión, La Blanqueada y parte de Buceo; mando a todo Uruguay.
@@ -54,3 +54,7 @@ bed. Levels: music -23.0 dB under the voices, -13.7 dB in the gaps; -14.1 LUFS; 
 ### Exact notes (2026-11-15, fourth mix)
 
 The band now plays the owner's exact transcription (`../biblioteca/partituras/transcripciones-del-duenio.txt`): score args `p02-vals-la-menor 1-34 0.85`. -14.1 LUFS; every line clear.
+
+### No badge (2026-11-15)
+
+The owner asked to remove the "Sonido digital" badge and the "Ilustración 3D · sonido digital" line ("queda super implícito"); the caption keeps "El video es una animación."

@@ -52,3 +52,17 @@ If there is no answer in about 24 h, send once:
 ## Suggested publish date
 
 Sunday 13/12 (after "El laberinto" on Sunday 6/12; ten days before the last order day).
+
+## Result (2026-11-15)
+
+`el-mantel.mp4`: 24.5 s, 1080 × 1920, 60 fps.
+
+| Check | Result |
+|---|---|
+| QA gate | 0 bad frames of 1470, 0 pose jumps, deterministic. The gate covers the table with its hanging cloth, the feast, every piece and every board part against both bodies, and the hands against the table |
+| Flicker scan | 0 frames (cuts at 2.25, 3.72, 4.45, 5.95, 6.6, 9.65, 12.6, 15.25, 17.4, 22.0) |
+| Loudness | -14.5 LUFS, peak -1.5 dBFS, straight from the render (no remix needed) |
+| Steady buzz | none: no 37 Hz line above 6 kHz, and the high band sits at -35.2 dBFS |
+| Music | 26.0 dB under the voices and 16.3 dB under them in the gaps (`nivel_musica.py`): a little softer than the others |
+| Voices in the mix | every line is clear |
+| Contact sheet | 15 real frames were looked at: the hook along the table, "Eso es un mantel", the pawn tipping over on the fold, the shrug, the magic hand, the quadrants and frame sides fitting together from above, the pieces landing, the calendar page with the 23 circled, the CTA, the card |

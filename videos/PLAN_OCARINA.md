@@ -4,6 +4,18 @@ The research is in `RESEARCH_OCARINA_2026.md` (five Haiku angles; raw reports in
 **12-hole transverse ocarina printed in 3D**: matte black, teardrop-shaped, about hand length, ten holes on top (two of
 them small sub-holes) and two thumb holes underneath, an angled mouthpiece, visible layer lines.
 
+**The owner's decision (15/11/2026), which changes rules 1 and 6 below.** No photos or recording came in. The owner
+said: "We are not working on advertising. This is all fictional, educational y humorístico. Que sean syntetisados y hechos de
+manera digital y que no sea false advertising." So, in the four reels as made:
+- the ocarina's sound is **synthesised** (`biblioteca/ocarina_synth.py`), and a "♪ Sonido digital" badge shows whenever it sounds;
+- the ocarina is a **3D illustration** (`biblioteca/3d/web/ocarina3d.js`, from the owner's description of the photos);
+- the real-proof beat is replaced by a **product beat**: the 3D ocarina, named, with "Ilustración 3D · sonido digital" on
+  screen;
+- every caption says that the video is an animation and the sound is digital;
+- the hole animation follows a simplified Alto C chart (the real chart is still unknown);
+- **no claim** about the key, the range, tuning, the material or the size.
+If the owner later sends the photos and a recording, swap them in (the plan below still describes that version).
+
 **The rules stay the same:**
 - the product is named in words in frame 1;
 - one joke, which a non-player gets in 3 s and which proves a real feature;

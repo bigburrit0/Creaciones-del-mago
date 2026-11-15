@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 24.6, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.3) 100%); }
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      #hook { position: absolute; left: 40px; right: 40px; top: 300px; text-align: center; font: 700 104px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #E8B04A; font-size: 70px; }
+      /* while the ocarina plays: the sound is synthesised, and the badge says so */
+      #snd { position: absolute; left: 50%; top: 262px; transform: translateX(-50%); padding: 14px 30px 16px; border-radius: 40px; background: #2E2160; border: 6px solid #150A34;
+             font: 700 44px/1 "Fredoka", sans-serif; color: #F2C14E; white-space: nowrap; visibility: hidden; box-shadow: 0 8px 0 rgba(21, 10, 52, 0.45); }
+      #snd small { font: 600 30px/1 "Fredoka", sans-serif; color: #FFF6E5; margin-left: 8px; }
+      /* the calendar page: the owner's real cut-off (last order day, not a delivery promise) */
+      #cal { position: absolute; left: 590px; top: 470px; width: 400px; border-radius: 30px; background: #FFFDF6; border: 8px solid #150A34; box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45);
+             overflow: hidden; text-align: center; visibility: hidden; transform-origin: 50% 0%; }
+      #cal .hd { background: #C0392B; color: #FFF6E5; font: 700 54px/1 "Fredoka", sans-serif; letter-spacing: 4px; padding: 20px 0 18px; border-bottom: 8px solid #150A34; }
+      #cal .dd { position: relative; font: 700 230px/1 "Fredoka", sans-serif; color: #2E2160; padding: 12px 0 0; }
+      #cal svg { position: absolute; left: 50px; top: 4px; width: 284px; height: 236px; overflow: visible; }
+      #cal .ft { font: 700 58px/1 "Caveat", cursive; color: #C0392B; padding: 0 0 24px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      /* the product beat: the 3D ocarina, named, with what it is (an illustration, not a photo) */
+      #prod { position: absolute; inset: 0; visibility: hidden; pointer-events: none; }
+      #prod .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 96px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                  text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #prod .tag { position: absolute; padding: 12px 26px 14px; border-radius: 30px; background: #FBF4E4; border: 6px solid #150A34; font: 700 46px/1 "Fredoka", sans-serif; color: #2E2160;
+                   box-shadow: 0 8px 0 rgba(21, 10, 52, 0.4); white-space: nowrap; }
+      #prod .st { position: absolute; left: 60px; right: 60px; top: 1420px; text-align: center; font: 600 34px/1.25 "Fredoka", sans-serif; color: #FFF6E5; -webkit-text-stroke: 7px #150A34; paint-order: stroke fill; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 64px/1.05 "Fredoka", sans-serif; color: #2B7BB0; }
+      #card .k1 { font: 700 46px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 82px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 40px/1.25 "Fredoka", sans-serif; margin-top: 10px; } #card .k3 b { color: #C0392B; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.6" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="snd">♪ Sonido digital</div>
+      <div id="subs"></div>
+      <div id="cal"><div class="hd">DICIEMBRE</div><div class="dd">23<svg viewBox="0 0 284 236"><ellipse id="ring" cx="142" cy="122" rx="128" ry="98" pathLength="100" fill="none" stroke="#E0302A" stroke-width="12" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-8 142 122)"/></svg></div><div class="ft">último día para pedir</div></div>
+      <div id="prod">
+        <div class="tt">Ocarina<br>de 12 agujeros</div>
+        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Impresa en 3D</div>
+        <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Para tu Nochebuena</div>
+        <div class="st">Ilustración 3D · sonido digital</div>
+      </div>
+      <div id="card"><div class="k0">¿Quién la toca en tu casa?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá NAVIDAD!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.6" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="24.6" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-sq" class="clip" src="assets/oca/chirrido.wav" data-start="3.05" data-duration="0.6" data-track-index="3" data-volume="0.7"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/nochedepaz.wav" data-start="7.0" data-duration="4.9" data-track-index="9" data-volume="1"></audio>
+      <audio id="v-d1" class="clip" src="assets/voz/d1.wav" data-start="0.2" data-duration="2.585" data-track-index="4" data-volume="1" data-who="santa" data-text="¡En Nochebuena toco Noche de paz!"></audio>
+      <audio id="v-d2" class="clip" src="assets/voz/d2.wav" data-start="4.4" data-duration="1.212" data-track-index="5" data-volume="1" data-who="mago" data-text="Así no llegás a Nochebuena."></audio>
+      <audio id="v-d3" class="clip" src="assets/voz/d3.wav" data-start="11.75" data-duration="3.985" data-track-index="6" data-volume="1" data-who="mago" data-text="Pedidos hasta el 23 de diciembre. Cuanto antes, más ensayás."></audio>
+      <audio id="v-d4" class="clip" src="assets/voz/d4.wav" data-start="18.1" data-duration="3.914" data-track-index="7" data-volume="1" data-who="mago" data-text="¿Quién la toca en tu casa? Comentá NAVIDAD y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "El ensayo" (24.6 s, 3D toon; the ocarina reels O4, ../../PLAN_OCARINA.md): El Mago's workshop by day, dressed for
+         Christmas. Papá Noel, proud, the ocarina in his mittens: "¡En Nochebuena toco Noche de paz!" He raises it (the camera
+         low on his mittens; the mouthpiece never reaches his face) and a squeak comes out. El Mago flinches: "Así no llegás a
+         Nochebuena." His magic floats it out of the mittens; the caps land and it plays the opening of "Noche de paz"
+         (Gruber, 1818, public domain; synthesised, "Sonido digital"; the bed out); Papá Noel sways. The calendar page: "Pedidos
+         hasta el 23 de diciembre. Cuanto antes, más ensayás." The product beat, then ONE comment CTA (NAVIDAD). The tree's
+         lights blink as always: nothing in the world reacts to the music. */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, colDist } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, workshop, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { ocarina } from "./lib/ocarina3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 24.6, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage();
+      const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree, stool } = workshop();
+      spill.material.opacity = 0; tree.position.set(1.68, 0, -0.62); if (stool) stool.visible = false;
+      const { mago, santa, BTRACK, blobM, blobS, blobK, printer } = await cast();
+      blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+      const NOTES = await (await fetch("assets/oca/nochedepaz.json")).json();
+      // Christmas dressing: a second small tree by the bench, a garland along the shelves (the door already has its wreath)
+      { const g = new THREE.Group(); g.position.set(-1.25, 0, -0.35); scene.add(g); rbox(0.14, 0.12, 0.14, "#C0392B", 0, 0.06, 0, g);
+        [[0.22, 0.3, 0.27], [0.17, 0.26, 0.46], [0.12, 0.22, 0.63]].forEach(([r, h, y]) => { const c = new THREE.Mesh(new THREE.ConeGeometry(r, h, 10), toon("#2F5A32")); c.position.y = y; shade(c); g.add(c); outline(c, WO); });
+        sph(0.04, "#F2C14E", 0, 0.76, 0, g, { basic: true });
+        for (let k = 0; k < 9; k++) { const a = k * 2.3, y = 0.2 + k * 0.05, r = 0.2 - k * 0.017; bulbs.push(sph(0.017, "#E86A4A", Math.cos(a) * r, y, Math.sin(a) * r, g, { basic: true, seg: 8 })); } }
+      { const pts = []; for (let k = 0; k <= 16; k++) { const u = k / 16; pts.push(V3(lerp(-1.36, -0.6, u), 1.42 - 0.07 * Math.abs(Math.sin(u * Math.PI * 2)), -1.0)); }
+        const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 60, 0.025, 6), toon("#2F6B3A")); shade(m); scene.add(m); outline(m, WO);
+        pts.forEach((p, k) => { if (k % 2) sph(0.022, k % 4 === 1 ? "#C0392B" : "#E8B04A", p.x, p.y - 0.04, p.z + 0.02, null, { line: true }); }); }
+
+      // ---------- timing (voice first: the measured lines decide the beats) ----------
+      const T = { s1: 0.2, up: 2.85, sq: 3.05, down: 3.7, flinch: 3.62, m1: 4.4, rel: 5.75, land: 6.55, caps: 6.5, oca: 7.0, ocaEnd: 11.55, give: 11.65, m2: 11.75, cal: 11.8, ring: 12.6,
+                  prod: 15.95, cta: 18.05, d4: 18.1, card: 22.1, exit: 99 };
+
+      // ---------- staging: El Mago left, Papá Noel right (as in "La batata"); the ocarina in his mittens, then floating between them ----------
+      const MD = V3(-0.78, 0, -0.25), SD = V3(0.18, 0, -0.25), hM = 1.05, hS = -1.05;
+      const SFW = V3(Math.sin(hS), 0, Math.cos(hS)), SLEFT = V3(Math.cos(hS), 0, -Math.sin(hS));
+      const HOLD = SD.clone().add(SFW.clone().multiplyScalar(0.43)).add(V3(0, 0.63, 0)), HUP = SD.clone().add(SFW.clone().multiplyScalar(0.38)).add(V3(0, 0.72, 0));
+      const FP = V3(-0.3, 0.86, 0.12), LENS_C = V3(0.36, 1.05, 1.11);
+      const OC = ocarina(scene, { wo: WO, length: 0.12 }); OC.g.rotation.order = "YXZ";
+      const { SPK } = makeFX();
+      const HS = {}; for (const id of OC.ALL) HS[id] = [0, 1].map((i) => { const m = new THREE.Mesh(new THREE.OctahedronGeometry(i ? 0.006 : 0.009), new THREE.MeshBasicMaterial({ color: i ? "#FFF3B0" : "#F2C14E", fog: false })); m.visible = false; scene.add(m); return m; });
+      const raiseK = (t) => pulse(t, T.up, T.up + 0.25, T.down, T.down + 0.35);
+      const heldAt = (t) => HOLD.clone().lerp(HUP, raiseK(t));
+      for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.copy(SD); santa.W.rotation.y = hS; santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.L"), SF.fwd, 0.16); rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1); rotWorld(mago.b("DEF-upper_arm.R"), MF.fwd, -0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- Papá Noel: proud with the ocarina in his mittens; raises it (the squeak); embarrassed; lets it go to the magic; sways to the carol
+        const hold = Math.max(1 - seg(t, T.rel, T.rel + 0.5), seg(t, T.give + 0.2, T.give + 0.65)), H = heldAt(t);
+        for (const [side, s] of [["L", 1], ["R", -1]]) arm(santa, side, H.clone().add(SLEFT.clone().multiplyScalar(s * 0.072)).add(V3(0, -0.012, 0)).add(SFW.clone().multiplyScalar(-0.01)), hold, null, 0.05);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, -0.05 * pulse(t, -1, 0, 2.4, 2.8));                               // chest out, proud
+        const sway = pulse(t, T.oca + 0.4, T.oca + 0.9, T.ocaEnd, T.ocaEnd + 0.4);
+        rotWorld(santa.b("DEF-spine.003"), SF.fwd, 0.07 * Math.sin((t - T.oca) * 2.6) * sway);
+        turnTo(santa, FP, 0.5 * pulse(t, T.rel, T.rel + 0.4, T.prod, T.prod + 0.4));
+        // ---- El Mago: flinches at the squeak (the whole body leans back, eyes shut); the magic hand (left) floats it out and conducts; to the viewer for the date and the CTA
+        const fl = pulse(t, T.flinch, T.flinch + 0.12, T.flinch + 0.45, T.flinch + 0.8);
+        rotWorld(mago.b("DEF-spine.003"), MF.left, -0.14 * fl); rotWorld(mago.b("DEF-spine.001"), MF.left, -0.06 * fl);
+        const magic = pulse(t, T.rel - 0.4, T.rel, T.give, T.give + 0.4);
+        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.16)).add(MF.fwd.clone().multiplyScalar(0.1)).add(V3(0, 0.2 + 0.025 * Math.sin(t * 4.5) + 0.12 * (1 - magic), 0)), magic, null, 0.08); }
+        turnTo(mago, FP, 0.5 * pulse(t, T.rel - 0.2, T.rel + 0.2, T.ocaEnd, T.ocaEnd + 0.4));
+        turnTo(mago, LENS_C, Math.max(pulse(t, T.m1 - 0.2, T.m1 + 0.1, T.m1 + 1.1, T.m1 + 1.4), pulse(t, T.m2 - 0.25, T.m2 + 0.05, T.prod, T.prod + 0.1), pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1)));
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.d4 + 0.1, T.d4 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
+        let e = 0; for (const b of [1.6, 6.1, 9.6, 13.8, 16.9, 19.6, 23.0]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        mago.b("eyes").scale.y = 1 - Math.max(0.9 * e, 0.85 * fl);
+        santa.b("brows").position.y += 0.016 * pulse(t, -1, 0, 2.5, 2.8) - 0.012 * pulse(t, T.sq + 0.2, T.sq + 0.4, T.rel, T.rel + 0.3) + 0.012 * sway;
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props ----------
+      const flyArc = (A, Bp, u, h) => A.clone().lerp(Bp, u).add(V3(0, 4 * h * u * (1 - u), 0));
+      const R0 = [0.35, hS + Math.PI], RUP = [0.15, hS + Math.PI], RF = [0.8, 0];      // held: the mouthpiece toward him; raised: level; floating: the top to the camera
+      function props(t) {
+        setLight("day");
+        bulbs.forEach((b, k2) => b.material.color.set(["#E86A4A", "#F2C14E", "#9CC9E8", "#3a2a4a"][(k2 + Math.floor(t * 3)) % 4]));
+        if (printer) printer.visible = true;
+        const v = ss(clamp((t - T.rel) / (T.land - T.rel), 0, 1)), bob = 0.008 * Math.sin(t * 2.4) * seg(t, T.land, T.land + 0.3), r = raiseK(t);
+        const w = ss(clamp((t - T.give) / 0.75, 0, 1));
+        OC.g.position.copy(flyArc(heldAt(t), FP, v, 0.1)); OC.g.position.y += bob * (1 - w);
+        if (w > 0) OC.g.position.copy(flyArc(FP, HOLD, w, 0.08));
+        const yawP = 0.0 * Math.sin((t - T.prod) * 1.1) * pulse(t, T.prod - 0.1, T.prod + 0.2, T.cta - 0.2, T.cta);
+        OC.g.rotation.set(lerp(lerp(lerp(R0[0], RUP[0], r), RF[0], v), R0[0], w), lerp(lerp(R0[1], RF[1] - 2 * Math.PI, v), R0[1] - 2 * Math.PI, w) + yawP, 0.06 * Math.sin(t * 1.7) * seg(t, T.land, T.land + 0.3) * (1 - w));
+        const mag = seg(t, T.caps, T.caps + 0.4) * (1 - seg(t, T.ocaEnd + 0.1, T.ocaEnd + 0.45));
+        const st = OC.play(t, NOTES, T.oca, mag);
+        scene.updateMatrixWorld(true);
+        for (const id of OC.ALL) { const d = st.since[id], pr = HS[id], P = OC.holeWorld(id);
+          pr.forEach((m, i) => { m.visible = d !== undefined && d < 0.35; if (!m.visible) return; const a = i * 2.4 + id.length;
+            m.position.copy(P).add(V3(Math.cos(a) * 0.04 * d / 0.35, 0.05 * d / 0.35 + 0.01, Math.sin(a) * 0.03 * d / 0.35)); m.scale.setScalar(1 - d / 0.35); m.rotation.y = t * 6; }); }
+        SPK.forEach((m, i) => { let best = null, dt = 9;
+          for (const [t0, Q] of [[T.rel, HOLD], [T.caps, FP], [T.give + 0.75, HOLD]]) { const d = t - t0 - (i % 5) * 0.012; if (d > 0 && d < dt) { dt = d; best = Q; } }
+          m.visible = dt < 0.5 && i < 16; if (!m.visible) return; const w = V3((rnd(i) - 0.5) * 0.4, 0.15 + rnd(i + 50) * 0.25, (rnd(i + 99) - 0.5) * 0.4);
+          m.position.copy(best).add(w.multiplyScalar(dt * 0.7)); m.position.y -= 0.35 * dt * dt; m.scale.setScalar(0.25 * (1 - dt / 0.5)); });
+        for (let i = 0; i < NM; i++) { const ph = rnd(i) * 6.28, uu = rnd(i + 7), w = rnd(i + 13);
+          mpos[i * 3] = lerp(WIN.x - 0.35, 0.3, w) + 0.06 * Math.sin(t * 0.5 + ph) + (uu - 0.5) * 0.4; mpos[i * 3 + 1] = lerp(WIN.y + 0.2, 0.1, w) + 0.05 * Math.sin(t * 0.7 + ph * 2);
+          mpos[i * 3 + 2] = lerp(-1.0, 0.3, w) + 0.04 * Math.cos(t * 0.6 + ph); }
+        motes.geometry.attributes.position.needsUpdate = true;
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing (every camera looks toward the back or side walls) ----------
+      const SHOTS = [
+        { t: 0.0, d: T.up, fov: 36, subj: "hold", h: 0.75, az: -35, el: 10, v: 0.05 },                                                               // hook: proud, the ocarina in his mittens
+        { t: T.up, d: 3.95 - T.up, fov: 34, subj: "raise", h: 0.42, az: -40, el: 10, v: 0.05 },                                                      // low on his mittens: he raises it… the squeak
+        { t: 3.95, d: T.rel - 0.05 - 3.95, fov: 30, subj: "mago", h: 0.8, az: 52, el: -9, v: -0.02 },                                                  // the flinch; "Así no llegás a Nochebuena."
+        { t: T.rel - 0.05, d: T.oca - 0.25 - T.rel + 0.05, fov: 46, from: [-0.3, 1.18, 2.55], to: [-0.3, 1.15, 2.4], look: [-0.3, 0.74, -0.35] },      // the float, both in shot
+        { t: T.oca - 0.25, d: 9.5 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 2, el: 10, v: 0.0, whip: 1 },                                       // "Noche de paz", the caps pop off
+        { t: 9.5, d: T.m2 - 0.1 - 9.5, fov: 34, subj: "santa", h: 0.95, az: -15, el: 4, v: 0.2 },                                                        // Papá Noel sways
+        { t: T.m2 - 0.1, d: T.prod - T.m2 + 0.1, fov: 38, subj: "mago", h: 1.3, az: 38, el: -3, v: 0.12, aim: [0.04, 0.0, -0.26], whip: 1 },          // "Pedidos hasta el 23 de diciembre…" (the calendar page on the right)
+        { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "held", h: 0.32, az: -12, el: 32, v: 0.05, push: [1.06, 0.96] },                                       // the product beat
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                // CTA
+        { t: T.card, d: DUR - T.card, fov: 50, from: [-0.3, 1.15, 2.6], to: [-0.3, 1.13, 2.5], look: [-0.3, 0.8, -0.3] },                                // the card over the workshop
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props, points: { hold: SD.clone().add(SFW.clone().multiplyScalar(0.3)).add(V3(0, 0.8, 0)), raise: HUP.clone().add(V3(0, -0.03, 0)), oca: FP.clone(), held: HOLD.clone() },
+        punch: [[T.sq + 0.05, 0.08], [T.ring, 0.06]], shake: [[T.sq + 0.05, 0.003, 0.3]], flash: [[T.prod, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+
+      // ---------- text ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 2.6] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const snd = document.getElementById("snd"), prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")], cal = document.getElementById("cal"), ring = document.getElementById("ring");
+      function dom(t) {
+        { const a = Math.max(Math.min(clamp((t - T.oca + 0.2) / 0.2, 0, 1), clamp((T.ocaEnd + 0.3 - t) / 0.2, 0, 1)), Math.min(clamp((t - T.sq + 0.1) / 0.1, 0, 1), clamp((T.sq + 0.9 - t) / 0.15, 0, 1)));
+          snd.style.visibility = a > 0 ? "visible" : "hidden";
+          if (a > 0) { snd.style.opacity = a.toFixed(3); snd.style.transform = `translateX(-50%) scale(${(0.9 + 0.1 * Math.min(1, a)).toFixed(3)}) rotate(${(-2 + Math.sin(t * 3)).toFixed(2)}deg)`; } }
+        { const v = t >= T.cal && t < T.prod; cal.style.visibility = v ? "visible" : "hidden";
+          if (v) { const a = clamp((t - T.cal) / 0.3, 0, 1); cal.style.transform = `translateY(${((1 - ss(a)) * -120).toFixed(1)}px) rotate(${(3 + 4 * (1 - a) + 0.8 * Math.sin((t - T.cal) * 2.5)).toFixed(2)}deg) scale(${(0.85 + 0.15 * backOut(a)).toFixed(3)})`;
+            ring.setAttribute("stroke-dashoffset", (100 * (1 - ss(clamp((t - T.ring) / 0.45, 0, 1)))).toFixed(2)); } }
+        const pv = t >= T.prod && t < T.cta; prod.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { prod.style.opacity = Math.min(1, (t - T.prod) / 0.1, (T.cta - t) / 0.1).toFixed(3);
+          TAGS.forEach((g, i) => { const a = clamp((t - T.prod - 0.25 - i * 0.35) / 0.25, 0, 1); g.style.opacity = a > 0 ? "1" : "0";
+            g.style.transform = `rotate(${(i ? 3 : -4) + (1 - a) * 10}deg) scale(${(0.7 + 0.3 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks plus the bench and the small tree; the ocarina against both bodies (his arms excluded while he holds it) */
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const FURN = [{ name: "bench", min: V3(-1.255, 0, -1.075), max: V3(0.015, 0.6, -0.605) }, { name: "tree2", min: V3(-1.47, 0, -0.57), max: V3(-1.03, 0.8, -0.13) }];
+      const boxD = (p, F) => { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); return q.distanceTo(p); };
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          const d = boxD(p, F); if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        const op = OC.g.getWorldPosition(V3(0, 0, 0)), held = t < T.land || t > T.give + 0.45;
+        for (const [cn, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders(true)) { if ((held || t > T.give) && cn === "santa" && /^(upper|fore)/.test(k.name)) continue;
+          const d = colDist(op, k).d; if (d < (held ? 0.035 : 0.1)) out.push(["ocarina", cn, k.name, +d.toFixed(3)]); }
+        // the mouthpiece's tip never reaches his face, moustache or beard
+        { const tip = V3(-0.06, -0.012, 0.064).multiplyScalar(0.12 / 0.18); OC.inner.localToWorld(tip);
+          for (const k of santa.colliders(true)) if (/^(face|moust|beard|head)/.test(k.name)) { const d = colDist(tip, k).d; if (d < 0.01) out.push(["mouthpiece-face", k.name, +d.toFixed(3)]); } }
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, OC, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

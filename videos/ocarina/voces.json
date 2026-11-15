@@ -1,0 +1,96 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in a Montevideo summer: a big, jolly, impatient old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words. Line 1: puzzled and amused, peering at something odd. Line 2: sceptical, arms crossed. Line 3: alarmed, counting holes, sure the air will leak out. Line 4: impressed, then a little worried. Line 5: out of breath and proud, he has just pushed a piano along the promenade. Line 6: incredulous, looking from the big piano to the tiny thing. Line 7: proud and excited, making a big promise.",
+  "lines": [
+   [
+    "a1",
+    "¿Imprimiste una batata?"
+   ],
+   [
+    "a2",
+    "¿Y eso suena?"
+   ],
+   [
+    "b1",
+    "¿Doce agujeros? ¡Se le escapa el aire!"
+   ],
+   [
+    "b2",
+    "¿Y eso se aprende?"
+   ],
+   [
+    "c1",
+    "¡Traje música para la rambla!"
+   ],
+   [
+    "c2",
+    "¿Y eso entra en una mano?"
+   ],
+   [
+    "d1",
+    "¡En Nochebuena toco Noche de paz!"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile; deadpan, dry humour, never loud. Clear, well-articulated words, natural pace. Lines 1, 3, 5 and 7 are dry and matter-of-fact. Line 6 is short and calm. Line 9 says the date slowly and clearly, then a short pause before the last three words. Lines 4, 8, 10 and 11 are warm and inviting, straight to the viewer, with a tiny pause after the question.",
+  "lines": [
+   [
+    "a3",
+    "Una ocarina. Doce agujeros."
+   ],
+   [
+    "a4",
+    "La imprimo yo, a pedido."
+   ],
+   [
+    "b3",
+    "Cada agujero que destapás es otra nota."
+   ],
+   [
+    "a5",
+    "¿Batata u ocarina? Comentá BATATA y te paso precio y fecha."
+   ],
+   [
+    "b4",
+    "Si alguna vez tocaste flauta dulce, ya sabés la idea."
+   ],
+   [
+    "c3",
+    "Yo también."
+   ],
+   [
+    "c4",
+    "En una mano. Y va a todos lados."
+   ],
+   [
+    "b5",
+    "¿Cuántos agujeros tiene? Comentá DOCE y te paso precio y fecha."
+   ],
+   [
+    "d3",
+    "Pedidos hasta el veintitrés de diciembre. Cuanto antes, más ensayás."
+   ],
+   [
+    "c5",
+    "¿Qué te llevás a la rambla? Comentá RAMBLA y te paso precio y fecha."
+   ],
+   [
+    "d4",
+    "¿Quién la toca en tu casa? Comentá NAVIDAD y te paso precio y fecha."
+   ],
+   [
+    "d2",
+    "Así no llegás a Nochebuena."
+   ]
+  ]
+ },
+ "_edits": {
+  "a1": {
+   "from": 0.52
+  }
+ },
+ "_note": "2026-11-15: one take per character for the four ocarina reels; the automatic split matched the words. Every clip transcribed one by one: all as written (a1 started with a laugh, trimmed; b1 adds a short '¡ja!'; 'Comentá BATATA' reads as 'Comentaba Batata' to the transcriber, the subtitle and card carry the word)."
+}

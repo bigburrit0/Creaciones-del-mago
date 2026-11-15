@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script type="importmap">{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }</script>
+    <script src="lib/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__draw3d = null;
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 23.05, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      window.__timelines["main"] = tl;
+    </script>
+    <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #2e2160; }
+      #c { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; display: block; filter: saturate(1.08) contrast(1.04); }
+      #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(21,10,52,0) 60%, rgba(21,10,52,0.3) 100%); }
+      #subs { position: absolute; left: 60px; right: 60px; top: 1150px; height: 300px; pointer-events: none; }
+      .kin { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 80px/1.08 "Fredoka", sans-serif; color: #FFFFFF;
+             -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(21, 10, 52, 0.55); }
+      .kin .w { display: inline-block; transform-origin: 50% 80%; }
+      .kin.santa .w.cur { color: #FF6B57; }
+      .kin.mago .w.cur { color: #F2C14E; }
+      #hook { position: absolute; left: 40px; right: 40px; top: 300px; text-align: center; font: 700 104px/0.98 "Fredoka", sans-serif; color: #FFF6E5;
+              -webkit-text-stroke: 14px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(21, 10, 52, 0.5); opacity: 0; }
+      #hook span { color: #E8B04A; font-size: 70px; }
+      /* while the ocarina plays: the sound is synthesised, and the badge says so */
+      #snd { position: absolute; left: 50%; top: 262px; transform: translateX(-50%); padding: 14px 30px 16px; border-radius: 40px; background: #2E2160; border: 6px solid #150A34;
+             font: 700 44px/1 "Fredoka", sans-serif; color: #F2C14E; white-space: nowrap; visibility: hidden; box-shadow: 0 8px 0 rgba(21, 10, 52, 0.45); }
+      #snd small { font: 600 30px/1 "Fredoka", sans-serif; color: #FFF6E5; margin-left: 8px; }
+      #flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; pointer-events: none; }
+      /* the product beat: the 3D ocarina, named, with what it is (an illustration, not a photo) */
+      #prod { position: absolute; inset: 0; visibility: hidden; pointer-events: none; }
+      #prod .tt { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font: 700 96px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill;
+                  text-shadow: 0 10px 0 rgba(0, 0, 0, 0.35); }
+      #prod .tag { position: absolute; padding: 12px 26px 14px; border-radius: 30px; background: #FBF4E4; border: 6px solid #150A34; font: 700 46px/1 "Fredoka", sans-serif; color: #2E2160;
+                   box-shadow: 0 8px 0 rgba(21, 10, 52, 0.4); white-space: nowrap; }
+      #prod .st { position: absolute; left: 60px; right: 60px; top: 1420px; text-align: center; font: 600 34px/1.25 "Fredoka", sans-serif; color: #FFF6E5; -webkit-text-stroke: 7px #150A34; paint-order: stroke fill; }
+      #card { position: absolute; left: 70px; right: 70px; top: 960px; padding: 30px 30px 36px; border-radius: 44px; background: #FBF4E4; border: 8px solid #150A34;
+              box-shadow: 0 14px 0 rgba(21, 10, 52, 0.45); text-align: center; color: #2E2160; opacity: 0; transform-origin: 50% 60%; font-family: "Fredoka", sans-serif; }
+      #card .k0 { font: 700 64px/1.05 "Fredoka", sans-serif; color: #2B7BB0; }
+      #card .k1 { font: 700 46px/1.12 "Fredoka", sans-serif; margin-top: 10px; }
+      #card .k2 { font: 700 82px/1.1 "Fredoka", sans-serif; color: #C0392B; margin-top: 8px; }
+      #card .k3 { font: 600 40px/1.25 "Fredoka", sans-serif; margin-top: 10px; } #card .k3 b { color: #C0392B; }
+      #card .k4 { font: 600 30px/1.2 "Fredoka", sans-serif; margin-top: 12px; letter-spacing: 2px; opacity: 0.75; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="23.05" data-width="1080" data-height="1920">
+      <canvas id="c" width="1080" height="1920"></canvas>
+      <div id="vig"></div>
+      <div id="flash"></div>
+      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="snd">♪ Sonido digital</div>
+      <div id="subs"></div>
+      <div id="prod">
+        <div class="tt">Ocarina<br>de 12 agujeros</div>
+        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Entra en una mano</div>
+        <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Impresa en 3D</div>
+        <div class="st">Ilustración 3D · sonido digital</div>
+      </div>
+      <div id="card"><div class="k0">¿Qué te llevás a la rambla?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá RAMBLA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="23.05" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="23.05" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/rambla.wav" data-start="5.4" data-duration="4.4" data-track-index="3" data-volume="1"></audio>
+      <audio id="v-c1" class="clip" src="assets/voz/c1.wav" data-start="0.2" data-duration="2.828" data-track-index="4" data-volume="1" data-who="santa" data-text="¡Traje música para la rambla!"></audio>
+      <audio id="v-c3" class="clip" src="assets/voz/c3.wav" data-start="3.2" data-duration="0.527" data-track-index="5" data-volume="1" data-who="mago" data-text="Yo también."></audio>
+      <audio id="v-c2" class="clip" src="assets/voz/c2.wav" data-start="9.65" data-duration="2.134" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y eso entra en una mano?"></audio>
+      <audio id="v-c4" class="clip" src="assets/voz/c4.wav" data-start="11.95" data-duration="2.447" data-track-index="7" data-volume="1" data-who="mago" data-text="En una mano. Y va a todos lados."></audio>
+      <audio id="v-c5" class="clip" src="assets/voz/c5.wav" data-start="16.7" data-duration="3.737" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Qué te llevás a la rambla? Comentá RAMBLA y te paso precio y fecha."></audio>
+    </div>
+    <script type="module">
+      /* "El piano" (23.05 s, 3D toon; the ocarina reels O3, ../../PLAN_OCARINA.md): the rambla on a summer late afternoon.
+         Papá Noel, in his holiday clothes, pushes an upright piano along the promenade, puffing: "¡Traje música para la rambla!"
+         El Mago, by a bench where the ocarina rests: "Yo también." His gesture lifts it in sparkles, tiny next to the piano; it
+         plays a short original phrase (synthesised, "Sonido digital"; the bed out). "¿Y eso entra en una mano?" It floats down
+         into El Mago's open hand: "En una mano. Y va a todos lados." The product beat, then ONE comment CTA (RAMBLA). The piano
+         plays no note; the light never changes. */
+      import * as THREE from "three";
+      import { toon, outline, shade, rotWorld, ss, seg, clamp, lerp, pulse, rnd, pushOut, colDist } from "./lib/toon3d.js";
+      import { V3, stage, canvasTex, rbox, cyl, sph, cast, makeFX, unwrap, makeRig, voices, characterSprings, kineticOverlay, camRig, qaBase } from "./lib/escena3d.js";
+      import { ocarina } from "./lib/ocarina3d.js";
+
+      window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+      let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
+      const DUR = 23.05, FPS = 60, WO = 0.0024;
+      const { renderer, scene, camera } = stage();
+      const { mago, santa, BTRACK, blobM, blobS, blobK, printer } = await cast();
+      printer.visible = false; blobK.visible = false;
+      await document.fonts.load('700 48px "Caveat"'); await document.fonts.load('700 48px "Fredoka"');
+      const NOTES = await (await fetch("assets/oca/rambla.json")).json();
+
+      // ---------- the rambla: the promenade's paving, the low wall, the river-sea, the sky with the city across the bay, a bench, a lamp post ----------
+      scene.fog.color.set("#EBD9C8"); scene.fog.density = 0.02; scene.background = new THREE.Color("#F2D6BC");
+      const paveTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#CBB89A"; g.fillRect(0, 0, w, h); g.fillStyle = "#B9A585";
+        for (let y = 0; y < h; y += 16) { g.fillRect(0, y, w, 2); for (let x = (y / 16) % 2 ? 8 : 24; x < w; x += 32) g.fillRect(x, y, 2, 16); }
+        g.fillStyle = "#D6C5A8"; for (let k = 0; k < 40; k++) g.fillRect(rnd(k) * w, rnd(k + 5) * h, 2, 1); });
+      paveTex.repeat.set(30, 30);
+      const pave = new THREE.Mesh(new THREE.PlaneGeometry(60, 60, 60, 60), toon("#ffffff", { map: paveTex, rim: 0 })); pave.rotation.x = -Math.PI / 2; pave.receiveShadow = true; scene.add(pave);
+      const seaTex = canvasTex(64, 64, (g, w, h) => { g.fillStyle = "#5FA7C2"; g.fillRect(0, 0, w, h); g.fillStyle = "#7DBCD2"; for (let y = 4; y < h; y += 11) g.fillRect((y * 7) % w, y, 22, 2); });
+      seaTex.repeat.set(24, 14);
+      const sea = new THREE.Mesh(new THREE.PlaneGeometry(80, 40, 80, 40), new THREE.MeshBasicMaterial({ map: seaTex, color: "#FFE6D0" })); sea.rotation.x = -Math.PI / 2; sea.position.set(0, -0.6, -21.5); scene.add(sea);
+      const skyTex = canvasTex(256, 128, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#7FA9D6"); gr.addColorStop(0.6, "#F4C9A6"); gr.addColorStop(1, "#F8DCC0"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+        g.fillStyle = "#FFF0C8"; g.beginPath(); g.arc(60, 70, 13, 0, 7); g.fill();
+        g.fillStyle = "rgba(255,255,255,0.8)"; [[150, 30, 26], [178, 26, 16], [220, 52, 18]].forEach(([x, y, r]) => { g.beginPath(); g.ellipse(x, y, r, r * 0.4, 0, 0, 7); g.fill(); });
+        g.fillStyle = "#B7A7B4"; for (let x = 0; x < w; x += 7) { const hh = 5 + ((x * 37) % 23) * (x > 120 && x < 170 ? 1.3 : 0.5); g.fillRect(x, h - 14 - hh, 6, hh); }   // the city across the bay
+        g.fillStyle = "#C7B6BE"; g.fillRect(0, h - 14, w, 14); });
+      skyTex.wrapS = skyTex.wrapT = THREE.ClampToEdgeWrapping;
+      const sky = new THREE.Mesh(new THREE.PlaneGeometry(90, 28, 8, 4), new THREE.MeshBasicMaterial({ map: skyTex, fog: false })); sky.position.set(0, 12.6, -40); scene.add(sky);
+      // the rambla's low wall, in 1 m blocks (big planes are tiled: the software renderer loses depth precision on huge quads)
+      for (let x = -6; x < 6; x += 1) { rbox(1.0, 0.46, 0.3, "#DCCFB3", x + 0.5, 0.23, -1.3, null, { r: 0.08 }); rbox(1.0, 0.05, 0.36, "#E8DDC4", x + 0.5, 0.48, -1.3, null, { r: 0.2, line: false }); }
+      // the bench: wooden slats on two iron legs
+      const BN = { x0: -0.3, x1: 0.4, z0: -0.92, z1: -0.6, seat: 0.42 };
+      { const g = new THREE.Group(); g.position.set((BN.x0 + BN.x1) / 2, 0, (BN.z0 + BN.z1) / 2); scene.add(g); const W = BN.x1 - BN.x0;
+        for (let k = 0; k < 4; k++) rbox(W, 0.025, 0.065, "#B5733F", 0, BN.seat - 0.012, -0.12 + k * 0.08, g, { r: 0.3 });
+        for (let k = 0; k < 3; k++) rbox(W, 0.06, 0.022, "#B5733F", 0, 0.55 + k * 0.08, -0.16, g, { r: 0.3, rot: [-0.12, 0, 0] });
+        for (const s of [-1, 1]) { rbox(0.04, 0.42, 0.3, "#3A3A48", s * (W / 2 - 0.06), 0.2, 0, g, { r: 0.3 }); rbox(0.04, 0.3, 0.04, "#3A3A48", s * (W / 2 - 0.06), 0.56, -0.16, g); } }
+      // a lamp post at the left, a palm-like pot at the right (set dressing far from everyone)
+      { const g = new THREE.Group(); g.position.set(-1.35, 0, -1.0); scene.add(g); cyl(0.05, 0.07, 0.12, "#2E2E3A", 0, 0.06, 0, g); cyl(0.03, 0.03, 2.3, "#2E2E3A", 0, 1.2, 0, g);
+        rbox(0.16, 0.2, 0.16, "#2E2E3A", 0, 2.42, 0, g); sph(0.06, "#FFF0C8", 0, 2.4, 0, g, { basic: true }); }
+      // light: a summer late afternoon (fixed: nothing changes when the ocarina plays)
+      const sun = new THREE.DirectionalLight("#FFD2A0", 2.0); sun.position.set(-2.2, 2.8, -2.4); sun.target.position.set(0.3, 0, -0.2);
+      sun.castShadow = true; sun.shadow.mapSize.set(1536, 1536); Object.assign(sun.shadow.camera, { left: -2.6, right: 2.6, top: 2.6, bottom: -2.6, near: 0.5, far: 9 }); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; scene.add(sun, sun.target);
+      scene.add(new THREE.HemisphereLight("#FFE2C8", "#A88A6A", 1.0));
+      const front = new THREE.DirectionalLight("#FFF0DE", 0.75); front.position.set(1.0, 1.8, 3.2); scene.add(front);
+
+      // ---------- the upright piano (on small castors): Papá Noel pushes it from its right end; it plays no note ----------
+      const PW = 0.75, PD = 0.32, PH = 0.74;
+      const piano = new THREE.Group(); scene.add(piano); const wheels = [];
+      { rbox(PW, PH, PD, "#4A2A1C", 0, 0.05 + PH / 2, 0, piano, { r: 0.05 }); rbox(PW + 0.04, 0.04, PD + 0.04, "#3A2016", 0, 0.05 + PH + 0.02, 0, piano, { r: 0.2 });
+        const keys = canvasTex(256, 16, (g, w, h) => { g.fillStyle = "#FBF7EE"; g.fillRect(0, 0, w, h); g.fillStyle = "#7A746C"; for (let x = 0; x < w; x += 7) g.fillRect(x, 0, 1, h);
+          g.fillStyle = "#1A1418"; for (let x = 0, k = 0; x < w; x += 7, k++) if ([0, 1, 3, 4, 5].includes(k % 7)) g.fillRect(x + 4, 0, 4, h * 0.62); });
+        keys.wrapS = keys.wrapT = THREE.ClampToEdgeWrapping;
+        rbox(PW - 0.06, 0.04, 0.13, "#4A2A1C", 0, 0.47, PD / 2 + 0.06, piano, { r: 0.2 });
+        const kb = new THREE.Mesh(new THREE.PlaneGeometry(PW - 0.1, 0.1), toon("#ffffff", { map: keys, rim: 0 })); kb.rotation.x = -Math.PI / 2; kb.position.set(0, 0.4925, PD / 2 + 0.07); piano.add(kb);
+        rbox(PW - 0.1, 0.12, 0.02, "#5A3424", 0, 0.62, PD / 2 + 0.005, piano, { r: 0.2 });                                       // the music rest
+        for (const [x, z] of [[-PW / 2 + 0.06, -PD / 2 + 0.06], [PW / 2 - 0.06, -PD / 2 + 0.06], [-PW / 2 + 0.06, PD / 2 - 0.06], [PW / 2 - 0.06, PD / 2 - 0.06]]) {
+          const w = cyl(0.025, 0.025, 0.02, "#2E2E3A", x, 0.025, z, piano, { rot: [Math.PI / 2, 0, 0] }); wheels.push(w); } }
+
+      // ---------- timing (voice first: the measured lines decide the beats) ----------
+      const T = { s1: 0.2, stop: 2.55, m1: 3.2, rise: 3.85, land: 4.9, caps: 4.9, oca: 5.4, ocaEnd: 9.45, s2: 9.65, give: 11.8, m2: 11.95, prod: 14.55, cta: 16.65, c5: 16.7, card: 20.55, exit: 99 };
+
+      // ---------- staging ----------
+      const MD = V3(-0.62, 0, -0.32), hM = 0.9, MFW = V3(Math.sin(hM), 0, Math.cos(hM)), MLEFT = V3(Math.cos(hM), 0, -Math.sin(hM));
+      const SZ = -0.25, SX0 = 2.45, SX1 = 1.3, PGAP = 0.45 + PW / 2;                                       // his route along the promenade; the piano ahead of him
+      const PALM = MD.clone().add(MFW.clone().multiplyScalar(0.36)).add(MLEFT.clone().multiplyScalar(0.1)).add(V3(0, 0.6, 0)), INHAND = PALM.clone().add(V3(0, 0.035, 0));
+      const ONBENCH = V3(0.02, BN.seat + 0.018, -0.75), FP = V3(-0.05, 0.9, -0.08), LENS_C = V3(0.59, 1.05, 0.96);
+      const OC = ocarina(scene, { wo: WO, length: 0.12 }); OC.g.rotation.order = "YXZ";
+      const { SPK } = makeFX();
+      const HS = {}; for (const id of OC.ALL) HS[id] = [0, 1].map((i) => { const m = new THREE.Mesh(new THREE.OctahedronGeometry(i ? 0.006 : 0.009), new THREE.MeshBasicMaterial({ color: i ? "#FFF3B0" : "#F2C14E", fog: false })); m.visible = false; scene.add(m); return m; });
+      const vS = santa.stanceSpeed("Walk_Loop"), W0 = -0.6;
+      const sAt = (t) => { const u = clamp((t - W0) / (T.stop - W0), 0, 1); return lerp(SX0, SX1, u * 0.85 + 0.15 * ss(u)); };
+      santa.add("Walk_Loop", -1.0, T.stop + 0.12, { speed: clamp((SX0 - SX1) / (T.stop - W0) / Math.max(vS, 0.05), 0.5, 1.6) });
+      santa.add("Idle_Loop", T.stop - 0.1, DUR + 1, { off: 0.2 });
+      mago.add("Idle_Loop", -0.3, DUR + 1, { off: 0.6 });
+      const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);
+      const { LINES, ENV, talk } = await voices(FPS);
+      const hSAt = (t) => lerp(-Math.PI / 2, -1.2, seg(t, T.stop + 0.6, T.stop + 1.2));
+      function poseAt(t) {
+        IKQ.length = 0;
+        santa.apply(t); santa.W.position.set(sAt(t), 0, SZ); santa.W.rotation.y = hSAt(t); santa.W.updateMatrixWorld(true);
+        mago.apply(t); mago.W.position.copy(MD); mago.W.rotation.y = hM; mago.W.updateMatrixWorld(true);
+        const SF = frame(santa), MF = frame(mago);
+        rotWorld(santa.b("DEF-upper_arm.L"), SF.fwd, 0.16); rotWorld(santa.b("DEF-upper_arm.R"), SF.fwd, -0.16);
+        rotWorld(mago.b("DEF-upper_arm.L"), MF.fwd, 0.1); rotWorld(mago.b("DEF-upper_arm.R"), MF.fwd, -0.1);
+        const turnTo = (c, P0, k) => { const dir = P0.clone().sub(c.W.position); const a = unwrap(Math.atan2(dir.x, dir.z), c.W.rotation.y) - c.W.rotation.y; rotWorld(c.b("DEF-head"), V3(0, 1, 0), clamp(a, -0.9, 0.9) * k); };
+        // ---- Papá Noel: pushes the piano (both mittens on its right end, leaning in); out of breath when it stops; watches; asks
+        const push = 1 - seg(t, T.stop + 0.35, T.stop + 0.8), pc = sAt(t) - PGAP;
+        for (const [side, dz] of [["L", 0.11], ["R", -0.11]]) arm(santa, side, V3(pc + PW / 2 + 0.03, 0.66, SZ + dz), push, null, 0.04);
+        rotWorld(santa.b("DEF-spine.003"), SF.left, 0.07 * push + 0.05 * Math.sin(t * 5.5) * pulse(t, T.stop, T.stop + 0.3, T.m1 + 0.6, T.m1 + 1.0));   // leans into it; puffs
+        turnTo(santa, FP, 0.45 * pulse(t, T.rise, T.rise + 0.3, T.s2 - 0.2, T.s2 + 0.2));
+        // ---- El Mago: deadpan; the magic hand (left) lifts the ocarina and conducts; the same hand opens to receive it; to the viewer for the CTA
+        const magic = pulse(t, T.rise - 0.4, T.rise, T.give - 0.3, T.give + 0.1), palm = seg(t, T.give - 0.25, T.give + 0.35);
+        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.16)).add(MF.fwd.clone().multiplyScalar(0.1)).add(V3(0, 0.2 + 0.025 * Math.sin(t * 4.5) + 0.12 * (1 - magic), 0)), magic, null, 0.08); }
+        arm(mago, "L", PALM, palm, null, 0.04);
+        turnTo(mago, FP, 0.5 * pulse(t, T.rise - 0.2, T.rise + 0.2, T.ocaEnd, T.ocaEnd + 0.4));
+        turnTo(mago, LENS_C, Math.max(pulse(t, T.m1 - 0.25, T.m1 + 0.05, T.m1 + 0.6, T.m1 + 0.9), pulse(t, T.m2 - 0.2, T.m2 + 0.1, T.m2 + 2.3, T.m2 + 2.6), pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1)));
+        { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
+          arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.c5 + 0.1, T.c5 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
+        let e = 0; for (const b of [1.8, 5.0, 8.1, 10.9, 13.9, 15.8, 18.3, 21.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
+        mago.b("eyes").scale.y = 1 - 0.9 * e;
+        santa.b("brows").position.y += 0.016 * Math.max(pulse(t, -1, 0, 2.6, 3.0), pulse(t, T.oca + 0.4, T.oca + 0.7, T.s2 + 2.0, T.s2 + 2.3));
+        talk(santa, "santa", t, SF); talk(mago, "mago", t, MF);
+        solveArms([santa, mago]);
+      }
+      const { springs } = characterSprings(mago, santa, DUR, FPS, poseAt);
+
+      // ---------- props ----------
+      const flyArc = (A, Bp, u, h) => A.clone().lerp(Bp, u).add(V3(0, 4 * h * u * (1 - u), 0));
+      function props(t) {
+        const pc = sAt(t) - PGAP; piano.position.set(pc, 0, SZ); wheels.forEach((w) => (w.rotation.y = -(pc - (SX0 - PGAP)) / 0.025));
+        const v = ss(clamp((t - T.rise) / (T.land - T.rise), 0, 1)), w = ss(clamp((t - T.give) / 0.7, 0, 1)), bob = 0.008 * Math.sin(t * 2.4) * seg(t, T.land, T.land + 0.3) * (1 - w);
+        OC.g.position.copy(flyArc(ONBENCH, FP, v, 0.1)); OC.g.position.y += bob; if (w > 0) OC.g.position.copy(flyArc(FP, INHAND, w, 0.08));
+        OC.g.rotation.set(lerp(lerp(0, 0.8, v), 0.45, w), lerp(lerp(0.15, 0, v), hM - Math.PI / 2 + 0.25, w) + 0.25 * Math.sin((t - T.prod) * 1.1) * pulse(t, T.prod - 0.1, T.prod + 0.2, T.cta - 0.2, T.cta), 0.06 * Math.sin(t * 1.7) * seg(t, T.land, T.land + 0.3) * (1 - w));
+        const mag = seg(t, T.caps, T.caps + 0.4) * (1 - seg(t, T.ocaEnd + 0.1, T.ocaEnd + 0.45));
+        const st = OC.play(t, NOTES, T.oca, mag);
+        scene.updateMatrixWorld(true);
+        for (const id of OC.ALL) { const d = st.since[id], pr = HS[id], P = OC.holeWorld(id);
+          pr.forEach((m, i) => { m.visible = d !== undefined && d < 0.35; if (!m.visible) return; const a = i * 2.4 + id.length;
+            m.position.copy(P).add(V3(Math.cos(a) * 0.04 * d / 0.35, 0.05 * d / 0.35 + 0.01, Math.sin(a) * 0.03 * d / 0.35)); m.scale.setScalar(1 - d / 0.35); m.rotation.y = t * 6; }); }
+        SPK.forEach((m, i) => { let best = null, dt = 9;
+          for (const [t0, Q] of [[T.rise, ONBENCH], [T.caps, FP]]) { const d = t - t0 - (i % 5) * 0.012; if (d > 0 && d < dt) { dt = d; best = Q; } }
+          m.visible = dt < 0.5 && i < 16; if (!m.visible) return; const q = V3((rnd(i) - 0.5) * 0.4, 0.15 + rnd(i + 50) * 0.25, (rnd(i + 99) - 0.5) * 0.4);
+          m.position.copy(best).add(q.multiplyScalar(dt * 0.7)); m.position.y -= 0.35 * dt * dt; m.scale.setScalar(0.25 * (1 - dt / 0.5)); });
+        seaTex.offset.set((t * 0.004) % 1, (t * 0.006) % 1);
+        blobM.position.set(mago.W.position.x, 0.003, mago.W.position.z); blobS.position.set(santa.W.position.x, 0.003, santa.W.position.z);
+      }
+
+      // ---------- camera and editing (every camera looks toward the water) ----------
+      const SHOTS = [
+        { t: 0.0, d: 1.5, fov: 36, from: [0.3, 0.78, 0.12], to: [0.27, 0.76, 0.04], look: [0.08, 0.45, -0.75] },                                          // hook: the ocarina on the bench; the piano rolls in
+        { t: 1.5, d: T.m1 - 0.05 - 1.5, fov: 40, subj: "santa", h: 1.3, az: -50, el: 4, v: 0.2, track: true },                                              // "…para la rambla!": pushing, puffing
+        { t: T.m1 - 0.05, d: T.rise - 0.05 - T.m1 + 0.05, fov: 30, subj: "mago", h: 0.74, az: 48, el: -9, v: -0.02 },                                        // "Yo también."
+        { t: T.rise - 0.05, d: T.oca - 0.25 - T.rise + 0.05, fov: 50, from: [0.35, 1.2, 3.45], to: [0.35, 1.18, 3.3], look: [0.33, 0.62, -0.4] },             // the ocarina rises, tiny next to the piano
+        { t: T.oca - 0.25, d: 7.6 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 6, el: 10, v: 0.0, whip: 1 },                                             // it plays
+        { t: 7.6, d: T.s2 - 0.1 - 7.6, fov: 36, subj: "santa", h: 1.25, az: -38, el: 8, v: 0.2 },                                    // the ocarina in front, the piano and Papá Noel behind
+        { t: T.s2 - 0.1, d: T.give - 0.05 - T.s2 + 0.1, fov: 34, subj: "santa", h: 1.0, az: -40, el: 4, v: 0.2 },                                             // "¿Y eso entra en una mano?"
+        { t: T.give - 0.05, d: T.prod - T.give + 0.05, fov: 36, subj: "mago", h: 1.0, az: 48, el: -3, v: 0.2 },                                               // into his hand: "En una mano…"
+        { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "inhand", h: 0.36, az: 32, el: 16, v: 0.08, push: [1.06, 0.96] },                                       // the product beat
+        { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                     // CTA
+        { t: T.card, d: DUR - T.card, fov: 52, from: [0.35, 1.25, 3.5], to: [0.35, 1.23, 3.4], look: [0.33, 0.66, -0.4] },                                         // the card over the rambla
+      ];
+      const cam = camRig({ camera, shots: SHOTS, chars: { mago, santa }, poseAt, props, points: { oca: FP.clone(), inhand: INHAND.clone() },
+        punch: [[T.s2 + 0.1, 0.06]], shake: [], flash: [[T.prod, 0.12, "#FFFDF2"]],
+        canvasEl: document.getElementById("c"), flashEl: document.getElementById("flash") });
+      cam.measure();
+
+      // ---------- text ----------
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 1.55] });
+      const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+      const snd = document.getElementById("snd"), prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")];
+      function dom(t) {
+        { const a = Math.min(clamp((t - T.oca + 0.2) / 0.2, 0, 1), clamp((T.ocaEnd + 0.3 - t) / 0.2, 0, 1)); snd.style.visibility = a > 0 ? "visible" : "hidden";
+          if (a > 0) { snd.style.opacity = a.toFixed(3); snd.style.transform = `translateX(-50%) scale(${(0.8 + 0.2 * backOut(clamp((t - T.oca + 0.2) / 0.25, 0, 1))).toFixed(3)}) rotate(${(-2 + Math.sin(t * 3)).toFixed(2)}deg)`; } }
+        const pv = t >= T.prod && t < T.cta; prod.style.visibility = pv ? "visible" : "hidden";
+        if (pv) { prod.style.opacity = Math.min(1, (t - T.prod) / 0.1, (T.cta - t) / 0.1).toFixed(3);
+          TAGS.forEach((g, i) => { const a = clamp((t - T.prod - 0.25 - i * 0.35) / 0.25, 0, 1); g.style.opacity = a > 0 ? "1" : "0";
+            g.style.transform = `rotate(${(i ? 3 : -4) + (1 - a) * 10}deg) scale(${(0.7 + 0.3 * backOut(a)).toFixed(3)})`; }); }
+      }
+      let lastT = null;
+      function renderAt(t) { if (t === lastT) return; lastT = t; poseAt(t); springs(t); props(t); cam.at(t); renderer.render(scene, camera); overlay(t); dom(t); }
+
+      /* QA gate: the shared checks (no walls here: a dummy door far away; everyone stays well in front of the wall line z = -1.1),
+         the bench, the rambla wall and the moving piano against both bodies (his arms excluded while he pushes), the ocarina */
+      const DOOR = { x0: 40, x1: 41, h: 1.55, z: -40 }, hinge = new THREE.Group(); hinge.position.set(50, 0, 50); scene.add(hinge);
+      const QB = qaBase({ chars: { mago, santa }, DOOR, hinge, BTRACK, rig: { handC, wp } });
+      const boxD = (p, F) => { const q = V3(clamp(p.x, F.min.x, F.max.x), clamp(p.y, F.min.y, F.max.y), clamp(p.z, F.min.z, F.max.z)); return q.distanceTo(p); };
+      function qa(t) {
+        lastT = null; poseAt(t); springs(t); props(t); scene.updateMatrixWorld(true); const out = [];
+        const pc = piano.position.x;
+        const FURN = [{ name: "bench", min: V3(BN.x0, 0, BN.z0), max: V3(BN.x1, 0.8, BN.z1) }, { name: "wall", min: V3(-6, 0, -1.45), max: V3(6, 0.5, -1.15) },
+          { name: "piano", min: V3(pc - PW / 2, 0, SZ - PD / 2 - 0.01), max: V3(pc + PW / 2, PH + 0.1, SZ + PD / 2 + 0.14) }];
+        for (const [c, nm] of [[mago, "mago"], [santa, "santa"]]) for (const k of c.colliders(true)) for (const p of k.b ? [k.a, k.b, k.a.clone().lerp(k.b, 0.5)] : [k.a]) for (const F of FURN) {
+          if (F.name === "piano" && nm === "santa" && /^(upper|fore)/.test(k.name) && t < T.stop + 0.9) continue;
+          const d = boxD(p, F); if (d < k.r - 0.01) out.push(["furniture", nm, k.name, F.name, +(k.r - d).toFixed(3)]); }
+        const op = OC.g.getWorldPosition(V3(0, 0, 0)), held = t > T.give;
+        for (const [cn, c] of [["mago", mago], ["santa", santa]]) for (const k of c.colliders(true)) { if (held && cn === "mago" && /^(upper|fore)/.test(k.name)) continue;
+          const d = colDist(op, k).d; if (d < (held ? 0.035 : 0.1)) out.push(["ocarina", cn, k.name, +d.toFixed(3)]); }
+        if (boxD(op, FURN[2]) < 0.03) out.push(["ocarina-piano"]);
+        const J = QB(out, []);
+        return { t, out, J };
+      }
+      window.__qa = qa;
+      window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));
+      window.__draw3d = renderAt; window.__T = T; window.__JUMP_OK = [];
+      window.__dbg = { mago, santa, OC, piano, scene, renderer, camera, THREE };
+      renderAt(0);
+      markReady();
+    </script>
+  </body>
+</html>

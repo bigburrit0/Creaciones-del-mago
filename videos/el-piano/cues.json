@@ -1,0 +1,87 @@
+{
+ "duration": 23.05,
+ "sfx": [
+  {
+   "t": 3.87,
+   "s": "whoosh",
+   "pitch": 1.2,
+   "gain": 0.3
+  },
+  {
+   "t": 5.2,
+   "s": "pop",
+   "gain": 0.3
+  },
+  {
+   "t": 14.47,
+   "s": "whoosh",
+   "gain": 0.28
+  },
+  {
+   "t": 16.56,
+   "s": "whoosh",
+   "gain": 0.28
+  },
+  {
+   "t": 20.55,
+   "s": "chime",
+   "gain": 0.6
+  }
+ ],
+ "music": {
+  "style": "ambient",
+  "bpm": 120,
+  "start": 0.0,
+  "tonic": 7,
+  "mode": "mixolydian",
+  "chords": [
+   7,
+   5,
+   0,
+   7
+  ],
+  "chord_beats": 8,
+  "drone": false,
+  "duck": [
+   [
+    0.15,
+    3.11,
+    0.34
+   ],
+   [
+    3.15,
+    3.81,
+    0.34
+   ],
+   [
+    9.6,
+    11.86,
+    0.34
+   ],
+   [
+    11.9,
+    14.48,
+    0.34
+   ],
+   [
+    16.65,
+    20.52,
+    0.18
+   ],
+   [
+    4.9,
+    9.75,
+    0.0
+   ]
+  ],
+  "end_chord": {
+   "t": 20.55
+  },
+  "fade_out": [
+   22.25,
+   23.05
+  ]
+ },
+ "ambience": [],
+ "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the ocarina is its own clip (aud-oca)"
+}

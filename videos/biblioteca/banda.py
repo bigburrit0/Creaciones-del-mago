@@ -276,9 +276,9 @@ def fx_sparkle(p=1.0):
     for k, m in enumerate([84, 88, 91, 96, 100]):
         z = glock(hz(m) * p, 0.8) * 0.35; i = int(k * 0.045 * SR); y[i:i + len(z)] += z[:len(y) - i]
     return reverb(y, 1.0, 0.3)
-def fx_rizz(p=1.0):
+def fx_rizz(p=1.0, d=1.0):
     """a smug glint: a bass swell under a sparkle (the role of the viral 'rizz' sound)"""
-    d = 1.0; t = T(d); fr = 70 * p * (1 + 0.35 * np.clip(t / 0.5, 0, 1))
+    t = T(d); fr = 70 * p * (1 + 0.35 * np.clip(t / 0.5, 0, 1))
     b = sat(np.sin(2 * np.pi * np.cumsum(fr) / SR) * np.sin(np.pi * np.clip(t / d, 0, 1)) * (0.7 + 0.3 * np.sin(2 * np.pi * 7 * t)), 2.0) * 0.6
     s = fx_sparkle(1.2 * p)[:len(b)]; y = b.copy(); y[:len(s)] += s * 0.7; return y
 def fx_uhoh(p=1.0):
@@ -317,16 +317,23 @@ def fx_gull(p=1.0):
     d = 0.42; t = T(d); fr = (1700 - 900 * t / d) * p
     y = np.sin(2 * np.pi * np.cumsum(fr) / SR + 2.5 * np.sin(2 * np.pi * np.cumsum(fr * 0.5) / SR)) * env(d, 0.01, 0.1)
     return bp(y + 0.2 * noise(d), 800, 4000) * 0.4
+def fx_silbido(p=1.0):
+    """an innocent whistled tune (two characters pretending nothing happened)"""
+    y = np.zeros(int(1.5 * SR))
+    for at, m, ln in ((0, "E6", .18), (.2, "C6", .18), (.4, "G5", .25), (.7, "A5", .18), (.9, "G5", .4)):
+        z = whistle(f(m) * p, ln); i = int(at * SR); y[i:i + len(z)] += z[:len(y) - i]
+    return reverb(y, 0.8, 0.2) * 0.6
 def fx_peck(p=1.0): return wood(2200 * p, 0.6)
 def fx_snore(p=1.0, d=1.2):
     t = T(d); y = lp(noise(d), 600) * np.sin(np.pi * np.clip(t / d, 0, 1)) ** 2 * (0.6 + 0.4 * np.sin(2 * np.pi * 28 * t)); return y * 0.6
 def fx_rustle(p=1.0, d=0.3): t = T(d); return bp(noise(d), 2000, 8000) * np.abs(np.sin(np.pi * 3 * t / d)) * env(d, 0.01, 0.08) * 0.35
 def fx_flipflop(p=1.0): d = 0.08; return (bp(noise(d), 500, 4000) * edec(d, 60) + np.sin(2 * np.pi * 220 * T(d)) * edec(d, 70) * 0.4) * 0.9
 def fx_sip(p=1.0, d=0.6): t = T(d); return bp(noise(d), 1500, 5000) * (0.4 + 0.6 * np.abs(np.sin(2 * np.pi * 7 * t))) * env(d, 0.03, 0.1) * 0.25
-def fx_confetti(p=1.0):
-    y = fx_boom(1.6 * p)[: int(1.2 * SR)] * 0.5; s = fx_sparkle(p); y[:len(s)] += s; return y
+def fx_confetti(p=1.0, d=1.2):
+    y = fx_boom(1.6 * p)[: int(d * SR)] * 0.5; s = fx_sparkle(p)[: int(d * SR)]; y[:len(s)] += s
+    k = int(min(0.15, d / 3) * SR); y[-k:] *= np.linspace(1, 0, k); return y
 def fx_printer(p=1.0, d=0.8):
-    t = T(d); return lp(np.sin(2 * np.pi * 180 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 9 * t)) + 0.2 * noise(d), 1200) * env(d, 0.05, 0.1) * 0.25
+    t = T(d); return lp(np.sin(2 * np.pi * 150 * t) * (0.5 + 0.5 * np.sin(2 * np.pi * 9 * t)) + 0.05 * noise(d), 600, 3) * env(d, 0.08, 0.15) * 0.25
 def fx_door(p=1.0): return fx_thud(0.8 * p) * 1.2
 def fx_heave(p=1.0): return fx_slide_up(0.6 * p, 0.3) * 0.5
 def fx_fuse(p=1.0, d=0.5): t = T(d); return hp(noise(d), 3000) * (0.4 + 0.6 * (rng.uniform(size=len(t)) > 0.92)) * env(d, 0.01, 0.05) * 0.3
@@ -338,7 +345,7 @@ OLD = {"tap": "tap", "clack": "clack", "pop": "pop", "whoosh": "whoosh", "chime"
        "bell": "ding", "thud": "thud", "boom": "boom", "sting": "dundun", "sad": "sadtrombone", "surprise": "slide_up",
        "item_get": "tada", "victory": "tada", "plop": "thud", "sack_plop": "thud", "click": "toc", "printer": "printer",
        "snore": "snore", "rustle": "rustle", "flutter": "rustle", "flap": "rustle", "chirp": "gull", "peck": "peck",
-       "tiptoe": "tiptoe", "whistle": "slide_up", "flipflop": "flipflop", "door_bang": "door", "door_close": "door",
+       "tiptoe": "tiptoe", "whistle": "silbido", "flipflop": "flipflop", "door_bang": "door", "door_close": "door",
        "step": "toc", "sip": "sip", "relief": "chime", "idea": "ding", "heave": "heave", "fuse": "fuse", "puff": "whoosh",
        "lur": "lur", "creak": "toc"}
 
@@ -369,7 +376,7 @@ class Song:
         if i < self.n: n = min(len(y), self.n - i); self.sfx[i:i + n] += y[:n] * g
         self.fxlog.append((round(t, 3), OLD.get(name, name), allow_on_word))
     def stop(self, t0, t1, ramp=0.03): self.stops.append((t0, t1, ramp))
-    def old_sfx(self, path, skip=(), gain=1.0, only_before=None):
+    def old_sfx(self, path, skip=(), gain=1.0, only_before=None, avoid_words=True):
         """the reel's existing action-synced effects (cues.json), each re-voiced with the new sounds (OLD map); skip names or (name, t) pairs"""
         for c in json.load(open(path)).get("sfx", []):
             nm = c["s"]
@@ -377,6 +384,7 @@ class Song:
             for k in range(c.get("n", 1)):
                 t = c["t"] + k * c.get("every", 0)
                 if only_before and t >= only_before: continue
+                if avoid_words and any(a + 0.05 < t < b - 0.05 for a, b, _ in self.voices): continue      # never on a word, even where the old cues allowed it
                 self.fx(nm, t, min(0.9, c.get("gain", 0.5) * gain), c.get("pitch", 1.0) * c.get("pitch_step", 1.0) ** k)
     def on_word(self):
         """effects that start inside a spoken line (never allowed unless marked): (t, name, the line)"""
@@ -389,7 +397,7 @@ class Song:
             if tk["rv"] > 0: x = reverb(x, tk["rt"], tk["rv"])
             m += x * tk["g"]
         if master_hi: m = lp(m, master_hi)
-        g = np.ones(self.n); r = int(0.12 * SR)
+        g = np.ones(self.n); r = int(0.2 * SR)
         for a, b, txt in self.voices:                            # duck under every line, with soft ramps
             dk = self.cta_duck if re.search(r"Coment|Pedidos|Escrib|Etiquet|diciembre", txt) else self.duck
             i0, i1 = int((a - 0.06) * SR), int((b + 0.1) * SR); g[max(0, i0):i1] = np.minimum(g[max(0, i0):i1], dk)

@@ -11,7 +11,7 @@ d = sys.argv[1]; html = open(os.path.join(d, "index.html")).read()
 dur = float(re.search(r'data-composition-id="main"[^>]*data-duration="([0-9.]+)"', html).group(1)); n = int(dur * SR)
 def load(p): return np.frombuffer(subprocess.run(["ffmpeg", "-loglevel", "error", "-i", p, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True).stdout, np.float32)
 voice, music, mask = np.zeros(n), np.zeros(n), np.zeros(n, bool)
-for tag in re.findall(r"<audio[^>]*>", html):
+for tag in re.findall(r"<audio[^>]*class=\"clip\"[^>]*>", html):
     at = dict(re.findall(r'([\w-]+)="([^"]*)"', tag)); x = load(os.path.join(d, at["src"]))[:int(float(at["data-duration"]) * SR)] * float(at.get("data-volume", 1))
     i = int(float(at["data-start"]) * SR); k = max(0, min(len(x), n - i))
     if "data-who" in at: voice[i:i + k] += x[:k]; mask[i:i + k] = True

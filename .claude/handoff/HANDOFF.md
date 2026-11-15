@@ -1,6 +1,16 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
+**GALERÍAS DE FOTOS REALES (15/11):** el dueño pidió que en la parte de producto se vean varias fotos reales que vayan cambiando, y fotos de estudio.
+- Los 12 reels (13 videos) tienen ahora una galería:
+  - 3 a 5 fotos cambiando cada ~0,5 s, con «swish» cuando no hay voz;
+  - en «Papá Noel en ojotas» e «Invisible no era», que no tenían esa parte, va debajo del llamado final.
+- Herramienta: `videos/biblioteca/galeria.py REEL`, con la configuración en `REEL/galeria.json`. Después de usarla se corre `rehacer_audio.py REEL --swap`.
+- Paquete para Gemini: `videos/ENTREGA/fotos_para_gemini.zip` (16 fotos, `INSTRUCCIONES.md`, `PEDIDOS.md`, `FOTOS_NUEVAS.md`).
+- **Cuando lleguen las fotos de estudio:**
+  - guardarlas en `assets/estudio/` (nombre igual a la original; las nuevas con `-2`, `-3`…);
+  - correr `galeria.py` y `rehacer_audio.py --swap` en cada reel.
+
 **MÚSICA Y EFECTOS NUEVOS (15/11):** el dueño dijo «La música no tiene mucho sentido» y pidió música acorde a cada video y efectos humorísticos que estén de moda.
 - Auditoría y resultado: `videos/AUDIT_MUSICA.md`.
 - Los 12 reels (13 videos) tienen partitura propia (`videos/REEL/musica.py`) y efectos cómicos originales.

@@ -194,3 +194,11 @@ Each row: what the person saw → the real cause → the rule now → where it i
 | HeyGen, Openverse and Lyria were unavailable | The network blocks the first two; Lyria 3 has a 0 quota on the free key | Synthesise with numpy (additive plucks and mallets, reeds, brass, drums, a convolution reverb). `rehacer_audio.py REEL --swap` re-scores a finished reel without touching its picture |
 | An old effect started inside a word | The old cues allowed some names inside lines | `Song.old_sfx` drops every inherited effect that starts inside a line; `Song.write` lists any new one that does |
 | The music sounded too quiet after the switch | Real instruments carry less energy than square waves | Level by measurement: about 22 dB under the voices, never above -10 dB in the gaps (`rehacer_audio.py` sets the page's volume) |
+
+## Real product photos (2026-11-15: "que vayan cambiando las imágenes de productos")
+
+| Seen | Cause | Rule |
+|---|---|---|
+| The owner wanted people to see the real product, not only the 3D renders | One still photo for about 2 s | The proof window is a gallery: the product's photo, details of it, and the rest of the line, one after another (`biblioteca/galeria.py`, `REEL/galeria.json`). Reels without a proof window get it under the call to action |
+| — | Re-rendering the 3D only to change an overlay costs half an hour per reel | The gallery is a small HyperFrames page (no 3D) laid over the reel with ffmpeg in its window. The one-photo version is kept as `REEL_sin_galeria.mp4` (not versioned), so it can be rebuilt |
+| The site's photos are 600 px and several are home shots | — | `videos/ENTREGA/fotos_para_gemini.zip`: instructions, one prompt per photo and a shot list for studio photos that keep the product identical. Studio photos go in `assets/estudio/<name>.png` (new ones `<name>-2.png`…); `galeria.py` prefers them, and new ones replace the detail crops |

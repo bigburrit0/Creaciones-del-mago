@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=1080, height=1920">
+<script src="gsap.min.js"></script>
+<script>window.__timelines = window.__timelines || {}; window.__draw = null;
+const tl = gsap.timeline({ paused: true }); tl.to({}, { duration: 2.2, ease: "none", onUpdate: () => window.__draw && window.__draw(tl.time()) }); window.__timelines["main"] = tl;</script>
+<style>
+@font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-700.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka-600.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-700.woff2") format("woff2"); font-weight: 700; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #150A34; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: radial-gradient(ellipse at 50% 45%, #3A2A6E 0%, #150A34 78%); }
+.tt { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font: 700 96px/1 "Fredoka", sans-serif; color: #F2C14E; -webkit-text-stroke: 12px #150A34; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0,0,0,0.35); }
+.st { position: absolute; left: 60px; right: 60px; top: 1500px; text-align: center; font: 600 44px/1.25 "Fredoka", sans-serif; color: #FFF6E5; letter-spacing: 1px; }
+.card { position: absolute; left: 110px; top: 480px; width: 860px; padding: 20px 20px 0; background: #FFFDF6; border-radius: 22px; box-shadow: 0 18px 0 rgba(0,0,0,0.3); transform-origin: 50% 60%; will-change: transform; }
+.win { width: 820px; height: 820px; overflow: hidden; border-radius: 12px; background: #fff; }
+.win img { width: 820px; height: 820px; object-fit: cover; display: block; transform-origin: 50% 50%; }
+.lab { font: 700 60px/1 "Caveat", cursive; color: #24306B; text-align: center; padding: 14px 0 18px; }
+#dots { position: absolute; left: 0; right: 0; top: 1418px; text-align: center; }
+#dots span { display: inline-block; width: 20px; height: 20px; border-radius: 10px; margin: 0 9px; background: rgba(255,246,229,0.35); }
+#dots span.on { background: #F2C14E; }
+#flash { position: absolute; inset: 0; background: #FFFDF2; opacity: 0; }
+</style></head>
+<body><div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="1080" data-height="1920">
+<div class="tt">Así es<br>de verdad</div>
+<div class="card"><div class="win"><img src="assets/fotos/plegable.webp" alt=""></div><div class="lab">el ajedrez de viaje</div></div>
+<div class="card"><div class="win"><img src="assets/fotos/plegable.webp" alt=""></div><div class="lab">el tubo</div></div>
+<div class="card"><div class="win"><img src="assets/fotos/plegable.webp" alt=""></div><div class="lab">las piezas, adentro</div></div>
+<div id="dots"><span></span><span></span><span></span></div>
+<div class="st">Se pliega en un tubo de 24 cm con las piezas adentro</div>
+<div id="flash"></div>
+</div>
+<script>
+const S = [{"zoom": 1, "fx": 0.5, "fy": 0.5}, {"zoom": 1.7, "fx": 0.32, "fy": 0.38}, {"zoom": 1.7, "fx": 0.6, "fy": 0.78}], ST = [0.0, 0.75, 1.475], D = 2.2, FLASH = true;
+const cards = [...document.querySelectorAll(".card")], imgs = cards.map((c) => c.querySelector("img")), dots = [...document.querySelectorAll("#dots span")];
+const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3), TR = 0.18;
+function draw(t) {
+  let k = 0; for (let i = 0; i < ST.length; i++) if (t >= ST[i]) k = i;
+  cards.forEach((c, i) => {
+    const end = i + 1 < ST.length ? ST[i + 1] : D + 1, a = ease((t - ST[i]) / TR), out = i + 1 < ST.length ? ease((t - ST[i + 1]) / TR) : 0;
+    const vis = t >= ST[i] && (i + 1 >= ST.length || t < ST[i + 1] + TR);
+    c.style.visibility = vis ? "visible" : "hidden"; if (!vis) return;
+    const rot = (i % 2 ? 2.5 : -2.5);
+    const x = i === 0 && t < TR ? 0 : (1 - a) * 1150 - out * 1150, r = (1 - a) * (rot + 7) + rot * (1 - out) - out * 9, sc = (i === 0 ? 0.85 + 0.15 * ease(t / 0.3) : 1);
+    c.style.transform = `translateX(${x.toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${sc.toFixed(3)})`; c.style.zIndex = String(10 + i);
+    const s = S[i], u = Math.min(1, Math.max(0, (t - ST[i]) / (end - ST[i]))), z = s.zoom * (1 + 0.06 * u);
+    imgs[i].style.transformOrigin = `${(s.fx * 100).toFixed(1)}% ${(s.fy * 100).toFixed(1)}%`; imgs[i].style.transform = `scale(${z.toFixed(4)})`;
+  });
+  dots.forEach((d, i) => d.classList.toggle("on", i === k));
+  document.getElementById("flash").style.opacity = FLASH ? Math.max(0, 0.9 * (1 - t / 0.12)).toFixed(3) : "0";
+}
+window.__draw = draw; window.addEventListener("hf-seek", (e) => draw(e.detail.time)); draw(0);
+</script></body></html>

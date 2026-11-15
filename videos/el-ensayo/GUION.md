@@ -27,3 +27,11 @@ Envío gratis solo en La Unión, La Blanqueada y parte de Buceo; mando a todo Ur
 ¿Para quién es la ocarina?
 Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso. El último día para pedir es el 23 de diciembre.
 ```
+
+## Result (2026-11-15)
+
+`el-ensayo.mp4`: 24.6 s, 1080×1920, 60 fps.
+- QA gate 0 bad frames (the mouthpiece checked against his face, moustache and beard every frame), 0 jumps, deterministic; flicker scan 0 frames.
+- Sound rebuilt with `remezclar.py` to -14.2 LUFS (peak -4.3 dBFS); music 27 dB under the voices, 18 dB under them in the gaps.
+- Mix transcription: every line clear.
+- The squeak and "Noche de paz" are synthesised ("Sonido digital"); the ocarina goes back to Papá Noel's mittens for the product beat.

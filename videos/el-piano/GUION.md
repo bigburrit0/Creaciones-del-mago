@@ -27,3 +27,11 @@ Pedidos para Navidad: hasta el 23 de diciembre.
 ¿Para quién es? ¿Para la rambla o para regalar?
 Te paso precio y fecha por WhatsApp, antes de empezar y sin compromiso.
 ```
+
+## Result (2026-11-15)
+
+`el-piano.mp4`: 23.05 s, 1080×1920, 60 fps.
+- QA gate 0 bad frames (the second run: the piano kept 45 cm ahead of him so his jacket's knot clears it), 0 jumps, deterministic; flicker scan 0 frames.
+- Sound rebuilt with `remezclar.py` to -14.1 LUFS (peak -4.3 dBFS); music 25 dB under the voices, 17 dB under them in the gaps.
+- Mix transcription: every line clear.
+- A new set: the rambla (paving, the low wall, the water, a bench, a lamp post); the ocarina plays an original phrase (synthesised, "Sonido digital") and lands in El Mago's hand.

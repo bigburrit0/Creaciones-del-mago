@@ -181,7 +181,7 @@
       const { SPK } = makeFX();
 
       // ---------- staging (El Mago at the bronze end, Papá Noel at his red end) ----------
-      const MD = V3(TC.x - 0.6, 0, BC.z), SD = V3(TC.x + 0.62, 0, BC.z), hM = Math.PI / 2, hS = -Math.PI / 2;
+      const MD = V3(TC.x - 0.6, 0, BC.z), SD = V3(TC.x + 0.67, 0, BC.z)        /* 5 cm further than in "Los gatos": his jacket knot clears the cloth hanging from the table */, hM = Math.PI / 2, hS = -Math.PI / 2;
       const LENS_C = V3(1.08, 1.05, 1.1), BOARDPT = V3(BC.x, 0.62, BC.z);
       for (const [c, off] of [[santa, 0.2], [mago, 0.6]]) c.add("Idle_Loop", -0.3, DUR + 1, { off });
       const { frame, wp, IKQ, arm, handC, headPt, solveArms } = makeRig([mago, santa]);

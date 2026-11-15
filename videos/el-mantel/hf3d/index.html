@@ -203,7 +203,7 @@
         rotWorld(santa.b("DEF-head"), SF.left, 0.1 * pulse(t, T.parts, T.parts + 0.3, T.pieces + 2.0, T.pieces + 2.4));   // watches the board
         // ---- El Mago: deadpan at the cloth; the magic hand (left, raised) for the board; to the viewer for the CTA (a 0.55 s reach)
         const magic = pulse(t, T.snap - 0.4, T.snap + 0.05, T.parts + 1.1, T.parts + 1.6);
-        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.12)).add(MF.fwd.clone().multiplyScalar(0.22)).add(V3(0, 0.1 + 0.02 * Math.sin(t * 5), 0)), magic, null, 0.08); }
+        { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.12)).add(MF.fwd.clone().multiplyScalar(0.16)).add(V3(0, 0.1 + 0.02 * Math.sin(t * 5) + 0.15 * (1 - magic), 0)), magic, null, 0.08); }   /* the hand arcs up, clear of the table's edge */
         rotWorld(mago.b("DEF-head"), MF.left, 0.12 * pulse(t, T.m1 - 0.1, T.m1 + 0.2, T.s2 + 0.6, T.s2 + 1.0));    // looks down at the cloth
         turnTo(mago, LENS_C, pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1));
         { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
@@ -238,8 +238,9 @@
         // the board: hidden until the snap; each part flies in from outside and settles with a small bounce
         PB.g.visible = t >= T.parts - 0.05;
         PB.parts.forEach((pt, i) => { const t0 = T.parts + (i < 4 ? i * 0.3 : 1.25 + (i - 4) * 0.25), u = clamp((t0 === 0 ? 0 : t - t0) / 0.45, 0, 1);
-          pt.g.visible = t >= t0; const from = pt.home.clone().add(pt.out.clone().multiplyScalar(0.45)).add(V3(0, 0.22, 0));
-          pt.g.position.copy(flyArc(from, pt.home, ss(u), 0.05)); pt.g.position.y += 0.004 * Math.sin(Math.PI * clamp((u - 0.8) / 0.2, 0, 1)); pt.g.rotation.y = (1 - ss(u)) * (i % 2 ? 1.1 : -1.1); });
+          pt.g.visible = t >= t0; const from = pt.home.clone().add(pt.out.clone().multiplyScalar(0.05)).add(V3(0, 0.2, 0));   /* from just above its place, below both hats (QA: from the sides the frame's long sides crossed their heads, from high up El Mago's brim) */
+          pt.g.position.copy(flyArc(from, pt.home, ss(u), 0.03)); pt.g.position.y += 0.004 * Math.sin(Math.PI * clamp((u - 0.8) / 0.2, 0, 1)); pt.g.rotation.y = (1 - ss(u)) * (i % 2 ? 1.1 : -1.1);
+          pt.g.scale.setScalar(Math.max(0.001, 0.25 + 0.75 * ss(clamp(u * 1.8, 0, 1)))); });
         // sparkles: the snap (the pieces leave), each piece landing back
         SPK.forEach((m, i) => { let best = null, dt = 9;
           const ev = [[T.snap, BC.clone().setY(CL + 0.05)], [T.pieces + 0.15, PB.sq(3, 7)], [T.pieces + 0.55, PB.sq(4, 6)], [T.pieces + 0.95, PB.sq(3, 1)], [T.pieces + 1.35, PB.sq(4, 0)]];
@@ -252,14 +253,14 @@
       // ---------- camera and editing (every camera looks toward a wall) ----------
       const X = BC.x, Z = BC.z, PL = PCS.find((p) => p === TIPPER).cl;
       const SHOTS = [
-        { t: 0.0, d: T.m1 - 0.05, fov: 46, subj: "santa", h: 1.35, az: -50, el: 12, v: 0.38 },                                    // Christmas Eve: his red vikings on the tablecloth
+        { t: 0.0, d: T.m1 - 0.05, fov: 52, from: [X - 0.5, 1.0, Z + 0.42], to: [X - 0.46, 0.99, Z + 0.4], look: [X + 0.45, 0.74, Z - 0.02] },                       // along the table: his red vikings on the cloth, Papá Noel proud behind them                                    // Christmas Eve: his red vikings on the tablecloth
         { t: T.m1 - 0.05, d: T.wob - 0.03 - T.m1 + 0.05, fov: 32, subj: "mago", h: 0.95, az: 48, el: -9, v: 0.12 },                                                        // "Eso es un mantel."
         { t: T.wob - 0.03, d: T.s2 - 0.05 - T.wob + 0.03, fov: 40, from: [X - 0.06, CL + 0.105, Z + 0.13], to: [X - 0.05, CL + 0.1, Z + 0.125], look: [PL.x, CL + 0.03, PL.z] },   // a pawn on the fold tips over
         { t: T.s2 - 0.05, d: T.snap - 0.05 - T.s2 + 0.05, fov: 34, subj: "santa", h: 1.1, az: -35, el: 4, v: 0.15 },                                                       // "¿Y qué tiene?"
         { t: T.snap - 0.05, d: T.parts - T.snap + 0.05, fov: 40, subj: "mago", h: 1.3, az: 40, el: 2, v: 0.22, whip: 1 },                                                  // El Mago's magic
         { t: T.parts, d: T.pieces - 0.1 - T.parts, fov: 50, from: [X, CL + 1.05, Z + 0.04], to: [X, CL + 0.98, Z + 0.035], look: [X, CL, Z] },                            // the parts fit together, from above
         { t: T.pieces - 0.1, d: T.m3 - 0.15 - T.pieces + 0.1, fov: 42, from: [X - 0.04, CL + 0.55, Z + 0.66], to: [X - 0.02, CL + 0.5, Z + 0.6], look: [X, CL + 0.02, Z - 0.03] },   // the pieces land, rank by rank
-        { t: T.m3 - 0.15, d: T.proof - T.m3 + 0.15, fov: 38, subj: "mago", h: 1.3, az: 40, el: -3, v: 0.12, aim: [-0.12, 0.0, 0.1], whip: 1 },                             // "Pedidos hasta el 23 de diciembre." (the calendar page on the right)
+        { t: T.m3 - 0.15, d: T.proof - T.m3 + 0.15, fov: 38, subj: "mago", h: 1.3, az: 40, el: -3, v: 0.12, aim: [-0.26, 0.0, 0.22], whip: 1 },                             // "Pedidos hasta el 23 de diciembre." (the calendar page on the right)
         { t: T.proof, d: T.cta - T.proof, fov: 30, subj: "mago", h: 0.72, az: 50, el: -9, v: -0.02 },                                                                     // (under the proof panel)
         { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                                 // CTA
         { t: T.card, d: DUR - T.card, fov: 54, from: [X, 1.05, Z + 0.95], to: [X, 1.03, Z + 0.89], look: [X, 0.66, Z - 0.02] },                                            // the card over the board

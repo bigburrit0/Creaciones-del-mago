@@ -1,6 +1,10 @@
 # Traspaso — Creaciones del Mago: reel de Navidad "Papá Noel en ojotas" — actualizado 2026-11-14
 
 ## Próximo paso exacto
+**PARTITURAS DEL DUEÑO (15/11):** el dueño mandó 4 partituras con permiso de uso y pidió guardarlas para reels futuros: `videos/biblioteca/partituras/` (imágenes, transcripción JSON y `LEEME.md` con la regla). Se convierten en música con `videos/biblioteca/partitura_synth.py`. Cuando mande más, guardarlas ahí con el mismo formato.
+
+**OCARINA DE 12 AGUJEROS (15/11):** los 4 reels están hechos: `videos/la-batata`, `doce-agujeros`, `el-piano`, `el-ensayo` (sonido sintetizado y marcado "Sonido digital", a pedido del dueño; música de sus partituras; copy en cada `GUION.md`). Plan: `videos/PLAN_OCARINA.md`.
+
 **SEGUNDA TANDA DE NOVIEMBRE: LOS CUATRO REELS TERMINADOS (15/11, ~2:30 UTC).** Todos están commiteados, enviados, con caption, DM y la sección "Result" en `GUION.md`:
 - W1 "Los gatos tiran todo": publicar el domingo 29/11;
 - W2 "La gaviota": publicar el jueves 3/12;

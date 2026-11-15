@@ -42,3 +42,11 @@ The ambient bed was replaced by music made from the owner's score p02 (vals en l
 permission), with `../biblioteca/partitura_synth.py`: a soft music box, a pad and a bass, ducked under the voices and out
 under the ocarina. Rebuild: `bash ../ocarina/build_reel.sh "b1 b2 b3 b4 b5" "escala" "p02-vals-la-menor 1-13 1.0"`, then `remezclar.py` (the picture is byte-identical).
 Levels: music -24.1 dB under the voices, -16.6 dB in the gaps; -14.1 LUFS; every line clear in the mix transcription.
+
+### The band (2026-11-15, third mix)
+
+The owner found the music-box version too empty and asked for piano, percussion, bass, a synthesiser and a theremin. Now
+`../biblioteca/partitura_banda.py` plays the same score as a band: the piano (melody and chords on each beat), a soft drum
+groove, the bass, a detuned saw pad and a theremin that carries the melody in the gaps between spoken lines (out under the
+voices; the piano carries it there). Everything ducks under the voices and is out under the ocarina; +2.5 dB over the old
+bed. Levels: music -23.0 dB under the voices, -13.7 dB in the gaps; -14.1 LUFS; every line clear in the mix transcription.

@@ -21,6 +21,8 @@ silencio), y `chord` (las notas del acorde del compás) o `bass` (la línea del 
 **Límite:** las transcripciones se hicieron a ojo desde imágenes de 484 px. Están marcadas `approx`: la forma de la melodía
 y la armonía están, pero alguna nota suelta puede diferir. Si el dueño manda MIDI o MusicXML, se pasan exactas.
 
-**Cómo se usan:** `python3 ../partitura_synth.py partituras/<pieza>.json <reel>/cues.json <reel>/hf3d/assets/audio/music.wav --ref <bed anterior> --bars A-B --tempo T`,
+**Con banda (15/11, a pedido del dueño: "la música se siente muy vacía"):** `../partitura_banda.py` toca la partitura con piano, batería, bajo, sintetizador y theremin (el theremin lleva la melodía entre las líneas habladas y se corre debajo de las voces). Es la versión que usan los reels de la ocarina.
+
+**Cómo se usan (versión simple, cajita de música):** `python3 ../partitura_synth.py partituras/<pieza>.json <reel>/cues.json <reel>/hf3d/assets/audio/music.wav --ref <bed anterior> --bars A-B --tempo T`,
 o el tercer argumento de `videos/ocarina/build_reel.sh`. La música queda suave, por debajo de las voces (20-25 dB) y se
 corta debajo de la ocarina; se revisa con `nivel_musica.py` y la transcripción de la mezcla.

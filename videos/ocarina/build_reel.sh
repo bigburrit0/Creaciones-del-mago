@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Shared build for the four ocarina reels (../PLAN_OCARINA.md). Usage, from a reel folder: bash ../ocarina/build_reel.sh "a1 a2 a3" "oda chirrido"
-# Optional third argument: "SCORE BARS TEMPO" (a score from biblioteca/partituras) replaces the ambient bed with music
-# made from that score (biblioteca/partitura_synth.py), matched in loudness to the bed.
+# Optional third argument: "SCORE BARS TEMPO" (a score from biblioteca/partituras) replaces the ambient bed with a band
+# (piano, drums, bass, synth, theremin) playing that score (biblioteca/partitura_banda.py), +2.5 dB over the bed, matched in loudness to the bed.
 # Copies three.js, the kit (toon3d, escena3d, ocarina3d), the GLBs, fonts, the reel's voices (from ../ocarina/voz) and its
 # synthesised ocarina phrases (from ../ocarina/sonido, made by biblioteca/ocarina_synth.py), makes the talk envelopes and
 # synthesises the ambient bed and effects from cues.json (run cues.py first).
@@ -40,5 +40,6 @@ json.dump(env, open("hf3d/assets/voz/env.json", "w"))
 PY
 python3 ../../skills/pixel-reel/scripts/chiptune.py cues.json hf3d/assets/audio
 if [ -n "$3" ]; then set -- $3; cp hf3d/assets/audio/music.wav hf3d/assets/audio/music_ambient.wav
-  python3 ../biblioteca/partitura_synth.py ../biblioteca/partituras/$1.json cues.json hf3d/assets/audio/music.wav --ref hf3d/assets/audio/music_ambient.wav --bars $2 --tempo $3; fi
+  python3 ../biblioteca/partitura_banda.py ../biblioteca/partituras/$1.json cues.json hf3d/assets/audio/music.wav --ref hf3d/assets/audio/music_ambient.wav --bars $2 --tempo $3
+  ffmpeg -loglevel error -y -i hf3d/assets/audio/music.wav -af "volume=2.5dB,alimiter=limit=0.9:level=disabled" -ar 44100 hf3d/assets/audio/_m.wav && mv hf3d/assets/audio/_m.wav hf3d/assets/audio/music.wav; fi
 echo ok

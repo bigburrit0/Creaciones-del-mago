@@ -13,6 +13,7 @@ partituras nuevas, se guardan acá con el mismo formato y se anotan en la tabla.
 | `p02-vals-la-menor.json` | Vals en la menor, 3/4, tempo no indicado (♩=138 supuesto; compases 1-13) | `p02-vals-la-menor-a.png`, `-b.png` | Doce agujeros |
 | `p03-sol-menor-155.json` | Sol menor, compás partido, ♩=155, arpegios en corcheas (compases 1-8) | `p03-sol-menor-155.png` | El ensayo (al 80 % del tempo) |
 | `p04-sol-menor-60.json` | Sol menor, 4/4, ♩=60, expressivo, después semicorcheas acentuadas (compases 1-8) | `p04-sol-menor-60.png` | El piano |
+| (misma pieza, más páginas) | Continuación de la pieza 4, recibida el 15/11: compases 11-18 (pág. 2), 19-23 (pág. 3), 24-29 con el cambio a 6/4 y 2/2 (pág. 4), 30-34 *maestoso*, *ff* (pág. 5), 39-48 hasta *fff* (pág. 7). Aún sin transcribir: se pasa a JSON cuando un reel la use. Los compases marcados en rosa (15, 22, 42) vienen así en las imágenes | `p04-sol-menor-60-pag2.png` … `-pag7.png` | — |
 
 **Formato:** `bpm`, `beats_per_bar` y una lista de compases, cada uno con `mel` (nota y duración en negras; `"r"` es
 silencio), y `chord` (las notas del acorde del compás) o `bass` (la línea del bajo).

@@ -49,3 +49,17 @@ If there is no answer in about 24 h, send once:
 ## Suggested publish date
 
 Sunday 6/12 (after "La gaviota" on Thursday 3/12).
+
+## Result (2026-11-15)
+
+`el-laberinto.mp4`: 23.0 s, 1080 × 1920, 60 fps.
+
+| Check | Result |
+|---|---|
+| QA gate | 0 bad frames of 1380, 0 pose jumps, deterministic. The gate covers his mitten against every wall block, the temple and the pieces |
+| Flicker scan | 0 frames (cuts at 1.55, 2.7, 3.7, 4.65, 6.8, 9.55, 13.05, 14.95, 17.15, 20.3) |
+| Loudness | the render came out at -14.9 LUFS. It was re-mixed with `remezclar.py` to -14.5 LUFS, peak -4.0 dBFS, the same as the other reels. The picture is byte-identical (same md5) |
+| Steady buzz | none: no 37 Hz line above 6 kHz, and the high band sits at -33.7 dBFS |
+| Music | 24.2 dB under the voices and 14.6 dB under them in the gaps (`nivel_musica.py`) |
+| Voices in the mix | every line is clear ("Y este trae su tablero, 52 por 50") |
+| Contact sheet | 15 real frames were looked at: the labyrinth from above rising into the board, the Minotaur, Hercules raising his club, Papá Noel leaning in, his mitten on the walls from above, the deadpan, the tapes with "52 cm" and then "52 × 50 cm", "¡Qué tablero!", the proof, the CTA |

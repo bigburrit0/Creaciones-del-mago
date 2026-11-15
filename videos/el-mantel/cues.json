@@ -1,0 +1,94 @@
+{
+ "duration": 24.5,
+ "sfx": [
+  {
+   "t": 4.369999999999999,
+   "s": "tap",
+   "pitch": 0.7,
+   "gain": 0.4
+  },
+  {
+   "t": 6.02,
+   "s": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 12.6,
+   "s": "whoosh",
+   "pitch": 0.9,
+   "gain": 0.3
+  },
+  {
+   "t": 22.0,
+   "s": "chime",
+   "gain": 0.6
+  },
+  {
+   "t": 17.31,
+   "s": "whoosh",
+   "gain": 0.3
+  },
+  {
+   "t": 15.62,
+   "s": "tap",
+   "pitch": 0.9,
+   "gain": 0.7
+  }
+ ],
+ "music": {
+  "style": "ambient",
+  "bpm": 120,
+  "start": 0.0,
+  "tonic": 0,
+  "mode": "ionian",
+  "chords": [
+   0,
+   5,
+   7,
+   0
+  ],
+  "chord_beats": 8,
+  "drone": false,
+  "duck": [
+   [
+    0.15,
+    1.87,
+    0.34
+   ],
+   [
+    2.25,
+    3.75,
+    0.34
+   ],
+   [
+    4.45,
+    5.91,
+    0.34
+   ],
+   [
+    6.25,
+    12.28,
+    0.34
+   ],
+   [
+    12.7,
+    14.98,
+    0.18
+   ],
+   [
+    17.45,
+    21.75,
+    0.18
+   ]
+  ],
+  "end_chord": {
+   "t": 22.0
+  },
+  "fade_out": [
+   23.7,
+   24.5
+  ]
+ },
+ "ambience": [],
+ "_voices": "the voice lines live in hf3d/index.html (<audio data-who>); the music ducks under each one"
+}

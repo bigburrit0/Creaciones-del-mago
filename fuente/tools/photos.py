@@ -7,13 +7,13 @@ P = "/mnt/user-data/uploads/creaciones del mago/Proyecto 3D/"
 X = "/mnt/user-data/uploads/creaciones del mago/Pics/"
 PHOTOS = {
   # clickers y miniaturas (fotos propias)
-  "cafe":        (X+"IMG_6648.JPG", .5, .44, 1.45),
-  "banana":      (X+"IMG_6653.JPG", .5, .44, 1.45),
-  "suculenta":   (X+"IMG_6654.JPG", .5, .44, 1.45),
-  "calavera":    (X+"IMG_6655.JPG", .5, .44, 1.45),
-  "hamster":     (X+"IMG_6656.JPG", .5, .44, 1.45),
-  "rana":        (X+"IMG_6658.JPG", .5, .44, 1.45),
-  "osito":       (X+"IMG_6659.JPG", .5, .44, 1.45),
+  "cafe":        (E+"cafe.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "banana":      (E+"banana.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "suculenta":   (E+"suculenta.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "calavera":    (E+"calavera.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "hamster":     (E+"hamster.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "rana":        (E+"rana.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "osito":       (E+"osito.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
   "lata":        (X+"IMG_6660.JPG", .5, .44, 1.45),
   "ovni":        (X+"IMG_6661.JPG", .5, .44, 1.45),
   "aceitera":    (X+"IMG_6647.JPG", .5, .44, 1.45),
@@ -66,19 +66,19 @@ PHOTOS = {
   "torre":       (P+"Soporte Exhibidor de Pared para Autos/soporte-autos.JPG", .5, .5, 1.0),
   "rack-132":    (P+"Estante ranck autos 1-32/Ranck 1-32.JPG", .5, .5, 1.0),
   # ajedrez y juegos (fotos de los diseñadores; las que terminan en -d se ven en la ventana del producto)
-  "medieval-d":    (P+"Ajedrez medieval/WhatsApp Image 2026-10-10 at 5.40.41 PM (2).jpeg", .5, .5, 1.0, "g"),
-  "medieval-p":  (P+"Ajedres medieval premium/Ajedrez-Medieval-prem-02.JPG", .5, .5, 1.0),
-  "vikingos-d":    (P+"Ajedrez vikingos/Ajedrez vikingos-1.JPG", .5, .5, 1.0, "g"),
-  "grecia":      (P+"Ajedrez-antiguaGrecia/Ajedrez-antiguaGrecia-10.JPG", .5, .5, 1.0),
+  "medieval-d":    (E+"medieval-d.png", .5, .5, 1.0, "g"),   # la del diseñador, con fondo de estudio
+  "medieval-p":  (E+"medieval-p.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "vikingos-d":    (E+"vikingos-d.png", .5, .5, 1.0, "g"),   # la del diseñador, con fondo de estudio
+  "grecia":      (E+"grecia.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
   "hp":          (P+"AjedrezHP/AjedrezHP-1.JPG", .5, .5, 1.0),
   "sw-caja":     (P+"Starwars chess/Starwars chess-2.JPG", .5, .5, 1.0),
   "sw-piezas":   (P+"Starwars chess2/Starwars chess2-3.JPG", .5, .5, 1.0),
   "mc-ajedrez-d":  (P+"Minecraft ajedrez/Minecraft ajedrez-10.JPG", .5, .5, 1.0, "g"),
-  "perros-gatos-d":(P+"Ajedrez perro vs gatos/Ajedrez perro vs gatos-4.JPG", .5, .5, 1.0, "g"),
-  "plegable":    (P+"Ajedrez minimalista/Ajedrez minimalista-4.JPG", .5, .5, 1.0),
-  "minimal-d":     (P+"Ajedrez minimal2/Ajedrez minimal2-1.JPG", .5, .5, 1.0, "g"),
-  "escultorico": (P+"Ajedrez moderno-escultorico/Ajedrez moderno-escultorico-2.JPG", .5, .5, 1.0),
-  "tablero-d":     (P+"Tablero ajedrez/Tablero.jpg", .5, .5, 1.0, "g"),
+  "perros-gatos-d":(E+"perros-gatos-d.png", .5, .5, 1.0, "g"),   # la del diseñador, con fondo de estudio
+  "plegable":    (E+"plegable.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "minimal-d":     (E+"minimal-d.png", .5, .5, 1.0, "g"),   # la del diseñador, con fondo de estudio
+  "escultorico": (E+"escultorico.png", .5, .5, 1.0),   # foto de estudio (16/11/2026)
+  "tablero-d":     (E+"tablero-d.png", .5, .5, 1.0, "g"),   # la del diseñador, con fondo de estudio
   "domino":      (P+"Domino/domino.JPG", .5, .5, 1.0),
   # pajaros y jardin
   "hoja":        (P+"Comedero de aves1/Comedero aves.JPG", .5, .5, 1.0),

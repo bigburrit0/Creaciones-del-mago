@@ -55,6 +55,49 @@ no cambian.
   - En los `accel.`/`rit.` marcados en el original, la batería agrega un relleno
     (fill) con redoble hacia el siguiente compás en vez de mantener el patrón fijo.
 
+## Reglas de teoría musical aplicadas en las muestras de audio (`muestras/`)
+
+El primer intento de generar `muestras/*.mp3` sonaba "raro" porque sólo tocaba
+una nota estática de bajo y una de theremín por compás contra un pulso de
+batería genérico, sin verificar que bajo y melodía formaran un intervalo
+consonante. Se investigó teoría musical básica (líneas de bajo funcional,
+notas no armónicas, contrapunto de primera especie) y se aplicaron estas
+reglas en `tools/generar_muestras.py`:
+
+- **Línea de bajo raíz-quinta ("oom-pah")**: en vez de un solo bajo sostenido
+  por compás, el bajo toca la raíz del acorde en el tiempo fuerte y su quinta
+  justa en el siguiente tiempo fuerte (p. ej. 4/4: raíz-raíz-quinta-raíz), que
+  es la construcción básica de una línea de bajo funcional.
+- **Consonancia bajo-melodía (estilo contrapunto de primera especie)**: el
+  theremín debe sonar un intervalo consonante contra el bajo (unísono, 3ª,
+  5ª, 6ª u 8ª). Si el intervalo cae en una disonancia dura (2ª, tritono, 7ª),
+  la nota se ajusta a la nota consonante más cercana del acorde en vez de
+  dejar sonar el choque.
+- **Movimiento por grado/portamento en vez de saltos estáticos**: el theremín
+  (monofónico) conecta cada nota estructural con la siguiente mediante un
+  glissando continuo en la última parte de su duración — el equivalente de
+  una nota de paso/vecina que conecta dos notas del acorde, en vez de saltar
+  de golpe compás a compás.
+- **Acentuación métrica en la batería**: bombo en el tiempo fuerte (tiempo 1),
+  caja en el contratiempo correspondiente al compás (tiempo 2 en 3/4, mitad
+  del compás en 4/4), hi-hat en cada tiempo — sigue la jerarquía métrica
+  básica en vez de un patrón arbitrario.
+
+Fuentes consultadas:
+- Construcción de líneas de bajo (raíz y quinta, tonos de acorde en tiempos
+  fuertes, notas de paso/vecinas entre ellos): [Lesson: Basic Line Construction Types](https://www.notreble.com/?p=5924),
+  [Rhythmic and Melodic Development in the Construction of Bass Lines](https://jonburr.com/rhythmic-and-melodic-development-in-the-construction-of-bass-lines/),
+  [How to Build a Jazz Walking Bass Line](https://bass.tonebase.co/blog/how-to-build-a-jazz-walking-bass-line-on-the-double-bass).
+- Contrapunto de primera especie (consonancias perfectas/imperfectas,
+  prohibición de quintas/octavas paralelas, preferencia por movimiento por
+  grado): [The Westergaard Rules](https://westerparse.readthedocs.io/en/v2.5/speciesrules.html),
+  [Open Music Theory — First Species Counterpoint](https://viva.pressbooks.pub/openmusictheory/chapter/first-species-counterpoint/).
+
+Nota: la verificación automática cubre consonancia bajo-melodía nota a nota;
+no implementa todavía una revisión completa de quintas/octavas paralelas
+entre líneas consecutivas (eso queda documentado aquí como regla pendiente
+para una futura mejora, no como algo ya aplicado).
+
 ## Catálogo
 
 Ver `index.json`.

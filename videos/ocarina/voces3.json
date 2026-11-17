@@ -1,0 +1,38 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in a Montevideo summer: a big, jolly, impatient old man with a deep, slightly gravelly, warm voice. Clear, well-articulated words. The word 'ocarina' must be heard clearly, with its first 'o' pronounced: o-ca-ri-na. Line 1: sceptical, arms crossed. Line 2: incredulous, looking from a big piano to a tiny instrument.",
+  "lines": [
+   [
+    "a2",
+    "¿Y la ocarina suena?"
+   ],
+   [
+    "c2",
+    "¿Y la ocarina entra en una mano?"
+   ]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile; deadpan, never loud. Clear, well-articulated words, natural pace. The word 'ocarinas' must be heard clearly, with its first 'o' pronounced: o-ca-ri-nas; '3D' is 'tres de'. Line 1: proud and calm. Line 2: says the date slowly, then a short pause before the last three words. Line 3: warm and inviting, straight to the viewer, with a tiny pause after the question.",
+  "lines": [
+   [
+    "a4",
+    "Ocarinas hechas en 3D. Las imprimo yo, a pedido."
+   ],
+   [
+    "d3",
+    "Ocarinas: pedidos hasta el veintitrés de diciembre. Cuanto antes, más ensayás."
+   ],
+   [
+    "d4",
+    "En tu casa, ¿quién la va a tocar? Comentá NAVIDAD y te paso precio y fecha."
+   ]
+  ]
+ },
+ "_cuts_from_take": {
+  "d3": "d3_raw 0-5.42",
+  "d4": "d3_raw 6.02-8.35 + 0.22 s + d4_raw (the split put the question in d3)"
+ }
+}

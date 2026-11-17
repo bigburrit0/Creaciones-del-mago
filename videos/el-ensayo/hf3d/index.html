@@ -9,7 +9,7 @@
       window.__timelines = window.__timelines || {};
       window.__draw3d = null;
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 24.6, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      tl.to({}, { duration: 28.35, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
       window.__timelines["main"] = tl;
     </script>
     <style>
@@ -58,27 +58,27 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="24.6" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28.35" data-width="1080" data-height="1920">
       <canvas id="c" width="1080" height="1920"></canvas>
       <div id="vig"></div>
       <div id="flash"></div>
-      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="hook">Ocarina<br>hecha en 3D<br><span>12 agujeros</span></div>
             <div id="subs"></div>
       <div id="cal"><div class="hd">DICIEMBRE</div><div class="dd">23<svg viewBox="0 0 284 236"><ellipse id="ring" cx="142" cy="122" rx="128" ry="98" pathLength="100" fill="none" stroke="#E0302A" stroke-width="12" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-8 142 122)"/></svg></div><div class="ft">último día para pedir</div></div>
       <div id="prod">
-        <div class="tt">Ocarina<br>de 12 agujeros</div>
-        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Impresa en 3D</div>
+        <div class="tt">Ocarina<br>hecha en 3D</div>
+        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">12 agujeros</div>
         <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Para tu Nochebuena</div>
       </div>
-      <div id="card"><div class="k0">¿Quién la toca en tu casa?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá NAVIDAD!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
-      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.6" data-track-index="1" data-volume="0.22"></audio>
-      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="24.6" data-track-index="2" data-volume="1"></audio>
-      <audio id="aud-sq" class="clip" src="assets/oca/chirrido.wav" data-start="3.05" data-duration="0.6" data-track-index="3" data-volume="0.7"></audio>
-      <audio id="aud-oca" class="clip" src="assets/oca/nochedepaz.wav" data-start="7.0" data-duration="4.9" data-track-index="9" data-volume="1"></audio>
-      <audio id="v-d1" class="clip" src="assets/voz/d1.wav" data-start="0.2" data-duration="2.585" data-track-index="4" data-volume="1" data-who="santa" data-text="¡En Nochebuena toco Noche de paz!"></audio>
-      <audio id="v-d2" class="clip" src="assets/voz/d2.wav" data-start="4.4" data-duration="1.212" data-track-index="5" data-volume="1" data-who="mago" data-text="Así no llegás a Nochebuena."></audio>
-      <audio id="v-d3" class="clip" src="assets/voz/d3.wav" data-start="11.75" data-duration="3.985" data-track-index="6" data-volume="1" data-who="mago" data-text="Pedidos hasta el 23 de diciembre. Cuanto antes, más ensayás."></audio>
-      <audio id="v-d4" class="clip" src="assets/voz/d4.wav" data-start="18.1" data-duration="3.914" data-track-index="7" data-volume="1" data-who="mago" data-text="¿Quién la toca en tu casa? Comentá NAVIDAD y te paso precio y fecha."></audio>
+      <div id="card"><div class="k0">¿Quién toca la ocarina en tu casa?</div><div class="k1">Ocarina de 12 agujeros,<br>hecha en 3D</div><div class="k2">¡Comentá NAVIDAD!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="28.35" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="28.35" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-sq" class="clip" src="assets/oca/chirrido.wav" data-start="3.65" data-duration="0.6" data-track-index="3" data-volume="0.7"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/nochedepaz.wav" data-start="7.6" data-duration="4.9" data-track-index="9" data-volume="1"></audio>
+      <audio id="v-d1" class="clip" src="assets/voz/d1.wav" data-start="0.2" data-duration="3.184" data-track-index="4" data-volume="1" data-who="santa" data-text="¡En Nochebuena toco Noche de paz en mi ocarina!"></audio>
+      <audio id="v-d2" class="clip" src="assets/voz/d2.wav" data-start="5.0" data-duration="1.212" data-track-index="5" data-volume="1" data-who="mago" data-text="Así no llegás a Nochebuena."></audio>
+      <audio id="v-d3" class="clip" src="assets/voz/d3.wav" data-start="12.35" data-duration="5.42" data-track-index="6" data-volume="1" data-who="mago" data-text="Ocarinas: pedidos hasta el 23 de diciembre. Cuanto antes, más ensayás."></audio>
+      <audio id="v-d4" class="clip" src="assets/voz/d4.wav" data-start="20.1" data-duration="5.655" data-track-index="7" data-volume="1" data-who="mago" data-text="En tu casa, ¿quién la va a tocar? Comentá NAVIDAD y te paso precio y fecha."></audio>
     </div>
     <script type="module">
       /* "El ensayo" (24.6 s, 3D toon; the ocarina reels O4, ../../PLAN_OCARINA.md): El Mago's workshop by day, dressed for
@@ -95,7 +95,7 @@
 
       window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
       let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
-      const DUR = 24.6, FPS = 60, WO = 0.0024;
+      const DUR = 28.35, FPS = 60, WO = 0.0024;
       const { renderer, scene, camera } = stage();
       const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree, stool } = workshop();
       spill.material.opacity = 0; tree.position.set(1.68, 0, -0.62); if (stool) stool.visible = false;
@@ -113,8 +113,8 @@
         pts.forEach((p, k) => { if (k % 2) sph(0.022, k % 4 === 1 ? "#C0392B" : "#E8B04A", p.x, p.y - 0.04, p.z + 0.02, null, { line: true }); }); }
 
       // ---------- timing (voice first: the measured lines decide the beats) ----------
-      const T = { s1: 0.2, up: 2.85, sq: 3.05, down: 3.7, flinch: 3.62, m1: 4.4, rel: 5.75, land: 6.55, caps: 6.5, oca: 7.0, ocaEnd: 11.55, give: 11.65, m2: 11.75, cal: 11.8, ring: 12.6,
-                  prod: 15.95, cta: 18.05, d4: 18.1, card: 22.1, exit: 99 };
+      const T = { s1: 0.2, up: 3.45, sq: 3.65, down: 4.3, flinch: 4.22, m1: 5.0, rel: 6.35, land: 7.15, caps: 7.1, oca: 7.6, ocaEnd: 12.15, give: 12.25, m2: 12.35, cal: 12.4, ring: 14.55,
+                  prod: 17.95, cta: 20.05, d4: 20.1, card: 25.85, exit: 99 };
 
       // ---------- staging: El Mago left, Papá Noel right (as in "La batata"); the ocarina in his mittens, then floating between them ----------
       const MD = V3(-0.78, 0, -0.25), SD = V3(0.18, 0, -0.25), hM = 1.05, hS = -1.05;
@@ -194,11 +194,11 @@
       // ---------- camera and editing (every camera looks toward the back or side walls) ----------
       const SHOTS = [
         { t: 0.0, d: T.up, fov: 36, subj: "hold", h: 0.75, az: -35, el: 10, v: 0.05 },                                                               // hook: proud, the ocarina in his mittens
-        { t: T.up, d: 3.95 - T.up, fov: 34, subj: "raise", h: 0.42, az: -40, el: 10, v: 0.05 },                                                      // low on his mittens: he raises it… the squeak
-        { t: 3.95, d: T.rel - 0.05 - 3.95, fov: 30, subj: "mago", h: 0.8, az: 52, el: -9, v: -0.02 },                                                  // the flinch; "Así no llegás a Nochebuena."
+        { t: T.up, d: 4.55 - T.up, fov: 34, subj: "raise", h: 0.42, az: -40, el: 10, v: 0.05 },                                                      // low on his mittens: he raises it… the squeak
+        { t: 4.55, d: T.rel - 0.05 - 4.55, fov: 30, subj: "mago", h: 0.8, az: 52, el: -9, v: -0.02 },                                                  // the flinch; "Así no llegás a Nochebuena."
         { t: T.rel - 0.05, d: T.oca - 0.25 - T.rel + 0.05, fov: 46, from: [-0.3, 1.18, 2.55], to: [-0.3, 1.15, 2.4], look: [-0.3, 0.74, -0.35] },      // the float, both in shot
-        { t: T.oca - 0.25, d: 9.5 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 2, el: 10, v: 0.0, whip: 1 },                                       // "Noche de paz", the caps pop off
-        { t: 9.5, d: T.m2 - 0.1 - 9.5, fov: 34, subj: "santa", h: 0.95, az: -15, el: 4, v: 0.2 },                                                        // Papá Noel sways
+        { t: T.oca - 0.25, d: 10.1 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 2, el: 10, v: 0.0, whip: 1 },                                       // "Noche de paz", the caps pop off
+        { t: 10.1, d: T.m2 - 0.1 - 10.1, fov: 34, subj: "santa", h: 0.95, az: -15, el: 4, v: 0.2 },                                                        // Papá Noel sways
         { t: T.m2 - 0.1, d: T.prod - T.m2 + 0.1, fov: 38, subj: "mago", h: 1.3, az: 38, el: -3, v: 0.12, aim: [0.04, 0.0, -0.26], whip: 1 },          // "Pedidos hasta el 23 de diciembre…" (the calendar page on the right)
         { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "held", h: 0.32, az: -12, el: 32, v: 0.05, push: [1.06, 0.96] },                                       // the product beat
         { t: T.cta, d: T.card - T.cta, fov: 36, subj: "mago", h: 1.15, az: 40, el: -3, v: 0.12, whip: 1 },                                                // CTA
@@ -210,7 +210,7 @@
       cam.measure();
 
       // ---------- text ----------
-      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 2.6] });
+      const overlay = kineticOverlay({ LINES, ENV, FPS, T, subsEl: document.getElementById("subs"), cardEl: document.getElementById("card"), hookEl: document.getElementById("hook"), hook: [-0.2, 3.2] });
       const backOut = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
       const snd = { style: {} }, prod = document.getElementById("prod"), TAGS = [...prod.querySelectorAll(".tag")], cal = document.getElementById("cal"), ring = document.getElementById("ring");
       function dom(t) {

@@ -6,14 +6,14 @@ labelled "Sonido digital" on screen; the ocarina is a 3D illustration (the owner
 ## Caption (curated from the three caption writers: humour, practical, character)
 
 ```
-Papá Noel prometió tocar Noche de paz en Nochebuena. Le salió un chirrido. 🎄
+Papá Noel prometió tocar Noche de paz en su ocarina en Nochebuena. Le salió un chirrido. 🎄
 
-Ocarina de 12 agujeros, impresa en 3D en Montevideo: 10 arriba y 2 para los pulgares.
+Ocarina de 12 agujeros, hecha en 3D en Montevideo: 10 arriba y 2 para los pulgares.
 El primer intento suena a chirrido: para eso está el ensayo.
-Pedidos para Navidad: hasta el 23 de diciembre. Cuanto antes, más ensayás.
+Ocarinas para Navidad: pedidos hasta el 23 de diciembre. Cuanto antes, más ensayás.
 La hago a pedido.
 El video es una animación.
-¿Quién la toca en tu casa? Comentá NAVIDAD y te paso precio y fecha.
+¿Quién toca la ocarina en tu casa? Comentá NAVIDAD y te paso precio y fecha.
 Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso.
 Envío gratis solo en La Unión, La Blanqueada y parte de Buceo; mando a todo Uruguay.
 
@@ -58,3 +58,7 @@ The band now plays the owner's exact transcription (`../biblioteca/partituras/tr
 ### No badge (2026-11-15)
 
 The owner asked to remove the "Sonido digital" badge and the "Ilustración 3D · sonido digital" line ("queda super implícito"); the caption keeps "El video es una animación."
+
+### More "ocarina" (2026-11-17)
+
+The owner asked for more "ocarina hecha en 3D" and the word "ocarina" more often: the hook, product beat and card say "Ocarina hecha en 3D"; most lines now name the ocarina (new takes `../ocarina/voz2`, `voz3`; "esa ocarina" and "tu ocarina" were heard as "eso, Karina" and were reworded); the caption follows. Re-timed, re-rendered.

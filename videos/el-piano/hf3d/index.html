@@ -9,7 +9,7 @@
       window.__timelines = window.__timelines || {};
       window.__draw3d = null;
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 23.05, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      tl.to({}, { duration: 24.3, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
       window.__timelines["main"] = tl;
     </script>
     <style>
@@ -51,26 +51,26 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="23.05" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.3" data-width="1080" data-height="1920">
       <canvas id="c" width="1080" height="1920"></canvas>
       <div id="vig"></div>
       <div id="flash"></div>
-      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="hook">Ocarina<br>hecha en 3D<br><span>12 agujeros</span></div>
             <div id="subs"></div>
       <div id="prod">
-        <div class="tt">Ocarina<br>de 12 agujeros</div>
+        <div class="tt">Ocarina<br>hecha en 3D</div>
         <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Entra en una mano</div>
-        <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">Impresa en 3D</div>
+        <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">12 agujeros</div>
       </div>
-      <div id="card"><div class="k0">¿Qué te llevás a la rambla?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá RAMBLA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
-      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="23.05" data-track-index="1" data-volume="0.22"></audio>
-      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="23.05" data-track-index="2" data-volume="1"></audio>
-      <audio id="aud-oca" class="clip" src="assets/oca/rambla.wav" data-start="5.4" data-duration="4.4" data-track-index="3" data-volume="1"></audio>
+      <div id="card"><div class="k0">¿Qué te llevás a la rambla?</div><div class="k1">Ocarina de 12 agujeros,<br>hecha en 3D</div><div class="k2">¡Comentá RAMBLA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.3" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="24.3" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/rambla.wav" data-start="6.5" data-duration="4.4" data-track-index="3" data-volume="1"></audio>
       <audio id="v-c1" class="clip" src="assets/voz/c1.wav" data-start="0.2" data-duration="2.828" data-track-index="4" data-volume="1" data-who="santa" data-text="¡Traje música para la rambla!"></audio>
-      <audio id="v-c3" class="clip" src="assets/voz/c3.wav" data-start="3.2" data-duration="0.527" data-track-index="5" data-volume="1" data-who="mago" data-text="Yo también."></audio>
-      <audio id="v-c2" class="clip" src="assets/voz/c2.wav" data-start="9.65" data-duration="2.134" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y eso entra en una mano?"></audio>
-      <audio id="v-c4" class="clip" src="assets/voz/c4.wav" data-start="11.95" data-duration="2.447" data-track-index="7" data-volume="1" data-who="mago" data-text="En una mano. Y va a todos lados."></audio>
-      <audio id="v-c5" class="clip" src="assets/voz/c5.wav" data-start="16.7" data-duration="3.737" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Qué te llevás a la rambla? Comentá RAMBLA y te paso precio y fecha."></audio>
+      <audio id="v-c3" class="clip" src="assets/voz/c3.wav" data-start="3.2" data-duration="1.634" data-track-index="5" data-volume="1" data-who="mago" data-text="Yo traje mi ocarina."></audio>
+      <audio id="v-c2" class="clip" src="assets/voz/c2.wav" data-start="10.75" data-duration="1.951" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y la ocarina entra en una mano?"></audio>
+      <audio id="v-c4" class="clip" src="assets/voz/c4.wav" data-start="12.9" data-duration="2.75" data-track-index="7" data-volume="1" data-who="mago" data-text="En una mano. Y la ocarina va a todos lados."></audio>
+      <audio id="v-c5" class="clip" src="assets/voz/c5.wav" data-start="17.95" data-duration="3.737" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Qué te llevás a la rambla? Comentá RAMBLA y te paso precio y fecha."></audio>
     </div>
     <script type="module">
       /* "El piano" (23.05 s, 3D toon; the ocarina reels O3, ../../PLAN_OCARINA.md): the rambla on a summer late afternoon.
@@ -86,7 +86,7 @@
 
       window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
       let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
-      const DUR = 23.05, FPS = 60, WO = 0.0024;
+      const DUR = 24.3, FPS = 60, WO = 0.0024;
       const { renderer, scene, camera } = stage();
       const { mago, santa, BTRACK, blobM, blobS, blobK, printer } = await cast();
       printer.visible = false; blobK.visible = false;
@@ -163,7 +163,7 @@
           const w = cyl(0.025, 0.025, 0.02, "#2E2E3A", x, 0.025, z, piano, { rot: [Math.PI / 2, 0, 0] }); wheels.push(w); } }
 
       // ---------- timing (voice first: the measured lines decide the beats) ----------
-      const T = { s1: 0.2, stop: 2.55, m1: 3.2, rise: 3.85, land: 4.9, caps: 4.9, oca: 5.4, ocaEnd: 9.45, s2: 9.65, give: 11.8, m2: 11.95, prod: 14.55, cta: 16.65, c5: 16.7, card: 20.55, exit: 99 };
+      const T = { s1: 0.2, stop: 2.55, m1: 3.2, rise: 4.95, land: 6.0, caps: 6.0, oca: 6.5, ocaEnd: 10.55, s2: 10.75, give: 12.75, m2: 12.9, prod: 15.8, cta: 17.9, c5: 17.95, card: 21.8, exit: 99 };
 
       // ---------- staging ----------
       const MD = V3(-0.62, 0, -0.32), hM = 0.9, MFW = V3(Math.sin(hM), 0, Math.cos(hM)), MLEFT = V3(Math.cos(hM), 0, -Math.sin(hM));
@@ -199,7 +199,7 @@
         { const sh = wp(mago.b("DEF-upper_arm.L")); arm(mago, "L", sh.clone().add(MF.left.clone().multiplyScalar(0.16)).add(MF.fwd.clone().multiplyScalar(0.1)).add(V3(0, 0.2 + 0.025 * Math.sin(t * 4.5) + 0.12 * (1 - magic), 0)), magic, null, 0.08); }
         arm(mago, "L", PALM, palm, null, 0.04);
         turnTo(mago, FP, 0.5 * pulse(t, T.rise - 0.2, T.rise + 0.2, T.ocaEnd, T.ocaEnd + 0.4));
-        turnTo(mago, LENS_C, Math.max(pulse(t, T.m1 - 0.25, T.m1 + 0.05, T.m1 + 0.6, T.m1 + 0.9), pulse(t, T.m2 - 0.2, T.m2 + 0.1, T.m2 + 2.3, T.m2 + 2.6), pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1)));
+        turnTo(mago, LENS_C, Math.max(pulse(t, T.m1 - 0.25, T.m1 + 0.05, T.m1 + 1.6, T.m1 + 1.9), pulse(t, T.m2 - 0.2, T.m2 + 0.1, T.m2 + 2.3, T.m2 + 2.6), pulse(t, T.cta - 0.2, T.cta + 0.1, DUR, DUR + 1)));
         { const sh = wp(mago.b("DEF-upper_arm.R")), dir = LENS_C.clone().sub(sh).normalize();
           arm(mago, "R", sh.clone().add(dir.multiplyScalar(0.4)).add(V3(0, -0.04, 0)), pulse(t, T.c5 + 0.1, T.c5 + 0.65, T.card + 0.3, T.card + 0.8), null, 0.08); }
         let e = 0; for (const b of [1.8, 5.0, 8.1, 10.9, 13.9, 15.8, 18.3, 21.6]) { const u = (t - b) * FPS; if (u >= 0 && u < 12) e = Math.max(e, u < 4 ? u / 4 : u < 6 ? 1 : 1 - (u - 6) / 6); }
@@ -237,8 +237,8 @@
         { t: 1.5, d: T.m1 - 0.05 - 1.5, fov: 40, subj: "santa", h: 1.3, az: -50, el: 4, v: 0.2, track: true },                                              // "…para la rambla!": pushing, puffing
         { t: T.m1 - 0.05, d: T.rise - 0.05 - T.m1 + 0.05, fov: 30, subj: "mago", h: 0.74, az: 48, el: -9, v: -0.02 },                                        // "Yo también."
         { t: T.rise - 0.05, d: T.oca - 0.25 - T.rise + 0.05, fov: 50, from: [0.35, 1.2, 3.45], to: [0.35, 1.18, 3.3], look: [0.33, 0.62, -0.4] },             // the ocarina rises, tiny next to the piano
-        { t: T.oca - 0.25, d: 7.6 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 6, el: 10, v: 0.0, whip: 1 },                                             // it plays
-        { t: 7.6, d: T.s2 - 0.1 - 7.6, fov: 36, subj: "santa", h: 1.25, az: -38, el: 8, v: 0.2 },                                    // the ocarina in front, the piano and Papá Noel behind
+        { t: T.oca - 0.25, d: 8.7 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 6, el: 10, v: 0.0, whip: 1 },                                             // it plays
+        { t: 8.7, d: T.s2 - 0.1 - 8.7, fov: 36, subj: "santa", h: 1.25, az: -38, el: 8, v: 0.2 },                                    // the ocarina in front, the piano and Papá Noel behind
         { t: T.s2 - 0.1, d: T.give - 0.05 - T.s2 + 0.1, fov: 34, subj: "santa", h: 1.0, az: -40, el: 4, v: 0.2 },                                             // "¿Y eso entra en una mano?"
         { t: T.give - 0.05, d: T.prod - T.give + 0.05, fov: 36, subj: "mago", h: 1.0, az: 48, el: -3, v: 0.2 },                                               // into his hand: "En una mano…"
         { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "inhand", h: 0.36, az: 32, el: 16, v: 0.08, push: [1.06, 0.96] },                                       // the product beat

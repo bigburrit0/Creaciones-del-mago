@@ -6,10 +6,10 @@ labelled "Sonido digital" on screen; the ocarina is a 3D illustration (the owner
 ## Caption (curated from the three caption writers: humour, practical, character)
 
 ```
-¿Imprimí una batata? Casi: es una ocarina de 12 agujeros, impresa en 3D en Montevideo. 🍠
+¿Imprimí una batata? Casi: es una ocarina hecha en 3D en Montevideo. 🍠
 
-10 agujeros arriba y 2 para los pulgares. Tiene forma de batata, pero se sopla, no se come.
-La imprimo yo, a pedido.
+Una ocarina de 12 agujeros: 10 arriba y 2 para los pulgares. Tiene forma de batata, pero la ocarina se sopla, no se come.
+Cada ocarina la imprimo yo, a pedido.
 El video es una animación.
 ¿Batata u ocarina? Comentá BATATA y te paso precio y fecha.
 Precio y fecha por WhatsApp al 092 104 419, antes de empezar y sin compromiso.
@@ -57,3 +57,7 @@ The band now plays the owner's exact transcription (`../biblioteca/partituras/tr
 ### No badge (2026-11-15)
 
 The owner asked to remove the "Sonido digital" badge and the "Ilustración 3D · sonido digital" line ("queda super implícito"); the caption keeps "El video es una animación."
+
+### More "ocarina" (2026-11-17)
+
+The owner asked for more "ocarina hecha en 3D" and the word "ocarina" more often: the hook, product beat and card say "Ocarina hecha en 3D"; most lines now name the ocarina (new takes `../ocarina/voz2`, `voz3`; "esa ocarina" and "tu ocarina" were heard as "eso, Karina" and were reworded); the caption follows. Re-timed, re-rendered.

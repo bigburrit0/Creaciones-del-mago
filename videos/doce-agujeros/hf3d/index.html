@@ -9,7 +9,7 @@
       window.__timelines = window.__timelines || {};
       window.__draw3d = null;
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 24.65, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      tl.to({}, { duration: 28.15, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
       window.__timelines["main"] = tl;
     </script>
     <style>
@@ -51,26 +51,26 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="24.65" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28.15" data-width="1080" data-height="1920">
       <canvas id="c" width="1080" height="1920"></canvas>
       <div id="vig"></div>
       <div id="flash"></div>
-      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="hook">Ocarina<br>hecha en 3D<br><span>12 agujeros</span></div>
             <div id="subs"></div>
       <div id="prod">
-        <div class="tt">12 agujeros</div>
+        <div class="tt">Ocarina<br>hecha en 3D</div>
         <div class="tag" style="left: 80px; top: 560px; transform: rotate(-4deg)">10 arriba</div>
         <div class="tag" style="right: 80px; top: 1180px; transform: rotate(3deg)">2 para los pulgares</div>
       </div>
-      <div id="card"><div class="k0">¿Cuántos agujeros tiene?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá DOCE!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
-      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="24.65" data-track-index="1" data-volume="0.22"></audio>
-      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="24.65" data-track-index="2" data-volume="1"></audio>
-      <audio id="aud-oca" class="clip" src="assets/oca/escala.wav" data-start="6.75" data-duration="5.5" data-track-index="3" data-volume="1"></audio>
-      <audio id="v-b1" class="clip" src="assets/voz/b1.wav" data-start="0.2" data-duration="3.48" data-track-index="4" data-volume="1" data-who="santa" data-text="¿Doce agujeros? ¡Se le escapa el aire!"></audio>
-      <audio id="v-b3" class="clip" src="assets/voz/b3.wav" data-start="3.8" data-duration="2.703" data-track-index="5" data-volume="1" data-who="mago" data-text="Cada agujero que destapás es otra nota."></audio>
-      <audio id="v-b2" class="clip" src="assets/voz/b2.wav" data-start="12.15" data-duration="1.274" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y eso se aprende?"></audio>
-      <audio id="v-b4" class="clip" src="assets/voz/b4.wav" data-start="13.55" data-duration="2.486" data-track-index="7" data-volume="1" data-who="mago" data-text="Si alguna vez tocaste flauta dulce, ya sabés la idea."></audio>
-      <audio id="v-b5" class="clip" src="assets/voz/b5.wav" data-start="18.5" data-duration="3.551" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Cuántos agujeros tiene? Comentá DOCE y te paso precio y fecha."></audio>
+      <div id="card"><div class="k0">¿Cuántos agujeros tiene la ocarina?</div><div class="k1">Ocarina de 12 agujeros,<br>hecha en 3D</div><div class="k2">¡Comentá DOCE!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="28.15" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="28.15" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/escala.wav" data-start="8.1" data-duration="5.5" data-track-index="3" data-volume="1"></audio>
+      <audio id="v-b1" class="clip" src="assets/voz/b1.wav" data-start="0.2" data-duration="3.909" data-track-index="4" data-volume="1" data-who="santa" data-text="¿Una ocarina con doce agujeros? ¡Se le escapa el aire!"></audio>
+      <audio id="v-b3" class="clip" src="assets/voz/b3.wav" data-start="4.25" data-duration="3.534" data-track-index="5" data-volume="1" data-who="mago" data-text="En la ocarina, cada agujero que destapás es otra nota."></audio>
+      <audio id="v-b2" class="clip" src="assets/voz/b2.wav" data-start="13.5" data-duration="2.3" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y la ocarina se aprende?"></audio>
+      <audio id="v-b4" class="clip" src="assets/voz/b4.wav" data-start="16.0" data-duration="2.486" data-track-index="7" data-volume="1" data-who="mago" data-text="Si alguna vez tocaste flauta dulce, ya sabés la idea."></audio>
+      <audio id="v-b5" class="clip" src="assets/voz/b5.wav" data-start="20.95" data-duration="4.575" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Cuántos agujeros tiene la ocarina? Comentá DOCE y te paso precio y fecha."></audio>
     </div>
     <script type="module">
       /* "Doce agujeros" (24.65 s, 3D toon; the ocarina reels O2, ../../PLAN_OCARINA.md): Papá Noel's holiday living room by day
@@ -86,7 +86,7 @@
 
       window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
       let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
-      const DUR = 24.65, FPS = 60, WO = 0.0024;
+      const DUR = 28.15, FPS = 60, WO = 0.0024;
       const { renderer, scene, camera } = stage();
       const WS = workshop();
       const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree, rug, bench, glass, stool } = WS;
@@ -122,7 +122,7 @@
       tree.position.set(1.62, 0, -0.68); rug.position.set(-0.2, 0.004, -0.1); rug.scale.setScalar(1.05);
 
       // ---------- timing (voice first: the measured lines decide the beats) ----------
-      const T = { s1: 0.2, m1: 3.8, rel: 3.95, land: 5.25, caps: 6.25, oca: 6.75, ocaEnd: 11.95, s2: 12.15, m2: 13.55, prod: 16.2, flip: 17.1, rest: 18.4, cta: 18.45, b5: 18.5, card: 22.15, exit: 99 };
+      const T = { s1: 0.2, m1: 4.25, rel: 4.4, land: 5.7, caps: 7.6, oca: 8.1, ocaEnd: 13.3, s2: 13.5, m2: 16.0, prod: 18.65, flip: 19.55, rest: 20.85, cta: 20.9, b5: 20.95, card: 25.65, exit: 99 };
 
       // ---------- staging: Papá Noel in front of the sofa (left), El Mago right; the ocarina in his mittens, then floating between them ----------
       const SD = V3(-0.72, 0, -0.22), MD = V3(0.24, 0, -0.22), hS = 1.05, hM = -1.05;
@@ -198,8 +198,8 @@
         { t: 1.9, d: T.m1 - 0.05 - 1.9, fov: 32, subj: "held", h: 0.2, az: 50, el: 38, v: 0.0 },                                                       // the holes, from above ("¡Se le escapa el aire!")
         { t: T.m1 - 0.05, d: T.land + 0.1 - T.m1 + 0.05, fov: 46, from: [-0.24, 1.18, 2.55], to: [-0.24, 1.15, 2.4], look: [-0.24, 0.74, -0.35] },        // "Cada agujero…": the float, both in shot
         { t: T.land + 0.1, d: T.oca - 0.25 - T.land - 0.1, fov: 30, subj: "mago", h: 0.74, az: -50, el: -9, v: -0.02 },                               // "…es otra nota."
-        { t: T.oca - 0.25, d: 9.35 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 0, el: 10, v: 0.0, whip: -1 },                                     // the scale climbs, the caps pop off
-        { t: 9.35, d: T.s2 - 0.1 - 9.35, fov: 30, subj: "oca", h: 0.22, az: -22, el: 22, v: 0.0 },                                                         // another angle, to the top note
+        { t: T.oca - 0.25, d: 10.7 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 0, el: 10, v: 0.0, whip: -1 },                                     // the scale climbs, the caps pop off
+        { t: 10.7, d: T.s2 - 0.1 - 10.7, fov: 30, subj: "oca", h: 0.22, az: -22, el: 22, v: 0.0 },                                                         // another angle, to the top note
         { t: T.s2 - 0.1, d: T.m2 - 0.1 - T.s2 + 0.1, fov: 34, subj: "santa", h: 1.0, az: 12, el: 4, v: 0.2 },                                            // "¿Y eso se aprende?"
         { t: T.m2 - 0.1, d: T.prod - T.m2 + 0.1, fov: 30, subj: "mago", h: 0.74, az: -50, el: -9, v: -0.02 },                                          // "Si alguna vez tocaste flauta dulce…"
         { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "oca", h: 0.24, az: 0, el: 8, v: 0.02, push: [1.08, 0.94] },                                      // the product beat: 10 on top, then it turns over: 2 for the thumbs

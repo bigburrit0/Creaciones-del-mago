@@ -9,7 +9,7 @@
       window.__timelines = window.__timelines || {};
       window.__draw3d = null;
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 25.3, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
+      tl.to({}, { duration: 28.25, ease: "none", onUpdate: () => window.__draw3d && window.__draw3d(tl.time()) });
       window.__timelines["main"] = tl;
     </script>
     <style>
@@ -51,26 +51,26 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="25.3" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28.25" data-width="1080" data-height="1920">
       <canvas id="c" width="1080" height="1920"></canvas>
       <div id="vig"></div>
       <div id="flash"></div>
-      <div id="hook">Ocarina<br>de 12 agujeros<br><span>impresa en 3D</span></div>
+      <div id="hook">Ocarina<br>hecha en 3D<br><span>12 agujeros</span></div>
             <div id="subs"></div>
       <div id="prod">
-        <div class="tt">Ocarina<br>de 12 agujeros</div>
-        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">Impresa en 3D</div>
+        <div class="tt">Ocarina<br>hecha en 3D</div>
+        <div class="tag" style="left: 90px; top: 560px; transform: rotate(-4deg)">12 agujeros</div>
         <div class="tag" style="right: 90px; top: 1180px; transform: rotate(3deg)">La hago a pedido</div>
       </div>
-      <div id="card"><div class="k0">¿Batata u ocarina?</div><div class="k1">Ocarina de 12 agujeros,<br>impresa en 3D</div><div class="k2">¡Comentá BATATA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
-      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="25.3" data-track-index="1" data-volume="0.22"></audio>
-      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="25.3" data-track-index="2" data-volume="1"></audio>
-      <audio id="aud-oca" class="clip" src="assets/oca/oda.wav" data-start="8.4" data-duration="5.7" data-track-index="3" data-volume="1"></audio>
+      <div id="card"><div class="k0">¿Batata u ocarina?</div><div class="k1">Ocarina de 12 agujeros,<br>hecha en 3D</div><div class="k2">¡Comentá BATATA!</div><div class="k3">Te paso precio y fecha por mensaje<br>Pedidos para Navidad: hasta el <b>23 de diciembre</b></div><div class="k4">Creaciones del Mago · Montevideo</div></div>
+      <audio id="aud-music" class="clip" src="assets/audio/music.wav" data-start="0" data-duration="28.25" data-track-index="1" data-volume="0.22"></audio>
+      <audio id="aud-sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="28.25" data-track-index="2" data-volume="1"></audio>
+      <audio id="aud-oca" class="clip" src="assets/oca/oda.wav" data-start="9.35" data-duration="5.7" data-track-index="3" data-volume="1"></audio>
       <audio id="v-a1" class="clip" src="assets/voz/a1.wav" data-start="0.2" data-duration="2.322" data-track-index="4" data-volume="1" data-who="santa" data-text="¿Imprimiste una batata?"></audio>
-      <audio id="v-a3" class="clip" src="assets/voz/a3.wav" data-start="2.65" data-duration="2.622" data-track-index="5" data-volume="1" data-who="mago" data-text="Una ocarina. Doce agujeros."></audio>
-      <audio id="v-a2" class="clip" src="assets/voz/a2.wav" data-start="6.7" data-duration="1.442" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y eso suena?"></audio>
-      <audio id="v-a4" class="clip" src="assets/voz/a4.wav" data-start="14.75" data-duration="1.476" data-track-index="7" data-volume="1" data-who="mago" data-text="La imprimo yo, a pedido."></audio>
-      <audio id="v-a5" class="clip" src="assets/voz/a5.wav" data-start="18.7" data-duration="3.992" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Batata u ocarina? Comentá BATATA y te paso precio y fecha."></audio>
+      <audio id="v-a3" class="clip" src="assets/voz/a3.wav" data-start="2.65" data-duration="3.407" data-track-index="5" data-volume="1" data-who="mago" data-text="Una ocarina hecha en 3D. Doce agujeros."></audio>
+      <audio id="v-a2" class="clip" src="assets/voz/a2.wav" data-start="7.5" data-duration="1.615" data-track-index="6" data-volume="1" data-who="santa" data-text="¿Y la ocarina suena?"></audio>
+      <audio id="v-a4" class="clip" src="assets/voz/a4.wav" data-start="15.7" data-duration="3.974" data-track-index="7" data-volume="1" data-who="mago" data-text="Ocarinas hechas en 3D. Las imprimo yo, a pedido."></audio>
+      <audio id="v-a5" class="clip" src="assets/voz/a5.wav" data-start="21.65" data-duration="3.992" data-track-index="8" data-volume="1" data-who="mago" data-text="¿Batata u ocarina? Comentá BATATA y te paso precio y fecha."></audio>
     </div>
     <script type="module">
       /* "La batata" (25.3 s, 3D toon; the ocarina reels O1, ../../PLAN_OCARINA.md): El Mago's workshop by day. The printer lays
@@ -87,7 +87,7 @@
 
       window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
       let markReady; window.__hf.buildReady.scene = new Promise((r) => (markReady = r));
-      const DUR = 25.3, FPS = 60, WO = 0.0024;
+      const DUR = 28.25, FPS = 60, WO = 0.0024;
       const { renderer, scene, camera } = stage(); renderer.localClippingEnabled = true;
       const { DOOR, hinge, spill, WIN, motes, mpos, NM, bulbs, setLight, tree, stool } = workshop();
       spill.material.opacity = 0; tree.position.set(1.68, 0, -0.62); if (stool) stool.visible = false;
@@ -97,8 +97,8 @@
       const NOTES = await (await fetch("assets/oca/oda.json")).json();
 
       // ---------- timing (voice first: the measured lines decide the beats) ----------
-      const T = { s1: 0.2, print1: 1.45, m1: 2.65, lift: 5.35, land: 6.6, s2: 6.7, caps: 7.85, oca: 8.4, ocaEnd: 13.7, react: 13.75, give: 13.85, m2: 14.75,
-                  prod: 16.35, cta: 18.65, a5: 18.7, card: 22.8, exit: 99 };
+      const T = { s1: 0.2, print1: 1.45, m1: 2.65, lift: 6.15, land: 7.4, s2: 7.5, caps: 8.85, oca: 9.35, ocaEnd: 14.65, react: 14.7, give: 14.8, m2: 15.7,
+                  prod: 19.8, cta: 21.6, a5: 21.65, card: 25.75, exit: 99 };
 
       // ---------- the ocarina: printed on the bed (a rising cut plane), then lifted to float between the two ----------
       const OC = ocarina(scene, { wo: WO, length: 0.12 }); OC.g.rotation.order = "YXZ";
@@ -199,8 +199,8 @@
         { t: T.m1 - 0.05, d: T.lift - 0.05 - T.m1 + 0.05, fov: 30, subj: "mago", h: 0.74, az: 52, el: -9, v: -0.02 },                              // "Una ocarina. Doce agujeros."
         { t: T.lift - 0.05, d: T.s2 - 0.05 - T.lift + 0.05, fov: 46, from: [-0.32, 1.18, 2.55], to: [-0.31, 1.15, 2.4], look: [-0.34, 0.74, -0.4] },   // the lift: both, the ocarina flying from the printer
         { t: T.s2 - 0.05, d: T.oca - 0.25 - T.s2 + 0.05, fov: 34, subj: "santa", h: 1.1, az: -38, el: 4, v: 0.22 },                                // "¿Y eso suena?" (hands on hips)
-        { t: T.oca - 0.25, d: 11.1 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 2, el: 10, v: 0.0, whip: 1 },                                  // the ocarina plays, the caps pop off
-        { t: 11.1, d: T.react - 0.05 - 11.1, fov: 54, from: [-0.3, 0.98, 1.45], to: [-0.3, 0.97, 1.35], look: [-0.3, 0.84, -0.2] },                 // both listening, the ocarina between them
+        { t: T.oca - 0.25, d: 12.0 - T.oca + 0.25, fov: 30, subj: "oca", h: 0.2, az: 2, el: 10, v: 0.0, whip: 1 },                                  // the ocarina plays, the caps pop off
+        { t: 12.0, d: T.react - 0.05 - 12.0, fov: 54, from: [-0.3, 0.98, 1.45], to: [-0.3, 0.97, 1.35], look: [-0.3, 0.84, -0.2] },                 // both listening, the ocarina between them
         { t: T.react - 0.05, d: T.m2 - 0.1 - T.react + 0.05, fov: 32, subj: "santa", h: 0.82, az: -40, el: 2, v: 0.06 },                           // glasses down
         { t: T.m2 - 0.1, d: T.prod - T.m2 + 0.1, fov: 36, subj: "mago", h: 1.0, az: 50, el: -3, v: 0.2 },              // "La imprimo yo, a pedido." (the ocarina beside him)
         { t: T.prod, d: T.cta - T.prod, fov: 30, subj: "inhand", h: 0.36, az: 32, el: 16, v: 0.08, push: [1.06, 0.96] },                                    // the product beat

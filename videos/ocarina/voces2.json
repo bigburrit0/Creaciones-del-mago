@@ -1,0 +1,27 @@
+{
+ "Santa": {
+  "voice": "Algenib",
+  "style": "Papá Noel on holiday in a Montevideo summer: a big, jolly, impatient old man with a deep, slightly gravelly, warm voice. Quick comic timing. Clear, well-articulated words; say the word 'ocarina' clearly every time. Line 1: sceptical, arms crossed. Line 2: alarmed, counting holes, sure the air will leak out. Line 3: impressed, then a little worried. Line 4: incredulous, looking from a big piano to a tiny instrument. Line 5: proud and excited, making a big promise.",
+  "lines": [
+   ["a2", "¿Y esa ocarina suena?"],
+   ["b1", "¿Una ocarina con doce agujeros? ¡Se le escapa el aire!"],
+   ["b2", "¿Y la ocarina se aprende?"],
+   ["c2", "¿Esa ocarina entra en una mano?"],
+   ["d1", "¡En Nochebuena toco Noche de paz en mi ocarina!"]
+  ]
+ },
+ "Mago": {
+  "voice": "Charon",
+  "style": "El Mago, a kind, older wizard from Montevideo with a warm voice and a playful smile; deadpan, dry humour, never loud. Clear, well-articulated words, natural pace; say 'ocarina' and 'hecha en 3D' (tres de) clearly. Lines 1, 3, 5 and 6 are dry and matter-of-fact. Line 2 is proud and calm. Line 7 says the date slowly, then a short pause before the last three words. Lines 4 and 8 are warm and inviting, straight to the viewer, with a tiny pause after the question.",
+  "lines": [
+   ["a3", "Una ocarina hecha en 3D. Doce agujeros."],
+   ["a4", "La ocarina la imprimo yo, a pedido."],
+   ["b3", "En la ocarina, cada agujero que destapás es otra nota."],
+   ["b5", "¿Cuántos agujeros tiene la ocarina? Comentá DOCE y te paso precio y fecha."],
+   ["c3", "Yo traje mi ocarina."],
+   ["c4", "En una mano. Y la ocarina va a todos lados."],
+   ["d3", "Pedí tu ocarina hasta el veintitrés de diciembre. Cuanto antes, más ensayás."],
+   ["d4", "¿Quién toca la ocarina en tu casa? Comentá NAVIDAD y te paso precio y fecha."]
+  ]
+ }
+}

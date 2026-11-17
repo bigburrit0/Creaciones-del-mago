@@ -62,3 +62,7 @@ The owner asked to remove the "Sonido digital" badge and the "Ilustración 3D ·
 ### More "ocarina" (2026-11-17)
 
 The owner asked for more "ocarina hecha en 3D" and the word "ocarina" more often: the hook, product beat and card say "Ocarina hecha en 3D"; most lines now name the ocarina (new takes `../ocarina/voz2`, `voz3`; "esa ocarina" and "tu ocarina" were heard as "eso, Karina" and were reworded); the caption follows. Re-timed, re-rendered.
+
+## Resultado 17/11/2026: más "ocarina hecha en 3D"
+
+Render final con el texto nuevo: QA 0 cuadros malos, flicker 0, mezcla a -14 LUFS, todas las líneas claras en la transcripción de la mezcla.

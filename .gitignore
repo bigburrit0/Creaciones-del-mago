@@ -36,3 +36,4 @@ videos/*/qa.json
 videos/*/qa.log
 videos/*/render.log
 videos/*/voz/_take_*.wav
+videos/ocarina/voz*/_take_*.wav

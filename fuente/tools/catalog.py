@@ -3,11 +3,15 @@
 # profiles in the project docs, the v3 brief (Drive) or what the photo shows.
 # Each item: (id, name, line[, whatsapp line]). "mine" = his own photos.
 # "feature": the shelf goes first and shows more items (v10: ajedrez).
+# v11 (22/11/2026): catálogo PDF «Mesa de juego». Nuevos estantes «Cartas y TCG» y
+# «Juegos de mesa»; One Piece + Minecraft/Star Wars pasan a «Figuras»; Casa + Jardín
+# pasan a «Casa y jardín». Siguen siendo 9 (la grilla del menú es de 9 y de 3×3).
+# Sin precios: los del PDF no se publican (ver COPY-RULES 7 y 14).
 
 SHELVES = [
   {
-    "id": "ajedrez", "tab": "Ajedrez", "name": "Ajedrez y dominó", "icon": "caballo",
-    "go": "ajedrez y dominó", "mine": ("medieval", "vikingos", "perros-gatos", "minimal", "mc-ajedrez", "tablero", "pieza"),
+    "id": "ajedrez", "tab": "Ajedrez", "name": "Ajedrez", "icon": "caballo",
+    "go": "ajedrez", "mine":("medieval", "vikingos", "perros-gatos", "minimal", "mc-ajedrez", "tablero", "pieza"),
     "feature": True,
     "intro": "Los siete primeros los imprimí yo: tocá la foto y mirá los colores en que ya los hice. Casi todos son solo las piezas; el tablero va aparte.",
     "items": [
@@ -25,15 +29,41 @@ SHELVES = [
       ("hp", "Ajedrez de Harry Potter", "Con Harry, Hermione, Ron y el Sombrero Seleccionador."),
       ("sw-caja", "Ajedrez de Star Wars con caja", "Piezas de unos 5 cm y una caja para llevarlas."),
       ("sw-piezas", "Ajedrez de Star Wars", "Con X-Wings, AT-ST y tauntauns. Son piezas delicadas."),
+    ],
+  },
+  {
+    "id": "cartas", "tab": "Cartas y TCG", "name": "Deck boxes y accesorios para cartas", "icon": "cartas",
+    "go": "deck boxes y cartas", "mine": ("contador",),
+    "intro": "Para Magic, Pokémon y otros TCG. Cada deck box lo imprimo a pedido, en el color que elijas. ¿Jugás One Piece, Lorcana o Yu-Gi-Oh!? Preguntame. El contador lo imprimí yo.",
+    "items": [
+      ("commander", "Deck box Commander con traba", "Un mazo de 100 con fundas. La traba deslizante no deja que se abra en el bolso."),
+      ("pokedex", "Deck box Pokédex", "Se abre como en el juego. Mazo de 100, cajón para dados y cierre con imanes."),
+      ("rotom", "Deck box Rotom Hielo", "Una heladera con lugar para 60 cartas con fundas y un cajón para dados."),
+      ("pokebola", "Deck box Pokébola mecánica", "Apretás y se despliega sola. Entran 60 cartas con fundas y la moneda."),
+      ("pokebox", "Deck box Game Boy", "La primera carta se ve en la pantalla, como un cartucho."),
+      ("fichas-magic", "Fichas para Magic", "+1/+1, −1/−1 y habilidades, con su caja. Se leen desde el otro lado de la mesa."),
+      ("contador", "Contador de vidas para Magic", "Dos ruedas del 0 al 9 para llevar la cuenta en la partida."),
+    ],
+  },
+  {
+    "id": "mesa", "tab": "Juegos de mesa", "name": "Juegos de mesa y dados", "icon": "dado",
+    "go": "juegos de mesa y dados",
+    "intro": "Torres de dados, organizadores y piezas para Catan. ¿Te falta una pieza de otro juego? Mandame una foto y la imprimo.",
+    "items": [
+      ("torre-madera", "Torre de dados de madera", "Tirás el dado arriba y cae en la bandeja. Es plástico con acabado de madera."),
+      ("torre-castillo", "Torre de dados castillo", "Un castillo de ladrillos, con bandeja almenada para los dados."),
+      ("catan-org", "Organizador Catan Plus", "Una caja por jugador y bandejas para cartas y hexágonos. Entra en la caja original."),
+      ("catan-3d", "Tablero 3D de Catan", "Montañas, bosques y campos con relieve. Reemplaza el tablero de cartón del Catan base."),
+      ("catan-maravillas", "Maravillas de Catan", "Poblados y ciudades con forma de monumentos: Egipto, China, castillo y Roma."),
+      ("catan-clasico", "Piezas clásicas de Catan", "Camino, poblado y ciudad para reponer las que perdiste, del color que elijas."),
       ("domino", "Dominó", "Las 28 fichas, con su caja."),
     ],
   },
   {
     "id": "clickers", "tab": "Clickers", "name": "Clickers y llaveros", "icon": "clicker",
     "go": "clickers y llaveros", "pre": "Clicker: ", "mine": "all",
-    "intro": "Se aprietan y hacen clic. Para tener en la mano mientras esperás o estudiás. También hago flexis y torres de dados: preguntame.",
+    "intro": "Se aprietan y hacen clic. Para tener en la mano mientras esperás o estudiás. También hago flexis: preguntame.",
     "items": [
-      ("contador", "Contador de vidas para Magic", "Dos ruedas del 0 al 9 para llevar la cuenta en la partida.", "Contador de vidas para Magic"),
       ("cafe", "Vasito de café", "Tapa negra y faja marrón, como el de la cafetería."),
       ("banana", "Banana", "Media pelada. Esta no se pone negra."),
       ("suculenta", "Suculenta", "En su macetita. No hay que regarla."),
@@ -85,9 +115,10 @@ SHELVES = [
     ],
   },
   {
-    "id": "onepiece", "tab": "One Piece", "name": "One Piece y figuras", "icon": "barco",
-    "go": "One Piece y figuras", "mine": "all",
-    "intro": "Todo esto salió de mi impresora, y las fotos las saqué yo.",
+    "id": "figuras", "tab": "Figuras", "name": "Figuras: One Piece, Minecraft y Star Wars", "icon": "joystick",
+    "go": "figuras de One Piece, Minecraft y Star Wars",
+    "mine": ("sunny", "merry", "striker", "tiburon", "fruta", "articulados", "kitty", "mascara", "sprigatito"),
+    "intro": "Para la repisa. Lo de One Piece y el Sprigatito salió de mi impresora y las fotos son mías; lo de Minecraft y Star Wars son fotos de los diseñadores. Sus ajedreces están en Ajedrez.",
     "items": [
       ("sunny", "Thousand Sunny", "El barco de Luffy. Lo imprimí por partes y lo armé yo."),
       ("merry", "Going Merry", "Cerca de 200 piezas, armadas una por una."),
@@ -97,27 +128,17 @@ SHELVES = [
       ("articulados", "Figuras articuladas", "Vienen con sus espadas."),
       ("kitty", "Hello Kitty robot", "Hello Kitty con armadura de robot."),
       ("mascara", "Máscara de cosplay", "Plateada, para ponértela con el disfraz."),
-    ],
-  },
-  {
-    "id": "gamer", "tab": "Minecraft y Star Wars", "name": "Minecraft, Star Wars y Pokémon", "icon": "joystick",
-    "go": "Minecraft, Star Wars y Pokémon", "mine": ("sprigatito",),
-    "intro": "Acá también están el ajedrez de Minecraft y el de Star Wars.",
-    "items": [
+      ("sprigatito", "Sprigatito", "El gatito verde de Pokémon, recién salido de la impresora."),
       ("tnt", "Bloque de TNT", "Con la mecha arriba."),
       ("dragon", "Dragón del End", "28 cm. Mueve las alas, las patas y la cola."),
       ("diorama-mc", "Diorama de Minecraft", "Girás la manija y andan las vagonetas y el bote."),
       ("bonsai", "Bonsái de bloques", "Un arbolito de Minecraft en su maceta."),
       ("torta", "Torta de Minecraft", "Es una caja: la torta es la tapa."),
       ("creeper", "Alcancía Creeper", "Ranura arriba. La tapa se saca para vaciarla."),
-      ("mc-ajedrez", "Ajedrez de Minecraft", "Trae tablero y caja para guardar todo."),
       ("r2", "R2-D2", "Cúpula azul y plateada, para la repisa."),
       ("tie", "Caza TIE de Vader", "La nave de Darth Vader, sobre su base."),
       ("estrella", "Estrella de la Muerte", "A medio construir, como en El retorno del Jedi."),
       ("hoth", "Diorama de Hoth", "Los AT-AT avanzando en la nieve."),
-      ("sw-piezas", "Ajedrez de Star Wars", "Con X-Wings, AT-ST y tauntauns. Son piezas delicadas."),
-      ("pokebox", "Caja para cartas Pokémon", "Guarda un mazo y parece una Game Boy."),
-      ("sprigatito", "Sprigatito", "El gatito verde de Pokémon, recién salido de la impresora."),
     ],
   },
   {
@@ -134,11 +155,17 @@ SHELVES = [
     ],
   },
   {
-    "id": "jardin", "tab": "Jardín", "name": "Pájaros y jardín", "icon": "pajaro",
-    "go": "pájaros y jardín",
-    "mine": ("elfico", "casita"),
-    "intro": "Para el balcón, el fondo o la huerta. Si va al sol, conviene PETG: preguntame. Los comederos élfico y casita los imprimí yo; el resto son fotos de los diseñadores.",
+    "id": "casa", "tab": "Casa y jardín", "name": "Casa y jardín", "icon": "casa",
+    "go": "casa y jardín",
+    "mine": ("repisa", "elfico", "casita"),
+    "intro": "Cosas útiles y raras para adentro, y para el balcón o la huerta. Si va al sol, conviene PETG: preguntame. La repisa roja y los comederos élfico y casita los imprimí yo; el resto son fotos de los diseñadores.",
     "items": [
+      ("repisa", "Repisa derretida", "Un estante de pared que parece que gotea."),
+      ("bowl", "Bowl derretido", "Para dejar las llaves cuando llegás."),
+      ("cassette", "Cassette gigante", "24 × 15 cm. Se le puede poner una luz adentro (la luz no viene)."),
+      ("mesa-luz", "Organizador de mesa de luz", "Sostiene el libro abierto y tiene cajones."),
+      ("bolso", "Cartera de costillas", "Para Halloween, o para todo el año."),
+      ("casco-gato", "Casco de Maléfica para gatos", "Para gatos medianos. Un ratito para la foto, y con vos al lado."),
       ("hoja", "Comedero hoja", "Tiene forma de hoja y se cuelga de una rama."),
       ("redondo", "Comedero redondo", "Abierto y con techito. Se cuelga o se apoya."),
       ("elfico", "Comedero élfico", "La bandeja de las semillas sale para lavarla."),
@@ -149,20 +176,6 @@ SHELVES = [
       ("abejas", "Bebedero de abejas", "Se enrosca en una botella. Las abejas toman sin ahogarse."),
       ("maceta", "Maceta capitoné", "Parece de tela acolchada. Es para macetas de 9 cm."),
       ("cosechador", "Cosechador de frutas", "Va en la punta de un palo y corta la fruta de arriba. La hoja de cutter no viene."),
-    ],
-  },
-  {
-    "id": "casa", "tab": "Casa", "name": "Casa", "icon": "casa",
-    "go": "cosas para la casa",
-    "mine": ("repisa",),
-    "intro": "Cosas raras y útiles para la casa. La repisa roja la imprimí yo; el resto son fotos de los diseñadores.",
-    "items": [
-      ("repisa", "Repisa derretida", "Un estante de pared que parece que gotea."),
-      ("bowl", "Bowl derretido", "Para dejar las llaves cuando llegás."),
-      ("cassette", "Cassette gigante", "24 × 15 cm. Se le puede poner una luz adentro (la luz no viene)."),
-      ("mesa-luz", "Organizador de mesa de luz", "Sostiene el libro abierto y tiene cajones."),
-      ("bolso", "Cartera de costillas", "Para Halloween, o para todo el año."),
-      ("casco-gato", "Casco de Maléfica para gatos", "Para gatos medianos. Un ratito para la foto, y con vos al lado."),
     ],
   },
 ]
@@ -194,6 +207,24 @@ FOTOS = {
   "elfico": [("elfico", "En dorado (fondo retocado)"), ("elfico-d", "Foto del diseñador")],
   "casita": [("casita", "Lila, con el techo rosa (fondo retocado)"), ("casita-d", "Foto del diseñador")],
   "repisa": [("repisa", "En rojo (fondo retocado)"), ("repisa-d", "Foto del diseñador")],
+  "commander": [("commander", "En azul, con la carta del comandante a la vista"), ("commander-2", "En blanco"),
+                ("commander-3", "Abierto: el mazo, la bandeja para dados y el separador"), ("commander-4", "El mazo con fundas adentro"),
+                ("commander-5", "De atrás")],
+  "pokedex": [("pokedex", "Abierta, con el cajón para dados afuera"), ("pokedex-2", "Cerrada"), ("pokedex-3", "Abierta"),
+              ("pokedex-4", "Con el mazo adentro")],
+  "rotom": [("rotom", "Abierto: la heladera, el cajón y la bandeja"), ("rotom-2", "Cerrado"), ("rotom-3", "Abierto"),
+            ("rotom-4", "Con el mazo")],
+  "pokebola": [("pokebola", "Desplegada: lugar para el mazo y la moneda"), ("pokebola-2", "Cerrada"), ("pokebola-3", "Cerrada y abierta"),
+               ("pokebola-4", "Cómo se abre: sube la tapa"), ("pokebola-5", "Cómo se abre: se despliega"), ("pokebola-6", "Lista para jugar")],
+  "fichas-magic": [("fichas-magic", "Las fichas y su caja"), ("fichas-magic-2", "El set completo"), ("fichas-magic-3", "Sueltas, en dorado y plateado")],
+  "torre-madera": [("torre-madera", "Con la bandeja abierta y los dados"), ("torre-madera-2", "Cerrada"), ("torre-madera-3", "De frente")],
+  "catan-3d": [("catan-3d", "El tablero armado"), ("catan-3d-2", "Bosque"), ("catan-3d-3", "Montaña"), ("catan-3d-4", "El relieve de cerca")],
+  "catan-org": [("catan-org", "Todo adentro de la caja original"), ("catan-org-2", "Una caja por jugador"),
+                ("catan-org-3", "Bandejas de cartas"), ("catan-org-4", "Porta hexágonos")],
+  "catan-maravillas": [("catan-maravillas", "Los cuatro estilos"), ("catan-maravillas-2", "Egipto"), ("catan-maravillas-3", "China"),
+                       ("catan-maravillas-4", "Castillo")],
+  "catan-clasico": [("catan-clasico", "Camino, poblado y ciudad"), ("catan-clasico-2", "Camino"), ("catan-clasico-3", "Poblado"),
+                    ("catan-clasico-4", "Ciudad")],
 }
 
 # 12x12 pixel icons, one string per row ('#' = ink)
@@ -206,6 +237,8 @@ ICONS = {
   "barco":   ["............","......#.....","......##....","......###...","......####..","......#.....","......#.....","############",".##########.","..########..","............","............"],
   "pajaro":  ["............","............","...###......","..#####.....","..##.###....","######......","..#########.","...########.","....#####...",".....#.#....","....##.##...","............"],
   "casa":    ["............",".....##.....","....####....","...######...","..########..",".##########.","..########..","..##.##.##..","..##.##.##..","..##....##..","..########..","............"],
+  "cartas":  ["............","....#######.","....#.....#.",".#######..#.",".#.....#..#.",".#..#..#..#.",".#.###.#..#.",".#..#..#..#.",".#.....####.",".#.....#....",".#######....","............"],
+  "dado":    ["............",".#########..",".#.......##.",".#.#...#.##.",".#.......##.",".#...#...##.",".#.......##.",".#.#...#.##.",".#.......##.",".##########.","..#########.","............"],
   "pelota":  ["............","....####....","..##.##.##..","..#.####.#..",".##.####.##.",".###....###.",".##.####.##.","..#.####.#..","..##.##.##..","....####....","............","............"],
 }
 

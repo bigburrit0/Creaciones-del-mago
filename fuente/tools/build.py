@@ -138,7 +138,7 @@ def jsonld():
         "alternateName": "Creaciones del Mago, impresión 3D en Montevideo",
         "url": SITE,
         "description": ("Servicio de impresión y diseño 3D en Montevideo, Uruguay. Imprimo piezas de hasta 25 cm por lado en PLA o PETG, con hasta 4 colores: "
-                        "ajedrez personalizados, autos a escala, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso."),
+                        "ajedrez personalizados, deck boxes para TCG, accesorios para juegos de mesa, autos a escala, exhibidores para autitos, clickers y piezas a medida. Precio y fecha por WhatsApp antes de empezar, sin compromiso."),
         "slogan": "Imprimo en 3D en Montevideo. Mandame tu idea.",
         "logo": SITE + "assets/px/apple-touch-icon.png",
         "image": SITE + "assets/px/og.png",
@@ -154,7 +154,7 @@ def jsonld():
         ],
         "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "telephone": PHONE_INTL,
                          "availableLanguage": "es", "areaServed": "UY", "url": "https://wa.me/59892104419"},
-        "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG", "autos a escala para armar", "ajedrez impreso en 3D", "ajedrez personalizado", "ajedrez temático", "exhibidores para autitos 1:64"],
+        "knowsAbout": ["impresión 3D", "diseño 3D a medida", "PLA", "PETG", "autos a escala para armar", "ajedrez impreso en 3D", "ajedrez personalizado", "ajedrez temático", "deck boxes para Magic y Pokémon TCG", "torres de dados", "organizadores y piezas para Catan", "exhibidores para autitos 1:64"],
         "makesOffer": cats,
     }
     site = {"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Creaciones del Mago", "inLanguage": "es-UY", "publisher": {"@id": SITE + "#negocio"}}

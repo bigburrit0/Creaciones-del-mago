@@ -3,6 +3,7 @@
 import os
 V = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'vendidos') + os.sep
 E = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'estudio') + os.sep
+C = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fotos', 'catalogo') + os.sep   # sacadas del catálogo PDF «Mesa de juego» (22/11/2026)
 P = "/mnt/user-data/uploads/creaciones del mago/Proyecto 3D/"
 X = "/mnt/user-data/uploads/creaciones del mago/Pics/"
 PHOTOS = {
@@ -147,4 +148,47 @@ PHOTOS = {
   "elfico":      (V+"comedero-elfico-dorado.jpg", .5, .5, 1.0, "m"),
   "repisa":      (V+"repisa-derretida-roja.jpg", .5, .5, 1.0, "m"),
   "ascensor":    (V+"ascensor-negro.jpg", .5, .58, 1.0, "m"),
+  # cartas y juegos de mesa (fotos del catálogo PDF «Mesa de juego», 22/11/2026; las -2, -3... van en la galería)
+  "commander":        (C+"commander-azul.jpg", .5, .5, 1.0),
+  "commander-2":      (C+"commander-blanco.jpg", .5, .5, 1.0, "g"),
+  "commander-3":      (C+"commander-set.jpg", .5, .5, 1.0, "g"),
+  "commander-4":      (C+"commander-abierto.jpg", .5, .5, 1.0, "g"),
+  "commander-5":      (C+"commander-atras.jpg", .5, .5, 1.0, "g"),
+  "pokedex":          (C+"pokedex.jpg", .5, .5, 1.0),
+  "pokedex-2":        (C+"pokedex-cerrada.jpg", .5, .5, 1.0, "g"),
+  "pokedex-3":        (C+"pokedex-abierta.jpg", .5, .5, 1.0, "g"),
+  "pokedex-4":        (C+"pokedex-mazo.jpg", .5, .5, 1.0, "g"),
+  "rotom":            (C+"rotom.jpg", .5, .5, 1.0),
+  "rotom-2":          (C+"rotom-cerrada.jpg", .5, .5, 1.0, "g"),
+  "rotom-3":          (C+"rotom-abierta.jpg", .5, .5, 1.0, "g"),
+  "rotom-4":          (C+"rotom-mazo.jpg", .5, .5, 1.0, "g"),
+  "pokebola":         (C+"pokebola.jpg", .5, .5, 1.0),
+  "pokebola-2":       (C+"pokebola-cerrada.jpg", .5, .5, 1.0, "g"),
+  "pokebola-3":       (C+"pokebola-las-dos.jpg", .5, .5, 1.0, "g"),
+  "pokebola-4":       (C+"pokebola-sube-tapa.jpg", .5, .5, 1.0, "g"),
+  "pokebola-5":       (C+"pokebola-se-despliega.jpg", .5, .5, 1.0, "g"),
+  "pokebola-6":       (C+"pokebola-lista.jpg", .5, .5, 1.0, "g"),
+  "fichas-magic":     (C+"fichas-magic.jpg", .5, .5, 1.0),
+  "fichas-magic-2":   (C+"fichas-magic-set.jpg", .5, .5, 1.0, "g"),
+  "fichas-magic-3":   (C+"fichas-magic-sueltas.jpg", .5, .5, 1.0, "g"),
+  "torre-madera":     (C+"torre-madera.jpg", .5, .5, 1.0),
+  "torre-madera-2":   (C+"torre-madera-cerrada.jpg", .5, .5, 1.0, "g"),
+  "torre-madera-3":   (C+"torre-madera-frente.jpg", .5, .5, 1.0, "g"),
+  "torre-castillo":   (C+"torre-castillo.jpg", .5, .5, 1.0),
+  "catan-3d":         (C+"catan-3d.jpg", .5, .5, 1.0),
+  "catan-3d-2":       (C+"catan-3d-bosque.jpg", .5, .5, 1.0, "g"),
+  "catan-3d-3":       (C+"catan-3d-montana.jpg", .5, .5, 1.0, "g"),
+  "catan-3d-4":       (C+"catan-3d-relieve.jpg", .5, .5, 1.0, "g"),
+  "catan-org":        (C+"catan-org.jpg", .5, .5, 1.0),
+  "catan-org-2":      (C+"catan-org-jugador.jpg", .5, .5, 1.0, "g"),
+  "catan-org-3":      (C+"catan-org-bandejas.jpg", .5, .5, 1.0, "g"),
+  "catan-org-4":      (C+"catan-org-hexagonos.jpg", .5, .5, 1.0, "g"),
+  "catan-maravillas": (C+"catan-maravillas.jpg", .5, .5, 1.0),
+  "catan-maravillas-2":(C+"catan-maravillas-egipto.jpg", .5, .5, 1.0, "g"),
+  "catan-maravillas-3":(C+"catan-maravillas-china.jpg", .5, .5, 1.0, "g"),
+  "catan-maravillas-4":(C+"catan-maravillas-castillo.jpg", .5, .5, 1.0, "g"),
+  "catan-clasico":    (C+"catan-clasico.jpg", .5, .5, 1.0),
+  "catan-clasico-2":  (C+"catan-clasico-camino.jpg", .5, .5, 1.0, "g"),
+  "catan-clasico-3":  (C+"catan-clasico-poblado.jpg", .5, .5, 1.0, "g"),
+  "catan-clasico-4":  (C+"catan-clasico-ciudad.jpg", .5, .5, 1.0, "g"),
 }

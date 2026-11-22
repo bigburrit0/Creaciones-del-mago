@@ -9,7 +9,7 @@ bajada: Clickers y llaveros chiquitos para la oficina, el liceo o la familia. Qu
 descripcion: Clickers y llaveros impresos en 3D para el amigo invisible de la oficina o la familia. Uno o quince, te paso el precio por WhatsApp antes de empezar.
 respuesta: Para el amigo invisible imprimo clickers y llaveros en 3D en Montevideo: un vasito de café, una banana, una suculenta, una calavera con argolla, un hámster en su huevo y más. Podés pedir uno o varios para todo el grupo; te paso el precio total por WhatsApp antes de empezar, sin compromiso.
 publicada: 2026-11-01
-actualizada: 2026-11-01
+actualizada: 2026-11-22
 foto: calavera
 imagen: amigo-invisible-hero.webp
 imagen_alt: Ilustración en pixel art de una mesa de oficina con regalitos envueltos y figuritas de colores
@@ -44,7 +44,7 @@ Contame cuántas personas son y para qué fecha es el intercambio. La fecha de e
 
 ## Otras cosas chicas que imprimo
 
-Además de los clickers del catálogo hago flexis (figuras articuladas que se mueven), torres de dados y contadores de vidas para Magic. No están en las fotos: preguntame.
+Además de los clickers del catálogo hago flexis (figuras articuladas que se mueven): no están en las fotos, preguntame. Las torres de dados y el contador de vidas para Magic sí están en el catálogo.
 
 ## Preguntas frecuentes
 
